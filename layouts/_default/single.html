@@ -8,10 +8,16 @@
         
         <h1>{{ .Title }}</h1> 
 
+        {{ if .Params.status }}
+        <div class="mb-4"> <span class="status-pill {{ if eq .Params.status "Active Research" }}active{{ end }}">
+                {{ .Params.status }}
+            </span>
+        </div>
+        {{ end }}
+
         <div class="d-lg-none mb-4">
-            
             {{ if .Params.toc }}
-            #<div class="toc-sidebar">
+            <div class="toc-sidebar">
               <h3>Table of Contents</h3>
               {{ .TableOfContents }} 
             </div>
@@ -28,14 +34,14 @@
             </div>
             {{ end }}
 
-            <hr> </div>
+            <hr> 
+        </div>
+
         {{ .Content }}
 
       </div>
 
-
       <aside class="col-lg-3 col-md-4 aside-column d-none d-lg-block">
-        
         {{ if .Params.toc }}
         <div class="toc-sidebar">
           <h3>Table of Contents</h3>
@@ -57,7 +63,6 @@
         {{ if .Params.share }}
           {{ partial "page_links_div.html" . }}
         {{ end }}
-
       </aside>
 
     </div>
