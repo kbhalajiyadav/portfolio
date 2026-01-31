@@ -5,7 +5,7 @@ tags:
   - Fracture Mechanics
   - Soft Robotics
   - Python
-  - Active Research
+  - Academic Research
 date: 2025-01-30
 type: post #ject #_page # Optional: creates a consistent layout across projects
 toc: true          # Enables the Table of Contents on the right
