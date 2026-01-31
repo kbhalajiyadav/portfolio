@@ -102,9 +102,7 @@ Replace: `static/uploads/resume.pdf`
 
 ## 📞 Contact
 
-- **Email**: kbhalajiyadav22@gmail.com
 - **LinkedIn**: [linkedin.com/in/kbhalajiyadav](https://linkedin.com/in/kbhalajiyadav)
-- **Phone**: +1 (804) 310-4169
 
 ## 📄 License
 
