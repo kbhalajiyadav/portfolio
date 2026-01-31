@@ -1,60 +1,42 @@
 ---
-title: FDA Compliance & Quality Systems
-date: '2023-05-01T00:00:00Z'
-external_link: ''
-image:
-  caption: Quality Management Systems
-  focal_point: Center
-links:
-  - icon: certificate
-    icon_pack: fas
-    name: FDA Guidelines
-    url: 'https://www.fda.gov/'
-summary: Directed CAPA initiatives and V-Model validation roadmap ensuring US FDA audit readiness for pharmaceutical operations.
+title: "Dummy Layout Test"
+summary: "Testing Wide Layout & Left Alignment"
+date: 2025-01-31
 tags:
-  - Quality Systems
-  - FDA Compliance
-  - cGMP
-  - Project Management
+  - Test
+  - Layout
+
+# This prevents the default narrow column layout
+design:
+  columns: '1'
 ---
 
-## Overview
+## 1. This Should Be Left Aligned
+This text should span the entire width of your screen (or close to it), rather than being stuck in a narrow column in the middle. 
 
-Led quality assurance initiatives at Kreative Organics Pvt. Ltd. to ensure **US FDA audit readiness** and compliance with cGMP standards.
+## 2. The Header Test
+Look at the Title "Dummy Layout Test" at the very top. Is it aligned to the far left, or is it still centered?
 
-## Key Responsibilities
+## 3. Visual Width Check
+If this line breaks early, we are still in "narrow mode." If it stretches all the way to the right side of your monitor, we have successfully unlocked "Wide Mode."
 
-### CAPA Management
-- Directed **CAPA (Corrective and Preventive Action)** initiative
-- Led Root Cause Analysis (RCA) sessions for operational deviations
-- Documented corrective actions to maintain quality certification status
+<style>
+  /* 1. Force the container to be wide */
+  .container, .article-container {
+      max-width: 95% !important; 
+      margin-left: 20px !important;
+      margin-right: auto !important;
+      padding-left: 0 !important;
+  }
 
-### V-Model Validation
-- Defined **V-Model roadmap** for system validation
-- Ensured full readiness for US FDA audits
-- Maintained compliance with cGMP standards
-
-### SAP System Requalification
-- Executed precision **5-hour overnight cutover**
-- Safeguarded production continuity and data integrity
-- Minimized operational risk during system transition
-
-### Market Intelligence
-- Analyzed **FDA Drug Master Files (DMF)** to identify market gaps
-- Steered strategic new market entry for regulated materials
-- Synthesized supply chain intelligence for business development
-
-## Achievements
-
-- **Zero Safety Incidents** during tenure
-- Successfully prepared for US FDA audits
-- **Promoted from Intern to Manager** in 6 months
-- Implemented company-wide project management framework
-
-## Skills Developed
-
-- cGMP Guidelines and FDA regulations
-- CAPA and Root Cause Analysis
-- V-Model validation methodology
-- SAP Business One (ERP) system management
-- SOP development and standardization
+  /* 2. Force text alignment to the left */
+  h1, h2, h3, p, .page-title, .article-title {
+      text-align: left !important;
+  }
+  
+  /* 3. Ensure the main header (Avatar + Title area) aligns left */
+  .page-header {
+      text-align: left !important;
+      align-items: flex-start !important;
+  }
+</style>
