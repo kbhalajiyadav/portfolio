@@ -7,7 +7,7 @@ tags:
   - Python
   - Active Research
 date: 2025-01-30
-#type: prost #ject #_page # Optional: creates a consistent layout across projects
+type: post #ject #_page # Optional: creates a consistent layout across projects
 toc: true          # Enables the Table of Contents on the right
 share: true        # Shows social sharing buttons
 ---
