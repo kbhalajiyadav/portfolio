@@ -1,54 +1,96 @@
 {{ define "main" }}
+
 <article class="article">
   <div class="container">
     <div class="row">
 
-      <div class="col-lg-9 col-md-8 article-container"> 
-        
-        <h1>{{ .Title }}</h1> 
+      <!-- MAIN CONTENT -->
+      <div class="col-lg-9 col-md-8 article-container">
 
-        {{ if .Params.status }}
-        <div class="mb-4">
-            <span class="status-pill {{ if eq .Params.status "Active Research" }}active{{ end }}">
-                {{ .Params.status }}
-            </span>
-        </div>
+        <!-- Title -->
+        <h1 class="article-title">{{ .Title }}</h1>
+
+        <!-- Status pill under title (auto-detects from front matter OR summary span OR markdown "Status:" line stays in content) -->
+        {{/* Prefer .Params.status_label if you add it, otherwise try to extract first <span>...</span> from summary */}}
+        {{ $status := "" }}
+        {{ if .Params.status_label }}
+          {{ $status = .Params.status_label }}
+        {{ else if .Params.summary }}
+          {{ $m := findRE "<span[^>]*>[^<]+</span>" .Params.summary 1 }}
+          {{ if gt (len $m) 0 }}
+            {{ $status = (replaceRE "<[^>]+>" "" (index $m 0)) }}
+          {{ end }}
         {{ end }}
 
-        <div class="d-lg-none mb-4">
-            {{ if .Params.toc }}
-            <div class="toc-sidebar">
+        {{ if $status }}
+          <div class="article-status-row">
+            <span class="status-pill status-pill--active">{{ $status }}</span>
+          </div>
+        {{ end }}
+
+        <!-- Mobile TOC + Tags (shows below title on small screens) -->
+        <div class="d-lg-none article-mobile-meta">
+          {{ if .Params.toc }}
+            <div class="toc-sidebar toc-sidebar--mobile">
               <h3>Table of Contents</h3>
-              {{ .TableOfContents }} 
+              {{ .TableOfContents }}
             </div>
-            <hr>
-            {{ end }}
+          {{ end }}
+
+          {{ if .Params.tags }}
+            <div class="tags-sidebar tags-sidebar--mobile">
+              <h3>Tags</h3>
+              <ul class="list-unstyled">
+                {{ range .Params.tags }}
+                  <li>
+                    <a href="{{ (printf "tags/%s" (. | urlize)) | relURL }}" class="badge badge-light">
+                      {{ . }}
+                    </a>
+                  </li>
+                {{ end }}
+              </ul>
+            </div>
+          {{ end }}
         </div>
 
+        <!-- Content -->
         {{ .Content }}
+
       </div>
 
+      <!-- RIGHT SIDEBAR (Desktop only) -->
       <aside class="col-lg-3 col-md-4 aside-column d-none d-lg-block">
+
         {{ if .Params.toc }}
-        <div class="toc-sidebar">
-          <h3>Table of Contents</h3>
-          {{ .TableOfContents }} 
-        </div>
+          <div class="toc-sidebar">
+            <h3>Table of Contents</h3>
+            {{ .TableOfContents }}
+          </div>
         {{ end }}
-        
+
         {{ if .Params.tags }}
-        <div class="tags-sidebar">
-          <h3>Tags</h3>
-          <ul class="list-unstyled">
-             {{ range .Params.tags }}
-             <li><a href="/tags/{{ . | urlize }}" class="badge badge-light">{{ . }}</a></li>
-             {{ end }}
-          </ul>
-        </div>
+          <div class="tags-sidebar">
+            <h3>Tags</h3>
+            <ul class="list-unstyled">
+              {{ range .Params.tags }}
+                <li>
+                  <a href="{{ (printf "tags/%s" (. | urlize)) | relURL }}" class="badge badge-light">
+                    {{ . }}
+                  </a>
+                </li>
+              {{ end }}
+            </ul>
+          </div>
         {{ end }}
+
+        {{ if .Params.share }}
+          {{ partial "page_links_div.html" . }}
+        {{ end }}
+
       </aside>
 
     </div>
   </div>
 </article>
+
 {{ end }}
