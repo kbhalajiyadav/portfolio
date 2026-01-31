@@ -4,42 +4,21 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
+    const progressBar = document.getElementById('reading-progress');
     
-    // --- A. PROGRESS BAR ---
-    window.addEventListener('scroll', () => {
-      const scrollTop = window.scrollY;
-      const docHeight = document.body.scrollHeight - window.innerHeight;
-      const scrollPercent = (scrollTop / docHeight) * 100;
+    // Check if the element exists to avoid errors
+    if (progressBar) {
       
-      const progressBar = document.getElementById('reading-progress');
-      if (progressBar) {
-          progressBar.style.width = scrollPercent + '%';
-      }
-    });
-
-    // --- B. SCROLLSPY (TOC HIGHLIGHTER) ---
-    // Targets headers in both articles and fluid containers
-    const headers = document.querySelectorAll('.article-container h1, .article-container h2, .article-container h3, .container-fluid h1, .container-fluid h2');
-    const tocLinks = document.querySelectorAll('.toc-sidebar a');
-
-    if (headers.length > 0 && tocLinks.length > 0) {
       window.addEventListener('scroll', () => {
-        let currentId = '';
+        // Calculate how far down the user has scrolled
+        const scrollTop = window.scrollY;
+        const docHeight = document.body.scrollHeight - window.innerHeight;
         
-        headers.forEach(header => {
-          const headerTop = header.offsetTop;
-          // Trigger 150px before the header hits the top
-          if (window.scrollY >= (headerTop - 150)) {
-            currentId = header.getAttribute('id');
-          }
-        });
-
-        tocLinks.forEach(link => {
-          link.classList.remove('active-toc-link');
-          if (link.getAttribute('href') === '#' + currentId) {
-            link.classList.add('active-toc-link');
-          }
-        });
+        // Convert to percentage (0 to 100)
+        const scrollPercent = (scrollTop / docHeight) * 100;
+        
+        // Apply the width
+        progressBar.style.width = scrollPercent + '%';
       });
     }
   });
