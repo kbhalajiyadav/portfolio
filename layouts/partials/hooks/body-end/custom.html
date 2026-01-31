@@ -1,0 +1,55 @@
+<!-- Reading Progress Bar -->
+<div id="reading-progress" class="reading-progress"></div>
+
+<style>
+  /* Progress Bar Style */
+  .reading-progress {
+    position: fixed;
+    top: 66px; /* Position it exactly under the default header */
+    left: 0;
+    width: 0%;
+    height: 4px;
+    background: #1565c0; /* Match your corporate blue */
+    z-index: 1001;
+    transition: width 0.1s ease-out;
+  }
+
+  /* Smart Header Animation (The "hover back" effect) */
+  .navbar {
+    transition: transform 0.3s ease-in-out !important;
+  }
+  .navbar--hidden {
+    transform: translateY(-100%); /* Hides header */
+  }
+
+  /* Ensure content starts below the header/progress bar area */
+  body {
+    padding-top: 70px;
+  }
+  :root {
+    scroll-padding-top: 100px; 
+  }
+</style>
+
+<script>
+  let lastScrollY = window.scrollY;
+  const navbar = document.querySelector('.navbar');
+  const progressBar = document.getElementById('reading-progress');
+
+  window.addEventListener('scroll', () => {
+    // 1. Reading Progress Calculation
+    const totalHeight = document.body.scrollHeight - window.innerHeight;
+    const progress = (window.scrollY / totalHeight) * 100;
+    progressBar.style.width = progress + '%';
+
+    // 2. Smart Header (Hide on Scroll Down, Show on Up)
+    if (window.scrollY > lastScrollY && window.scrollY > 150) {
+      navbar.classList.add('navbar--hidden');
+      progressBar.style.top = '0px'; // Move bar to top when header hides
+    } else {
+      navbar.classList.remove('navbar--hidden');
+      progressBar.style.top = '66px'; // Move bar back under header
+    }
+    lastScrollY = window.scrollY;
+  });
+</script>
