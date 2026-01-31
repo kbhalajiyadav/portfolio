@@ -141,6 +141,71 @@ body {
   width: 0%;
   height: 3px !important;
   background: #1565c0 !important;
-  z-index: 100000 !important; /* above navbar */
+  z-index: 100000 !important; /* below navbar */
   transition: width 0.1s linear;
+}
+
+/* ================================
+   STATUS PILL under title
+   ================================ */
+.article-title {
+  margin-bottom: 0.35rem !important;
+}
+
+.article-status-row {
+  margin: 0.3rem 0 1.25rem 0 !important;
+}
+
+.status-pill {
+  display: inline-block !important;
+  padding: 5px 12px !important;
+  border-radius: 999px !important;
+  font-weight: 700 !important;
+  font-size: 0.78rem !important;
+  letter-spacing: 0.02em !important;
+  line-height: 1.2 !important;
+  border: 1px solid transparent !important;
+}
+
+.status-pill--active {
+  background: #e8f5e9 !important;
+  color: #2e7d32 !important;
+  border-color: #2e7d32 !important;
+}
+
+/* ================================
+   TAGS — Horizontal pill layout
+   (desktop + mobile)
+   ================================ */
+.tags-sidebar ul {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 8px 10px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.tags-sidebar ul li {
+  list-style: none !important;
+  margin: 0 !important;
+}
+
+/* Make tag badges look like clean chips */
+.tags-sidebar .badge {
+  display: inline-block !important;
+  background: #f1f3f5 !important;
+  color: #24292e !important;
+  border-radius: 999px !important;
+  padding: 5px 12px !important;
+  font-size: 0.78rem !important;
+  font-weight: 500 !important;
+  text-decoration: none !important;
+  border: 1px solid #e1e4e8 !important;
+  transition: all 0.2s ease !important;
+}
+
+.tags-sidebar .badge:hover {
+  background: #0366d6 !important;
+  color: #ffffff !important;
+  border-color: #0366d6 !important;
 }
