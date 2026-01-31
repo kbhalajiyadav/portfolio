@@ -1,43 +1,7 @@
 /* Override Bootstrap/Theme default alignment that prevents sticky from working */
-/* Set align-items to 'start' on the row container, or just the column itself */
 .row {
-  align-items: flex-start; /* Prevents columns from stretching full height by default */
+  align-items: flex-start; /* Ensures columns align to the top */
 }
-
-/* Lock the Right Sidebar (ToC and Tags) in place */
-.aside-column {
-  position: -webkit-sticky; /* For compatibility */
-  position: sticky;
-  
-  /* Lock it 80 pixels from the top of the viewport (under the header) */
-  top: 80px; 
-  
-  /* Ensure it takes up available vertical space and has its own scrollbar if needed */
-  height: calc(100vh - 80px);
-  overflow-y: auto; 
-  
-  /* Ensure it sits above the main content visually */
-  z-index: 10;
-  
-  /* Align the content itself to the start for a clean look */
-  align-self: flex-start; 
-}
-
-/* Adjust the positioning to align the top of the 'Tags' section with the main content title */
-/* Adjust the top value as needed to align perfectly with your H1 title start position */
-.toc-sidebar, .tags-sidebar {
-    margin-top: 1.5rem; 
-}
-
-
-/* --- Your existing styles below this line --- */
-
-.tags-sidebar {
-  padding-top: 1rem;
-  border-top: 1px solid var(--border-color);
-}
-/* ... (rest of your tag styles) ... */
-
 
 /* Lock the Right Sidebar (ToC and Tags) in place */
 .aside-column {
@@ -54,6 +18,22 @@
   
   /* Ensure it sits above the main content visually */
   z-index: 10;
+  
+  /* Align the content itself to the start for a clean look */
+  align-self: flex-start; 
+}
+
+/* Adjust the positioning of both sidebar sections to align neatly */
+.toc-sidebar, .tags-sidebar {
+    margin-top: 1.5rem; /* Pushes both sections down from the header/previous element */
+}
+
+/* Style for the new ToC title */
+.toc-sidebar h3 {
+  font-size: 0.9rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
 }
 
 /* Ensure the main content on the left has enough padding at the top */
@@ -61,10 +41,9 @@
     padding-top: 20px; /* Add a little space between title and header */
 }
 
-/* The rest of your previous tag styles can stay below this */
+/* --- Your existing tag styles below this line --- */
 
 .tags-sidebar {
-  margin-top: 2rem;
   padding-top: 1rem;
   border-top: 1px solid var(--border-color);
 }
