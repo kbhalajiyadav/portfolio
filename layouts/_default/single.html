@@ -6,16 +6,19 @@
 
       <!-- Main Content Area (Left/Center Column) -->
       <div class="col-lg-9 col-md-8">
+        <!-- Renders the main title -->
         <h1>{{ .Title }}</h1> 
+        <!-- Renders all your markdown content -->
         {{ .Content }}
       </div>
 
       <!-- Sidebar Area (Right Column) -->
       <aside class="col-lg-3 col-md-4 aside-column">
         
-        <!-- Table of Contents (TOC) -->
+        <!-- Table of Contents (TOC) Container -->
         {{ if .Params.toc }}
         <div class="toc-sidebar">
+          <!-- Hugo generates the list of links here -->
           <nav id="TableOfContents"></nav>
         </div>
         {{ end }}
@@ -32,7 +35,7 @@
         </div>
         {{ end }}
         
-        <!-- Add other potential sidebar items here if needed (e.g., share buttons) -->
+        <!-- Share buttons -->
         {{ if .Params.share }}
           {{ partial "page_links_div.html" . }}
         {{ end }}
