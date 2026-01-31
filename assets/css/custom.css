@@ -3,25 +3,29 @@
    Location: assets/css/custom.css
    ========================================================= */
 
-/* --- 1. ANIMATION KILLER (CRITICAL FIX) --- */
-/* Disables "slide-in" animations that break the sticky header */
+/* --- 1. THE "HARD PUSH" (CRITICAL FIX) --- */
+/* We apply a massive top padding directly to the content wrapper.
+   This guarantees the content starts 120px down the page, 
+   clearing the header completely. */
+.page-wrapper {
+  padding-top: 120px !important; 
+  margin-top: 0 !important;
+}
+
+/* We also keep this to tell the browser where to stop 
+   when you click "Back to Top" or a specific link. */
+html {
+  scroll-padding-top: 120px !important;
+}
+
+/* --- 2. ANIMATION KILLER --- */
+/* Stops the "slide-up" animation that messes with positions */
 body, .page-wrapper, .article-container, main {
   transform: none !important;
   -webkit-transform: none !important;
 }
 
-/* --- 1.1 SPACER FIX (NEW: Fixes the "Top Cut-Off" Issue) --- */
-/* 1. Forces the browser to land 100px ABOVE content when you click "Home" */
-html {
-  scroll-padding-top: 100px !important;
-}
-
-/* 2. Resets any "negative margins" the theme uses to pull content up */
-.page-wrapper, main, .article-container {
-  margin-top: 0 !important;
-}
-
-/* --- 2. FIXED HEADER --- */
+/* --- 3. FIXED HEADER --- */
 #navbar-main, .navbar {
   position: fixed !important;
   top: 0 !important;
@@ -31,25 +35,24 @@ html {
   z-index: 99999 !important;
   background-color: #ffffff !important; 
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  min-height: 70px !important; /* Enforces the header height */
 }
 
-/* --- 3. BODY PADDING (Updated) --- */
-/* We use 100px to ensure the header never covers the title. */
-body {
-  padding-top: 100px !important;
+/* --- 4. WIDTH & ALIGNMENT FIX --- */
+/* Prevents the text from stretching too wide (Elongated look) */
+.col-lg-9, .col-md-8 {
+  padding-right: 50px !important;
 }
 
-/* Extra cushion specifically for the Title area */
-.article-container {
-  padding-top: 40px !important; /* Increased from 30px */
-}
+/* Forces the columns to align to the top */
+.row { align-items: flex-start !important; }
 
-/* --- 4. FIXED SIDEBAR --- */
+/* --- 5. FIXED SIDEBAR --- */
 .aside-column {
   position: -webkit-sticky !important;
   position: sticky !important;
-  top: 110px !important; /* Matches the body padding + gap */
-  height: calc(100vh - 110px) !important;
+  top: 130px !important; /* Adjusted to match the new 120px padding */
+  height: calc(100vh - 130px) !important;
   overflow-y: auto !important;
   align-self: flex-start !important;
   
@@ -59,12 +62,7 @@ body {
   background-color: #ffffff !important;
 }
 
-/* WIDTH FIX: Prevents text from looking "elongated" */
-.col-lg-9, .col-md-8 {
-  padding-right: 50px !important;
-}
-
-/* --- 5. TOC HIGHLIGHTER (ScrollSpy) --- */
+/* --- 6. TOC HIGHLIGHTER (ScrollSpy) --- */
 .toc-sidebar a {
   display: block;
   color: #666;
@@ -83,10 +81,10 @@ body {
   background-color: #f0f7ff;
 }
 
-/* --- 6. READING PROGRESS BAR --- */
+/* --- 7. READING PROGRESS BAR --- */
 #reading-progress {
   position: fixed;
-  top: 70px;
+  top: 70px; /* Aligns with bottom of header */
   left: 0;
   width: 0%;
   height: 4px;
@@ -95,7 +93,7 @@ body {
   transition: width 0.1s linear;
 }
 
-/* --- 7. GENERAL SIDEBAR STYLES --- */
+/* General Sidebar Styles */
 .toc-sidebar, .tags-sidebar { margin-top: 1.5rem !important; }
 .toc-sidebar h3, .tags-sidebar h3 {
   font-size: 0.9rem !important;
