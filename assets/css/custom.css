@@ -12,7 +12,7 @@
 /* Ensure body content starts below the header */
 /* This is now REQUIRED because 'fixed' pulls the navbar out of the flow */
 body {
-  padding-top: 70px; 
+  padding-top: 70px !important; 
 }
 
 /* --- SIDEBAR FIX: Ensures the right column scrolls independently and locks in place --- */
