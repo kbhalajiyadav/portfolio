@@ -1,0 +1,29 @@
+.tags-sidebar {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.tags-sidebar h3 {
+  font-size: 0.9rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.tags-sidebar .badge {
+  /* Style the badges to fit your minimal theme */
+  display: inline-block;
+  padding: 0.35em 0.6em;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.25rem;
+  margin: 0.2rem 0.2rem 0.2rem 0;
+  background-color: #f8f9fa;
+  color: #000;
+  border: 1px solid #dee2e6;
+}
