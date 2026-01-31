@@ -6,7 +6,8 @@
   right: 0;         /* ADDED: Ensures it spans the full width correctly */
   width: 100%;
   z-index: 1020; 
-  background-color: var(--background); 
+  #background-color: var(--background); 
+  background-color: #0d47a1 !important;
 }
 
 /* Ensure body content starts below the header */
