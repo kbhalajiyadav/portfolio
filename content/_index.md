@@ -5,7 +5,7 @@ date: 2024-01-30
 type: landing
 
 sections:
-  # 1. THE HERO: Clean, professional, and defines you immediately.
+  # 1. THE HERO
   - block: hero
     content:
       title: |
@@ -30,7 +30,7 @@ sections:
         gradient_start: '#004ba0'
         text_color_light: true
 
-  # 2. BIOGRAPHY: Loads your bio from authors/admin/_index.md
+  # 2. BIOGRAPHY
   - block: about.biography
     id: about
     content:
@@ -39,34 +39,31 @@ sections:
     design:
       columns: '1'
 
-  # 3. SKILLS: Categorized to show your "Dual Threat" ability (Lab + Code)
+  # 3. SKILLS
   - block: features
     id: skills
     content:
       title: Technical Expertise
       items:
-        # Category A: Experimental Mechanics
         - name: Experimental Mechanics
           description: Universal Testing (Instron), T-Peel & Shear Testing (ASTM), Rheology, Soft Material Fracture, Microscopy.
           icon: microscope
           icon_pack: fas
         
-        # Category B: Computational & Data
         - name: Computational & Data
           description: Python (Pandas, OpenCV, SciPy), MATLAB, Automated Data Pipelines, Statistical Analysis (PCA).
           icon: code
           icon_pack: fas
           
-        # Category C: Regulatory & Process
         - name: Quality & Regulatory
           description: FDA Compliance, cGMP Guidelines, CAPA/Root Cause Analysis, Design of Experiments (DoE).
           icon: clipboard-check
           icon_pack: fas
     design:
       columns: '1'
-      view: 3 # Lays them out side-by-side cleanly
+      view: 3
 
-  # 4. EXPERIENCE: Your timeline, highlighting the $30k grant and 300% efficiency
+  # 4. EXPERIENCE (Fixed: Removed missing logos)
   - block: experience
     id: experience
     content:
@@ -75,7 +72,6 @@ sections:
         - title: Graduate Research Assistant
           company: VCU Soft Functional Materials Lab
           company_url: ''
-          company_logo: vcu
           location: Richmond, VA
           date_start: '2024-09-01'
           date_end: ''
@@ -88,7 +84,6 @@ sections:
         - title: Technical Project Manager
           company: Kreative Organics Pvt. Ltd.
           company_url: ''
-          company_logo: org
           location: Hyderabad, India
           date_start: '2023-05-01'
           date_end: '2024-05-01'
@@ -101,7 +96,6 @@ sections:
         - title: Technical Project Intern
           company: Kreative Organics Pvt. Ltd.
           company_url: ''
-          company_logo: org
           location: Hyderabad, India
           date_start: '2022-10-01'
           date_end: '2023-04-01'
@@ -111,7 +105,7 @@ sections:
     design:
       columns: '2'
 
-  # 5. PROJECTS: This grid will automatically pull from your content/project/ folder
+  # 5. PROJECTS
   - block: portfolio
     id: projects
     content:
@@ -127,7 +121,7 @@ sections:
       view: showcase
       flip_alt_rows: true
 
-  # 6. PUBLICATIONS: Pulls from content/publication/ folder
+  # 6. PUBLICATIONS
   - block: collection
     id: publications
     content:
@@ -139,7 +133,7 @@ sections:
       columns: '2'
       view: citation
 
-  # 7. ACHIEVEMENTS: The "Trophy Case"
+  # 7. ACHIEVEMENTS
   - block: accomplishments
     content:
       title: Achievements
@@ -165,7 +159,7 @@ sections:
     design:
       columns: '2'
 
-  # 8. CONTACT: Simple and direct
+  # 8. CONTACT
   - block: contact
     id: contact
     content:
