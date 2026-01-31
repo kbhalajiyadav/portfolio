@@ -1,0 +1,80 @@
+{{ define "main" }}
+
+<article class="article">
+  <div class="container">
+    <div class="row">
+
+      <!-- MAIN CONTENT -->
+      <div class="col-lg-9 col-md-8 article-container">
+
+        <h1 class="article-title">{{ .Title }}</h1>
+
+        {{ if .Params.status_label }}
+          <div class="article-status-row">
+            <span class="status-pill status-pill--active">{{ .Params.status_label }}</span>
+          </div>
+        {{ end }}
+
+        <!-- Mobile meta -->
+        <div class="d-lg-none article-mobile-meta">
+
+          {{ if .Params.toc }}
+            <div class="toc-sidebar toc-sidebar--mobile">
+              <h3>Table of Contents</h3>
+              {{ .TableOfContents }}
+            </div>
+          {{ end }}
+
+          {{ if .Params.tags }}
+            <div class="tags-sidebar tags-sidebar--mobile">
+              <h3>Tags</h3>
+              <ul class="list-unstyled">
+                {{ range .Params.tags }}
+                  <li>
+                    <a href="{{ (printf "tags/%s" (. | urlize)) | relURL }}" class="badge badge-light">
+                      {{ . }}
+                    </a>
+                  </li>
+                {{ end }}
+              </ul>
+            </div>
+          {{ end }}
+
+        </div>
+
+        {{ .Content }}
+
+      </div>
+
+      <!-- RIGHT SIDEBAR (Desktop) -->
+      <aside class="col-lg-3 col-md-4 aside-column d-none d-lg-block">
+
+        {{ if .Params.toc }}
+          <div class="toc-sidebar">
+            <h3>Table of Contents</h3>
+            {{ .TableOfContents }}
+          </div>
+        {{ end }}
+
+        {{ if .Params.tags }}
+          <div class="tags-sidebar">
+            <h3>Tags</h3>
+            <ul class="list-unstyled">
+              {{ range .Params.tags }}
+                <li>
+                  <a href="{{ (printf "tags/%s" (. | urlize)) | relURL }}" class="badge badge-light">
+                    {{ . }}
+                  </a>
+                </li>
+              {{ end }}
+            </ul>
+          </div>
+        {{ end }}
+
+      </aside>
+
+    </div>
+  </div>
+</article>
+
+{{ end }}
