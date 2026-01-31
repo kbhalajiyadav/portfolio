@@ -1,3 +1,4 @@
+```yaml
 ---
 # Leave the homepage title empty to use the site title
 title: ''
@@ -41,22 +42,21 @@ sections:
     design:
       columns: '2'
 
-  # 3. RECENT NEWS
+  # 3. LATEST UPDATES
   - block: markdown
     id: news
     content:
-      title: Recent News
+      title: Latest Updates
       text: |
-        * **[Sep 2025]** Selected participant for the **1st National Neutron Scattering School** at [ORNL](https://www.ornl.gov/).
-        * **[Aug 2025]** Presented *Adhesives for Personalized Wearable Devices* at **[ACS Fall 2025](https://www.acs.org/)** (Washington, D.C.).
-        * **[May 2025]** Attended **Anton Paar Rheology Workshop** on soft matter characterization.
-        * **[Sep 2024]** Secured **$30,000 Commonwealth Cyber Initiative** grant for thermochromic textile research. [Read project details]({{< relref "project/adhesion-analysis" >}}).
-        
-        [**View Archived News →**](#)
+        * **Dec 2025:** Attended **Anton Paar XRD Workshop** (XRDynamic 500) on total scattering and PDF analysis. [[Read Learning Report]](#)
+        * **Sep 2025:** Selected participant for the **1st National Neutron Scattering School** at [Oak Ridge National Laboratory (ORNL)](https://www.ornl.gov/). [[View Agenda]](uploads/nns_agenda.pdf)
+        * **Aug 2025:** Presented *Adhesives for Personalized Wearable Devices* at **[ACS Fall 2025](https://www.acs.org/)** (Washington, D.C.).
+        * **June 2025:** Attended **Anton Paar Rheo-Polarized Imaging Workshop** with Photron high-speed camera integration. [[Read Learning Report]](#)
+        * **Sep 2024:** **[FUNDED]** Drafted successful **$30,000 Commonwealth Cyber Initiative** grant for thermochromic textile research. [[Read Project Details]]({{< relref "project/adhesion-analysis" >}})
     design:
       columns: '2'
 
-  # 4. SELECTED PROJECTS (View: Compact)
+  # 4. SELECTED PROJECTS
   - block: portfolio
     id: projects
     content:
@@ -84,11 +84,11 @@ sections:
       columns: '2'
       view: citation
 
-  # 6. EXPERIENCE
+  # 6. ACADEMIC RESEARCH (Block 1)
   - block: experience
     id: experience
     content:
-      title: Experience
+      title: Academic Research
       items:
         - title: Graduate Research Assistant
           company: VCU Soft Functional Materials Lab
@@ -97,9 +97,17 @@ sections:
           date_start: '2024-09-01'
           date_end: ''
           description: |2-
-            * Drafted successful **$30,000 grant proposal** (Commonwealth Cyber Initiative).
-            * Engineered an **Integrated Optical Metrology System** (Python/OpenCV).
+            * **Grant Success:** Drafted successful **$30,000 grant proposal** (Commonwealth Cyber Initiative) for thermochromic socks.
+            * **Metrology:** Engineered an **Integrated Optical Metrology System** (Python/OpenCV) increasing throughput by >300%.
+            * **Award:** Recieved Graduate Assistantship (Full Tuition Waiver).
+    design:
+      columns: '2'
 
+  # 7. INDUSTRY EXPERIENCE (Block 2)
+  - block: experience
+    content:
+      title: Industry Experience
+      items:
         - title: Technical Project Manager
           company: Kreative Organics Pvt. Ltd.
           company_url: 'https://kreativeorganics.com/'
@@ -107,8 +115,10 @@ sections:
           date_start: '2023-05-01'
           date_end: '2024-05-01'
           description: |2-
+            *Recruited via Deep Thought Edutech.*
+            * **Mentors:** [Mr. Ravi Seelamsetty (CEO)](https://www.linkedin.com/in/raviseelamsetty/) & [Tarun Ayitham](https://www.linkedin.com/in/tarunayitham/).
             * Directed **CAPA/Root Cause Analysis** initiatives ensuring FDA audit readiness.
-            * Executed **SAP System Requalification**.
+            * Executed **SAP System Requalification** with precision cutover.
 
         - title: Technical Intern
           company: Deep Thought Edutech
@@ -118,10 +128,21 @@ sections:
           date_end: '2022-10-01'
           description: |2-
             * Developed logic frameworks and documentation standards.
+            * Contributed to educational technology logic frameworks.
+
+        - title: Technical Project Intern
+          company: Kreative Organics Pvt. Ltd.
+          company_url: 'https://kreativeorganics.com/'
+          location: Hyderabad, India
+          date_start: '2022-10-01'
+          date_end: '2023-04-01'
+          description: |2-
+            * Engineered **Supply Chain Optimization Workflow** reducing research time by **70%**.
+            * Designed **Standardized Chemical Data Protocol** (Python/Docker) with **90%** accuracy improvement.
     design:
       columns: '2'
 
-  # 7. SKILLS
+  # 8. SKILLS
   - block: features
     id: skills
     content:
@@ -145,7 +166,7 @@ sections:
       columns: '1'
       view: 3
 
-  # 8. CONTACT
+  # 9. CONTACT
   - block: contact
     id: contact
     content:
