@@ -8,7 +8,7 @@ Visit the live portfolio at: **https://kbhalajiyadav.github.io/portfolio**
 
 ## 📸 Preview
 
-![Portfolio Preview](assets/images/avatar.png)
+![Portfolio Preview](assets/images/avatar.jpg)
 
 ## 🚀 Quick Start
 
