@@ -1,5 +1,5 @@
 <style>
-  /* 1. HEADER FIX: Forces the navbar to stay at the top */
+  /* --- 1. HEADER FIX (STICKY TOP) --- */
   .navbar {
     position: fixed !important;
     top: 0 !important;
@@ -7,45 +7,87 @@
     right: 0 !important;
     width: 100% !important;
     z-index: 1020 !important;
-    background-color: #ffffff !important; 
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    background-color: #ffffff !important; /* Force White Background */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow */
   }
 
-  /* 2. BODY PADDING: Pushes content down so it's not hidden behind the header */
+  /* --- 2. BODY PADDING (Prevent content hiding) --- */
   body {
-    padding-top: 80px !important; 
+    padding-top: 75px !important; /* Matches header height */
   }
 
-  /* 3. SIDEBAR FIX: Keeps the Table of Contents visible while scrolling */
-  .row { align-items: flex-start !important; }
+  /* --- 3. SIDEBAR FIX (STICKY TOC) --- */
+  .row { 
+      align-items: flex-start !important; 
+  }
   
   .aside-column {
     position: -webkit-sticky !important;
     position: sticky !important;
-    top: 90px !important; /* Aligns below the fixed header */
+    top: 90px !important; /* Sit comfortably below the header */
     height: calc(100vh - 90px) !important;
     overflow-y: auto !important;
     align-self: flex-start !important;
   }
-  
-  /* Fix sidebar alignment */
-  .article-container { padding-top: 1.5rem !important; }
-  .toc-sidebar, .tags-sidebar { margin-top: 1.5rem !important; }
 
-  /* 4. READING PROGRESS BAR STYLE (CSS only) */
+  /* --- 4. SIDEBAR STYLING (From your CSS file) --- */
+  /* Spacing for TOC and Tags */
+  .toc-sidebar, .tags-sidebar {
+      margin-top: 1.5rem !important; 
+  }
+
+  /* Titles for TOC and Tags */
+  .toc-sidebar h3, .tags-sidebar h3 {
+    font-size: 0.9rem !important;
+    font-weight: bold !important;
+    text-transform: uppercase !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  /* Tag Cloud / Badge Styles */
+  .tags-sidebar { 
+      padding-top: 1rem; 
+      border-top: 1px solid var(--border-color); 
+  }
+  .tags-sidebar .badge { 
+      display: inline-block; 
+      padding: 0.35em 0.6em; 
+      font-size: 75%; 
+      font-weight: 700; 
+      line-height: 1; 
+      text-align: center; 
+      white-space: nowrap; 
+      vertical-align: baseline; 
+      border-radius: 0.25rem; 
+      margin: 0.2rem 0.2rem 0.2rem 0; 
+      background-color: #f8f9fa; 
+      color: #000; 
+      border: 1px solid #dee2e6; 
+  }
+
+  /* --- 5. READING PROGRESS BAR STYLE --- */
   #reading-progress {
     position: fixed;
-    top: 70px; /* Position under navbar */
+    top: 70px; /* Position exactly at the bottom of the navbar */
     left: 0;
     width: 0%;
     height: 4px;
-    background: #1565c0; 
-    z-index: 1021; 
+    background: #1565c0; /* Blue color */
+    z-index: 1021; /* Sits on top of the navbar */
     transition: width 0.1s ease-out;
   }
-  
-  /* 5. TAGS Styles (Moved from custom.css) */
-  .tags-sidebar { padding-top: 1rem; border-top: 1px solid var(--border-color); }
-  .tags-sidebar h3 { font-size: 0.9rem; font-weight: bold; text-transform: uppercase; margin-bottom: 0.5rem; }
-  .tags-sidebar .badge { display: inline-block; padding: 0.35em 0.6em; font-size: 75%; font-weight: 700; line-height: 1; text-align: center; white-space: nowrap; vertical-align: baseline; border-radius: 0.25rem; margin: 0.2rem 0.2rem 0.2rem 0; background-color: #f8f9fa; color: #000; border: 1px solid #dee2e6; }
 </style>
+
+<div id="reading-progress"></div>
+<script>
+  window.addEventListener('scroll', () => {
+    const totalHeight = document.body.scrollHeight - window.innerHeight;
+    const progress = (window.scrollY / totalHeight) * 100;
+    const progressBar = document.getElementById('reading-progress');
+    
+    // Safety check to ensure bar exists before setting width
+    if (progressBar) {
+        progressBar.style.width = progress + '%';
+    }
+  });
+</script>
