@@ -1,12 +1,13 @@
 <style>
-  /* --- 0. ANIMATION FIX (CRITICAL FOR PROJECT PAGES) --- */
-  /* This prevents the page animation from breaking the sticky header */
-  body, .page-wrapper, .article-container {
+  /* 0. CRITICAL FIX: Disable theme animations that break sticky/fixed positioning */
+  body, .page-wrapper, .article-container, .hero-lead {
     transform: none !important;
     -webkit-transform: none !important;
+    animation: none !important;
+    opacity: 1 !important;
   }
 
-  /* --- 1. FIXED HEADER (Targeting ID and Class) --- */
+  /* 1. FIXED HEADER (Works on all pages now) */
   #navbar-main, .navbar {
     position: fixed !important;
     top: 0 !important;
@@ -18,12 +19,12 @@
     box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
   }
 
-  /* --- 2. BODY PADDING (Push content down) --- */
+  /* 2. BODY PADDING (Push content down on all pages) */
   body {
     padding-top: 80px !important; 
   }
 
-  /* --- 3. STICKY SIDEBAR + VERTICAL LINE --- */
+  /* 3. STICKY SIDEBAR + VERTICAL LINE (Only applies to Project Pages) */
   .aside-column {
     position: -webkit-sticky !important;
     position: sticky !important;
@@ -31,107 +32,19 @@
     height: calc(100vh - 90px) !important;
     overflow-y: auto !important; 
     align-self: flex-start !important;
-    
-    /* Grey Divider Line */
     border-left: 2px solid #e0e0e0 !important; 
     padding-left: 20px !important;
     background-color: #fff !important;
   }
 
-  /* Prevent Main Content from touching the line */
-  .col-lg-9, .col-md-8 {
-      padding-right: 30px !important; 
-  }
-  
   /* Ensure column alignment */
   .row { align-items: flex-start !important; }
-
-  /* --- 4. TABLE OF CONTENTS HIGHLIGHTING --- */
-  /* Normal Link */
-  .toc-sidebar a {
-      display: block;
-      color: #666; 
-      text-decoration: none;
-      padding: 4px 0;
-      transition: all 0.2s ease;
-      border-left: 3px solid transparent; 
-      padding-left: 10px;
-      font-size: 0.85rem;
-  }
-
-  /* Active/Highlighted Link */
-  .toc-sidebar a.active-toc-link {
-      color: #1565c0 !important;       
-      font-weight: bold !important;
-      border-left: 3px solid #1565c0 !important; 
-      background-color: #f0f7ff;       
-  }
-
-  /* --- 5. GENERAL STYLES --- */
-  .toc-sidebar, .tags-sidebar { margin-top: 1.5rem !important; }
   
-  .toc-sidebar h3, .tags-sidebar h3 {
-    font-size: 0.9rem !important;
-    font-weight: bold !important;
-    text-transform: uppercase !important;
-    margin-bottom: 0.5rem !important;
-  }
-  
-  .tags-sidebar { padding-top: 1rem; border-top: 1px solid #eee; }
-  .tags-sidebar .badge { 
-      display: inline-block; padding: 0.35em 0.6em; font-size: 75%; 
-      font-weight: 700; line-height: 1; text-align: center; 
-      white-space: nowrap; vertical-align: baseline; 
-      border-radius: 0.25rem; margin: 0.2rem; 
-      background-color: #f8f9fa; color: #000; border: 1px solid #dee2e6; 
-  }
+  /* Prevent Main Content from touching the line */
+  .col-lg-9, .col-md-8 { padding-right: 30px !important; }
 
-  /* --- 6. READING PROGRESS BAR --- */
+  /* 4. READING PROGRESS BAR STYLE (CSS) */
   #reading-progress {
-    position: fixed;
-    top: 70px; 
-    left: 0;
-    width: 0%;
-    height: 4px;
-    background: #1565c0; 
-    z-index: 100000; /* Above the navbar z-index */
-    transition: width 0.1s ease-out;
+    position: fixed; top: 70px; left: 0; width: 0%; height: 4px; background: #1565c0; z-index: 1021; transition: width 0.1s ease-out;
   }
 </style>
-
-<div id="reading-progress"></div>
-
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    
-    // 1. Reading Progress Bar Logic
-    window.addEventListener('scroll', () => {
-      const totalHeight = document.body.scrollHeight - window.innerHeight;
-      const progress = (window.scrollY / totalHeight) * 100;
-      const progressBar = document.getElementById('reading-progress');
-      if (progressBar) progressBar.style.width = progress + '%';
-    });
-
-    // 2. ScrollSpy Logic
-    const headers = document.querySelectorAll('.article-container h1, .article-container h2, .article-container h3');
-    const tocLinks = document.querySelectorAll('.toc-sidebar a');
-
-    if (headers.length > 0 && tocLinks.length > 0) {
-      window.addEventListener('scroll', () => {
-        let currentId = '';
-        headers.forEach(header => {
-          const headerTop = header.offsetTop;
-          if (window.scrollY >= (headerTop - 200)) { 
-            currentId = header.getAttribute('id');
-          }
-        });
-        tocLinks.forEach(link => {
-          link.classList.remove('active-toc-link');
-          if (link.getAttribute('href') === '#' + currentId) {
-            link.classList.add('active-toc-link');
-          }
-        });
-      });
-    }
-  });
-</script>
