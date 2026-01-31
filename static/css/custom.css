@@ -1,100 +1,146 @@
 /* =========================================================
-   MASTER CUSTOM CSS: Fixed Header & Clean Layout
+   FINAL CUSTOM CSS (Navbar fixed + clean sidebar + TOC + Progress)
+   File: static/css/custom.css
    ========================================================= */
 
-/* --- 1. CONTENT SPACING (The "Hard Push") --- */
-/* This forces the content to start 100px down the page. 
-   It ensures your Title and "Active Research" pill are never hidden. */
-body, .page-wrapper, .article-container {
-  padding-top: 100px !important;
-  transform: none !important; /* Disables animation interference */
+/* -----------------------------
+   0) Global safety
+------------------------------ */
+:root {
+  --nav-h: 70px; /* JS will overwrite this with real navbar height */
 }
 
-/* --- 2. FIXED HEADER --- */
-/* Locks the white header to the top */
-.navbar {
+/* -----------------------------
+   1) NAVBAR: fixed, always visible
+------------------------------ */
+#navbar-main, .navbar, header, .page-header {
   position: fixed !important;
   top: 0 !important;
-  left: 0;
-  width: 100%;
+  left: 0 !important;
+  right: 0 !important;
   z-index: 99999 !important;
-  background-color: #ffffff !important;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  background: #ffffff !important;
+  transform: translateY(0) !important;  /* kill hide-on-scroll transforms */
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
-/* --- 3. TOC & SIDEBAR CLEANUP (Remove All Lines) --- */
-/* Removes the border from the container, the list, and the links */
-.toc-sidebar, 
-.toc-sidebar ul, 
-.toc-sidebar li, 
-.toc-sidebar a {
-  border: none !important;
+/* Push all pages down below the fixed navbar */
+body {
+  padding-top: var(--nav-h, 70px) !important;
+  margin-top: 0 !important;
+}
+
+/* Homepage hero often already includes top spacing.
+   Cancel the extra offset so homepage doesn't look "dropped". */
+.page-home .home-section:first-of-type,
+.home .home-section:first-of-type {
+  margin-top: calc(-1 * var(--nav-h, 70px)) !important;
+}
+
+/* Avoid wrapper clipping (helps progress bar visibility on home) */
+.page-wrapper, main, .home-section {
+  overflow: visible !important;
+}
+
+/* -----------------------------
+   2) RIGHT SIDEBAR: one clean divider only
+------------------------------ */
+.aside-column {
+  position: -webkit-sticky !important;
+  position: sticky !important;
+  top: calc(var(--nav-h, 70px) + 20px) !important; /* below navbar */
+  height: calc(100vh - (var(--nav-h, 70px) + 20px)) !important;
+  overflow-y: auto !important;
+  align-self: flex-start !important;
+
+  border-left: 1px solid #e1e4e8 !important; /* single divider line */
+  padding-left: 20px !important;
+  background-color: #ffffff !important;
+}
+
+/* Main content spacing away from divider */
+.col-lg-9, .col-md-8 {
+  padding-right: 40px !important;
+}
+.row { align-items: flex-start !important; }
+
+/* -----------------------------
+   3) REMOVE "inner TOC line" / box borders
+------------------------------ */
+.toc-sidebar,
+.tags-sidebar {
+  border-left: none !important;
+  padding-left: 0 !important;
+  background: transparent !important;
+}
+
+.toc-sidebar nav#TableOfContents,
+.toc-sidebar #TableOfContents {
   border-left: none !important;
   padding-left: 0 !important;
   margin-left: 0 !important;
 }
 
-/* Style the links to look clean and simple */
+/* TOC links */
 .toc-sidebar a {
   display: block;
   color: #586069;
-  font-size: 0.85rem;
-  padding: 5px 0;
   text-decoration: none;
-  transition: color 0.2s;
+  padding: 4px 0;
+  font-size: 0.85rem;
+  border-left: 2px solid transparent;
+  padding-left: 10px;
+  transition: all 0.2s ease;
 }
-
-/* Active State: Just Bold Blue, No Lines */
 .toc-sidebar a.active-toc-link {
   color: #0366d6 !important;
+  font-weight: 600 !important;
+  border-left: 2px solid #0366d6 !important;
+}
+
+/* Sidebar headings */
+.toc-sidebar h3, .tags-sidebar h3 {
+  font-size: 0.8rem !important;
   font-weight: 700 !important;
-  background: transparent !important;
+  text-transform: uppercase;
+  color: #24292e;
+  margin-bottom: 0.5rem;
 }
 
-/* --- 4. FIXED SIDEBAR POSITION --- */
-.aside-column {
-  position: -webkit-sticky !important;
-  position: sticky !important;
-  top: 120px !important; /* Aligns with the 100px body padding */
-  height: calc(100vh - 120px) !important;
-  overflow-y: auto !important;
-  align-self: flex-start !important;
-  
-  /* Vertical Grey Line (Only between content and sidebar) */
-  border-left: 1px solid #e1e4e8 !important; 
-  padding-left: 20px !important;
-  background-color: #ffffff !important;
-}
+/* -----------------------------
+   4) STATUS PILL under title (if used on project pages)
+------------------------------ */
+.article-title { margin-bottom: 0.35rem !important; }
+.article-status-row { margin: 0.25rem 0 1.25rem 0 !important; }
 
-/* --- 5. ACTIVE RESEARCH PILL --- */
 .status-pill {
   display: inline-block;
-  padding: 0.35rem 0.9rem;
-  border-radius: 4px;
-  font-size: 0.7rem;
+  padding: 4px 10px;
+  border-radius: 999px;
   font-weight: 700;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  background-color: #f5f5f5;
-  color: #616161;
-  border: 1px solid #e0e0e0;
-  margin-top: 0.5rem;   /* Small gap above the pill */
-  margin-bottom: 1rem;  /* Larger gap below the pill */
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  border: 1px solid transparent;
 }
 
-.status-pill.active {
-  background-color: #e8f5e9;
+.status-pill--active {
+  background: #e8f5e9;
   color: #2e7d32;
-  border: 1px solid #2e7d32;
+  border-color: #2e7d32;
 }
 
-/* --- 6. READING PROGRESS BAR --- */
+/* -----------------------------
+   5) READING PROGRESS BAR (always visible)
+------------------------------ */
 #reading-progress {
-  position: fixed;
-  top: 70px; /* Matches header height */
-  left: 0;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
   width: 0%;
-  height: 3px;
-  background: #1565c0;
-  z-index: 100000;
+  height: 3px !important;
+  background: #1565c0 !important;
+  z-index: 100000 !important; /* above navbar */
+  transition: width 0.1s linear;
 }
