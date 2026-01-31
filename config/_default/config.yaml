@@ -1,7 +1,13 @@
 # Configuration for Hugo Blox Portfolio
-baseURL: 'https://kbhalajiyadav.github.io'
+# CRITICAL FIX 1: Added /portfolio/ to the end so links work
+baseURL: 'https://kbhalajiyadav.github.io/portfolio/'
 title: 'Bhalaji Yadav'
-theme: 'hugo-blox-builder'
+# CRITICAL FIX 2: Removed the "theme" line that was causing the error
+
+# Module settings (This downloads the design automatically)
+module:
+  imports:
+    - path: github.com/HugoBlox/hugo-blox-builder/modules/blox-bootstrap/v5
 
 # Language settings
 defaultContentLanguage: 'en'
@@ -60,15 +66,3 @@ markup:
     noClasses: false
     style: 'monokai'
     tabWidth: 4
-
-# Module settings
-module:
-  imports:
-    - path: github.com/HugoBlox/hugo-blox-builder/modules/blox-bootstrap/v5
-  mounts:
-    - source: assets
-      target: assets
-    - source: static
-      target: static
-    - source: content
-      target: content
