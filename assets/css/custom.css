@@ -6,7 +6,11 @@
   right: 0;         /* ADDED: Ensures it spans the full width correctly */
   width: 100%;
   z-index: 1020; 
-  background-color: #0d47a1 !important;
+  /* CHANGE THIS LINE: Set to solid white */
+  background-color: #ffffff !important; 
+    
+  /* Optional: Add a subtle shadow so it separates from the content */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 /* Ensure body content starts below the header */
