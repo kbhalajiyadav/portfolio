@@ -300,3 +300,160 @@ body {
   }
 }
 
+/* ============================
+   Publication template styling
+   ============================ */
+
+.publication-submeta{
+  margin: 0.5rem 0 1.25rem 0;
+}
+
+.publication-venue{
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.publication-meta{
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+.publication-meta .dot{
+  margin: 0 0.35rem;
+}
+
+.publication-section{
+  margin: 1.25rem 0;
+}
+
+.publication-links{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.75rem 0 1.25rem 0;
+}
+
+.pub-btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 38px;
+  padding: 0 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background: #fff;
+  text-decoration: none;
+  color: #111827;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.pub-btn:hover{
+  background: #fafafa;
+  border-color: #d1d5db;
+}
+
+.pub-btn--copy{
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.cite-sidebar{
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.cite-box{
+  width: 100%;
+  min-height: 120px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 10px;
+  font-size: 0.85rem;
+  color: #111827;
+  background: #fff;
+  resize: vertical;
+}
+
+.copy-msg{
+  margin-top: 0.4rem;
+  font-size: 0.85rem;
+  color: #2563eb;
+}
+
+/* Keyword chips inline */
+.tags-inline{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tag-chip{
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+  color: #111827;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.tag-chip:hover{
+  background: #f3f4f6;
+  border-color: #d1d5db;
+}
+
+/* Capsule colors */
+.status-pill{
+  display: inline-flex;
+  align-items: center;
+  height: 34px;
+  padding: 0 14px;
+  border-radius: 999px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+}
+
+.status-pill--pub{
+  border: 1px solid #86efac;
+  background: #ecfdf5;
+  color: #166534;
+}
+
+.status-pill--conf{
+  border: 1px solid #fdba74;
+  background: #fff7ed;
+  color: #9a3412;
+}
+
+.status-pill--preprint{
+  border: 1px solid #93c5fd;
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+.status-pill--report,
+.status-pill--book,
+.status-pill--thesis,
+.status-pill--patent{
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+  color: #111827;
+}
+
+/* Status row spacing */
+.article-status-row{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.4rem 0 0.75rem 0;
+}
+
+
