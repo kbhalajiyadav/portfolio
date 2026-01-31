@@ -90,7 +90,7 @@ sections:
   - block: experience
     id: experience
     content:
-      title: Academic Research
+      title: Experience
       items:
         - title: Graduate Research Assistant
           company: VCU Soft Functional Materials Lab
@@ -130,7 +130,7 @@ sections:
             * Created **Stage-Gate Project Management Framework** which was subsequently adopted company-wide to streamline R&D timelines.
     design:
       columns: '2'
-
+    
   # ===== SKILLS SECTION =====
   - block: features
     id: skills
