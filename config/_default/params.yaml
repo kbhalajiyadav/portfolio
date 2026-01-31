@@ -24,6 +24,7 @@ marketing:
 
 # Site header
 header:
+  sticky: true
   navbar:
     enable: true
     align: l
