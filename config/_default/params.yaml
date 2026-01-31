@@ -35,7 +35,7 @@ header:
     highlight_active_link: true
   #sticky: true 
 #header.on_scroll: false
-header.on_scroll: "fixed"
+header.on_scroll: "sticky"
 
 
 # Site footer
