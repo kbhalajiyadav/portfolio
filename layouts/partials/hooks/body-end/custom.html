@@ -1,15 +1,1 @@
-<!-- Reading Progress Bar HTML Element -->
-<div id="reading-progress"></div>
-
-<script>
-  // Script for the progress bar ("scroll top bar thing")
-  window.addEventListener('scroll', () => {
-    const totalHeight = document.body.scrollHeight - window.innerHeight;
-    const progress = (window.scrollY / totalHeight) * 100;
-    const progressBar = document.getElementById('reading-progress');
-    if (progressBar) {
-        progressBar.style.width = progress + '%';
-    }
-  });
-</script>
 
