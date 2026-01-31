@@ -1,0 +1,54 @@
+{{/* layouts/partials/author-footer.html */}}
+
+{{ $defaultAuthor := site.GetPage "authors/admin" }}
+
+{{/* If the page explicitly sets authors, use the first one; else fallback to admin */}}
+{{ $author := $defaultAuthor }}
+{{ with .Params.authors }}
+  {{ $first := index . 0 }}
+  {{ with site.GetPage (printf "authors/%s" $first) }}
+    {{ $author = . }}
+  {{ end }}
+{{ end }}
+
+{{ if $author }}
+<hr class="author-footer-divider">
+
+<section class="author-footer">
+  <div class="author-footer__avatar">
+    {{/* Hugo Blox author avatar is typically at: content/authors/<name>/avatar.(png|jpg) */}}
+    {{ $avatar := $author.Resources.GetMatch "avatar*" }}
+    {{ if $avatar }}
+      <img src="{{ $avatar.RelPermalink }}" alt="{{ $author.Title }}" loading="lazy">
+    {{ else }}
+      <div class="author-footer__avatar-fallback" aria-hidden="true"></div>
+    {{ end }}
+  </div>
+
+  <div class="author-footer__meta">
+    <div class="author-footer__name">{{ $author.Title }}</div>
+
+    {{ with $author.Params.role }}
+      <div class="author-footer__role">{{ . }}</div>
+    {{ end }}
+
+    {{ with $author.Params.bio }}
+      <div class="author-footer__bio">{{ . }}</div>
+    {{ end }}
+
+    {{/* Social icons (simple + robust: text links, no dependency on icon packs) */}}
+    {{ with $author.Params.social }}
+      <div class="author-footer__links">
+        {{ range . }}
+          {{ $label := .icon }}
+          {{ if .link }}
+            <a class="author-footer__link" href="{{ .link }}" target="_blank" rel="noopener">
+              {{ $label }}
+            </a>
+          {{ end }}
+        {{ end }}
+      </div>
+    {{ end }}
+  </div>
+</section>
+{{ end }}
