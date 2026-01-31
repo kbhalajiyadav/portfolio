@@ -1,15 +1,11 @@
 ---
 title: "Mechanics-Consistent Adhesion in Soft Wearables"
 summary: "Developed a First-Principles framework to identify 'False Positive' adhesion failures, utilizing a custom Python pipeline to automate fracture mechanics analysis."
-tags:
-  - Fracture Mechanics
-  - Soft Robotics
-  - Python
-  - Academic Research
+tags:["Fracture Mechanics", "Soft Robotics", "Python", "Academic Research"]
+status_label: ACTIVE RESEARCH
 date: 2025-01-30
 type: post #ject #_page # Optional: creates a consistent layout across projects
 toc: true          # Enables the Table of Contents on the right
-share: true        # Shows social sharing buttons
 ---
 
 <div class="status-pill active">ACTIVE RESEARCH</div>
@@ -49,21 +45,3 @@ graph TD
 - Framework prevents "False Positive" selections
 - Ensures mechanically stable adhesives for medical devices
 - Validated using T-Peel testing (ASTM D2724 adapted) with custom Python signal analysis
-
-<style>
-.status-pill {
-  display: inline-block;
-  padding: 0.35rem 0.9rem;
-  border-radius: 4px;
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  margin-bottom: 1.5rem;
-}
-.status-pill.active {
-  background-color: #e8f5e9;
-  color: #2e7d32;
-  border: 1px solid #2e7d32;
-}
-</style>
