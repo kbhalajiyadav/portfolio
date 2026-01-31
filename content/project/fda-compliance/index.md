@@ -32,3 +32,10 @@ graph TD
     D -- "Scan: Min. Std Dev" --> E["Peak & Trough Detection<br/>Isolate Initiation Forces (Fci)"]
     E --> F["Calculate Stability Metrics<br/>PSI = Fmean / SigmaF"]
     F --> H["Summary Report<br/>Metrics: Gci, PSI"]
+```
+**Key Contribution:** This automation reduced data processing time by 80% while ensuring that only mechanically stable (Category II) adhesives are selected for the final medical device.
+
+## 4. The Result
+Framework prevents "False Positive" selections
+Ensures mechanically stable adhesives for medical devices
+Validated using T-Peel testing (ASTM D2724 adapted) with custom Python signal analysis
