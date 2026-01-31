@@ -1,0 +1,22 @@
+<script>
+(function () {
+  function updateProgress() {
+    const bar = document.getElementById('reading-progress');
+    if (!bar) return;
+
+    const doc = document.documentElement;
+    const scrollTop = doc.scrollTop || document.body.scrollTop;
+    const scrollHeight = doc.scrollHeight || document.body.scrollHeight;
+    const clientHeight = doc.clientHeight || window.innerHeight;
+
+    const total = Math.max(scrollHeight - clientHeight, 1);
+    const progress = Math.min(Math.max(scrollTop / total, 0), 1);
+
+    bar.style.width = (progress * 100).toFixed(2) + '%';
+  }
+
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  window.addEventListener('resize', updateProgress);
+  document.addEventListener('DOMContentLoaded', updateProgress);
+})();
+</script>
