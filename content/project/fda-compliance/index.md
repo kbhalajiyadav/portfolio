@@ -24,6 +24,11 @@ Instead of relying on misleading averages, I applied **first-principles thinking
 
 To remove human bias and speed up analysis, I built a custom Python pipeline that operationalizes this physics-based logic.
 
+{{< mermaid >}}
+graph TD
+  A-->B
+{{< /mermaid >}}
+
 ```mermaid
 graph TD
     A["Raw Force Data<br/>(Noisy & Unreliable)"] --> B["Preprocessing<br/>Data Cleaning & Unit Conversion"]
