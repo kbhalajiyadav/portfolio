@@ -49,7 +49,7 @@ social:
     link: https://github.com/kbhalajiyadav
   - icon: orcid
     icon_pack: fab
-    link: https://orcid.org/PLACEHOLDER
+    link: https://orcid.org/0000-0003-0551-6172
 
 # Link to a PDF of your resume/CV
 # To use: copy your resume to `static/uploads/resume.pdf`, enable `ai` icons in `params.toml`,
