@@ -8,14 +8,14 @@
    This guarantees the content starts 120px down the page, 
    clearing the header completely. */
 .page-wrapper {
-  padding-top: 120px !important; 
+  padding-top: 10px !important; 
   margin-top: 0 !important;
 }
 
 /* We also keep this to tell the browser where to stop 
    when you click "Back to Top" or a specific link. */
 html {
-  scroll-padding-top: 120px !important;
+  scroll-padding-top: 10px !important;
 }
 
 /* --- 2. ANIMATION KILLER --- */
