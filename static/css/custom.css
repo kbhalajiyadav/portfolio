@@ -209,3 +209,89 @@ body {
   color: #ffffff !important;
   border-color: #0366d6 !important;
 }
+
+/* =========================
+   AUTHOR FOOTER (Projects)
+   ========================= */
+
+.author-footer-divider{
+  margin: 2.5rem 0 1.5rem 0;
+  border: 0;
+  border-top: 1px solid #e6e6e6;
+}
+
+.author-footer{
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  padding: 14px 0 8px 0;
+}
+
+.author-footer__avatar img{
+  width: 64px;
+  height: 64px;
+  border-radius: 999px;
+  object-fit: cover;
+  border: 1px solid #e6e6e6;
+}
+
+.author-footer__avatar-fallback{
+  width: 64px;
+  height: 64px;
+  border-radius: 999px;
+  background: #f2f2f2;
+  border: 1px solid #e6e6e6;
+}
+
+.author-footer__name{
+  font-weight: 700;
+  font-size: 1.05rem;
+  line-height: 1.2;
+}
+
+.author-footer__role{
+  margin-top: 4px;
+  color: #6b7280;
+  font-size: 0.95rem;
+}
+
+.author-footer__bio{
+  margin-top: 8px;
+  color: #111827;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  max-width: 70ch;
+}
+
+.author-footer__links{
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.author-footer__link{
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 10px;
+  border: 1px solid #e6e6e6;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 0.85rem;
+  color: #111827;
+  background: #fff;
+}
+
+.author-footer__link:hover{
+  border-color: #cfd4dc;
+  background: #fafafa;
+}
+
+/* Mobile stacking */
+@media (max-width: 768px){
+  .author-footer{
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
