@@ -3,6 +3,9 @@ title: ''
 date: 2025-01-31
 type: landing
 
+profile: true
+toc: true
+
 sections:
   # ===== HERO SECTION =====
   - block: hero
