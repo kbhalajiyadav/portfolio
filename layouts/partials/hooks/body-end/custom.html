@@ -1,21 +1,14 @@
 <script>
-/* 1) Set CSS variable to the real navbar height */
 (function () {
+  // 1) set CSS var for navbar height
   function setNavHeightVar() {
     const nav = document.querySelector('#navbar-main, .navbar');
     if (!nav) return;
     const h = Math.ceil(nav.getBoundingClientRect().height);
     document.documentElement.style.setProperty('--nav-h', h + 'px');
   }
-  window.addEventListener('resize', setNavHeightVar);
-  document.addEventListener('DOMContentLoaded', setNavHeightVar);
-  setNavHeightVar();
-})();
-</script>
 
-<script>
-/* 2) Reading progress bar */
-(function () {
+  // 2) progress bar update
   function updateProgress() {
     const bar = document.getElementById('reading-progress');
     if (!bar) return;
@@ -31,9 +24,53 @@
     bar.style.width = (progress * 100).toFixed(2) + '%';
   }
 
+  // 3) TOC active link highlight (scrollspy)
+  function initTOCSpy() {
+    const toc = document.querySelector('.toc-sidebar #TableOfContents');
+    if (!toc) return;
+
+    const tocLinks = Array.from(toc.querySelectorAll('a[href^="#"]'));
+    if (!tocLinks.length) return;
+
+    const map = new Map();
+    tocLinks.forEach(a => {
+      const id = decodeURIComponent(a.getAttribute('href').slice(1));
+      const el = document.getElementById(id);
+      if (el) map.set(el, a);
+    });
+
+    // clear helper
+    function clearActive() {
+      tocLinks.forEach(a => a.classList.remove('active-toc-link'));
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      // pick the most visible intersecting heading
+      const visible = entries
+        .filter(e => e.isIntersecting)
+        .sort((a,b) => (b.intersectionRatio - a.intersectionRatio))[0];
+
+      if (!visible) return;
+
+      clearActive();
+      const a = map.get(visible.target);
+      if (a) a.classList.add('active-toc-link');
+
+    }, { root: null, threshold: [0.2, 0.35, 0.5, 0.65, 0.8] });
+
+    map.forEach((a, el) => observer.observe(el));
+  }
+
+  window.addEventListener('resize', () => { setNavHeightVar(); updateProgress(); });
   window.addEventListener('scroll', updateProgress, { passive: true });
-  window.addEventListener('resize', updateProgress);
-  document.addEventListener('DOMContentLoaded', updateProgress);
-  updateProgress();
+
+  document.addEventListener('DOMContentLoaded', () => {
+    setNavHeightVar();
+    updateProgress();
+    initTOCSpy();
+  });
+
+  // run immediately too
+  setNavHeightVar();
 })();
 </script>
