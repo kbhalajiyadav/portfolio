@@ -1,6 +1,6 @@
 ---
 title: Mechanics-Consistent Adhesion in Soft Wearables
-summary: "<span style='background-color: #e8f5e9; color: #2e7d32; padding: 2px 8px; border-radius: 4px; font-weight: bold; font-size: 0.8em; border: 1px solid #2e7d32;'>ACTIVE RESEARCH</span> A stability-driven framework preventing 'False Positive' adhesion failures in skin-interfaced electronics, validated using a custom Python signal analysis pipeline."
+summary: "<span style='background-color: #e8f5e9; color: #2e7d32; padding: 2px 8px; border-radius: 4px; font-weight: bold; font-size: 0.8em; border: 1px solid #2e7d32;'>ACTIVE RESEARCH</span> Developed a First-Principles framework to identify 'False Positive' adhesion failures, utilizing a custom Python pipeline to automate fracture mechanics analysis."
 tags:
   - Fracture Mechanics
   - Soft Robotics
@@ -9,19 +9,20 @@ tags:
 date: 2025-01-30
 ---
 
-**Status:** <span style="color: #2e7d32; font-weight: bold;">Active Research (Aims 1 & 2)</span>
+**Status:** <span style="color: #2e7d32; font-weight: bold;">Active Research (Aims 1 & 2)</span> | **Output:** Presented at [ACS Fall 2025](https://www.acs.org/)
 
-## 1. The Challenge (First Principles Analysis)
-Current industry standards (ASTM D1876) rely on the assumption that **Average Peel Force = Adhesion**.
-By applying **First Principles thinking**, we identified that this assumption fails for soft wearables. In viscoelastic systems, the total work is dominated by bulk dissipation (stretching), not interfacial bonding. This creates a **"False Positive Trap"**: adhesives that appear strong in standard tests but fail functionally due to "stick-slip" instability.
+## 1. The Situation: The "False Positive" Trap
+**The Gap:** Current industry standards (like ASTM D1876) assume that higher average peel force equals better adhesion.
+**The Problem:** I identified that this assumption fails for soft wearables. In stretchable textiles, up to 90% of the "measured force" is actually just the fabric stretching (dissipation), not the glue holding. This creates a **"False Positive Trap"**: selecting adhesives that look strong in the lab but fail functionally on the human body due to "stick-slip" instability.
 
-## 2. The Innovation: Stability Metrics
-I established a **Mechanics-Consistent Framework** to isolate true interfacial toughness.
-* **Physics of Failure:** We distinguish between **Initiation Force ($F_{ci}$)** (the peaks, representing true crack resistance) and **Arrest Force ($F_{ca}$)** (the troughs, representing artifacts).
-* **The Metric:** Introduced the **Peel Stability Index (PSI)** ($\mu_F / \sigma_F$). High PSI indicates stable, self-similar crack propagation (Category II), essential for low-noise sensor performance.
+## 2. The Action: Rational Engineering
+Instead of relying on misleading averages, I applied **First Principles Thinking** to re-engineer how we define failure.
 
-## 3. The Tool: Automated Python Pipeline
-To operationalize this physics, I engineered a custom Python analysis pipeline (replacing manual Excel analysis) to detect $F_{ci}$ without human bias.
+* **Logic over Data:** I deconstructed the force profile to distinguish between **True Adhesion** (the peaks, representing crack resistance) and **Artifacts** (the troughs, representing slip).
+* **The Metric:** I introduced the **Peel Stability Index (PSI)**. Unlike raw force, this metric quantifies *consistency*. A high PSI predicts that a sensor will perform reliably without electrical noise, preventing costly device failures downstream.
+
+## 3. The Execution: Automated Python Pipeline
+To remove human bias and speed up analysis, I built a custom Python pipeline that operationalizes this physics-based logic.
 
 ```mermaid
 graph TD
@@ -35,7 +36,7 @@ graph TD
     
     subgraph "Physics-Based Core Analysis"
         direction TB
-        D{"Identify Steady-State<br/>Window"}:::innovation
+        D["Identify Steady-State<br/>Window"]:::innovation
         E["Peak & Trough Detection<br/>Isolate Initiation Forces (F_ci)"]:::innovation
         F["Calculate Stability Metrics<br/>PSI = F_mean / Sigma_F"]:::innovation
     end
