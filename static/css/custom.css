@@ -17,7 +17,7 @@ body, .page-wrapper, .article-container {
    on the page (so your Title is pushed down automatically). */
 #navbar-main, .navbar {
   position: -webkit-sticky !important; /* Safari support */
-  position: sticky !important;
+  position: fixed !important;
   top: 0 !important;
   z-index: 99999 !important;
   background-color: #ffffff !important; /* Solid White */
