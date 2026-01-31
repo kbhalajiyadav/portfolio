@@ -7,87 +7,124 @@
     right: 0 !important;
     width: 100% !important;
     z-index: 1020 !important;
-    background-color: #ffffff !important; /* Force White Background */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow */
+    background-color: #ffffff !important;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   }
 
-  /* --- 2. BODY PADDING (Prevent content hiding) --- */
+  /* --- 2. BODY PADDING --- */
   body {
-    padding-top: 75px !important; /* Matches header height */
+    padding-top: 75px !important;
   }
 
-  /* --- 3. SIDEBAR FIX (STICKY TOC) --- */
-  .row { 
-      align-items: flex-start !important; 
-  }
-  
+  /* --- 3. FIXED SIDEBAR + VERTICAL BAR --- */
   .aside-column {
-    position: -webkit-sticky !important;
-    position: sticky !important;
-    top: 90px !important; /* Sit comfortably below the header */
+    position: fixed !important;
+    top: 90px !important;
+    right: 0 !important;
+    width: 25% !important; /* Adjust if needed */
     height: calc(100vh - 90px) !important;
     overflow-y: auto !important;
-    align-self: flex-start !important;
+    padding-left: 20px !important;
+    
+    /* THE VERTICAL BAR SEPARATOR */
+    border-left: 2px solid #e0e0e0 !important;
+    background-color: #fff !important;
   }
 
-  /* --- 4. SIDEBAR STYLING (From your CSS file) --- */
-  /* Spacing for TOC and Tags */
-  .toc-sidebar, .tags-sidebar {
-      margin-top: 1.5rem !important; 
+  /* Adjust Main Content to not touch the sidebar */
+  .col-lg-9, .col-md-8 {
+      padding-right: 30px !important; 
   }
 
-  /* Titles for TOC and Tags */
+  /* --- 4. ACTIVE TOC HIGHLIGHTING (NEW) --- */
+  /* Default State for Links */
+  .toc-sidebar a {
+      display: block;
+      color: #666; /* Grey by default */
+      text-decoration: none;
+      padding: 2px 0;
+      transition: all 0.2s ease;
+      border-left: 3px solid transparent; /* Invisible border to prevent jumping */
+      padding-left: 8px;
+  }
+
+  /* Active State (When you are reading this section) */
+  .toc-sidebar a.active-toc-link {
+      color: #1565c0 !important; /* Blue text */
+      font-weight: bold !important;
+      border-left: 3px solid #1565c0 !important; /* Blue left marker */
+      background-color: #f0f7ff; /* Very faint blue background */
+  }
+
+  /* --- 5. SIDEBAR GENERAL STYLING --- */
+  .toc-sidebar, .tags-sidebar { margin-top: 1.5rem !important; }
+  
   .toc-sidebar h3, .tags-sidebar h3 {
     font-size: 0.9rem !important;
     font-weight: bold !important;
     text-transform: uppercase !important;
     margin-bottom: 0.5rem !important;
   }
-
-  /* Tag Cloud / Badge Styles */
-  .tags-sidebar { 
-      padding-top: 1rem; 
-      border-top: 1px solid var(--border-color); 
-  }
+  
+  /* Tag Cloud Styling */
+  .tags-sidebar { padding-top: 1rem; border-top: 1px solid var(--border-color); }
   .tags-sidebar .badge { 
-      display: inline-block; 
-      padding: 0.35em 0.6em; 
-      font-size: 75%; 
-      font-weight: 700; 
-      line-height: 1; 
-      text-align: center; 
-      white-space: nowrap; 
-      vertical-align: baseline; 
-      border-radius: 0.25rem; 
-      margin: 0.2rem 0.2rem 0.2rem 0; 
-      background-color: #f8f9fa; 
-      color: #000; 
-      border: 1px solid #dee2e6; 
+      display: inline-block; padding: 0.35em 0.6em; font-size: 75%; 
+      font-weight: 700; line-height: 1; text-align: center; white-space: nowrap; 
+      vertical-align: baseline; border-radius: 0.25rem; 
+      margin: 0.2rem 0.2rem 0.2rem 0; background-color: #f8f9fa; 
+      color: #000; border: 1px solid #dee2e6; 
   }
 
-  /* --- 5. READING PROGRESS BAR STYLE --- */
+  /* --- 6. READING PROGRESS BAR --- */
   #reading-progress {
     position: fixed;
-    top: 70px; /* Position exactly at the bottom of the navbar */
+    top: 74px; /* Just under the navbar */
     left: 0;
     width: 0%;
     height: 4px;
-    background: #1565c0; /* Blue color */
-    z-index: 1021; /* Sits on top of the navbar */
+    background: #1565c0; 
+    z-index: 1021; 
     transition: width 0.1s ease-out;
   }
 </style>
 
 <div id="reading-progress"></div>
+
 <script>
-  window.addEventListener('scroll', () => {
-    const totalHeight = document.body.scrollHeight - window.innerHeight;
-    const progress = (window.scrollY / totalHeight) * 100;
-    const progressBar = document.getElementById('reading-progress');
+  document.addEventListener('DOMContentLoaded', () => {
     
-    // Safety check to ensure bar exists before setting width
-    if (progressBar) {
-        progressBar.style.width = progress + '%';
-    }
+    // --- PART A: Reading Progress Bar Logic ---
+    window.addEventListener('scroll', () => {
+      const totalHeight = document.body.scrollHeight - window.innerHeight;
+      const progress = (window.scrollY / totalHeight) * 100;
+      const progressBar = document.getElementById('reading-progress');
+      if (progressBar) progressBar.style.width = progress + '%';
+    });
+
+    // --- PART B: Table of Contents Highlighter (ScrollSpy) ---
+    const headers = document.querySelectorAll('.article-container h1, .article-container h2, .article-container h3');
+    const tocLinks = document.querySelectorAll('.toc-sidebar a');
+
+    window.addEventListener('scroll', () => {
+      let currentId = '';
+
+      // Find which header is currently nearest to the top of the screen
+      headers.forEach(header => {
+        const headerTop = header.offsetTop;
+        if (window.scrollY >= (headerTop - 150)) { // 150px offset for the sticky header
+          currentId = header.getAttribute('id');
+        }
+      });
+
+      // Loop through TOC links and add/remove 'active-toc-link' class
+      tocLinks.forEach(link => {
+        link.classList.remove('active-toc-link');
+        if (link.getAttribute('href') === '#' + currentId) {
+          link.classList.add('active-toc-link');
+        }
+      });
+    });
+    
   });
 </script>
