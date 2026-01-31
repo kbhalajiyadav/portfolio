@@ -1,14 +1,16 @@
 <script>
 (function () {
-  // 1) set CSS var for navbar height
-  function setNavHeightVar() {
+  function getNavbarHeight() {
     const nav = document.querySelector('#navbar-main, .navbar');
-    if (!nav) return;
-    const h = Math.ceil(nav.getBoundingClientRect().height);
-    document.documentElement.style.setProperty('--nav-h', h + 'px');
+    if (!nav) return 70;
+    return Math.ceil(nav.getBoundingClientRect().height);
   }
 
-  // 2) progress bar update
+  function setNavHeightVar() {
+    document.documentElement.style.setProperty('--nav-h', getNavbarHeight() + 'px');
+  }
+
+  // Progress bar update
   function updateProgress() {
     const bar = document.getElementById('reading-progress');
     if (!bar) return;
@@ -24,53 +26,70 @@
     bar.style.width = (progress * 100).toFixed(2) + '%';
   }
 
-  // 3) TOC active link highlight (scrollspy)
+  // ✅ Scrollspy for ALL TOCs (desktop + mobile)
   function initTOCSpy() {
-    const toc = document.querySelector('.toc-sidebar #TableOfContents');
-    if (!toc) return;
+    const tocs = Array.from(document.querySelectorAll('.toc-sidebar #TableOfContents'));
+    if (!tocs.length) return;
 
-    const tocLinks = Array.from(toc.querySelectorAll('a[href^="#"]'));
-    if (!tocLinks.length) return;
+    // collect ALL toc links from ALL toc containers
+    const allLinks = [];
+    tocs.forEach(toc => {
+      toc.querySelectorAll('a[href^="#"]').forEach(a => allLinks.push(a));
+    });
+    if (!allLinks.length) return;
 
-    const map = new Map();
-    tocLinks.forEach(a => {
+    // map heading -> all matching TOC links (desktop + mobile)
+    const headingToLinks = new Map();
+    allLinks.forEach(a => {
       const id = decodeURIComponent(a.getAttribute('href').slice(1));
       const el = document.getElementById(id);
-      if (el) map.set(el, a);
+      if (!el) return;
+      if (!headingToLinks.has(el)) headingToLinks.set(el, []);
+      headingToLinks.get(el).push(a);
     });
 
-    // clear helper
     function clearActive() {
-      tocLinks.forEach(a => a.classList.remove('active-toc-link'));
+      allLinks.forEach(a => a.classList.remove('active-toc-link'));
     }
 
+    const navH = getNavbarHeight();
+
     const observer = new IntersectionObserver((entries) => {
-      // pick the most visible intersecting heading
       const visible = entries
         .filter(e => e.isIntersecting)
-        .sort((a,b) => (b.intersectionRatio - a.intersectionRatio))[0];
+        .sort((a,b) => b.boundingClientRect.top - a.boundingClientRect.top)[0];
 
       if (!visible) return;
 
       clearActive();
-      const a = map.get(visible.target);
-      if (a) a.classList.add('active-toc-link');
+      const links = headingToLinks.get(visible.target) || [];
+      links.forEach(a => a.classList.add('active-toc-link'));
 
-    }, { root: null, threshold: [0.2, 0.35, 0.5, 0.65, 0.8] });
+    }, {
+      root: null,
+      // account for fixed header so headings don’t count as “hidden under navbar”
+      rootMargin: `-${navH + 10}px 0px -70% 0px`,
+      threshold: 0.01
+    });
 
-    map.forEach((a, el) => observer.observe(el));
+    headingToLinks.forEach((links, heading) => observer.observe(heading));
   }
 
-  window.addEventListener('resize', () => { setNavHeightVar(); updateProgress(); });
-  window.addEventListener('scroll', updateProgress, { passive: true });
-
-  document.addEventListener('DOMContentLoaded', () => {
+  // Run
+  function initAll() {
     setNavHeightVar();
     updateProgress();
     initTOCSpy();
+  }
+
+  window.addEventListener('resize', () => {
+    setNavHeightVar();
+    updateProgress();
   });
 
-  // run immediately too
-  setNavHeightVar();
+  window.addEventListener('scroll', updateProgress, { passive: true });
+
+  document.addEventListener('DOMContentLoaded', initAll);
+  initAll();
 })();
 </script>
