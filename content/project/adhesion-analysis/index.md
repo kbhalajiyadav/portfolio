@@ -1,55 +1,24 @@
 ---
 title: Mechanics-Consistent Adhesion in Soft Wearables
-summary: Developing stability-driven fracture metrics to prevent "False Positive" adhesion in stretchable electronics.
+# The Summary is what appears on the homepage list. Short and punchy.
+summary: "🟢 **Active Research:** Developing a stability-driven fracture mechanics framework to prevent 'False Positive' adhesion failures in skin-interfaced electronics."
 tags:
-  - Materials Science
   - Fracture Mechanics
   - Soft Robotics
+  - Python
 date: 2024-01-30
-
-# Optional external link for the project (replaces the project page)
-external_link: ''
-
-image:
-  caption: ''
-  focal_point: Smart
-
-links:
-url_code: ''
-url_pdf: ''
-url_slides: ''
-url_video: ''
-
-# Slides (optional).
-#   Associate this project with Markdown slides.
-#   Simply enter your slide deck's filename without extension.
-#   E.g. `slides = "example-slides"` references `content/slides/example-slides.md`.
-#   Otherwise, set `slides = ""`.
-slides: ""
 ---
 
-**Status:** Active Research (Aims 1 & 2)
+**Status:** 🟢 Active Research (Aims 1 & 2) | **Output:** Presented at ACS Fall 2025
 
-## Overview
-Conventional peel metrics (like ASTM D1876) often fail for soft, extensible interfaces because they cannot distinguish between **true interfacial adhesion** and **bulk dissipation** (stretching/bending). This leads to a "False Positive Trap," where an adhesive appears strong on paper but fails functionally in a wearable device due to stick-slip instability.
+## 1. The Challenge (The Gap)
+Conventional peel metrics (ASTM D1876) generate "False Positives" when applied to soft, stretchable electronics. They fail to distinguish between **true interfacial adhesion** and **bulk dissipation** (stretching), leading to devices that pass lab tests but fail on human skin.
 
-This project establishes a **mechanics-consistent framework** to predict reliability in wearable strain sensors.
+## 2. The Innovation
+I am establishing a **Mechanics-Consistent Framework** that moves beyond simple "strength" numbers.
+* **Metric:** Introduced the **Peel Stability Index (PSI)** to quantify stick-slip instability.
+* **Method:** Adapted T-Peel configurations for porous knitted substrates to isolate interfacial toughness.
 
-## Key Innovations
-
-### 1. The Peel Stability Index (PSI)
-We introduced the **Peel Stability Index (PSI)**, defined as the ratio of mean peel force to its standard deviation ($ \mu_F / \sigma_F $).
-* **High PSI:** Indicates steady-state crack propagation (Category II), allowing for valid fracture energy ($G_c$) extraction.
-* **Low PSI:** Indicates stick-slip instability (Category III), which generates electrical noise artifacts in wearable sensors.
-
-### 2. Eliminating the "False Positive"
-We demonstrated that adhesives with high nominal peel strength often exhibit "limited propagation," failing to exit the initiation phase. By filtering these out, we prevent signal drift in critical monitoring applications like knee rehabilitation.
-
-## Applications
-* **Wearable Demonstrator:** A printed serpentine strain sensor on a knitted knee sleeve, utilizing a PSI-optimized primer layer to minimize hysteresis and resistance drift.
-* **Medical Monitoring:** Ensuring signal fidelity for 30-40% strain monitoring in Total Knee Arthroplasty (TKA) rehabilitation.
-
-## Methodologies
-* **T-Peel Testing (ASTM D2724 Adapted):** Customized for porous knitted substrates.
-* **IC-Peel Protocol:** For extracting intrinsic fracture energy decoupled from plasticity.
-* **Uniaxial Tensile Profiling:** ASTM D5035 characterization of substrate compliance.
+## 3. Impact & Tools
+* **Outcome:** Identified that high-strength adhesives often suffer from "limited propagation," causing signal noise in sensors.
+* **Tools:** TA.XTplusC Texture Analyser (Tensile), Python (Signal Analysis), Optical Microscopy.
