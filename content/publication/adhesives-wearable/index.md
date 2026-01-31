@@ -1,39 +1,44 @@
 ---
-title: 'Adhesives for Personalized Wearable Devices'
+title: "Adhesives for Personalized Wearable Devices: Beyond Peel Strength"
 authors:
-  - admin
-  - H. Stwodah
-  - D. Joung
-  - C. Tang
-date: '2025-04-01T00:00:00Z'
-doi: ''
+- Bhalaji Yadav Kantepalle
+- H. Stwodah
+- D. Joung
+- C. Tang
 
-# Schedule page publish date
-publishDate: '2025-04-01T00:00:00Z'
+date: "2025-08-01T00:00:00Z"
+doi: ""
 
-# Publication type
-publication_types: ['1']
+# Schedule page publish date (NOT publication date).
+publishDate: "2024-01-01T00:00:00Z"
 
-# Publication name
-publication: 'ACS Fall 2025 Meeting'
-publication_short: 'ACS Fall 2025'
+# Publication type.
+# Legend: 0 = Uncategorized; 1 = Conference paper; 2 = Journal article;
+# 3 = Preprint / Working Paper; 4 = Report; 5 = Book; 6 = Book section;
+# 7 = Thesis; 8 = Patent
+publication_types: ["1"]
 
-abstract: Poster presentation on adhesive materials for personalized wearable medical devices, focusing on biocompatibility, mechanical performance, and long-term wearability.
+# Publication name and optional abbreviated publication name.
+publication: In *American Chemical Society (ACS) Fall 2025*
+publication_short: In *ACS Fall 2025*
 
-# Summary
-summary: Poster presentation at ACS Fall 2025 on adhesives for wearable medical devices.
+abstract: Presented a mechanics-consistent methodology for evaluating adhesion in soft electronics. We highlighted the "False Positive" trap where conventional force metrics fail to predict functional reliability in textile-integrated sensors.
+
+# Summary. An optional shortened abstract.
+summary: Poster presentation at ACS Fall 2025 on fracture mechanics in soft wearables.
 
 tags:
-  - Materials Science
-  - Adhesives
-  - Wearable Devices
-  - Biomedical
+- Fracture Mechanics
+- Soft Electronics
 
+# Display this page in the Featured widget?
 featured: true
 
+# Custom links (uncomment lines below)
 # links:
-# - name: ""
-#   url: ""
+# - name: Custom Link
+#   url: http://example.org
+
 url_pdf: ''
 url_code: ''
 url_dataset: ''
@@ -43,29 +48,11 @@ url_slides: ''
 url_source: ''
 url_video: ''
 
-# Featured image
-image:
-  caption: 'Wearable Device Adhesives'
-  focal_point: ''
-  preview_only: false
-
-# Associated Projects
+# Associated Projects (optional).
+#   Associate this publication with one or more of your projects.
+#   Simply enter your project's folder or file name without extension.
+#   E.g. `internal-project` references `content/project/internal-project/index.md`.
+#   Otherwise, set `projects: []`.
 projects:
-  - thermochromic-textiles
-
-# Slides
-slides: ''
+- adhesion-analysis
 ---
-
-This poster presentation covers research on adhesive materials specifically designed for personalized wearable medical devices. The work addresses key challenges in:
-
-- **Biocompatibility** - Ensuring safe skin contact
-- **Mechanical Performance** - Maintaining adhesion under dynamic conditions
-- **Long-term Wearability** - Sustained performance over extended use
-
-**Presented at:**
-- ACS Fall 2025 Meeting
-- VCU Research Symposium - April 2025
-- VCU Engineering Research Showcase - March 2025
-
-**Authors:** B. Y. Kantepalle, H. Stwodah, D. Joung, C. Tang
