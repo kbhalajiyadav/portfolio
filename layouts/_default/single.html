@@ -10,26 +10,16 @@
         <!-- Title -->
         <h1 class="article-title">{{ .Title }}</h1>
 
-        <!-- Status pill under title (auto-detects from front matter OR summary span OR markdown "Status:" line stays in content) -->
-        {{/* Prefer .Params.status_label if you add it, otherwise try to extract first <span>...</span> from summary */}}
-        {{ $status := "" }}
+        <!-- Status pill directly under title -->
         {{ if .Params.status_label }}
-          {{ $status = .Params.status_label }}
-        {{ else if .Params.summary }}
-          {{ $m := findRE "<span[^>]*>[^<]+</span>" .Params.summary 1 }}
-          {{ if gt (len $m) 0 }}
-            {{ $status = (replaceRE "<[^>]+>" "" (index $m 0)) }}
-          {{ end }}
-        {{ end }}
-
-        {{ if $status }}
           <div class="article-status-row">
-            <span class="status-pill status-pill--active">{{ $status }}</span>
+            <span class="status-pill status-pill--active">{{ .Params.status_label }}</span>
           </div>
         {{ end }}
 
-        <!-- Mobile TOC + Tags (shows below title on small screens) -->
+        <!-- Mobile TOC + Tags (small screens) -->
         <div class="d-lg-none article-mobile-meta">
+
           {{ if .Params.toc }}
             <div class="toc-sidebar toc-sidebar--mobile">
               <h3>Table of Contents</h3>
@@ -51,9 +41,10 @@
               </ul>
             </div>
           {{ end }}
+
         </div>
 
-        <!-- Content -->
+        <!-- Page content -->
         {{ .Content }}
 
       </div>
@@ -81,10 +72,6 @@
               {{ end }}
             </ul>
           </div>
-        {{ end }}
-
-        {{ if .Params.share }}
-          {{ partial "page_links_div.html" . }}
         {{ end }}
 
       </aside>
