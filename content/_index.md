@@ -64,8 +64,6 @@ sections:
         folders:
           - project
       buttons:
-        - name: All
-          tag: '*'
         - name: Academic Research
           tag: Academic Research
         - name: Industry
