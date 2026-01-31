@@ -1,5 +1,5 @@
 <style>
-  /* --- HEADER FIX --- */
+  /* --- 1. HEADER FIX --- */
   .navbar {
     position: fixed !important;
     top: 0 !important;
@@ -11,17 +11,30 @@
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   }
 
-  /* --- BODY PADDING --- */
+  /* --- 2. BODY PADDING (FIX FOR BLOCKED TITLE) --- */
+  /* We increased this from 80px to 100px to give the title more room */
   body {
-    padding-top: 80px !important; 
+    padding-top: 100px !important; 
   }
 
-  /* --- SIDEBAR FIX --- */
+  /* Extra push for the Main Article Container */
+  /* This specifically targets the "Mechanics..." title area */
+  .article-container {
+    padding-top: 30px !important; 
+  }
+
+  /* --- 3. WIDTH FIX (FIX FOR "ELONGATED" LOOK) --- */
+  /* This ensures the text column doesn't stretch too wide */
+  .col-lg-9, .col-md-8 {
+    padding-right: 50px !important; 
+  }
+  
+  /* --- 4. SIDEBAR FIX --- */
   .aside-column {
     position: -webkit-sticky !important;
     position: sticky !important;
-    top: 90px !important;
-    height: calc(100vh - 90px) !important;
+    top: 110px !important; /* Adjusted to match new body padding */
+    height: calc(100vh - 110px) !important;
     overflow-y: auto !important;
     align-self: flex-start !important;
   }
@@ -29,15 +42,15 @@
   /* Fix alignment */
   .row { align-items: flex-start !important; }
 
-  /* --- READING PROGRESS BAR STYLE --- */
+  /* --- 5. READING PROGRESS BAR --- */
   #reading-progress {
     position: fixed;
-    top: 70px; /* Adjust this if your header is taller/shorter */
+    top: 70px; /* Sits right below the standard header */
     left: 0;
     width: 0%;
     height: 4px;
     background: #1565c0; /* Blue Color */
-    z-index: 1021; /* Above the navbar */
+    z-index: 1021; 
     transition: width 0.1s ease-out;
   }
 </style>
