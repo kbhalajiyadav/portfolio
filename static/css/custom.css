@@ -273,13 +273,18 @@ body {
 .author-footer__link{
   display: inline-flex;
   align-items: center;
-  padding: 6px 10px;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
   border: 1px solid #e6e6e6;
   border-radius: 999px;
   text-decoration: none;
-  font-size: 0.85rem;
   color: #111827;
   background: #fff;
+}
+
+.author-footer__link i{
+  font-size: 1.05rem;
 }
 
 .author-footer__link:hover{
