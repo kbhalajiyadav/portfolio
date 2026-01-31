@@ -1,0 +1,36 @@
+/* --- Sidebar Spacing & Cosmetics --- */
+
+/* Adjust the vertical positioning of both sidebar sections */
+.toc-sidebar, .tags-sidebar {
+    margin-top: 1.5rem; 
+}
+
+/* Style for the ToC and Tags titles */
+.toc-sidebar h3, .tags-sidebar h3 {
+  font-size: 0.9rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+/* --- Tag Styles (Pills) --- */
+.tags-sidebar { 
+  padding-top: 1rem; 
+  border-top: 1px solid var(--border-color); 
+}
+
+.tags-sidebar .badge { 
+  display: inline-block; 
+  padding: 0.35em 0.6em; 
+  font-size: 75%; 
+  font-weight: 700; 
+  line-height: 1; 
+  text-align: center; 
+  white-space: nowrap; 
+  vertical-align: baseline; 
+  border-radius: 0.25rem; 
+  margin: 0.2rem 0.2rem 0.2rem 0; 
+  background-color: #f8f9fa; 
+  color: #000; 
+  border: 1px solid #dee2e6; 
+}
