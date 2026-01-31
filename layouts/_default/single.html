@@ -1,31 +1,45 @@
-<!-- layouts/_default/single.html (Conceptual Example) -->
 {{ define "main" }}
-<div class="page-body">
-  <article class="article">
-    <!-- Main Content Column -->
-    <div class="article-container">
-      {{ .Content }}
-    </div>
 
-    <!-- Sidebar/Aside Column -->
-    <aside class="toc-sidebar">
-      <!-- Standard TOC Rendering (already handled by theme) -->
-      {{ if .Params.toc }}
-        <nav id="TableOfContents"></nav>
-      {{ end }}
+<article class="article">
+  <div class="container">
+    <div class="row">
 
-      
-      {{ if .Params.tags }}
-      <div class="tags-sidebar">
-        <h3>Tags</h3>
-        <ul class="list-unstyled">
-          {{ range .Params.tags }}
-          <li><a href="/tags/{{ . | urlize }}" class="badge badge-light">{{ . }}</a></li>
-          {{ end }}
-        </ul>
+      <!-- Main Content Area (Left/Center Column) -->
+      <div class="col-lg-9 col-md-8">
+        {{ .Content }}
       </div>
-      {{ end }}
-    </aside>
+
+      <!-- Sidebar Area (Right Column) -->
+      <aside class="col-lg-3 col-md-4 aside-column">
+        
+        <!-- Table of Contents (TOC) -->
+        {{ if .Params.toc }}
+        <div class="toc-sidebar">
+          <nav id="TableOfContents"></nav>
+        </div>
+        {{ end }}
+
+        <!-- Tags List -->
+        {{ if .Params.tags }}
+        <div class="tags-sidebar">
+          <h3>Tags</h3>
+          <ul class="list-unstyled">
+            {{ range .Params.tags }}
+            <li><a href="/tags/{{ . | urlize }}" class="badge badge-light">{{ . }}</a></li>
+            {{ end }}
+          </ul>
+        </div>
+        {{ end }}
+        
+        <!-- Add other potential sidebar items here if needed (e.g., share buttons) -->
+        {{ if .Params.share }}
+          {{ partial "page_links_div.html" . }}
+        {{ end }}
+
+      </aside>
+
+    </div>
   </div>
 </article>
+
 {{ end }}
