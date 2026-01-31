@@ -1,94 +1,100 @@
 /* =========================================================
-   MASTER CUSTOM CSS: The "Sticky" Standard
-   Location: static/css/custom.css
+   MASTER CUSTOM CSS: Fixed Header & Clean Layout
    ========================================================= */
 
-/* --- 1. RESET LAYOUT (Stop the fighting) --- */
-/* We remove all the manual "padding-top" hacks we tried before. 
-   Sticky positioning handles this automatically. */
+/* --- 1. CONTENT SPACING (The "Hard Push") --- */
+/* This forces the content to start 100px down the page. 
+   It ensures your Title and "Active Research" pill are never hidden. */
 body, .page-wrapper, .article-container {
-  padding-top: 0 !important;
-  margin-top: 0 !important;
-  transform: none !important; /* Kills the animation bug */
+  padding-top: 100px !important;
+  transform: none !important; /* Disables animation interference */
 }
 
-/* --- 2. THE NAVBAR (STICKY) --- */
-/* position: sticky makes the navbar occupy physical space 
-   on the page (so your Title is pushed down automatically). */
-#navbar-main, .navbar {
-  position: -webkit-sticky !important; /* Safari support */
+/* --- 2. FIXED HEADER --- */
+/* Locks the white header to the top */
+.navbar {
   position: fixed !important;
   top: 0 !important;
+  left: 0;
+  width: 100%;
   z-index: 99999 !important;
-  background-color: #ffffff !important; /* Solid White */
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05); /* Very subtle shadow like GitHub */
-  width: 100% !important;
-  height: auto !important; /* Let it define its own height */
+  background-color: #ffffff !important;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
-/* --- 3. THE SIDEBAR (STICKY) --- */
-/* Since the navbar is sticky, the sidebar just needs to sit below it. */
+/* --- 3. TOC & SIDEBAR CLEANUP (Remove All Lines) --- */
+/* Removes the border from the container, the list, and the links */
+.toc-sidebar, 
+.toc-sidebar ul, 
+.toc-sidebar li, 
+.toc-sidebar a {
+  border: none !important;
+  border-left: none !important;
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+}
+
+/* Style the links to look clean and simple */
+.toc-sidebar a {
+  display: block;
+  color: #586069;
+  font-size: 0.85rem;
+  padding: 5px 0;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+/* Active State: Just Bold Blue, No Lines */
+.toc-sidebar a.active-toc-link {
+  color: #0366d6 !important;
+  font-weight: 700 !important;
+  background: transparent !important;
+}
+
+/* --- 4. FIXED SIDEBAR POSITION --- */
 .aside-column {
   position: -webkit-sticky !important;
   position: sticky !important;
-  /* Adjust this value: Navbar Height (approx 70px) + 20px Gap */
-  top: 90px !important; 
-  height: calc(100vh - 90px) !important;
+  top: 120px !important; /* Aligns with the 100px body padding */
+  height: calc(100vh - 120px) !important;
   overflow-y: auto !important;
   align-self: flex-start !important;
   
-  /* The "GitHub-style" Divider Line */
-  border-left: 1px solid #e1e4e8 !important;
+  /* Vertical Grey Line (Only between content and sidebar) */
+  border-left: 1px solid #e1e4e8 !important; 
   padding-left: 20px !important;
   background-color: #ffffff !important;
 }
 
-/* --- 4. CONTENT ALIGNMENT --- */
-/* Ensures the text doesn't touch the sidebar line */
-.col-lg-9, .col-md-8 {
-  padding-right: 40px !important;
+/* --- 5. ACTIVE RESEARCH PILL --- */
+.status-pill {
+  display: inline-block;
+  padding: 0.35rem 0.9rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  background-color: #f5f5f5;
+  color: #616161;
+  border: 1px solid #e0e0e0;
+  margin-top: 0.5rem;   /* Small gap above the pill */
+  margin-bottom: 1rem;  /* Larger gap below the pill */
 }
 
-/* Forces columns to align top-left */
-.row { align-items: flex-start !important; }
+.status-pill.active {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  border: 1px solid #2e7d32;
+}
 
-/* --- 5. READING PROGRESS BAR --- */
-/* We attach this to the top of the viewport */
+/* --- 6. READING PROGRESS BAR --- */
 #reading-progress {
-  position: fixed; /* This stays fixed relative to screen */
-  top: 0;          /* Right at the very top edge */
+  position: fixed;
+  top: 70px; /* Matches header height */
   left: 0;
   width: 0%;
-  height: 3px;     /* Thin and elegant */
+  height: 3px;
   background: #1565c0;
-  z-index: 100000; /* On top of the navbar */
-  transition: width 0.1s linear;
-}
-
-/* --- 6. TABLE OF CONTENTS (Clean Style) --- */
-.toc-sidebar a {
-  display: block;
-  color: #586069; /* GitHub dark grey */
-  text-decoration: none;
-  padding: 4px 0;
-  font-size: 0.85rem;
-  border-left: 2px solid transparent;
-  padding-left: 10px;
-  transition: all 0.2s ease;
-}
-
-.toc-sidebar a.active-toc-link {
-  color: #0366d6 !important; /* GitHub Blue */
-  font-weight: 600 !important;
-  border-left: 2px solid #0366d6 !important;
-  background-color: transparent; /* Cleaner look */
-}
-
-/* Title Styling */
-.toc-sidebar h3, .tags-sidebar h3 {
-  font-size: 0.8rem !important;
-  font-weight: 600 !important;
-  text-transform: uppercase;
-  color: #24292e;
-  margin-bottom: 0.5rem;
+  z-index: 100000;
 }
