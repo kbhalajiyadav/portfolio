@@ -99,12 +99,10 @@ sections:
           date_start: '2024-09-01'
           date_end: ''
           description: |2-
-            *Advisor:* [Dr. Christina Tang, Associate Professor] (https://egr.vcu.edu/directory/christina.tang/)
+            *Advisor:* [Dr. Christina Tang, Associate Professor](https://egr.vcu.edu/directory/christina.tang/)
             * **Grant Success:** Drafted successful **$30,000 grant proposal** (Commonwealth Cyber Initiative) for thermochromic socks.
             * **Metrology:** Engineered an **Integrated Optical Metrology System** (Python/OpenCV) increasing throughput by >300%.
             * **Award:** Recieved Graduate Assistantship (Full Tuition Waiver).
-    design:
-      columns: '2'
 
         - title: Technical Project Manager
           company: Kreative Organics Pvt. Ltd.
