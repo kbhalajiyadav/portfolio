@@ -1,4 +1,20 @@
 <script>
+/* 1) Set CSS variable to the real navbar height */
+(function () {
+  function setNavHeightVar() {
+    const nav = document.querySelector('#navbar-main, .navbar');
+    if (!nav) return;
+    const h = Math.ceil(nav.getBoundingClientRect().height);
+    document.documentElement.style.setProperty('--nav-h', h + 'px');
+  }
+  window.addEventListener('resize', setNavHeightVar);
+  document.addEventListener('DOMContentLoaded', setNavHeightVar);
+  setNavHeightVar();
+})();
+</script>
+
+<script>
+/* 2) Reading progress bar */
 (function () {
   function updateProgress() {
     const bar = document.getElementById('reading-progress');
@@ -18,5 +34,6 @@
   window.addEventListener('scroll', updateProgress, { passive: true });
   window.addEventListener('resize', updateProgress);
   document.addEventListener('DOMContentLoaded', updateProgress);
+  updateProgress();
 })();
 </script>
