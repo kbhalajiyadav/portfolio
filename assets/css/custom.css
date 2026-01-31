@@ -72,15 +72,28 @@ body {
 }
 
 /* --- 6. READING PROGRESS BAR --- */
+/* --- READING PROGRESS BAR --- */
 #reading-progress {
+  /* Fix it to the screen so it stays while you scroll */
   position: fixed;
-  top: 70px;
+  
+  /* POSITIONING: Adjust this number to match your header height */
+  /* If your header is 70px tall, set this to 70px */
+  top: 70px; 
+  
   left: 0;
-  width: 0%;
-  height: 4px;
-  background: #1565c0;
-  z-index: 100000;
-  transition: width 0.1s linear;
+  width: 0%; /* Starts at 0 width */
+  height: 5px; /* Make it thick enough to see easily */
+  
+  /* COLOR: Bright Blue */
+  background-color: #1565c0; 
+  
+  /* Z-INDEX: Must be higher than the header (usually 1020) */
+  /* We use a huge number to force it to be visible */
+  z-index: 999999; 
+  
+  /* Animation smoothness */
+  transition: width 0.1s ease-out;
 }
 
 /* --- 7. GENERAL SIDEBAR STYLES --- */
