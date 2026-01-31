@@ -1,0 +1,31 @@
+<!-- layouts/_default/single.html (Conceptual Example) -->
+{{ define "main" }}
+<div class="page-body">
+  <article class="article">
+    <!-- Main Content Column -->
+    <div class="article-container">
+      {{ .Content }}
+    </div>
+
+    <!-- Sidebar/Aside Column -->
+    <aside class="toc-sidebar">
+      <!-- Standard TOC Rendering (already handled by theme) -->
+      {{ if .Params.toc }}
+        <nav id="TableOfContents"></nav>
+      {{ end }}
+
+      <!-- 👇 ADD YOUR TAGS HTML HERE 👇 -->
+      {{ if .Params.tags }}
+      <div class="tags-sidebar">
+        <h3>Tags</h3>
+        <ul class="list-unstyled">
+          {{ range .Params.tags }}
+          <li><a href="/tags/{{ . | urlize }}" class="badge badge-light">{{ . }}</a></li>
+          {{ end }}
+        </ul>
+      </div>
+      {{ end }}
+    </aside>
+  </div>
+</article>
+{{ end }}
