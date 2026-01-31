@@ -1,62 +1,38 @@
-<style>
-  /* 0. CRITICAL FIX: Disable theme animations that break sticky/fixed positioning */
-  body, .page-wrapper, .article-container, main, #navbar-main, .hero-lead {
-    transform: none !important;
-    -webkit-transform: none !important;
-    animation: none !important;
-    opacity: 1 !important; /* Prevents initial blank/fade-in issues */
-    min-height: auto !important;
-  }
+<link rel="stylesheet" href="/css/custom.css">
 
-  /* 1. THE "HARD PUSH" (CRITICAL FIX FOR CONTENT) */
-  /* Guarantees content starts 120px down, clearing the header */
-  .page-wrapper {
-    padding-top: 120px !important; 
-    margin-top: 0 !important;
-  }
-  html { scroll-padding-top: 120px !important; }
-
-  /* 2. FIXED HEADER (Guaranteed Fixed on all pages) */
-  #navbar-main, .navbar {
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    width: 100% !important;
-    z-index: 999999 !important; /* Maximum Priority */
-    background-color: #ffffff !important; /* Forces solid white background */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    min-height: 70px !important; 
-  }
-
-  /* 3. FIXED SIDEBAR (Guaranteed Sticky) */
-  .aside-column {
-    position: -webkit-sticky !important;
-    position: sticky !important;
-    top: 130px !important; /* Adjusted to align below fixed header/padding */
-    height: calc(100vh - 130px) !important;
-    overflow-y: auto !important;
-    align-self: flex-start !important;
-    border-left: 2px solid #e0e0e0 !important;
-    padding-left: 20px !important;
-    background-color: #ffffff !important;
-  }
-
-  /* 4. READING PROGRESS BAR & Alignment Styles */
-  #reading-progress { position: fixed; top: 70px; left: 0; width: 0%; height: 4px; background: #1565c0; z-index: 100000; transition: width 0.1s linear; }
-  .col-lg-9, .col-md-8 { padding-right: 50px !important; }
-  .row { align-items: flex-start !important; }
-  .toc-sidebar, .tags-sidebar { margin-top: 1.5rem !important; }
-  /* (Rest of your tag styles are not strictly needed here but can remain) */
-</style>
-
-<!-- Reading Progress Bar HTML/JS (loads instantly in head) -->
 <div id="reading-progress"></div>
+
 <script>
-  window.addEventListener('scroll', () => {
-    const totalHeight = document.body.scrollHeight - window.innerHeight;
-    const progress = (window.scrollY / totalHeight) * 100;
-    const progressBar = document.getElementById('reading-progress');
-    if (progressBar) { progressBar.style.width = progress + '%'; }
+  document.addEventListener('DOMContentLoaded', () => {
+    
+    // 1. Progress Bar
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.body.scrollHeight - window.innerHeight;
+      const scrollPercent = (scrollTop / docHeight) * 100;
+      const progressBar = document.getElementById('reading-progress');
+      if (progressBar) progressBar.style.width = scrollPercent + '%';
+    });
+
+    // 2. ScrollSpy (Active TOC)
+    const headers = document.querySelectorAll('.article-container h1, .article-container h2, .article-container h3');
+    const tocLinks = document.querySelectorAll('.toc-sidebar a');
+
+    if (headers.length > 0 && tocLinks.length > 0) {
+      window.addEventListener('scroll', () => {
+        let currentId = '';
+        headers.forEach(header => {
+          if (window.scrollY >= (header.offsetTop - 150)) {
+            currentId = header.getAttribute('id');
+          }
+        });
+        tocLinks.forEach(link => {
+          link.classList.remove('active-toc-link');
+          if (link.getAttribute('href') === '#' + currentId) {
+            link.classList.add('active-toc-link');
+          }
+        });
+      });
+    }
   });
 </script>
