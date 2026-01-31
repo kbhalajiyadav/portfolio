@@ -1,50 +1,144 @@
 <style>
-  /* 0. CRITICAL FIX: Disable theme animations that break sticky/fixed positioning */
-  body, .page-wrapper, .article-container, .hero-lead {
+  /* --- 0. AGGRESSIVE ANIMATION KILLER (The Fix) --- */
+  /* We target ALL possible wrappers to ensure the header never gets "un-stuck" */
+  body, 
+  .page-wrapper, 
+  .article-container, 
+  .universal-wrapper, 
+  .container, 
+  main, 
+  div[class*="animate"], /* Targets anything with "animate" in the class name */
+  section {
     transform: none !important;
     -webkit-transform: none !important;
-    animation: none !important;
-    opacity: 1 !important;
+    will-change: auto !important; /* Resets browser rendering hints */
   }
 
-  /* 1. FIXED HEADER (Works on all pages now) */
+  /* --- 1. FIXED HEADER --- */
   #navbar-main, .navbar {
     position: fixed !important;
     top: 0 !important;
     left: 0 !important;
     right: 0 !important;
     width: 100% !important;
-    z-index: 99999 !important; /* Maximum Priority */
+    z-index: 99999 !important; 
     background-color: #ffffff !important; 
     box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
   }
 
-  /* 2. BODY PADDING (Push content down on all pages) */
+  /* --- 2. BODY PADDING --- */
   body {
-    padding-top: 80px !important; 
+    padding-top: 80px !important;
   }
 
-  /* 3. STICKY SIDEBAR + VERTICAL LINE (Only applies to Project Pages) */
+  /* --- 3. FIXED SIDEBAR --- */
   .aside-column {
     position: -webkit-sticky !important;
     position: sticky !important;
-    top: 90px !important;       
-    height: calc(100vh - 90px) !important;
-    overflow-y: auto !important; 
+    top: 90px !important;         
+    right: 0 !important;          
+    width: 25% !important;        
+    height: calc(100vh - 90px) !important; 
+    overflow-y: auto !important;  
     align-self: flex-start !important;
-    border-left: 2px solid #e0e0e0 !important; 
+    
+    /* Vertical Divider */
+    border-left: 2px solid #e0e0e0 !important;
     padding-left: 20px !important;
-    background-color: #fff !important;
+    background-color: #ffffff !important;
   }
 
-  /* Ensure column alignment */
-  .row { align-items: flex-start !important; }
+  /* --- 4. CONTENT SPACING --- */
+  /* Ensures content doesn't hit the sidebar line */
+  .col-lg-9, .col-md-8 {
+      padding-right: 40px !important; 
+  }
   
-  /* Prevent Main Content from touching the line */
-  .col-lg-9, .col-md-8 { padding-right: 30px !important; }
+  /* Forces layout alignment */
+  .row { align-items: flex-start !important; }
 
-  /* 4. READING PROGRESS BAR STYLE (CSS) */
+  /* --- 5. TABLE OF CONTENTS STYLING --- */
+  .toc-sidebar a {
+      display: block;
+      color: #666;
+      text-decoration: none;
+      padding: 5px 0;
+      font-size: 0.85rem;
+      border-left: 3px solid transparent; 
+      padding-left: 10px;
+      transition: all 0.2s ease;
+  }
+
+  /* Active Link */
+  .toc-sidebar a.active-toc-link {
+      color: #1565c0 !important;       
+      font-weight: bold !important;
+      border-left: 3px solid #1565c0 !important; 
+      background-color: #f0f7ff;        
+  }
+
+  .toc-sidebar, .tags-sidebar { margin-top: 1.5rem !important; }
+  .toc-sidebar h3, .tags-sidebar h3 {
+    font-size: 0.9rem !important;
+    font-weight: bold !important;
+    text-transform: uppercase !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  /* --- 6. READING PROGRESS BAR --- */
   #reading-progress {
-    position: fixed; top: 70px; left: 0; width: 0%; height: 4px; background: #1565c0; z-index: 1021; transition: width 0.1s ease-out;
+    position: fixed;
+    top: 70px; 
+    left: 0;
+    width: 0%;
+    height: 4px;
+    background: #1565c0; 
+    z-index: 100000;      
+    transition: width 0.1s linear;
   }
 </style>
+
+<div id="reading-progress"></div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    
+    // --- PART A: READING PROGRESS BAR ---
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.body.scrollHeight - window.innerHeight;
+      const scrollPercent = (scrollTop / docHeight) * 100;
+      
+      const progressBar = document.getElementById('reading-progress');
+      if (progressBar) {
+          progressBar.style.width = scrollPercent + '%';
+      }
+    });
+
+    // --- PART B: SCROLLSPY (TOC HIGHLIGHTER) ---
+    // Note: We added ".container-fluid" to the selector to catch more headers
+    const headers = document.querySelectorAll('.article-container h1, .article-container h2, .article-container h3, .container-fluid h1, .container-fluid h2');
+    const tocLinks = document.querySelectorAll('.toc-sidebar a');
+
+    if (headers.length > 0 && tocLinks.length > 0) {
+      window.addEventListener('scroll', () => {
+        let currentId = '';
+        
+        headers.forEach(header => {
+          const headerTop = header.offsetTop;
+          // Trigger activation 150px before header hits top
+          if (window.scrollY >= (headerTop - 150)) {
+            currentId = header.getAttribute('id');
+          }
+        });
+
+        tocLinks.forEach(link => {
+          link.classList.remove('active-toc-link');
+          if (link.getAttribute('href') === '#' + currentId) {
+            link.classList.add('active-toc-link');
+          }
+        });
+      });
+    }
+  });
+</script>
