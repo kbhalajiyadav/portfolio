@@ -1,52 +1,54 @@
 :root { --nav-h: 70px; }
 
-/* Navbar fixed + always visible */
+/* Make sure content starts below navbar */
+body { padding-top: var(--nav-h, 70px) !important; }
+
+/* Navbar: keep it stable, no strange transforms */
 #navbar-main, .navbar {
   position: fixed !important;
   top: 0 !important; left: 0 !important; right: 0 !important;
-  z-index: 99999 !important;
+  z-index: 100000 !important;
   background: #fff !important;
-  transform: translateY(0) !important;
-  opacity: 1 !important;
-  visibility: visible !important;
+  transform: none !important;
 }
 
-/* Push content below navbar */
-body { padding-top: var(--nav-h, 70px) !important; }
-
-/* Progress bar BELOW navbar, always visible (wrap gives a faint track) */
+/* ✅ Progress bar BELOW navbar (with a visible track) */
 #reading-progress-wrap {
   position: fixed !important;
   top: var(--nav-h, 70px) !important;
   left: 0 !important;
   width: 100% !important;
-  height: 3px !important;
-  background: #e1e4e8 !important;
-  z-index: 99998 !important; /* under navbar */
-}
-#reading-progress {
-  height: 3px !important;
-  width: 0%;
-  background: #1565c0 !important;
-  transition: width 0.1s linear;
+  height: 4px !important;
+  background: #eaecef !important; /* track */
+  z-index: 99999 !important;      /* just under navbar */
 }
 
-/* Sidebar: single clean divider */
+#reading-progress {
+  height: 4px !important;
+  width: 0%;
+  background: #1565c0 !important;
+  transition: width 0.08s linear;
+}
+
+/* Sidebar positioning */
 .aside-column {
   position: sticky !important;
-  top: calc(var(--nav-h, 70px) + 14px) !important;
-  height: calc(100vh - (var(--nav-h, 70px) + 14px)) !important;
+  top: calc(var(--nav-h, 70px) + 18px) !important;
+  height: calc(100vh - (var(--nav-h, 70px) + 18px)) !important;
   overflow-y: auto !important;
   border-left: 1px solid #e1e4e8 !important;
   padding-left: 20px !important;
   background: #fff !important;
 }
 
-/* Remove inner TOC line */
-.toc-sidebar, .tags-sidebar { border-left: none !important; padding-left: 0 !important; }
-.toc-sidebar #TableOfContents { border-left: none !important; padding-left: 0 !important; margin-left: 0 !important; }
+/* Remove inner TOC border so you only have ONE clean divider */
+.toc-sidebar #TableOfContents {
+  border-left: none !important;
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+}
 
-/* TOC links + active highlight */
+/* TOC link styles */
 .toc-sidebar a {
   display: block;
   color: #586069;
@@ -56,27 +58,14 @@ body { padding-top: var(--nav-h, 70px) !important; }
   border-left: 2px solid transparent;
   padding-left: 10px;
 }
+
 .toc-sidebar a.active-toc-link {
   color: #0366d6 !important;
-  font-weight: 600 !important;
+  font-weight: 700 !important;
   border-left-color: #0366d6 !important;
 }
 
-/* Status pill under title */
-.article-title { margin-bottom: 0.35rem !important; }
-.article-status-row { margin: 0.3rem 0 1.25rem 0 !important; }
-.status-pill {
-  display: inline-block !important;
-  padding: 5px 12px !important;
-  border-radius: 999px !important;
-  font-weight: 700 !important;
-  font-size: 0.78rem !important;
-  border: 1px solid #2e7d32 !important;
-  background: #e8f5e9 !important;
-  color: #2e7d32 !important;
-}
-
-/* Tags in a single horizontal chip row */
+/* Tags horizontal chips */
 .tags-sidebar ul {
   display: flex !important;
   flex-wrap: wrap !important;
@@ -86,11 +75,11 @@ body { padding-top: var(--nav-h, 70px) !important; }
 }
 .tags-sidebar ul li { list-style: none !important; margin: 0 !important; }
 .tags-sidebar .badge {
-  background: #f1f3f5 !important;
+  background: #f6f8fa !important;
   color: #24292e !important;
   border-radius: 999px !important;
-  padding: 5px 12px !important;
-  border: 1px solid #e1e4e8 !important;
+  padding: 6px 12px !important;
+  border: 1px solid #d0d7de !important;
   text-decoration: none !important;
 }
 .tags-sidebar .badge:hover {
