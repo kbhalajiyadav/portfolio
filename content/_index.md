@@ -67,10 +67,10 @@ sections:
       buttons:
         - name: All
           tag: '*'
-        - name: Active Research
-          tag: Active Research
-        - name: Completed
-          tag: Completed
+        - name: Academic Research
+          tag: Academic Research
+        - name: Industry
+          tag: Industry
     design:
       columns: '1'
       view: compact
