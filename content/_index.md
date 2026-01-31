@@ -12,7 +12,7 @@ sections:
     content:
       title: Bhalaji Yadav
       image:
-        filename: assets/images/avatar.jpg
+        filename: avatar.png
       cta:
         label: 'Download CV'
         url: uploads/resume.pdf
