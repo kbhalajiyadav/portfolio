@@ -109,5 +109,3 @@ Replace: `static/uploads/resume.pdf`
 This portfolio template is based on [Hugo Blox](https://hugoblox.com/) which is open source.
 
 ---
-
-**Created with ❤️ for Bhalaji Yadav**
