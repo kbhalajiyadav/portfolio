@@ -27,3 +27,32 @@
   color: #000;
   border: 1px solid #dee2e6;
 }
+
+/* Ensure the sidebar stays put (Sticky effect) */
+.aside-column {
+  /* This makes the sidebar float down with the content */
+  position: -webkit-sticky; /* For compatibility */
+  position: sticky;
+  top: 80px; /* Adjust this value if your header height changes */
+  height: calc(100vh - 80px); /* Fill the rest of the viewport height */
+  overflow-y: auto; /* Adds a scrollbar to the sidebar if content is long */
+}
+
+/* Style the TOC links for that little floating effect */
+#TableOfContents nav ul li a {
+  padding: 5px 0;
+  display: block;
+  transition: color 0.2s ease-in-out;
+}
+
+/* Highlight the active link (the section you are currently reading) */
+#TableOfContents nav ul li a.active {
+  color: #1565c0; /* Match your corporate blue */
+  font-weight: bold;
+}
+
+/* Add some margin to the bottom of the tags section */
+.tags-sidebar {
+  margin-bottom: 2rem;
+}
+
