@@ -8,7 +8,7 @@ tags:
   - Active Research
 date: 2025-01-30
 ---
-# 👇 Ensure you have these layout options 👇
+
 type: project_page # Optional: creates a consistent layout across projects
 toc: true          # Enables the Table of Contents on the right
 share: true        # Shows social sharing buttons
