@@ -2,9 +2,9 @@
 en:
   languageCode: en-us
   contentDir: content
-  title: Bhalaji Yadav
+  title: Bhalaji
   params:
-    description: Portfolio of Bhalaji Yadav - Chemical Engineer
+    description: Portfolio of Bhalaji Y. Kantepalle - Chemical Engineer
   menu:
     main:
       - name: Home
