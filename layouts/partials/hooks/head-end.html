@@ -7,21 +7,18 @@
     right: 0 !important;
     width: 100% !important;
     z-index: 1020 !important;
-    
-    /* FORCE OPAQUE BACKGROUND (White) */
-    /* If you want blue, change #ffffff to #0d47a1 */
     background-color: #ffffff !important; 
-    
-    /* Optional: Adds a small shadow so you can see where the header ends */
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   }
 
   /* 2. BODY PADDING: Pushes content down so it's not hidden behind the header */
   body {
-    padding-top: 80px !important; /* Increased slightly to be safe */
+    padding-top: 80px !important; 
   }
 
   /* 3. SIDEBAR FIX: Keeps the Table of Contents visible while scrolling */
+  .row { align-items: flex-start !important; }
+  
   .aside-column {
     position: -webkit-sticky !important;
     position: sticky !important;
@@ -32,14 +29,13 @@
   }
   
   /* Fix sidebar alignment */
-  .row { align-items: flex-start !important; }
   .article-container { padding-top: 1.5rem !important; }
   .toc-sidebar, .tags-sidebar { margin-top: 1.5rem !important; }
 
-  /* 4. READING PROGRESS BAR */
+  /* 4. READING PROGRESS BAR STYLE (CSS only) */
   #reading-progress {
     position: fixed;
-    top: 70px; /* Adjust this to match your navbar height */
+    top: 70px; /* Position under navbar */
     left: 0;
     width: 0%;
     height: 4px;
@@ -48,15 +44,3 @@
     transition: width 0.1s ease-out;
   }
 </style>
-
-<div id="reading-progress"></div>
-<script>
-  window.addEventListener('scroll', () => {
-    const totalHeight = document.body.scrollHeight - window.innerHeight;
-    const progress = (window.scrollY / totalHeight) * 100;
-    const progressBar = document.getElementById('reading-progress');
-    if (progressBar) {
-        progressBar.style.width = progress + '%';
-    }
-  });
-</script>
