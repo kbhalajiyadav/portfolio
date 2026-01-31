@@ -10,7 +10,7 @@ sections:
   # ===== HERO SECTION =====
   - block: hero
     content:
-      title: Bhalaji Yadav
+      title: Bhalaji Y.
       image:
         filename: avatar.jpg
       cta:
