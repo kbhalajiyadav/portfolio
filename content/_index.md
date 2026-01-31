@@ -41,35 +41,6 @@ sections:
         My work focuses on the fracture mechanics of soft interfaces—specifically avoiding the "False Positive" trap in wearable adhesion. I leverage Python (Pandas, OpenCV) to automate mechanical data analysis, turning raw peel tests into actionable fracture energy insights.
     design:
       columns: '2'
-    
-  # ===== LATEST NEWS SECTION =====
-  - block: markdown
-    id: news
-    content:
-      title: Latest Updates
-      text: |
-    
-        * **Dec 2025** — Attended Anton Paar XRD Workshop (XRDynamic 500) on total scattering and PDF analysis
-        * **Sep 2025** — Selected participant for the 1st National Neutron Scattering School at Oak Ridge National Laboratory (ORNL)
-        * **Aug 2025** — Presented "Adhesives for Personalized Wearable Devices" at ACS Fall 2025 (Washington, D.C.)
-        * **Jun 2025** — Attended Anton Paar Rheo-Polarized Imaging Workshop with Photron high-speed camera integration
-        * **Sep 2024** — Drafted successful $30,000 Commonwealth Cyber Initiative grant for thermochromic textile research
-    design:
-      columns: '1'
-
-# 3. LATEST UPDATES (Workshops, News, Awards)
-  - block: markdown
-    id: news
-    content:
-      title: Latest Updates
-      text: |
-        * **[Dec 2025]** Attended **Anton Paar XRD Workshop** (XRDynamic 500) on total scattering and PDF analysis.
-        * **[Sep 2025]** Selected participant for the **1st National Neutron Scattering School** at [Oak Ridge National Laboratory (ORNL)](https://www.ornl.gov/).
-        * **[Aug 2025]** Presented *Adhesives for Personalized Wearable Devices* at **[ACS Fall 2025](https://www.acs.org/)** (Washington, D.C.).
-        * **[June 2025]** Attended **Anton Paar Rheo-Polarized Imaging Workshop** with Photron high-speed camera integration.
-        * **[Dec 2025]** **Funded:** Secured **$30,000 Commonwealth Cyber Initiative** grant for thermochromic textile research.
-    design:
-      columns: '2'
 
     # 3. LATEST UPDATES (Workshops, News, Awards)
   - block: markdown
@@ -134,11 +105,7 @@ sections:
             * **Award:** Recieved Graduate Assistantship (Full Tuition Waiver).
     design:
       columns: '2'
-# 7. INDUSTRY EXPERIENCE (Block 2)
-  - block: experience
-    content:
-      title: Industry Experience
-      items:
+
         - title: Technical Project Manager
           company: Kreative Organics Pvt. Ltd.
           company_url: 'https://kreativeorganics.com/'
