@@ -1,65 +1,52 @@
-/* Ensure the main navigation bar itself is sticky */
+/* --- HEADER FIX: Ensures the main navbar is always at the very top --- */
 .navbar {
-  position: -webkit-sticky; /* For Safari */
+  position: -webkit-sticky; 
   position: sticky;
-  top: 0; /* Lock it to the very top of the screen */
+  top: 0; /* Locks it to the very top of the screen */
   width: 100%;
-  z-index: 1020; /* Ensure it is above all other content */
+  z-index: 1020; /* Ensures it is above all other content */
   background-color: var(--background); /* Prevents content from showing through */
 }
 
-/* Ensure content starts below the header once it is sticky */
+/* Ensure body content starts below the header once it is sticky */
 body {
-  padding-top: 70px; /* Add space equivalent to header height */
+  padding-top: 70px; 
 }
 
-/* The rest of your previous sidebar CSS is fine below this */
-/* ... */
-
-/* Override Bootstrap/Theme default alignment that prevents sticky from working */
+/* --- SIDEBAR FIX: Ensures the right column scrolls independently and locks in place --- */
 .row {
   align-items: flex-start; /* Ensures columns align to the top */
 }
 
-/* Lock the Right Sidebar (ToC and Tags) in place */
 .aside-column {
   position: -webkit-sticky; 
   position: sticky;
-  top: 80px; /* Aligns exactly below your main site header */
-  height: calc(100vh - 80px);
-  overflow-y: auto; /* Adds a scrollbar to the sidebar if needed */
+  top: 80px; /* Aligns below your main site header (70px height + 10px margin) */
+  height: calc(100vh - 80px); /* Makes sidebar scrollable if content is long */
+  overflow-y: auto; 
   z-index: 10;
   align-self: flex-start; 
 }
 
-/* Adjust the positioning of both sidebar sections to align neatly */
+/* Ensure the main content area has enough padding at the top */
+.article-container {
+    padding-top: 1.5rem; /* Aligns top of H1 with the top of sidebar H3s */
+}
+
+/* Adjust the vertical positioning of both sidebar sections */
 .toc-sidebar, .tags-sidebar {
     margin-top: 1.5rem; 
 }
 
-/* Style for the ToC and Tags titles (Ensures alignment and consistency) */
+/* Style for the ToC and Tags titles */
 .toc-sidebar h3, .tags-sidebar h3 {
   font-size: 0.9rem;
   font-weight: bold;
   text-transform: uppercase;
   margin-bottom: 0.5rem;
-  /* Add margin here to align better with main H1 title if necessary: margin-left: Xpx; */
 }
 
-/* Ensure the main content area has enough padding at the top and uses the correct class */
-.article-container {
-    padding-top: 1.5rem; /* Aligns top of H1 with the top of sidebar H3s */
-}
-
-/* --- Your existing tag styles below this line (no changes needed here) --- */
-
-.tags-sidebar {
-  padding-top: 1rem;
-  border-top: 1px solid var(--border-color);
-}
-.tags-sidebar .badge {
-  display: inline-block; padding: 0.35em 0.6em; font-size: 75%; font-weight: 700;
-  line-height: 1; text-align: center; white-space: nowrap; vertical-align: baseline;
-  border-radius: 0.25rem; margin: 0.2rem 0.2rem 0.2rem 0; background-color: #f8f9fa;
-  color: #000; border: 1px solid #dee2e6;
-}
+/* --- Your existing tag styles (no changes needed) --- */
+.tags-sidebar { padding-top: 1rem; border-top: 1px solid var(--border-color); }
+.tags-sidebar h3 { font-size: 0.9rem; font-weight: bold; text-transform: uppercase; margin-bottom: 0.5rem; }
+.tags-sidebar .badge { display: inline-block; padding: 0.35em 0.6em; font-size: 75%; font-weight: 700; line-height: 1; text-align: center; white-space: nowrap; vertical-align: baseline; border-radius: 0.25rem; margin: 0.2rem 0.2rem 0.2rem 0; background-color: #f8f9fa; color: #000; border: 1px solid #dee2e6; }
