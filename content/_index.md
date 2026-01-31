@@ -167,7 +167,7 @@ sections:
       text: |
         Open to collaborations in Materials Science and Data-Driven R&D.
       email: kbhalajiyadav22@gmail.com
-      phone: +1 (804) 310-4169
+     
       address:
         street: 401 W Main St (VCU Engineering)
         city: Richmond
