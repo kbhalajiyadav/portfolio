@@ -1,55 +1,60 @@
-<!-- Reading Progress Bar -->
-<div id="reading-progress" class="reading-progress"></div>
-
+<!-- === Global Custom Styles and Scripts for Fixed/Sticky Elements === -->
 <style>
-  /* Progress Bar Style */
-  .reading-progress {
+  /* --- HEADER FIX: Ensures the main navbar is always at the very top --- */
+  .navbar {
+    position: fixed !important; /* Use !important to override theme conflicts */
+    top: 0 !important; 
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    z-index: 1020 !important; 
+    background-color: var(--background) !important; 
+  }
+
+  /* Ensure body content starts below the header (adjust if your header is different height) */
+  body {
+    padding-top: 70px !important; 
+  }
+
+  /* --- SIDEBAR FIX: Ensures the right column scrolls independently and locks in place --- */
+  .row {
+    align-items: flex-start !important; 
+  }
+  .aside-column {
+    position: -webkit-sticky !important; 
+    position: sticky !important;
+    top: 80px !important; /* Aligns below the fixed header */
+    height: calc(100vh - 80px) !important;
+    overflow-y: auto !important; 
+    z-index: 10 !important;
+    align-self: flex-start !important; 
+  }
+
+  /* Adjust positioning to align sidebar titles with main H1 title */
+  .article-container { padding-top: 1.5rem !important; }
+  .toc-sidebar, .tags-sidebar { margin-top: 1.5rem !important; }
+
+  /* Reading Progress Bar Style */
+  #reading-progress {
     position: fixed;
-    top: 66px; /* Position it exactly under the default header */
+    top: 66px; /* Position it exactly under the fixed header */
     left: 0;
     width: 0%;
     height: 4px;
-    background: #1565c0; /* Match your corporate blue */
-    z-index: 1001;
+    background: #1565c0; 
+    z-index: 1021; /* Above the navbar */
     transition: width 0.1s ease-out;
-  }
-
-  /* Smart Header Animation (The "hover back" effect) */
-  .navbar {
-    transition: transform 0.3s ease-in-out !important;
-  }
-  .navbar--hidden {
-    transform: translateY(-100%); /* Hides header */
-  }
-
-  /* Ensure content starts below the header/progress bar area */
-  body {
-    padding-top: 70px;
-  }
-  :root {
-    scroll-padding-top: 100px; 
   }
 </style>
 
-<script>
-  let lastScrollY = window.scrollY;
-  const navbar = document.querySelector('.navbar');
-  const progressBar = document.getElementById('reading-progress');
+<!-- Reading Progress Bar HTML Element -->
+<div id="reading-progress"></div>
 
+<script>
+  // Script for the progress bar
   window.addEventListener('scroll', () => {
-    // 1. Reading Progress Calculation
     const totalHeight = document.body.scrollHeight - window.innerHeight;
     const progress = (window.scrollY / totalHeight) * 100;
-    progressBar.style.width = progress + '%';
-
-    // 2. Smart Header (Hide on Scroll Down, Show on Up)
-    if (window.scrollY > lastScrollY && window.scrollY > 150) {
-      navbar.classList.add('navbar--hidden');
-      progressBar.style.top = '0px'; // Move bar to top when header hides
-    } else {
-      navbar.classList.remove('navbar--hidden');
-      progressBar.style.top = '66px'; // Move bar back under header
-    }
-    lastScrollY = window.scrollY;
+    document.getElementById('reading-progress').style.width = progress + '%';
   });
 </script>
