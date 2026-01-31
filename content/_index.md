@@ -10,7 +10,7 @@ sections:
   # ===== HERO SECTION =====
   - block: hero
     content:
-      title: Bhalaji Y.
+      title: Bhalaji Y. Kantepalle
       image:
         filename: avatar.jpg
       cta:
