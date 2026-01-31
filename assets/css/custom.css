@@ -1,14 +1,16 @@
 /* --- HEADER FIX: Ensures the main navbar is always at the very top --- */
 .navbar {
-  position: -webkit-sticky; 
-  position: sticky;
-  top: 0; /* Locks it to the very top of the screen */
+  position: fixed;  /* CHANGED from sticky to fixed */
+  top: 0; 
+  left: 0;          /* ADDED: Ensures it spans the full width correctly */
+  right: 0;         /* ADDED: Ensures it spans the full width correctly */
   width: 100%;
-  z-index: 1020; /* Ensures it is above all other content */
-  background-color: var(--background); /* Prevents content from showing through */
+  z-index: 1020; 
+  background-color: var(--background); 
 }
 
-/* Ensure body content starts below the header once it is sticky */
+/* Ensure body content starts below the header */
+/* This is now REQUIRED because 'fixed' pulls the navbar out of the flow */
 body {
   padding-top: 70px; 
 }
