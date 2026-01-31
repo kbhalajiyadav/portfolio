@@ -1,42 +1,14 @@
-  /* --- SIDEBAR FIX: Ensures the right column scrolls independently and locks in place --- */
-  .row {
-    align-items: flex-start !important; 
-  }
-  .aside-column {
-    position: -webkit-sticky !important; 
-    position: sticky !important;
-    top: 80px !important; /* Aligns below the fixed header */
-    height: calc(100vh - 80px) !important;
-    overflow-y: auto !important; 
-    z-index: 10 !important;
-    align-self: flex-start !important; 
-  }
-
-  /* Adjust positioning to align sidebar titles with main H1 title */
-  .article-container { padding-top: 1.5rem !important; }
-  .toc-sidebar, .tags-sidebar { margin-top: 1.5rem !important; }
-
-  /* Reading Progress Bar Style */
-  #reading-progress {
-    position: fixed;
-    top: 66px; /* Position it exactly under the fixed header */
-    left: 0;
-    width: 0%;
-    height: 4px;
-    background: #1565c0; 
-    z-index: 1021; /* Above the navbar */
-    transition: width 0.1s ease-out;
-  }
-</style>
-
 <!-- Reading Progress Bar HTML Element -->
 <div id="reading-progress"></div>
 
 <script>
-  // Script for the progress bar
+  // Script for the progress bar (The "scroll top bar thing")
   window.addEventListener('scroll', () => {
     const totalHeight = document.body.scrollHeight - window.innerHeight;
     const progress = (window.scrollY / totalHeight) * 100;
-    document.getElementById('reading-progress').style.width = progress + '%';
+    const progressBar = document.getElementById('reading-progress');
+    if (progressBar) {
+        progressBar.style.width = progress + '%';
+    }
   });
 </script>
