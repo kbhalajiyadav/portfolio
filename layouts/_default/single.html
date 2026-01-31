@@ -1,5 +1,4 @@
 {{ define "main" }}
-
 <article class="article">
   <div class="container">
     <div class="row">
@@ -9,7 +8,8 @@
         <h1>{{ .Title }}</h1> 
 
         {{ if .Params.status }}
-        <div class="mb-4"> <span class="status-pill {{ if eq .Params.status "Active Research" }}active{{ end }}">
+        <div class="mb-4">
+            <span class="status-pill {{ if eq .Params.status "Active Research" }}active{{ end }}">
                 {{ .Params.status }}
             </span>
         </div>
@@ -21,24 +21,11 @@
               <h3>Table of Contents</h3>
               {{ .TableOfContents }} 
             </div>
+            <hr>
             {{ end }}
-
-            {{ if .Params.tags }}
-            <div class="tags-sidebar" style="margin-top: 1rem;">
-              <h3>Tags</h3>
-              <ul class="list-unstyled">
-                {{ range .Params.tags }}
-                <li><a href="/tags/{{ . | urlize }}" class="badge badge-light">{{ . }}</a></li>
-                {{ end }}
-              </ul>
-            </div>
-            {{ end }}
-
-            <hr> 
         </div>
 
         {{ .Content }}
-
       </div>
 
       <aside class="col-lg-3 col-md-4 aside-column d-none d-lg-block">
@@ -48,25 +35,20 @@
           {{ .TableOfContents }} 
         </div>
         {{ end }}
-
+        
         {{ if .Params.tags }}
         <div class="tags-sidebar">
           <h3>Tags</h3>
           <ul class="list-unstyled">
-            {{ range .Params.tags }}
-            <li><a href="/tags/{{ . | urlize }}" class="badge badge-light">{{ . }}</a></li>
-            {{ end }}
+             {{ range .Params.tags }}
+             <li><a href="/tags/{{ . | urlize }}" class="badge badge-light">{{ . }}</a></li>
+             {{ end }}
           </ul>
         </div>
-        {{ end }}
-        
-        {{ if .Params.share }}
-          {{ partial "page_links_div.html" . }}
         {{ end }}
       </aside>
 
     </div>
   </div>
 </article>
-
 {{ end }}
