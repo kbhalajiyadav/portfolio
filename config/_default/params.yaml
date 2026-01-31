@@ -24,7 +24,7 @@ marketing:
 
 # Site header
 header:
-  sticky: true
+  #sticky: true
   navbar:
     enable: true
     align: l
@@ -34,7 +34,7 @@ header:
     show_search: true
     highlight_active_link: true
   #sticky: true 
-header.on_scroll: false
+#header.on_scroll: false
 
 # Site footer
 footer:
