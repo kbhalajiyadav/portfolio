@@ -5,7 +5,7 @@
     <div class="row">
 
       <!-- Main Content Area (Left/Center Column) -->
-      <div class="col-lg-9 col-md-8">
+      <div class="col-lg-9 col-md-8 article-container"> <!-- Added article-container class here -->
         <!-- Renders the main title -->
         <h1>{{ .Title }}</h1> 
         <!-- Renders all your markdown content -->
@@ -18,8 +18,8 @@
         <!-- Table of Contents (TOC) Container -->
         {{ if .Params.toc }}
         <div class="toc-sidebar">
+          <h3>Table of Contents</h3>
           <!-- Hugo generates the list of links here -->
-          <nav id="TableOfContents"></nav>
           {{ .TableOfContents }} 
         </div>
         {{ end }}
