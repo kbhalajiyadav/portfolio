@@ -26,22 +26,25 @@ To remove human bias and speed up analysis, I built a custom Python pipeline tha
 
 ```mermaid
 graph TD
-    classDef input fill:#f1f8ff,stroke:#0366d6,stroke-width:2px,color:#000;
-    classDef process fill:#ffffff,stroke:#586069,stroke-width:1px,color:#000;
-    classDef innovation fill:#e6ffed,stroke:#22863a,stroke-width:2px,color:#000,stroke-dasharray: 5 5;
-    classDef output fill:#fff5b1,stroke:#b08800,stroke-width:2px,color:#000;
+    %% Define Professional "Classy" Styles
+    classDef input fill:#f8f9fa,stroke:#6c757d,stroke-width:1px,color:#212529,stroke-dasharray: 5 5;
+    classDef logic fill:#e3f2fd,stroke:#0d47a1,stroke-width:2px,color:#0d47a1;
+    classDef result fill:#e8f5e9,stroke:#1b5e20,stroke-width:2px,color:#1b5e20;
 
-    A["Raw Data Input<br/>Force vs. Displacement"]:::input --> B["Preprocessing<br/>Data Cleaning & Unit Conversion"]:::process
-    B --> C["Baseline Correction<br/>Normalize Starting Force to 0N"]:::process
+    %% Nodes
+    Raw[/"Raw Force Data<br/>(Noisy & Unreliable)"/]:::input
     
-    subgraph "Physics-Based Core Analysis"
-        direction TB
-        D["Identify Steady-State<br/>Window"]:::innovation
-        E["Peak & Trough Detection<br/>Isolate Initiation Forces (F_ci)"]:::innovation
-        F["Calculate Stability Metrics<br/>PSI = F_mean / Sigma_F"]:::innovation
+    subgraph "The Python Pipeline (Automated Logic)"
+        Clean["Step 1: Signal Cleaning<br/>(Remove Vibration Artifacts)"]:::logic
+        Detect{"Step 2: Physics Check<br/>Is it Adhesion or Stretching?"}:::logic
+        Filter["Step 3: Feature Extraction<br/>Isolate True Peak Load"]:::logic
     end
 
-    C --> D
-    D -- "Scan: Min. Std Dev" --> E
-    E --> F
-    F --> H["Summary Report<br/>Metrics: G_ci, PSI"]:::output
+    Output[/"Final Output:<br/>Reliability Score (PSI)"/]:::result
+
+    %% Connections
+    Raw --> Clean
+    Clean --> Detect
+    Detect -- "Stretching (Dissipation)" --> Clean
+    Detect -- "True Adhesion" --> Filter
+    Filter --> Output
