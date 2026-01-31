@@ -30,17 +30,17 @@ graph TD
     classDef innovation fill:#e6ffed,stroke:#22863a,stroke-width:2px,color:#000,stroke-dasharray: 5 5;
     classDef output fill:#fff5b1,stroke:#b08800,stroke-width:2px,color:#000;
 
-    A[Raw Data Input<br/>Force vs. Displacement]:::input --> B[Preprocessing<br/>Data Cleaning & Unit Conversion]:::process
-    B --> C[Baseline Correction<br/>Normalize Starting Force to 0N]:::process
+    A["Raw Data Input<br/>Force vs. Displacement"]:::input --> B["Preprocessing<br/>Data Cleaning & Unit Conversion"]:::process
+    B --> C["Baseline Correction<br/>Normalize Starting Force to 0N"]:::process
     
     subgraph "Physics-Based Core Analysis"
         direction TB
-        D{Identify Steady-State<br/>Window}:::innovation
-        E[Peak & Trough Detection<br/>Isolate Initiation Forces $F_{ci}$]:::innovation
-        F[Calculate Stability Metrics<br/>PSI = $F_{mean} / \sigma_F$]:::innovation
+        D{"Identify Steady-State<br/>Window"}:::innovation
+        E["Peak & Trough Detection<br/>Isolate Initiation Forces (F_ci)"]:::innovation
+        F["Calculate Stability Metrics<br/>PSI = F_mean / Sigma_F"]:::innovation
     end
 
     C --> D
     D -- "Scan: Min. Std Dev" --> E
     E --> F
-    F --> H[Summary Report<br/>Metrics: G_{ci}, PSI]:::output
+    F --> H["Summary Report<br/>Metrics: G_ci, PSI"]:::output
