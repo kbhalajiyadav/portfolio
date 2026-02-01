@@ -1,43 +1,22 @@
-{{/* Simple copy-to-clipboard citation tools */}}
+{{/* Citation box with Copy button */}}
 
-<div class="citebox">
+{{ $cite := "" }}
+
+{{ if .Params.citation_full }}
+  {{ $cite = .Params.citation_full }}
+{{ else if .Params.doi }}
+  {{/* fallback: simple generated citation */}}
+  {{ $venue := "" }}
+  {{ if .Params.publication_short }}{{ $venue = .Params.publication_short }}{{ else if .Params.publication }}{{ $venue = .Params.publication }}{{ end }}
+  {{ $cite = printf "%s. %s. %s. https://doi.org/%s" (.Title) (cond (ne $venue "") ($venue | plainify) "") (time.Format "2006" .Date) .Params.doi }}
+{{ else }}
+  {{ $cite = printf "%s." .Title }}
+{{ end }}
+
+<div class="publication-citebox">
   <h3>Citation</h3>
-
-  {{/* Build a clean citation string */}}
-  {{ $authors := "" }}
-  {{ with .Params.authors }}
-    {{ $authors = delimit . ", " }}
-  {{ end }}
-
-  {{ $year := "" }}
-  {{ with .Date }}{{ $year = .Format "2006" }}{{ end }}
-
-  {{ $pub := "" }}
-  {{ with .Params.publication }}{{ $pub = . }}{{ end }}
-
-  {{ $doi := "" }}
-  {{ with .Params.doi }}{{ $doi = . }}{{ end }}
-
-  {{ $cite := printf "%s (%s). %s. %s. DOI: %s" $authors $year .Title ($pub | plainify) $doi }}
-
-  <div class="citebox__buttons">
-    <button class="btn btn-outline-primary btn-sm js-copy" data-copy="{{ $cite | htmlEscape }}">
-      Copy citation
-    </button>
-
-    {{ if .Params.doi }}
-      <button class="btn btn-outline-primary btn-sm js-copy" data-copy="{{ .Params.doi | htmlEscape }}">
-        Copy DOI
-      </button>
-    {{ end }}
-  </div>
-
-  <div class="citebox__links">
-    {{ if .Params.url_pdf }}
-      <a class="citebox__link" href="{{ .Params.url_pdf }}" target="_blank" rel="noopener">PDF</a>
-    {{ end }}
-    {{ if .Params.url_source }}
-      <a class="citebox__link" href="{{ .Params.url_source }}" target="_blank" rel="noopener">Publisher</a>
-    {{ end }}
-  </div>
+  <button class="btn btn-outline-primary btn-sm" type="button"
+          onclick="navigator.clipboard.writeText({{ $cite | jsonify }}); this.innerText='Copied ✓'; setTimeout(()=>this.innerText='Copy citation',1200);">
+    Copy citation
+  </button>
 </div>
