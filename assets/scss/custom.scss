@@ -147,41 +147,52 @@
   text-decoration: underline;
 }
 
-/* Make publication items feel like cards */
+/* PUBLICATION LIST CARDS: stable hover */
 .wg-collection .media.stream-item {
+  position: relative;
   padding: 1rem;
   border-radius: 12px;
+  background: #fff;
   box-shadow: 0 4px 16px rgba(0,0,0,0.05);
   margin-bottom: 1rem;
-  /* Add this for smooth movement */
-  transition: transform 0.3s ease, box-shadow 0.3s ease; 
+
+  border: 1px solid transparent;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
 .wg-collection .media.stream-item:hover {
-  /* Lifts the card slightly */
-  transform: translateY(-5px); 
-  /* Makes the shadow deeper to look like it's floating */
-  box-shadow: 0 12px 24px rgba(0,0,0,0.1); 
-  /* Optional: adds a border color on hover */
-  border: 1px solid #007bff; 
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.10);
+  border-color: #007bff;
+  z-index: 5;
 }
 
-/* Apply card style to the specific Projects section using its ID and item classes */
+
+/* PROJECT CARDS: stable hover (no jump) */
 #projects .media.stream-item {
+  position: relative;
   padding: 1rem;
   border-radius: 12px;
+  background: #fff;
   box-shadow: 0 4px 16px rgba(0,0,0,0.05);
   margin-bottom: 1rem;
-  background: #fff; /* Ensures card has a solid background */
-  transition: transform 0.3s ease;
+
+  /* IMPORTANT: reserve border space so hover doesn't change size */
+  border: 1px solid transparent;
+
+  /* smooth hover */
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
-/* Add a hover effect for consistency */
 #projects .media.stream-item:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-  border: 1px solid #007bff;
+  box-shadow: 0 12px 24px rgba(0,0,0,0.10);
+  border-color: #007bff;
+
+  /* IMPORTANT: float above neighbors */
+  z-index: 5;
 }
+
 
 
 
