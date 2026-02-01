@@ -1,0 +1,24 @@
+{{ $links := slice }}
+
+{{ if .Params.url_pdf }}
+  {{ $links = $links | append (dict "label" "PDF" "url" .Params.url_pdf) }}
+{{ end }}
+{{ if .Params.url_source }}
+  {{ $links = $links | append (dict "label" "Publisher" "url" .Params.url_source) }}
+{{ end }}
+{{ if .Params.doi }}
+  {{ $links = $links | append (dict "label" "DOI" "url" (printf "https://doi.org/%s" .Params.doi)) }}
+{{ end }}
+
+{{ if gt (len $links) 0 }}
+  <div class="publication-links">
+    <h3>Links</h3>
+    <div class="publication-link-row">
+      {{ range $i, $l := $links }}
+        <a class="pub-link-chip" href="{{ $l.url }}" target="_blank" rel="noopener">
+          {{ $l.label }}
+        </a>
+      {{ end }}
+    </div>
+  </div>
+{{ end }}
