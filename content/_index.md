@@ -14,8 +14,8 @@ sections:
       username: admin
     design:
       background:
-        gradient_end: '#00674F'
-        gradient_start: '#00416A'
+        gradient_end: '#536976'
+        gradient_start: '#292E49'
         text_color_light: true
 
   # ===== HERO SECTION =====
