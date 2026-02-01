@@ -12,7 +12,7 @@ sections:
     content:
       title: Bhalaji Y. Kantepalle
       image:
-        filename: content/authors/admin/avatar.png
+        filename: avatar.png
       cta:
         label: 'Download CV'
         url: uploads/resume.pdf
