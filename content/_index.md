@@ -133,9 +133,9 @@ sections:
     content:
       title: Contact
       text: |
-        I’m always open to collaborations in **soft materials, adhesion mechanics, wearable interfaces**, and **materials analytics**.
+        I’m always open to oppurtunities in **soft materials, adhesion mechanics, wearable interfaces**, and **materials analytics**.
 
-      email: kbhalajiyadav22@gmail.com
+      email: contact@bhalaji.com
 
       # Keep location high-level (cleaner + safer)
       address:
