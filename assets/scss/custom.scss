@@ -244,3 +244,17 @@
   transform: translateY(-2px);
 }
 
+/* ===== Make About section icons blue ===== */
+
+/* Interest icons (book icon) */
+.wg-about .fa-book,
+.wg-about .fas.fa-book,
+.wg-about .fa-book-open {
+  color: #0d6efd !important;  /* Bootstrap primary blue */
+}
+
+/* Education icons (graduation cap) */
+.wg-about .fa-graduation-cap,
+.wg-about .fas.fa-graduation-cap {
+  color: #0d6efd !important;
+}
