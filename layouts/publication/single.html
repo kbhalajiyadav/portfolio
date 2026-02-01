@@ -47,6 +47,12 @@
           {{ if .Params.url_source }}
             <a class="pub-link-chip" href="{{ .Params.url_source }}" target="_blank" rel="noopener">Publisher</a>
           {{ end }}
+
+          {{/* COPY CITATION CHIP */}}
+          <button class="pub-link-chip js-copy-cite"
+                  data-cite="{{ with .Params.citation }}{{ . }}{{ else }}{{ .Plain | htmlEscape }}{{ end }}">
+            Copy Citation
+          </button>
         </div>
 
 
