@@ -73,7 +73,7 @@ sections:
       view: compact
       flip_alt_rows: false
       spacing:
-        padding: ["100px", "0", "20px", "0"]
+        padding: ["180px", "0", "20px", "0"]
         
 
 
