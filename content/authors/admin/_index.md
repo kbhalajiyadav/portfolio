@@ -2,7 +2,7 @@
 # Display name
 title: Bhalaji Y. Kantepalle
 
-# Full name (for SEO)
+# Full name (SEO)
 first_name: Bhalaji Yadav
 last_name: Kantepalle
 
@@ -10,83 +10,70 @@ last_name: Kantepalle
 status:
   icon: ☕
 
-# Is this the primary user of the site?
+# Primary site user
 superuser: true
 
-# Role/position/tagline
+# Role / tagline
 role: Chemical Engineer | Materials Science Researcher
 
-# Organizations/Affiliations
+# Affiliations
 organizations:
   - name: Virginia Commonwealth University
     url: https://www.vcu.edu/
 
-# Short bio (displayed in user profile at end of posts)
-bio: Chemical Engineer with expertise in Materials Science, Quality Operations, and Medical Device Innovation. Passionate about advancing healthcare through reliable, patient-centric material solutions.
+# Short profile blurb (appears under name)
+bio: Chemical Engineer specializing in soft materials, adhesion mechanics, and automated materials data analysis for reliable wearable and medical devices.
 
-# Interests
-tags:
-  - Materials Science
-  - Medical Devices
-  - Quality Assurance
-  - Polymer Physics
-  - FDA Compliance
-  - Data Automation
+# Interests (displayed as “Interests” panel)
+interests:
+  - Fracture Mechanics of Soft Interfaces
+  - Wearable & Medical Device Materials
+  - Adhesion Stability in Textiles
+  - Optical & Mechanical Metrology
+  - Data-Driven Materials Analysis
 
-# Social/Academic Networking
+# Education panel (renders clean list like Shilaan site)
+education:
+  courses:
+    - course: M.S. Chemical & Life Science Engineering
+      institution: Virginia Commonwealth University
+      year: "Expected 2026"
+    - course: B.Tech. Chemical Engineering
+      institution: Amrita Vishwa Vidyapeetham
+      year: "2022"
+
+# Social icons row
 social:
   - icon: envelope
     icon_pack: fas
     link: 'mailto:kbhalajiyadav22@gmail.com'
+
   - icon: linkedin
     icon_pack: fab
     link: https://linkedin.com/in/kbhalajiyadav
+
   - icon: graduation-cap
     icon_pack: fas
     link: https://scholar.google.com/citations?user=PLACEHOLDER
+
   - icon: github
     icon_pack: fab
     link: https://github.com/kbhalajiyadav
+
   - icon: orcid
     icon_pack: fab
     link: https://orcid.org/0000-0003-0551-6172
 
-# Link to a PDF of your resume/CV
-# To use: copy your resume to `static/uploads/resume.pdf`, enable `ai` icons in `params.toml`,
-# and uncomment the lines below.
-# - icon: cv
-#   icon_pack: ai
-#   link: uploads/resume.pdf
-
-# Enter email to display Gravatar (if Gravatar enabled in Config)
-email: 'kbhalajiyadav22@gmail.com'
-
-# Highlight the author in author lists? (true/false)
+# Highlight your name in publication author lists
 highlight_name: true
 ---
 
-Chemical Engineer with 1.5+ years of experience bridging **Materials Science** and **Regulated Quality Operations**. Proven ability to accelerate medical product innovation by translating complex R&D data into commercial value, evidenced by successful grant funding for wearable diagnostics and US FDA audit readiness.
+Chemical Engineer with 1.5+ years of experience bridging **Materials Science** and **Regulated Quality Operations**. I translate complex mechanical behavior in soft materials into **design rules for reliable wearable and medical devices**.
 
-cta:
-        label: View Research Projects
-        url: '#projects'
-        
-## Expertise
+My research at the **VCU Soft Functional Materials Lab** focuses on:
 
-- **Material Characterization**: Adhesion testing, Fatigue analysis, Rheology, Microscopy
-- **Process Validation**: V-Model methodology, CAPA management, Root Cause Analysis
-- **Data Automation**: Python (Data Mining, OpenCV), Statistical Analysis (PCA)
-- **Regulatory Compliance**: cGMP guidelines, FDA audit preparation, DMF analysis
+- Mechanics-consistent adhesion testing for soft electronics  
+- Preventing “false positive” adhesion metrics in stretchable systems  
+- Synchronizing mechanical strain with optical response in thermochromic textiles  
+- Automating fracture and peel signal analysis using Python (Pandas, OpenCV)
 
-## Current Research
-
-At the **VCU Soft Functional Materials Lab**, I'm developing thermochromic textiles for diabetic inflammation monitoring. My work involves:
-
-- Engineering optical metrology systems that synchronize mechanical strain with colorimetry
-- Predicting device fatigue limits using machine learning techniques
-- Automating fracture signal analysis protocols for adhesion testing
-
-## Education
-
-- **M.S. Chemical & Life Science Engineering** - Virginia Commonwealth University (Expected May 2026)
-- **B.Tech. Chemical Engineering** - Amrita Vishwa Vidyapeetham (2022)
