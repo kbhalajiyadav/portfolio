@@ -166,6 +166,11 @@
   border: 1px solid #007bff; 
 }
 
+/* Fix the top margin issue for the very first card in the collection list */
+.wg-collection .media.stream-item:first-child {
+    margin-top: 0 !important;
+}
+
 /* Apply card style to the specific Projects section using its ID and item classes */
 #projects .media.stream-item {
   padding: 1rem;
