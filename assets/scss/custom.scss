@@ -166,16 +166,16 @@
   border: 1px solid #007bff; 
 }
 
-/* Add top padding to the main page content wrapper */
-.page-header, 
-.page-body,
-.container {
-    padding-top: 1rem !important;
+/* Use this one: Add a reliable margin to the main body/content area */
+body, .page-body, .universal-wrapper, .main-content {
+    /* Ensures space below the main navigation bar */
+    margin-top: 50px !important; 
+    /* The '50px' might need adjustment depending on your navbar height */
 }
 
-/* Ensure the header/navbar has a solid background so content doesn't show through if it overlaps */
-.navbar-light {
-    background-color: #ffffff; /* Or whatever color your navbar should be */
+/* Ensure the navbar itself has a solid background so content doesn't show through */
+.navbar-light, .navbar-dark {
+    background-color: #ffffff; /* Use #fff or your site's header color */
 }
 
 
