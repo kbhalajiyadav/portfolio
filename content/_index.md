@@ -32,7 +32,7 @@ sections:
 
 
 # 2. BIOGRAPHY
-  - block: markdown
+- block: markdown
   content:
     title: Research Focus
     text: |
