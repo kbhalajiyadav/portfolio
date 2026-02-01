@@ -24,10 +24,7 @@ organizations:
 # Short profile blurb (appears under name)
 bio: Chemical Engineer specializing in soft materials, adhesion mechanics, and automated materials data analysis for reliable wearable and medical devices.
 
-# CV button (Academicons)
-- icon: cv
-  icon_pack: ai
-  link: "uploads/resume.pdf"
+
 # Interests (displayed as “Interests” panel)
 interests:
   - Fracture Mechanics of Soft Interfaces
