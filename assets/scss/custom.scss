@@ -1,13 +1,3 @@
-/* Force a solid background color on the navbar to prevent content from showing through */
-.navbar-light, 
-.navbar-dark, 
-.navbar-static-top, 
-.navbar-fixed-top, 
-.navbar-fixed-bottom {
-    background-color: #0d47a1 !important; /* Matches your Hero Section blue */
-    z-index: 1030; /* Ensures the navbar is above all other content layers */
-}
-
 .card:hover {
   transform: translateY(-4px);
   transition: all 0.2s ease;  
