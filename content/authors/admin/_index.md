@@ -85,3 +85,11 @@ My research at the **VCU Soft Functional Materials Lab** focuses on:
 - Synchronizing mechanical strain with optical response in thermochromic textiles  
 - Automating fracture and peel signal analysis using Python (Pandas, OpenCV)
 
+---
+# CV BUTTON
+buttons:
+  - label: Download CV
+    url: uploads/resume.pdf
+    icon: download
+    icon_pack: fas
+---
