@@ -8,7 +8,7 @@ toc: true
 
 sections:
   # ===== HERO SECTION =====
-   - block: hero
+  - block: hero
     content:
       title: Engineering Reliable Soft-Material Interfaces for Wearable & Medical Devices
       image:
