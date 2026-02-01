@@ -1,4 +1,4 @@
-<img width="1250" height="731" alt="image" src="https://github.com/user-attachments/assets/4d567490-2baf-4895-9873-a1f334b97ace" />---
+---
 title: "Integrated Optical Metrology System"
 summary: "Engineered a high-throughput Python/OpenCV pipeline to quantify mechanochromic response, synchronizing sub-pixel tracking with rigorous CIE L*a*b* colorimetry."
 tags: ["Computer Vision", "Python", "Metrology", "Data Pipelines", "Smart Textiles", "Academic Research"]
