@@ -109,7 +109,7 @@ sections:
           tag: Industry
     design:
       columns: '2'
-      view: card
+      view: compact
       flip_alt_rows: false
         
 
