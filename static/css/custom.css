@@ -300,3 +300,72 @@ body {
   }
 }
 
+/* Publication badge colors */
+.status-pill--pub{
+  background: #e8f5e9 !important;
+  color: #2e7d32 !important;
+  border-color: #2e7d32 !important;
+}
+
+.status-pill--talk{
+  background: #fff3e0 !important;
+  color: #e65100 !important;
+  border-color: #e65100 !important;
+}
+
+.status-pill--preprint{
+  background: #e3f2fd !important;
+  color: #1565c0 !important;
+  border-color: #1565c0 !important;
+}
+
+/* Publication meta line */
+.pub-meta{
+  margin: 0.2rem 0 1.1rem 0;
+  font-size: 0.95rem;
+}
+.pub-meta__label{
+  font-weight: 700;
+  margin-right: 6px;
+}
+.pub-meta__value{
+  color: #24292e;
+}
+
+/* Abstract block */
+.pub-abstract{
+  margin: 1.25rem 0 1.25rem 0;
+  padding: 12px 14px;
+  border: 1px solid #e6e6e6;
+  border-radius: 12px;
+  background: #fff;
+}
+.pub-abstract h2{
+  font-size: 1.05rem;
+  margin: 0 0 0.5rem 0;
+}
+
+/* Citation box */
+.citebox{
+  margin-top: 18px;
+  padding: 12px 14px;
+  border: 1px solid #e6e6e6;
+  border-radius: 12px;
+  background: #fff;
+}
+.citebox__buttons{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+.citebox__links{
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+}
+.citebox__link{
+  text-decoration: none;
+  font-weight: 600;
+}
+
