@@ -153,7 +153,19 @@
   border-radius: 12px;
   box-shadow: 0 4px 16px rgba(0,0,0,0.05);
   margin-bottom: 1rem;
+  /* Add this for smooth movement */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
 }
+
+.wg-collection .media.stream-item:hover {
+  /* Lifts the card slightly */
+  transform: translateY(-5px); 
+  /* Makes the shadow deeper to look like it's floating */
+  box-shadow: 0 12px 24px rgba(0,0,0,0.1); 
+  /* Optional: adds a border color on hover */
+  border: 1px solid #007bff; 
+}
+
 
 #news ul { line-height: 1.8; }
 #news li { margin-bottom: 0.75rem; }
