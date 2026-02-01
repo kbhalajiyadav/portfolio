@@ -12,11 +12,7 @@ sections:
   - block: about.biography
     content:
       username: admin
-    design:
-      background:
-        gradient_end: '#E69F00'
-        gradient_start: '#F0E442'
-        text_color_light: true
+   
 
   # ===== HERO SECTION =====
   - block: hero
