@@ -17,7 +17,7 @@ image:
 
 **The Context:** Validating mechanochromic materials requires more than just seeing a color change; it requires quantifying it. To prove a material is viable for injury monitoring, we need a precise correlation between mechanical strain and optical response in the **CIE L*a*b*** color space.
 
-**The Gap:** Manual analysis was insufficient. High-speed video data (600+ frames/test) suffered from lighting variances and mechanical "drift" (clamp slippage), making it impossible to separate true color shifts from environmental noise.
+**The Gap:** Manual analysis was insufficient. High-speed video data (2000+ frames/test) suffered from lighting variances and mechanical "drift" (clamp slippage), making it impossible to separate true color shifts from environmental noise.
 
 ## 2. The Task: A "Ground Truth" Pipeline
 
@@ -26,9 +26,9 @@ I needed to architect a **Computer Vision System** capable of isolating the mate
 **Key Requirements:**
 - **Input Compliance:** Automatically reject or correct video inputs (HDR/SDR) to ensure lighting standardization.
 - **Structural Integrity:** Track the material's texture (yarns) independent of the testing rig to eliminate mechanical noise.
-- **Rigorous Colorimetry:** Quantify response using **CIE L*a*b*** scalars, moving beyond basic RGB values to measure Perceptual Color Difference ($\Delta E_{00}$).
+- **Rigorous Colorimetry:** Quantify response using **CIE Lab** scalars, moving beyond basic RGB values to measure Perceptual Color Difference Delta E00/E76.
 
-## 3. The Action: The Master Pipeline (V17.3)
+## 3. The Action: The approach
 
 I developed a modular **Python/OpenCV** architecture that operates on two distinct analytical layers: **Structural (Texture)** and **Scalar (Color Physics)**.
 
@@ -39,7 +39,7 @@ Before analysis begins, the pipeline acts as a quality gate. It detects High-Dyn
 To solve the "drift" problem, I implemented **ECC (Enhanced Correlation Coefficient)** tracking. Instead of tracking the machine's movement, the code locks onto the *texture* of the rigid clamps with sub-pixel accuracy. This creates a "Virtual Extensometer" that calculates strain based on the actual material deformation, removing fabric slippage noise entirely.
 
 ### C. Layer 2: Scalar Analysis (CIE Colorimetry)
-Once the region of interest is structurally stabilized, the pipeline performs deep colorimetry. It converts raw pixel data into **CIE L*a*b*** coordinates—separating Lightness ($L^*$) from Chromaticity ($a^*, b^*$). This allows us to calculate $\Delta E_{00}$ (CIEDE2000), providing a mathematically rigorous metric for "Visible Color Change" that matches human perception.
+Once the region of interest is structurally stabilized, the pipeline performs deep colorimetry. It converts raw pixel data into **CIE Lab** coordinates—separating Lightness L* from Chromaticity a*, b*. This allows us to calculate Delta E00$ (CIEDE2000), providing a mathematically rigorous metric for "Visible Color Change" that matches human perception.
 
 ```mermaid
 graph TD
