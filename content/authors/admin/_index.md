@@ -49,7 +49,7 @@ social:
     link: 'mailto:kbhalajiyadav22@gmail.com'
 
   - display:
-    header: yes
+      header: yes
     icon: linkedin
     icon_pack: fab
     label: Find me on Twitter
