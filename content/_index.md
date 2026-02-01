@@ -18,7 +18,7 @@ sections:
       icon: download
       icon_pack: fas
 
-<!--
+  <!--
   # 2. BIOGRAPHY
   - block: markdown
     content:
