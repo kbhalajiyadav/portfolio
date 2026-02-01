@@ -9,12 +9,6 @@ show_date: false
 date: false
 
 sections:
-  - block: about
-    content:
-      title: ""
-      username: admin   # pulls from content/authors/admin/
-    design:
-      columns: '2'
   # ===== HERO SECTION =====
   - block: hero
     content:
@@ -132,6 +126,18 @@ sections:
     design:
       columns: '2'
       view: card
+
+- block: collection
+  id: publications
+  content:
+    title: Publications
+    filters:
+      folders:
+        - publication
+  design:
+    columns: '2'
+    view: compact
+
 
 # 6. ACADEMIC RESEARCH (Block 1)
   - block: experience
