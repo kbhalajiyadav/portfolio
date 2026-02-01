@@ -167,6 +167,15 @@
   z-index: 5;
 }
 
+/* Allow hover-lifted cards to show fully */
+.wg-portfolio,
+.wg-collection,
+.home-section,
+.home-section .container,
+.home-section .row {
+  overflow: visible !important;
+}
+
 
 /* PROJECT CARDS: stable hover (no jump) */
 #projects .media.stream-item {
