@@ -41,3 +41,40 @@
 .wg-collection .card:hover {
   transform: translateY(-3px);
 }
+
+/* Publication action row under title */
+.pub-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0.75rem 0 1.25rem 0;
+}
+
+.pub-link-chip {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid #e1e4e8;
+  background: #ffffff;
+  text-decoration: none !important;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.pub-link-chip:hover {
+  background: #0366d6;
+  color: #fff !important;
+  border-color: #0366d6;
+}
+
+.status-pill--pub{
+  background: #e8f5e9 !important;
+  color: #2e7d32 !important;
+  border-color: #2e7d32 !important;
+}
+.status-pill--conf{
+  background: #fff3e0 !important;
+  color: #ef6c00 !important;
+  border-color: #ef6c00 !important;
+}
