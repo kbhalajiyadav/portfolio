@@ -1,7 +1,7 @@
 # Site Parameters
 appearance:
   theme_day: minimal
-  theme_night: minimal
+  #theme_night: minimal
   font: native
   font_size: L
 
