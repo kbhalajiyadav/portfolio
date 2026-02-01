@@ -1,6 +1,6 @@
 ---
 # Display name
-title: Bhalaji Yadav Kantepalle
+title: Bhalaji Y. Kantepalle
 
 # Full name (for SEO)
 first_name: Bhalaji Yadav
@@ -67,6 +67,10 @@ highlight_name: true
 
 Chemical Engineer with 1.5+ years of experience bridging **Materials Science** and **Regulated Quality Operations**. Proven ability to accelerate medical product innovation by translating complex R&D data into commercial value, evidenced by successful grant funding for wearable diagnostics and US FDA audit readiness.
 
+cta:
+        label: View Research Projects
+        url: '#projects'
+        
 ## Expertise
 
 - **Material Characterization**: Adhesion testing, Fatigue analysis, Rheology, Microscopy
