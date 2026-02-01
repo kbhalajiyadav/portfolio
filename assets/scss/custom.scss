@@ -171,6 +171,23 @@
   font-size: 1.15rem;
 }
 
+/* Make publication items feel like cards */
+.wg-collection .media.stream-item {
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+  margin-bottom: 1rem;
+}
+
+#news ul { line-height: 1.8; }
+#news li { margin-bottom: 0.75rem; }
+
+/* Hide theme (dark/light) toggle in navbar */
+.js-toggle-theme,
+.navbar .theme-dropdown,
+.navbar .toggle-dark {
+  display: none !important;
+}
 
 /* HERO SOCIAL ICONS (match footer style) */
 .hero-social {
