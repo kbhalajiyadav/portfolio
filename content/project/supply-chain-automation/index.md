@@ -16,6 +16,7 @@ tags:
   - Python
   - Docker
   - Supply Chain
+  - Industry
 ---
 
 ## Overview
