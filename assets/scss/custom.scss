@@ -147,6 +147,31 @@
   text-decoration: underline;
 }
 
+/* CONTACT: tighten layout and reduce the giant left title gap */
+.wg-contact .section-heading h1,
+.wg-contact .section-heading h2 {
+  margin-bottom: 0.5rem;
+}
+
+.wg-contact .fa-ul {
+  margin-left: 0;
+}
+
+.wg-contact .fa-li {
+  left: 0;
+}
+
+.wg-contact li {
+  margin-bottom: 0.8rem;
+}
+
+.wg-contact .fas,
+.wg-contact .fab,
+.wg-contact .ai {
+  font-size: 1.15rem;
+}
+
+
 /* HERO SOCIAL ICONS (match footer style) */
 .hero-social {
   margin-top: 1.2rem;
