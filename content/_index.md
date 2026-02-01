@@ -26,6 +26,31 @@ sections:
   
         M.S. Researcher at [Virginia Commonwealth University](https://www.vcu.edu/)  
         Soft Functional Materials Lab · Dr. Christina Tang
+        <div class="hero-social">
+        <a href="mailto:kbhalajiyadav22@gmail.com" aria-label="Email">
+        <i class="fas fa-envelope"></i>
+        </a>
+        
+        <a href="https://www.linkedin.com/in/YOUR_LINK/" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <i class="fab fa-linkedin-in"></i>
+        </a>
+        
+        <a href="https://scholar.google.com/citations?user=YOUR_ID" target="_blank" rel="noopener" aria-label="Google Scholar">
+        <i class="fas fa-graduation-cap"></i>
+        </a>
+        
+        <a href="https://github.com/YOUR_GITHUB" target="_blank" rel="noopener" aria-label="GitHub">
+        <i class="fab fa-github"></i>
+        </a>
+        
+        <a href="https://orcid.org/YOUR_ORCID" target="_blank" rel="noopener" aria-label="ORCID">
+        <i class="ai ai-orcid"></i>
+        </a>
+        
+        </div>
+
+
+
     design:
       background:
         gradient_end: '#1565c0'
@@ -191,17 +216,8 @@ sections:
     design:
       columns: '2'
 
-  - block: markdown
-      content:
-        title: ''
-        text: |
-          <div class="contact-chips">
-            <a class="pub-link-chip" href="mailto:kbhalajiyadav22@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
-            <a class="pub-link-chip" href="https://www.linkedin.com" target="_blank" rel="noopener" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-            <a class="pub-link-chip" href="https://github.com" target="_blank" rel="noopener" title="GitHub"><i class="fab fa-github"></i></a>
-            <a class="pub-link-chip" href="https://orcid.org" target="_blank" rel="noopener" title="ORCID"><i class="ai ai-orcid"></i></a>
-            <a class="pub-link-chip" href="/uploads/resume.pdf" title="CV"><i class="fas fa-file-pdf"></i></a>
-          </div>
+ 
+          
 
 
 ---
