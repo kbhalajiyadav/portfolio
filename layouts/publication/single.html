@@ -34,6 +34,22 @@
           </div>
         {{ end }}
 
+        {{/* Quick action buttons under title */}}
+        <div class="pub-actions">
+          {{ if .Params.url_pdf }}
+            <a class="pub-link-chip" href="{{ .Params.url_pdf }}" target="_blank" rel="noopener">PDF</a>
+          {{ end }}
+        
+          {{ if .Params.doi }}
+            <a class="pub-link-chip" href="{{ printf "https://doi.org/%s" .Params.doi }}" target="_blank" rel="noopener">DOI</a>
+          {{ end }}
+        
+          {{ if .Params.url_source }}
+            <a class="pub-link-chip" href="{{ .Params.url_source }}" target="_blank" rel="noopener">Publisher</a>
+          {{ end }}
+        </div>
+
+
         {{/* Optional: Abstract block (uses front matter abstract) */}}
         {{ if .Params.abstract }}
           <h2>Abstract</h2>
