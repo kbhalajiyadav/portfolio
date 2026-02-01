@@ -103,6 +103,7 @@ sections:
             * Created **Stage-Gate Project Management Framework** which was subsequently adopted company-wide to streamline R&D timelines.
     design:
       columns: '2'
+      view: compact
     
   # ===== SKILLS SECTION =====
   - block: features
