@@ -82,6 +82,7 @@ sections:
       columns: '2'
       view: card
       flip_alt_rows: false
+      show_date: false   # 👈 ADD THIS LINE
 
 
   # ===== PUBLICATIONS SECTION =====
