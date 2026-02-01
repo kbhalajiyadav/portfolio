@@ -168,18 +168,7 @@ sections:
     design:
       columns: '3'
 
-  - block: markdown
-    content:
-      title: ''
-      text: |
-        <div class="contact-chips">
-          <a class="pub-link-chip" href="mailto:kbhalajiyadav22@gmail.com">Email</a>
-          <a class="pub-link-chip" href="https://www.linkedin.com/in/kbhalajiyadav/" target="_blank" rel="noopener">LinkedIn</a>
-          <a class="pub-link-chip" href="https://github.com/kbhalajiyadav" target="_blank" rel="noopener">GitHub</a>
-          <a class="pub-link-chip" href="https://orcid.org/0000-0003-0551-6172" target="_blank" rel="noopener">ORCID</a>
-          <a class="pub-link-chip" href="uploads/resume.pdf">CV</a>
-        </div>
-
+  
   # ===== CONTACT SECTION =====
   - block: contact
     id: contact
@@ -201,5 +190,18 @@ sections:
       autolink: true
     design:
       columns: '2'
+
+  - block: markdown
+      content:
+        title: ''
+        text: |
+          <div class="contact-chips">
+            <a class="pub-link-chip" href="mailto:kbhalajiyadav22@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+            <a class="pub-link-chip" href="https://www.linkedin.com" target="_blank" rel="noopener" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a class="pub-link-chip" href="https://github.com" target="_blank" rel="noopener" title="GitHub"><i class="fab fa-github"></i></a>
+            <a class="pub-link-chip" href="https://orcid.org" target="_blank" rel="noopener" title="ORCID"><i class="ai ai-orcid"></i></a>
+            <a class="pub-link-chip" href="/uploads/resume.pdf" title="CV"><i class="fas fa-file-pdf"></i></a>
+          </div>
+
 
 ---
