@@ -319,6 +319,8 @@ body {
   border-color: #1565c0 !important;
 }
 
+
+
 /* Publication meta line */
 .pub-meta{
   margin: 0.2rem 0 1.1rem 0;
@@ -367,5 +369,64 @@ body {
 .citebox__link{
   text-decoration: none;
   font-weight: 600;
+}
+
+/* =========================
+   PUBLICATION CAPSULE COLORS
+   ========================= */
+.status-pill--pub {
+  background: #e8f5e9 !important;
+  color: #2e7d32 !important;
+  border-color: #2e7d32 !important;
+}
+.status-pill--conf {
+  background: #fff3e0 !important;
+  color: #ef6c00 !important;
+  border-color: #ef6c00 !important;
+}
+.status-pill--thesis {
+  background: #ede7f6 !important;
+  color: #5e35b1 !important;
+  border-color: #5e35b1 !important;
+}
+.status-pill--research {
+  background: #e3f2fd !important;
+  color: #1565c0 !important;
+  border-color: #1565c0 !important;
+}
+
+.publication-venue {
+  margin: 0.25rem 0 1.25rem 0;
+  font-size: 1.05rem;
+}
+
+/* =========================
+   Citation + Link blocks
+   ========================= */
+.publication-citebox,
+.publication-links {
+  margin-top: 1.25rem;
+}
+
+.publication-link-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 10px;
+}
+
+.pub-link-chip {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid #e1e4e8;
+  background: #ffffff;
+  text-decoration: none !important;
+  font-size: 0.85rem;
+}
+
+.pub-link-chip:hover {
+  background: #0366d6;
+  color: #fff !important;
+  border-color: #0366d6;
 }
 
