@@ -13,3 +13,31 @@
   padding-top: 5rem;
   padding-bottom: 5rem;
 }
+
+/* Section Title Styling */
+.home-section h1,
+.home-section h2 {
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin-bottom: 1.2rem;
+}
+
+/* Improve Latest Updates readability */
+#news ul {
+  line-height: 1.8;
+}
+
+#news li {
+  margin-bottom: 0.75rem;
+}
+
+/* Publication & collection cards styling */
+.wg-collection .card {
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease;
+}
+
+.wg-collection .card:hover {
+  transform: translateY(-3px);
+}
