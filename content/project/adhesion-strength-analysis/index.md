@@ -12,7 +12,6 @@ image:
   focal_point: left
   preview_only: false
 ---
-{{< toc >}} 
 
 ## 1. The Situation: The “False Positive” Trap
 
