@@ -73,7 +73,7 @@ highlight_name: true
 greeting: bhalaji::kantepalle()
 ---
 
-<h1>About me</h1>
+# About me
 Chemical Engineer with 1.5+ years of experience bridging **Materials Science** and **Regulated Quality Operations**. I translate complex mechanical behavior in soft materials into **design rules for reliable wearable and medical devices**.
 
 My research at the **VCU Soft Functional Materials Lab** focuses on:
