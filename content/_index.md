@@ -12,55 +12,6 @@ sections:
   - block: about.biography
     content:
       username: admin
-   
-
-  # ===== HERO SECTION =====
-  - block: hero
-    content:
-      title: Engineering Reliable Soft-Material Interfaces for Wearable & Medical Devices
-      image:
-        filename: avatar.png
-      cta:
-        label: View Research Projects
-        url: '#projects'
-      cta_alt:
-        label: Download CV
-        url: uploads/resume.pdf
-      text: |
-        **Fracture Mechanics • Adhesion Stability • Automated Materials Analytics**
-  
-        M.S. Researcher at [Virginia Commonwealth University](https://www.vcu.edu/)  
-        Soft Functional Materials Lab · Dr. Christina Tang
-        <div class="hero-social">
-        <a href="mailto:kbhalajiyadav22@gmail.com" aria-label="Email">
-        <i class="fas fa-envelope"></i>
-        </a>
-        
-        <a href="https://www.linkedin.com/in/YOUR_LINK/" target="_blank" rel="noopener" aria-label="LinkedIn">
-        <i class="fab fa-linkedin-in"></i>
-        </a>
-        
-        <a href="https://scholar.google.com/citations?user=YOUR_ID" target="_blank" rel="noopener" aria-label="Google Scholar">
-        <i class="fas fa-graduation-cap"></i>
-        </a>
-        
-        <a href="https://github.com/YOUR_GITHUB" target="_blank" rel="noopener" aria-label="GitHub">
-        <i class="fab fa-github"></i>
-        </a>
-        
-        <a href="https://orcid.org/YOUR_ORCID" target="_blank" rel="noopener" aria-label="ORCID">
-        <i class="ai ai-orcid"></i>
-        </a>
-        
-        </div>
-
-
-
-    design:
-      background:
-        gradient_end: '#1565c0'
-        gradient_start: '#0d47a1'
-        text_color_light: true
 
 
   # 2. BIOGRAPHY
