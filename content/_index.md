@@ -90,17 +90,17 @@ sections:
 
 
   # ===== PUBLICATIONS SECTION =====
-- block: collection
-  id: publications
-  content:
-    title: Publications
-    count: 6
-    filters:
-      folders:
-        - publication
-  design:
-    columns: '2'
-    view: card
+  - block: collection
+    id: publications
+    content:
+      title: Publications
+      count: 6
+      filters:
+        folders:
+          - publication
+    design:
+      columns: '2'
+      view: card
 
 # 6. ACADEMIC RESEARCH (Block 1)
   - block: experience
