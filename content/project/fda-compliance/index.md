@@ -8,7 +8,7 @@ type: project
 toc: true
 
 image:
-  filename: featured.jpg
+  filename: featured.png
   focal_point: center
   preview_only: false
 ---
