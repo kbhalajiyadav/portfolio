@@ -166,13 +166,18 @@
   border: 1px solid #007bff; 
 }
 
-/* Add padding to the top of the parent container to fix margin collapse */
-.wg-collection {
-    padding-top: 1rem;
+/* Add top padding to the main page content wrapper */
+.page-header, 
+.page-body,
+.container {
+    padding-top: 1rem !important;
 }
 
-/* Optional: You can now safely remove the previous specific fix */
-/* .wg-collection .media.stream-item:first-child { margin-top: 0 !important; } */
+/* Ensure the header/navbar has a solid background so content doesn't show through if it overlaps */
+.navbar-light {
+    background-color: #ffffff; /* Or whatever color your navbar should be */
+}
+
 
 
 /* Apply card style to the specific Projects section using its ID and item classes */
