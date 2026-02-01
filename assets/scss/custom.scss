@@ -276,4 +276,32 @@
   z-index: 5;
 }
 
+/* ===== ABOUT BIOGRAPHY TYPOGRAPHY FIX ===== */
+.wg-about h1,
+.wg-about h2,
+.wg-about h3 {
+  font-family: inherit !important;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.wg-about p,
+.wg-about li {
+  font-family: inherit !important;
+}
+
+/* ===== ABOUT SECTION ICON COLOR ===== */
+.wg-about .svg-icon {
+  color: #0d47a1 !important;   /* your site blue */
+  fill: #0d47a1 !important;
+}
+
+.wg-about svg {
+  fill: #0d47a1 !important;
+}
+/* ===== Blank space Padding ===== */
+
+.wg-about {
+  padding-bottom: 3rem !important;
+}
 
