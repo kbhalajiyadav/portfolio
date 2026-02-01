@@ -39,7 +39,6 @@ To ensure operational continuity, I packaged the solution using **Docker**. This
 I developed **Strategic Dashboards** in Tableau that mapped global trade volume against our internal inventory. This transformed raw rows of data into stratergic insights, allowing the sales team to navigate and spot the under-served regions for specific chemical classes.
 
 ```mermaid
-```mermaid
 graph TD
     %% Professional Style Definitions
     classDef input fill:#f8f9fa,stroke:#6c757d,stroke-width:1px,stroke-dasharray: 5 5;
