@@ -13,7 +13,7 @@ toc: true
 **The Context:** In the pharmaceutical supply chain, speed is critical. At **Kreative Organics**, the Business Development team needed to rapidly identify gaps in the global market for specific chemical intermediates.
 
 **The Gap:** The industry suffers from severe data fragmentation. A single molecule might be listed under a Trade Name, an IUPAC name, or a generic identifier across different global databases.
-- **The Chemical Problem:** Mismatched **CAS Numbers** (Chemical Abstracts Service) led to missed market opportunities.
+- **The Chemical Problem:** Mismatched **CAS name fomats** (Chemical Abstracts Service) led to missed market opportunities.
 - **The Operational Problem:** Researchers spent 70% of their time manually cross-referencing safety data sheets (SDS) and trade logs rather than analyzing market strategy.
 
 ## 2. The Task: Operationalizing Data
@@ -30,7 +30,7 @@ I was assigned as the **Technical Project Manager** to lead the **Digital Transf
 I operated as the **Technical Lead**, bridging the gap between chemical domain knowledge and technical execution.
 
 ### A. Defining the "Chemical Logic" (Strategy)
-I engineered the standardization algorithm. Unlike a generic developer, I understood the nuances of chemical naming conventions. I defined the rulesets for mapping inconsistent trade names to verified **CAS Names**, ensuring scientific accuracy in the output.
+I spearheaded the standardization algorithm. Unlike a generic approach, I understood the nuances of chemical naming conventions. I defined the rulesets for mapping inconsistent trade names to verified **CAS Names**, ensuring scientific accuracy in the output.
 
 ### B. Containerizing the Workflow (Docker)
 To ensure operational continuity, I packaged the solution using **Docker**. This wasn't just about code; it was about **Process Reliability**. By containerizing the environment, I ensured that the standardization engine ran identically on every machine, immune to local configuration errors—critical for a regulated industrial environment.
@@ -51,12 +51,12 @@ graph TD
     
     subgraph "Standardization Engine"
         direction TB
-        Logic["Chemical Logic Definition<br/>(CAS Number Mapping)"]:::chemistry
+        Logic["Chemical Logic Definition<br/>(CAS Name Mapping)"]:::chemistry
         Docker["Docker Containerization<br/>(Process Reliability)"]:::ops
     end
 
     subgraph "Business Intelligence"
-        Viz["Tableau Market Heatmaps<br/>(Supply/Demand Gaps)"]:::ops
+        Viz["Tableau Market Insights<br/>(Supply/Demand Gaps)"]:::ops
     end
 
     Result[/"Qualified Sales Targets"/]:::output
