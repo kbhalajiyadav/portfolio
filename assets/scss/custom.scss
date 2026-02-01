@@ -147,11 +147,32 @@
   text-decoration: underline;
 }
 
-.contact-chips {
+/* HERO SOCIAL ICONS (match footer style) */
+.hero-social {
+  margin-top: 1.2rem;
   display: flex;
+  gap: 0.9rem;
   flex-wrap: wrap;
-  gap: 0.6rem;
-  margin: 1rem auto 0;
-  max-width: 980px;
-  justify-content: center;
 }
+
+.hero-social a {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid rgba(0,0,0,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  color: #0d47a1;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: all 0.2s ease;
+}
+
+.hero-social a:hover {
+  background: #0d47a1;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
