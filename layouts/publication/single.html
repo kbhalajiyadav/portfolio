@@ -50,10 +50,11 @@
 
           {{/* COPY CITATION CHIP */}}
           <button class="pub-link-chip js-copy-cite"
-                  data-cite="{{ with .Params.citation }}{{ . }}{{ else }}{{ .Plain | htmlEscape }}{{ end }}">
-                  onclick="navigator.clipboard.writeText({{ $cite | jsonify }}); this.innerText='Copied ✓'; setTimeout(()=>this.innerText='Copy citation',1200);">
+                  data-cite="{{ with .Params.citation }}{{ . }}{{ else }}{{ .Plain | htmlEscape }}{{ end }}"
+                  onclick="navigator.clipboard.writeText({{ $cite | jsonify }}); this.innerText='Copied ✓'; setTimeout(()=>this.innerText='Copy Citation', 5000);">
             Copy Citation
           </button>
+
         </div>
 
 
