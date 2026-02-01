@@ -177,7 +177,7 @@ sections:
           <a class="pub-link-chip" href="https://www.linkedin.com/in/kbhalajiyadav/" target="_blank" rel="noopener">LinkedIn</a>
           <a class="pub-link-chip" href="https://github.com/kbhalajiyadav" target="_blank" rel="noopener">GitHub</a>
           <a class="pub-link-chip" href="https://orcid.org/0000-0003-0551-6172" target="_blank" rel="noopener">ORCID</a>
-          <a class="pub-link-chip" href="{{< relref "uploads/resume.pdf" >}}">CV</a>
+          <a class="pub-link-chip" href="uploads/resume.pdf">CV</a>
         </div>
 
   # ===== CONTACT SECTION =====
