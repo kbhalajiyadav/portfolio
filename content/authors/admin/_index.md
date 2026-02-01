@@ -24,13 +24,6 @@ organizations:
 # Short profile blurb (appears under name)
 bio: Chemical Engineer specializing in soft materials, adhesion mechanics, and automated materials data analysis for reliable wearable and medical devices.
 
-# 🔹 This creates the CV button under bio
-button:
-  icon: download
-  icon_pack: fas
-  text: Download my CV
-  url: uploads/resume.pdf
-
 # Interests (displayed as “Interests” panel)
 interests:
   - Fracture Mechanics of Soft Interfaces
@@ -70,10 +63,14 @@ social:
   - icon: orcid
     icon_pack: fab
     link: https://orcid.org/0000-0003-0551-6172
-
     
+  - icon: cv
+    icon_pack: ai
+    link: uploads/resume.pdf
+
 # Highlight your name in publication author lists
 highlight_name: true
+greeting: bhalaji::kantepalle()
 ---
 
 Chemical Engineer with 1.5+ years of experience bridging **Materials Science** and **Regulated Quality Operations**. I translate complex mechanical behavior in soft materials into **design rules for reliable wearable and medical devices**.
@@ -85,4 +82,7 @@ My research at the **VCU Soft Functional Materials Lab** focuses on:
 - Synchronizing mechanical strain with optical response in thermochromic textiles  
 - Automating fracture and peel signal analysis using Python (Pandas, OpenCV)
 
+<center> 
+#### <i class="fa fa-download" aria-hidden="true" style="color:#035AA6"></i> {{< staticref "uploads/resume.pdf" "newtab" >}}Download my CV{{< /staticref >}}
+</center> 
 
