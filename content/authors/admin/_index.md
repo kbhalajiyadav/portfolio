@@ -73,6 +73,7 @@ highlight_name: true
 greeting: bhalaji::kantepalle()
 ---
 
+<h1>About me</h1>
 Chemical Engineer with 1.5+ years of experience bridging **Materials Science** and **Regulated Quality Operations**. I translate complex mechanical behavior in soft materials into **design rules for reliable wearable and medical devices**.
 
 My research at the **VCU Soft Functional Materials Lab** focuses on:
@@ -83,6 +84,6 @@ My research at the **VCU Soft Functional Materials Lab** focuses on:
 - Automating fracture and peel signal analysis using Python (Pandas, OpenCV)
 
 <center> 
-#### <i class="fa fa-download" aria-hidden="true" style="color:#035AA6"></i> {{< staticref "uploads/resume.pdf" "newtab" >}}Download my CV{{< /staticref >}}
+<i class="fa fa-download" aria-hidden="true" style="color:#035AA6"></i> {{< staticref "uploads/resume.pdf" "newtab" >}}Download my CV{{< /staticref >}}
 </center> 
 
