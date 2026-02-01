@@ -1,7 +1,7 @@
 ---
 title: "FDA Compliance & Quality Systems"
 summary: "Directed CAPA initiatives and V-Model validation roadmap ensuring US FDA audit readiness for pharmaceutical operations."
-tags: ["Quality Systems", "FDA Compliance", "cGMP", "Project Management","industry"]
+tags: ["Quality Systems", "FDA Compliance", "cGMP", "Project Management", "Industry"]
 status_label: "COMPLETED"
 date: 2023-05-01
 type: project
@@ -25,20 +25,31 @@ As **Technical Project Manager** (promoted from Intern within 6 months), I was t
 I implemented a structured **V-Model Validation Framework** to map technical requirements directly to testing protocols, ensuring complete traceability.
 
 - **CAPA Management:** Directed Corrective and Preventive Action initiatives by leading Root Cause Analysis (RCA) sessions for operational deviations, reducing recurrence.
-- **Validation Roadmap:** Defined the IQ/OQ/PQ (Installation, Operation, Performance Qualification) protocols for the SAP Business One system.
+- **Validation Roadmap:** Defined and executed the **OQ/PQ** (Operational & Performance Qualification) protocols for the SAP Business One system.
 - **Precision Execution:** Executed a **5-hour overnight system cutover plan** to safeguard production continuity and data integrity.
 
 ```mermaid
 graph TD
-    %% V-Model Validation Workflow
-    URS["User Requirement Specs<br/>(FDA/cGMP Needs)"] --> FS["Functional Specs<br/>(SAP Configuration)"]
-    FS --> DS["Design Specs<br/>(Technical Architecture)"]
-    DS --> Build["System Build &<br/>Configuration"]
-    Build --> IQ["Installation Qualification<br/>(IQ)"]
-    IQ --> OQ["Operational Qualification<br/>(OQ)"]
-    OQ --> PQ["Performance Qualification<br/>(PQ)"]
+    %% Define Professional Styles
+    classDef input fill:#f8f9fa,stroke:#6c757d,stroke-width:1px,stroke-dasharray: 5 5;
+    classDef process fill:#e3f2fd,stroke:#1565c0,stroke-width:2px;
+    classDef logic fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px;
 
-    %% Traceability Links (Dotted)
-    URS -.-> PQ
+    %% Nodes
+    URS["User Requirement Specs<br/>(FDA/cGMP Needs)"]:::input
+    FS["Functional Specs<br/>(SAP Configuration)"]:::input
+    
+    Build["System Build &<br/>Configuration"]:::process
+
+    OQ["Operational Qualification<br/>(OQ)"]:::logic
+    PQ["Performance Qualification<br/>(PQ)"]:::logic
+
+    %% Flow
+    URS --> FS
+    FS --> Build
+    Build --> OQ
+    OQ --> PQ
+
+    %% Traceability Links (Dotted) showing what validates what
     FS -.-> OQ
-    DS -.-> IQ
+    URS -.-> PQ
