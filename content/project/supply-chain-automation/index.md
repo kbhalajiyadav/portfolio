@@ -40,32 +40,30 @@ I developed **Strategic Dashboards** in Tableau that mapped global trade volume 
 
 ```mermaid
 graph TD
-    %% Professional Style Definitions
-    classDef input fill:#f8f9fa,stroke:#6c757d,stroke-width:1px,stroke-dasharray: 5 5;
-    classDef chemistry fill:#e3f2fd,stroke:#1565c0,stroke-width:2px;
-    classDef ops fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px;
-    classDef output fill:#fff3e0,stroke:#e65100,stroke-width:2px;
+  %% Style Definitions
+  classDef input fill:#f8f9fa,stroke:#6c757d,stroke-width:1px,stroke-dasharray: 5 5;
+  classDef chemistry fill:#e3f2fd,stroke:#1565c0,stroke-width:2px;
+  classDef ops fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px;
+  classDef output fill:#fff3e0,stroke:#e65100,stroke-width:2px;
 
-    %% Nodes
-    Raw[/"Raw Global Trade Data<br/>(Ambiguous Naming)"/]:::input
-    
-    subgraph "Standardization Engine"
-        direction TB
-        Logic["Chemical Logic Definition<br/>(CAS Number Mapping)"]:::chemistry
-        Docker["Docker Containerization<br/>(Process Reliability)"]:::ops
-    end
+  %% Nodes (use \n instead of <br/>)
+  Raw["Raw Global Trade Data\n(Ambiguous Naming)"]:::input
 
-    subgraph "Business Intelligence"
-        Viz["Tableau Market Heatmaps<br/>(Supply/Demand Gaps)"]:::ops
-    end
+  subgraph SE["Standardization Engine"]
+    direction TB
+    Logic["Chemical Logic Definition\n(CAS Mapping)"]:::chemistry
+    Docker["Docker Containerization\n(Process Reliability)"]:::ops
+  end
 
-    Result[/"Qualified Sales Targets"/]:::output
+  subgraph BI["Business Intelligence"]
+    direction TB
+    Viz["Tableau Market Heatmaps\n(Supply/Demand Gaps)"]:::ops
+  end
 
-    %% Flow
-    Raw --> Logic
-    Logic --> Docker
-    Docker --> Viz
-    Viz --> Result
+  Result["Qualified Sales Targets"]:::output
+
+  %% Flow
+  Raw --> Logic --> Docker --> Viz --> Result
 ```
 ## 4. The Result
 - Operational Efficiency: Slashed market research time by 70%, effectively automating the "grunt work" of data collection.
