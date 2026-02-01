@@ -79,9 +79,10 @@ sections:
         - name: Industry
           tag: Industry
     design:
-      columns: '1'
-      view: compact
+      columns: '2'
+      view: card
       flip_alt_rows: false
+
 
   # ===== PUBLICATIONS SECTION =====
   - block: collection
