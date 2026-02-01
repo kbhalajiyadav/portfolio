@@ -119,18 +119,6 @@ sections:
     id: publications
     content:
       title: Publications
-      count: 6
-      filters:
-        folders:
-          - publication
-    design:
-      columns: '2'
-      view: card
-
-  - block: collection
-    id: publications
-    content:
-      title: Publications
       filters:
         folders:
           - publication
