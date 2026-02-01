@@ -111,3 +111,19 @@
   document.addEventListener("DOMContentLoaded", setupTocHighlight);
 })();
 
+<script>
+document.addEventListener("click", async (e) => {
+  const btn = e.target.closest(".js-copy-cite");
+  if (!btn) return;
+
+  const text = btn.getAttribute("data-cite") || "";
+  try {
+    await navigator.clipboard.writeText(text);
+    const old = btn.textContent;
+    btn.textContent = "Copied!";
+    setTimeout(() => (btn.textContent = old), 1200);
+  } catch (err) {
+    alert("Copy failed. Please copy manually.");
+  }
+});
+</script>
