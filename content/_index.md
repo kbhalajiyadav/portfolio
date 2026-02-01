@@ -112,15 +112,15 @@ sections:
       title: Technical Skills
       items:
         - name: Experimental Mechanics
-          description: NMR, FT-NIR, Abbe refractometry, UV-Vis, Tensile Testing, T-Peel (ASTM D2724), Rheology, Microscopy
+          description: Rheology • T-Peel • NMR • Microscopy
           icon: microscope
           icon_pack: fas
         - name: Computational & Data
-          description: Python (Numpy, Pandas, OpenCV, SciPy), Metrology Throughput Optimization and anaylysis
+          description: Python • OpenCV • NumPy • Pandas • SciPy
           icon: code
           icon_pack: fas
         - name: Quality & Regulatory
-          description: FDA Compliance, cGMP, CAPA, Technical writing, SOP Development, Design of Experiments
+          description: FDA • cGMP • CAPA • SOP
           icon: clipboard-check
           icon_pack: fas
     design:
