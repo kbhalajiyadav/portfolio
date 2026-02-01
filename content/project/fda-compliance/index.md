@@ -1,3 +1,7 @@
+image:
+    filename: featured.png
+    focal_point: Center
+    preview_only: false
 ---
 title: "Mechanics-Consistent Adhesion in Soft Wearables"
 summary: "Developed a first-principles framework to identify 'false positive' adhesion failures, utilizing a custom Python pipeline to automate fracture mechanics analysis."
