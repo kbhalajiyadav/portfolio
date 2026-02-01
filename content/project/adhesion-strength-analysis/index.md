@@ -12,6 +12,8 @@ image:
   focal_point: left
   preview_only: false
 ---
+{{< toc >}} 
+
 ## 1. The Situation: The “False Positive” Trap
 
 **The Gap:** Current industry standards (like ASTM D1876) assume that higher average peel force equals better adhesion.
