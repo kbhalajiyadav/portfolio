@@ -1,7 +1,7 @@
 ---
 title: ''
 date: 2025-01-31
-type: landing
+type: landing 
 
 profile: true
 toc: true
