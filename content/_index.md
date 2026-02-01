@@ -9,13 +9,6 @@ show_date: false
 date: false
 
 sections:
-  - block: resume-biography-3
-    content:
-      username: admin
-    design:
-      columns: '2'
-
-
   # ===== HERO SECTION =====
   - block: hero
     content:
