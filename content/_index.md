@@ -5,6 +5,7 @@ type: landing
 
 profile: true
 toc: true
+show_date: false
 
 sections:
   # ===== HERO SECTION =====
@@ -70,6 +71,7 @@ sections:
     id: projects
     content:
       title: Selected Projects
+      show_date: false
       filters:
         folders:
           - project
@@ -82,7 +84,7 @@ sections:
       columns: '2'
       view: card
       flip_alt_rows: false
-      show_date: false   # 👈 ADD THIS LINE
+        
 
 
   # ===== PUBLICATIONS SECTION =====
