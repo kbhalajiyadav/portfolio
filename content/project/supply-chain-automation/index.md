@@ -46,34 +46,26 @@ graph TD
     classDef ops fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px;
     classDef output fill:#fff3e0,stroke:#e65100,stroke-width:2px;
 
-    %% SYSTEM BOUNDARY: Wraps the whole process
-    subgraph System ["High-Throughput Supply Chain Pipeline"]
+    %% Nodes
+    Raw[/"Raw Global Trade Data<br/>(Ambiguous Naming)"/]:::input
+    
+    subgraph "Standardization Engine"
         direction TB
-        
-        %% Inputs
-        Raw[/"Input: Raw Global Trade Data<br/>(Ambiguous Naming)"/]:::input
-        
-        %% Backend Sub-System
-        subgraph Engine ["Standardization Engine (Backend)"]
-            direction TB
-            Logic["Chemical Logic Definition<br/>(CAS Number Mapping)"]:::chemistry
-            Docker["Docker Containerization<br/>(Process Reliability)"]:::ops
-        end
-
-        %% Frontend Sub-System
-        subgraph Intel ["Business Intelligence (Frontend)"]
-            Viz["Tableau Market Heatmaps<br/>(Supply/Demand Gaps)"]:::ops
-        end
-
-        %% Output
-        Result[/"Output: Qualified Sales Targets"/]:::output
+        Logic["Chemical Logic Definition<br/>(CAS Number Mapping)"]:::chemistry
+        Docker["Docker Containerization<br/>(Process Reliability)"]:::ops
     end
 
-    %% Flow Connections
-    Raw --> Logic
-    Logic --> Docker
-    Docker --> Viz
-    Viz --> Result
+    subgraph "Business Intelligence"
+        Viz["Tableau Market Heatmaps<br/>(Supply/Demand Gaps)"]:::ops
+    end
+
+    Result[/"Qualified Sales Targets"/]:::output
+
+    %% Flow with System State Labels (The "CAD" Look)
+    Raw -- "Unstructured CSV" --> Logic
+    Logic -- "Mapping Rules" --> Docker
+    Docker -- "Cleaned Dataset" --> Viz
+    Viz -- "Actionable Insights" --> Result
 ```
 ## 4. The Result
 - Operational Efficiency: Slashed market research time by 70%, effectively automating the "grunt work" of data collection.
