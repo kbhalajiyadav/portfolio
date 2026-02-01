@@ -12,36 +12,8 @@ sections:
   - block: about.biography
     content:
       username: admin
-    button:
-      text: Download my CV
-      url: uploads/resume.pdf
-      icon: download
-      icon_pack: fas
 
-  <!-- 
-  # 2. BIOGRAPHY
-  - block: markdown
-    content:
-      title: Research Focus
-      text: |
-        I am a Chemical & Life Science Engineering researcher working at the intersection of **experimental mechanics and computational materials analysis**.  
-        At [Virginia Commonwealth University](https://www.vcu.edu/), I conduct research in the **[Soft Functional Materials Lab](https://vcusoftmaterialslab.weebly.com/)** under [Dr. Christina Tang](https://egr.vcu.edu/directory/christina.tang/).
-  
-        **My work centers on:**
-  
-        • Fracture mechanics of soft material interfaces  
-        • Identifying “false positive” adhesion metrics in wearable systems  
-        • Designing mechanically stable interfaces for soft electronics  
-        • Automating materials testing analysis using Python (Pandas, OpenCV)
-  
-        I translate complex mechanical behavior into **design rules for reliable wearable and medical devices**.
-    design:
-      columns: '2'
-    -->
-
-
-
-    # 3. LATEST UPDATES (Workshops, News, Awards)
+# 3. LATEST UPDATES (Workshops, News, Awards)
   - block: markdown
     id: news
     content:
