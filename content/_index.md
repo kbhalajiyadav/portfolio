@@ -19,11 +19,11 @@ sections:
     content:
       title: Latest Updates
       text: |
-        * **Dec 2025:** **[FUNDED]** Drafted successful **$30,000 Commonwealth Cyber Initiative** grant for thermochromic textile research. [[Read Project Details]]({{< relref "project/adhesion-analysis" >}})
-        * **Dec 2025:** Attended **Anton Paar XRD Workshop** (XRDynamic 500) on total scattering and PDF analysis. [[Read Learning Report]](#)
+        * **Dec 2025:** **[FUNDED]** Drafted successful **$30,000 Commonwealth Cyber Initiative** grant for thermochromic textile research. 
+        * **Dec 2025:** Attended **Anton Paar XRD Workshop** (XRDynamic 500) on total scattering and PDF analysis.
         * **Sep 2025:** Selected participant for the **1st National Neutron Scattering School** at [Oak Ridge National Laboratory (ORNL)](https://www.ornl.gov/). [[Know more]]([uploads/nns_agenda.pdf](https://neutrons.ornl.gov/nns/2025))
         * **Aug 2025:** Presented *Adhesives for Personalized Wearable Devices* at **[ACS Fall 2025](https://acs.digitellinc.com/live/35/session/565233)** (Washington, D.C.).
-        * **June 2025:** Attended **Anton Paar Rheo-Polarized Imaging Workshop** with Photron high-speed camera integration. [[Read Learning Report]](#)
+        * **June 2025:** Attended **Anton Paar Rheo-Polarized Imaging Workshop** with Photron high-speed camera integration.
     design:
       columns: '2'
   # ===== PROJECTS SECTION =====
@@ -96,7 +96,7 @@ sections:
           date_start: '2022-10-01'
           date_end: '2023-04-01'
           description: |2-
-            *Recruited and groomed by Deep Thought Edutech.*
+            *Recruited and groomed by Deep Thought Edutech.* 
             | *Mentor:* [Mr. Tarun Ayitham (Founder & CEO)](https://www.linkedin.com/in/tarunayitham/).
             * Engineered **Supply Chain Optimization Workflow** reducing research time by **70%**.
             * Designed and Containerized **Standardized Chemical Data Protocol** (Python/Docker) with **90%** accuracy improvement.
