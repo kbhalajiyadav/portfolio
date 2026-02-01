@@ -1,0 +1,43 @@
+{{/* Simple copy-to-clipboard citation tools */}}
+
+<div class="citebox">
+  <h3>Citation</h3>
+
+  {{/* Build a clean citation string */}}
+  {{ $authors := "" }}
+  {{ with .Params.authors }}
+    {{ $authors = delimit . ", " }}
+  {{ end }}
+
+  {{ $year := "" }}
+  {{ with .Date }}{{ $year = .Format "2006" }}{{ end }}
+
+  {{ $pub := "" }}
+  {{ with .Params.publication }}{{ $pub = . }}{{ end }}
+
+  {{ $doi := "" }}
+  {{ with .Params.doi }}{{ $doi = . }}{{ end }}
+
+  {{ $cite := printf "%s (%s). %s. %s. DOI: %s" $authors $year .Title ($pub | plainify) $doi }}
+
+  <div class="citebox__buttons">
+    <button class="btn btn-outline-primary btn-sm js-copy" data-copy="{{ $cite | htmlEscape }}">
+      Copy citation
+    </button>
+
+    {{ if .Params.doi }}
+      <button class="btn btn-outline-primary btn-sm js-copy" data-copy="{{ .Params.doi | htmlEscape }}">
+        Copy DOI
+      </button>
+    {{ end }}
+  </div>
+
+  <div class="citebox__links">
+    {{ if .Params.url_pdf }}
+      <a class="citebox__link" href="{{ .Params.url_pdf }}" target="_blank" rel="noopener">PDF</a>
+    {{ end }}
+    {{ if .Params.url_source }}
+      <a class="citebox__link" href="{{ .Params.url_source }}" target="_blank" rel="noopener">Publisher</a>
+    {{ end }}
+  </div>
+</div>
