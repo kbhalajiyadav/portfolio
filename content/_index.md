@@ -18,7 +18,7 @@ sections:
       icon: download
       icon_pack: fas
 
-
+<!--
   # 2. BIOGRAPHY
   - block: markdown
     content:
@@ -37,6 +37,7 @@ sections:
         I translate complex mechanical behavior into **design rules for reliable wearable and medical devices**.
     design:
       columns: '2'
+    -->
 
 
 
