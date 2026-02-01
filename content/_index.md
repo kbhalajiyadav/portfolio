@@ -33,15 +33,23 @@ sections:
 
 # 2. BIOGRAPHY
   - block: markdown
-    content:
-      title: Biography
-      subtitle: ''
-      text: |
-        I am a Chemical & Life Science Engineering researcher bridging the gap between experimental mechanics and computational analysis. Currently pursuing my M.S. at **[Virginia Commonwealth University](https://www.vcu.edu/)**, I conduct research at the **[Soft Functional Materials Lab](https://vcusoftmaterialslab.weebly.com/)** led by [Dr. Christina Tang](https://egr.vcu.edu/directory/christina.tang/).
-        
-        My work focuses on the fracture mechanics of soft interfaces—specifically avoiding the "False Positive" trap in wearable adhesion. I leverage Python (Pandas, OpenCV) to automate mechanical data analysis, turning raw peel tests into actionable fracture energy insights.
-    design:
-      columns: '2'
+  content:
+    title: Research Focus
+    text: |
+      I am a Chemical & Life Science Engineering researcher working at the intersection of **experimental mechanics and computational materials analysis**.  
+      At [Virginia Commonwealth University](https://www.vcu.edu/), I conduct research in the **[Soft Functional Materials Lab](https://vcusoftmaterialslab.weebly.com/)** under [Dr. Christina Tang](https://egr.vcu.edu/directory/christina.tang/).
+
+      **My work centers on:**
+
+      • Fracture mechanics of soft material interfaces  
+      • Identifying “false positive” adhesion metrics in wearable systems  
+      • Designing mechanically stable interfaces for soft electronics  
+      • Automating materials testing analysis using Python (Pandas, OpenCV)
+
+      I translate complex mechanical behavior into **design rules for reliable wearable and medical devices**.
+  design:
+    columns: '2'
+
 
     # 3. LATEST UPDATES (Workshops, News, Awards)
   - block: markdown
