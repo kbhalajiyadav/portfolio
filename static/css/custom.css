@@ -430,3 +430,19 @@ body {
   border-color: #0366d6;
 }
 
+/* Make tag chips inline in the sidebar (desktop + mobile) */
+.tags-sidebar ul,
+.tags-sidebar--mobile ul {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 10px !important;
+  padding-left: 0 !important;
+  margin: 0 !important;
+}
+
+.tags-sidebar li,
+.tags-sidebar--mobile li {
+  list-style: none !important;
+  margin: 0 !important;
+}
+
