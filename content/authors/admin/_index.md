@@ -80,9 +80,9 @@ Chemical Engineer with 1.5+ years of experience bridging **Materials Science** a
 
 My research at the [**VCU Soft Functional Materials Lab**](https://vcusoftmaterialslab.weebly.com/) under [Dr. Christina Tang](https://egr.vcu.edu/directory/christina.tang/) focuses on:
 
-- Mechanics-consistent adhesion testing for soft electronics  
+- Mechanics-consistent adhesion testing for soft materials/E-textiles.  
 - Preventing “false positive” adhesion metrics in stretchable systems  
-- Synchronizing mechanical strain with optical response in thermochromic textiles  
+- Synchronizing mechanical strain with optical response in mechanochromic textiles  
 - Automating fracture and peel signal analysis using Python (Pandas, OpenCV)
 
 <center> 
