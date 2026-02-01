@@ -122,7 +122,7 @@ sections:
           date_end: '2023-04-01'
           description: |2-
             *Recruited and groomed by Deep Thought Edutech.*
-            *Mentor:* [Mr. Tarun Ayitham (Founder & CEO)](https://www.linkedin.com/in/tarunayitham/).
+    - *Mentor:* [Mr. Tarun Ayitham (Founder & CEO)](https://www.linkedin.com/in/tarunayitham/).
             * Engineered **Supply Chain Optimization Workflow** reducing research time by **70%**.
             * Designed and Containerized **Standardized Chemical Data Protocol** (Python/Docker) with **90%** accuracy improvement.
             * Created **Stage-Gate Project Management Framework** which was subsequently adopted company-wide to streamline R&D timelines.
