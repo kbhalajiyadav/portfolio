@@ -1,5 +1,5 @@
 ---
-title: "Integrated Optical Metrology System"
+title: "Integrated Optical Metrology System_1"
 summary: "<span style='background-color: #e8f5e9; color: #2e7d32; padding: 2px 8px; border-radius: 4px; font-weight: bold; font-size: 0.8em; border: 1px solid #2e7d32;'>DEPLOYED</span> Engineered a high-throughput Python/OpenCV pipeline to quantify mechanochromic response, synchronizing sub-pixel tracking with CIEDE2000 colorimetry."
 tags: ["Computer Vision", "Python", "Metrology", "Data Pipelines", "Smart Textiles","Academic Research"]
 date: 2025-01-31
