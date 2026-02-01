@@ -111,7 +111,3 @@
   document.addEventListener("DOMContentLoaded", setupTocHighlight);
 })();
 
-<button class="pub-link-chip js-copy" data-copy="{{ $cite | htmlEscape }}" type="button">
-  Copy citation
-</button>
-
