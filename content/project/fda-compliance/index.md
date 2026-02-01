@@ -9,7 +9,7 @@ toc: true
 
 image:
   filename: featured.png
-  focal_point: center
+  focal_point: smart
   preview_only: false
 ---
 ## 1. The Situation: The “False Positive” Trap
