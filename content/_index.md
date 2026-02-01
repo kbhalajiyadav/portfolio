@@ -8,27 +8,28 @@ toc: true
 
 sections:
   # ===== HERO SECTION =====
-  - block: hero
+   - block: hero
     content:
-      title: Bhalaji Y. Kantepalle
+      title: Engineering Reliable Soft-Material Interfaces for Wearable & Medical Devices
       image:
         filename: avatar.png
       cta:
-        label: 'Download CV'
-        url: uploads/resume.pdf
+        label: View Research Projects
+        url: '#projects'
       cta_alt:
-        label: Contact Me
-        url: '#contact'
+        label: Download CV
+        url: uploads/resume.pdf
       text: |
-        **Materials Engineer & Researcher**
-        
-        Specializing in Soft Materials, Adhesion Mechanics, and Automated Data Analysis.
-        M.S. Candidate at [Virginia Commonwealth University](https://www.vcu.edu/).
+        **Fracture Mechanics • Adhesion Stability • Automated Materials Analytics**
+  
+        M.S. Researcher at [Virginia Commonwealth University](https://www.vcu.edu/)  
+        Soft Functional Materials Lab · Dr. Christina Tang
     design:
       background:
         gradient_end: '#1565c0'
         gradient_start: '#0d47a1'
         text_color_light: true
+
 
 # 2. BIOGRAPHY
   - block: markdown
