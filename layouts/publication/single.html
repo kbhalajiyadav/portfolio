@@ -1,20 +1,5 @@
 {{ define "main" }}
 
-{{/* ---------- BADGE LOGIC ---------- */}}
-{{ $ptype := "" }}
-{{ with .Params.publication_types }}
-  {{ if gt (len .) 0 }}{{ $ptype = index . 0 }}{{ end }}
-{{ end }}
-
-{{/* Map Hugo Blox publication type numbers to your labels */}}
-{{ $badgeText := "PUBLICATION" }}
-{{ $badgeClass := "status-pill--pub" }}
-
-{{ if eq $ptype "1" }} {{ $badgeText = "CONFERENCE" }} {{ $badgeClass = "status-pill--talk" }} {{ end }}
-{{ if eq $ptype "2" }} {{ $badgeText = "JOURNAL PUBLICATION" }} {{ $badgeClass = "status-pill--pub" }} {{ end }}
-{{ if eq $ptype "3" }} {{ $badgeText = "PREPRINT" }} {{ $badgeClass = "status-pill--preprint" }} {{ end }}
-{{ if eq $ptype "7" }} {{ $badgeText = "THESIS" }} {{ $badgeClass = "status-pill--talk" }} {{ end }}
-
 <article class="article">
   <div class="container">
     <div class="row">
@@ -24,60 +9,39 @@
 
         <h1 class="article-title">{{ .Title }}</h1>
 
-        <!-- Capsule badge under title -->
+        {{/* Status capsule (desktop + mobile) */}}
+        {{ $ptype := "" }}
+        {{ if .Params.publication_types }}
+          {{ $ptype = (index .Params.publication_types 0) | printf "%v" }}
+        {{ end }}
+
         <div class="article-status-row">
-          <span class="status-pill {{ $badgeClass }}">{{ $badgeText }}</span>
+          {{ if eq $ptype "2" }}
+            <span class="status-pill status-pill--pub">PUBLICATION</span>
+          {{ else if eq $ptype "1" }}
+            <span class="status-pill status-pill--conf">CONFERENCE</span>
+          {{ else if eq $ptype "7" }}
+            <span class="status-pill status-pill--thesis">THESIS</span>
+          {{ else }}
+            <span class="status-pill status-pill--research">RESEARCH</span>
+          {{ end }}
         </div>
 
-        <!-- Replace ugly "Type" with a clean publication line -->
+        {{/* Optional: show where it appeared (Polymers 17(13), 1777) */}}
         {{ if .Params.publication }}
-          <div class="pub-meta">
-            <span class="pub-meta__label">Publication</span>
-            <span class="pub-meta__value">{{ .Params.publication | safeHTML }}</span>
+          <div class="publication-venue">
+            {{ .Params.publication | markdownify }}
           </div>
         {{ end }}
 
-        <!-- Abstract -->
+        {{/* Optional: Abstract block (uses front matter abstract) */}}
         {{ if .Params.abstract }}
-          <div class="pub-abstract">
-            <h2>Abstract</h2>
-            <p>{{ .Params.abstract }}</p>
-          </div>
+          <h2>Abstract</h2>
+          <p>{{ .Params.abstract }}</p>
         {{ end }}
 
-        <!-- Mobile sidebar content (TOC/Tags/Cite) -->
-        <div class="d-lg-none article-mobile-meta">
-
-          {{ if .Params.toc }}
-            <div class="toc-sidebar toc-sidebar--mobile">
-              <h3>Table of Contents</h3>
-              {{ .TableOfContents }}
-            </div>
-          {{ end }}
-
-          {{ if .Params.tags }}
-            <div class="tags-sidebar tags-sidebar--mobile">
-              <h3>Tags</h3>
-              <ul class="list-unstyled">
-                {{ range .Params.tags }}
-                  <li>
-                    <a href="{{ (printf "tags/%s" (. | urlize)) | relURL }}" class="badge badge-light">
-                      {{ . }}
-                    </a>
-                  </li>
-                {{ end }}
-              </ul>
-            </div>
-          {{ end }}
-
-          {{ partial "publication-citebox.html" . }}
-
-        </div>
-
-        <!-- Main body -->
         {{ .Content }}
 
-        <!-- Your author footer -->
         {{ partial "author-footer.html" . }}
 
       </div>
@@ -85,13 +49,7 @@
       <!-- RIGHT SIDEBAR (Desktop) -->
       <aside class="col-lg-3 col-md-4 aside-column d-none d-lg-block">
 
-        {{ if .Params.toc }}
-          <div class="toc-sidebar">
-            <h3>Table of Contents</h3>
-            {{ .TableOfContents }}
-          </div>
-        {{ end }}
-
+        {{/* Tags */}}
         {{ if .Params.tags }}
           <div class="tags-sidebar">
             <h3>Tags</h3>
@@ -107,9 +65,34 @@
           </div>
         {{ end }}
 
+        {{/* Citation box + copy button */}}
         {{ partial "publication-citebox.html" . }}
 
+        {{/* Links (PDF / DOI / Publisher etc.) */}}
+        {{ partial "publication-links.html" . }}
+
       </aside>
+
+      <!-- MOBILE SIDEBAR (below title/content) -->
+      <div class="col-12 d-lg-none">
+        {{ if .Params.tags }}
+          <div class="tags-sidebar tags-sidebar--mobile">
+            <h3>Tags</h3>
+            <ul class="list-unstyled">
+              {{ range .Params.tags }}
+                <li>
+                  <a href="{{ (printf "tags/%s" (. | urlize)) | relURL }}" class="badge badge-light">
+                    {{ . }}
+                  </a>
+                </li>
+              {{ end }}
+            </ul>
+          </div>
+        {{ end }}
+
+        {{ partial "publication-citebox.html" . }}
+        {{ partial "publication-links.html" . }}
+      </div>
 
     </div>
   </div>
