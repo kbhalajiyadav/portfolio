@@ -3,3 +3,13 @@
   transition: all 0.2s ease;
   box-shadow: 0 8px 24px rgba(0,0,0,0.08);
 }
+
+/* Section rhythm for landing page */
+.home-section:nth-of-type(even) {
+  background: #f7f9fc;
+}
+
+.home-section {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
