@@ -127,16 +127,16 @@ sections:
       columns: '2'
       view: card
 
-- block: collection
-  id: publications
-  content:
-    title: Publications
-    filters:
-      folders:
-        - publication
-  design:
-    columns: '2'
-    view: compact
+  - block: collection
+    id: publications
+    content:
+      title: Publications
+      filters:
+        folders:
+          - publication
+    design:
+      columns: '2'
+      view: compact
 
 
 # 6. ACADEMIC RESEARCH (Block 1)
