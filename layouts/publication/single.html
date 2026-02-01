@@ -49,11 +49,10 @@
           {{ end }}
 
           {{/* COPY CITATION CHIP */}}
-          {{ $cite := cond (isset .Params "citation") .Paramas.citation(printf "%s. "%s. "%s. doi.%s" .Title .Paramas.publication .Paramas.date .Paramas.doi) }}
-          <button class="pub-link-chip js-copy-cite"
+          {{ $cite := cond (isset .Params "citation") .Params.citation (printf "%s. %s. %s. doi:%s" .Title .Params.publication .Params.date .Params.doi) }}
+          <button class="pub-link-chip"
                   onclick="navigator.clipboard.writeText({{ $cite | jsonify }}); this.innerText='Copied ✓'; setTimeout(()=>this.innerText='Copy Citation', 5000);">
             Copy Citation
-          </button>
 
         </div>
 
