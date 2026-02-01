@@ -79,7 +79,7 @@ greeting: bhalaji::kantepalle()
 # About me
 Chemical Engineer with 1.5+ years of experience bridging **Materials Science** and **Regulated Quality Operations**. I translate complex mechanical behavior in soft materials into **design rules for reliable wearable and medical devices**.
 
-My research at the **VCU Soft Functional Materials Lab** focuses on:
+My research at the [**VCU Soft Functional Materials Lab**](https://vcusoftmaterialslab.weebly.com/) under [Dr. Christina Tang](https://egr.vcu.edu/directory/christina.tang/) focuses on:
 
 - Mechanics-consistent adhesion testing for soft electronics  
 - Preventing “false positive” adhesion metrics in stretchable systems  
