@@ -26,7 +26,20 @@ publication_types: ['2']
 publication: '*Polymers* 17(13), 1777'
 publication_short: '*Polymers* 17(13), 1777'
 
-abstract: This study investigates the mechanical properties of dual-layer electrospun fiber mats, focusing on their potential applications in biomedical and filtration technologies. The research provides insights into the structural characteristics and performance of these advanced materials.
+abstract: Electrospinning with sequential layer deposition has been reported for various applications
+such as tissue scaffolds, shape memory materials, and separations. However, the effect
+of layering on the mechanical properties is not fully understood. In this work, layered
+structures of thermoplastic polyurethane (TPU) and nylon were selected as a model system
+to investigate the effect of sequential layer deposition on mechanical properties. Evidence
+of the layered structure was indicated by scanning electron microscopy (SEM) and Fourier
+Transform Infrared spectroscopy (FTIR) experiments. Layering TPU with nylon resulted in
+a 60-fold increase in the Young’s modulus. The Young’s modulus of the layered structure
+was reasonably predicted by the Voigt rule of mixtures. Furthermore, the Young’s modulus
+changes without any statistically significant change in elongation at break compared to
+a single layer of nylon. Thus, the elongation at break was dictated by the stiffer material,
+despite being present at a lower volume fraction. Overall, electrospinning with sequential
+layer deposition electrospinning is an effective approach for tuning the mechanical properties and surface chemistry of electrospun materials independently, which may be of interest
+for applications in tissue engineering and separations.
 
 # Summary. An optional shortened abstract.
 summary: Published research on mechanical properties of electrospun fiber mats in Polymers journal.
@@ -38,7 +51,7 @@ tags:
   - Polymers
 
 featured: true
-
+citation: "Caloian I., Trapp J., Kantepalle B.Y., et al. Mechanical Properties of Dual-Layer Electrospun Fiber Mats. Polymers 17(13), 1777 (2025). doi:10.3390/polym17131777"
 # links:
 # - name: ""
 #   url: ""
@@ -48,7 +61,7 @@ url_dataset: ''
 url_poster: ''
 url_project: ''
 url_slides: ''
-url_source: 'https://doi.org/10.3390/polym17131777'
+url_source: ''
 url_video: ''
 
 # Featured image
@@ -73,8 +86,3 @@ projects:
 #   Otherwise, set `slides: ""`.
 slides: ''
 ---
-
-This publication represents collaborative research on the mechanical characterization of dual-layer electrospun fiber mats, contributing to the understanding of these materials for biomedical applications.
-
-**Citation:**
-I. Caloian, J. Trapp, B. Y. Kantepalle, et al. "Mechanical Properties of Dual-Layer Electrospun Fiber Mats". *Polymers* 17(13), 1777 (2025). [doi:10.3390/polym17131777](https://doi.org/10.3390/polym17131777)
