@@ -168,25 +168,38 @@ sections:
     design:
       columns: '3'
 
+  - block: markdown
+    content:
+      title: ''
+      text: |
+        <div class="contact-chips">
+          <a class="pub-link-chip" href="mailto:kbhalajiyadav22@gmail.com">Email</a>
+          <a class="pub-link-chip" href="https://www.linkedin.com/in/kbhalajiyadav/" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="pub-link-chip" href="https://github.com/kbhalajiyadav" target="_blank" rel="noopener">GitHub</a>
+          <a class="pub-link-chip" href="https://orcid.org/0000-0003-0551-6172" target="_blank" rel="noopener">ORCID</a>
+          <a class="pub-link-chip" href="{{< relref "uploads/resume.pdf" >}}">CV</a>
+        </div>
+
   # ===== CONTACT SECTION =====
   - block: contact
     id: contact
     content:
       title: Contact
+      text: |
+        I’m always open to collaborations in **soft materials, adhesion mechanics, wearable interfaces**, and **materials analytics**.
+
       email: kbhalajiyadav22@gmail.com
-      
+
+      # Keep location high-level (cleaner + safer)
       address:
-        street: 401 W Main St
         city: Richmond
         region: VA
-        postcode: '23284'
         country: United States
         country_code: US
-      coordinates:
-        latitude: '37.5465'
-        longitude: '-77.4530'
+
       directions: VCU College of Engineering
       autolink: true
     design:
       columns: '2'
+
 ---
