@@ -67,6 +67,7 @@ sections:
       columns: '2'
       view: compact
       flip_alt_rows: false
+      spacing: padding: ["80px", "0", "20px", "0"]
         
 
 
