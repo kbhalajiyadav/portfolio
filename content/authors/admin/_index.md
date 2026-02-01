@@ -52,7 +52,6 @@ social:
       header: yes
     icon: linkedin
     icon_pack: fab
-    label: Find me on LinkedIn
     link: https://linkedin.com/in/kbhalajiyadav
 
   - icon: graduation-cap
