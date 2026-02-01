@@ -48,8 +48,11 @@ social:
     icon_pack: fas
     link: 'mailto:kbhalajiyadav22@gmail.com'
 
-  - icon: linkedin
+  - display:
+    header: yes
+    icon: linkedin
     icon_pack: fab
+    label: Find me on Twitter
     link: https://linkedin.com/in/kbhalajiyadav
 
   - icon: graduation-cap
