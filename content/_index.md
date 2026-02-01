@@ -72,6 +72,7 @@ sections:
     content:
       title: Selected Projects
       show_date: false
+      date: false
       filters:
         folders:
           - project
