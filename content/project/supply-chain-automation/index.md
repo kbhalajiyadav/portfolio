@@ -30,14 +30,15 @@ I was assigned as the **Technical Project Manager** to lead the **Digital Transf
 I operated as the **Technical Lead**, bridging the gap between chemical domain knowledge and technical execution.
 
 ### A. Defining the "Chemical Logic" (Strategy)
-I engineered the standardization algorithm. Unlike a generic developer, I understood the nuances of chemical naming conventions. I defined the rulesets for mapping inconsistent trade names to verified **CAS Registry Numbers**, ensuring 100% scientific accuracy in the output.
+I engineered the standardization algorithm. Unlike a generic developer, I understood the nuances of chemical naming conventions. I defined the rulesets for mapping inconsistent trade names to verified **CAS Names**, ensuring scientific accuracy in the output.
 
 ### B. Containerizing the Workflow (Docker)
 To ensure operational continuity, I packaged the solution using **Docker**. This wasn't just about code; it was about **Process Reliability**. By containerizing the environment, I ensured that the standardization engine ran identically on every machine, immune to local configuration errors—critical for a regulated industrial environment.
 
 ### C. Visualizing Market Gaps (Tableau)
-I developed **Strategic Dashboards** in Tableau that mapped global trade volume against our internal inventory. This transformed raw rows of data into a "Heat Map" of supply shortages, allowing the sales team to visually spot under-served regions for specific chemical classes.
+I developed **Strategic Dashboards** in Tableau that mapped global trade volume against our internal inventory. This transformed raw rows of data into stratergic insights, allowing the sales team to navigate and spot the under-served regions for specific chemical classes.
 
+```mermaid
 ```mermaid
 graph TD
     %% Professional Style Definitions
@@ -50,6 +51,7 @@ graph TD
     Raw[/"Raw Global Trade Data<br/>(Ambiguous Naming)"/]:::input
     
     subgraph "Standardization Engine"
+        direction TB
         Logic["Chemical Logic Definition<br/>(CAS Number Mapping)"]:::chemistry
         Docker["Docker Containerization<br/>(Process Reliability)"]:::ops
     end
