@@ -6,6 +6,7 @@ type: landing
 profile: true
 toc: true
 show_date: false
+date: false
 
 sections:
   # ===== HERO SECTION =====
@@ -89,16 +90,18 @@ sections:
 
 
   # ===== PUBLICATIONS SECTION =====
-  - block: collection
-    id: publications
-    content:
-      title: Publications
-      filters:
-        folders:
-          - publication
-    design:
-      columns: '2'
-      view: citation
+- block: collection
+  id: publications
+  content:
+    title: Publications
+    count: 6
+    filters:
+      folders:
+        - publication
+  design:
+    columns: '2'
+    view: card
+
 # 6. ACADEMIC RESEARCH (Block 1)
   - block: experience
     id: experience
