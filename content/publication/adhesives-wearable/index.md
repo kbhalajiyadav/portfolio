@@ -1,7 +1,7 @@
 ---
 title: "Adhesives for Personalized Wearable Devices: Beyond Peel Strength"
 authors:
-- Bhalaji Yadav Kantepalle
+- Admin
 - H. Stwodah
 - D. Joung
 - C. Tang
@@ -22,10 +22,10 @@ publication_types: ["1"]
 publication: In *American Chemical Society (ACS) Fall 2025*
 publication_short: In *ACS Fall 2025*
 
-abstract: Presented a mechanics-consistent methodology for evaluating adhesion in soft electronics. We highlighted the "False Positive" trap where conventional force metrics fail to predict functional reliability in textile-integrated sensors.
+abstract: This project aims to develop an effective method for adhesion or attachment of devices to fabric wraps or sleeves for applications in personalized medicine. The goal of this work was to identify commercial glues appropriate for adhesion of metal or silcone devices to fabric substrates. Methods to determine the ability of the glue to adhere to fabric, adhere metal to fabric, and silicone to fabric and be maintained under fabric strain are being developed. Initial experiments subjecting the glue-fabric bonds to hand stretching indicated that Professional Grade Super Glue (Fast-Setting, Impact Tough, Versatile) was not effective as the fabric became brittle and adhesion was ineffective. Using E6000 (Industrial Strength Adhesive), adhesion between fabic and metal was successful but adhesion between fabric and silicone failed upon fabric stretching. GE Silicone Glue Premium and J-B Weld 31310 All-Purpose RTV Silicone Sealant successfully adhered silcone to fabric or metal to silicone while stretching the fabric. Methods to quantify the adhesion strength using ASTM standards and to determine modes of faiure (i.e., fabric, adhesive, or cohesive) are currently being developed. Testing to evaluate skin irritability is also being considered.
 
 # Summary. An optional shortened abstract.
-summary: Poster presentation at ACS Fall 2025 on fracture mechanics in soft wearables.
+summary: Poster presentation at ACS Fall 2025 on adhesion strength in soft wearables.
 
 tags:
 - Fracture Mechanics
@@ -42,7 +42,7 @@ featured: true
 url_pdf: ''
 url_code: ''
 url_dataset: ''
-url_poster: ''
+url_poster: 'https://acs.digitellinc.com/live/35/session/565233'
 url_project: ''
 url_slides: ''
 url_source: ''
@@ -54,5 +54,5 @@ url_video: ''
 #   E.g. `internal-project` references `content/project/internal-project/index.md`.
 #   Otherwise, set `projects: []`.
 projects:
-- adhesion-analysis
+- adhesion-strength-analysis
 ---
