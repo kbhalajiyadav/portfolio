@@ -21,8 +21,7 @@
           {{ if .Params.toc }}
             <div class="toc-sidebar toc-sidebar--mobile">
               <h3>Table of Contents</h3>
-              {{< toc >}} 
-              
+              {{ .TableOfContents }}
             </div>
           {{ end }}
 
