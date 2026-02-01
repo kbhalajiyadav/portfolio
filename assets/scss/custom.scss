@@ -166,16 +166,20 @@
   border: 1px solid #007bff; 
 }
 
-/* Add padding to the very top of the entire webpage body */
-body {
-    padding-top: 100px !important; /* Adjust '100px' if your header is taller/shorter */
+/* Add scroll margin to account for the fixed header height */
+#projects, 
+#publications,
+#experience,
+#news,
+#contact {
+  /* This ensures 100px of space is left above the section ID when anchored to */
+  scroll-margin-top: 100px; 
 }
 
-/* Ensure the header/navbar has a solid background so content doesn't show through */
+/* Ensure the navbar has a solid background so content doesn't show through if it overlaps */
 .navbar-light, .navbar-dark {
-    background-color: #ffffff; 
+    background-color: #ffffff; /* Use #fff or your site's header color */
 }
-
 
 
 /* Apply card style to the specific Projects section using its ID and item classes */
