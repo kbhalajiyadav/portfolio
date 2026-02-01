@@ -166,6 +166,24 @@
   border: 1px solid #007bff; 
 }
 
+/* Apply card style to Projects section */
+#projects .project-showcase,
+#projects .portfolio-item {
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+  margin-bottom: 1rem;
+  background: #fff; /* Ensures card has a solid background */
+  transition: transform 0.3s ease;
+}
+
+/* Add a hover effect for consistency */
+#projects .project-showcase:hover,
+#projects .portfolio-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+}
+
 
 #news ul { line-height: 1.8; }
 #news li { margin-bottom: 0.75rem; }
