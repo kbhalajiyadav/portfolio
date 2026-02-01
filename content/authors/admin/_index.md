@@ -63,7 +63,15 @@ social:
   - icon: orcid
     icon_pack: fab
     link: https://orcid.org/0000-0003-0551-6172
+    
+# CV BUTTON
+buttons:
+  - label: Download CV
+    url: uploads/resume.pdf
+    icon: download
+    icon_pack: fas
 
+    
 # Highlight your name in publication author lists
 highlight_name: true
 ---
