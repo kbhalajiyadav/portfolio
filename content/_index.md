@@ -9,6 +9,13 @@ show_date: false
 date: false
 
 sections:
+  - block: biography
+    content:
+      title: ""
+      username: admin
+    design:
+      columns: '2'
+
   # ===== HERO SECTION =====
   - block: hero
     content:
