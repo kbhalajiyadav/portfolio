@@ -1,7 +1,7 @@
 <!-- 
 {{ $links := slice }}
 
-{{ if .Params.url_pdf }}
+{{ if .Params.url_pdf }} 
   {{ $links = $links | append (dict "label" "PDF" "url" .Params.url_pdf) }}
 {{ end }}
 {{ if .Params.url_source }}
