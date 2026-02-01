@@ -12,6 +12,11 @@ sections:
   - block: about.biography
     content:
       username: admin
+    button:
+      text: Download my CV
+      url: uploads/resume.pdf
+      icon: download
+      icon_pack: fas
 
 
   # 2. BIOGRAPHY
@@ -67,7 +72,8 @@ sections:
       columns: '2'
       view: compact
       flip_alt_rows: false
-      spacing: padding: ["80px", "0", "20px", "0"]
+      spacing:
+        padding: ["100px", "0", "20px", "0"]
         
 
 
