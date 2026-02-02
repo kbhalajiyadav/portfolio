@@ -15,7 +15,7 @@ sections:
 
 # 3. LATEST UPDATES (Workshops, News, Awards)
   - block: markdown
-    id: news
+    id: news 
     content:
       title: Latest Updates
       text: |
