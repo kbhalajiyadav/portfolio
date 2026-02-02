@@ -2,7 +2,7 @@
 title: "Integrated Optical Metrology System"
 summary: "Engineered a high-throughput Python/OpenCV pipeline to quantify mechanochromic response, synchronizing sub-pixel tracking with rigorous CIE L*a*b* colorimetry."
 tags: ["Computer Vision", "Python", "Metrology", "Data Pipelines", "Smart Textiles", "Academic Research"]
-status_label: "DEPLOYED"
+status: "DEPLOYED"
 date: 2025-01-31
 type: project
 toc: true
