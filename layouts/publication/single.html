@@ -15,9 +15,17 @@
           {{ $ptype = (index .Params.publication_types 0) | printf "%v" }}
         {{ end }}
 
-        {{ with .Params.status_label }}
-          <span class="status-pill status-pill--pub">{{ . }}</span>
-        {{ end }}
+        <div class="article-status-row">
+          {{ if eq $ptype "2" }}
+            <span class="status-pill status-pill--pub">PUBLICATION</span>
+          {{ else if eq $ptype "1" }}
+            <span class="status-pill status-pill--conf">CONFERENCE</span>
+          {{ else if eq $ptype "7" }}
+            <span class="status-pill status-pill--thesis">THESIS</span>
+          {{ else }}
+            <span class="status-pill status-pill--research">RESEARCH</span>
+          {{ end }}
+        </div>
 
         {{/* Optional: show where it appeared (Polymers 17(13), 1777) */}}
         {{ if .Params.publication }}
