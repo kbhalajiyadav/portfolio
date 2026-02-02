@@ -13,7 +13,7 @@ toc: true
 **The Context:** In the pharmaceutical supply chain, speed is critical. At **Kreative Organics**, the Business Development team needed to rapidly identify gaps in the global market for specific chemical intermediates.
 
 **The Gap:** The industry suffers from severe data fragmentation. A single molecule might be listed under a Trade Name, an IUPAC name, or a generic identifier across different global databases.
-- **The Chemical Problem:** Mismatched **CAS name fomats** (Chemical Abstracts Service) led to missed market opportunities.
+- **The Chemical Problem:** Mismatched **CAS or common chemical name fomats** (Chemical Abstracts Service) led to missed market opportunities.
 - **The Operational Problem:** Researchers spent 70% of their time manually cross-referencing safety data sheets (SDS) and trade logs rather than analyzing market strategy.
 
 ## 2. The Task: Operationalizing Data
