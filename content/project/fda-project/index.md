@@ -2,7 +2,7 @@
 title: "FDA Compliance & Quality Systems"
 summary: "Directed CAPA initiatives and V-Model validation roadmap ensuring US FDA audit readiness for pharmaceutical operations."
 tags: ["Quality Systems", "FDA Compliance", "cGMP", "Project Management", "Industry"]
-status_label: "COMPLETED"
+status: "COMPLETED"
 date: 2023-05-01
 type: project
 toc: true
