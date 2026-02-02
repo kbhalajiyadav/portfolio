@@ -2,7 +2,7 @@
 title: "Mechanics-Consistent Adhesion in Soft Wearables"
 summary: "Developed a first-principles framework to identify 'false positive' adhesion failures, utilizing a custom Python pipeline to automate fracture mechanics analysis."
 tags: ["Fracture Mechanics", "Soft Robotics", "Python", "Academic Research"]
-status_label: "ACTIVE RESEARCH"
+status: "ACTIVE"
 date: 2025-01-30
 type: project
 toc: true
