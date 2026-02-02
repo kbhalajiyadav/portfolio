@@ -22,6 +22,7 @@ publishDate: '2025-01-01T00:00:00Z'
 # 7 = Thesis; 8 = Patent
 publication_types: ['2']
 
+weight: 1
 # Publication name and optional abbreviated publication name.
 publication: '*Polymers* 17(13), 1777'
 publication_short: '*Polymers* 17(13), 1777'
