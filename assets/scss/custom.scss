@@ -176,6 +176,28 @@
   overflow: visible !important;
 }
 
+/* =========================
+   MERMAID: responsive + no clipping
+========================= */
+
+.mermaid {
+  overflow-x: auto;         /* allow scroll if diagram is wider than column */
+  padding: 0.5rem 0;
+}
+
+.mermaid svg {
+  max-width: 100% !important;  /* fit the column */
+  height: auto !important;
+}
+
+/* Sometimes wrappers around diagrams clip SVGs */
+.article-style,
+.article-container,
+.page-body,
+main {
+  overflow: visible;
+}
+
 
 /* PROJECT CARDS: stable hover (no jump) */
 #projects .media.stream-item {
