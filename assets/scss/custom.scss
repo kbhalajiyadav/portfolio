@@ -391,3 +391,54 @@
   margin-top: 0.5rem;
   margin-bottom: 1rem;
 }
+
+
+/* ===== STATUS PILLS ===== */
+
+.status-pill {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border: 1px solid transparent;
+}
+
+/* Projects */
+.status-pill--active {
+  background: rgba(13,110,253,0.12);
+  color: #0d6efd;
+  border-color: rgba(13,110,253,0.25);
+}
+
+.status-pill--completed {
+  background: rgba(25,135,84,0.12);
+  color: #198754;
+  border-color: rgba(25,135,84,0.25);
+}
+
+.status-pill--deployed {
+  background: rgba(111,66,193,0.12);
+  color: #6f42c1;
+  border-color: rgba(111,66,193,0.25);
+}
+
+/* Publications */
+.status-pill--published {
+  background: rgba(25,135,84,0.1);
+  color: #198754;
+  border-color: rgba(25,135,84,0.25);
+}
+
+.status-pill--under-review {
+  background: rgba(255,193,7,0.12);
+  color: #ff9800;
+  border-color: rgba(255,193,7,0.3);
+}
+
+.status-pill--in-prep {
+  background: rgba(108,117,125,0.12);
+  color: #6c757d;
+  border-color: rgba(108,117,125,0.25);
+}
+
