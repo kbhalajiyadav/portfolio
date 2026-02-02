@@ -93,3 +93,41 @@
   initAll();
 })();
 </script>
+
+
+<script>
+(function () {
+  // ... your existing code ...
+
+  function rerenderMermaidAfterFonts() {
+    if (!window.mermaid) return;
+    const nodes = document.querySelectorAll('.mermaid');
+    if (!nodes.length) return;
+
+    // Wait for fonts, then re-run Mermaid so node widths match final font metrics
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => {
+        try {
+          // Mermaid v10+ supports run(); older supports init()
+          if (typeof mermaid.run === 'function') {
+            mermaid.run({ nodes });
+          } else if (typeof mermaid.init === 'function') {
+            mermaid.init(undefined, nodes);
+          }
+        } catch (e) {
+          console.warn("Mermaid rerender failed:", e);
+        }
+      });
+    }
+  }
+
+  // call once now, and also after resize (TOC/sidebar changes column width)
+  rerenderMermaidAfterFonts();
+  window.addEventListener('resize', () => {
+    clearTimeout(window.__mermaidResizeTimer);
+    window.__mermaidResizeTimer = setTimeout(rerenderMermaidAfterFonts, 200);
+  });
+
+})();
+</script>
+
