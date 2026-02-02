@@ -312,3 +312,51 @@
   color: #0d47a1 !important;
   fill: currentColor !important;
 }
+
+
+/* ===== Project Status Pills ===== */
+
+.status-pill {
+  display: inline-block;
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  margin-bottom: 0.6rem;
+}
+
+/* Active (Research Ongoing) */
+.status-pill--active {
+  background: rgba(13,110,253,0.1);
+  color: #0d6efd;
+  border-color: rgba(13,110,253,0.25);
+}
+
+/* Completed (Research Finished) */
+.status-pill--completed {
+  background: rgba(25,135,84,0.1);
+  color: #198754;
+  border-color: rgba(25,135,84,0.25);
+}
+
+/* Deployed (Real-world Use) */
+.status-pill--deployed {
+  background: rgba(111,66,193,0.1);
+  color: #6f42c1;
+  border-color: rgba(111,66,193,0.25);
+}
+
+/* Prototype */
+.status-pill--prototype {
+  background: rgba(255,193,7,0.12);
+  color: #ff9800;
+  border-color: rgba(255,193,7,0.3);
+}
+
+/* Concept */
+.status-pill--concept {
+  background: rgba(108,117,125,0.12);
+  color: #6c757d;
+  border-color: rgba(108,117,125,0.25);
+}
