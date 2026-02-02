@@ -2,7 +2,7 @@
 title: "Supply Chain & Chemical Data Operations"
 summary: "Spearheaded the digital transformation of chemical supply chain workflows as Technical Project Manager, leveraging Python/Docker to standardize nomenclature and accelerate R&D decision-making."
 tags: ["Technical Project Management", "Chemical Operations", "Supply Chain", "Data Strategy", "Industry"]
-status_label: "COMPLETED"
+status: "COMPLETED"
 date: 2022-10-01
 type: project
 toc: true
