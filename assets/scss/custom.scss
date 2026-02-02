@@ -485,3 +485,30 @@
   color: #ef6c00;
   border-color: rgba(239,108,0,0.45);
 }
+
+/* ===============================
+   UNIFIED STATUS / TAG PILLS
+================================ */
+
+/* Base pill style for ALL sections */
+.badge,
+.label,
+.wg-experience .badge {
+  border-radius: 999px !important;
+  padding: 6px 14px !important;
+  font-size: 0.75rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.4px;
+  background: transparent !important;
+  border: 2px solid currentColor !important;
+}
+
+/* Remove soft pastel backgrounds from Experience section */
+.wg-experience .badge[class*="soft"],
+.wg-experience .badge-soft-primary,
+.wg-experience .badge-soft-info,
+.wg-experience .badge-soft-success,
+.wg-experience .badge-soft-warning {
+  background: transparent !important;
+  border-width: 2px !important;
+}
