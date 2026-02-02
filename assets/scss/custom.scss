@@ -442,3 +442,46 @@
   border-color: rgba(108,117,125,0.25);
 }
 
+/* ===== Unified Status Pill ===== */
+.status-pill {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+}
+
+/* Project states */
+.status-pill--active {
+  background: rgba(46,125,50,0.12);
+  color: #2e7d32;
+  border-color: rgba(46,125,50,0.45);
+}
+
+.status-pill--deployed {
+  background: rgba(103,58,183,0.12);
+  color: #673ab7;
+  border-color: rgba(103,58,183,0.40);
+}
+
+.status-pill--completed {
+  background: rgba(2,136,209,0.12);
+  color: #0288d1;
+  border-color: rgba(2,136,209,0.40);
+}
+
+/* Publication types */
+.status-pill--pub {
+  background: rgba(46,125,50,0.12);
+  color: #2e7d32;
+  border-color: rgba(46,125,50,0.45);
+}
+
+.status-pill--conf {
+  background: rgba(239,108,0,0.12);
+  color: #ef6c00;
+  border-color: rgba(239,108,0,0.45);
+}
