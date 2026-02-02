@@ -36,6 +36,8 @@ sections:
       filters:
         folders:
           - project
+      sort_by: weight
+      sort_ascending: true
       buttons:
         - name: Academic Research
           tag: Academic Research
@@ -54,6 +56,8 @@ sections:
       filters:
         folders:
           - publication
+      sort_by: weight
+      sort_ascending: true
     design:
       columns: '2'
       view: compact
