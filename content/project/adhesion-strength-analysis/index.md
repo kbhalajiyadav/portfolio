@@ -31,6 +31,7 @@ Instead of relying on misleading averages, I applied **first-principles thinking
 To remove human bias and speed up analysis, I built a custom Python pipeline that operationalizes this physics-based logic.
 
 ```mermaid
+%%{init: {"flowchart": {"useMaxWidth": true, "htmlLabels": true}} }%%
 graph TD
     A["Raw Force Data<br/>(Noisy & Unreliable)"] --> B["Preprocessing<br/>Data Cleaning & Unit Conversion"]
     B --> C["Baseline Correction<br/>Normalize Starting Force to 0N"]
