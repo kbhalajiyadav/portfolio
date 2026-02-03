@@ -6,6 +6,7 @@ status: "ACTIVE"
 date: 2025-01-30
 type: project
 toc: true
+weight: 2
 
 image:
   filename: featured.png
