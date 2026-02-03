@@ -96,7 +96,7 @@ sections:
             * **Promoted from Intern to Manager** in 6 months for demonstrating high adaptability.
             * Spearheaded **CAPA/Root Cause Analysis** initiatives ensuring FDA audit readiness.
             * Executed **SAP System Requalification** with 5-hour precision cutover. 
-            - [[Read Project Details]]({{< relref "project/fda-project" >}})
+            [[Read Project Details]]({{< relref "project/fda-project" >}})
 
         - title: Technical Project Intern
           company: Kreative Organics Pvt. Ltd.
@@ -106,11 +106,12 @@ sections:
           date_end: '2023-04-01'
           description: |2-
             *Recruited and groomed by Deep Thought Edutech.* 
-            | *Mentor:* [Mr. Tarun Ayitham (Founder & CEO)](https://www.linkedin.com/in/tarunayitham/).
+
+            *Mentor:* [Mr. Tarun Ayitham (Founder & CEO)](https://www.linkedin.com/in/tarunayitham/).
             * Engineered **Supply Chain Optimization Workflow** reducing research time by **70%**.
             * Designed and Containerized **Standardized Chemical Data Protocol** (Python/Docker) with **90%** accuracy improvement.
             * Created **Stage-Gate Project Management Framework** which was subsequently adopted company-wide to streamline R&D timelines.
-            - [[Read Project Details]]({{< relref "project/supply-chain-automation" >}}) 
+            [[Read Project Details]]({{< relref "project/supply-chain-automation" >}}) 
     design:
       columns: '2'
       view: compact
