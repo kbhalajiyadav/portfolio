@@ -147,11 +147,29 @@
   text-decoration: underline;
 }
 
+.mermaid { overflow-x: auto; padding: 0.5rem 0; }
+.mermaid svg { max-width: 100% !important; height: auto !important; }
+.mermaid svg { overflow: visible; }
 
-/* Force Mermaid to use a standard narrow font to match box calculations */
-.mermaid, .mermaid text {
+
+/* Fix Mermaid text overflowing the boxes */
+.mermaid text, 
+.mermaid tspan, 
+.mermaid .label {
     font-family: "Arial", sans-serif !important; 
-    font-size: 16px !important; /* Adjust if text is too small */
+    font-size: 13px !important; /* Forces text to fit inside the calculated box */
+    font-weight: 400 !important;
+}
+
+/* Mermaid: allow wrapping inside node labels */
+.mermaid .nodeLabel {
+  white-space: normal !important;
+  line-height: 1.25;
+}
+
+/* Some Mermaid versions use foreignObject for labels */
+.mermaid foreignObject {
+  overflow: visible;
 }
 
 /* PUBLICATION LIST CARDS: stable hover */
