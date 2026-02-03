@@ -150,6 +150,12 @@
 .mermaid { overflow-x: auto; padding: 0.5rem 0; }
 .mermaid svg { max-width: 100% !important; height: auto !important; }
 
+/* Force Mermaid to use a standard narrow font to match box calculations */
+.mermaid, .mermaid text {
+    font-family: "Arial", sans-serif !important; 
+    font-size: 16px !important; /* Adjust if text is too small */
+}
+
 /* PUBLICATION LIST CARDS: stable hover */
 .wg-collection .media.stream-item {
   position: relative;
