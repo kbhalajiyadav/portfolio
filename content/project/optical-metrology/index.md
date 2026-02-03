@@ -39,7 +39,7 @@ Before analysis begins, the pipeline acts as a quality gate. It detects High-Dyn
 To solve the "drift" problem, I implemented **ECC (Enhanced Correlation Coefficient)** tracking. Instead of tracking the machine's movement, the code locks onto the *texture* of the rigid clamps with sub-pixel accuracy. This creates a "Virtual Extensometer" that calculates strain based on the actual material deformation, removing fabric slippage noise entirely.
 
 ### C. Layer 2: Scalar Analysis (CIE Colorimetry)
-Once the region of interest is structurally stabilized, the pipeline performs deep colorimetry. It converts raw pixel data into **CIE Lab** coordinates—separating Lightness L* from Chromaticity a*, b*. This allows us to calculate Delta E00$ (CIEDE2000), providing a mathematically rigorous metric for "Visible Color Change" that matches human perception.
+Once the region of interest is structurally stabilized, the pipeline performs deep colorimetry. It converts raw pixel data into **CIE Lab** coordinates—separating Lightness L* from Chromaticity a*, b*. This allows us to calculate Delta E00 (CIEDE2000), providing a mathematically rigorous metric for "Visible Color Change" that matches human perception.
 
 ```mermaid
 graph TD
