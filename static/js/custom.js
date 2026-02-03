@@ -127,3 +127,7 @@ document.addEventListener("click", async (e) => {
   }
 });
 </script>
+
+window.addEventListener('load', () => {
+  setTimeout(rerenderMermaidAfterFonts, 150);
+});
