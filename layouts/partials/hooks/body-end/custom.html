@@ -1,5 +1,8 @@
+<div id="reading-progress"></div>
+
 <script>
 (function () {
+
   function getNavbarHeight() {
     const nav = document.querySelector('#navbar-main, .navbar');
     if (!nav) return 70;
@@ -26,19 +29,17 @@
     bar.style.width = (progress * 100).toFixed(2) + '%';
   }
 
-  // ✅ Scrollspy for ALL TOCs (desktop + mobile)
+  // Scrollspy for ALL TOCs (desktop + mobile)
   function initTOCSpy() {
     const tocs = Array.from(document.querySelectorAll('.toc-sidebar #TableOfContents'));
     if (!tocs.length) return;
 
-    // collect ALL toc links from ALL toc containers
     const allLinks = [];
     tocs.forEach(toc => {
       toc.querySelectorAll('a[href^="#"]').forEach(a => allLinks.push(a));
     });
     if (!allLinks.length) return;
 
-    // map heading -> all matching TOC links (desktop + mobile)
     const headingToLinks = new Map();
     allLinks.forEach(a => {
       const id = decodeURIComponent(a.getAttribute('href').slice(1));
@@ -67,7 +68,6 @@
 
     }, {
       root: null,
-      // account for fixed header so headings don’t count as “hidden under navbar”
       rootMargin: `-${navH + 10}px 0px -70% 0px`,
       threshold: 0.01
     });
@@ -75,40 +75,15 @@
     headingToLinks.forEach((links, heading) => observer.observe(heading));
   }
 
-  // Run
-  function initAll() {
-    setNavHeightVar();
-    updateProgress();
-    initTOCSpy();
-  }
-
-  window.addEventListener('resize', () => {
-    setNavHeightVar();
-    updateProgress();
-  });
-
-  window.addEventListener('scroll', updateProgress, { passive: true });
-
-  document.addEventListener('DOMContentLoaded', initAll);
-  initAll();
-})();
-</script>
-
-
-<script>
-(function () {
-  // ... your existing code ...
-
+  // Mermaid: rerender AFTER fonts load (fixes chopped text)
   function rerenderMermaidAfterFonts() {
     if (!window.mermaid) return;
     const nodes = document.querySelectorAll('.mermaid');
     if (!nodes.length) return;
 
-    // Wait for fonts, then re-run Mermaid so node widths match final font metrics
     if (document.fonts && document.fonts.ready) {
       document.fonts.ready.then(() => {
         try {
-          // Mermaid v10+ supports run(); older supports init()
           if (typeof mermaid.run === 'function') {
             mermaid.run({ nodes });
           } else if (typeof mermaid.init === 'function') {
@@ -121,13 +96,27 @@
     }
   }
 
-  // call once now, and also after resize (TOC/sidebar changes column width)
-  rerenderMermaidAfterFonts();
+  function initAll() {
+    setNavHeightVar();
+    updateProgress();
+    initTOCSpy();
+    rerenderMermaidAfterFonts();
+  }
+
   window.addEventListener('resize', () => {
+    setNavHeightVar();
+    updateProgress();
+
     clearTimeout(window.__mermaidResizeTimer);
     window.__mermaidResizeTimer = setTimeout(rerenderMermaidAfterFonts, 200);
   });
 
+  window.addEventListener('scroll', updateProgress, { passive: true });
+
+  document.addEventListener('DOMContentLoaded', initAll);
+  window.addEventListener('load', rerenderMermaidAfterFonts);
+
+  initAll();
+
 })();
 </script>
-
