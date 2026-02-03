@@ -39,6 +39,8 @@ sections:
       sort_by: weight
       sort_ascending: true
       buttons:
+        - name: All
+          tag: *
         - name: Academic Research
           tag: Academic Research
         - name: Industry
@@ -78,7 +80,7 @@ sections:
           description: |2-
             *Advisor:* [Dr. Christina Tang, Associate Professor](https://egr.vcu.edu/directory/christina.tang/)
             * **Grant Success:** Drafted successful **$30,000 grant proposal** (Commonwealth Cyber Initiative) for thermochromic socks.
-            * **Metrology:** Engineered an **Integrated Optical Metrology System** (Python/OpenCV) increasing throughput by >300%.
+            * **Metrology:** Engineered an **Integrated Optical Metrology System** (Python/OpenCV) increasing throughput by >300%. [[Read Project Details]]({{< relref "project/optical-metrology" >}})
             * **Award:** Received Fall 2025 Graduate Assistantship (Full Tuition Waiver & stipend).
 
         - title: Technical Project Manager
@@ -89,9 +91,10 @@ sections:
           date_end: '2024-05-15'
           description: |2-
             *Mentor:* [Mr. Ravi Seelamsetty (MD & CEO)](https://www.linkedin.com/in/raviseelamsetty/).
-            * **Promoted from Intern to Manager** in 6 months for demonstrating high adaptability
+            * **Promoted from Intern to Manager** in 6 months for demonstrating high adaptability.
             * Spearheaded **CAPA/Root Cause Analysis** initiatives ensuring FDA audit readiness.
-            * Executed **SAP System Requalification** with 5-hour precision cutover
+            * Executed **SAP System Requalification** with 5-hour precision cutover. 
+            - [[Read Project Details]]({{< relref "project/fda-project" >}})
 
         - title: Technical Project Intern
           company: Kreative Organics Pvt. Ltd.
@@ -105,6 +108,7 @@ sections:
             * Engineered **Supply Chain Optimization Workflow** reducing research time by **70%**.
             * Designed and Containerized **Standardized Chemical Data Protocol** (Python/Docker) with **90%** accuracy improvement.
             * Created **Stage-Gate Project Management Framework** which was subsequently adopted company-wide to streamline R&D timelines.
+            - [[Read Project Details]]({{< relref "project/supply-chain-automation" >}}) 
     design:
       columns: '2'
       view: compact
