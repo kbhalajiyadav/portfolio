@@ -35,11 +35,11 @@ interests:
 # Education panel (renders clean list like Shilaan site)
 education:
   courses:
-    - course: M.S. Chemical & Life Science Engineering
-      institution: Virginia Commonwealth University
+    - course: [M.S. Chemical & Life Science Engineering](https://egr.vcu.edu/departments/chemical-life-science-engineering/)
+      institution: [Virginia Commonwealth University](https://www.vcu.edu/)
       year: "Expected 2026"
-    - course: B.Tech. Chemical Engineering
-      institution: Amrita Vishwa Vidyapeetham
+    - course: [B.Tech. Chemical Engineering](https://www.amrita.edu/department/chemical-engineering-and-materials-science-coimbatore/)
+      institution: [Amrita Vishwa Vidyapeetham](https://www.amrita.edu/)
       year: "2022"
 
 # Social icons row
