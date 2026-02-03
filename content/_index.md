@@ -83,7 +83,7 @@ sections:
             *Advisor:* [Dr. Christina Tang, Associate Professor](https://egr.vcu.edu/directory/christina.tang/)
             * **Grant Success:** Drafted successful **$30,000 grant proposal** (Commonwealth Cyber Initiative) for thermochromic socks.
             * **Metrology:** Engineered an **Integrated Optical Metrology System** (Python/OpenCV) increasing throughput by >300%.
-               [[Read Project Details]]({{< relref "project/supply-chain-automation" >}})  [[Read Project Details]]({{< relref "project/optical-metrology" >}})
+               {{% icon name="arrow-right" pack="fas" %}} [[Read Project Details]]({{< relref "project/optical-metrology" >}})
             * **Award:** Received Fall 2025 Graduate Assistantship (Full Tuition Waiver & stipend).
 
         - title: Technical Project Manager
