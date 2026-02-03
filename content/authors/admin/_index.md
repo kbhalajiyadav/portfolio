@@ -39,8 +39,9 @@ education:
       institution: Virginia Commonwealth University
       url: https://egr.vcu.edu
       year: "Expected 2026"
-    - course: [B.Tech. Chemical Engineering](https://www.amrita.edu/department/chemical-engineering-and-materials-science-coimbatore/)
-      institution: [Amrita Vishwa Vidyapeetham](https://www.amrita.edu/)
+    - course: B.Tech. Chemical Engineering
+      institution: Amrita Vishwa Vidyapeetham
+      url: https://www.amrita.edu
       year: "2022"
 
 # Social icons row
