@@ -40,7 +40,9 @@ sections:
       sort_ascending: true
       buttons:
         - name: All
-          tag: Academic Research, Industry
+          tag: "*"
+          # This filter only shows projects with either tag
+          filter: '.js-id-academic-research, .js-id-industry'
         - name: Academic Research
           tag: Academic Research
         - name: Industry
