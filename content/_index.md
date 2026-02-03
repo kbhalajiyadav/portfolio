@@ -40,7 +40,7 @@ sections:
       sort_ascending: true
       buttons:
         - name: All
-          tag: *
+          tag: '*'
         - name: Academic Research
           tag: Academic Research
         - name: Industry
