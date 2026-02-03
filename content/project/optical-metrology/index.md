@@ -6,6 +6,7 @@ status: "DEPLOYED"
 date: 2025-01-31
 type: project
 toc: true
+weight: 1
 
 image:
     filename: featured.png
