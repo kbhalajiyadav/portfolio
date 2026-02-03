@@ -147,6 +147,9 @@
   text-decoration: underline;
 }
 
+.mermaid { overflow-x: auto; padding: 0.5rem 0; }
+.mermaid svg { max-width: 100% !important; height: auto !important; }
+
 /* PUBLICATION LIST CARDS: stable hover */
 .wg-collection .media.stream-item {
   position: relative;
