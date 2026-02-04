@@ -29,6 +29,9 @@ header:
     enable: true
     align: l
     show_logo: true
+    logo:
+      text: ""
+      filename: "logo.png"
     show_language: false
     show_day_night: false
     show_search: true
