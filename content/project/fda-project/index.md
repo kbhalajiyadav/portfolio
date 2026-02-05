@@ -23,11 +23,11 @@ As **Technical Project Manager** (promoted from Intern within 6 months), I was t
 
 ## 3. The Action: The V-Model Framework
 
-I implemented a structured **V-Model Validation Framework** to map technical requirements directly to testing protocols, ensuring complete traceability.
+I implemented a structured **V-Model Validation Framework** to map technical re-qualification requirements directly to testing protocols, ensuring complete traceability.
 
 - **CAPA Management:** Directed Corrective and Preventive Action initiatives by leading Root Cause Analysis (RCA) sessions for operational deviations, reducing recurrence.
 - **Validation Roadmap:** Defined and executed the **OQ/PQ** (Operational & Performance Qualification) protocols for the SAP Business One system.
-- **Precision Execution:** Executed a **5-hour overnight system cutover plan** to safeguard production continuity and data integrity.
+- **Precision Execution:** Executed a **5-hour overnight system cutover re-qualification plan** to safeguard production continuity and data integrity.
 
 ```mermaid
 graph TD
@@ -55,9 +55,8 @@ graph TD
     FS -.-> OQ
     URS -.-> PQ
 ```
-**Key Contribution:** By skipping generic installation checks and focusing on Operational & Performance Qualification (OQ/PQ), I ensured the system didn't just "install" correctly, but actually functioned according to the strict User Requirement Specifications (URS) required by the FDA.
+**Key Contribution:** By skipping generic installation checks and focusing on Operational & Performance Qualification (OQ/PQ), I ensured the system didn't just "Re-qualified", but actually functioned according to the strict User Requirement Specifications (URS) required by the FDA.
 
 ## 4. The Result
 - **System Compliance:** Achieved full alignment with cGMP and US FDA regulations through rigorous OQ/PQ execution.
-- **Process Standardization:** Authored and implemented Standard Operating Procedures (SOPs) that codified the new digital workflows, ensuring repeatable quality compliance.
 - **Zero Safety Incidents:** Maintained a perfect safety record during the tenure while ensuring the facility remained audit-ready.
