@@ -1,6 +1,6 @@
 ---
 title: "Supply Chain & Chemical Data Operations"
-summary: "Spearheaded the digital transformation of chemical supply chain workflows as Technical Project Manager, leveraging Python/Docker to standardize nomenclature and accelerate R&D decision-making."
+summary: "Spearheaded the digital transformation of chemical supply chain workflows as Technical Project Manager, leveraging Python/Docker to standardize nomenclature and accelerate stakeholders decision-making."
 tags: ["Technical Project Management", "Chemical Operations", "Supply Chain", "Data Strategy", "Industry"]
 status: "COMPLETED"
 date: 2022-10-01
@@ -15,7 +15,7 @@ weight: 4
 
 **The Gap:** The industry suffers from severe data fragmentation. A single molecule might be listed under a Trade Name, an IUPAC name, or a generic identifier across different global databases.
 - **The Chemical Problem:** Mismatched **CAS or common chemical name fomats** (Chemical Abstracts Service) led to missed market opportunities.
-- **The Operational Problem:** Researchers spent 70% of their time manually cross-referencing safety data sheets (SDS) and trade logs rather than analyzing market strategy.
+- **The Operational Problem:** Teams used to spent 70% of their time manually cross-referencing safety data sheets (SDS) and trade logs rather than analyzing market strategy.
 
 ## 2. The Task: Operationalizing Data
 
@@ -31,13 +31,13 @@ I was assigned as the **Technical Project Manager** to lead the **Digital Transf
 I operated as the **Technical Lead**, bridging the gap between chemical domain knowledge and technical execution.
 
 ### A. Defining the "Chemical Logic" (Strategy)
-I spearheaded the standardization algorithm. Unlike a generic approach, I understood the nuances of chemical naming conventions. I defined the rulesets for mapping inconsistent trade names to verified **CAS Names**, ensuring scientific accuracy in the output.
+I spearheaded the standardization algorithm. Unlike a generic approach, I understood the nuances of chemical naming conventions. I defined the rulesets for mapping inconsistent trade names to verified **CAS or common chemical Names**, ensuring accuracy in the output.
 
 ### B. Containerizing the Workflow (Docker)
 To ensure operational continuity, I packaged the solution using **Docker**. This wasn't just about code; it was about **Process Reliability**. By containerizing the environment, I ensured that the standardization engine ran identically on every machine, immune to local configuration errors—critical for a regulated industrial environment.
 
 ### C. Visualizing Market Gaps (Tableau)
-I developed **Strategic Dashboards** in Tableau that mapped global trade volume against our internal inventory. This transformed raw rows of data into stratergic insights, allowing the sales team to navigate and spot the under-served regions for specific chemical classes.
+I developed **Strategic Dashboards** in Tableau that mapped global trade volume. This transformed raw rows of data into stratergic insights, allowing the sales team to navigate and spot the under-served regions for specific chemical classes.
 
 ```mermaid
 graph TD
@@ -70,4 +70,4 @@ graph TD
 ```
 ## 4. The Result
 - Operational Efficiency: Slashed market research time by 70%, effectively automating the "grunt work" of data collection.
-- Data Integrity: Achieved a 90% accuracy uplift in chemical identification, virtually eliminating errors caused by synonym confusion.
+- Data Integrity: Achieved a 90% accuracy uplift in chemical identification, virtually eliminating errors caused by ambiguous naming confusion.
