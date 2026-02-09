@@ -80,7 +80,7 @@ greeting: bhalaji::kantepalle()
 # About me
 I am a **Chemical Engineer** with a background spanning both academic research and industrial operations. My work focuses on the intersection of **Materials Science** and **Quality Compliance**, bridging the gap between R&D innovation and regulated manufacturing.
 
-Currently, as a Graduate Researcher at the [**VCU Soft Functional Materials Lab**](https://vcusoftmaterialslab.weebly.com/) under [Dr. Christina Tang](https://egr.vcu.edu/directory/christina.tang/). I specialize in the mechanics of soft interfaces. My research involves:
+Currently, as a Graduate Researcher at the [**VCU Soft Functional Materials Lab**](https://vcusoftmaterialslab.weebly.com/) under [Dr. Christina Tang](https://egr.vcu.edu/directory/christina.tang/), I specialize in the mechanics of soft interfaces. My research involves:
 
 - Mechanics-consistent adhesion testing for soft materials/E-textiles.  
 - Preventing “false positive” adhesion metrics in stretchable systems  
@@ -91,7 +91,7 @@ Previously, I served as a **Technical Project Manager** in the pharmaceutical in
 * Executing **OQ/PQ** testing in coordination with external technical partners.
 * Optimizing supply chain data workflows to enhance operational reporting.
   
-I am interested in roles that allow me to apply rigorous engineering principles—whether characterizing new materials or optimizing production workflows—to build reliable, compliant products.
+I am interested in roles that allow me to apply rigorous engineering principles whether characterizing new materials or optimizing production workflows to build reliable, compliant products.
 
 <center> 
 <i class="fa fa-download" aria-hidden="true" style="color:#035AA6"></i> {{< staticref "uploads/resume.pdf" "newtab" >}}Download my CV{{< /staticref >}}
