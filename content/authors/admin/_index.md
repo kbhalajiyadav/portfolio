@@ -86,7 +86,7 @@ Currently, as a Graduate Researcher at the [**VCU Soft Functional Materials Lab*
 - Preventing “false positive” adhesion metrics in stretchable systems  
 - Synchronizing mechanical strain with optical response in mechanochromic textiles  
 
-Previously, I served as a **Technical Project Manager** in the pharmaceutical industry at **Kreative Organics**. In this role, I supported the engineering and quality teams by:
+Previously, I served as a **Technical Project Manager** in the pharmaceutical industry at [**Kreative Organics**](https://kreativeorganics.com/index.html). In this role, I supported the engineering and quality teams by:
 * Assisting with **FDA Readiness** protocols and SAP ERP validation (cGMP).
 * Executing **OQ/PQ** testing in coordination with external technical partners.
 * Optimizing supply chain data workflows to enhance operational reporting.
