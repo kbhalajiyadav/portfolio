@@ -26,7 +26,7 @@ As **Technical Project Manager** (promoted from Intern within 6 months), I was t
 I implemented a structured **V-Model Validation Framework** to map technical re-qualification requirements directly to testing protocols, serving as the bridge between internal stakeholders and, external SAP partners and consultants.
 
 - **CAPA Management:** Directed Corrective and Preventive Action initiatives by leading Root Cause Analysis (RCA) sessions for operational deviations, Partnered with external SAP Vendors mitgating recurrence.
-- **SAP Re-qualification:** Collaborated with external **SAP Consultants** to design the validation strategy, but **personally executed** the 0Q/PQ (Operational Performance Qualification) protocols verify the system met FDA standards.
+- **SAP Re-qualification:** Collaborated with external **SAP Consultants** to design the validation strategy, but **personally executed** the OQ/PQ (Operational Performance Qualification) protocols verify the system met FDA standards.
 - **Precision Execution:** Coordinated the internal/external technical teams during a **5-hour overnight system cutover re-qualification plan** to safeguard production continuity and data integrity.
 
 ```mermaid
