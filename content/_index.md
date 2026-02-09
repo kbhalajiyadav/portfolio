@@ -26,47 +26,8 @@ sections:
         * **June 2025:** Attended **Anton Paar Rheo-Polarized Imaging Workshop** with Photron high-speed camera integration.
     design:
       columns: '2'
-  # ===== PROJECTS SECTION =====
-  - block: portfolio
-    id: projects
-    content:
-      title: Selected Projects
-      show_date: false
-      date: false
-      filters:
-        folders:
-          - project
-      sort_by: weight
-      sort_ascending: true
-      buttons:
-        - name: All
-          tag: "*"
-          # This filter only shows projects with either tag
-          filter: '.js-id-academic-research, .js-id-industry'
-        - name: Academic Research
-          tag: Academic Research
-        - name: Industry
-          tag: Industry
-    design:
-      columns: '2'
-      view: compact
-      flip_alt_rows: false
 
-  # ===== PUBLICATIONS SECTION =====
-  - block: collection
-    id: publications
-    content:
-      title: Publications
-      filters:
-        folders:
-          - publication
-      sort_by: weight
-      sort_ascending: true
-    design:
-      columns: '2'
-      view: compact
-
-
+  
 # 6. ACADEMIC RESEARCH (Block 1)
   - block: experience
     id: experience
@@ -138,6 +99,49 @@ sections:
           icon_pack: fas
     design:
       columns: '3'
+  
+  
+  # ===== PROJECTS SECTION =====
+  - block: portfolio
+    id: projects
+    content:
+      title: Selected Projects
+      show_date: false
+      date: false
+      filters:
+        folders:
+          - project
+      sort_by: weight
+      sort_ascending: true
+      buttons:
+        - name: All
+          tag: "*"
+          # This filter only shows projects with either tag
+          filter: '.js-id-academic-research, .js-id-industry'
+        - name: Academic Research
+          tag: Academic Research
+        - name: Industry
+          tag: Industry
+    design:
+      columns: '2'
+      view: compact
+      flip_alt_rows: false
+
+  # ===== PUBLICATIONS SECTION =====
+  - block: collection
+    id: publications
+    content:
+      title: Publications
+      filters:
+        folders:
+          - publication
+      sort_by: weight
+      sort_ascending: true
+    design:
+      columns: '2'
+      view: compact
+
+
 
   
   # ===== CONTACT SECTION =====
