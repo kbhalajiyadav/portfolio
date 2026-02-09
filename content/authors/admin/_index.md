@@ -22,7 +22,7 @@ organizations:
     url: https://www.vcu.edu/
 
 # Short profile blurb (appears under name)
-bio: Chemical Engineer with experience in **Materials Science** and **Regulated Quality Operations**. I focus on characterizing soft materials and ensuring process compliance in manufacturing.
+bio: Chemical Engineer with experience in Materials Science and Regulated Quality Operations. I focus on characterizing soft materials and ensuring process compliance in manufacturing.
 
 # Interests (displayed as “Interests” panel)
 interests:
