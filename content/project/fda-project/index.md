@@ -58,6 +58,6 @@ graph TD
 **Key Contribution:** By skipping generic installation checks and focusing on Operational & Performance Qualification (OQ/PQ), I ensured the system didn't just "Re-qualified", but actually functioned according to the strict User Requirement Specifications (URS) required by the FDA.
 
 ## 4. The Result
-- **System Compliance:** Achieved full alignment with cGMP and US FDA regulations through rigorous OQ/PQ execution.
+- **SAP Re-qualification (system compliance):** Successfully executed the re-qualification protocols, verifying that audit trails. Achieved full alignment with cGMP and US FDA regulations through rigorous OQ/PQ execution.
 - **SOP Standardization (Process):** Authored and implemented the Standard Operating Procedures that govern human interaction with the system, bridging the gap between technical capabilities and daily operator workflows.
 - **Zero Safety Incidents:** Maintained a perfect safety record during the tenure while ensuring the facility remained audit-ready.
