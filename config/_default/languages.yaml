@@ -13,15 +13,16 @@ en:
       - name: News
         url: /#news
         weight: 20
+      - name: Experience
+        url: /#experience
+        weight: 50
       - name: Projects
         url: /#projects
         weight: 30
       - name: Publications
         url: /#publications
         weight: 40
-      - name: Experience
-        url: /#experience
-        weight: 50
+      
       - name: Contact
         url: /#contact
         weight: 60
