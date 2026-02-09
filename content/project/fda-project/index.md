@@ -55,7 +55,7 @@ graph TD
     FS -.-> OQ
     URS -.-> PQ
 ```
-**Key Contribution:** By skipping generic installation checks and focusing on Operational & Performance Qualification (OQ/PQ), I ensured the system didn't just "Re-qualified", but actually functioned according to the strict User Requirement Specifications (URS) required by the FDA.
+**Key Contribution:** By focusing on Operational & Performance Qualification (OQ/PQ), I verified that the system didn't just "install" correctly, but actually functioned according to the strict User Requirement Specifications (URS) required by the FDA.
 
 ## 4. The Result
 - **SAP Re-qualification (system compliance):** Successfully executed the re-qualification protocols, verifying that audit trails. Achieved full alignment with cGMP and US FDA regulations through rigorous OQ/PQ execution.
