@@ -1,6 +1,7 @@
 # Configuration for Hugo Blox Portfolio
 # CRITICAL FIX 1: Added /portfolio/ to the end so links work
-baseURL: 'https://kbhalajiyadav.github.io/portfolio/'
+url: "https://bhalaji.com"
+baseURL: ""
 title: 'Bhalaji'
 # CRITICAL FIX 2: Removed the "theme" line that was causing the error
 
