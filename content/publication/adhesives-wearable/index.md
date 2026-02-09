@@ -1,5 +1,5 @@
 ---
-title: "Adhesives for Personalized Wearable Devices: Beyond Peel Strength"
+title: "Adhesives for Personalized Wearable Devices"
 authors:
 - Admin
 - H. Stwodah
