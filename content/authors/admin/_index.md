@@ -22,15 +22,15 @@ organizations:
     url: https://www.vcu.edu/
 
 # Short profile blurb (appears under name)
-bio: Chemical Engineer specializing in soft materials, adhesion mechanics, and automated materials data analysis for reliable wearable and medical devices.
+bio: Chemical Engineer with experience in **Materials Science** and **Regulated Quality Operations**. I focus on characterizing soft materials and ensuring process compliance in manufacturing.
 
 # Interests (displayed as “Interests” panel)
 interests:
-  - Fracture Mechanics of Soft Interfaces
+  - Fracture Mechanics & Adhesion
   - Wearable & Medical Device Materials
-  - Adhesion Stability in Textiles
-  - Optical & Mechanical Metrology
-  - Data-Driven Materials Analysis
+  - FDA Compliance & Quality Systems
+  - Optical Metrology (Computer Vision)
+  - Data-Driven Process Engineering
 
 # Education panel (renders clean list like Shilaan site)
 education:
@@ -78,14 +78,22 @@ greeting: bhalaji::kantepalle()
 ---
 
 # About me
-Chemical Engineer with 1.5+ years of experience bridging **Materials Science** and **Regulated Quality Operations**. I translate complex mechanical behavior in soft materials into **design rules for reliable wearable and medical devices**.
+I am a **Chemical Engineer** with a background spanning both academic research and industrial operations. My work focuses on the intersection of **Materials Science** and **Quality Compliance**, bridging the gap between R&D innovation and regulated manufacturing.
 
-My research at the [**VCU Soft Functional Materials Lab**](https://vcusoftmaterialslab.weebly.com/) under [Dr. Christina Tang](https://egr.vcu.edu/directory/christina.tang/) focuses on:
+Currently, as a Graduate Researcher at the [**VCU Soft Functional Materials Lab**](https://vcusoftmaterialslab.weebly.com/) under [Dr. Christina Tang](https://egr.vcu.edu/directory/christina.tang/) focuses on:
 
 - Mechanics-consistent adhesion testing for soft materials/E-textiles.  
 - Preventing “false positive” adhesion metrics in stretchable systems  
 - Synchronizing mechanical strain with optical response in mechanochromic textiles  
 - Automating fracture and peel signal analysis using Python (Pandas, OpenCV)
+
+
+Previously, I served as a **Technical Project Manager** in the pharmaceutical industry at **Kreative Organics**. In this role, I supported the engineering and quality teams by:
+* Assisting with **FDA Readiness** protocols and SAP ERP validation (cGMP).
+* Executing **OQ/PQ** testing in coordination with external technical partners.
+* Optimizing supply chain data workflows to enhance operational reporting.
+  
+I am interested in roles that allow me to apply rigorous engineering principles—whether characterizing new materials or optimizing production workflows—to build reliable, compliant products.
 
 <center> 
 <i class="fa fa-download" aria-hidden="true" style="color:#035AA6"></i> {{< staticref "uploads/resume.pdf" "newtab" >}}Download my CV{{< /staticref >}}
