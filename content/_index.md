@@ -27,7 +27,27 @@ sections:
     design:
       columns: '2'
 
-  
+  # ===== SKILLS SECTION =====
+  - block: features
+    id: skills
+    content:
+      title: Technical Skills
+      items:
+        - name: Experimental Mechanics
+          description: Rheology • T-Peel • NMR • Microscopy
+          icon: microscope
+          icon_pack: fas
+        - name: Computational & Data
+          description: Python • OpenCV • NumPy • Pandas • SciPy
+          icon: code
+          icon_pack: fas
+        - name: Quality & Regulatory
+          description: FDA • cGMP • CAPA • SOP
+          icon: clipboard-check
+          icon_pack: fas
+    design:
+      columns: '3'
+      
 # 6. ACADEMIC RESEARCH (Block 1)
   - block: experience
     id: experience
@@ -79,26 +99,7 @@ sections:
       columns: '2'
       view: compact
     
-  # ===== SKILLS SECTION =====
-  - block: features
-    id: skills
-    content:
-      title: Technical Skills
-      items:
-        - name: Experimental Mechanics
-          description: Rheology • T-Peel • NMR • Microscopy
-          icon: microscope
-          icon_pack: fas
-        - name: Computational & Data
-          description: Python • OpenCV • NumPy • Pandas • SciPy
-          icon: code
-          icon_pack: fas
-        - name: Quality & Regulatory
-          description: FDA • cGMP • CAPA • SOP
-          icon: clipboard-check
-          icon_pack: fas
-    design:
-      columns: '3'
+
   
   
   # ===== PROJECTS SECTION =====
