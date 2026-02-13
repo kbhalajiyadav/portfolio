@@ -91,7 +91,7 @@ Previously, I served as a **Technical Project Manager** in the pharmaceutical in
 In this role, I **led technical compliance initiatives** for the engineering and quality teams by:
 * **Coordinating** FDA Readiness protocols and SAP ERP validation (CGMP).
 * **Executing** OQ/PQ testing to verify system data integrity and GMP compliance.
-* **Standardizing** supply chain data workflows to enhance operational reporting.
+* **Standardizing** supply chain data workflows to accelerate stakeholder decision-making.
 
 
 I am interested in roles that allow me to apply rigorous engineering principles whether characterizing new materials or optimizing production workflows to build reliable, compliant products.
