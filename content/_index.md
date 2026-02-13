@@ -151,7 +151,7 @@ sections:
     content:
       title: Contact
       text: |
-        I’m always open to oppurtunities in **soft materials, adhesion mechanics, wearable interfaces**, and **materials analytics**.
+        I’m open to oppurtunities in **soft materials, adhesion mechanics, wearable interfaces**, and **materials analytics**.
 
       email: contact@bhalaji.com
 
