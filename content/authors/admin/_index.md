@@ -35,7 +35,7 @@ interests:
 # Education panel (renders clean list like Shilaan site)
 education:
   courses:
-    - course: Ph. D. Integrative Life Science 
+    - course: Ph. D. Integrative Life Sciences
       institution: Virginia Commonwealth University
       url: [https://egr.vcu.edu](https://cilse.vcu.edu/)
       year: "Incoming Fall 2026"
