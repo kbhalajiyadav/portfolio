@@ -46,7 +46,7 @@ education:
     - course: B.Tech. Chemical Engineering
       institution: Amrita Vishwa Vidyapeetham
       url: https://www.amrita.edu
-      year: "2018-2022"
+      year: "2022"
 
 # Social icons row
 social:
