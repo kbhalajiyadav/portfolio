@@ -37,7 +37,7 @@ education:
   courses:
     - course: Ph. D. Integrative Life Sciences
       institution: Virginia Commonwealth University
-      url: [https://egr.vcu.edu](https://cilse.vcu.edu/)
+      url: https://cilse.vcu.edu/
       year: "Incoming Fall 2026"
     - course: M.S. Chemical & Life Science Engineering
       institution: Virginia Commonwealth University
@@ -46,7 +46,7 @@ education:
     - course: B.Tech. Chemical Engineering
       institution: Amrita Vishwa Vidyapeetham
       url: https://www.amrita.edu
-      year: "2022"
+      year: "2018-2022"
 
 # Social icons row
 social:
