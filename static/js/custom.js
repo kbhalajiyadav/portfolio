@@ -32,6 +32,11 @@
       }, 900);
     } catch (err) {
       console.error("Clipboard copy failed:", err);
+      const old = btn.textContent;
+      btn.textContent = "Copy failed";
+      setTimeout(() => {
+        btn.textContent = old;
+      }, 1200);
     }
   });
 
@@ -55,9 +60,23 @@
     bar.style.width = p.toFixed(2) + "%";
   }
 
+  function setNavHeightVar() {
+    const nav = document.querySelector("#navbar-main, .navbar");
+    const height = nav ? Math.ceil(nav.getBoundingClientRect().height) : 70;
+    document.documentElement.style.setProperty("--nav-h", `${height}px`);
+  }
+
   window.addEventListener("scroll", updateReadingProgress, { passive: true });
-  window.addEventListener("resize", updateReadingProgress);
-  document.addEventListener("DOMContentLoaded", updateReadingProgress);
+  window.addEventListener("resize", () => {
+    setNavHeightVar();
+    updateReadingProgress();
+  });
+  document.addEventListener("DOMContentLoaded", () => {
+    setNavHeightVar();
+    updateReadingProgress();
+  });
+  setNavHeightVar();
+  updateReadingProgress();
 
   // -----------------------------
   // 3) ToC highlight (active section)
@@ -127,19 +146,28 @@
   }
 
   document.addEventListener("DOMContentLoaded", setupTocHighlight);
-})();
 
-document.addEventListener("click", async (e) => {
-  const btn = e.target.closest(".js-copy-cite");
-  if (!btn) return;
-
-  const text = btn.getAttribute("data-cite") || "";
-  try {
-    await navigator.clipboard.writeText(text);
-    const old = btn.textContent;
-    btn.textContent = "Copied!";
-    setTimeout(() => (btn.textContent = old), 1200);
-  } catch (err) {
-    alert("Copy failed. Please copy manually.");
+  function rerenderMermaidAfterFonts() {
+    if (!window.mermaid) return;
+    const nodes = document.querySelectorAll(".mermaid");
+    if (!nodes.length) return;
+    const render = () => {
+      try {
+        if (typeof window.mermaid.run === "function") {
+          window.mermaid.run({ nodes });
+        } else if (typeof window.mermaid.init === "function") {
+          window.mermaid.init(undefined, nodes);
+        }
+      } catch (error) {
+        console.warn("Mermaid rerender failed:", error);
+      }
+    };
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(render);
+    } else {
+      render();
+    }
   }
-});
+
+  document.addEventListener("DOMContentLoaded", rerenderMermaidAfterFonts);
+})();

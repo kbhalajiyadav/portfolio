@@ -1,22 +1,17 @@
 ---
 title: 'Mechanical Properties of Dual-Layer Electrospun Fiber Mats'
 authors:
-  - I. Caloian
-  - J. Trapp
-  - admin
-  - P. Latimer
-  - T. J. Lawton
-  - C. Tang
-author_notes:
-  - ''
-  - ''
-  - 'Bhalaji Y. Kantepalle'
-  - ''
-date: '2025-01-01T00:00:00Z'
+  - Ioana Caloian
+  - Jocelyn Trapp
+  - Bhalaji Yadav Kantepalle
+  - Patrick Latimer
+  - Timothy J. Lawton
+  - Christina Tang
+date: '2025-06-26T00:00:00Z'
 doi: '10.3390/polym17131777'
 
 # Schedule page publish date (NOT publication's date).
-publishDate: '2025-01-01T00:00:00Z'
+publishDate: '2025-06-26T00:00:00Z'
 
 # Publication type.
 # Legend: 0 = Uncategorized; 1 = Conference paper; 2 = Journal article;

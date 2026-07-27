@@ -1,11 +1,8 @@
-# Configuration for Hugo Blox Portfolio
-# CRITICAL FIX 1: Added /portfolio/ to the end so links work
-url: "https://bhalaji.com"
-baseURL: ""
-title: 'Bhalaji'
-# CRITICAL FIX 2: Removed the "theme" line that was causing the error
+# Configuration for the public research portfolio
+baseURL: "https://bhalaji.com/"
+title: "Bhalaji Yadav Kantepalle"
 
-# Module settings (This downloads the design automatically)
+# Hugo Blox module
 module:
   imports:
     - path: github.com/HugoBlox/hugo-blox-builder/modules/blox-bootstrap/v5

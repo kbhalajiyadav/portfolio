@@ -1,0 +1,12 @@
+{{ $profile := site.Data.portfolio.profile }}
+<footer class="site-footer portfolio-footer">
+  <div class="portfolio-footer__inner">
+    <span>© {{ now.Year }} {{ $profile.name }}</span>
+    <nav class="portfolio-footer__links" aria-label="Academic profiles">
+      <a href="{{ $profile.linkedin }}" target="_blank" rel="noopener" title="Connect with Bhalaji on LinkedIn">LinkedIn</a>
+      <a href="{{ $profile.github }}" target="_blank" rel="noopener">GitHub</a>
+      <a href="{{ $profile.scholar }}" target="_blank" rel="noopener">Scholar</a>
+      <a href="{{ $profile.orcid }}" target="_blank" rel="noopener">ORCID</a>
+    </nav>
+  </div>
+</footer>

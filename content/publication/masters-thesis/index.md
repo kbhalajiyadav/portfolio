@@ -32,8 +32,7 @@ tags:
 featured: true
 url_source: "https://scholarscompass.vcu.edu/etd/8456/"
 url_code: "https://github.com/VCU-Soft-Functional-Materials-Lab/Peel-Trace-Evaluation-for-Soft-Substrates"
-projects:
-  - adhesion-strength-analysis
+projects: []
 ---
 
 ## Degree and defense

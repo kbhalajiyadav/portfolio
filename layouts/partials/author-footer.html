@@ -47,10 +47,16 @@
           {{ end }}
   
           {{ $href := .link }}
+          {{ if eq $icon "cv" }}
+            {{ $portfolio := site.Data.portfolio }}
+            {{ $href = printf "%s?v=%s" ($portfolio.profile.cv | relURL) $portfolio.profile.cv_version }}
+          {{ end }}
           {{ if and (not (hasPrefix $href "http")) (not (hasPrefix $href "mailto:")) (not (hasPrefix $href "/")) }}
             {{ $href = $href | relURL }}
           {{ end }}
-          <a class="author-footer__link" href="{{ $href }}" target="_blank" rel="noopener" aria-label="{{ $icon }}">
+          {{ $label := cond (eq $icon "cv") "Open generated CV" $icon }}
+          {{ if eq $icon "linkedin" }}{{ $label = "Connect with Bhalaji on LinkedIn" }}{{ end }}
+          <a class="author-footer__link" href="{{ $href }}" target="_blank" rel="noopener" aria-label="{{ $label }}" title="{{ $label }}">
             <i class="{{ $iconClass }}" aria-hidden="true"></i>
           </a>
         {{ end }}

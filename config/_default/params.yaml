@@ -32,10 +32,10 @@ header:
     show_logo: true
     logo:
       text: ""
-      filename: "logo.png"
+      filename: "icon.png"
     show_language: false
     show_day_night: false
-    show_search: true
+    show_search: false
     highlight_active_link: true
 
 

@@ -1,68 +1,39 @@
 ---
-title: "FDA Compliance & Quality Systems"
-summary: "Led the validation lifecycle for pharmaceutical operations, partnering with SAP consultants to execute OQ/PQ protocols for FDA audit readiness."
-tags: ["Quality Systems", "FDA Compliance", "cGMP", "Project Management", "Industry"]
+title: "Quality Systems & Validation"
+summary: "Professional experience connecting engineering requirements, validation documentation, and data integrity in regulated manufacturing."
+tags: ["Quality Systems", "Validation", "cGMP", "Project Management", "Industry"]
 status: "COMPLETED"
 date: 2023-05-01
 type: project
 toc: true
 weight: 3
-
-image:
-    filename: featured.png
-    focal_point: smart
-    preview_only: false
 ---
 
-## 1. The Situation: Zero Margin for Error
+## Professional context
 
-**The Stakes:** Pharmaceutical manufacturing operates under strict regulatory scrutiny. At **Kreative Organics**, maintaining US FDA audit readiness was critical for business continuity.
+As a **Technical Project Manager** at **Kreative Organics**, following a prior
+internship with the company, I worked with quality, engineering, and external
+stakeholders during a regulated digital-transformation initiative.
 
-**The Gap:** The operational workflow required rigorous validation of the SAP ERP system to meet **cGMP (Current Good Manufacturing Practice)** standards. Any discrepancy in data integrity could lead to audit observations (Form 483) or costly production halts.
+## Selected contributions
 
-## 2. The Task: Validating the Digital Core
+- Translated process and quality requirements into traceable validation
+  documentation and structured test protocols.
+- Coordinated cross-functional review of requirements, evidence, and
+  implementation readiness.
+- Supported data-integrity, change-control, and documentation practices used in
+  regulated manufacturing.
+- Applied root-cause analysis and corrective-action thinking to technical and
+  operational issues.
+- Helped make complex system requirements understandable to both technical and
+  non-technical stakeholders.
 
-As **Technical Project Manager** (promoted from Intern within 6 months), I was tasked with leading the Quality Assurance interface between the technical team and regulatory requirements.
+## Transferable perspective
 
-**Primary Objective:** Orchestrate a risk-free transition (cutover) to the new SAP system while ensuring all "Electronic Records" complied with **FDA 21 CFR Part 11** protocols.
+The experience reinforced an engineering principle that also shapes my
+research: a result is useful only when the method, assumptions, and evidence are
+clear enough to be reviewed and reproduced.
 
-## 3. The Action: The V-Model Framework
-
-I implemented a structured **V-Model Validation Framework** to map technical requirements to testing protocols, serving as the bridge between internal stakeholders and, external SAP partners and consultants.
-
-- **CAPA Management:** Drove Corrective and Preventive Action initiatives by leading Root Cause Analysis (RCA) sessions for operational deviations, partnering with external **SAP Vendors** to implement controls that prevent future recurrence.
-- **SAP Re-qualification:** Collaborated with external **SAP Consultants** to design the validation strategy, but **personally executed** the OQ/PQ (Operational Performance Qualification) protocols verify the system met FDA standards.
-- **Precision Execution:** Directed the internal/external technical teams during a **5-hour overnight system cutover re-qualification plan** to safeguard production continuity and data integrity.
-
-```mermaid
-graph TD
-    %% Define Professional Styles
-    classDef input fill:#f8f9fa,stroke:#6c757d,stroke-width:1px,stroke-dasharray: 5 5;
-    classDef process fill:#e3f2fd,stroke:#1565c0,stroke-width:2px;
-    classDef logic fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px;
-
-    %% Nodes
-    URS["User Requirement Specs<br/>(FDA/cGMP Needs)"]:::input
-    FS["Functional Specs<br/>(SAP Configuration)"]:::input
-    
-    Build["System Build &<br/>Configuration"]:::process
-
-    OQ["Operational Qualification<br/>(OQ)"]:::logic
-    PQ["Performance Qualification<br/>(PQ)"]:::logic
-
-    %% Flow
-    URS --> FS
-    FS --> Build
-    Build --> OQ
-    OQ --> PQ
-
-    %% Traceability Links (Dotted) showing what validates what
-    FS -.-> OQ
-    URS -.-> PQ
-```
-**Key Contribution:** By focusing on Operational & Performance Qualification (OQ/PQ), I verified that the system didn't just "install" correctly, but actually functioned according to the strict User Requirement Specifications (URS) required by the FDA.
-
-## 4. The Result
-- **SAP Re-qualification (system compliance):** Successfully executed the re-qualification protocols, verifying that audit trails. Achieved full alignment with cGMP and US FDA regulations through rigorous OQ/PQ execution.
-- **SOP Standardization (Process):** Authored and implemented the Standard Operating Procedures that govern human interaction with the system, bridging the gap between technical capabilities and daily operator workflows.
-- **Zero Safety Incidents:** Maintained a perfect safety record during the tenure while ensuring the facility remained audit-ready.
+> This public case study intentionally excludes employer system architecture,
+> operating data, customer information, deployment details, and confidential
+> performance measures.

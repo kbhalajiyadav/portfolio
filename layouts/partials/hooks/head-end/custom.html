@@ -1,4 +1,8 @@
 <link rel="stylesheet" href="{{ "css/custom.css" | relURL }}">
+{{ with resources.Get "media/icon.png" }}
+<link rel="icon" type="{{ .MediaType.Type }}" href="{{ .RelPermalink }}">
+<link rel="apple-touch-icon" href="{{ .RelPermalink }}">
+{{ end }}
 {{ $page := . }}
 {{ if not .IsHome }}
 <link rel="canonical" href="{{ .Permalink }}">
@@ -7,10 +11,12 @@
 <meta property="og:description" content="{{ (.Params.summary | default .Summary) | plainify }}">
 <meta property="og:url" content="{{ .Permalink }}">
 <meta property="og:image" content="{{ "uploads/avatar-portrait.jpg" | absURL }}">
+<meta property="og:image:alt" content="Portrait of Bhalaji Yadav Kantepalle">
 <meta property="og:site_name" content="Bhalaji Yadav Kantepalle · Research Portfolio">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="{{ .Title }}">
 <meta name="twitter:description" content="{{ (.Params.summary | default .Summary) | plainify }}">
+<meta name="twitter:image" content="{{ "uploads/avatar-portrait.jpg" | absURL }}">
 {{ end }}
 {{ if eq .Section "publication" }}
   {{ $ptype := "" }}
@@ -59,7 +65,6 @@
 {{ end }}
 {{ end }}
 {{ end }}
-<div id="reading-progress"></div>
 <script src="{{ "js/custom.js" | relURL }}" defer></script>
 <script>
   // Force light theme and remove stored dark preference

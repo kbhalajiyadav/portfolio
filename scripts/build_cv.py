@@ -92,7 +92,7 @@ def render(data: dict) -> str:
             rf"{{{esc(subtitle)}}}{{{esc(item['location'])}}}"
         )
         research.append(bullets(item.get("bullets", [])))
-    output.append(section("Research Experience", research))
+    output.append(section("Research and Teaching Experience", research))
 
     pubs = [
         "\\begin{enumerate}\n"
@@ -153,7 +153,7 @@ def render(data: dict) -> str:
         skills.append(
             rf"\textbf{{{esc(item['category'])}:}} {esc(item['items'])}{suffix}"
         )
-    output.append(section("Technical Skills", skills))
+    output.append(section("Technical Skills", [r"{\small " + "\n".join(skills) + "}"]))
 
     return "\n".join(output)
 
