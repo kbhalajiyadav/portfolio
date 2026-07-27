@@ -1,0 +1,160 @@
+\documentclass[10pt,letterpaper]{article}
+\usepackage[margin=0.54in,top=0.45in,bottom=0.48in]{geometry}
+\usepackage{fontspec}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{microtype}
+\usepackage{lastpage}
+
+\setmainfont{Latin Modern Sans}
+\definecolor{Ink}{HTML}{13222A}
+\definecolor{Teal}{HTML}{0A5660}
+\definecolor{Rust}{HTML}{A4472D}
+\definecolor{Muted}{HTML}{58666B}
+\definecolor{Rule}{HTML}{C8CDC7}
+
+\hypersetup{
+  colorlinks=true,
+  urlcolor=Teal,
+  linkcolor=Teal,
+  pdfauthor={Bhalaji Yadav Kantepalle},
+  pdftitle={Curriculum Vitae - Bhalaji Yadav Kantepalle}
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[L]{\color{Muted}\scriptsize Updated July 2026}
+\fancyfoot[R]{\color{Muted}\scriptsize Page \thepage\ of \pageref{LastPage}}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlist[itemize]{leftmargin=1.1em,itemsep=1.2pt,topsep=2pt,parsep=0pt}
+\setlist[enumerate]{leftmargin=1.45em,itemsep=2.4pt,topsep=3pt,parsep=0pt}
+\titleformat{\section}
+  {\large\bfseries\color{Ink}}
+  {}{0pt}{\MakeUppercase}
+  [\vspace{1.5pt}\color{Rule}\titlerule]
+\titlespacing*{\section}{0pt}{7pt}{4pt}
+
+\newcommand{\entry}[4]{%
+  \begin{tabularx}{\textwidth}{@{}Xr@{}}
+    {\bfseries\color{Ink} #1} & {\color{Muted}\small #2}\\
+    {\itshape #3} & {\itshape\color{Muted}\small #4}
+  \end{tabularx}\vspace{1pt}
+}
+
+\newcommand{\smallentry}[3]{%
+  \begin{tabularx}{\textwidth}{@{}Xr@{}}
+    {\bfseries #1} & {\color{Muted}\small #2}\\
+    {\small #3} &
+  \end{tabularx}\vspace{1pt}
+}
+
+\newcommand{\contactsep}{\hspace{0.45em}{\color{Rule}|}\hspace{0.45em}}
+\newcommand{\cvlink}[2]{\href{#1}{#2}}
+\newcommand{\dateditem}[2]{%
+  \begin{tabularx}{\linewidth}{@{}X>{\raggedleft\arraybackslash}p{0.82in}@{}}
+    #1 & {\color{Muted}\small #2}
+  \end{tabularx}
+}
+
+\begin{document}
+
+\begin{center}
+  {\fontsize{25}{28}\selectfont\bfseries\color{Ink} Bhalaji Yadav Kantepalle}\\[3pt]
+  {\large\color{Teal} Graduate Researcher and Chemical Engineer}\\[5pt]
+  {\small Richmond, Virginia \contactsep \cvlink{mailto:contact@bhalaji.com}{contact@bhalaji.com} \contactsep +1 (804) 310-4169}\\[2pt]
+  {\small \cvlink{https://bhalaji.com}{bhalaji.com} \contactsep \cvlink{https://www.linkedin.com/in/kbhalajiyadav}{LinkedIn} \contactsep \cvlink{https://scholar.google.com/citations?hl=en\&user=DrfbtX4AAAAJ}{Google Scholar} \contactsep \cvlink{https://orcid.org/0000-0003-0551-6172}{ORCID} \contactsep \cvlink{https://github.com/kbhalajiyadav}{GitHub}}
+\end{center}
+\vspace{2pt}
+
+\section{Research Profile}
+\color{Ink} Graduate researcher and chemical engineer specializing in soft-matter mechanics, adhesion and fracture metrology, wearable textiles, and computer-vision-based materials characterization. Develops reproducible experimental and computational workflows that connect material response, optical measurement, and engineering decision-making.\color{black}
+
+\section{Education}
+\entry{Incoming Ph.D. Student, Integrative Life Sciences}{Starting Fall 2026}{Virginia Commonwealth University}{Richmond, Virginia}
+
+\entry{M.S., Chemical and Life Science Engineering}{Expected Aug 2026}{Virginia Commonwealth University}{Richmond, Virginia}
+\begin{itemize}
+  \item GPA: 3.62
+  \item Thesis: Multi-Criteria Selection of Adhesives for Wearable Textiles
+  \item Advisor: Christina Tang, Ph.D.
+\end{itemize}
+
+\entry{B.Tech., Chemical Engineering}{Jun 2022}{Amrita Vishwa Vidyapeetham}{Coimbatore, India}
+
+
+\section{Research Experience}
+\entry{Graduate Researcher and Metrology Lead}{Sep 2024 - Present}{VCU Soft Functional Materials Lab | Advisor: Christina Tang, Ph.D.}{Richmond, Virginia}
+\begin{itemize}
+  \item Develop mechanics-consistent adhesion and fracture-characterization methods for soft, stretchable, and textile-supported interfaces.
+  \item Engineer reproducible Python and OpenCV workflows that synchronize force-displacement data, deformation tracking, and optical colorimetry.
+  \item Apply adhesion testing, tensile analysis, rheology-informed interpretation, optical microscopy, and refractometry to functional soft-material systems.
+  \item Contributed technical writing and regulatory analysis to a successful \$30,000 Commonwealth Cyber Initiative proposal.
+\end{itemize}
+
+
+\section{Peer-Reviewed Publications}
+\begin{enumerate}
+  \item Kantepalle, B. Y.; Epitawala Arachchige, U.; Joung, D.; Tang, C. Multi-Criteria Selection of Adhesives for Wearable Textiles. Polymers 2026, 18, 1504. https://doi.org/10.3390/polym18121504
+  \item Caloian, I.; Trapp, J.; Kantepalle, B. Y.; Latimer, P.; Lawton, T. J.; Tang, C. Mechanical Properties of Dual-Layer Electrospun Fiber Mats. Polymers 2025, 17, 1777. https://doi.org/10.3390/polym17131777
+\end{enumerate}
+
+\section{Research Software}
+\smallentry{Peel Trace Evaluation for Soft Substrates}{v1.4.0-rc15}{Bhalaji Yadav Kantepalle and Christina Tang}
+{\small Open-source Jupyter and Colab workflow for protocol-defined analysis of force-displacement peel traces from soft substrates. \cvlink{https://github.com/VCU-Soft-Functional-Materials-Lab/Peel-Trace-Evaluation-for-Soft-Substrates}{Repository} \contactsep \cvlink{https://doi.org/10.5281/zenodo.20301242}{Archived release}}
+
+\section{Presentations, Seminar, and Defense}
+\begin{enumerate}
+  \item \dateditem{\textbf{M.S. Thesis Defense.} B. Y. Kantepalle, "Multi-Criteria Selection of Adhesives for Wearable Textiles," Virginia Commonwealth University, Richmond, Virginia.}{Jul 1, 2026}
+  \item \dateditem{\textbf{Poster Presentation.} B. Y. Kantepalle, U. E. Arachchige, D. Joung, and C. Tang, "Multi-Criteria Selection of Adhesives for Wearable Textiles," PMDC 4th Annual Research Symposium, Virginia Commonwealth University, Richmond, Virginia.}{Jun 12, 2026}
+  \item \dateditem{\textbf{Poster Presentation.} B. Y. Kantepalle, A. Reyna, and C. Tang, "Quantifying Mechanochromic Response in Smart Textiles: A Computer Vision Approach," 29th VCU Graduate Student Research Symposium, Richmond, Virginia.}{Apr 22, 2026}
+  \item \dateditem{\textbf{Departmental Research Seminar.} B. Y. Kantepalle, "Beyond Peel Strength: Stability-Driven Adhesion Metrics for Soft Wearable Interfaces," Chemical and Life Science Engineering Research Day, Virginia Commonwealth University, Richmond, Virginia.}{Apr 15, 2026}
+  \item \dateditem{\textbf{Poster Presentation.} B. Y. Kantepalle, A. Reyna, and C. Tang, "Quantifying Mechanochromic Response in Smart Textiles: A Computer Vision Approach," VCU Engineering Graduate Research and Postdoc Showcase, Richmond, Virginia.}{Mar 25, 2026}
+  \item \dateditem{\textbf{Poster Presentation.} B. Y. Kantepalle, H. Stwodah, D. Joung, and C. Tang, "Adhesives for Personalized Wearable Devices," ACS Fall 2025, Washington, DC.}{Aug 20, 2025}
+  \item \dateditem{\textbf{Poster Presentation.} B. Y. Kantepalle, H. Stwodah, D. Joung, and C. Tang, "Adhesives for Personalized Wearable Devices," 28th VCU Graduate Student Research Symposium, Richmond, Virginia.}{Apr 23, 2025}
+  \item \dateditem{\textbf{Poster Presentation.} B. Y. Kantepalle, H. Stwodah, D. Joung, and C. Tang, "Adhesives for Personalized Wearable Devices," VCU Engineering Graduate Research and Postdoc Showcase, Richmond, Virginia.}{Mar 26, 2025}
+  \item \dateditem{\textbf{Classroom Lecture.} Undergraduate Material Balance instruction on vapor-liquid equilibrium, Henry's Law, and Raoult's Law.}{2026}
+\end{enumerate}
+
+\section{Teaching and Service}
+\smallentry{Judge, Student Poster Session}{Mar 29, 2026}{AIChE Atlantic Regional Conference, Virginia Commonwealth University}
+\smallentry{Judge, Chem-E-Car Poster Competition}{Mar 28, 2026}{AIChE Mid-Atlantic Regional Conference, Virginia Commonwealth University}
+\smallentry{Prototype Demonstrator, Feedback Friday}{Mar 20, 2026}{Shelfie Program, VCU da Vinci Center}
+\smallentry{Student Volunteer}{Feb 2020}{Anokha, Amrita University Techfest}
+
+\section{Industry Experience}
+\entry{Technical Project Manager}{May 2023 - May 2024}{Kreative Organics Pvt. Ltd.}{Hyderabad, India}
+\begin{itemize}
+  \item Led the quality-assurance interface for SAP ERP implementation and translated manufacturing SOPs into OQ/PQ validation protocols supporting cGMP and data-integrity requirements.
+  \item Re-engineered the deployment strategy for a five-hour overnight cutover with zero production downtime.
+  \item Standardized chemical nomenclature and data workflows, reducing manual research time by 70\% and improving search accuracy.
+\end{itemize}
+
+\entry{Technical Project Manager Intern}{Oct 2022 - Apr 2023}{Kreative Organics Pvt. Ltd.}{Hyderabad, India}
+\begin{itemize}
+  \item Supported digital-transformation, chemical-data standardization, and technical-documentation workflows in regulated manufacturing.
+\end{itemize}
+
+
+\section{Honors and Professional Development}
+\begin{itemize}
+  \item Graduate Assistantship Award, Virginia Commonwealth University, Fall 2025
+  \item Selected Participant, 1st National Neutron Scattering School, Oak Ridge National Laboratory, Sep 2025
+  \item VCU da Vinci Center credentials: Design Thinking, Prototyping, and Pitching and Storytelling, Mar 2026
+\end{itemize}
+
+
+\section{Technical Skills}
+\textbf{Materials and Testing:} Adhesion testing, T-peel, fracture mechanics, tensile testing, rheology, viscoelasticity, soft interfaces, wearable textiles\\[2pt]
+\textbf{Computational:} Python, OpenCV, NumPy, Pandas, SciPy, Matplotlib, image processing, CIE L*a*b* colorimetry, automated analysis\\[2pt]
+\textbf{Instrumentation:} Universal testing machine, optical microscopy, UV-Vis spectroscopy, Abbe refractometry, 3D printing\\[2pt]
+\textbf{Compliance and Process:} SAP ERP validation, OQ/PQ, FDA 21 CFR Part 11, cGMP, V-model, RCA, CAPA, DOE, Lean manufacturing
+
+
+\end{document}

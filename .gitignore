@@ -1,6 +1,7 @@
 # Generated files by hugo
 /public/
 /public-test/
+/.agent-preview/
 /resources/_gen/
 /assets/jsconfig.json
 hugo_stats.json
@@ -12,6 +13,11 @@ hugo.linux
 
 # Temporary lock file while building
 /.hugo_build.lock
+/tmp/
+
+# LaTeX CV build intermediates (the generated .tex remains reviewable)
+/cv/generated/*
+!/cv/generated/bhalaji_cv.tex
 
 # IDE
 .vscode/
