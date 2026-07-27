@@ -138,6 +138,20 @@
           <div class="pub-links"><a href="https://scholarscompass.vcu.edu/etd/8456/">Record <span aria-hidden="true">↗</span></a></div>
         </article>
       </div>
+      <article class="software-output">
+        <div>
+          <p class="kicker">Research software</p>
+          <h3>{{ $p.software.title }}</h3>
+          <p>{{ $p.software.text }}</p>
+          <small>{{ $p.software.authors }} · {{ $p.software.version }} · {{ $p.software.license }}</small>
+          <p class="software-citation">{{ $p.software.citation }}</p>
+        </div>
+        <div class="software-links">
+          <a href="{{ $p.software.repository }}">Repository <span aria-hidden="true">↗</span></a>
+          <a href="{{ $p.software.version_doi }}">Version DOI <span aria-hidden="true">↗</span></a>
+          <a href="{{ $p.software.concept_doi }}">All versions <span aria-hidden="true">↗</span></a>
+        </div>
+      </article>
     </section>
 
     <section class="section updates-section">
@@ -175,7 +189,12 @@
         <article{{ if ge $index 5 }} class="is-extra"{{ end }}>
           <time>{{ .date }}</time>
           <span class="tag">{{ .kind }}</span>
-          <div><h3>{{ .title }}</h3><p>{{ .event }}</p></div>
+          <div>
+            <h3>{{ .title }}</h3>
+            <p>{{ .event }}</p>
+            {{ with .authors }}<small class="authors">{{ . }}</small>{{ end }}
+            {{ with .record }}<a class="record-link" href="{{ . }}">Public record <span aria-hidden="true">↗</span></a>{{ end }}
+          </div>
         </article>
         {{ end }}
       </div>
@@ -194,6 +213,11 @@
           <h3>{{ .role }}</h3>
           <p class="organization">{{ .organization }}</p>
           <p>{{ .detail }}</p>
+          {{ with .links }}
+          <div class="credential-links">
+            {{ range . }}<a href="{{ .href }}">{{ .label }} <span aria-hidden="true">↗</span></a>{{ end }}
+          </div>
+          {{ end }}
         </article>
         {{ end }}
       </div>

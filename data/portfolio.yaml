@@ -77,36 +77,59 @@ publications:
     venue: Polymers 17(13), 1777
     doi: https://doi.org/10.3390/polym17131777
 
+software:
+  title: Peel Trace Evaluation for Soft Substrates
+  version: v1.4.0-rc15
+  authors: Bhalaji Yadav Kantepalle and Christina Tang
+  text: >-
+    Reproducible Jupyter and Colab workflow for protocol-defined analysis of
+    force-displacement peel traces from soft substrates.
+  repository: https://github.com/VCU-Soft-Functional-Materials-Lab/Peel-Trace-Evaluation-for-Soft-Substrates
+  version_doi: https://doi.org/10.5281/zenodo.20301242
+  concept_doi: https://doi.org/10.5281/zenodo.20278327
+  license: Apache-2.0
+  citation: >-
+    Kantepalle, B.Y.; Tang, C. Peel Trace Evaluation for Soft Substrates,
+    version 1.4.0-rc15; Zenodo, 2026.
+
 presentations:
   - date: Jun 12, 2026
     kind: Poster
     title: Stability-Informed Adhesive Selection for Textile-Integrated Vibrotactile Wearables in Parkinson’s Applications
     event: PMDC 4th Annual Research Symposium · VCU
+    authors: Author list pending confirmation
   - date: Apr 22, 2026
     kind: Poster
     title: "Quantifying Mechanochromic Response in Smart Textiles: A Computer Vision Approach"
     event: 29th VCU Graduate Student Research Symposium
+    authors: B. Y. Kantepalle, A. Reyna, and C. Tang
   - date: Apr 15, 2026
     kind: Research seminar
     title: "Beyond Peel Strength: Stability-Driven Adhesion Metrics for Soft Wearable Interfaces"
     event: Chemical & Life Science Engineering Research Day · VCU
+    authors: B. Y. Kantepalle
     featured: true
-  - date: Mar 2026
+  - date: Mar 25, 2026
     kind: Poster
-    title: "Beyond Peel Strength: Stability-Driven Adhesion Metrics for Soft Wearable Interfaces"
+    title: "Quantifying Mechanochromic Response in Smart Textiles: A Computer Vision Approach"
     event: VCU Engineering Graduate Research & Postdoc Showcase
+    authors: B. Y. Kantepalle, A. Reyna, and C. Tang
   - date: Aug 20, 2025
     kind: Poster
     title: Adhesives for Personalized Wearable Devices
     event: ACS Fall 2025 · PMSE Graduate Researchers Poster Session · Washington, DC
+    authors: B. Y. Kantepalle, H. Stwodah, D. Joung, and C. Tang
+    record: https://acs.digitellinc.com/p/s/adhesives-for-personalized-wearable-devices-poster-board-030-638253
   - date: Apr 23, 2025
     kind: Poster
     title: Adhesives for Personalized Wearable Devices
     event: 28th VCU Graduate Student Research Symposium
+    authors: B. Y. Kantepalle, H. Stwodah, D. Joung, and C. Tang
   - date: Mar 26, 2025
     kind: Poster
     title: Adhesives for Personalized Wearable Devices
     event: VCU Engineering Graduate Research & Postdoc Showcase
+    authors: B. Y. Kantepalle, H. Stwodah, D. Joung, and C. Tang
   - date: Jul 1, 2026
     kind: Thesis defense
     title: Multi-Criteria Selection of Adhesives for Wearable Textiles
@@ -129,6 +152,19 @@ service:
     role: Design & innovation credentials
     organization: VCU da Vinci Center
     detail: Design Thinking, Prototyping, and Pitching & Storytelling.
+    links:
+      - label: Design Thinking
+        href: https://www.credly.com/badges/e6785521-d537-4ea8-983f-3e1b123f01c7/public_url
+      - label: Prototyping
+        href: https://www.credly.com/badges/ad98e65e-5b4e-4910-9dff-fa54960fdeca/public_url
+      - label: Pitching & Storytelling
+        href: https://www.credly.com/badges/8caba56a-a526-4891-9408-55e68ee2b0cf/public_url
+  - date: Mar 2026
+    role: Prototype Demonstration · Feedback Friday
+    organization: VCU da Vinci Center
+    detail: >-
+      Demonstrated a battery-free diabetic thermochromic sock concept for
+      preventive foot-care monitoring at home.
   - date: Feb 2020
     role: Student Volunteer
     organization: Anokha · Amrita University Techfest
