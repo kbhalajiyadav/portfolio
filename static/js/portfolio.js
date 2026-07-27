@@ -2,26 +2,42 @@
   const menu = document.querySelector('.menu-button');
   const nav = document.querySelector('#site-nav');
   if (menu && nav) {
+    const closeMenu = ({ restoreFocus = false } = {}) => {
+      menu.setAttribute('aria-expanded', 'false');
+      nav.classList.remove('is-open');
+      if (restoreFocus) menu.focus();
+    };
     menu.addEventListener('click', () => {
       const open = menu.getAttribute('aria-expanded') === 'true';
       menu.setAttribute('aria-expanded', String(!open));
       nav.classList.toggle('is-open', !open);
     });
-    nav.addEventListener('click', () => {
-      menu.setAttribute('aria-expanded', 'false');
-      nav.classList.remove('is-open');
+    nav.addEventListener('click', () => closeMenu());
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && menu.getAttribute('aria-expanded') === 'true') {
+        closeMenu({ restoreFocus: true });
+      }
+    });
+    document.addEventListener('click', (event) => {
+      if (!nav.contains(event.target) && !menu.contains(event.target)) closeMenu();
     });
   }
 
   const more = document.querySelector('[data-more]');
   const list = document.querySelector('[data-collapsible]');
   if (more && list) {
+    const status = document.querySelector('[data-presentation-status]');
+    const extras = Array.from(list.querySelectorAll('.is-extra'));
     more.addEventListener('click', () => {
       const open = more.getAttribute('aria-expanded') === 'true';
       more.setAttribute('aria-expanded', String(!open));
       list.classList.toggle('is-expanded', !open);
-      more.firstChild.textContent = open ? 'View all presentations ' : 'Show fewer ';
+      more.firstChild.textContent = open ? `View all ${list.children.length} records ` : 'Show fewer records ';
+      extras.forEach((item) => item.setAttribute('aria-hidden', String(open)));
+      if (status) status.textContent = open ? 'Additional presentation records collapsed.' : 'All presentation records are now visible.';
+      if (open) more.focus();
     });
+    extras.forEach((item) => item.setAttribute('aria-hidden', 'true'));
   }
 
   const sectionLinks = Array.from(document.querySelectorAll('#site-nav a[href^="#"]'));

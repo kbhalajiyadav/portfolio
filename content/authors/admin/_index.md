@@ -67,6 +67,10 @@ social:
   - icon: orcid
     icon_pack: fab
     link: https://orcid.org/0000-0003-0551-6172
+
+  - icon: google-scholar
+    icon_pack: ai
+    link: https://scholar.google.com/citations?hl=en&user=DrfbtX4AAAAJ
     
   - icon: cv
     icon_pack: ai
@@ -97,5 +101,6 @@ In this role, I **led technical compliance initiatives** for the engineering and
 I am interested in roles that allow me to apply rigorous engineering principles whether characterizing new materials or optimizing production workflows to build reliable, compliant products.
 
 <center> 
-<i class="fa fa-download" aria-hidden="true" style="color:#035AA6"></i> {{< staticref "uploads/resume.pdf" "newtab" >}}Download my CV{{< /staticref >}}
+<i class="fa fa-download" aria-hidden="true" style="color:#035AA6"></i>
+<a href="/uploads/resume.pdf" target="_blank" rel="noopener">Download my CV</a>
 </center> 

@@ -18,6 +18,11 @@
   <button class="btn btn-outline-primary btn-sm js-copy" type="button" data-copy="{{ $cite | htmlEscape }}">
     Copy citation
   </button>
+  {{ with .Params.bibtex }}
+  <button class="btn btn-outline-primary btn-sm js-copy" type="button" data-copy="{{ . | htmlEscape }}">
+    Copy BibTeX
+  </button>
+  {{ end }}
 </div>
 
 

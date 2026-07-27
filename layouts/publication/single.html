@@ -23,11 +23,16 @@
         {{ if .Params.url_source }}<a class="pub-link-chip" href="{{ .Params.url_source }}" target="_blank" rel="noopener">Repository ↗</a>{{ end }}
         {{ $cite := cond (isset .Params "citation") .Params.citation (printf "%s. %s. %s. doi:%s" .Title (.Params.publication | plainify) (time.Format "2006" .Date) .Params.doi) }}
         <button class="pub-link-chip js-copy" data-copy="{{ $cite | htmlEscape }}" type="button">Copy citation</button>
+        {{ with .Params.bibtex }}<button class="pub-link-chip js-copy" data-copy="{{ . | htmlEscape }}" type="button">Copy BibTeX</button>{{ end }}
       </div>
     </header>
     <div class="scholar-layout">
       <div class="article-container">
-        {{ if .Params.abstract }}<section class="abstract-block"><h2>Abstract</h2><p>{{ .Params.abstract }}</p></section>{{ end }}
+        {{ if eq $ptype "7" }}
+          {{ with .Params.summary }}<section class="abstract-block"><h2>Public overview</h2><p>{{ . }}</p><p><small>Detailed results remain excluded while the manuscript is under repository embargo.</small></p></section>{{ end }}
+        {{ else }}
+          {{ if .Params.abstract }}<section class="abstract-block"><h2>Abstract</h2><p>{{ .Params.abstract }}</p></section>{{ end }}
+        {{ end }}
         {{ .Content }}
         {{ partial "author-footer.html" . }}
       </div>

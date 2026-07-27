@@ -13,6 +13,9 @@ profile:
   linkedin: https://www.linkedin.com/in/kbhalajiyadav
   github: https://github.com/kbhalajiyadav
   orcid: https://orcid.org/0000-0003-0551-6172
+  scholar: https://scholar.google.com/citations?hl=en&user=DrfbtX4AAAAJ
+  cv: uploads/resume.pdf
+  last_updated: July 2026
 
 metrics:
   - value: "2"
@@ -70,12 +73,14 @@ publications:
     venue: Polymers 18(12), 1504
     doi: https://doi.org/10.3390/polym18121504
     code: https://github.com/VCU-Soft-Functional-Materials-Lab/Peel-Trace-Evaluation-for-Soft-Substrates
+    detail: publication/adhesives-wearable/
   - year: "2025"
     type: Journal article · Co-author
     title: Mechanical Properties of Dual-Layer Electrospun Fiber Mats
-    authors: I. Caloian, J. Trapp, B. Y. Kantepalle, et al.
+    authors: I. Caloian, J. Trapp, B. Y. Kantepalle, P. Latimer, T. J. Lawton, and C. Tang
     venue: Polymers 17(13), 1777
     doi: https://doi.org/10.3390/polym17131777
+    detail: publication/electrospun-fiber-mats/
 
 software:
   title: Peel Trace Evaluation for Soft Substrates
@@ -91,6 +96,7 @@ software:
   citation: >-
     Kantepalle, B.Y.; Tang, C. Peel Trace Evaluation for Soft Substrates,
     version 1.4.0-rc15; Zenodo, 2026.
+  detail: project/peel-trace-evaluation/
 
 presentations:
   - date: Jun 12, 2026

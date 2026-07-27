@@ -8,10 +8,28 @@
 
     const text = btn.getAttribute("data-copy") || "";
     try {
-      await navigator.clipboard.writeText(text);
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+      } else {
+        const area = document.createElement("textarea");
+        area.value = text;
+        area.setAttribute("readonly", "");
+        area.style.position = "fixed";
+        area.style.opacity = "0";
+        document.body.appendChild(area);
+        area.select();
+        document.execCommand("copy");
+        area.remove();
+      }
       const old = btn.textContent;
+      const oldLabel = btn.getAttribute("aria-label");
       btn.textContent = "Copied!";
-      setTimeout(() => (btn.textContent = old), 900);
+      btn.setAttribute("aria-label", "Copied to clipboard");
+      setTimeout(() => {
+        btn.textContent = old;
+        if (oldLabel) btn.setAttribute("aria-label", oldLabel);
+        else btn.removeAttribute("aria-label");
+      }, 900);
     } catch (err) {
       console.error("Clipboard copy failed:", err);
     }
