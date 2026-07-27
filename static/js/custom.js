@@ -111,7 +111,6 @@
   document.addEventListener("DOMContentLoaded", setupTocHighlight);
 })();
 
-<script>
 document.addEventListener("click", async (e) => {
   const btn = e.target.closest(".js-copy-cite");
   if (!btn) return;
@@ -125,9 +124,4 @@ document.addEventListener("click", async (e) => {
   } catch (err) {
     alert("Copy failed. Please copy manually.");
   }
-});
-</script>
-
-window.addEventListener('load', () => {
-  setTimeout(rerenderMermaidAfterFonts, 150);
 });

@@ -14,7 +14,7 @@ status:
 superuser: true
 
 # Role / tagline
-role: Chemical Engineer | Materials Science Researcher
+role: Soft Materials Researcher | Chemical Engineer
 
 # Affiliations
 organizations:
@@ -22,15 +22,15 @@ organizations:
     url: https://www.vcu.edu/
 
 # Short profile blurb (appears under name)
-bio: Chemical Engineer with experience in Materials Science and Regulated Quality Operations. I focus on characterizing soft materials and ensuring process compliance in manufacturing.
+bio: Soft materials researcher developing experimental and computational methods for interfaces, wearable textiles, and quantitative metrology.
 
 # Interests (displayed as “Interests” panel)
 interests:
   - Fracture Mechanics & Adhesion
-  - Wearable & Medical Device Materials
-  - FDA Compliance & Quality Systems
-  - Optical Metrology (Computer Vision)
-  - Data-Driven Process Engineering
+  - Wearable & Functional Materials
+  - Computer Vision & Optical Metrology
+  - Rheology & Neutron Scattering
+  - Reproducible Experimentation
 
 # Education panel (renders clean list like Shilaan site)
 education:
@@ -42,7 +42,7 @@ education:
     - course: M.S. Chemical & Life Science Engineering
       institution: Virginia Commonwealth University
       url: https://egr.vcu.edu
-      year: "Expected Summer 2026"
+      year: "2026"
     - course: B.Tech. Chemical Engineering
       institution: Amrita Vishwa Vidyapeetham
       url: https://www.amrita.edu
@@ -59,10 +59,6 @@ social:
     icon: linkedin
     icon_pack: fab
     link: https://linkedin.com/in/kbhalajiyadav
-
-  - icon: graduation-cap
-    icon_pack: fas
-    link: https://scholar.google.com/citations?user=PLACEHOLDER
 
   - icon: github
     icon_pack: fab
@@ -82,7 +78,7 @@ greeting: bhalaji::kantepalle()
 ---
 
 # About me
-I am a **Chemical Engineer** with a background spanning both academic research and industrial operations. My work focuses on the intersection of **Materials Science** and **Quality Compliance**, bridging the gap between R&D innovation and regulated manufacturing.
+I am a **soft materials researcher and chemical engineer** developing experimental and computational methods for soft interfaces, wearable textiles, and functional materials.
 
 Currently, as a Graduate Researcher at the [**VCU Soft Functional Materials Lab**](https://vcusoftmaterialslab.weebly.com/) under [Dr. Christina Tang](https://egr.vcu.edu/directory/christina.tang/), I specialize in the mechanics of soft interfaces. My research involves:
 
@@ -103,4 +99,3 @@ I am interested in roles that allow me to apply rigorous engineering principles 
 <center> 
 <i class="fa fa-download" aria-hidden="true" style="color:#035AA6"></i> {{< staticref "uploads/resume.pdf" "newtab" >}}Download my CV{{< /staticref >}}
 </center> 
-

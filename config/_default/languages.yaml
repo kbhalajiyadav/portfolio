@@ -2,30 +2,27 @@
 en:
   languageCode: en-us
   contentDir: content
-  title: Bhalaji
+  title: Bhalaji Kantepalle
   params:
-    description: Portfolio of Bhalaji Y. Kantepalle - Chemical Engineer
+    description: Research portfolio of Bhalaji Yadav Kantepalle
   menu:
     main:
       - name: Home
         url: /#about
         weight: 10
-      - name: News
-        url: /#news
+      - name: Research
+        url: /#research
         weight: 20
-      - name: Experience
-        url: /#experience
+      - name: Outputs
+        url: /#outputs
         weight: 30
-      - name: Projects
-        url: /#projects
+      - name: Presentations
+        url: /#presentations
         weight: 40
-      - name: Publications
-        url: /#publications
+      - name: Service
+        url: /#service
         weight: 50
       
       - name: Contact
         url: /#contact
         weight: 60
-      - name: CV
-        url: uploads/resume.pdf
-        weight: 70

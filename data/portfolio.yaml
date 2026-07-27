@@ -1,0 +1,148 @@
+profile:
+  name: Bhalaji Yadav Kantepalle
+  short_name: Bhalaji Kantepalle
+  eyebrow: Soft materials · Quantitative metrology · Chemical engineering
+  headline: Making soft-material behavior measurable.
+  summary: >-
+    I develop experimental and computational methods for soft interfaces,
+    wearable textiles, and functional materials—connecting mechanics,
+    optical response, and reproducible analysis.
+  status: Incoming Ph.D. student in Integrative Life Sciences at Virginia Commonwealth University
+  location: Richmond, Virginia
+  email: contact@bhalaji.com
+  linkedin: https://www.linkedin.com/in/kbhalajiyadav
+  github: https://github.com/kbhalajiyadav
+  orcid: https://orcid.org/0000-0003-0551-6172
+
+metrics:
+  - value: "2"
+    label: Peer-reviewed papers
+  - value: "6"
+    label: Poster presentations
+  - value: "3"
+    label: Talks & defense
+  - value: "3.62"
+    label: M.S. GPA
+
+updates:
+  - date: Jul 21, 2026
+    title: M.S. thesis deposited
+    text: Multi-Criteria Selection of Adhesives for Wearable Textiles was submitted to VCU Scholars Compass.
+    href: https://scholarscompass.vcu.edu/etd/8456/
+    label: Thesis record
+  - date: Jul 1, 2026
+    title: M.S. thesis defense
+    text: Defended research on multi-criteria adhesive selection for wearable textiles.
+  - date: Jun 16, 2026
+    title: First-author paper published
+    text: Multi-Criteria Selection of Adhesives for Wearable Textiles appeared in Polymers.
+    href: https://doi.org/10.3390/polym18121504
+    label: Read paper
+  - date: Jun 12, 2026
+    title: Parkinson’s research symposium
+    text: Presented a poster on textile-integrated vibrotactile wearables.
+    href: https://parkinsons.vcu.edu/research/pmdc-research-symposium/
+    label: Event
+
+research:
+  - number: "01"
+    title: Soft-interface mechanics
+    text: Mechanics-consistent peel analysis for compliant, stretchable, and textile-supported interfaces.
+    tags: [Adhesion, Fracture, Wearables]
+  - number: "02"
+    title: Computer-vision metrology
+    text: Image-processing workflows that synchronize deformation, color, and mechanical measurements.
+    tags: [OpenCV, CIE L*a*b*, Reproducibility]
+  - number: "03"
+    title: Structure under flow
+    text: Rheology and neutron-scattering approaches for linking processing, structure, and material response.
+    tags: [Rheology, SANS, Liquid crystals]
+  - number: "04"
+    title: Autonomous experimentation
+    text: An emerging direction in closed-loop experiments using robotic handling, sensing, and quantitative analysis.
+    tags: [xArm6, Automation, Experiment design]
+
+publications:
+  - year: "2026"
+    type: Journal article · First author
+    title: Multi-Criteria Selection of Adhesives for Wearable Textiles
+    authors: B. Y. Kantepalle, U. E. Arachchige, D. Joung, and C. Tang
+    venue: Polymers 18(12), 1504
+    doi: https://doi.org/10.3390/polym18121504
+    code: https://github.com/VCU-Soft-Functional-Materials-Lab/Peel-Trace-Evaluation-for-Soft-Substrates
+  - year: "2025"
+    type: Journal article · Co-author
+    title: Mechanical Properties of Dual-Layer Electrospun Fiber Mats
+    authors: I. Caloian, J. Trapp, B. Y. Kantepalle, et al.
+    venue: Polymers 17(13), 1777
+    doi: https://doi.org/10.3390/polym17131777
+
+presentations:
+  - date: Jun 12, 2026
+    kind: Poster
+    title: Stability-Informed Adhesive Selection for Textile-Integrated Vibrotactile Wearables in Parkinson’s Applications
+    event: PMDC 4th Annual Research Symposium · VCU
+  - date: Apr 22, 2026
+    kind: Poster
+    title: "Quantifying Mechanochromic Response in Smart Textiles: A Computer Vision Approach"
+    event: 29th VCU Graduate Student Research Symposium
+  - date: Apr 15, 2026
+    kind: Research seminar
+    title: "Beyond Peel Strength: Stability-Driven Adhesion Metrics for Soft Wearable Interfaces"
+    event: Chemical & Life Science Engineering Research Day · VCU
+    featured: true
+  - date: Mar 2026
+    kind: Poster
+    title: "Beyond Peel Strength: Stability-Driven Adhesion Metrics for Soft Wearable Interfaces"
+    event: VCU Engineering Graduate Research & Postdoc Showcase
+  - date: Aug 20, 2025
+    kind: Poster
+    title: Adhesives for Personalized Wearable Devices
+    event: ACS Fall 2025 · PMSE Graduate Researchers Poster Session · Washington, DC
+  - date: Apr 23, 2025
+    kind: Poster
+    title: Adhesives for Personalized Wearable Devices
+    event: 28th VCU Graduate Student Research Symposium
+  - date: Mar 26, 2025
+    kind: Poster
+    title: Adhesives for Personalized Wearable Devices
+    event: VCU Engineering Graduate Research & Postdoc Showcase
+  - date: Jul 1, 2026
+    kind: Thesis defense
+    title: Multi-Criteria Selection of Adhesives for Wearable Textiles
+    event: Virginia Commonwealth University
+  - date: Date not listed
+    kind: Classroom lecture
+    title: Vapor–liquid equilibrium, Henry’s Law, and Raoult’s Law
+    event: Undergraduate Material Balance · instructional contribution
+
+service:
+  - date: Mar 29, 2026
+    role: Judge · Student Poster Session
+    organization: AIChE Atlantic Regional Conference · VCU
+    detail: Evaluated student work across materials, catalysis, separations, and chemical engineering.
+  - date: Mar 28, 2026
+    role: Judge · Chem-E-Car Poster Competition
+    organization: AIChE Mid-Atlantic Regional Conference · VCU
+    detail: Evaluated student engineering projects during the regional competition.
+  - date: Mar 2026
+    role: Design & innovation credentials
+    organization: VCU da Vinci Center
+    detail: Design Thinking, Prototyping, and Pitching & Storytelling.
+  - date: Feb 2020
+    role: Student Volunteer
+    organization: Anokha · Amrita University Techfest
+    detail: Helped organize and deliver the chemical-engineering event Get Engineered.
+
+education:
+  - period: Fall 2026
+    degree: Ph.D. · Integrative Life Sciences
+    institution: Virginia Commonwealth University
+    note: Incoming student
+  - period: "2024–2026"
+    degree: M.S. · Chemical & Life Science Engineering
+    institution: Virginia Commonwealth University
+    note: GPA 3.62 · Thesis defended July 1, 2026
+  - period: "2018–2022"
+    degree: B.Tech. · Chemical Engineering
+    institution: Amrita Vishwa Vidyapeetham

@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f3f0e8">
+  <title>{{ site.Data.portfolio.profile.name }} · Soft Materials Researcher</title>
+  <meta name="description" content="{{ site.Data.portfolio.profile.summary }}">
+  <link rel="canonical" href="{{ site.BaseURL }}">
+  <link rel="stylesheet" href="{{ "css/portfolio.css" | relURL }}">
+</head>
+<body>
+  {{ $p := site.Data.portfolio }}
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="wordmark" href="#top" aria-label="Bhalaji Kantepalle, home">
+      <span>BK</span><small>Research portfolio</small>
+    </a>
+    <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav id="site-nav" aria-label="Primary navigation">
+      <a href="#research">Research</a>
+      <a href="#outputs">Outputs</a>
+      <a href="#presentations">Presentations</a>
+      <a href="#service">Service</a>
+      <a class="nav-contact" href="mailto:{{ $p.profile.email }}">Contact</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="hero-copy">
+        <p class="eyebrow">{{ $p.profile.eyebrow }}</p>
+        <h1>{{ $p.profile.headline }}</h1>
+        <p class="lede">{{ $p.profile.summary }}</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#outputs">View research outputs</a>
+          <a class="button button-quiet" href="mailto:{{ $p.profile.email }}">Start a conversation <span aria-hidden="true">↗</span></a>
+        </div>
+        <p class="current"><span></span>{{ $p.profile.status }}</p>
+      </div>
+      <div class="hero-visual">
+        <div class="portrait-frame">
+          <img src="{{ "uploads/avatar.png" | relURL }}" alt="Portrait of {{ $p.profile.name }}" width="640" height="640">
+        </div>
+        <div class="identity-card">
+          <span>{{ $p.profile.short_name }}</span>
+          <small>{{ $p.profile.location }}</small>
+        </div>
+      </div>
+    </section>
+
+    <section class="metrics" aria-label="Portfolio at a glance">
+      {{ range $p.metrics }}
+      <div><strong>{{ .value }}</strong><span>{{ .label }}</span></div>
+      {{ end }}
+    </section>
+
+    <section class="section section-intro" id="research">
+      <div class="section-heading">
+        <p class="kicker">Research program</p>
+        <h2>From material response to defensible measurement.</h2>
+      </div>
+      <p class="section-summary">My work asks a practical question: how can complex behavior in soft, deformable materials be measured in a way that remains physically meaningful and reproducible?</p>
+    </section>
+
+    <section class="research-grid">
+      {{ range $p.research }}
+      <article class="research-card">
+        <span class="card-number">{{ .number }}</span>
+        <h3>{{ .title }}</h3>
+        <p>{{ .text }}</p>
+        <ul aria-label="Methods and topics">
+          {{ range .tags }}<li>{{ . }}</li>{{ end }}
+        </ul>
+      </article>
+      {{ end }}
+    </section>
+
+    <section class="method-section">
+      <div class="method-copy">
+        <p class="kicker">Analytical strength</p>
+        <h2>One synchronized measurement pipeline.</h2>
+        <p>Computer vision is integrated with mechanical testing—not added after the fact. The workflow aligns regions of interest, color-space measurements, deformation, and force-time signals into a reproducible record.</p>
+        <p class="disclosure">Method schematic — no unpublished results or experimental frames are shown.</p>
+      </div>
+      <div class="method-viz" aria-label="Schematic of synchronized computer vision and mechanical analysis">
+        <div class="scanline"></div>
+        <div class="frame frame-one">
+          <span>01</span><strong>Acquire</strong><small>video + force</small>
+          <i></i>
+        </div>
+        <div class="frame frame-two">
+          <span>02</span><strong>Track</strong><small>ROI + strain</small>
+          <i></i>
+        </div>
+        <div class="frame frame-three">
+          <span>03</span><strong>Quantify</strong><small>L*a*b* + ΔE₀₀</small>
+          <i></i>
+        </div>
+        <div class="frame frame-four">
+          <span>04</span><strong>Synchronize</strong><small>mechanics + optics</small>
+        </div>
+        <svg class="method-curve" viewBox="0 0 640 130" role="img" aria-label="Abstract synchronized signal trace">
+          <path class="gridline" d="M0 32H640M0 65H640M0 98H640"/>
+          <path class="curve-a" d="M0 105 C70 104 72 74 125 72 S205 89 255 48 S342 31 394 62 S475 84 522 41 S598 18 640 29"/>
+          <path class="curve-b" d="M0 116 C65 112 110 109 155 97 S230 75 283 83 S366 100 423 73 S535 45 640 52"/>
+        </svg>
+      </div>
+    </section>
+
+    <section class="section outputs" id="outputs">
+      <div class="section-heading">
+        <p class="kicker">Selected outputs</p>
+        <h2>Published work and open methods.</h2>
+      </div>
+      <div class="publication-list">
+        {{ range $p.publications }}
+        <article class="publication">
+          <div class="pub-meta"><span>{{ .year }}</span><span>{{ .type }}</span></div>
+          <div>
+            <h3>{{ .title }}</h3>
+            <p>{{ .authors }}</p>
+            <p class="venue">{{ .venue }}</p>
+          </div>
+          <div class="pub-links">
+            <a href="{{ .doi }}">Paper <span aria-hidden="true">↗</span></a>
+            {{ with .code }}<a href="{{ . }}">Code <span aria-hidden="true">↗</span></a>{{ end }}
+          </div>
+        </article>
+        {{ end }}
+        <article class="publication thesis">
+          <div class="pub-meta"><span>2026</span><span>M.S. thesis</span></div>
+          <div>
+            <h3>Multi-Criteria Selection of Adhesives for Wearable Textiles</h3>
+            <p>Virginia Commonwealth University · defended July 1, 2026</p>
+            <p class="venue">Repository record public; manuscript under embargo.</p>
+          </div>
+          <div class="pub-links"><a href="https://scholarscompass.vcu.edu/etd/8456/">Record <span aria-hidden="true">↗</span></a></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section updates-section">
+      <div class="section-heading compact">
+        <p class="kicker">Latest updates</p>
+        <h2>Current milestones.</h2>
+      </div>
+      <div class="update-list">
+        {{ range first 4 $p.updates }}
+        <article>
+          <time>{{ .date }}</time>
+          <div><h3>{{ .title }}</h3><p>{{ .text }}</p></div>
+          {{ if .href }}<a href="{{ .href }}">{{ .label | default "Details" }} <span aria-hidden="true">↗</span></a>{{ end }}
+        </article>
+        {{ end }}
+      </div>
+    </section>
+
+    <section class="section presentations" id="presentations">
+      <div class="section-heading">
+        <p class="kicker">Research communication</p>
+        <h2>Posters, seminars, and defense.</h2>
+      </div>
+      <div class="presentation-feature">
+        <img src="{{ "media/clse-research-day-2026.jpeg" | relURL }}" alt="VCU Chemical and Life Science Engineering Research Day seminar flyer" loading="lazy">
+        <div>
+          <span class="tag">Featured seminar</span>
+          <h3>Beyond Peel Strength</h3>
+          <p>Stability-Driven Adhesion Metrics for Soft Wearable Interfaces</p>
+          <small>CLSE Research Day · April 15, 2026</small>
+        </div>
+      </div>
+      <div class="presentation-list" data-collapsible>
+        {{ range $index, $item := $p.presentations }}
+        <article{{ if ge $index 5 }} class="is-extra"{{ end }}>
+          <time>{{ .date }}</time>
+          <span class="tag">{{ .kind }}</span>
+          <div><h3>{{ .title }}</h3><p>{{ .event }}</p></div>
+        </article>
+        {{ end }}
+      </div>
+      <button class="more-button" type="button" data-more aria-expanded="false">View all presentations <span aria-hidden="true">↓</span></button>
+    </section>
+
+    <section class="section service" id="service">
+      <div class="section-heading">
+        <p class="kicker">Teaching & service</p>
+        <h2>Contributing beyond the lab.</h2>
+      </div>
+      <div class="service-grid">
+        {{ range $p.service }}
+        <article>
+          <time>{{ .date }}</time>
+          <h3>{{ .role }}</h3>
+          <p class="organization">{{ .organization }}</p>
+          <p>{{ .detail }}</p>
+        </article>
+        {{ end }}
+      </div>
+      <aside class="teaching-note">
+        <span>Teaching contribution</span>
+        <div>
+          <h3>Undergraduate Material Balance</h3>
+          <p>Delivered classroom instruction on vapor–liquid equilibrium, Henry’s Law, and Raoult’s Law, alongside mentoring in laboratory safety, literature review, experimental planning, and scientific figures.</p>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section path-section">
+      <div class="path-column">
+        <p class="kicker">Education</p>
+        {{ range $p.education }}
+        <article><time>{{ .period }}</time><div><h3>{{ .degree }}</h3><p>{{ .institution }}</p>{{ with .note }}<small>{{ . }}</small>{{ end }}</div></article>
+        {{ end }}
+      </div>
+      <div class="path-column future-column">
+        <p class="kicker">Research disclosure</p>
+        <article>
+          <time>Policy</time>
+          <div>
+            <h3>Published work first</h3>
+            <p>New experiments, datasets, and results will be added only after they are publicly available.</p>
+          </div>
+        </article>
+        <p class="privacy-note">This portfolio intentionally excludes unpublished formulations, figures, datasets, and experimental schedules.</p>
+      </div>
+    </section>
+
+    <section class="automation">
+      <div>
+        <p class="kicker">Emerging direction</p>
+        <h2>Toward closed-loop materials experiments.</h2>
+        <p>Exploring how accessible robotics such as the UFACTORY xArm6 could connect controlled handling, measurement, and analysis. This is a future research direction, not a claim of current instrumentation.</p>
+      </div>
+      <ol aria-label="Closed-loop experimentation workflow">
+        <li><span>01</span>Robotic handling</li>
+        <li><span>02</span>Controlled experiment</li>
+        <li><span>03</span>Optical / scattering data</li>
+        <li><span>04</span>Reproducible analysis</li>
+      </ol>
+    </section>
+
+    <section class="contact-section">
+      <p class="kicker">Contact</p>
+      <h2>Interested in soft materials, quantitative metrology, or research collaboration?</h2>
+      <a class="contact-link" href="mailto:{{ $p.profile.email }}">{{ $p.profile.email }} <span aria-hidden="true">↗</span></a>
+    </section>
+  </main>
+
+  <footer>
+    <span>© {{ now.Year }} {{ $p.profile.name }}</span>
+    <div>
+      <a href="{{ $p.profile.linkedin }}">LinkedIn</a>
+      <a href="{{ $p.profile.github }}">GitHub</a>
+      <a href="{{ $p.profile.orcid }}">ORCID</a>
+    </div>
+  </footer>
+  <script src="{{ "js/portfolio.js" | relURL }}" defer></script>
+</body>
+</html>
