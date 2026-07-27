@@ -4,7 +4,9 @@ authors:
   - I. Caloian
   - J. Trapp
   - admin
-  - et al.
+  - P. Latimer
+  - T. J. Lawton
+  - C. Tang
 author_notes:
   - ''
   - ''
@@ -44,7 +46,18 @@ tags:
 
 
 featured: true
-citation: "Caloian I., Trapp J., Kantepalle B.Y., et al. Mechanical Properties of Dual-Layer Electrospun Fiber Mats. Polymers 17(13), 1777 (2025). doi:10.3390/polym17131777"
+citation: "Caloian, I.; Trapp, J.; Kantepalle, B.Y.; Latimer, P.; Lawton, T.J.; Tang, C. Mechanical Properties of Dual-Layer Electrospun Fiber Mats. Polymers 2025, 17, 1777. https://doi.org/10.3390/polym17131777"
+bibtex: >-
+  @article{Caloian2025DualLayer,
+    author = {Caloian, Ioana and Trapp, Jocelyn and Kantepalle, Bhalaji Yadav and Latimer, Patrick and Lawton, Timothy J. and Tang, Christina},
+    title = {Mechanical Properties of Dual-Layer Electrospun Fiber Mats},
+    journal = {Polymers},
+    year = {2025},
+    volume = {17},
+    number = {13},
+    pages = {1777},
+    doi = {10.3390/polym17131777}
+  }
 # links:
 # - name: ""
 #   url: ""

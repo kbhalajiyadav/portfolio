@@ -1,82 +1,23 @@
 {{ define "main" }}
-
-<article class="article">
+<article class="scholar-page scholar-page--project">
   <div class="container">
-    <div class="row">
-
-      <!-- MAIN CONTENT -->
-      <div class="col-lg-9 col-md-8 article-container">
-
-        <h1 class="article-title">{{ .Title }}</h1>
-
-        {{ with .Params.status }}
-          <span class="status-pill status-pill--{{ lower . }}">
-            {{ . }}
-          </span>
-        {{ end }}
-
-        <!-- Mobile meta -->
-        <div class="d-lg-none article-mobile-meta">
-
-          {{ if .Params.toc }}
-            <div class="toc-sidebar toc-sidebar--mobile">
-              <h3>Table of Contents</h3>
-              {{ .TableOfContents }}
-            </div>
-          {{ end }}
-
-          {{ if .Params.tags }}
-            <div class="tags-sidebar tags-sidebar--mobile">
-              <h3>Tags</h3>
-              <ul class="list-unstyled">
-                {{ range .Params.tags }}
-                  <li>
-                    <a href="{{ (printf "tags/%s" (. | urlize)) | relURL }}" class="badge badge-light">
-                      {{ . }}
-                    </a>
-                  </li>
-                {{ end }}
-              </ul>
-            </div>
-          {{ end }}
-
-        </div>
-
+    <a class="scholar-back" href="{{ "/#research" | relURL }}"><span aria-hidden="true">←</span> Research program</a>
+    <header class="scholar-header">
+      <p class="scholar-kicker">Research project</p>
+      <h1 class="article-title">{{ .Title }}</h1>
+      <div class="article-status-row">{{ with .Params.status }}<span class="status-pill status-pill--{{ lower . }}">{{ . }}</span>{{ end }}</div>
+      {{ with .Params.summary }}<p class="scholar-subtitle">{{ . | markdownify }}</p>{{ end }}
+    </header>
+    <div class="scholar-layout">
+      <div class="article-container">
         {{ .Content }}
-
         {{ partial "author-footer.html" . }}
-
       </div>
-
-      <!-- RIGHT SIDEBAR (Desktop) -->
-      <aside class="col-lg-3 col-md-4 aside-column d-none d-lg-block">
-
-        {{ if .Params.toc }}
-          <div class="toc-sidebar">
-            <h3>Table of Contents</h3>
-            {{ .TableOfContents }}
-          </div>
-        {{ end }}
-
-        {{ if .Params.tags }}
-          <div class="tags-sidebar">
-            <h3>Tags</h3>
-            <ul class="list-unstyled">
-              {{ range .Params.tags }}
-                <li>
-                  <a href="{{ (printf "tags/%s" (. | urlize)) | relURL }}" class="badge badge-light">
-                    {{ . }}
-                  </a>
-                </li>
-              {{ end }}
-            </ul>
-          </div>
-        {{ end }}
-
+      <aside class="aside-column">
+        {{ if .Params.toc }}<div class="toc-sidebar aside-block"><h3>Table of contents</h3>{{ .TableOfContents }}</div>{{ end }}
+        {{ if .Params.tags }}<div class="tags-sidebar aside-block"><h3>Topics</h3><ul>{{ range .Params.tags }}<li><a href="{{ (printf "tags/%s" (. | urlize)) | relURL }}" class="badge">{{ . }}</a></li>{{ end }}</ul></div>{{ end }}
       </aside>
-
     </div>
   </div>
 </article>
-
 {{ end }}

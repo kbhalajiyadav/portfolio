@@ -1,32 +1,64 @@
 ---
-title: "Adhesives for Personalized Wearable Devices"
+title: "Multi-Criteria Selection of Adhesives for Wearable Textiles"
 authors:
-- Admin
-- H. Stwodah
-- D. Joung
-- C. Tang
+- Bhalaji Yadav Kantepalle
+- Udena Epitawala Arachchige
+- Daeha Joung
+- Christina Tang
 
-date: "2025-08-01T00:00:00Z"
-doi: ""
-weight: 2
+date: "2026-06-16T00:00:00Z"
+doi: "10.3390/polym18121504"
+weight: 1
 
 # Schedule page publish date (NOT publication date).
-publishDate: "2024-01-01T00:00:00Z"
+publishDate: "2026-06-16T00:00:00Z"
 
 # Publication type.
 # Legend: 0 = Uncategorized; 1 = Conference paper; 2 = Journal article;
 # 3 = Preprint / Working Paper; 4 = Report; 5 = Book; 6 = Book section;
 # 7 = Thesis; 8 = Patent
-publication_types: ["1"]
+publication_types: ["2"]
 
 # Publication name and optional abbreviated publication name.
-publication: In *American Chemical Society (ACS) Fall 2025*
-publication_short: In *ACS Fall 2025*
+publication: "*Polymers*, 18(12), 1504"
+publication_short: "*Polymers* 18(12)"
 
-abstract: This project aims to develop an effective method for adhesion or attachment of devices to fabric wraps or sleeves for applications in personalized medicine. The goal of this work was to identify commercial glues appropriate for adhesion of metal or silcone devices to fabric substrates. Methods to determine the ability of the glue to adhere to fabric, adhere metal to fabric, and silicone to fabric and be maintained under fabric strain are being developed. Initial experiments subjecting the glue-fabric bonds to hand stretching indicated that Professional Grade Super Glue (Fast-Setting, Impact Tough, Versatile) was not effective as the fabric became brittle and adhesion was ineffective. Using E6000 (Industrial Strength Adhesive), adhesion between fabic and metal was successful but adhesion between fabric and silicone failed upon fabric stretching. GE Silicone Glue Premium and J-B Weld 31310 All-Purpose RTV Silicone Sealant successfully adhered silcone to fabric or metal to silicone while stretching the fabric. Methods to quantify the adhesion strength using ASTM standards and to determine modes of faiure (i.e., fabric, adhesive, or cohesive) are currently being developed. Testing to evaluate skin irritability is also being considered.
+abstract: >-
+  Peeling behavior of soft materials is important in a wide range of
+  applications, including electronics and healthcare. When applied on soft
+  substrates, soft adhesives demonstrate unique mechanical behaviors compared
+  with adhesives applied on rigid substrates. Adhesive properties can be
+  conveniently measured by peel testing. This work characterizes commercial
+  glues on fabric substrates using commonly used peel tests and investigates
+  energy dissipation on textile substrates. A multi-criteria framework was
+  developed for evaluating adhesives using the shape and stability of the
+  T-peel trace, and the results were compared with traditionally used peel
+  strength and fracture energy. Although E6000 produced the highest peel force
+  (1.82 ± 0.27 N mm⁻¹) and the largest apparent fracture energy
+  (8673 ± 1545 J m⁻²), it showed large force oscillation
+  (SSA = 4.05 ± 0.83 N). Fabri-Fuse was selected based on its low oscillation
+  (SSA = 0.69 ± 0.29 N), lowest crack-initiation-force coefficient of
+  variation (4.0%), high peel stability index, and high displacement at break.
+  Functional evaluation showed that Fabri-Fuse increased
+  strain-to-electrical-failure to 34.95 ± 2.43%, higher than direct printing
+  on fabric or printing on E6000. These results suggest that metrics that
+  consider peel-trace shape and inter-sample repeatability provide a useful
+  alternative to selecting adhesives by highest peel strength alone.
+citation: "Kantepalle, B.Y.; Epitawala Arachchige, U.; Joung, D.; Tang, C. Multi-Criteria Selection of Adhesives for Wearable Textiles. Polymers 2026, 18, 1504. https://doi.org/10.3390/polym18121504"
+bibtex: >-
+  @article{Kantepalle2026Adhesives,
+    author = {Kantepalle, Bhalaji Yadav and Epitawala Arachchige, Udena and Joung, Daeha and Tang, Christina},
+    title = {Multi-Criteria Selection of Adhesives for Wearable Textiles},
+    journal = {Polymers},
+    year = {2026},
+    volume = {18},
+    number = {12},
+    pages = {1504},
+    doi = {10.3390/polym18121504}
+  }
 
 # Summary. An optional shortened abstract.
-summary: Poster presentation at ACS Fall 2025 on adhesion strength in soft wearables.
+summary: First-author study introducing a reproducible, multi-criteria framework for adhesive selection in wearable textiles.
 
 tags:
 - Fracture Mechanics
@@ -41,9 +73,9 @@ featured: true
 #   url: http://example.org
 
 url_pdf: ''
-url_code: ''
-url_dataset: ''
-url_poster: 'https://acs.digitellinc.com/live/35/session/565233'
+url_code: 'https://github.com/VCU-Soft-Functional-Materials-Lab/Peel-Trace-Evaluation-for-Soft-Substrates'
+url_dataset: 'https://doi.org/10.5281/zenodo.20301242'
+url_poster: ''
 url_project: ''
 url_slides: ''
 url_source: ''

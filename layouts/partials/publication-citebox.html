@@ -15,10 +15,14 @@
 
 <div class="publication-citebox">
   <h3>Citation</h3>
-  <button class="btn btn-outline-primary btn-sm" type="button"
-          onclick="navigator.clipboard.writeText({{ $cite | jsonify }}); this.innerText='Copied ✓'; setTimeout(()=>this.innerText='Copy citation',1200);">
+  <button class="btn btn-outline-primary btn-sm js-copy" type="button" data-copy="{{ $cite | htmlEscape }}">
     Copy citation
   </button>
+  {{ with .Params.bibtex }}
+  <button class="btn btn-outline-primary btn-sm js-copy" type="button" data-copy="{{ . | htmlEscape }}">
+    Copy BibTeX
+  </button>
+  {{ end }}
 </div>
 
 

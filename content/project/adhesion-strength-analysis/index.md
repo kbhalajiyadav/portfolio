@@ -1,8 +1,8 @@
 ---
-title: "Mechanics-Consistent Adhesion in Soft Wearables"
-summary: "Developed a first-principles framework to identify 'false positive' adhesion failures, utilizing a custom Python pipeline to automate fracture mechanics analysis."
+title: "Multi-Criteria Adhesion Analysis for Wearable Textiles"
+summary: "A published, reproducible framework for evaluating both peel response and force stability in soft textile interfaces."
 tags: ["Fracture Mechanics", "Soft Robotics", "Python", "Academic Research"]
-status: "ACTIVE"
+status: "PUBLISHED"
 date: 2025-01-30
 type: project
 toc: true
@@ -14,36 +14,25 @@ image:
   preview_only: false
 ---
 
-## 1. The Situation: The “False Positive” Trap
+## Research question
 
-**The Gap:** Current industry standards (like ASTM D1876) assume that higher average peel force equals better adhesion.
+How should adhesives be compared when the substrate itself is soft, extensible, and structurally variable?
 
-**The Problem:** I identified that this assumption fails for soft wearables. In stretchable textiles, up to 90% of the "measured force" is actually just the fabric stretching (dissipation), not the glue holding. This creates a **"False Positive Trap"**: selecting adhesives that look strong in the lab but fail functionally on the human body due to stick-slip instability.
+Average peel force alone does not fully describe interface behavior. A useful selection framework must also account for force stability, failure mode, and the practical requirements of a wearable system.
 
-## 2. The Action: Rational Engineering
+## Published approach
 
-Instead of relying on misleading averages, I applied **first-principles thinking** to re-engineer how we define failure.
+The study combines adapted T-peel testing with a reproducible signal-analysis workflow. Candidate interfaces are compared using multiple interpretable criteria rather than a single headline number.
 
-- **Logic over Data:** I deconstructed the force profile to distinguish between **true adhesion** (the peaks, representing crack resistance) and **artifacts** (the troughs, representing slip).
-- **The Metric:** I introduced the **Peel Stability Index (PSI)**. Unlike raw force, this metric quantifies *consistency*. A high PSI predicts that a sensor will perform reliably without electrical noise, preventing costly device failures downstream.
+- Mechanics-informed preprocessing and steady-state analysis
+- Force-response stability and failure-mode interpretation
+- Transparent comparison across candidate adhesive systems
+- Reproducible Python analysis with an open-source implementation
 
-## 3. The Execution: Automated Python Pipeline
+## Reproducible workflow
 
-To remove human bias and speed up analysis, I built a custom Python pipeline that operationalizes this physics-based logic.
+The analysis code is available in the [Peel Trace Evaluation for Soft Substrates](https://github.com/VCU-Soft-Functional-Materials-Lab/Peel-Trace-Evaluation-for-Soft-Substrates) repository.
 
-```mermaid
-graph TD
-    A["Raw Force Data<br/>(Noisy & Unreliable)"] --> B["Preprocessing<br/>Data Cleaning & Unit Conversion"]
-    B --> C["Baseline Correction<br/>Normalize Starting Force to 0N"]
-    C --> D{"Identify Steady-State<br/>Window"}
-    D -- "Scan: Min. Std Dev" --> E["Peak & Trough Detection<br/>Isolate Initiation Forces (Fci)"]
-    E --> F["Calculate Stability Metrics<br/>PSI = Fmean / SigmaF"]
-    F --> H["Summary Report<br/>Metrics: Gci, PSI"]
-```
-**Key Contribution:** This automation reduced data processing time by 80% while ensuring that only mechanically stable (Category II) adhesives are selected for the final medical device.
+Read the peer-reviewed article: [Multi-Criteria Selection of Adhesives for Wearable Textiles](https://doi.org/10.3390/polym18121504).
 
-## 4. The Result
-- Framework prevents "False Positive" selections
-- Ensures mechanically stable adhesives for medical devices
-- Validated using T-Peel testing (ASTM D2724 adapted) with custom Python signal analysis
-
+> This page summarizes published methods only. Unpublished formulations, datasets, and experimental results are intentionally omitted.
