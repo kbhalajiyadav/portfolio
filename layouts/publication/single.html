@@ -1,125 +1,46 @@
 {{ define "main" }}
-
-<article class="article">
+<article class="scholar-page scholar-page--publication">
   <div class="container">
-    <div class="row">
-
-      <!-- MAIN CONTENT -->
-      <div class="col-lg-9 col-md-8 article-container">
-
-        <h1 class="article-title">{{ .Title }}</h1>
-
-        {{/* Status capsule (desktop + mobile) */}}
-        {{ $ptype := "" }}
-        {{ if .Params.publication_types }}
-          {{ $ptype = (index .Params.publication_types 0) | printf "%v" }}
-        {{ end }}
-
-        <div class="article-status-row">
-          {{ if eq $ptype "2" }}
-            <span class="status-pill status-pill--pub">PUBLICATION</span>
-          {{ else if eq $ptype "1" }}
-            <span class="status-pill status-pill--conf">CONFERENCE</span>
-          {{ else if eq $ptype "7" }}
-            <span class="status-pill status-pill--thesis">THESIS</span>
-          {{ else }}
-            <span class="status-pill status-pill--research">RESEARCH</span>
-          {{ end }}
-        </div>
-
-        {{/* Optional: show where it appeared (Polymers 17(13), 1777) */}}
-        {{ if .Params.publication }}
-          <div class="publication-venue">
-            {{ .Params.publication | markdownify }}
-          </div>
-        {{ end }}
-
-        {{/* Quick action buttons under title */}}
-        <div class="pub-actions">
-          {{ if .Params.url_pdf }}
-            <a class="pub-link-chip" href="{{ .Params.url_pdf }}" target="_blank" rel="noopener">PDF</a>
-          {{ end }}
-        
-          {{ if .Params.doi }}
-            <a class="pub-link-chip" href="{{ printf "https://doi.org/%s" .Params.doi }}" target="_blank" rel="noopener">DOI</a>
-          {{ end }}
-        
-          {{ if .Params.url_source }}
-            <a class="pub-link-chip" href="{{ .Params.url_source }}" target="_blank" rel="noopener">Publisher</a>
-          {{ end }}
-
-          {{/* COPY CITATION CHIP */}}
-          {{ $cite := cond (isset .Params "citation") .Params.citation (printf "%s. %s. %s. doi:%s" .Title .Params.publication .Params.date .Params.doi) }}
-          <button class="pub-link-chip"
-                  onclick="navigator.clipboard.writeText({{ $cite | jsonify }}); this.innerText='Copied ✓'; setTimeout(()=>this.innerText='Copy Citation', 5000);">
-            Copy Citation
-
-        </div>
-
-
-        {{/* Optional: Abstract block (uses front matter abstract) */}}
-        {{ if .Params.abstract }}
-          <h2>Abstract</h2>
-          <p>{{ .Params.abstract }}</p>
-        {{ end }}
-
+    <a class="scholar-back" href="{{ "/#outputs" | relURL }}"><span aria-hidden="true">←</span> Research outputs</a>
+    <header class="scholar-header">
+      <p class="scholar-kicker">Scholarly output</p>
+      <h1 class="article-title">{{ .Title }}</h1>
+      {{ $ptype := "" }}
+      {{ if .Params.publication_types }}{{ $ptype = (index .Params.publication_types 0) | printf "%v" }}{{ end }}
+      <div class="article-status-row">
+        {{ if eq $ptype "2" }}<span class="status-pill status-pill--pub">Journal article</span>
+        {{ else if eq $ptype "1" }}<span class="status-pill">Conference</span>
+        {{ else if eq $ptype "7" }}<span class="status-pill status-pill--thesis">Thesis</span>
+        {{ else }}<span class="status-pill">Research</span>{{ end }}
+        <span class="status-pill">{{ time.Format "2006" .Date }}</span>
+      </div>
+      {{ if .Params.publication }}<div class="publication-venue">{{ .Params.publication | markdownify }}</div>{{ end }}
+      <div class="pub-actions">
+        {{ if .Params.doi }}<a class="pub-link-chip" href="{{ printf "https://doi.org/%s" .Params.doi }}" target="_blank" rel="noopener">Open DOI ↗</a>{{ end }}
+        {{ if .Params.url_pdf }}<a class="pub-link-chip" href="{{ .Params.url_pdf }}" target="_blank" rel="noopener">PDF ↗</a>{{ end }}
+        {{ if .Params.url_code }}<a class="pub-link-chip" href="{{ .Params.url_code }}" target="_blank" rel="noopener">Code ↗</a>{{ end }}
+        {{ if .Params.url_dataset }}<a class="pub-link-chip" href="{{ .Params.url_dataset }}" target="_blank" rel="noopener">Archive ↗</a>{{ end }}
+        {{ if .Params.url_source }}<a class="pub-link-chip" href="{{ .Params.url_source }}" target="_blank" rel="noopener">Repository ↗</a>{{ end }}
+        {{ $cite := cond (isset .Params "citation") .Params.citation (printf "%s. %s. %s. doi:%s" .Title (.Params.publication | plainify) (time.Format "2006" .Date) .Params.doi) }}
+        <button class="pub-link-chip js-copy" data-copy="{{ $cite | htmlEscape }}" type="button">Copy citation</button>
+      </div>
+    </header>
+    <div class="scholar-layout">
+      <div class="article-container">
+        {{ if .Params.abstract }}<section class="abstract-block"><h2>Abstract</h2><p>{{ .Params.abstract }}</p></section>{{ end }}
         {{ .Content }}
-
         {{ partial "author-footer.html" . }}
-
       </div>
-
-      <!-- RIGHT SIDEBAR (Desktop) -->
-      <aside class="col-lg-3 col-md-4 aside-column d-none d-lg-block">
-
-        {{/* Tags */}}
+      <aside class="aside-column">
         {{ if .Params.tags }}
-          <div class="tags-sidebar">
-            <h3>Tags</h3>
-            <ul class="list-unstyled">
-              {{ range .Params.tags }}
-                <li>
-                  <a href="{{ (printf "tags/%s" (. | urlize)) | relURL }}" class="badge badge-light">
-                    {{ . }}
-                  </a>
-                </li>
-              {{ end }}
-            </ul>
-          </div>
+        <div class="tags-sidebar aside-block">
+          <h3>Topics</h3>
+          <ul>{{ range .Params.tags }}<li><a href="{{ (printf "tags/%s" (. | urlize)) | relURL }}" class="badge">{{ . }}</a></li>{{ end }}</ul>
+        </div>
         {{ end }}
-
-        {{/* Citation box + copy button */}}
-        {{ partial "publication-citebox.html" . }}
-
-        {{/* Links (PDF / DOI / Publisher etc.) */}}
-        {{ partial "publication-links.html" . }}
-
+        <div class="aside-block">{{ partial "publication-citebox.html" . }}</div>
       </aside>
-
-      <!-- MOBILE SIDEBAR (below title/content) -->
-      <div class="col-12 d-lg-none">
-        {{ if .Params.tags }}
-          <div class="tags-sidebar tags-sidebar--mobile">
-            <h3>Tags</h3>
-            <ul class="list-unstyled">
-              {{ range .Params.tags }}
-                <li>
-                  <a href="{{ (printf "tags/%s" (. | urlize)) | relURL }}" class="badge badge-light">
-                    {{ . }}
-                  </a>
-                </li>
-              {{ end }}
-            </ul>
-          </div>
-        {{ end }}
-        <!--
-        {{ partial "publication-citebox.html" . }}
-        {{ partial "publication-links.html" . }}
-        -->
-      </div>
-
     </div>
   </div>
 </article>
-
 {{ end }}

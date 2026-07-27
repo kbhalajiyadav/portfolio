@@ -2,14 +2,8 @@
 
 {{ $defaultAuthor := site.GetPage "authors/admin" }}
 
-{{/* If the page explicitly sets authors, use the first one; else fallback to admin */}}
+{{/* This is an owner signature, not the publication's first-author card. */}}
 {{ $author := $defaultAuthor }}
-{{ with .Params.authors }}
-  {{ $first := index . 0 }}
-  {{ with site.GetPage (printf "authors/%s" $first) }}
-    {{ $author = . }}
-  {{ end }}
-{{ end }}
 
 {{ if $author }}
 <hr class="author-footer-divider">
@@ -52,7 +46,11 @@
             {{ $iconClass = printf "%s fa-%s" $pack $icon }}
           {{ end }}
   
-          <a class="author-footer__link" href="{{ .link }}" target="_blank" rel="noopener" aria-label="{{ $icon }}">
+          {{ $href := .link }}
+          {{ if and (not (hasPrefix $href "http")) (not (hasPrefix $href "mailto:")) (not (hasPrefix $href "/")) }}
+            {{ $href = $href | relURL }}
+          {{ end }}
+          <a class="author-footer__link" href="{{ $href }}" target="_blank" rel="noopener" aria-label="{{ $icon }}">
             <i class="{{ $iconClass }}" aria-hidden="true"></i>
           </a>
         {{ end }}
