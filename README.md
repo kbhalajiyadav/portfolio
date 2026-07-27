@@ -1,111 +1,81 @@
-# Bhalaji Yadav - Portfolio Website
+# Bhalaji Yadav Kantepalle — Research Portfolio
 
-A professional portfolio website built with **Hugo Blox** and deployed on **GitHub Pages**.
+Source for [bhalaji.com](https://bhalaji.com), an academic portfolio documenting
+public research outputs, research software, presentations, teaching, service,
+and selected professional experience.
 
-## 🌐 Live Website
+The site is intentionally a professional research portfolio—not a laboratory
+notebook or a repository for unpublished results. Experimental formulations,
+restricted datasets, unpublished figures, and future experimental schedules are
+kept outside this repository.
 
-Visit the live portfolio at: **https://kbhalajiyadav.github.io/portfolio**
+## Information architecture
 
-## 📸 Preview
+- `data/portfolio.yaml` — curated homepage content and chronology
+- `content/publication/` — public publication and thesis records
+- `content/project/` — selected public research-software and professional work
+- `data/cv.yaml` — single source for the generated curriculum vitae
+- `scripts/build_cv.py` — YAML-to-LaTeX CV generator
+- `data/publication_sync.json` — public journal-article metadata synchronized
+  from ORCID
+- `scripts/sync_orcid.py` — deterministic ORCID metadata synchronizer
+- `layouts/`, `static/css/`, and `static/js/` — portfolio presentation and
+  interaction layer
 
-![Portfolio Preview](assets/images/avatar.jpg)
+## Publication synchronization
 
-## 🚀 Quick Start
-
-To deploy this portfolio to your own GitHub Pages:
-
-1. **Create a GitHub repository** named `portfolio`
-2. **Upload all files** from this folder to your repository
-3. **Enable GitHub Actions** in your repository settings
-4. **Configure GitHub Pages** to use GitHub Actions as the source
-5. **Wait 2-5 minutes** for automatic deployment
-
-For detailed instructions, see **[DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md)**
-
-## 📋 What's Included
-
-### Sections
-- **Hero Banner** - Introduction with profile photo
-- **About Me** - Professional summary and expertise
-- **Experience** - Work history and research positions
-- **Projects** - Research projects with detailed descriptions
-- **Publications** - Academic papers and presentations
-- **Skills** - Technical competencies
-- **Achievements** - Awards and recognitions
-- **Contact** - Contact information and location
-
-### Projects Featured
-1. **Thermochromic Textiles for Diabetic Monitoring** - $30K funded research
-2. **Automated Adhesion Testing Protocol** - 80% time reduction automation
-3. **FDA Compliance & Quality Systems** - Audit readiness initiative
-4. **Supply Chain Data Automation** - Python/Docker automation pipeline
-
-### Publications
-- **Journal Article**: "Mechanical Properties of Dual-Layer Electrospun Fiber Mats" - Polymers 17(13), 1777 (2025)
-- **Poster Presentations**: ACS Fall 2025, VCU Research Symposium
-
-## 🛠️ Built With
-
-- **[Hugo](https://gohugo.io/)** - Static site generator
-- **[Hugo Blox](https://hugoblox.com/)** - Website builder for Hugo
-- **[GitHub Pages](https://pages.github.com/)** - Free hosting
-- **[GitHub Actions](https://github.com/features/actions)** - Automated deployment
-
-## 📁 File Structure
-
-```
-bhalaji-portfolio/
-├── .github/workflows/hugo.yaml    # Deployment workflow
-├── assets/images/                 # Profile photo and images
-├── config/_default/               # Hugo configuration
-├── content/                       # Website content
-│   ├── authors/admin/            # Profile information
-│   ├── project/                  # Project pages
-│   └── publication/              # Publication pages
-├── static/uploads/               # Resume PDF
-└── DEPLOYMENT_GUIDE.md           # Detailed deployment guide
-```
-
-## 🔄 Updating Your Portfolio
-
-To make changes:
+The weekly GitHub workflow reads the public works record for
+[ORCID 0000-0003-0551-6172](https://orcid.org/0000-0003-0551-6172), counts
+items classified by ORCID as `journal-article`, and updates
+`data/publication_sync.json` only when the public record changes.
 
 ```bash
-# Edit the files you want to change
-# Then commit and push:
-git add .
-git commit -m "Update portfolio"
-git push origin main
+python3 scripts/sync_orcid.py
 ```
 
-GitHub Actions will automatically rebuild and redeploy your site!
+The homepage count follows this generated file. Selected publication cards
+remain curated so a metadata change cannot automatically expose incomplete or
+unreviewed site content.
 
-## 📝 Customization Guide
+Google Scholar remains linked as a discovery and citation profile. It is not
+scraped during builds because Scholar does not provide a supported public
+profile API for this use.
 
-### Update Profile Information
-Edit: `content/authors/admin/_index.md`
+## Curriculum vitae
 
-### Update Homepage
-Edit: `content/_index.md`
+Edit `data/cv.yaml`, then regenerate both the reviewable LaTeX source and the
+public PDF:
 
-### Add New Projects
-Create: `content/project/PROJECT_NAME/index.md`
+```bash
+python3 -m pip install PyYAML
+python3 scripts/build_cv.py
+```
 
-### Add Publications
-Create: `content/publication/PUBLICATION_NAME/index.md`
+The generator requires `latexmk` and XeLaTeX. The deployment workflow rebuilds
+the CV before every production build.
 
-### Update Photo
-Replace: `assets/images/avatar.png`
+## Local development
 
-### Update Resume
-Replace: `static/uploads/resume.pdf`
+Requirements:
 
-## 📞 Contact
+- Hugo Extended 0.124.1
+- Go, for Hugo modules
+- Python 3
 
-- **LinkedIn**: [linkedin.com/in/kbhalajiyadav](https://linkedin.com/in/kbhalajiyadav)
+```bash
+hugo server
+```
 
-## 📄 License
+The production site is built and deployed to GitHub Pages from `main` through
+`.github/workflows/hugo.yaml`.
 
-This portfolio template is based on [Hugo Blox](https://hugoblox.com/) which is open source.
+## Content policy
 
----
+- Only public or explicitly approved research information belongs here.
+- Publication and software claims should resolve to a DOI, repository, or
+  institutional record whenever possible.
+- Quantitative claims should remain traceable to a public source.
+- Personal documents and images may not be reused without permission.
+
+See [Contributing](.github/CONTRIBUTING.md), [Security](.github/SECURITY.md),
+and the [repository license](LICENSE).

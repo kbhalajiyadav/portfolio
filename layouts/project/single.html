@@ -1,9 +1,11 @@
 {{ define "main" }}
+{{ $isIndustry := in (.Params.tags | default (slice)) "Industry" }}
+{{ $backHref := cond $isIndustry "/#experience" "/#research" }}
 <article class="scholar-page scholar-page--project">
   <div class="container">
-    <a class="scholar-back" href="{{ "/#research" | relURL }}"><span aria-hidden="true">←</span> Research program</a>
+    <a class="scholar-back" href="{{ $backHref | relURL }}"><span aria-hidden="true">←</span> {{ if $isIndustry }}Professional experience{{ else }}Research program{{ end }}</a>
     <header class="scholar-header">
-      <p class="scholar-kicker">Research project</p>
+      <p class="scholar-kicker">{{ if $isIndustry }}Professional case study{{ else }}Research project{{ end }}</p>
       <h1 class="article-title">{{ .Title }}</h1>
       <div class="article-status-row">{{ with .Params.status }}<span class="status-pill status-pill--{{ lower . }}">{{ . }}</span>{{ end }}</div>
       {{ with .Params.summary }}<p class="scholar-subtitle">{{ . | markdownify }}</p>{{ end }}

@@ -60,18 +60,17 @@
     sections.forEach((item) => sectionObserver.observe(item.target));
   }
 
-  const viz = document.querySelector('.method-viz');
-  if (viz && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    viz.addEventListener('pointermove', (event) => {
-      const box = viz.getBoundingClientRect();
-      const x = ((event.clientX - box.left) / box.width - 0.5) * 8;
-      const y = ((event.clientY - box.top) / box.height - 0.5) * 8;
-      viz.style.setProperty('--rx', `${-y}deg`);
-      viz.style.setProperty('--ry', `${x}deg`);
-    });
-    viz.addEventListener('pointerleave', () => {
-      viz.style.setProperty('--rx', '0deg');
-      viz.style.setProperty('--ry', '0deg');
-    });
+  const progressBar = document.querySelector('#reading-progress');
+  if (progressBar) {
+    const updateProgress = () => {
+      const doc = document.documentElement;
+      const total = Math.max(doc.scrollHeight - doc.clientHeight, 1);
+      const progress = Math.min(Math.max(doc.scrollTop / total, 0), 1);
+      progressBar.style.width = `${(progress * 100).toFixed(2)}%`;
+    };
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    window.addEventListener('resize', updateProgress);
+    updateProgress();
   }
+
 })();

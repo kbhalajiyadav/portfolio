@@ -14,7 +14,7 @@ status:
 superuser: true
 
 # Role / tagline
-role: Soft Materials Researcher | Chemical Engineer
+role: Incoming Ph.D. Student | Soft Materials Researcher
 
 # Affiliations
 organizations:
@@ -22,7 +22,7 @@ organizations:
     url: https://www.vcu.edu/
 
 # Short profile blurb (appears under name)
-bio: Soft materials researcher developing experimental and computational methods for interfaces, wearable textiles, and quantitative metrology.
+bio: Incoming Integrative Life Sciences Ph.D. student developing reproducible methods for soft-material mechanics, optical metrology, and structure–property characterization.
 
 # Interests (displayed as “Interests” panel)
 interests:
@@ -74,7 +74,7 @@ social:
     
   - icon: cv
     icon_pack: ai
-    link: uploads/resume.pdf
+    link: /uploads/resume.pdf?v=2026-07-28
 
 # Highlight your name in publication author lists
 highlight_name: true
@@ -84,23 +84,27 @@ greeting: bhalaji::kantepalle()
 # About me
 I am a **soft materials researcher and chemical engineer** developing experimental and computational methods for soft interfaces, wearable textiles, and functional materials.
 
-Currently, as a Graduate Researcher at the [**VCU Soft Functional Materials Lab**](https://vcusoftmaterialslab.weebly.com/) under [Dr. Christina Tang](https://egr.vcu.edu/directory/christina.tang/), I specialize in the mechanics of soft interfaces. My research involves:
+Through August 2026, I serve as a Graduate Researcher at the [**VCU Soft Functional Materials Lab**](https://vcusoftmaterialslab.weebly.com/) under [Dr. Christina Tang](https://egr.vcu.edu/directory/christina.tang/). Beginning in August 2026, I will transition to a Graduate Teaching Assistant appointment while entering the Integrative Life Sciences Ph.D. program. My research involves:
 
 - Mechanics-consistent adhesion testing for soft materials/E-textiles.  
 - Preventing “false positive” adhesion metrics in stretchable systems  
 - Synchronizing mechanical strain with optical response in mechanochromic textiles  
+- Mentoring students in characterization planning, NMR-related interpretation, strain-to-color quantification, scientific figures, and poster development
 
-  
+In Summer 2026, I mentored two students through the progression from research
+question and characterization strategy to relationship graphs and poster-ready
+scientific communication.
+
 Previously, I served as a **Technical Project Manager** in the pharmaceutical industry at [**Kreative Organics**](https://kreativeorganics.com/index.html).
 In this role, I **led technical compliance initiatives** for the engineering and quality teams by:
-* **Coordinating** FDA Readiness protocols and SAP ERP validation (CGMP).
-* **Executing** OQ/PQ testing to verify system data integrity and GMP compliance.
-* **Standardizing** supply chain data workflows to accelerate stakeholder decision-making.
+* **Coordinating** quality, engineering, and external stakeholders during regulated digital transformation.
+* **Translating** process requirements into traceable validation documentation and data-integrity controls.
+* **Standardizing** chemical nomenclature and analytical workflows to support consistent decision-making.
 
 
 I am interested in roles that allow me to apply rigorous engineering principles whether characterizing new materials or optimizing production workflows to build reliable, compliant products.
 
 <center> 
 <i class="fa fa-download" aria-hidden="true" style="color:#035AA6"></i>
-<a href="/uploads/resume.pdf" target="_blank" rel="noopener">Download my CV</a>
+<a href="/uploads/resume.pdf?v=2026-07-28" target="_blank" rel="noopener">Open my generated CV</a>
 </center> 

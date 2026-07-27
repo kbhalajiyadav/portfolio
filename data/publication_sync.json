@@ -1,0 +1,25 @@
+{
+  "orcid": "0000-0003-0551-6172",
+  "profile_url": "https://orcid.org/0000-0003-0551-6172",
+  "source": "ORCID Anonymous API v3.0",
+  "journal_article_count": 2,
+  "works": [
+    {
+      "title": "Multi-Criteria Selection of Adhesives for Wearable Textiles",
+      "type": "journal-article",
+      "year": "2026",
+      "journal": "Polymers",
+      "doi": "10.3390/polym18121504",
+      "url": "https://doi.org/10.3390/polym18121504"
+    },
+    {
+      "title": "Mechanical Properties of Dual-Layer Electrospun Fiber Mats",
+      "type": "journal-article",
+      "year": "2025",
+      "journal": "Polymers",
+      "doi": "10.3390/polym17131777",
+      "url": "https://doi.org/10.3390/polym17131777"
+    }
+  ],
+  "last_synced": "2026-07-27T23:16:27Z"
+}

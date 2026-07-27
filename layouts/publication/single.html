@@ -14,6 +14,11 @@
         {{ else }}<span class="status-pill">Research</span>{{ end }}
         <span class="status-pill">{{ time.Format "2006" .Date }}</span>
       </div>
+      {{ with .Params.authors }}
+      <p class="publication-authors">
+        {{ range $index, $author := . }}{{ if $index }}, {{ end }}{{ if eq $author "admin" }}Bhalaji Yadav Kantepalle{{ else }}{{ $author }}{{ end }}{{ end }}
+      </p>
+      {{ end }}
       {{ if .Params.publication }}<div class="publication-venue">{{ .Params.publication | markdownify }}</div>{{ end }}
       <div class="pub-actions">
         {{ if .Params.doi }}<a class="pub-link-chip" href="{{ printf "https://doi.org/%s" .Params.doi }}" target="_blank" rel="noopener">Open DOI ↗</a>{{ end }}
@@ -22,8 +27,8 @@
         {{ if .Params.url_dataset }}<a class="pub-link-chip" href="{{ .Params.url_dataset }}" target="_blank" rel="noopener">Archive ↗</a>{{ end }}
         {{ if .Params.url_source }}<a class="pub-link-chip" href="{{ .Params.url_source }}" target="_blank" rel="noopener">Repository ↗</a>{{ end }}
         {{ $cite := cond (isset .Params "citation") .Params.citation (printf "%s. %s. %s. doi:%s" .Title (.Params.publication | plainify) (time.Format "2006" .Date) .Params.doi) }}
-        <button class="pub-link-chip js-copy" data-copy="{{ $cite | htmlEscape }}" type="button">Copy citation</button>
-        {{ with .Params.bibtex }}<button class="pub-link-chip js-copy" data-copy="{{ . | htmlEscape }}" type="button">Copy BibTeX</button>{{ end }}
+        <button class="pub-link-chip js-copy" data-copy="{{ $cite | htmlEscape }}" type="button" aria-live="polite">Copy citation</button>
+        {{ with .Params.bibtex }}<button class="pub-link-chip js-copy" data-copy="{{ . | htmlEscape }}" type="button" aria-live="polite">Copy BibTeX</button>{{ end }}
       </div>
     </header>
     <div class="scholar-layout">
@@ -43,7 +48,7 @@
           <ul>{{ range .Params.tags }}<li><a href="{{ (printf "tags/%s" (. | urlize)) | relURL }}" class="badge">{{ . }}</a></li>{{ end }}</ul>
         </div>
         {{ end }}
-        <div class="aside-block">{{ partial "publication-citebox.html" . }}</div>
+        <div class="aside-block aside-citation">{{ partial "publication-citebox.html" . }}</div>
       </aside>
     </div>
   </div>

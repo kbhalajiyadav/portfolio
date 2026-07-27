@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#f3f0e8">
+  <meta name="theme-color" content="#f7f5f0">
   <title>{{ site.Data.portfolio.profile.name }} · Soft Materials Researcher</title>
   <meta name="description" content="{{ site.Data.portfolio.profile.summary }}">
   <link rel="canonical" href="{{ .Permalink }}">
@@ -18,9 +18,16 @@
   <meta name="twitter:title" content="{{ site.Data.portfolio.profile.name }} · Soft Materials Researcher">
   <meta name="twitter:description" content="{{ site.Data.portfolio.profile.summary }}">
   <meta name="twitter:image" content="{{ "uploads/avatar-portrait.jpg" | absURL }}">
-  <link rel="stylesheet" href="{{ "css/portfolio.css" | relURL }}">
   {{ $p := site.Data.portfolio }}
+  {{ $brandIcon := resources.Get "media/icon.png" }}
+  {{ $publicationSync := site.Data.publication_sync }}
+  {{ $cvHref := printf "%s?v=%s" ($p.profile.cv | relURL) $p.profile.cv_version }}
   {{ $sameAs := slice $p.profile.linkedin $p.profile.github $p.profile.orcid $p.profile.scholar }}
+  {{ with $brandIcon }}
+  <link rel="icon" type="{{ .MediaType.Type }}" href="{{ .RelPermalink }}">
+  <link rel="apple-touch-icon" href="{{ .RelPermalink }}">
+  {{ end }}
+  <link rel="stylesheet" href="{{ "css/portfolio.css" | relURL }}">
   <script type="application/ld+json">
   {{ dict
     "@context" "https://schema.org"
@@ -38,14 +45,21 @@
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
+  <div id="reading-progress" aria-hidden="true"></div>
   <header class="site-header">
     <a class="wordmark" href="#top" aria-label="Bhalaji Kantepalle, home">
-      <span>BK</span><small>Research portfolio</small>
+      {{ with $brandIcon }}
+      <img src="{{ .RelPermalink }}" alt="" width="39" height="39">
+      {{ else }}
+      <span>BYK</span>
+      {{ end }}
+      <small>Research portfolio</small>
     </a>
     <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
     <nav id="site-nav" aria-label="Primary navigation">
       <a href="#research">Research</a>
       <a href="#outputs">Outputs</a>
+      <a href="#experience">Experience</a>
       <a href="#presentations">Presentations</a>
       <a href="#service">Service</a>
       <a class="nav-contact" href="mailto:{{ $p.profile.email }}">Contact</a>
@@ -59,8 +73,9 @@
         <h1>{{ $p.profile.headline }}</h1>
         <p class="lede">{{ $p.profile.summary }}</p>
         <div class="hero-actions">
-          <a class="button button-primary" href="#outputs">View research outputs</a>
-          <a class="button button-quiet" href="mailto:{{ $p.profile.email }}">Start a conversation <span aria-hidden="true">↗</span></a>
+          <a class="button button-primary" href="#research">Explore the research</a>
+          <a class="button button-quiet" href="#outputs">Publications & software <span aria-hidden="true">↓</span></a>
+          <a class="button button-quiet" href="{{ $cvHref }}" target="_blank" rel="noopener">Generated CV <span aria-hidden="true">↗</span></a>
         </div>
         <p class="current"><span></span>{{ $p.profile.status }}</p>
       </div>
@@ -77,16 +92,20 @@
 
     <section class="metrics" aria-label="Portfolio at a glance">
       {{ range $p.metrics }}
-      <div><strong>{{ .value }}</strong><span>{{ .label }}</span></div>
+      {{ $metricValue := .value }}
+      {{ if and (eq .source "orcid") $publicationSync }}
+        {{ $metricValue = $publicationSync.journal_article_count }}
+      {{ end }}
+      <div><strong>{{ $metricValue }}</strong><span>{{ .label }}</span></div>
       {{ end }}
     </section>
 
     <section class="section section-intro" id="research">
       <div class="section-heading">
         <p class="kicker">Research program</p>
-        <h2>From material response to defensible measurement.</h2>
+        <h2>From material structure to reliable use.</h2>
       </div>
-      <p class="section-summary">My work asks a practical question: how can complex behavior in soft, deformable materials be measured in a way that remains physically meaningful and reproducible?</p>
+      <p class="section-summary">My program asks how processing and temperature organize soft-material structure, how that structure governs optical, thermal, and mechanical response, and how those relationships can be translated into reliable devices.</p>
     </section>
 
     <section class="research-grid">
@@ -98,39 +117,26 @@
         <ul aria-label="Methods and topics">
           {{ range .tags }}<li>{{ . }}</li>{{ end }}
         </ul>
+        <a class="card-link" href="{{ .href }}">{{ .link_label }} <span aria-hidden="true">↗</span></a>
       </article>
       {{ end }}
     </section>
 
-    <section class="method-section">
+    <section class="evidence-section" id="workflow">
       <div class="method-copy">
-        <p class="kicker">Analytical strength</p>
-        <h2>One synchronized measurement pipeline.</h2>
-        <p>Computer vision is integrated with mechanical testing—not added after the fact. The workflow aligns regions of interest, color-space measurements, deformation, and force-time signals into a reproducible record.</p>
-        <p class="disclosure">Method schematic — no unpublished results or experimental frames are shown.</p>
+        <p class="kicker">How I build evidence</p>
+        <h2>From physical question to inspectable decision.</h2>
+        <p>My analytical strength is not a single technique. It is the chain connecting experimental design, synchronized measurement, reproducible computation, and public research outputs.</p>
       </div>
-      <div class="method-viz" aria-label="Schematic of synchronized computer vision and mechanical analysis">
-        <div class="scanline"></div>
-        <div class="frame frame-one">
-          <span>01</span><strong>Acquire</strong><small>video + force</small>
-          <i></i>
-        </div>
-        <div class="frame frame-two">
-          <span>02</span><strong>Track</strong><small>ROI + strain</small>
-          <i></i>
-        </div>
-        <div class="frame frame-three">
-          <span>03</span><strong>Quantify</strong><small>L*a*b* + ΔE₀₀</small>
-          <i></i>
-        </div>
-        <div class="frame frame-four">
-          <span>04</span><strong>Synchronize</strong><small>mechanics + optics</small>
-        </div>
-        <svg class="method-curve" viewBox="0 0 640 130" role="img" aria-label="Abstract synchronized signal trace">
-          <path class="gridline" d="M0 32H640M0 65H640M0 98H640"/>
-          <path class="curve-a" d="M0 105 C70 104 72 74 125 72 S205 89 255 48 S342 31 394 62 S475 84 522 41 S598 18 640 29"/>
-          <path class="curve-b" d="M0 116 C65 112 110 109 155 97 S230 75 283 83 S366 100 423 73 S535 45 640 52"/>
-        </svg>
+      <div class="evidence-map" aria-label="Research evidence workflow">
+        {{ range $p.workflow }}
+        <a class="evidence-step" href="{{ .href }}">
+          <span>{{ .number }}</span>
+          <strong>{{ .title }}</strong>
+          <small>{{ .text }}</small>
+          <em>{{ .link_label }} ↗</em>
+        </a>
+        {{ end }}
       </div>
     </section>
 
@@ -138,6 +144,13 @@
       <div class="section-heading">
         <p class="kicker">Selected outputs</p>
         <h2>Published work and open methods.</h2>
+        {{ with $publicationSync }}
+        <p class="output-sync">
+          {{ .journal_article_count }} journal articles synchronized from
+          <a href="{{ .profile_url }}" target="_blank" rel="noopener">ORCID <span aria-hidden="true">↗</span></a>;
+          selected records are curated below.
+        </p>
+        {{ end }}
       </div>
       <div class="publication-list">
         {{ range $p.publications }}
@@ -201,13 +214,60 @@
       </div>
     </section>
 
+    <section class="section milestones-section" id="milestones">
+      <div class="section-heading">
+        <p class="kicker">Upcoming milestones</p>
+        <h2>The next questions are structural, quantitative, and translational.</h2>
+      </div>
+      <div class="milestone-grid">
+        {{ range $p.milestones }}
+        <article>
+          <div class="milestone-meta"><time>{{ .period }}</time><span>{{ .label }}</span></div>
+          <h3>{{ .title }}</h3>
+          <p>{{ .text }}</p>
+        </article>
+        {{ end }}
+      </div>
+    </section>
+
+    <section class="section experience-section" id="experience">
+      <div class="section-heading">
+        <p class="kicker">Research & industry experience</p>
+        <h2>Experimental rigor, software thinking, and regulated execution.</h2>
+      </div>
+      <div class="experience-list">
+        {{ range $p.experience }}
+        <article>
+          <div class="experience-meta">
+            <time>{{ .period }}</time>
+            <span>{{ .location }}</span>
+          </div>
+          <div class="experience-body">
+            <p class="organization">{{ .organization }}</p>
+            <h3>{{ .role }}</h3>
+            <p>{{ .detail }}</p>
+            {{ with .outcomes }}
+            <ul>
+              {{ range . }}<li>{{ . }}</li>{{ end }}
+            </ul>
+            {{ end }}
+            {{ with .links }}
+            <div class="experience-links">
+              {{ range . }}<a href="{{ .href }}">{{ .label }} <span aria-hidden="true">↗</span></a>{{ end }}
+            </div>
+            {{ end }}
+          </div>
+        </article>
+        {{ end }}
+      </div>
+    </section>
+
     <section class="section presentations" id="presentations">
       <div class="section-heading">
         <p class="kicker">Research communication</p>
         <h2>Posters, seminars, and defense.</h2>
       </div>
-      <div class="presentation-feature">
-        <img src="{{ "media/clse-research-day-2026.jpeg" | relURL }}" alt="VCU Chemical and Life Science Engineering Research Day seminar flyer" loading="lazy">
+      <div class="presentation-feature presentation-feature--text">
         <div>
           <span class="tag">Featured seminar</span>
           <h3>Beyond Peel Strength</h3>
@@ -256,13 +316,20 @@
         </article>
         {{ end }}
       </div>
-      <aside class="teaching-note">
-        <span>Teaching contribution</span>
-        <div>
-          <h3>Undergraduate Material Balance</h3>
-          <p>Delivered classroom instruction on vapor–liquid equilibrium, Henry’s Law, and Raoult’s Law, alongside mentoring in laboratory safety, literature review, experimental planning, and scientific figures.</p>
-        </div>
-      </aside>
+      <div class="teaching-grid" aria-label="Teaching and mentoring contributions">
+        {{ range $p.teaching }}
+        <article class="teaching-note">
+          <div>
+            <span>{{ .type }}</span>
+            <time>{{ .date }}</time>
+          </div>
+          <div>
+            <h3>{{ .title }}</h3>
+            <p>{{ .detail }}</p>
+          </div>
+        </article>
+        {{ end }}
+      </div>
     </section>
 
     <section class="section path-section">
@@ -271,35 +338,60 @@
         {{ range $p.education }}
         <article><time>{{ .period }}</time><div><h3>{{ .degree }}</h3><p>{{ .institution }}</p>{{ with .note }}<small>{{ . }}</small>{{ end }}</div></article>
         {{ end }}
+        {{ with $p.professional_development }}
+        <div class="development-list">
+          <p class="kicker">Selected scientific training</p>
+          {{ range . }}
+          <article>
+            <time>{{ .period }}</time>
+            <div>
+              <h3>{{ .title }}</h3>
+              <p>{{ .organization }}</p>
+              {{ with .note }}<small>{{ . }}</small>{{ end }}
+            </div>
+          </article>
+          {{ end }}
+        </div>
+        {{ end }}
       </div>
-      <div class="path-column future-column">
-        <p class="kicker">Research disclosure</p>
-        <article>
-          <time>Policy</time>
-          <div>
-            <h3>Published work first</h3>
-            <p>New experiments, datasets, and results will be added only after they are publicly available.</p>
-          </div>
-        </article>
-        <p class="privacy-note">This portfolio intentionally excludes unpublished formulations, figures, datasets, and experimental schedules.</p>
+      <div class="transition-card">
+        <p class="kicker">Academic transition</p>
+        <span class="transition-label">Now</span>
+        <h3>Completing the M.S. in Chemical & Life Science Engineering</h3>
+        <p>Thesis defended July 1, 2026; degree completion expected August 2026.</p>
+        <span class="transition-label">Next</span>
+        <h3>Beginning the Integrative Life Sciences Ph.D.</h3>
+        <p>Entering doctoral study at VCU in Fall 2026 with a research trajectory spanning soft matter, quantitative metrology, and structure under flow.</p>
       </div>
     </section>
 
-    <section class="automation">
+    <section class="automation" id="trajectory">
       <div>
-        <p class="kicker">Emerging direction</p>
-        <h2>Toward closed-loop materials experiments.</h2>
-        <p>Exploring how accessible robotics such as the UFACTORY xArm6 could connect controlled handling, measurement, and analysis. This is a future research direction, not a claim of current instrumentation.</p>
+        <p class="kicker">Research trajectory</p>
+        <h2>Resolving structure–processing–property relationships in liquid crystals.</h2>
+        <p>The next research chapter centers on how flow and thermal history organize liquid-crystal structure—and how neutron scattering, rheology, and optical or mechanical response can be connected into one interpretable picture.</p>
+        <p class="future-note">Longer term, platforms such as the UFACTORY xArm6 could support repeatable sample handling and closed-loop experimentation. Robotics is an enabling layer, not the research claim.</p>
       </div>
-      <ol aria-label="Closed-loop experimentation workflow">
-        <li><span>01</span>Robotic handling</li>
-        <li><span>02</span>Controlled experiment</li>
-        <li><span>03</span>Optical / scattering data</li>
-        <li><span>04</span>Reproducible analysis</li>
+      <ol aria-label="Liquid crystal research trajectory">
+        <li><span>01</span><strong>Processing history</strong><small>Shear and thermal conditions</small></li>
+        <li><span>02</span><strong>Liquid-crystal structure</strong><small>Orientation and organization</small></li>
+        <li><span>03</span><strong>SANS / RheoSANS</strong><small>Structure under controlled flow</small></li>
+        <li><span>04</span><strong>Property response</strong><small>Optical and mechanical behavior</small></li>
       </ol>
+      <div class="collaboration-questions">
+        <div>
+          <p class="kicker">Questions for collaboration</p>
+          <h3>Where methods and application domains can meet.</h3>
+        </div>
+        <div class="question-list">
+          {{ range $p.collaboration_questions }}
+          <article><strong>{{ .title }}</strong><p>{{ .text }}</p></article>
+          {{ end }}
+        </div>
+      </div>
     </section>
 
-    <section class="contact-section">
+    <section class="contact-section" id="contact">
       <p class="kicker">Contact</p>
       <h2>Interested in soft materials, quantitative metrology, or research collaboration?</h2>
       <a class="contact-link" href="mailto:{{ $p.profile.email }}">{{ $p.profile.email }} <span aria-hidden="true">↗</span></a>
@@ -307,8 +399,8 @@
         <a href="{{ $p.profile.scholar }}" target="_blank" rel="noopener">Google Scholar <span aria-hidden="true">↗</span></a>
         <a href="{{ $p.profile.orcid }}" target="_blank" rel="noopener">ORCID <span aria-hidden="true">↗</span></a>
         <a href="{{ $p.profile.github }}" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
-        <a href="{{ $p.profile.linkedin }}" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a>
-        <a href="{{ $p.profile.cv | relURL }}" target="_blank" rel="noopener">Download CV <span aria-hidden="true">↓</span></a>
+        <a href="{{ $p.profile.linkedin }}" target="_blank" rel="noopener" title="Connect with Bhalaji on LinkedIn">Connect on LinkedIn <span aria-hidden="true">↗</span></a>
+        <a href="{{ $cvHref }}" target="_blank" rel="noopener">Generated CV <span aria-hidden="true">↓</span></a>
       </nav>
       <p class="last-updated">Last updated {{ $p.profile.last_updated }}</p>
     </section>
@@ -317,7 +409,7 @@
   <footer>
     <span>© {{ now.Year }} {{ $p.profile.name }}</span>
     <div>
-      <a href="{{ $p.profile.linkedin }}" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="{{ $p.profile.linkedin }}" target="_blank" rel="noopener" title="Connect with Bhalaji on LinkedIn">LinkedIn</a>
       <a href="{{ $p.profile.github }}" target="_blank" rel="noopener">GitHub</a>
       <a href="{{ $p.profile.scholar }}" target="_blank" rel="noopener">Scholar</a>
       <a href="{{ $p.profile.orcid }}" target="_blank" rel="noopener">ORCID</a>

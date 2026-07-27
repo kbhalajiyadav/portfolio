@@ -1,7 +1,7 @@
 ---
-title: "Supply Chain & Chemical Data Operations"
-summary: "Spearheaded the digital transformation of chemical supply chain workflows as Technical Project Manager, leveraging Python/Docker to standardize nomenclature and accelerate stakeholders decision-making."
-tags: ["Technical Project Management", "Chemical Operations", "Supply Chain", "Data Strategy", "Industry"]
+title: "Chemical Data & Digital Operations"
+summary: "Professional experience translating chemical-domain requirements into reliable data, documentation, and decision-support workflows."
+tags: ["Technical Project Management", "Chemical Operations", "Data Quality", "Industry"]
 status: "COMPLETED"
 date: 2022-10-01
 type: project
@@ -9,65 +9,20 @@ toc: true
 weight: 4
 ---
 
-## 1. The Situation: The Nomenclature Barrier
+## Professional context
 
-**The Context:** In the pharmaceutical supply chain, speed is critical. At **Kreative Organics**, the Business Development team needed to rapidly identify gaps in the global market for specific chemical intermediates.
+At **Kreative Organics**, I worked at the intersection of chemical engineering, technical project management, and regulated operations. My role involved turning domain-specific requirements into structured, repeatable workflows that could be used by technical and business teams.
 
-**The Gap:** The industry suffers from severe data fragmentation. A single molecule might be listed under a Trade Name, an IUPAC name, or a generic identifier across different global databases.
-- **The Chemical Problem:** Mismatched **CAS or common chemical name fomats** (Chemical Abstracts Service) led to missed market opportunities.
-- **The Operational Problem:** Teams used to spent 70% of their time manually cross-referencing safety data sheets (SDS) and trade logs rather than analyzing market strategy.
+## Selected contributions
 
-## 2. The Task: Operationalizing Data
+- Standardized chemical identifiers and nomenclature to improve consistency across working datasets.
+- Connected chemical-domain knowledge with data-quality, documentation, and process requirements.
+- Supported reproducible analytical workflows using tools including Python, Docker, and Tableau.
+- Coordinated with cross-functional stakeholders during digital-transformation and enterprise-system initiatives.
+- Prepared technical documentation with attention to traceability, validation, and data integrity.
 
-I was assigned as the **Technical Project Manager** to lead the **Digital Transformation** of this workflow. My objective was not just "software," but **Process Engineering**: creating a robust, standardized pipeline that could translate ambiguous market data into actionable chemical intelligence.
+## Transferable perspective
 
-**Key Objectives:**
-- **Standardization:** Define a logic to resolve chemical synonym conflicts and establish a "Single Source of Truth."
-- **Reliability:** Ensure the tool was robust enough for non-technical staff to run independently.
-- **Market Speed:** Compress the timeline from "Data Gathering" to "Sales Action."
+This experience strengthened the same habits that guide my research: define the measurement or decision clearly, make the workflow reproducible, document assumptions, and communicate results for the people who will use them.
 
-## 3. The Action: Engineering the Process
-
-I operated as the **Technical Lead**, bridging the gap between chemical domain knowledge and technical execution.
-
-### A. Defining the "Chemical Logic" (Strategy)
-I spearheaded the standardization algorithm. Unlike a generic approach, I understood the nuances of chemical naming conventions. I defined the rulesets for mapping inconsistent trade names to verified **CAS or common chemical Names**, ensuring accuracy in the output.
-
-### B. Containerizing the Workflow (Docker)
-To ensure operational continuity, I packaged the solution using **Docker**. This wasn't just about code; it was about **Process Reliability**. By containerizing the environment, I ensured that the standardization engine ran identically on every machine, immune to local configuration errors—critical for a regulated industrial environment.
-
-### C. Visualizing Market Gaps (Tableau)
-I developed **Strategic Dashboards** in Tableau that mapped global trade volume. This transformed raw rows of data into stratergic insights, allowing the sales team to navigate and spot the under-served regions for specific chemical classes.
-
-```mermaid
-graph TD
-    %% Professional Style Definitions
-    classDef input fill:#f8f9fa,stroke:#6c757d,stroke-width:1px,stroke-dasharray: 5 5;
-    classDef chemistry fill:#e3f2fd,stroke:#1565c0,stroke-width:2px;
-    classDef ops fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px;
-    classDef output fill:#fff3e0,stroke:#e65100,stroke-width:2px;
-
-    %% Nodes
-    Raw[/"Raw Global Trade Data<br/>(Ambiguous Naming)"/]:::input
-    
-    subgraph "Standardization Engine"
-        direction TB
-        Logic["Chemical Logic Definition<br/>(CAS Name Mapping)"]:::chemistry
-        Docker["Docker Containerization<br/>(Process Reliability)"]:::ops
-    end
-
-    subgraph "Business Intelligence"
-        Viz["Tableau Market Insights<br/>(Supply/Demand Gaps)"]:::ops
-    end
-
-    Result[/"Qualified Sales Targets"/]:::output
-
-    %% Flow with System State Labels (The "CAD" Look)
-    Raw -- "Unstructured CSV" --> Logic
-    Logic -- "Mapping Rules" --> Docker
-    Docker -- "Cleaned Dataset" --> Viz
-    Viz -- "Actionable Insights" --> Result
-```
-## 4. The Result
-- Operational Efficiency: Slashed market research time by 70%, effectively automating the "grunt work" of data collection.
-- Data Integrity: Achieved a 90% accuracy uplift in chemical identification, virtually eliminating errors caused by ambiguous naming confusion.
+> This public portfolio describes responsibilities and methods at a high level. Employer datasets, system architecture, customer information, and confidential operating details are intentionally excluded.

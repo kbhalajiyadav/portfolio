@@ -8,13 +8,13 @@ profile:
   github: https://github.com/kbhalajiyadav
   orcid: https://orcid.org/0000-0003-0551-6172
   scholar: https://scholar.google.com/citations?hl=en&user=DrfbtX4AAAAJ
-  headline: Graduate Researcher and Chemical Engineer
+  headline: Incoming Ph.D. Student, Researcher, and Chemical Engineer
   summary: >-
-    Graduate researcher and chemical engineer specializing in soft-matter
-    mechanics, adhesion and fracture metrology, wearable textiles, and
-    computer-vision-based materials characterization. Develops reproducible
-    experimental and computational workflows that connect material response,
-    optical measurement, and engineering decision-making.
+    Incoming Integrative Life Sciences Ph.D. student and chemical engineer
+    specializing in soft-matter mechanics, adhesion and fracture metrology,
+    wearable textiles, and computer-vision-based materials characterization.
+    Develops reproducible experimental and computational workflows that connect
+    processing, structure, material response, and engineering decisions.
 
 education:
   - period: Starting Fall 2026
@@ -35,7 +35,15 @@ education:
     location: Coimbatore, India
 
 research_experience:
-  - period: Sep 2024 - Present
+  - period: Beginning Aug 2026
+    role: Graduate Teaching Assistant
+    organization: Virginia Commonwealth University
+    location: Richmond, Virginia
+    bullets:
+      - >-
+        Support undergraduate instruction while beginning doctoral training
+        in the Integrative Life Sciences Ph.D. program.
+  - period: Sep 2024 - Aug 2026
     role: Graduate Researcher and Metrology Lead
     organization: VCU Soft Functional Materials Lab
     location: Richmond, Virginia
@@ -52,8 +60,14 @@ research_experience:
         interpretation, optical microscopy, and refractometry to functional
         soft-material systems.
       - >-
-        Contributed technical writing and regulatory analysis to a successful
-        $30,000 Commonwealth Cyber Initiative proposal.
+        Mentored two students in Summer 2026 on characterization planning,
+        NMR-related interpretation, strain-to-color quantification,
+        relationship plots, scientific figures, and poster development.
+      - >-
+        Contributed technical writing and regulatory analysis to a phased
+        $100,000 Commonwealth Cyber Initiative proposal; the $30,000
+        prototype and proof-of-concept phase was initially funded, with later
+        funding contingent on satisfactory progress.
 
 publications:
   - >-
@@ -126,11 +140,6 @@ presentations:
       B. Y. Kantepalle, H. Stwodah, D. Joung, and C. Tang, "Adhesives for
       Personalized Wearable Devices," VCU Engineering Graduate Research and
       Postdoc Showcase, Richmond, Virginia.
-  - date: "2026"
-    type: Classroom Lecture
-    citation: >-
-      Undergraduate Material Balance instruction on vapor-liquid equilibrium,
-      Henry's Law, and Raoult's Law.
 
 service:
   - period: Mar 29, 2026
@@ -142,6 +151,9 @@ service:
   - period: Mar 20, 2026
     role: Prototype Demonstrator, Feedback Friday
     organization: Shelfie Program, VCU da Vinci Center
+  - period: Nov 11-12, 2025
+    role: Classroom Instructor, Undergraduate Material Balance
+    organization: Virginia Commonwealth University
   - period: Feb 2020
     role: Student Volunteer
     organization: Anokha, Amrita University Techfest
@@ -153,15 +165,14 @@ industry_experience:
     location: Hyderabad, India
     bullets:
       - >-
-        Led the quality-assurance interface for SAP ERP implementation and
-        translated manufacturing SOPs into OQ/PQ validation protocols
-        supporting cGMP and data-integrity requirements.
+        Coordinated quality, engineering, and external stakeholders during a
+        regulated digital-transformation initiative.
       - >-
-        Re-engineered the deployment strategy for a five-hour overnight
-        cutover with zero production downtime.
+        Translated process requirements into validation documentation,
+        traceable test protocols, and data-integrity controls.
       - >-
-        Standardized chemical nomenclature and data workflows, reducing manual
-        research time by 70% and improving search accuracy.
+        Standardized chemical nomenclature and analytical workflows to support
+        more consistent technical and business decisions.
   - period: Oct 2022 - Apr 2023
     role: Technical Project Manager Intern
     organization: Kreative Organics Pvt. Ltd.
@@ -184,4 +195,4 @@ technical_skills:
   - category: Instrumentation
     items: Universal testing machine, optical microscopy, UV-Vis spectroscopy, Abbe refractometry, 3D printing
   - category: Compliance and Process
-    items: SAP ERP validation, OQ/PQ, FDA 21 CFR Part 11, cGMP, V-model, RCA, CAPA, DOE, Lean manufacturing
+    items: Validation documentation, data integrity, cGMP, V-model, RCA, CAPA, DOE, Lean manufacturing
