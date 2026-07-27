@@ -207,8 +207,11 @@
         <h2>Contributing beyond the lab.</h2>
       </div>
       <div class="service-grid">
-        {{ range $p.service }}
+        {{ range $item := $p.service }}
         <article>
+          {{ with .image }}
+          <img class="service-image" src="{{ . | relURL }}" alt="{{ $item.image_alt }}" loading="lazy">
+          {{ end }}
           <time>{{ .date }}</time>
           <h3>{{ .role }}</h3>
           <p class="organization">{{ .organization }}</p>

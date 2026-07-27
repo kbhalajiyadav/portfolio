@@ -40,7 +40,7 @@ updates:
     label: Read paper
   - date: Jun 12, 2026
     title: Parkinson’s research symposium
-    text: Presented a poster on textile-integrated vibrotactile wearables.
+    text: Presented the multi-criteria adhesive-selection framework at the PMDC annual research symposium.
     href: https://parkinsons.vcu.edu/research/pmdc-research-symposium/
     label: Event
 
@@ -95,9 +95,9 @@ software:
 presentations:
   - date: Jun 12, 2026
     kind: Poster
-    title: Stability-Informed Adhesive Selection for Textile-Integrated Vibrotactile Wearables in Parkinson’s Applications
+    title: Multi-Criteria Selection of Adhesives for Wearable Textiles
     event: PMDC 4th Annual Research Symposium · VCU
-    authors: Author list pending confirmation
+    authors: B. Y. Kantepalle, U. E. Arachchige, D. Joung, and C. Tang
   - date: Apr 22, 2026
     kind: Poster
     title: "Quantifying Mechanochromic Response in Smart Textiles: A Computer Vision Approach"
@@ -159,12 +159,15 @@ service:
         href: https://www.credly.com/badges/ad98e65e-5b4e-4910-9dff-fa54960fdeca/public_url
       - label: Pitching & Storytelling
         href: https://www.credly.com/badges/8caba56a-a526-4891-9408-55e68ee2b0cf/public_url
-  - date: Mar 2026
+  - date: Mar 20, 2026
     role: Prototype Demonstration · Feedback Friday
-    organization: VCU da Vinci Center
+    organization: Shelfie Program · VCU da Vinci Center
     detail: >-
       Demonstrated a battery-free diabetic thermochromic sock concept for
-      preventive foot-care monitoring at home.
+      preventive foot-care monitoring at home during the Spring 2026 Shelfie
+      cohort's Feedback Friday at Shift Retail Lab.
+    image: media/shelfie-feedback-friday-2026.jpg
+    image_alt: Spring 2026 Shelfie Program cohort outside VCU Shift Retail Lab after Feedback Friday
   - date: Feb 2020
     role: Student Volunteer
     organization: Anokha · Amrita University Techfest
