@@ -27,6 +27,8 @@ forbidden = {
     'See the evidence workflow': 'misdirected homepage link',
     '>Archive ↗<': 'ambiguous software label',
     '>Repository ↗<': 'ambiguous thesis/source label',
+    'Applied innovation & professional development': 'duplicated engagement taxonomy',
+    'Netroschooltraining': 'incorrect name for the National Neutron Scattering School',
 }
 errors: list[str] = []
 for needle, reason in forbidden.items():
@@ -40,11 +42,26 @@ for required in (
     'Stimuli-responsive',
     'Aug 2026–present',
     'M.S. degree',
+    'professional_development:',
+    '1st National Neutron Scattering School',
+    'Oak Ridge National Laboratory',
     'applied_innovation:',
+    'Prototype Demonstrator · Shelfie Program',
+    'VCU da Vinci Center · Feedback Friday',
     'Graduate Researcher · Quantitative Metrology',
 ):
     if required.lower() not in portfolio_text.lower():
         errors.append(f'data/portfolio.yaml: missing {required!r}')
+
+landing_text = texts[ROOT / 'layouts/landing/list.html']
+for required in (
+    '<h3>Research training</h3>',
+    '<h3 class="subhead">Applied innovation</h3>',
+    'range $p.professional_development',
+    'range $p.applied_innovation',
+):
+    if required not in landing_text:
+        errors.append(f'layouts/landing/list.html: missing taxonomy invariant {required!r}')
 
 cv_text = texts[ROOT / 'data/cv.yaml']
 build_cv_text = (ROOT / 'scripts/build_cv.py').read_text(encoding='utf-8')
