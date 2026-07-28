@@ -1,0 +1,89 @@
+name: Validate generated CV
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - data/cv.yaml
+      - cv/**
+      - scripts/build_cv.py
+      - static/uploads/resume.pdf
+      - .github/workflows/cv-validation.yaml
+  pull_request:
+    branches: [main]
+    paths:
+      - data/cv.yaml
+      - cv/**
+      - scripts/build_cv.py
+      - static/uploads/resume.pdf
+      - .github/workflows/cv-validation.yaml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          persist-credentials: false
+
+      - name: Install proven CV dependencies
+        run: |
+          sudo apt-get update
+          # Deliberately retain Ubuntu's recommended TeX packages. The CV uses
+          # enumitem, titlesec, fancyhdr, microtype, and lastpage; the earlier
+          # --no-install-recommends optimization omitted required packages.
+          sudo apt-get install -y latexmk texlive-xetex poppler-utils
+          python3 -m pip install --disable-pip-version-check PyYAML==6.0.3
+
+      - name: Verify required LaTeX packages
+        run: |
+          for package in enumitem.sty titlesec.sty fancyhdr.sty microtype.sty lastpage.sty; do
+            kpsewhich "$package" >/dev/null || {
+              echo "Missing required LaTeX package: $package" >&2
+              exit 1
+            }
+          done
+
+      - name: Preserve committed outputs
+        run: |
+          cp cv/generated/bhalaji_cv.tex "${RUNNER_TEMP}/committed.tex"
+          cp static/uploads/resume.pdf "${RUNNER_TEMP}/committed.pdf"
+          pdftotext -layout "${RUNNER_TEMP}/committed.pdf" "${RUNNER_TEMP}/committed.txt"
+
+      - name: Regenerate and preflight CV
+        run: |
+          python3 scripts/build_cv.py
+          cmp --silent "${RUNNER_TEMP}/committed.tex" cv/generated/bhalaji_cv.tex
+          pdfinfo static/uploads/resume.pdf | tee cv-pdfinfo.txt
+          test "$(pdfinfo static/uploads/resume.pdf | awk '/^Pages:/ {print $2}')" = "2"
+          test "$(pdfinfo static/uploads/resume.pdf | awk '/^Page size:/ {print $3, $5}')" = "612 792"
+          pdftotext -layout static/uploads/resume.pdf generated-cv.txt
+          cmp --silent "${RUNNER_TEMP}/committed.txt" generated-cv.txt
+
+      - name: Upload CV diagnostics on failure
+        if: failure()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: cv-validation-diagnostics-${{ github.run_attempt }}
+          path: |
+            cv/generated/bhalaji_cv.tex
+            cv/generated/*.log
+            cv/generated/*.fls
+            cv/generated/*.aux
+            cv/generated/*.out
+            cv/generated/*.xdv
+            static/uploads/resume.pdf
+            cv-pdfinfo.txt
+            generated-cv.txt
+          if-no-files-found: warn
+          retention-days: 14

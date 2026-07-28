@@ -1,0 +1,99 @@
+name: Propose portfolio display controls
+
+on:
+  workflow_dispatch:
+    inputs:
+      presentation_series:
+        description: Presentation groups shown on the homepage
+        required: true
+        default: "3"
+        type: choice
+        options: ["1", "2", "3", "4", "5", "6"]
+      teaching_records:
+        description: Teaching and research-guidance records shown on the homepage
+        required: true
+        default: "4"
+        type: choice
+        options: ["1", "2", "3", "4", "5", "6"]
+      service_records:
+        description: Service records shown on the homepage
+        required: true
+        default: "3"
+        type: choice
+        options: ["1", "2", "3", "4", "5", "6"]
+      notes:
+        description: Prepare the Notes feature for later publication
+        required: true
+        default: false
+        type: boolean
+      presentations_archive:
+        description: Prepare a separate presentations archive
+        required: true
+        default: false
+        type: boolean
+      webmentions:
+        description: Enable Webmention discovery only after real endpoints are configured
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+  pull-requests: write
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  propose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          fetch-depth: 0
+
+      - name: Install YAML dependency
+        run: python3 -m pip install --disable-pip-version-check PyYAML==6.0.3
+
+      - name: Update controls
+        env:
+          PRESENTATION_SERIES: ${{ inputs.presentation_series }}
+          TEACHING_RECORDS: ${{ inputs.teaching_records }}
+          SERVICE_RECORDS: ${{ inputs.service_records }}
+          NOTES: ${{ inputs.notes }}
+          PRESENTATIONS_ARCHIVE: ${{ inputs.presentations_archive }}
+          WEBMENTIONS: ${{ inputs.webmentions }}
+        run: |
+          python3 scripts/update_site_controls.py \
+            --presentation-series "$PRESENTATION_SERIES" \
+            --teaching-records "$TEACHING_RECORDS" \
+            --service-records "$SERVICE_RECORDS" \
+            --notes "$NOTES" \
+            --presentations-archive "$PRESENTATIONS_ARCHIVE" \
+            --webmentions "$WEBMENTIONS"
+          python3 scripts/audit_source.py
+
+      - name: Open a reviewable pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if git diff --quiet -- data/site_controls.yaml; then
+            echo "The requested controls already match the repository."
+            exit 0
+          fi
+          branch="automation/site-controls-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$branch"
+          git add data/site_controls.yaml
+          git commit -m "Update portfolio display controls"
+          git push --set-upstream origin "$branch"
+          gh pr create \
+            --draft \
+            --base main \
+            --head "$branch" \
+            --title "Update portfolio display controls" \
+            --body "Updates homepage limits and future feature controls through the owner-only Actions form. Search and Latest Updates remain permanently disabled."
