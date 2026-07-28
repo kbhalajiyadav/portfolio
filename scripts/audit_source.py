@@ -69,6 +69,12 @@ for required in (
     'Aug 2026–Present',
     'Graduate Researcher, Quantitative Metrology',
     'Teaching, Review, and Applied Innovation',
+    'Presentation of Research--Foundational',
+    'https://www.credly.com/badges/a2c228cc-13df-4153-b22b-741275119646',
+    'https://www.credly.com/badges/e6785521-d537-4ea8-983f-3e1b123f01c7/public_url',
+    'https://www.credly.com/badges/ad98e65e-5b4e-4910-9dff-fa54960fdeca/public_url',
+    'https://www.credly.com/badges/8caba56a-a526-4891-9408-55e68ee2b0cf/public_url',
+    'honors_bullets',
 ):
     if required.lower() not in (cv_text + build_cv_text).lower():
         errors.append(f'CV source: missing {required!r}')
