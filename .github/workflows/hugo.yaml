@@ -113,13 +113,18 @@ jobs:
           PA11Y_WIDTH=1440 PA11Y_HEIGHT=1000 npx pa11y-ci --config .pa11yci.cjs --json | tee artifacts/pa11y-desktop.json
           PA11Y_WIDTH=390 PA11Y_HEIGHT=844 npx pa11y-ci --config .pa11yci.cjs --json | tee artifacts/pa11y-mobile.json
 
-      - name: Responsive, zoom-equivalent, reduced-motion, and menu audit
+      - name: Responsive, laptop-frame, zoom-equivalent, reduced-motion, and menu audit
         run: |
           python3 scripts/check_responsive.py \
             --base-url http://127.0.0.1:4173/ \
             --chrome "$CHROME_PATH" \
             --report artifacts/responsive-layout.json \
             --screenshots artifacts/responsive-screenshots
+          python3 scripts/check_laptop_landing.py \
+            --base-url http://127.0.0.1:4173/ \
+            --chrome "$CHROME_PATH" \
+            --report artifacts/laptop-landing.json \
+            --screenshot artifacts/responsive-screenshots/1366x768-laptop-home.png
 
       - name: Lighthouse audits for mobile and desktop
         run: |
