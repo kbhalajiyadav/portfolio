@@ -16,6 +16,7 @@
       <div class="article-content e-content">{{ .Content }}</div>
       {{ if .Params.toc }}<aside class="toc-column"><details class="toc-disclosure" open><summary>On this page</summary>{{ .TableOfContents }}</details></aside>{{ end }}
     </div>
+    {{ partial "related_research_package.html" . }}
     <span class="p-author h-card visually-hidden"><a class="p-name u-url" href="{{ "/" | absURL }}">{{ site.Data.portfolio.profile.name }}</a></span>
   </div>
 </article>
