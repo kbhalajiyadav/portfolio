@@ -1,3 +1,0 @@
-Force GitHub Pages redeploy for the finalized August 2026 portfolio.
-Triggered: 2026-07-28
-Validated source commit: 46dfa6af2ac57829e707e31b3774dc0d1ef5563f
