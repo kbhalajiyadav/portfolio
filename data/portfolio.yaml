@@ -14,9 +14,9 @@ profile:
   orcid: https://orcid.org/0000-0003-0551-6172
   scholar: https://scholar.google.com/citations?hl=en&user=DrfbtX4AAAAJ
   cv: uploads/resume.pdf
-  cv_version: '2026-07-28'
-  last_updated: July 28, 2026
-  last_updated_iso: '2026-07-28'
+  cv_version: 2026-08
+  last_updated: August 2026
+  last_updated_iso: '2026-08-01'
 metrics:
 - value: '2'
   label: Peer-reviewed articles
@@ -24,7 +24,7 @@ metrics:
 - value: '6'
   label: Research posters
 - value: '1'
-  label: M.S. thesis
+  label: M.S. degree
 - value: '2'
   label: Student projects guided
 research:
@@ -116,10 +116,6 @@ presentations:
   title: 'Quantifying Mechanochromic Response in Smart Textiles: A Computer Vision Approach'
   event: VCU Engineering Graduate Research & Postdoc Showcase
   authors: B. Y. Kantepalle, A. Reyna, and C. Tang
-- date: Nov 11–12, 2025
-  kind: Classroom lecture
-  title: Vapor–liquid equilibrium, Henry’s Law, and Raoult’s Law
-  event: Undergraduate Material Balance · instructional contribution
 - date: Aug 20, 2025
   kind: Poster
   title: Adhesives for Personalized Wearable Devices
@@ -145,14 +141,16 @@ service:
   role: Judge · Chem-E-Car Poster Competition
   organization: AIChE Mid-Atlantic Regional Conference · VCU
   detail: Evaluated student engineering projects during the regional competition.
-- date: Mar 20, 2026
-  role: Shelfie Program · Prototype Demonstration & Design Credentials
+- date: Feb 2020
+  role: Student Volunteer
+  organization: Anokha · Amrita University Techfest
+  detail: Helped organize and deliver the chemical-engineering event Get Engineered.
+applied_innovation:
+- date: Spring 2026
+  role: Prototype Demonstrator · Shelfie Program
   organization: VCU da Vinci Center · Feedback Friday
-  detail: Demonstrated a battery-free diabetic thermochromic sock concept for preventive foot-care monitoring
-    at home during the Spring 2026 Shelfie cohort's Feedback Friday at Shift Retail Lab. Completed credentials
+  detail: Demonstrated a battery-free thermochromic sock concept at Feedback Friday and completed credentials
     in Design Thinking, Prototyping, and Pitching & Storytelling.
-  image: media/shelfie-feedback-friday-2026.jpg
-  image_alt: Spring 2026 Shelfie Program cohort outside VCU Shift Retail Lab after Feedback Friday
   links:
   - label: Design Thinking
     href: https://www.credly.com/badges/e6785521-d537-4ea8-983f-3e1b123f01c7/public_url
@@ -160,19 +158,15 @@ service:
     href: https://www.credly.com/badges/ad98e65e-5b4e-4910-9dff-fa54960fdeca/public_url
   - label: Pitching & Storytelling
     href: https://www.credly.com/badges/8caba56a-a526-4891-9408-55e68ee2b0cf/public_url
-- date: Feb 2020
-  role: Student Volunteer
-  organization: Anokha · Amrita University Techfest
-  detail: Helped organize and deliver the chemical-engineering event Get Engineered.
 education:
-- period: From July 2026
+- period: Aug 2026–present
   degree: Ph.D. · Integrative Life Sciences
   institution: Virginia Commonwealth University
-  note: Doctoral student studying stimuli-responsive soft and liquid-crystalline materials
-- period: 2024–2026
+  note: Doctoral research in stimuli-responsive soft and liquid-crystalline materials
+- period: Aug 2026
   degree: M.S. · Chemical & Life Science Engineering
   institution: Virginia Commonwealth University
-  note: GPA 3.62 · Thesis defended July 1, 2026 · Completion expected August 2026
+  note: GPA 3.62 · Thesis defended July 1, 2026
 - period: 2018–2022
   degree: B.Tech. · Chemical Engineering
   institution: Amrita Vishwa Vidyapeetham
@@ -180,32 +174,25 @@ professional_development:
 - period: Sep 2025
   title: 1st National Neutron Scattering School
   organization: Oak Ridge National Laboratory
-  note: Selected participant · foundational training supporting the transition toward scattering-informed
-    soft-matter research
+  note: Selected participant · foundational training supporting scattering-informed soft-matter research
 experience:
-- period: Beginning Aug 2026
+- period: Aug 2026–present
   role: Graduate Teaching Assistant
   organization: Virginia Commonwealth University
   location: Richmond, Virginia
-  detail: Supports undergraduate instruction while beginning doctoral training in the Integrative Life
-    Sciences Ph.D. program.
+  detail: Supports undergraduate instruction while pursuing doctoral training in the Integrative Life Sciences
+    Ph.D. program.
 - period: Sep 2024–Aug 2026
-  role: Graduate Researcher & Metrology Lead
+  role: Graduate Researcher · Quantitative Metrology
   organization: VCU Soft Functional Materials Lab
   location: Richmond, Virginia
-  detail: Develops mechanics-consistent methods for soft interfaces and reproducible Python/OpenCV workflows
+  detail: Developed mechanics-consistent methods for soft interfaces and reproducible Python/OpenCV workflows
     that align force, deformation, and optical data.
   outcomes:
   - First-author peer-reviewed study and citable research software
-  - >-
-    Guided two ongoing Summer 2026 student projects: temperature mapping of stimuli-responsive liquid
-    crystals and hyperspectral analysis of plastic concentration and detection in soil mixtures
-  - >-
-    Provided Spring 2026 technical support in NMR characterization and interpretation, strain-to-color
-    quantification, relationship analysis, scientific figure development, poster preparation, and grant drafting
   - Contributed technical writing and regulatory analysis to a phased $100,000 Commonwealth Cyber Initiative
-    proposal; the $30,000 prototype and proof-of-concept phase was initially funded, with later funding
-    contingent on satisfactory progress
+    proposal; the $30,000 prototype and proof-of-concept phase was initially funded, with later funding contingent
+    on satisfactory progress
   links:
   - label: First-author paper
     href: publication/adhesives-wearable/
@@ -224,16 +211,15 @@ experience:
   role: Technical Project Manager Intern
   organization: Kreative Organics Pvt. Ltd.
   location: Hyderabad, India
-  detail: Supported digital transformation, chemical-data standardization, and technical documentation
-    in pharmaceutical-intermediate manufacturing.
+  detail: Supported digital transformation, chemical-data standardization, and technical documentation in
+    pharmaceutical-intermediate manufacturing.
 teaching:
 - date: Summer 2026
   type: Research guidance
   title: Guidance for two ongoing student projects
-  detail: >-
-    Guided two summer researchers on ongoing projects: one developing temperature-mapping methods
-    for stimuli-responsive liquid crystals, and one analyzing hyperspectral measurements of soil-plastic
-    mixtures to evaluate concentration-dependent plastic detection and estimate the minimum detectable concentration.
+  detail: Guided two summer researchers on ongoing projects: one developing temperature-mapping methods for
+    stimuli-responsive liquid crystals, and one analyzing hyperspectral measurements of soil–plastic mixtures
+    to evaluate concentration-dependent plastic detection and estimate the minimum detectable concentration.
 - date: Spring 2026
   type: Technical and scientific support
   title: Characterization, analysis, and research communication
@@ -242,29 +228,27 @@ teaching:
 - date: Nov 11–12, 2025
   type: Classroom instruction
   title: Undergraduate Material Balance
-  detail: Delivered instruction on vapor-liquid equilibrium, Henry's Law, and Raoult's Law as a focused
-    classroom contribution.
+  detail: Delivered instruction on vapor–liquid equilibrium, Henry's Law, and Raoult's Law as a focused classroom
+    contribution.
 - date: 2024–Aug 2026
-  type: Research mentoring
+  type: Research guidance
   title: Scientific practice in the laboratory
-  detail: Mentors students in laboratory safety, literature review, experimental planning, and the preparation
+  detail: Supported students in laboratory safety, literature review, experimental planning, and the preparation
     of scientific figures.
 collaboration_questions:
 - title: Structure under processing
-  text: How do thermal and flow histories organize liquid-crystal structure across relevant time and length
-    scales?
+  text: How do thermal and flow histories organize liquid-crystal structure across relevant time and length scales?
 - title: Structure to measurable response
-  text: How can neutron scattering, rheology, optical metrology, and mechanics reveal structure-processing-property
+  text: How can neutron scattering, rheology, optical metrology, and mechanics reveal structure–processing–property
     relationships?
 - title: Materials to use cases
   text: How can passive thermochromic and soft-material systems be translated into reliable temperature-mapping,
     wearable, and sensing applications?
 narrative:
   problem_title: The response is only useful when its meaning survives processing.
-  problem: Stimuli-responsive materials already change color, stiffness, or organization. The unresolved
-    problem is that the response can drift when the material is reshaped, scaled, or processed on different
-    equipment. That makes reliable translation a processing and metrology problem before it is only a
-    chemistry problem.
+  problem: Stimuli-responsive materials already change color, stiffness, or organization. The unresolved problem
+    is that the response can drift when the material is reshaped, scaled, or processed on different equipment.
+    That makes reliable translation a processing and metrology problem before it is only a chemistry problem.
   chain:
   - Stimulus
   - Structure
@@ -274,21 +258,19 @@ narrative:
   chain_note: Controlled deformation, temperature, and flow are connected to evolving structure, measurable
     optical and mechanical response, and processing conditions that can be reproduced.
 applications:
-- Passive temperature mapping and battery-free wearable indicators
-- Non-contact and non-destructive optical interrogation
-- Visual safety and inspection indicators readable without instruments
-- Adaptive, decorative, and interactive surfaces
-- Low-power sensing in remote or hard-to-reach environments
+- Passive visual temperature mapping and wearable indicators
+- Non-contact optical monitoring and condition indication
+- Visual inspection and safety cues where powered instrumentation is impractical
+- Adaptive or decorative surfaces whose response can be quantified and reproduced
 doctoral:
-  title: Structure under processing is the doctoral center of gravity.
-  text: My doctoral research examines how deformation, temperature, and flow reorganize stimuli-responsive
-    liquid crystals over time; how those structural changes generate optical, thermal, and mechanical
-    response; and how reproducible measurements can guide reliable devices and scalable processing.
-  robotics: Time-resolved studies require stimulus cycles that repeat identically. Robotic handling, for
-    example with a UFACTORY xArm6, could provide consistent sample placement, controlled loading and thermal
-    cycles, and image capture synchronized to the mechanical record. Combined with OpenCV, this can support
-    time-resolved and eventually closed-loop experiments. Robotics is the infrastructure; the scientific
-    claim remains the stimulus–structure–response relationship.
+  title: My doctoral research centers on structure under processing.
+  text: My doctoral research examines how deformation, temperature, and flow reorganize stimuli-responsive liquid
+    crystals over time; how those structural changes generate optical, thermal, and mechanical response; and
+    how reproducible measurements can guide reliable devices and scalable processing.
+  robotics: Automation can improve experimental repeatability by standardizing sample placement, stimulus timing,
+    and synchronized data capture. Where scientifically useful, robotic handling could support longer or repeated
+    test sequences and future feedback-guided experiments. The research question remains how processing history
+    shapes structure and response.
 presentation_series:
 - title: Adhesive selection and soft wearable interfaces
   summary: First-author article, M.S. thesis defense, research seminar, and three poster presentations.
@@ -304,7 +286,3 @@ presentation_series:
   records:
   - 29th VCU Graduate Student Research Symposium · April 22, 2026
   - VCU Engineering Graduate Research & Postdoc Showcase · March 25, 2026
-- title: Teaching and technical communication
-  summary: Focused classroom instruction in undergraduate material balances.
-  records:
-  - Vapor–liquid equilibrium, Henry’s Law, and Raoult’s Law · November 11–12, 2025
