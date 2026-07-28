@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """Fail on known regression patterns in the portfolio source."""
 from __future__ import annotations
-
 from pathlib import Path
 from datetime import datetime, timezone, timedelta
 import json
@@ -41,13 +40,11 @@ for path in [ROOT / 'layouts/landing/list.html', ROOT / 'layouts/publication/sin
         if 'class="lnk"' not in snippet and 'class="button' not in snippet:
             errors.append(f'{path.relative_to(ROOT)}: arrow link is not a link atom: {snippet[:100]}')
 
-
 if (ROOT / 'content' / 'authors').exists():
     errors.append('legacy content/authors archive must not be published')
 config_text = (ROOT / 'config/_default/config.yaml').read_text(encoding='utf-8')
 if 'author: authors' in config_text or 'publication_type: publication_types' in config_text or 'category: categories' in config_text:
     errors.append('unused legacy taxonomies must remain disabled')
-
 
 # The public site is now a self-contained Hugo build; obsolete framework layers must not return.
 for obsolete in ('go.mod', 'go.sum', 'config/_default/module.yaml'):
@@ -86,7 +83,12 @@ if package.get('devDependencies') != expected_tools:
 if package.get('engines', {}).get('node') != '>=24':
     errors.append('package.json: Node.js 24 or newer must be required')
 
-for required in ('package.json', '.pa11yci.cjs', '.lighthouserc.cjs', 'scripts/check_external_links.py', 'scripts/check_workflows.py', 'scripts/check_live_site.py', 'scripts/check_responsive.py'):
+for required in (
+    'package.json', '.pa11yci.cjs', '.lighthouserc.cjs',
+    'scripts/check_external_links.py', 'scripts/check_workflows.py',
+    'scripts/check_live_site.py', 'scripts/check_responsive.py',
+    'scripts/check_laptop_landing.py',
+):
     if not (ROOT / required).exists():
         errors.append(f'{required}: missing production hardening file')
 
@@ -105,6 +107,11 @@ site_checker = (ROOT / "scripts" / "check_site.py").read_text(encoding="utf-8")
 for token in ("site_hosts", "Absolute links back to the canonical site are internal", "target_for(root, html, ref, site_hosts)"):
     if token not in site_checker:
         errors.append(f"generated-site checker lost absolute same-site validation invariant: {token}")
+
+laptop_checker = (ROOT / 'scripts' / 'check_laptop_landing.py').read_text(encoding='utf-8')
+for token in ('WIDTH = 1366', 'HEIGHT = 768', 'eyebrowLines', 'hero extends below the landing frame'):
+    if token not in laptop_checker:
+        errors.append(f'laptop landing audit lost required invariant: {token}')
 
 if errors:
     print('\n'.join(f'ERROR: {error}' for error in errors), file=sys.stderr)
