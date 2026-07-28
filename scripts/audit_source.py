@@ -40,7 +40,7 @@ for required in (
     'Stimuli-responsive',
     'Aug 2026–present',
     'M.S. degree',
-    'Applied innovation',
+    'applied_innovation:',
     'Graduate Researcher · Quantitative Metrology',
 ):
     if required.lower() not in portfolio_text.lower():
