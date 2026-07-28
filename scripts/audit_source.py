@@ -47,12 +47,13 @@ for required in (
         errors.append(f'data/portfolio.yaml: missing {required!r}')
 
 cv_text = texts[ROOT / 'data/cv.yaml']
+build_cv_text = (ROOT / 'scripts/build_cv.py').read_text(encoding='utf-8')
 for required in (
     'Aug 2026–Present',
     'Graduate Researcher, Quantitative Metrology',
     'Teaching, Review, and Applied Innovation',
 ):
-    if required.lower() not in (cv_text + texts[ROOT / 'scripts/build_cv.py']).lower():
+    if required.lower() not in (cv_text + build_cv_text).lower():
         errors.append(f'CV source: missing {required!r}')
 
 for path in [ROOT / 'layouts/landing/list.html', ROOT / 'layouts/publication/single.html']:
