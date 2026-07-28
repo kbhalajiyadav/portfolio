@@ -1,6 +1,6 @@
 ---
 title: "Research Program"
-summary: "A stable, citable overview of Bhalaji Yadav Kantepalle’s research in stimuli-responsive soft and liquid-crystalline materials, quantitative metrology, and reproducible processing."
+summary: "A stable, citable overview of Bhalaji Yadav Kantepalle's research in stimuli-responsive soft and liquid-crystalline materials, quantitative metrology, and reproducible processing."
 date: "2026-07-28T00:00:00Z"
 lastmod: "2026-07-28T00:00:00Z"
 toc: true
@@ -44,7 +44,7 @@ Public evidence includes:
 - versioned research software for protocol-defined peel-trace analysis; and
 - presentations on computer-vision metrology for mechanochromic textiles.
 
-## Resolve structure under stimuli
+## Resolve structure under stimuli {#resolve-structure}
 
 The doctoral direction centers on how deformation, temperature, time, and flow organize
 stimuli-responsive liquid-crystalline and soft-material structure. Rheology provides the
