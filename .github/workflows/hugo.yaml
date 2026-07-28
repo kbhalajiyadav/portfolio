@@ -50,9 +50,11 @@ jobs:
         uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
         with:
           node-version: 24
+          cache: npm
+          cache-dependency-path: package-lock.json
 
-      - name: Install exact audit-tool versions
-        run: npm install --ignore-scripts --no-audit --no-fund
+      - name: Install locked audit-tool versions
+        run: npm ci --ignore-scripts --no-audit --no-fund --prefer-offline
 
       - name: Install Python audit dependency
         run: python3 -m pip install --disable-pip-version-check PyYAML==6.0.3 websocket-client==1.9.0
