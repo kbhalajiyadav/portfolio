@@ -4,16 +4,25 @@ on:
   schedule:
     - cron: "17 8 * * 1"
   workflow_dispatch:
+  push:
+    branches:
+      - agent/clarify-training-innovation-taxonomy
+    paths:
+      - data/cv.yaml
+      - scripts/build_cv.py
+      - cv/template.tex
+      - .github/workflows/sync-publications.yaml
 
 permissions:
   contents: write
 
 concurrency:
-  group: publication-sync
+  group: publication-sync-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
   synchronize:
+    if: github.event_name != 'push'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -37,3 +46,35 @@ jobs:
           git add data/publication_sync.json
           git commit -m "chore: synchronize ORCID publications"
           git push
+
+  refresh-cv:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout working branch
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+
+      - name: Install pinned CV dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y latexmk texlive-xetex poppler-utils
+          python3 -m pip install --disable-pip-version-check PyYAML==6.0.3
+
+      - name: Regenerate and verify CV
+        run: |
+          python3 scripts/build_cv.py
+          test "$(pdfinfo static/uploads/resume.pdf | awk '/^Pages:/ {print $2}')" = "2"
+          test "$(pdfinfo static/uploads/resume.pdf | awk '/^Page size:/ {print $3, $5}')" = "612 792"
+
+      - name: Commit generated artifacts
+        run: |
+          if git diff --quiet -- cv/generated/bhalaji_cv.tex static/uploads/resume.pdf; then
+            echo "CV artifacts are already current."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add cv/generated/bhalaji_cv.tex static/uploads/resume.pdf
+          git commit -m "Regenerate CV with linked credentials"
+          git push origin HEAD:agent/clarify-training-innovation-taxonomy
