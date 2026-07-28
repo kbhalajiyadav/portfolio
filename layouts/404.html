@@ -1,1 +1,13 @@
-{{ define "main" }}<section class="error-page page-shell"><p class="kicker">404</p><h1>Page not found.</h1><p>The address may have changed. Use the research portfolio or the structured research page to continue.</p><div class="actions"><a class="button button--primary" href="{{ "/" | relURL }}">Portfolio home</a><a class="lnk" href="{{ "/research/" | relURL }}">Research program <span class="arw" aria-hidden="true">↗</span></a></div></section>{{ end }}
+{{ define "main" }}
+<section class="error-page page-shell">
+  <p class="kicker">404</p>
+  <h1>Page not found.</h1>
+  <p>The address may have changed. Continue through the main portfolio sections below.</p>
+  <div class="actions">
+    <a class="button button--primary" href="{{ "/" | relURL }}">Portfolio home</a>
+    <a class="lnk" href="{{ "/research/" | relURL }}">Research program <span class="arw" aria-hidden="true">↗</span></a>
+    <a class="lnk" href="{{ "/#outputs" | relURL }}">Selected outputs <span class="arw" aria-hidden="true">↗</span></a>
+    <a class="lnk" href="{{ "/#contact" | relURL }}">Contact <span class="arw" aria-hidden="true">↗</span></a>
+  </div>
+</section>
+{{ end }}
