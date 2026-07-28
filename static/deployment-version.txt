@@ -1,0 +1,4 @@
+portfolio_release=taxonomy-and-linked-credentials
+source_commit=696474262a2dd7995dc8ac44ca329cc5299fce70
+cv_credentials=design-thinking,prototyping,pitching-storytelling,presentation-of-research-foundational
+released_at=2026-07-28
