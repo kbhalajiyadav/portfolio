@@ -15,10 +15,25 @@ confidential employer information, and unsupported claims.
 - `content/research/index.md` — stable research-program page
 - `content/publication/` and `content/project/` — detailed public records
 - `data/cv.yaml` — source for the generated two-page CV
+- `docs/content-taxonomy.md` — canonical classification and public-label decisions
 
 The owner-only **Propose portfolio display controls** workflow can change homepage
 limits and future feature switches through a draft pull request. Search and Latest
 Updates are intentionally disabled.
+
+## Content taxonomy
+
+The homepage intentionally distinguishes formal scientific training from prototype
+translation:
+
+- `professional_development` is displayed as **Research training** and currently
+  contains the 1st National Neutron Scattering School at Oak Ridge National Laboratory.
+- `applied_innovation` is displayed as **Applied innovation** and currently contains
+  the Shelfie Program prototype demonstration and its linked design credentials.
+
+The source keys remain stable for backward compatibility and historical traceability.
+See `docs/content-taxonomy.md` before reclassifying either collection or changing its
+public label.
 
 ## Local validation
 

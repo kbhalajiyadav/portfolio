@@ -57,6 +57,40 @@ def bullets(items: list[str]) -> str:
     return "\\begin{itemize}\n" + body + "\n\\end{itemize}\n"
 
 
+def honors_bullets(items: list[object]) -> str:
+    """Render compact honor and credential entries with optional verified links."""
+    if not items:
+        return ""
+
+    rendered: list[str] = []
+    for item in items:
+        if isinstance(item, str):
+            rendered.append(esc(item))
+            continue
+
+        label = str(item.get("label", "")).strip()
+        url = str(item.get("url", "")).strip()
+        links = item.get("links", [])
+        details = str(item.get("details", "")).strip()
+
+        if links:
+            linked_labels = r" \contactsep ".join(
+                href(str(link["url"]), str(link["label"])) for link in links
+            )
+            text = f"{esc(label)}: {linked_labels}" if label else linked_labels
+        elif url:
+            text = href(url, label)
+        else:
+            text = esc(label)
+
+        if details:
+            text += f", {esc(details)}"
+        rendered.append(text)
+
+    body = "\n".join(rf"  \item {item}" for item in rendered)
+    return "\\begin{itemize}\n" + body + "\n\\end{itemize}\n"
+
+
 def section(title: str, content: list[str]) -> str:
     return rf"\section{{{esc(title)}}}" + "\n" + "\n".join(content) + "\n"
 
@@ -143,7 +177,7 @@ def render(data: dict) -> str:
         industry.append(bullets(item.get("bullets", [])))
     output.append(section("Industry Experience", industry))
 
-    honors = [bullets(data["honors_development"])]
+    honors = [honors_bullets(data["honors_development"])]
     output.append(section("Honors and Professional Development", honors))
 
     skills = []

@@ -27,6 +27,8 @@ forbidden = {
     'See the evidence workflow': 'misdirected homepage link',
     '>Archive ↗<': 'ambiguous software label',
     '>Repository ↗<': 'ambiguous thesis/source label',
+    'Applied innovation & professional development': 'duplicated engagement taxonomy',
+    'Netroschooltraining': 'incorrect name for the National Neutron Scattering School',
 }
 errors: list[str] = []
 for needle, reason in forbidden.items():
@@ -40,11 +42,26 @@ for required in (
     'Stimuli-responsive',
     'Aug 2026–present',
     'M.S. degree',
+    'professional_development:',
+    '1st National Neutron Scattering School',
+    'Oak Ridge National Laboratory',
     'applied_innovation:',
+    'Prototype Demonstrator · Shelfie Program',
+    'VCU da Vinci Center · Feedback Friday',
     'Graduate Researcher · Quantitative Metrology',
 ):
     if required.lower() not in portfolio_text.lower():
         errors.append(f'data/portfolio.yaml: missing {required!r}')
+
+landing_text = texts[ROOT / 'layouts/landing/list.html']
+for required in (
+    '<h3>Research training</h3>',
+    '<h3 class="subhead">Applied innovation</h3>',
+    'range $p.professional_development',
+    'range $p.applied_innovation',
+):
+    if required not in landing_text:
+        errors.append(f'layouts/landing/list.html: missing taxonomy invariant {required!r}')
 
 cv_text = texts[ROOT / 'data/cv.yaml']
 build_cv_text = (ROOT / 'scripts/build_cv.py').read_text(encoding='utf-8')
@@ -52,6 +69,12 @@ for required in (
     'Aug 2026–Present',
     'Graduate Researcher, Quantitative Metrology',
     'Teaching, Review, and Applied Innovation',
+    'Presentation of Research--Foundational',
+    'https://www.credly.com/badges/a2c228cc-13df-4153-b22b-741275119646',
+    'https://www.credly.com/badges/e6785521-d537-4ea8-983f-3e1b123f01c7/public_url',
+    'https://www.credly.com/badges/ad98e65e-5b4e-4910-9dff-fa54960fdeca/public_url',
+    'https://www.credly.com/badges/8caba56a-a526-4891-9408-55e68ee2b0cf/public_url',
+    'honors_bullets',
 ):
     if required.lower() not in (cv_text + build_cv_text).lower():
         errors.append(f'CV source: missing {required!r}')
