@@ -1,8 +1,17 @@
 Start building sites … 
 hugo v0.124.1-db083b05f16c945fec04f745f0ca8640560cf1ec linux/amd64 BuildDate=2024-03-20T11:40:10Z VendorInfo=gohugoio
 
-ERROR failed to load data: failed to load data: "/home/runner/work/portfolio/portfolio/data/portfolio.yaml:220:1": "_stream.yaml:220:1": failed to unmarshal YAML: yaml: line 220: mapping values are not allowed in this context
-Total in 37 ms
-Error: error building site: failed to load data: failed to load data: "/home/runner/work/portfolio/portfolio/data/portfolio.yaml:220:1": "_stream.yaml:220:1": failed to unmarshal YAML: yaml: line 220: mapping values are not allowed in this context
 
-EXIT=1
+                   | EN  
+-------------------+-----
+  Pages            | 59  
+  Paginator pages  |  0  
+  Non-page files   |  0  
+  Static files     | 16  
+  Processed images |  0  
+  Aliases          |  0  
+  Cleaned          |  0  
+
+Total in 36 ms
+
+EXIT=0
