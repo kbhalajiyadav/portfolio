@@ -14,7 +14,7 @@ status:
 superuser: true
 
 # Role / tagline
-role: Incoming Ph.D. Student | Soft Materials Researcher
+role: Ph.D. Student | Soft Materials Researcher
 
 # Affiliations
 organizations:
@@ -22,7 +22,7 @@ organizations:
     url: https://www.vcu.edu/
 
 # Short profile blurb (appears under name)
-bio: Incoming Integrative Life Sciences Ph.D. student developing reproducible methods for soft-material mechanics, optical metrology, and structure–property characterization.
+bio: Integrative Life Sciences Ph.D. student developing reproducible methods for stimuli-responsive materials, optical metrology, rheology, and structure–property characterization.
 
 # Interests (displayed as “Interests” panel)
 interests:
@@ -38,7 +38,7 @@ education:
     - course: Ph. D. Integrative Life Sciences
       institution: Virginia Commonwealth University
       url: https://cilse.vcu.edu/
-      year: "Incoming Fall 2026"
+      year: "From 2026"
     - course: M.S. Chemical & Life Science Engineering
       institution: Virginia Commonwealth University
       url: https://egr.vcu.edu
@@ -82,9 +82,9 @@ greeting: bhalaji::kantepalle()
 ---
 
 # About me
-I am a **soft materials researcher and chemical engineer** developing experimental and computational methods for soft interfaces, wearable textiles, and functional materials.
+I am a **Ph.D. student, soft materials researcher, and chemical engineer** developing experimental and computational methods for stimuli-responsive soft and liquid-crystalline materials.
 
-Through August 2026, I serve as a Graduate Researcher at the [**VCU Soft Functional Materials Lab**](https://vcusoftmaterialslab.weebly.com/) under [Dr. Christina Tang](https://egr.vcu.edu/directory/christina.tang/). Beginning in August 2026, I will transition to a Graduate Teaching Assistant appointment while entering the Integrative Life Sciences Ph.D. program. My research involves:
+I conduct research in the [**VCU Soft Functional Materials Lab**](https://vcusoftmaterialslab.weebly.com/) under [Dr. Christina Tang](https://egr.vcu.edu/directory/christina.tang/) while pursuing the Integrative Life Sciences Ph.D. Beginning in August 2026, I will transition to a Graduate Teaching Assistant appointment. My research involves:
 
 - Mechanics-consistent adhesion testing for soft materials/E-textiles.  
 - Preventing “false positive” adhesion metrics in stretchable systems  

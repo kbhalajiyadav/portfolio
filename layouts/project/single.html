@@ -1,24 +1,19 @@
 {{ define "main" }}
 {{ $isIndustry := in (.Params.tags | default (slice)) "Industry" }}
 {{ $backHref := cond $isIndustry "/#experience" "/#research" }}
-<article class="scholar-page scholar-page--project">
-  <div class="container">
-    <a class="scholar-back" href="{{ $backHref | relURL }}"><span aria-hidden="true">←</span> {{ if $isIndustry }}Professional experience{{ else }}Research program{{ end }}</a>
-    <header class="scholar-header">
-      <p class="scholar-kicker">{{ if $isIndustry }}Professional case study{{ else }}Research project{{ end }}</p>
-      <h1 class="article-title">{{ .Title }}</h1>
-      <div class="article-status-row">{{ with .Params.status }}<span class="status-pill status-pill--{{ lower . }}">{{ . }}</span>{{ end }}</div>
-      {{ with .Params.summary }}<p class="scholar-subtitle">{{ . | markdownify }}</p>{{ end }}
+<article class="scholar-page">
+  <div class="page-shell">
+    <a class="back-link lnk" href="{{ $backHref | relURL }}"><span aria-hidden="true">←</span> {{ if $isIndustry }}Professional experience{{ else }}Research program{{ end }}</a>
+    <header class="page-header">
+      <p class="kicker">{{ if $isIndustry }}Professional case study{{ else }}Research project{{ end }}</p>
+      <h1>{{ .Title }}</h1>
+      {{ with .Params.summary }}<p class="page-lede">{{ . | markdownify }}</p>{{ end }}
+      <div class="page-meta">{{ with .Params.status }}<span class="status-pill">{{ . }}</span>{{ end }}{{ with .Date }}<span>{{ .Format "January 2006" }}</span>{{ end }}</div>
+      {{ with .Params.tags }}<ul class="tag-list page-tags">{{ range . }}<li><a href="{{ (printf "/tags/%s/" (. | urlize)) | relURL }}">{{ . }}</a></li>{{ end }}</ul>{{ end }}
     </header>
-    <div class="scholar-layout">
-      <div class="article-container">
-        {{ .Content }}
-        {{ partial "author-footer.html" . }}
-      </div>
-      <aside class="aside-column">
-        {{ if .Params.toc }}<div class="toc-sidebar aside-block"><h3>Table of contents</h3>{{ .TableOfContents }}</div>{{ end }}
-        {{ if .Params.tags }}<div class="tags-sidebar aside-block"><h3>Topics</h3><ul>{{ range .Params.tags }}<li><a href="{{ (printf "tags/%s" (. | urlize)) | relURL }}" class="badge">{{ . }}</a></li>{{ end }}</ul></div>{{ end }}
-      </aside>
+    <div class="article-layout{{ if not .Params.toc }} article-layout--single{{ end }}">
+      <div class="article-content">{{ .Content }}</div>
+      {{ if .Params.toc }}<aside class="toc-column"><details class="toc-disclosure" open><summary>On this page</summary>{{ .TableOfContents }}</details></aside>{{ end }}
     </div>
   </div>
 </article>

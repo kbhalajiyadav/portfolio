@@ -22,8 +22,8 @@ en:
       - name: Presentations
         url: /#presentations
         weight: 50
-      - name: Service
-        url: /#service
+      - name: Trajectory
+        url: /#trajectory
         weight: 60
       - name: Contact
         url: /#contact

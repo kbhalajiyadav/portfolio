@@ -64,3 +64,9 @@ markup:
     noClasses: false
     style: 'monokai'
     tabWidth: 4
+
+# Search discovery
+sitemap:
+  changefreq: monthly
+  priority: 0.6
+  filename: sitemap.xml

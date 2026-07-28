@@ -1,0 +1,8 @@
+{{ define "main" }}
+<section class="list-page page-shell">
+  <header class="page-header"><p class="kicker">Portfolio index</p><h1>{{ .Title }}</h1>{{ with .Content }}<div class="page-lede">{{ . }}</div>{{ end }}</header>
+  <div class="listing-grid">
+    {{ range .Pages.ByDate.Reverse }}<article><span class="overline">{{ with .Date }}{{ .Format "2006" }}{{ end }}{{ with .Params.status }} · {{ . }}{{ end }}</span><h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>{{ with .Params.summary }}<p>{{ . }}</p>{{ end }}<a class="lnk" href="{{ .RelPermalink }}">View record <span class="arw" aria-hidden="true">↗</span></a></article>{{ end }}
+  </div>
+</section>
+{{ end }}

@@ -20,6 +20,7 @@ marketing:
     microsoft_clarity: ''
   verification:
     google: ''
+    bing: ''
     baidu: ''
 
 # Site header
@@ -27,7 +28,7 @@ header:
   sticky: true
   on_scroll: fixed
   navbar:
-    enable: true
+    enable: false
     align: l
     show_logo: true
     logo:

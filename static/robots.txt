@@ -1,4 +1,40 @@
+# Public research portfolio: indexing and retrieval are permitted.
 User-agent: *
+Allow: /
+
+# OpenAI search and user-directed retrieval
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# OpenAI model-development crawler is not required for ChatGPT search.
+User-agent: GPTBot
+Disallow: /
+
+# Anthropic search and user-directed retrieval
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+# Anthropic model-development crawler is separate from search retrieval.
+User-agent: ClaudeBot
+Disallow: /
+
+# Major conventional search crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Applebot
 Allow: /
 
 Sitemap: https://bhalaji.com/sitemap.xml

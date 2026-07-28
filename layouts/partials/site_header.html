@@ -1,0 +1,23 @@
+{{ $p := site.Data.portfolio }}
+{{ $root := "/" | relURL }}
+<header class="site-head">
+  <div class="site-head__inner">
+    <a class="brand" href="{{ $root }}" aria-label="{{ $p.profile.name }}, portfolio home">
+      {{ with resources.Get "media/icon.png" }}
+      <img src="{{ .RelPermalink }}" alt="" width="42" height="42">
+      {{ else }}
+      <span class="brand__fallback">BYK</span>
+      {{ end }}
+      <span><strong>{{ $p.profile.short_name }}</strong><small>Research portfolio</small></span>
+    </a>
+    <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
+      <a href="{{ $root }}#research">Research</a>
+      <a href="{{ $root }}#outputs">Outputs</a>
+      <a href="{{ $root }}#experience">Experience</a>
+      <a href="{{ $root }}#presentations">Presentations</a>
+      <a href="{{ $root }}#trajectory">Trajectory</a>
+      <a class="nav-contact" href="mailto:{{ $p.profile.email }}">Contact</a>
+    </nav>
+  </div>
+</header>

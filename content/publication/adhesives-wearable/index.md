@@ -67,11 +67,6 @@ tags:
 # Display this page in the Featured widget?
 featured: true
 
-# Custom links (uncomment lines below)
-# links:
-# - name: Custom Link
-#   url: http://example.org
-
 url_pdf: ''
 url_code: 'https://github.com/VCU-Soft-Functional-Materials-Lab/Peel-Trace-Evaluation-for-Soft-Substrates'
 url_dataset: 'https://doi.org/10.5281/zenodo.20301242'
