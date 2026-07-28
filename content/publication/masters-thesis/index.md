@@ -2,7 +2,7 @@
 title: "Multi-Criteria Selection of Adhesives for Wearable Textiles"
 authors:
   - Bhalaji Yadav Kantepalle
-date: "2026-08-01T00:00:00Z"
+date: "2026-07-21T00:00:00Z"
 weight: 2
 publication_types: ["7"]
 publication: "M.S. thesis, Virginia Commonwealth University"
