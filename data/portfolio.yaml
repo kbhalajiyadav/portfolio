@@ -26,7 +26,7 @@ metrics:
 - value: '1'
   label: M.S. thesis
 - value: '2'
-  label: Students mentored
+  label: Student projects guided
 research:
 - number: '01'
   title: Measure response
@@ -197,8 +197,12 @@ experience:
     that align force, deformation, and optical data.
   outcomes:
   - First-author peer-reviewed study and citable research software
-  - Mentored two students during Summer 2026 in characterization planning, NMR-related interpretation,
-    strain-to-color quantification, relationship plots, scientific figures, and poster development
+  - >-
+    Guided two ongoing Summer 2026 student projects: temperature mapping of stimuli-responsive liquid
+    crystals and hyperspectral analysis of plastic concentration and detection in soil mixtures
+  - >-
+    Provided Spring 2026 technical support in NMR characterization and interpretation, strain-to-color
+    quantification, relationship analysis, scientific figure development, poster preparation, and grant drafting
   - Contributed technical writing and regulatory analysis to a phased $100,000 Commonwealth Cyber Initiative
     proposal; the $30,000 prototype and proof-of-concept phase was initially funded, with later funding
     contingent on satisfactory progress
@@ -224,10 +228,17 @@ experience:
     in pharmaceutical-intermediate manufacturing.
 teaching:
 - date: Summer 2026
-  type: Research mentoring
-  title: Two-student summer mentorship
-  detail: Mentored two students through characterization planning, NMR-related interpretation, strain-to-color
-    quantification, relationship graphs, scientific figures, and poster development.
+  type: Research guidance
+  title: Guidance for two ongoing student projects
+  detail: >-
+    Guided two summer researchers on ongoing projects: one developing temperature-mapping methods
+    for stimuli-responsive liquid crystals, and one analyzing hyperspectral measurements of soil-plastic
+    mixtures to evaluate concentration-dependent plastic detection and estimate the minimum detectable concentration.
+- date: Spring 2026
+  type: Technical and scientific support
+  title: Characterization, analysis, and research communication
+  detail: Provided technical support in NMR characterization and interpretation, strain-to-color quantification,
+    relationship analysis, scientific figure development, poster preparation, and grant drafting.
 - date: Nov 11–12, 2025
   type: Classroom instruction
   title: Undergraduate Material Balance
