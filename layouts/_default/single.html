@@ -1,0 +1,20 @@
+{{ define "main" }}
+<article class="scholar-page h-entry">
+  <div class="page-shell">
+    <a class="back-link lnk" href="{{ "/" | relURL }}"><span aria-hidden="true">←</span> Portfolio home</a>
+    <header class="page-header">
+      <p class="kicker">{{ .Type | default "Portfolio" }}</p>
+      <h1 class="p-name">{{ .Title }}</h1>
+      <a class="u-url visually-hidden" href="{{ .Permalink }}">Permalink</a>
+      {{ with .Date }}<time class="dt-published visually-hidden" datetime="{{ .Format "2006-01-02T15:04:05Z07:00" }}">{{ .Format "January 2, 2006" }}</time>{{ end }}
+      {{ with .Params.summary }}<p class="page-lede">{{ . | markdownify }}</p>{{ end }}
+      {{ with .Params.tags }}<ul class="tag-list page-tags">{{ range . }}<li><a href="{{ (printf "/tags/%s/" (. | urlize)) | relURL }}">{{ . }}</a></li>{{ end }}</ul>{{ end }}
+    </header>
+    <div class="article-layout{{ if not .Params.toc }} article-layout--single{{ end }}">
+      <div class="article-content e-content">{{ .Content }}</div>
+      {{ if .Params.toc }}<aside class="toc-column"><details class="toc-disclosure" open><summary>On this page</summary>{{ .TableOfContents }}</details></aside>{{ end }}
+    </div>
+    <span class="p-author h-card visually-hidden"><a class="p-name u-url" href="{{ "/" | absURL }}">{{ site.Data.portfolio.profile.name }}</a></span>
+  </div>
+</article>
+{{ end }}
