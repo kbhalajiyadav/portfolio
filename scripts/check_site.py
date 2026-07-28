@@ -179,8 +179,6 @@ def target_for(
         host = normalized_host(url)
         if not host or host not in site_hosts:
             return None
-        # Absolute links back to the canonical site are internal. Resolve them
-        # against the freshly generated tree, not the previous live release.
         path = unquote(parsed.path)
     elif parsed.scheme:
         return None
@@ -311,7 +309,7 @@ def main() -> int:
         errors.append("unexpected generated authors archive")
     for required in (
         "robots.txt", "sitemap.xml", "index.xml", "llms.txt", "llms-full.txt", "humans.txt",
-        "CNAME", ".well-known/security.txt", "media/og-card.png", "media/icon.png", "site.webmanifest",
+        "CNAME", ".well-known/security.txt", "media/og-card.png", "media/favicon.svg", "site.webmanifest",
     ):
         target = root / required
         if not target.exists(): errors.append(f"missing generated {required}")
