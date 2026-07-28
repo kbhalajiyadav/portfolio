@@ -1,0 +1,15 @@
+# Account-issued verification codes. Keep blank until the corresponding
+# service verifies bhalaji.com and provides a value.
+marketing:
+  verification:
+    google: ''
+    bing: ''
+
+# IndieWeb service discovery. Identity links, microformats, and RSS work
+# without these values. Add only real operational endpoints.
+indieweb:
+  webmention_endpoint: ''
+  pingback_endpoint: ''
+  authorization_endpoint: ''
+  token_endpoint: ''
+  micropub_endpoint: ''
