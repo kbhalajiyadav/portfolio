@@ -1,0 +1,56 @@
+baseURL: https://bhalaji.com/
+title: Bhalaji Yadav Kantepalle
+module:
+  imports:
+  - path: github.com/HugoBlox/hugo-blox-builder/modules/blox-bootstrap/v5
+defaultContentLanguage: en
+hasCJKLanguage: false
+defaultContentLanguageInSubdir: false
+paginate: 10
+paginatePath: /page/
+outputs:
+  home:
+  - HTML
+  - RSS
+  - JSON
+  - WebAppManifest
+  - headers
+  - redirects
+  section:
+  - HTML
+  - RSS
+imaging:
+  quality: 75
+  resampleFilter: lanczos
+  anchor: smart
+taxonomies:
+  tag: tags
+related:
+  threshold: 80
+  includeNewer: true
+  toLower: true
+  indices:
+  - name: tags
+    weight: 100
+  - name: categories
+    weight: 70
+security:
+  funcs:
+    getenv:
+    - ^HUGO_
+    - ^WC_
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+  highlight:
+    codeFences: true
+    guessSyntax: true
+    lineNos: false
+    noClasses: false
+    style: monokai
+    tabWidth: 4
+sitemap:
+  changefreq: monthly
+  priority: 0.6
+  filename: sitemap.xml

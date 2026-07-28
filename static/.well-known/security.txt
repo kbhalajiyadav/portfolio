@@ -1,0 +1,5 @@
+Contact: mailto:contact@bhalaji.com
+Canonical: https://bhalaji.com/.well-known/security.txt
+Preferred-Languages: en
+Policy: https://github.com/kbhalajiyadav/portfolio/blob/main/.github/SECURITY.md
+Expires: 2027-07-28T23:59:59Z

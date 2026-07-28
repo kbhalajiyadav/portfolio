@@ -1,0 +1,299 @@
+profile:
+  name: Bhalaji Yadav Kantepalle
+  short_name: Bhalaji Kantepalle
+  eyebrow: Stimuli-responsive materials · Quantitative metrology · Structure under flow
+  headline: A material that changes color is easy to make. One you can read as a measurement is not.
+  summary: I study stimuli-responsive soft and liquid-crystalline materials, connecting deformation, temperature,
+    and flow history to the structure that forms, the optical and mechanical response that follows, and
+    the processing conditions under which that response can be reproduced.
+  status: Ph.D. student · Integrative Life Sciences · Virginia Commonwealth University
+  location: Richmond, Virginia
+  email: contact@bhalaji.com
+  linkedin: https://www.linkedin.com/in/kbhalajiyadav
+  github: https://github.com/kbhalajiyadav
+  orcid: https://orcid.org/0000-0003-0551-6172
+  scholar: https://scholar.google.com/citations?hl=en&user=DrfbtX4AAAAJ
+  cv: uploads/resume.pdf
+  cv_version: '2026-07-28'
+  last_updated: July 28, 2026
+  last_updated_iso: '2026-07-28'
+metrics:
+- value: '2'
+  label: Peer-reviewed articles
+  source: orcid
+- value: '6'
+  label: Research posters
+- value: '1'
+  label: M.S. thesis
+- value: '2'
+  label: Students mentored
+research:
+- number: '01'
+  title: Measure response
+  text: Mechanics-consistent adhesion, deformation tracking, and computer-vision metrology for soft, stretchable,
+    and textile-supported systems.
+  tags:
+  - Adhesion
+  - OpenCV
+  - Wearable textiles
+  href: /research/#measure-response
+  link_label: Measurement program
+  motif: trace
+- number: '02'
+  title: Resolve structure under stimuli
+  text: Rheology and neutron-scattering methods for determining how deformation, temperature, time, and
+    flow reorganize liquid-crystalline and soft-material structure.
+  tags:
+  - Rheology
+  - SANS
+  - Liquid crystals
+  href: /research/#resolve-structure
+  link_label: Structure program
+  motif: rings
+- number: '03'
+  title: Translate reproducibly
+  text: Versioned analysis, synchronized experiments, and repeatable stimulus cycles that preserve the
+    meaning of a response from bench characterization toward scalable processing.
+  tags:
+  - Open methods
+  - Automation
+  - Reproducibility
+  href: /research/#translate-reproducibly
+  link_label: Translation program
+  motif: grid
+publications:
+- year: '2026'
+  type: Journal article · First author
+  title: Multi-Criteria Selection of Adhesives for Wearable Textiles
+  authors: B. Y. Kantepalle, U. E. Arachchige, D. Joung, and C. Tang
+  venue: Polymers 18(12), 1504
+  doi: https://doi.org/10.3390/polym18121504
+  code: https://github.com/VCU-Soft-Functional-Materials-Lab/Peel-Trace-Evaluation-for-Soft-Substrates
+  detail: publication/adhesives-wearable/
+- year: '2025'
+  type: Journal article · Co-author
+  title: Mechanical Properties of Dual-Layer Electrospun Fiber Mats
+  authors: I. Caloian, J. Trapp, B. Y. Kantepalle, P. Latimer, T. J. Lawton, and C. Tang
+  venue: Polymers 17(13), 1777
+  doi: https://doi.org/10.3390/polym17131777
+  detail: publication/electrospun-fiber-mats/
+software:
+  title: Peel Trace Evaluation for Soft Substrates
+  version: v1.4.0-rc15
+  authors: Bhalaji Yadav Kantepalle and Christina Tang
+  text: Reproducible Jupyter and Colab workflow for protocol-defined analysis of force-displacement peel
+    traces from soft substrates.
+  repository: https://github.com/VCU-Soft-Functional-Materials-Lab/Peel-Trace-Evaluation-for-Soft-Substrates
+  version_doi: https://doi.org/10.5281/zenodo.20301242
+  concept_doi: https://doi.org/10.5281/zenodo.20278327
+  license: Apache-2.0
+  citation: Kantepalle, B.Y.; Tang, C. Peel Trace Evaluation for Soft Substrates, version 1.4.0-rc15;
+    Zenodo, 2026.
+  detail: project/peel-trace-evaluation/
+presentations:
+- date: Jul 1, 2026
+  kind: Thesis defense
+  title: Multi-Criteria Selection of Adhesives for Wearable Textiles
+  event: Virginia Commonwealth University
+- date: Jun 12, 2026
+  kind: Poster
+  title: Multi-Criteria Selection of Adhesives for Wearable Textiles
+  event: PMDC 4th Annual Research Symposium · VCU
+  authors: B. Y. Kantepalle, U. E. Arachchige, D. Joung, and C. Tang
+- date: Apr 22, 2026
+  kind: Poster
+  title: 'Quantifying Mechanochromic Response in Smart Textiles: A Computer Vision Approach'
+  event: 29th VCU Graduate Student Research Symposium
+  authors: B. Y. Kantepalle, A. Reyna, and C. Tang
+- date: Apr 15, 2026
+  kind: Research seminar
+  title: 'Beyond Peel Strength: Stability-Driven Adhesion Metrics for Soft Wearable Interfaces'
+  event: Chemical & Life Science Engineering Research Day · VCU
+  authors: B. Y. Kantepalle
+  featured: true
+- date: Mar 25, 2026
+  kind: Poster
+  title: 'Quantifying Mechanochromic Response in Smart Textiles: A Computer Vision Approach'
+  event: VCU Engineering Graduate Research & Postdoc Showcase
+  authors: B. Y. Kantepalle, A. Reyna, and C. Tang
+- date: Nov 11–12, 2025
+  kind: Classroom lecture
+  title: Vapor–liquid equilibrium, Henry’s Law, and Raoult’s Law
+  event: Undergraduate Material Balance · instructional contribution
+- date: Aug 20, 2025
+  kind: Poster
+  title: Adhesives for Personalized Wearable Devices
+  event: ACS Fall 2025 · PMSE Graduate Researchers Poster Session · Washington, DC
+  authors: B. Y. Kantepalle, H. Stwodah, D. Joung, and C. Tang
+  record: https://acs.digitellinc.com/p/s/adhesives-for-personalized-wearable-devices-poster-board-030-638253
+- date: Apr 23, 2025
+  kind: Poster
+  title: Adhesives for Personalized Wearable Devices
+  event: 28th VCU Graduate Student Research Symposium
+  authors: B. Y. Kantepalle, H. Stwodah, D. Joung, and C. Tang
+- date: Mar 26, 2025
+  kind: Poster
+  title: Adhesives for Personalized Wearable Devices
+  event: VCU Engineering Graduate Research & Postdoc Showcase
+  authors: B. Y. Kantepalle, H. Stwodah, D. Joung, and C. Tang
+service:
+- date: Mar 29, 2026
+  role: Judge · Student Poster Session
+  organization: AIChE Atlantic Regional Conference · VCU
+  detail: Evaluated student work across materials, catalysis, separations, and chemical engineering.
+- date: Mar 28, 2026
+  role: Judge · Chem-E-Car Poster Competition
+  organization: AIChE Mid-Atlantic Regional Conference · VCU
+  detail: Evaluated student engineering projects during the regional competition.
+- date: Mar 20, 2026
+  role: Shelfie Program · Prototype Demonstration & Design Credentials
+  organization: VCU da Vinci Center · Feedback Friday
+  detail: Demonstrated a battery-free diabetic thermochromic sock concept for preventive foot-care monitoring
+    at home during the Spring 2026 Shelfie cohort's Feedback Friday at Shift Retail Lab. Completed credentials
+    in Design Thinking, Prototyping, and Pitching & Storytelling.
+  image: media/shelfie-feedback-friday-2026.jpg
+  image_alt: Spring 2026 Shelfie Program cohort outside VCU Shift Retail Lab after Feedback Friday
+  links:
+  - label: Design Thinking
+    href: https://www.credly.com/badges/e6785521-d537-4ea8-983f-3e1b123f01c7/public_url
+  - label: Prototyping
+    href: https://www.credly.com/badges/ad98e65e-5b4e-4910-9dff-fa54960fdeca/public_url
+  - label: Pitching & Storytelling
+    href: https://www.credly.com/badges/8caba56a-a526-4891-9408-55e68ee2b0cf/public_url
+- date: Feb 2020
+  role: Student Volunteer
+  organization: Anokha · Amrita University Techfest
+  detail: Helped organize and deliver the chemical-engineering event Get Engineered.
+education:
+- period: From July 2026
+  degree: Ph.D. · Integrative Life Sciences
+  institution: Virginia Commonwealth University
+  note: Doctoral student studying stimuli-responsive soft and liquid-crystalline materials
+- period: 2024–2026
+  degree: M.S. · Chemical & Life Science Engineering
+  institution: Virginia Commonwealth University
+  note: GPA 3.62 · Thesis defended July 1, 2026 · Completion expected August 2026
+- period: 2018–2022
+  degree: B.Tech. · Chemical Engineering
+  institution: Amrita Vishwa Vidyapeetham
+professional_development:
+- period: Sep 2025
+  title: 1st National Neutron Scattering School
+  organization: Oak Ridge National Laboratory
+  note: Selected participant · foundational training supporting the transition toward scattering-informed
+    soft-matter research
+experience:
+- period: Beginning Aug 2026
+  role: Graduate Teaching Assistant
+  organization: Virginia Commonwealth University
+  location: Richmond, Virginia
+  detail: Supports undergraduate instruction while beginning doctoral training in the Integrative Life
+    Sciences Ph.D. program.
+- period: Sep 2024–Aug 2026
+  role: Graduate Researcher & Metrology Lead
+  organization: VCU Soft Functional Materials Lab
+  location: Richmond, Virginia
+  detail: Develops mechanics-consistent methods for soft interfaces and reproducible Python/OpenCV workflows
+    that align force, deformation, and optical data.
+  outcomes:
+  - First-author peer-reviewed study and citable research software
+  - Mentored two students during Summer 2026 in characterization planning, NMR-related interpretation,
+    strain-to-color quantification, relationship plots, scientific figures, and poster development
+  - Contributed technical writing and regulatory analysis to a phased $100,000 Commonwealth Cyber Initiative
+    proposal; the $30,000 prototype and proof-of-concept phase was initially funded, with later funding
+    contingent on satisfactory progress
+  links:
+  - label: First-author paper
+    href: publication/adhesives-wearable/
+  - label: Research software
+    href: project/peel-trace-evaluation/
+- period: May 2023–May 2024
+  role: Technical Project Manager
+  organization: Kreative Organics Pvt. Ltd.
+  location: Hyderabad, India
+  detail: Coordinated regulated digital-transformation and validation work, translating process requirements
+    into traceable documentation and data-integrity controls.
+  outcomes:
+  - Connected quality, engineering, and external stakeholders during implementation
+  - Standardized chemical nomenclature and analytical workflows for more consistent decisions
+- period: Oct 2022–Apr 2023
+  role: Technical Project Manager Intern
+  organization: Kreative Organics Pvt. Ltd.
+  location: Hyderabad, India
+  detail: Supported digital transformation, chemical-data standardization, and technical documentation
+    in pharmaceutical-intermediate manufacturing.
+teaching:
+- date: Summer 2026
+  type: Research mentoring
+  title: Two-student summer mentorship
+  detail: Mentored two students through characterization planning, NMR-related interpretation, strain-to-color
+    quantification, relationship graphs, scientific figures, and poster development.
+- date: Nov 11–12, 2025
+  type: Classroom instruction
+  title: Undergraduate Material Balance
+  detail: Delivered instruction on vapor-liquid equilibrium, Henry's Law, and Raoult's Law as a focused
+    classroom contribution.
+- date: 2024–Aug 2026
+  type: Research mentoring
+  title: Scientific practice in the laboratory
+  detail: Mentors students in laboratory safety, literature review, experimental planning, and the preparation
+    of scientific figures.
+collaboration_questions:
+- title: Structure under processing
+  text: How do thermal and flow histories organize liquid-crystal structure across relevant time and length
+    scales?
+- title: Structure to measurable response
+  text: How can neutron scattering, rheology, optical metrology, and mechanics reveal structure-processing-property
+    relationships?
+- title: Materials to use cases
+  text: How can passive thermochromic and soft-material systems be translated into reliable temperature-mapping,
+    wearable, and sensing applications?
+narrative:
+  problem_title: The response is only useful when its meaning survives processing.
+  problem: Stimuli-responsive materials already change color, stiffness, or organization. The unresolved
+    problem is that the response can drift when the material is reshaped, scaled, or processed on different
+    equipment. That makes reliable translation a processing and metrology problem before it is only a
+    chemistry problem.
+  chain:
+  - Stimulus
+  - Structure
+  - Response
+  - Measurement
+  - Translation
+  chain_note: Controlled deformation, temperature, and flow are connected to evolving structure, measurable
+    optical and mechanical response, and processing conditions that can be reproduced.
+applications:
+- Passive temperature mapping and battery-free wearable indicators
+- Non-contact and non-destructive optical interrogation
+- Visual safety and inspection indicators readable without instruments
+- Adaptive, decorative, and interactive surfaces
+- Low-power sensing in remote or hard-to-reach environments
+doctoral:
+  title: Structure under processing is the doctoral center of gravity.
+  text: My doctoral research examines how deformation, temperature, and flow reorganize stimuli-responsive
+    liquid crystals over time; how those structural changes generate optical, thermal, and mechanical
+    response; and how reproducible measurements can guide reliable devices and scalable processing.
+  robotics: Time-resolved studies require stimulus cycles that repeat identically. Robotic handling, for
+    example with a UFACTORY xArm6, could provide consistent sample placement, controlled loading and thermal
+    cycles, and image capture synchronized to the mechanical record. Combined with OpenCV, this can support
+    time-resolved and eventually closed-loop experiments. Robotics is the infrastructure; the scientific
+    claim remains the stimulus–structure–response relationship.
+presentation_series:
+- title: Adhesive selection and soft wearable interfaces
+  summary: First-author article, M.S. thesis defense, research seminar, and three poster presentations.
+  records:
+  - M.S. thesis defense · July 1, 2026 · VCU
+  - PMDC 4th Annual Research Symposium · June 12, 2026 · VCU
+  - Beyond Peel Strength research seminar · April 15, 2026 · VCU
+  - ACS Fall 2025 · August 20, 2025 · Washington, DC
+  - VCU Graduate Student Research Symposium · April 23, 2025
+  - VCU Engineering Graduate Research & Postdoc Showcase · March 26, 2025
+- title: Computer-vision metrology for mechanochromic textiles
+  summary: Two 2026 poster presentations on synchronized strain-to-color quantification.
+  records:
+  - 29th VCU Graduate Student Research Symposium · April 22, 2026
+  - VCU Engineering Graduate Research & Postdoc Showcase · March 25, 2026
+- title: Teaching and technical communication
+  summary: Focused classroom instruction in undergraduate material balances.
+  records:
+  - Vapor–liquid equilibrium, Henry’s Law, and Raoult’s Law · November 11–12, 2025

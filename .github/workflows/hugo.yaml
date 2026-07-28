@@ -1,0 +1,135 @@
+# Sample workflow for building and deploying a Hugo site to GitHub Pages
+name: Deploy Hugo site to Pages
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches:
+      - main
+  # Validates proposed changes without deploying them.
+  pull_request:
+    branches:
+      - main
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+# Default to bash
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  # Build job
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      HUGO_VERSION: 0.124.1
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Install Hugo CLI
+        run: |
+          wget -O "${{ runner.temp }}/hugo.deb" \
+            "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb"
+          sudo dpkg -i "${{ runner.temp }}/hugo.deb"
+
+      - name: Install Dart Sass
+        run: sudo snap install dart-sass
+
+      - name: Install CV build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y latexmk texlive-xetex
+          python3 -m pip install --disable-pip-version-check PyYAML
+
+      - name: Generate YAML-driven CV
+        run: python3 scripts/build_cv.py
+
+      - name: Audit source regressions
+        run: python3 scripts/audit_source.py
+
+      - name: Audit visual system and contrast
+        run: python3 scripts/audit_styles.py
+
+      - name: Audit Hugo templates and JavaScript
+        run: |
+          python3 scripts/audit_templates.py
+          node --check static/js/site.js
+          
+      - name: Setup Pages
+        id: pages
+        if: github.event_name != 'pull_request'
+        uses: actions/configure-pages@v6
+        
+      - name: Build with Hugo
+        env:
+          # For maximum backward compatibility with Hugo modules
+          HUGO_ENVIRONMENT: production
+          HUGO_ENV: production
+        run: |
+          BASE_URL="https://bhalaji.com/"
+          if [[ "${{ github.event_name }}" != "pull_request" ]]; then
+            BASE_URL="${{ steps.pages.outputs.base_url }}/"
+          fi
+          hugo \
+            --gc \
+            --minify \
+            --printPathWarnings \
+            --baseURL "${BASE_URL}"
+
+      - name: Audit generated site
+        run: python3 scripts/check_site.py public
+            
+      - name: Report generated site inventory
+        if: always()
+        run: |
+          if [[ -d public ]]; then
+            echo "HTML pages: $(find public -type f -name '*.html' | wc -l)"
+            echo "Generated authors paths:"
+            find public/authors -maxdepth 3 -type f 2>/dev/null || true
+          fi
+
+      - name: Upload artifact
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: ./public
+
+  # Deployment job
+  deploy:
+    timeout-minutes: 10
+    if: github.event_name != 'pull_request'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout notification script
+        uses: actions/checkout@v6
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
+
+      - name: Notify IndexNow
+        continue-on-error: true
+        run: python3 scripts/submit_indexnow.py
