@@ -13,6 +13,14 @@
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 <link rel="canonical" href="{{ $canonical }}">
 <link rel="author" href="{{ "/" | absURL }}">
+{{ with site.Home.OutputFormats.Get "RSS" }}
+<link rel="alternate feed" type="{{ .MediaType.Type }}" href="{{ .Permalink }}" title="{{ $siteName }}">
+{{ end }}
+{{ with site.Params.indieweb.webmention_endpoint }}<link rel="webmention" href="{{ . }}">{{ end }}
+{{ with site.Params.indieweb.pingback_endpoint }}<link rel="pingback" href="{{ . }}">{{ end }}
+{{ with site.Params.indieweb.authorization_endpoint }}<link rel="authorization_endpoint" href="{{ . }}">{{ end }}
+{{ with site.Params.indieweb.token_endpoint }}<link rel="token_endpoint" href="{{ . }}">{{ end }}
+{{ with site.Params.indieweb.micropub_endpoint }}<link rel="micropub" href="{{ . }}">{{ end }}
 <link rel="me" href="{{ $p.profile.orcid }}">
 <link rel="me" href="{{ $p.profile.scholar }}">
 <link rel="me" href="{{ $p.profile.linkedin }}">

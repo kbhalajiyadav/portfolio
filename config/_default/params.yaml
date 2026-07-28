@@ -103,3 +103,12 @@ extensions:
     enable: true
   isotope:
     enable: true
+
+# IndieWeb endpoints are emitted only after a real service is configured.
+# rel="me", RSS discovery, and microformats work without these endpoints.
+indieweb:
+  webmention_endpoint: ''
+  pingback_endpoint: ''
+  authorization_endpoint: ''
+  token_endpoint: ''
+  micropub_endpoint: ''

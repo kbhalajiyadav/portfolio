@@ -43,3 +43,29 @@ Reviewed and consolidated on July 28, 2026.
 5. Request indexing for the homepage and `/research/` after the first deployment.
 
 These service-side steps cannot be completed from repository code alone because they require account-level domain ownership confirmation.
+
+## IndieWeb and branch-feature review addendum
+
+The `agent/academic-portfolio-redesign` branch was reviewed as a feature source, not as
+a replacement design. The final build keeps the current palette, scientific motifs,
+portrait treatment, seven-section information architecture, and grouped disclosure
+components.
+
+Adopted:
+
+- the compact square `BK` monogram, rebuilt inside the shared header;
+- the existing accessible mobile menu, active-section state, native `<details>`
+  disclosures, and copy-citation behavior;
+- representative h-card, h-entry, feed discovery, and conditional IndieWeb endpoint
+  discovery;
+- a dormant notes/POSSE template that adds no homepage weight.
+
+Rejected:
+
+- a desktop navigation dropdown, because the current navigation remains shallow;
+- the standalone animated metrology showcase, 3-D pointer tilt, and scanning animation;
+- a separate latest-updates section and flat presentation archive;
+- automatic syndication before real target accounts and endpoint credentials are set.
+
+The result adds identity and owned-publishing infrastructure without changing the
+portfolio's current visual hierarchy or adding public content.

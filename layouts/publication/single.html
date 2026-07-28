@@ -1,15 +1,16 @@
 {{ define "main" }}
 {{ $ptype := "" }}{{ if .Params.publication_types }}{{ $ptype = (index .Params.publication_types 0) | printf "%v" }}{{ end }}
 {{ $isThesis := eq $ptype "7" }}
-<article class="scholar-page">
+<article class="scholar-page h-entry">
   <div class="page-shell">
     <a class="back-link lnk" href="{{ "/#outputs" | relURL }}"><span aria-hidden="true">←</span> Research outputs</a>
     <header class="page-header publication-header">
       <p class="kicker">{{ if $isThesis }}M.S. thesis{{ else }}Peer-reviewed article{{ end }}</p>
-      <h1>{{ .Title }}</h1>
+      <h1 class="p-name">{{ .Title }}</h1>
+      <a class="u-url visually-hidden" href="{{ .Permalink }}">Permalink</a>
       {{ with .Params.authors }}<p class="publication-authors">{{ delimit . ", " }}</p>{{ end }}
       {{ with .Params.publication }}<p class="publication-venue">{{ . | markdownify }}</p>{{ end }}
-      <div class="page-meta"><span>{{ time.Format "2006" .Date }}</span>{{ if $isThesis }}<span>Public record; manuscript embargoed</span>{{ end }}</div>
+      <div class="page-meta"><time class="dt-published" datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ time.Format "2006" .Date }}</time>{{ if $isThesis }}<span>Public record; manuscript embargoed</span>{{ end }}</div>
       {{ with .Params.tags }}<ul class="tag-list page-tags">{{ range . }}<li><a href="{{ (printf "/tags/%s/" (. | urlize)) | relURL }}">{{ . }}</a></li>{{ end }}</ul>{{ end }}
       <div class="actions publication-actions">
         {{ if .Params.doi }}<a class="lnk" href="{{ printf "https://doi.org/%s" .Params.doi }}" target="_blank" rel="noopener">Article <span class="arw" aria-hidden="true">↗</span></a>{{ end }}
@@ -20,7 +21,7 @@
       </div>
     </header>
     <div class="article-layout publication-layout">
-      <div class="article-content">
+      <div class="article-content e-content">
         {{ if $isThesis }}
           {{ with .Params.abstract }}<section class="abstract-block"><h2>Public overview</h2><p>{{ . }}</p><p class="fine-print">The complete manuscript remains under repository embargo until July 20, 2031.</p></section>{{ end }}
         {{ else }}
@@ -38,6 +39,7 @@
         </div>
       </aside>
     </div>
+    <span class="p-author h-card visually-hidden"><a class="p-name u-url" href="{{ "/" | absURL }}">{{ site.Data.portfolio.profile.name }}</a></span>
   </div>
 </article>
 {{ end }}

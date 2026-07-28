@@ -80,6 +80,10 @@ The weekly workflow reads public ORCID journal-article metadata for ORCID `0000-
 
 Update `data/portfolio.yaml` for homepage facts, then update `data/cv.yaml` when the same fact belongs in the CV. Run the full validation sequence before publishing.
 
+## IndieWeb and owned publishing
+
+The shared templates include `rel="me"`, microformats2 identity/content markup, RSS discovery, and conditional endpoint discovery. Future POSSE notes are scaffolded but intentionally absent from the public navigation until durable content exists. See [`INDIEWEB-POSSE.md`](INDIEWEB-POSSE.md).
+
 ## License and disclosure
 
 Source-code permissions and reserved portfolio-content terms are defined in `LICENSE`. Security reporting instructions are in `.github/SECURITY.md` and `static/.well-known/security.txt`.

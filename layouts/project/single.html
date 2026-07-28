@@ -1,20 +1,22 @@
 {{ define "main" }}
 {{ $isIndustry := in (.Params.tags | default (slice)) "Industry" }}
 {{ $backHref := cond $isIndustry "/#experience" "/#research" }}
-<article class="scholar-page">
+<article class="scholar-page h-entry">
   <div class="page-shell">
     <a class="back-link lnk" href="{{ $backHref | relURL }}"><span aria-hidden="true">←</span> {{ if $isIndustry }}Professional experience{{ else }}Research program{{ end }}</a>
     <header class="page-header">
       <p class="kicker">{{ if $isIndustry }}Professional case study{{ else }}Research project{{ end }}</p>
-      <h1>{{ .Title }}</h1>
+      <h1 class="p-name">{{ .Title }}</h1>
+      <a class="u-url visually-hidden" href="{{ .Permalink }}">Permalink</a>
       {{ with .Params.summary }}<p class="page-lede">{{ . | markdownify }}</p>{{ end }}
-      <div class="page-meta">{{ with .Params.status }}<span class="status-pill">{{ . }}</span>{{ end }}{{ with .Date }}<span>{{ .Format "January 2006" }}</span>{{ end }}</div>
+      <div class="page-meta">{{ with .Params.status }}<span class="status-pill">{{ . }}</span>{{ end }}{{ with .Date }}<time class="dt-published" datetime="{{ .Format "2006-01-02T15:04:05Z07:00" }}">{{ .Format "January 2006" }}</time>{{ end }}</div>
       {{ with .Params.tags }}<ul class="tag-list page-tags">{{ range . }}<li><a href="{{ (printf "/tags/%s/" (. | urlize)) | relURL }}">{{ . }}</a></li>{{ end }}</ul>{{ end }}
     </header>
     <div class="article-layout{{ if not .Params.toc }} article-layout--single{{ end }}">
-      <div class="article-content">{{ .Content }}</div>
+      <div class="article-content e-content">{{ .Content }}</div>
       {{ if .Params.toc }}<aside class="toc-column"><details class="toc-disclosure" open><summary>On this page</summary>{{ .TableOfContents }}</details></aside>{{ end }}
     </div>
+    <span class="p-author h-card visually-hidden"><a class="p-name u-url" href="{{ "/" | absURL }}">{{ site.Data.portfolio.profile.name }}</a></span>
   </div>
 </article>
 {{ end }}

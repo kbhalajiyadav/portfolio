@@ -2,13 +2,10 @@
 {{ $root := "/" | relURL }}
 <header class="site-head">
   <div class="site-head__inner">
-    <a class="brand" href="{{ $root }}" aria-label="{{ $p.profile.name }}, portfolio home">
-      {{ with resources.Get "media/icon.png" }}
-      <img src="{{ .RelPermalink }}" alt="" width="42" height="42">
-      {{ else }}
-      <span class="brand__fallback">BYK</span>
-      {{ end }}
-      <span><strong>{{ $p.profile.short_name }}</strong><small>Research portfolio</small></span>
+    <a class="brand h-card u-url" href="{{ $root }}" rel="me" aria-label="{{ $p.profile.name }}, portfolio home">
+      <span class="brand__monogram" aria-hidden="true">BK</span>
+      <span><strong class="p-name">{{ $p.profile.short_name }}</strong><small class="p-note">Research portfolio</small></span>
+      <img class="u-photo indieweb-photo" src="{{ "uploads/avatar-portrait.jpg" | relURL }}" alt="">
     </a>
     <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
     <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
