@@ -65,7 +65,7 @@ jobs:
           python3 scripts/audit_styles.py
           python3 scripts/audit_templates.py
           python3 scripts/check_workflows.py
-          node --check static/js/site.js
+          node --check assets/js/site.js
 
       - name: Setup Pages
         id: pages

@@ -107,10 +107,16 @@ for path in (ROOT / 'layouts/_default/single.html', ROOT / 'layouts/project/sing
     text = texts[path]
     if 'data-responsive-toc' not in text or '<details class="toc-disclosure" open' in text:
         errors.append(f'{path.relative_to(ROOT)}: responsive TOC must not be hard-coded open')
-site_js = texts[ROOT / 'static/js/site.js']
+site_js = (ROOT / 'assets/js/site.js').read_text(encoding='utf-8')
 for token in ("data-responsive-toc", "matchMedia('(min-width: 981px)')", "responsiveToc.open = desktopToc.matches"):
     if token not in site_js:
-        errors.append(f'static/js/site.js: responsive TOC invariant missing {token!r}')
+        errors.append(f'assets/js/site.js: responsive TOC invariant missing {token!r}')
+if (ROOT / 'static/js/site.js').exists():
+    errors.append('static/js/site.js: unused duplicate runtime script must remain removed')
+
+workflow_text = (ROOT / '.github/workflows/hugo.yaml').read_text(encoding='utf-8')
+if 'node --check assets/js/site.js' not in workflow_text:
+    errors.append('.github/workflows/hugo.yaml: JavaScript syntax check must target the bundled asset')
 
 package = json.loads((ROOT / 'package.json').read_text(encoding='utf-8'))
 expected_tools = {'@lhci/cli': '0.15.1', 'pa11y-ci': '4.1.1'}
@@ -143,7 +149,7 @@ for token in ("site_hosts", "Absolute links back to the canonical site are inter
     if token not in site_checker:
         errors.append(f"generated-site checker lost absolute same-site validation invariant: {token}")
 
-laptop_checker = (ROOT / 'scripts' / 'check_laptop_landing.py').read_text(encoding='utf-8')
+laptop_checker = (ROOT / 'scripts/check_laptop_landing.py').read_text(encoding='utf-8')
 for token in ('WIDTH = 1366', 'HEIGHT = 768', 'eyebrowLines', 'extends below the landing frame'):
     if token not in laptop_checker:
         errors.append(f'laptop landing audit lost required invariant: {token}')

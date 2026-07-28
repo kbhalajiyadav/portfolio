@@ -1,9 +1,5 @@
 #!/usr/bin/env python3
-"""Browser-level responsive, zoom-equivalent, reduced-motion, and menu audit.
-
-Uses the Chrome DevTools Protocol through websocket-client so CI can exercise the
-actual rendered Hugo output without introducing a full browser-test framework.
-"""
+"""Browser-level responsive, zoom-equivalent, reduced-motion, menu, and TOC audit."""
 from __future__ import annotations
 
 import argparse
@@ -29,7 +25,6 @@ VIEWPORTS = [
     (1180, 900, "1180-desktop-boundary"),
     (1440, 1000, "1440-desktop"),
     (1920, 1080, "1920-wide"),
-    # A 1440 px physical viewport at 200% zoom has roughly 720 CSS pixels.
     (720, 500, "200-percent-zoom-equivalent"),
 ]
 PAGES = [
@@ -132,6 +127,7 @@ LAYOUT_EXPRESSION = r"""
     .map((arrow) => (arrow.closest('.lnk')?.textContent || '').trim());
   const menu = document.querySelector('.menu-button');
   const nav = document.querySelector('#site-nav');
+  const toc = document.querySelector('.toc-disclosure[data-responsive-toc]');
   return {
     url: location.href,
     viewportWidth: width,
@@ -141,6 +137,7 @@ LAYOUT_EXPRESSION = r"""
     arrowIssues,
     menuDisplay: menu ? getComputedStyle(menu).display : null,
     navDisplay: nav ? getComputedStyle(nav).display : null,
+    tocOpen: toc ? toc.open : null,
     h1Count: document.querySelectorAll('h1').length,
     mainCount: document.querySelectorAll('main').length
   };
@@ -253,6 +250,13 @@ def main() -> int:
                             record_errors.append(f"expected one main, found {layout['mainCount']}")
                         if page_name == "home" and label in {"390-mobile", "1440-desktop"}:
                             record_errors.extend(audit_menu(cdp, width <= 480))
+                        if page_name == "research":
+                            expected_open = width >= 981
+                            if layout["tocOpen"] is None:
+                                record_errors.append("responsive table of contents is missing")
+                            elif bool(layout["tocOpen"]) != expected_open:
+                                state = "open" if expected_open else "closed"
+                                record_errors.append(f"responsive table of contents should be {state} at {width}px")
                         record["errors"] = record_errors
                         results.append(record)
                         errors.extend(f"{label}/{page_name}: {message}" for message in record_errors)
@@ -277,7 +281,7 @@ def main() -> int:
                 if errors:
                     print("\n".join(f"ERROR: {error}" for error in errors))
                     return 1
-                print(f"Responsive browser audit passed: {len(results)} page/viewport combinations plus reduced-motion and menu checks.")
+                print(f"Responsive browser audit passed: {len(results)} page/viewport combinations plus reduced-motion, menu, and TOC checks.")
                 return 0
             finally:
                 cdp.close()
