@@ -179,6 +179,8 @@ def target_for(
         host = normalized_host(url)
         if not host or host not in site_hosts:
             return None
+        # Absolute links back to the canonical site are internal. Resolve them
+        # against the freshly generated tree, not the previous live release.
         path = unquote(parsed.path)
     elif parsed.scheme:
         return None
