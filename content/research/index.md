@@ -2,8 +2,8 @@
 title: "Research Program"
 kicker: "Research overview"
 summary: "A stable, citable overview of Bhalaji Yadav Kantepalle’s research in stimuli-responsive soft and liquid-crystalline materials, quantitative metrology, and reproducible processing."
-date: "2026-08-01T00:00:00Z"
-lastmod: "2026-08-01T00:00:00Z"
+date: "2026-07-28T00:00:00Z"
+lastmod: "2026-07-28T00:00:00Z"
 toc: true
 tags:
   - Stimuli-Responsive Materials
