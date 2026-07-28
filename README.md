@@ -29,15 +29,16 @@ python3 scripts/audit_source.py
 python3 scripts/audit_styles.py
 python3 scripts/audit_templates.py
 python3 scripts/check_workflows.py
-node --check assets/js/site.js
+node --check static/js/site.js
 hugo --gc --minify --printPathWarnings --baseURL https://bhalaji.com/
 python3 scripts/check_site.py public
 python3 scripts/check_external_links.py public --site-origin https://bhalaji.com/
 ```
 
-GitHub Actions also runs responsive, accessibility, Lighthouse, external-link, and
-post-deployment checks. The CV compiles in a separate path-filtered workflow using the
-proven XeLaTeX dependency set.
+GitHub Actions additionally runs Pa11y, mobile and desktop Lighthouse, responsive
+checks from 390 to 1920 pixels, a 200%-zoom-equivalent test, and an exact 1366×768
+laptop landing-frame gate. CV compilation remains isolated in a path-filtered
+workflow using the proven XeLaTeX dependency set.
 
 ## Discovery and ownership
 
@@ -48,5 +49,5 @@ require account-issued values in `config/_default/params.yaml`.
 
 ## License
 
-See `LICENSE`. Security contact information is published at
+See `LICENSE`. The public security contact is published at
 `static/.well-known/security.txt`.
