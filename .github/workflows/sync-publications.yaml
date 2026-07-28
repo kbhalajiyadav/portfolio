@@ -4,9 +4,8 @@ on:
   schedule:
     - cron: "17 8 * * 1"
   workflow_dispatch:
-  push:
-    branches:
-      - agent/clarify-training-innovation-taxonomy
+  pull_request:
+    branches: [main]
     paths:
       - data/cv.yaml
       - scripts/build_cv.py
@@ -22,7 +21,7 @@ concurrency:
 
 jobs:
   synchronize:
-    if: github.event_name != 'push'
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -48,12 +47,14 @@ jobs:
           git push
 
   refresh-cv:
-    if: github.event_name == 'push'
+    if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
       - name: Checkout working branch
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          ref: agent/clarify-training-innovation-taxonomy
 
       - name: Install pinned CV dependencies
         run: |
