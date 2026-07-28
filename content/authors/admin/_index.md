@@ -24,7 +24,10 @@ organizations:
 # Short profile blurb (appears under name)
 bio: Integrative Life Sciences Ph.D. student developing reproducible methods for stimuli-responsive materials, optical metrology, rheology, and structure–property characterization.
 
-# Interests (displayed as “Interests” panel)
+# Meta description for SEO
+description: Bhalaji Y. Kantepalle is a Ph.D. student and soft materials researcher studying stimuli-responsive materials, optical metrology, and reproducible experimental methods at Virginia Commonwealth University.
+
+# Interests (displayed as "Interests" panel)
 interests:
   - Fracture Mechanics & Adhesion
   - Wearable & Functional Materials
@@ -84,10 +87,10 @@ greeting: bhalaji::kantepalle()
 # About me
 I am a **Ph.D. student, soft materials researcher, and chemical engineer** developing experimental and computational methods for stimuli-responsive soft and liquid-crystalline materials.
 
-I conduct research in the [**VCU Soft Functional Materials Lab**](https://vcusoftmaterialslab.weebly.com/) under [Dr. Christina Tang](https://egr.vcu.edu/directory/christina.tang/) while pursuing the Integrative Life Sciences Ph.D. Beginning in August 2026, I will transition to a Graduate Teaching Assistant appointment. My research involves:
+I conduct research in the [**VCU Soft Functional Materials Lab**](https://vcusoftmaterialslab.weebly.com/) under [Dr. Christina Tang](https://egr.vcu.edu/directory/christina.tang/) while pursuing [...]
 
 - Mechanics-consistent adhesion testing for soft materials/E-textiles.  
-- Preventing “false positive” adhesion metrics in stretchable systems  
+- Preventing "false positive" adhesion metrics in stretchable systems  
 - Synchronizing mechanical strain with optical response in mechanochromic textiles  
 - Mentoring students in characterization planning, NMR-related interpretation, strain-to-color quantification, scientific figures, and poster development
 
