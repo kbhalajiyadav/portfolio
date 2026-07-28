@@ -94,7 +94,7 @@
     <aside class="education-panel">
       <h3>Education</h3>
       {{ range $p.education }}{{ if ne .show false }}<article><span>{{ .period }}</span><strong>{{ .degree }}</strong><p>{{ .institution }}</p>{{ with .note }}<small>{{ . }}</small>{{ end }}</article>{{ end }}{{ end }}
-      <h3>Professional development</h3>
+      <h3>Research training</h3>
       {{ range $p.professional_development }}{{ if ne .show false }}<article><span>{{ .period }}</span><strong>{{ .title }}</strong><p>{{ .organization }}</p><small>{{ .note }}</small></article>{{ end }}{{ end }}
     </aside>
   </div>
@@ -112,7 +112,7 @@
   <div class="engagement-grid">
     <div><h3 class="subhead">Teaching and research guidance</h3>{{ range first $teachingLimit $visibleTeaching }}<article class="compact-record"><span>{{ .date }} · {{ .type }}</span><h4>{{ .title }}</h4><p>{{ .detail }}</p></article>{{ end }}</div>
     <div><h3 class="subhead">Service and review</h3>{{ range first $serviceLimit $visibleService }}<article class="compact-record"><span>{{ .date }}</span><h4>{{ .role }}</h4><p>{{ .organization }}</p><small>{{ .detail }}</small></article>{{ end }}</div>
-    <div><h3 class="subhead">Applied innovation & professional development</h3>{{ range first $innovationLimit $visibleInnovation }}<article class="compact-record"><span>{{ .date }}</span><h4>{{ .role }}</h4><p>{{ .organization }}</p><small>{{ .detail }}</small>{{ with .links }}<div class="actions">{{ range . }}<a class="lnk" href="{{ .href }}" target="_blank" rel="noopener">{{ .label }} <span class="arw" aria-hidden="true">↗</span></a>{{ end }}</div>{{ end }}</article>{{ end }}</div>
+    <div><h3 class="subhead">Applied innovation</h3>{{ range first $innovationLimit $visibleInnovation }}<article class="compact-record"><span>{{ .date }}</span><h4>{{ .role }}</h4><p>{{ .organization }}</p><small>{{ .detail }}</small>{{ with .links }}<div class="actions">{{ range . }}<a class="lnk" href="{{ .href }}" target="_blank" rel="noopener">{{ .label }} <span class="arw" aria-hidden="true">↗</span></a>{{ end }}</div>{{ end }}</article>{{ end }}</div>
   </div>
 </section>
 
