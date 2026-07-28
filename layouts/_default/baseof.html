@@ -5,13 +5,15 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#f7f5f0">
   {{ partial "seo_head.html" . }}
-  <link rel="stylesheet" href="{{ "css/site.css" | relURL }}">
+  {{ $styles := resources.Get "css/site.css" | minify | fingerprint "sha384" }}
+  <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}" crossorigin="anonymous">
 </head>
 <body class="page-{{ .Kind }} section-{{ .Section }}">
   <a class="skip-link" href="#main-content">Skip to content</a>
   {{ partial "site_header.html" . }}
   <main id="main-content">{{ block "main" . }}{{ end }}</main>
   {{ partial "site_footer.html" . }}
-  <script src="{{ "js/site.js" | relURL }}" defer></script>
+  {{ $script := resources.Get "js/site.js" | minify | fingerprint "sha384" }}
+  <script src="{{ $script.RelPermalink }}" integrity="{{ $script.Data.Integrity }}" crossorigin="anonymous" defer></script>
 </body>
 </html>
