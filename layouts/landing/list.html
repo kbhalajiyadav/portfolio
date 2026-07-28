@@ -5,6 +5,7 @@
 {{ $presentationLimit := $controls.homepage.limits.presentation_series | default 3 }}
 {{ $teachingLimit := $controls.homepage.limits.teaching_records | default 4 }}
 {{ $serviceLimit := $controls.homepage.limits.service_records | default 3 }}
+{{ $innovationLimit := $controls.homepage.limits.innovation_records | default 2 }}
 {{ $cvHref := printf "%s?v=%s" ($p.profile.cv | relURL) $p.profile.cv_version }}
 <section class="hero" id="top">
   <div class="hero__copy">
@@ -57,7 +58,7 @@
 <section class="section" id="outputs">
   <div class="section-head split-head">
     <div><p class="kicker">Selected outputs</p><h2>One research package, connected across article, thesis, and software.</h2></div>
-    {{ with $publicationSync }}<p class="metadata-line">{{ .journal_article_count }} ORCID-synchronized journal articles · Last reviewed July 2026</p>{{ end }}
+    {{ with $publicationSync }}<p class="metadata-line">{{ .journal_article_count }} ORCID-synchronized journal articles · Last reviewed August 2026</p>{{ end }}
   </div>
   {{ $primary := index $p.publications 0 }}
   <article class="research-package">
@@ -71,7 +72,7 @@
       </div>
     </div>
     <div class="package-artifacts">
-      <article><span>Associated thesis</span><h4>Multi-Criteria Selection of Adhesives for Wearable Textiles</h4><p>VCU M.S. thesis · defended July 1, 2026 · public record with manuscript embargo</p><a class="lnk" href="{{ "/publication/masters-thesis/" | relURL }}">Thesis record <span class="arw" aria-hidden="true">↗</span></a></article>
+      <article><span>Associated thesis</span><h4>Multi-Criteria Selection of Adhesives for Wearable Textiles</h4><p>VCU M.S. thesis · defended July 1, 2026 · degree completed August 2026</p><a class="lnk" href="{{ "/publication/masters-thesis/" | relURL }}">Thesis record <span class="arw" aria-hidden="true">↗</span></a></article>
       <article><span>Research software</span><h4>{{ $p.software.title }}</h4><p>{{ $p.software.text }}</p><div class="actions"><a class="lnk" href="{{ $p.software.detail | relURL }}">Software details <span class="arw" aria-hidden="true">↗</span></a><a class="lnk" href="{{ $p.software.version_doi }}" target="_blank" rel="noopener">Software release <span class="arw" aria-hidden="true">↗</span></a></div></article>
     </div>
   </article>
@@ -100,24 +101,26 @@
 </section>
 
 <section class="section" id="presentations">
-  <div class="section-head"><p class="kicker">Presentations, teaching, and service</p><h2>Evidence communicated through publications, posters, instruction, and review.</h2></div>
+  <div class="section-head"><p class="kicker">Presentations and professional engagement</p><h2>Evidence communicated through publications, posters, instruction, review, and applied innovation.</h2></div>
   {{ $visibleSeries := slice }}{{ range $p.presentation_series }}{{ if ne .show false }}{{ $visibleSeries = $visibleSeries | append . }}{{ end }}{{ end }}
   {{ $visibleTeaching := slice }}{{ range $p.teaching }}{{ if ne .show false }}{{ $visibleTeaching = $visibleTeaching | append . }}{{ end }}{{ end }}
   {{ $visibleService := slice }}{{ range $p.service }}{{ if ne .show false }}{{ $visibleService = $visibleService | append . }}{{ end }}{{ end }}
+  {{ $visibleInnovation := slice }}{{ range $p.applied_innovation }}{{ if ne .show false }}{{ $visibleInnovation = $visibleInnovation | append . }}{{ end }}{{ end }}
   <div class="series-grid">
     {{ range first $presentationLimit $visibleSeries }}<details class="series"><summary><span><strong>{{ .title }}</strong><small>{{ .summary }}</small></span><i aria-hidden="true">+</i></summary><ul>{{ range .records }}<li>{{ . }}</li>{{ end }}</ul></details>{{ end }}
   </div>
-  <div class="two-col compact-cols">
+  <div class="engagement-grid">
     <div><h3 class="subhead">Teaching and research guidance</h3>{{ range first $teachingLimit $visibleTeaching }}<article class="compact-record"><span>{{ .date }} · {{ .type }}</span><h4>{{ .title }}</h4><p>{{ .detail }}</p></article>{{ end }}</div>
-    <div><h3 class="subhead">Selected service</h3>{{ range first $serviceLimit $visibleService }}<article class="compact-record"><span>{{ .date }}</span><h4>{{ .role }}</h4><p>{{ .organization }}</p><small>{{ .detail }}</small>{{ with .links }}<div class="actions">{{ range . }}<a class="lnk" href="{{ .href }}" target="_blank" rel="noopener">{{ .label }} <span class="arw" aria-hidden="true">↗</span></a>{{ end }}</div>{{ end }}</article>{{ end }}</div>
+    <div><h3 class="subhead">Service and review</h3>{{ range first $serviceLimit $visibleService }}<article class="compact-record"><span>{{ .date }}</span><h4>{{ .role }}</h4><p>{{ .organization }}</p><small>{{ .detail }}</small></article>{{ end }}</div>
+    <div><h3 class="subhead">Applied innovation & professional development</h3>{{ range first $innovationLimit $visibleInnovation }}<article class="compact-record"><span>{{ .date }}</span><h4>{{ .role }}</h4><p>{{ .organization }}</p><small>{{ .detail }}</small>{{ with .links }}<div class="actions">{{ range . }}<a class="lnk" href="{{ .href }}" target="_blank" rel="noopener">{{ .label }} <span class="arw" aria-hidden="true">↗</span></a>{{ end }}</div>{{ end }}</article>{{ end }}</div>
   </div>
 </section>
 
 <section class="section trajectory" id="trajectory">
   <div class="section-head"><p class="kicker">Doctoral trajectory</p><h2>{{ $p.doctoral.title }}</h2><p>{{ $p.doctoral.text }}</p></div>
   <div class="trajectory-grid">
-    <article class="application-card"><h3>Application horizons</h3><p>Directions supported by the measurement and processing program—not claims of demonstrated devices.</p><ul>{{ range $p.applications }}<li>{{ . }}</li>{{ end }}</ul></article>
-    <article class="robotics-card"><h3>Automation as infrastructure</h3><p>{{ $p.doctoral.robotics }}</p></article>
+    <article class="application-card"><h3>Application directions</h3><p>Directions the measurement and processing platform could support—not claims of validated products.</p><ul>{{ range $p.applications }}<li>{{ . }}</li>{{ end }}</ul></article>
+    <article class="robotics-card"><h3>Automation for repeatability</h3><p>{{ $p.doctoral.robotics }}</p></article>
   </div>
   <div class="questions"><h3>Questions for collaboration</h3>{{ range $p.collaboration_questions }}<article><strong>{{ .title }}</strong><p>{{ .text }}</p></article>{{ end }}</div>
 </section>

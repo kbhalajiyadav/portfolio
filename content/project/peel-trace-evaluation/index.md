@@ -8,7 +8,7 @@ tags:
   - Adhesion
   - Reproducibility
   - Python
-toc: true
+toc: false
 ---
 
 ## Purpose
@@ -17,6 +17,14 @@ Peel Trace Evaluation for Soft Substrates supports reproducible analysis of
 force–displacement traces from compliant interfaces. The workflow documents
 trace-window selection, initiation behavior, stability metrics, and
 sample-level summaries without publishing restricted experimental data.
+
+## What the workflow supports
+
+- protocol-defined steady-peel window selection;
+- initiation and steady-peel force summaries;
+- peel-stability and oscillation metrics;
+- sample-level and group-level outputs; and
+- versioned, citable analysis records.
 
 ## Public resources
 

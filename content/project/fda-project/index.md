@@ -5,7 +5,7 @@ tags: ["Quality Systems", "Validation", "cGMP", "Project Management", "Industry"
 status: "COMPLETED"
 date: 2023-05-01
 type: project
-toc: true
+toc: false
 weight: 3
 ---
 

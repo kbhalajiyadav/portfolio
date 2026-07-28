@@ -126,13 +126,13 @@ def render(data: dict) -> str:
     ]
     output.append(section("Presentations, Seminar, and Defense", presentations))
 
-    service: list[str] = []
-    for item in data["service"]:
-        service.append(
+    engagement: list[str] = []
+    for item in data["engagement"]:
+        engagement.append(
             rf"\smallentry{{{esc(item['role'])}}}{{{esc(item['period'])}}}"
             rf"{{{esc(item['organization'])}}}"
         )
-    output.append(section("Teaching and Service", service))
+    output.append(section("Teaching, Review, and Applied Innovation", engagement))
 
     industry: list[str] = []
     for item in data["industry_experience"]:
@@ -198,13 +198,14 @@ def main() -> int:
     profile = data["profile"]
     updated = str(profile["updated"])
 
-    contact_one = (
-        esc(profile["location"])
-        + r" \contactsep "
-        + href(f"mailto:{profile['email']}", profile["email"])
-        + r" \contactsep "
-        + esc(profile["phone"])
-    )
+    contact_parts = [
+        esc(profile["location"]),
+        href(f"mailto:{profile['email']}", profile["email"]),
+    ]
+    if profile.get("phone"):
+        contact_parts.append(esc(profile["phone"]))
+    contact_one = r" \contactsep ".join(contact_parts)
+
     contact_two = (
         href(profile["portfolio"], "bhalaji.com")
         + r" \contactsep "

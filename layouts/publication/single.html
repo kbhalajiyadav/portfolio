@@ -8,6 +8,7 @@
       <p class="kicker">{{ if $isThesis }}M.S. thesis{{ else }}Peer-reviewed article{{ end }}</p>
       <h1 class="p-name">{{ .Title }}</h1>
       <a class="u-url visually-hidden" href="{{ .Permalink }}">Permalink</a>
+      {{ with .Params.summary }}<p class="page-lede publication-summary">{{ . | markdownify }}</p>{{ end }}
       {{ with .Params.authors }}<p class="publication-authors">{{ delimit . ", " }}</p>{{ end }}
       {{ with .Params.publication }}<p class="publication-venue">{{ . | markdownify }}</p>{{ end }}
       <div class="page-meta"><time class="dt-published" datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ time.Format "2006" .Date }}</time>{{ if $isThesis }}<span>Public record; manuscript embargoed</span>{{ end }}</div>
