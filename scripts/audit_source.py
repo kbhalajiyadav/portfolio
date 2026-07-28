@@ -109,7 +109,7 @@ for token in ("site_hosts", "Absolute links back to the canonical site are inter
         errors.append(f"generated-site checker lost absolute same-site validation invariant: {token}")
 
 laptop_checker = (ROOT / 'scripts' / 'check_laptop_landing.py').read_text(encoding='utf-8')
-for token in ('WIDTH = 1366', 'HEIGHT = 768', 'eyebrowLines', 'hero extends below the landing frame'):
+for token in ('WIDTH = 1366', 'HEIGHT = 768', 'eyebrowLines', 'extends below the landing frame'):
     if token not in laptop_checker:
         errors.append(f'laptop landing audit lost required invariant: {token}')
 
