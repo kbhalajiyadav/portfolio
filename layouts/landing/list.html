@@ -1,6 +1,10 @@
 {{ define "main" }}
 {{ $p := site.Data.portfolio }}
 {{ $publicationSync := site.Data.publication_sync }}
+{{ $controls := site.Data.site_controls }}
+{{ $presentationLimit := $controls.homepage.limits.presentation_series | default 3 }}
+{{ $teachingLimit := $controls.homepage.limits.teaching_records | default 4 }}
+{{ $serviceLimit := $controls.homepage.limits.service_records | default 3 }}
 {{ $cvHref := printf "%s?v=%s" ($p.profile.cv | relURL) $p.profile.cv_version }}
 <section class="hero" id="top">
   <div class="hero__copy">
@@ -82,27 +86,30 @@
   <div class="section-head"><p class="kicker">Experience and education</p><h2>Research rigor shaped by laboratory work and regulated manufacturing.</h2></div>
   <div class="two-col">
     <div class="timeline">
-      {{ range $p.experience }}
+      {{ range $p.experience }}{{ if ne .show false }}
       <article class="timeline-item"><span>{{ .period }}</span><h3>{{ .role }}</h3><p class="org">{{ .organization }}{{ with .location }} · {{ . }}{{ end }}</p><p>{{ .detail }}</p>{{ with .outcomes }}<ul>{{ range . }}<li>{{ . }}</li>{{ end }}</ul>{{ end }}{{ with .links }}<div class="actions">{{ range . }}<a class="lnk" href="{{ .href | relURL }}">{{ .label }} <span class="arw" aria-hidden="true">↗</span></a>{{ end }}</div>{{ end }}</article>
-      {{ end }}
+      {{ end }}{{ end }}
     </div>
     <aside class="education-panel">
       <h3>Education</h3>
-      {{ range $p.education }}<article><span>{{ .period }}</span><strong>{{ .degree }}</strong><p>{{ .institution }}</p>{{ with .note }}<small>{{ . }}</small>{{ end }}</article>{{ end }}
+      {{ range $p.education }}{{ if ne .show false }}<article><span>{{ .period }}</span><strong>{{ .degree }}</strong><p>{{ .institution }}</p>{{ with .note }}<small>{{ . }}</small>{{ end }}</article>{{ end }}{{ end }}
       <h3>Professional development</h3>
-      {{ range $p.professional_development }}<article><span>{{ .period }}</span><strong>{{ .title }}</strong><p>{{ .organization }}</p><small>{{ .note }}</small></article>{{ end }}
+      {{ range $p.professional_development }}{{ if ne .show false }}<article><span>{{ .period }}</span><strong>{{ .title }}</strong><p>{{ .organization }}</p><small>{{ .note }}</small></article>{{ end }}{{ end }}
     </aside>
   </div>
 </section>
 
 <section class="section" id="presentations">
   <div class="section-head"><p class="kicker">Presentations, teaching, and service</p><h2>Evidence communicated through publications, posters, instruction, and review.</h2></div>
+  {{ $visibleSeries := slice }}{{ range $p.presentation_series }}{{ if ne .show false }}{{ $visibleSeries = $visibleSeries | append . }}{{ end }}{{ end }}
+  {{ $visibleTeaching := slice }}{{ range $p.teaching }}{{ if ne .show false }}{{ $visibleTeaching = $visibleTeaching | append . }}{{ end }}{{ end }}
+  {{ $visibleService := slice }}{{ range $p.service }}{{ if ne .show false }}{{ $visibleService = $visibleService | append . }}{{ end }}{{ end }}
   <div class="series-grid">
-    {{ range $p.presentation_series }}<details class="series"><summary><span><strong>{{ .title }}</strong><small>{{ .summary }}</small></span><i aria-hidden="true">+</i></summary><ul>{{ range .records }}<li>{{ . }}</li>{{ end }}</ul></details>{{ end }}
+    {{ range first $presentationLimit $visibleSeries }}<details class="series"><summary><span><strong>{{ .title }}</strong><small>{{ .summary }}</small></span><i aria-hidden="true">+</i></summary><ul>{{ range .records }}<li>{{ . }}</li>{{ end }}</ul></details>{{ end }}
   </div>
   <div class="two-col compact-cols">
-    <div><h3 class="subhead">Teaching and mentoring</h3>{{ range $p.teaching }}<article class="compact-record"><span>{{ .date }} · {{ .type }}</span><h4>{{ .title }}</h4><p>{{ .detail }}</p></article>{{ end }}</div>
-    <div><h3 class="subhead">Selected service</h3>{{ range first 3 $p.service }}<article class="compact-record"><span>{{ .date }}</span><h4>{{ .role }}</h4><p>{{ .organization }}</p><small>{{ .detail }}</small>{{ with .links }}<div class="actions">{{ range . }}<a class="lnk" href="{{ .href }}" target="_blank" rel="noopener">{{ .label }} <span class="arw" aria-hidden="true">↗</span></a>{{ end }}</div>{{ end }}</article>{{ end }}</div>
+    <div><h3 class="subhead">Teaching and research guidance</h3>{{ range first $teachingLimit $visibleTeaching }}<article class="compact-record"><span>{{ .date }} · {{ .type }}</span><h4>{{ .title }}</h4><p>{{ .detail }}</p></article>{{ end }}</div>
+    <div><h3 class="subhead">Selected service</h3>{{ range first $serviceLimit $visibleService }}<article class="compact-record"><span>{{ .date }}</span><h4>{{ .role }}</h4><p>{{ .organization }}</p><small>{{ .detail }}</small>{{ with .links }}<div class="actions">{{ range . }}<a class="lnk" href="{{ .href }}" target="_blank" rel="noopener">{{ .label }} <span class="arw" aria-hidden="true">↗</span></a>{{ end }}</div>{{ end }}</article>{{ end }}</div>
   </div>
 </section>
 
