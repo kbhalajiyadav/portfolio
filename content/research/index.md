@@ -39,10 +39,10 @@ reducing material selection to a single maximum-force value.
 
 Public evidence includes:
 
-- a first-author article on multi-criteria adhesive selection for wearable textiles;
-- the associated M.S. thesis public record;
-- versioned research software for protocol-defined peel-trace analysis; and
-- presentations on computer-vision metrology for mechanochromic textiles.
+- a [first-author article on multi-criteria adhesive selection](/publication/adhesives-wearable/) for wearable textiles;
+- the [associated M.S. thesis public record](/publication/masters-thesis/);
+- [versioned research software](/project/peel-trace-evaluation/) for protocol-defined peel-trace analysis; and
+- a grouped [presentation series on adhesion and computer-vision metrology](/#presentations).
 
 ## Resolve structure under stimuli
 
@@ -58,10 +58,10 @@ a decorative identity for unrelated work.
 ## Translate reproducibly
 
 Translation requires repeatable stimulus cycles, synchronized acquisition, explicit
-analysis rules, and public decision trails. Versioned software and archived releases make
-methods inspectable. Longer term, robotic handling could provide consistent sample
-placement, controlled loading and thermal cycles, and synchronized image capture for
-time-resolved and eventually closed-loop experiments.
+analysis rules, and public decision trails. The [versioned analysis software](/project/peel-trace-evaluation/)
+and its archived releases make methods inspectable. Longer term, robotic handling could
+provide consistent sample placement, controlled loading and thermal cycles, and
+synchronized image capture for time-resolved and eventually closed-loop experiments.
 
 Robotics is enabling infrastructure. The scientific claim remains the
 stimulus–structure–response relationship.
@@ -90,7 +90,8 @@ The first-author research package connects three complementary records:
 
 The article establishes the published scientific result, the thesis record documents the
 degree work and embargo status, and the software provides a citable implementation of the
-analysis workflow.
+analysis workflow. Each record links back to the other two so the package remains
+navigable in either direction.
 
 ## Collaboration questions
 

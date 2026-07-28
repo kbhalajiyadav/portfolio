@@ -311,7 +311,7 @@ def main() -> int:
         errors.append("unexpected generated authors archive")
     for required in (
         "robots.txt", "sitemap.xml", "index.xml", "llms.txt", "llms-full.txt", "humans.txt",
-        "CNAME", ".well-known/security.txt", "media/og-card.png", "media/icon.png", "site.webmanifest",
+        "CNAME", ".well-known/security.txt", "media/og-card.png", "media/favicon.svg", "site.webmanifest",
     ):
         target = root / required
         if not target.exists(): errors.append(f"missing generated {required}")
