@@ -65,6 +65,12 @@
     sections.forEach((item) => observer.observe(item.target));
   }
 
+  const responsiveToc = document.querySelector('.toc-disclosure[data-responsive-toc]');
+  if (responsiveToc) {
+    const desktopToc = window.matchMedia('(min-width: 981px)');
+    responsiveToc.open = desktopToc.matches;
+  }
+
   const tocLinks = Array.from(document.querySelectorAll('.toc-disclosure a[href^="#"]'));
   const tocTargets = tocLinks.map((link) => {
     const target = document.getElementById(decodeURIComponent(link.hash.slice(1)));

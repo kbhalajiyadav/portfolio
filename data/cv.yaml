@@ -2,24 +2,23 @@ profile:
   name: Bhalaji Yadav Kantepalle
   location: Richmond, Virginia
   email: contact@bhalaji.com
-  phone: +1 (804) 310-4169
   portfolio: https://bhalaji.com
   linkedin: https://www.linkedin.com/in/kbhalajiyadav
   github: https://github.com/kbhalajiyadav
   orcid: https://orcid.org/0000-0003-0551-6172
   scholar: https://scholar.google.com/citations?hl=en&user=DrfbtX4AAAAJ
   headline: Ph.D. Student, Researcher, and Chemical Engineer
-  updated: July 2026
+  updated: August 2026
   summary: Integrative Life Sciences Ph.D. student and chemical engineer studying stimuli-responsive soft
     and liquid-crystalline materials through mechanics, quantitative imaging, rheology, and structure-sensitive
     characterization. Develops reproducible experimental and computational workflows that connect processing,
     structure, material response, and engineering decisions.
 education:
-- period: From Jul 2026
+- period: Aug 2026–Present
   degree: Ph.D. Student, Integrative Life Sciences
   institution: Virginia Commonwealth University
   location: Richmond, Virginia
-- period: Expected Aug 2026
+- period: Aug 2026
   degree: M.S., Chemical and Life Science Engineering
   institution: Virginia Commonwealth University
   location: Richmond, Virginia
@@ -32,27 +31,26 @@ education:
   institution: Amrita Vishwa Vidyapeetham
   location: Coimbatore, India
 research_experience:
-- period: Beginning Aug 2026
+- period: Aug 2026–Present
   role: Graduate Teaching Assistant
   organization: Virginia Commonwealth University
   location: Richmond, Virginia
   bullets:
-  - Support undergraduate instruction while beginning doctoral training in the Integrative Life Sciences
+  - Support undergraduate instruction while pursuing doctoral training in the Integrative Life Sciences
     Ph.D. program.
-- period: Sep 2024 - Aug 2026
-  role: Graduate Researcher and Metrology Lead
+- period: Sep 2024–Aug 2026
+  role: Graduate Researcher, Quantitative Metrology
   organization: VCU Soft Functional Materials Lab
   location: Richmond, Virginia
   advisor: Christina Tang, Ph.D.
   bullets:
-  - Develop mechanics-consistent adhesion and fracture-characterization methods for soft, stretchable,
+  - Developed mechanics-consistent adhesion and fracture-characterization methods for soft, stretchable,
     and textile-supported interfaces.
-  - Engineer reproducible Python and OpenCV workflows that synchronize force-displacement data, deformation
+  - Engineered reproducible Python and OpenCV workflows that synchronized force-displacement data, deformation
     tracking, and optical colorimetry.
-  - Apply adhesion testing, tensile analysis, rheology-informed interpretation, optical microscopy, and
-    refractometry to functional soft-material systems.
-  - Mentored two students in Summer 2026 on characterization planning, NMR-related interpretation, strain-to-color
-    quantification, relationship plots, scientific figures, and poster development.
+  - Guided two ongoing Summer 2026 student projects in liquid-crystal temperature mapping and hyperspectral
+    detection of plastics in soil mixtures; provided Spring 2026 technical support in NMR characterization,
+    strain-to-color analysis, scientific figures, posters, and grant drafting.
   - Contributed technical writing and regulatory analysis to a phased $100,000 Commonwealth Cyber Initiative
     proposal; the $30,000 prototype and proof-of-concept phase was initially funded, with later funding
     contingent on satisfactory progress.
@@ -104,7 +102,10 @@ presentations:
   type: Poster Presentation
   citation: B. Y. Kantepalle, H. Stwodah, D. Joung, and C. Tang, "Adhesives for Personalized Wearable
     Devices," VCU Engineering Graduate Research and Postdoc Showcase, Richmond, Virginia.
-service:
+engagement:
+- period: Nov 11–12, 2025
+  role: Classroom Instructor, Undergraduate Material Balance
+  organization: Virginia Commonwealth University
 - period: Mar 29, 2026
   role: Judge, Student Poster Session
   organization: AIChE Atlantic Regional Conference, Virginia Commonwealth University
@@ -114,14 +115,11 @@ service:
 - period: Mar 20, 2026
   role: Prototype Demonstrator, Feedback Friday
   organization: Shelfie Program, VCU da Vinci Center
-- period: Nov 11-12, 2025
-  role: Classroom Instructor, Undergraduate Material Balance
-  organization: Virginia Commonwealth University
 - period: Feb 2020
   role: Student Volunteer
   organization: Anokha, Amrita University Techfest
 industry_experience:
-- period: May 2023 - May 2024
+- period: May 2023–May 2024
   role: Technical Project Manager
   organization: Kreative Organics Pvt. Ltd.
   location: Hyderabad, India
@@ -132,7 +130,7 @@ industry_experience:
     controls.
   - Standardized chemical nomenclature and analytical workflows to support more consistent technical and
     business decisions.
-- period: Oct 2022 - Apr 2023
+- period: Oct 2022–Apr 2023
   role: Technical Project Manager Intern
   organization: Kreative Organics Pvt. Ltd.
   location: Hyderabad, India
@@ -142,7 +140,7 @@ industry_experience:
 honors_development:
 - Graduate Assistantship Award, Virginia Commonwealth University, Fall 2025
 - Selected Participant, 1st National Neutron Scattering School, Oak Ridge National Laboratory, Sep 2025
-- 'VCU da Vinci Center credentials: Design Thinking, Prototyping, and Pitching and Storytelling, Mar 2026'
+- Design Thinking, Prototyping, and Pitching & Storytelling credentials, VCU da Vinci Center, Mar 2026
 technical_skills:
 - category: Materials and Testing
   items: Adhesion testing, T-peel, fracture mechanics, tensile testing, rheology, viscoelasticity, soft

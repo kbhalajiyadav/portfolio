@@ -10,16 +10,10 @@ date: "2026-06-16T00:00:00Z"
 doi: "10.3390/polym18121504"
 weight: 1
 
-# Schedule page publish date (NOT publication date).
 publishDate: "2026-06-16T00:00:00Z"
 
-# Publication type.
-# Legend: 0 = Uncategorized; 1 = Conference paper; 2 = Journal article;
-# 3 = Preprint / Working Paper; 4 = Report; 5 = Book; 6 = Book section;
-# 7 = Thesis; 8 = Patent
 publication_types: ["2"]
 
-# Publication name and optional abbreviated publication name.
 publication: "*Polymers*, 18(12), 1504"
 publication_short: "*Polymers* 18(12)"
 
@@ -57,14 +51,12 @@ bibtex: >-
     doi = {10.3390/polym18121504}
   }
 
-# Summary. An optional shortened abstract.
-summary: First-author study introducing a reproducible, multi-criteria framework for adhesive selection in wearable textiles.
+summary: First-author study introducing a stability-informed, multi-criteria framework for selecting adhesives on wearable textiles.
 
 tags:
 - Fracture Mechanics
 - Soft Electronics
 
-# Display this page in the Featured widget?
 featured: true
 
 url_pdf: ''
@@ -76,10 +68,5 @@ url_slides: ''
 url_source: ''
 url_video: ''
 
-# Associated Projects (optional).
-#   Associate this publication with one or more of your projects.
-#   Simply enter your project's folder or file name without extension.
-#   E.g. `internal-project` references `content/project/internal-project/index.md`.
-#   Otherwise, set `projects: []`.
 projects: []
 ---

@@ -1,5 +1,6 @@
 ---
 title: "Research Program"
+kicker: "Research overview"
 summary: "A stable, citable overview of Bhalaji Yadav Kantepalle’s research in stimuli-responsive soft and liquid-crystalline materials, quantitative metrology, and reproducible processing."
 date: "2026-07-28T00:00:00Z"
 lastmod: "2026-07-28T00:00:00Z"
@@ -59,26 +60,23 @@ a decorative identity for unrelated work.
 
 Translation requires repeatable stimulus cycles, synchronized acquisition, explicit
 analysis rules, and public decision trails. The [versioned analysis software](/project/peel-trace-evaluation/)
-and its archived releases make methods inspectable. Longer term, robotic handling could
-provide consistent sample placement, controlled loading and thermal cycles, and
-synchronized image capture for time-resolved and eventually closed-loop experiments.
+and its archived releases make methods inspectable.
 
-Robotics is enabling infrastructure. The scientific claim remains the
-stimulus–structure–response relationship.
+Automation can improve experimental repeatability by standardizing sample placement,
+stimulus timing, and synchronized data capture. Where scientifically useful, robotic
+handling could support longer or repeated test sequences and future feedback-guided
+experiments. The research question remains how processing history shapes structure and
+response.
 
-## Application horizons
+## Application directions
 
-The measurement and processing program can support several application directions. These
-are research horizons, not claims that each device has already been demonstrated:
+These are directions the measurement and processing platform could support, not claims
+of validated products:
 
-- passive temperature mapping and battery-free wearable indicators;
-- non-contact and non-destructive optical interrogation;
-- visual safety and inspection indicators readable without instruments;
-- adaptive, decorative, and interactive surfaces; and
-- low-power sensing in remote or hard-to-reach environments.
-
-Infrared sensing and defense-specific claims are intentionally excluded because the
-current public record does not substantiate them.
+- passive visual temperature mapping and wearable indicators;
+- non-contact optical monitoring and condition indication;
+- visual inspection and safety cues where powered instrumentation is impractical; and
+- adaptive or decorative surfaces whose response can be quantified and reproduced.
 
 ## Public research package
 

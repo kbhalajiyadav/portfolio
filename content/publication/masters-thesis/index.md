@@ -38,6 +38,7 @@ projects: []
 ## Degree and defense
 
 - **Degree:** Master of Science in Chemical and Life Science Engineering
+- **Degree conferred:** August 2026
 - **Institution:** Virginia Commonwealth University
 - **Defense:** July 1, 2026
 - **Repository submission:** July 21, 2026

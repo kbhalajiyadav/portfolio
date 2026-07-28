@@ -5,7 +5,7 @@ tags: ["Technical Project Management", "Chemical Operations", "Data Quality", "I
 status: "COMPLETED"
 date: 2022-10-01
 type: project
-toc: true
+toc: false
 weight: 4
 ---
 

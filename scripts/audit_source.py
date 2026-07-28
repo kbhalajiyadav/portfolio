@@ -16,6 +16,12 @@ texts = {p: p.read_text(encoding='utf-8', errors='replace') for p in files}
 
 forbidden = {
     'Incoming Ph.D.': 'stale doctoral status',
+    'Beginning Aug 2026': 'stale future-tense appointment status',
+    'Completion expected August 2026': 'stale degree-completion language',
+    'From July 2026': 'stale doctoral start date',
+    'Metrology Lead': 'unverified formal role title',
+    '+1 (804) 310-4169': 'public phone number',
+    '804 310-4169': 'public phone number',
     'reading-progress': 'removed homepage progress bar',
     'http://example.org': 'sample URL',
     'See the evidence workflow': 'misdirected homepage link',
@@ -28,12 +34,28 @@ for needle, reason in forbidden.items():
         if needle in text:
             errors.append(f'{path.relative_to(ROOT)}: {reason}: {needle!r}')
 
-# The public identity must remain consistent across the main data sources.
-for required in ('Ph.D. student', 'Stimuli-responsive'):
-    if required.lower() not in texts[ROOT / 'data/portfolio.yaml'].lower():
+portfolio_text = texts[ROOT / 'data/portfolio.yaml']
+for required in (
+    'Ph.D. student',
+    'Stimuli-responsive',
+    'Aug 2026–present',
+    'M.S. degree',
+    'applied_innovation:',
+    'Graduate Researcher · Quantitative Metrology',
+):
+    if required.lower() not in portfolio_text.lower():
         errors.append(f'data/portfolio.yaml: missing {required!r}')
 
-# All externally displayed arrow labels should use the unbreakable link atom.
+cv_text = texts[ROOT / 'data/cv.yaml']
+build_cv_text = (ROOT / 'scripts/build_cv.py').read_text(encoding='utf-8')
+for required in (
+    'Aug 2026–Present',
+    'Graduate Researcher, Quantitative Metrology',
+    'Teaching, Review, and Applied Innovation',
+):
+    if required.lower() not in (cv_text + build_cv_text).lower():
+        errors.append(f'CV source: missing {required!r}')
+
 for path in [ROOT / 'layouts/landing/list.html', ROOT / 'layouts/publication/single.html']:
     for match in re.finditer(r'<a\b[^>]*>[^<\n]*(?:↗|↓)', texts[path]):
         snippet = match.group(0)
@@ -46,7 +68,6 @@ config_text = (ROOT / 'config/_default/config.yaml').read_text(encoding='utf-8')
 if 'author: authors' in config_text or 'publication_type: publication_types' in config_text or 'category: categories' in config_text:
     errors.append('unused legacy taxonomies must remain disabled')
 
-# The public site is now a self-contained Hugo build; obsolete framework layers must not return.
 for obsolete in ('go.mod', 'go.sum', 'config/_default/module.yaml'):
     if (ROOT / obsolete).exists():
         errors.append(f'{obsolete}: obsolete HugoBlox module dependency must remain removed')
@@ -56,7 +77,7 @@ params_text = texts[ROOT / 'config/_default/params.yaml']
 for obsolete_marker in ('wowchemy', 'academicons', 'isotope', 'theme_day', 'google_analytics'):
     if obsolete_marker in params_text:
         errors.append(f'config/_default/params.yaml: obsolete inherited configuration marker {obsolete_marker!r}')
-if '/research/#resolve-structure\n' in texts[ROOT / 'data/portfolio.yaml']:
+if '/research/#resolve-structure\n' in portfolio_text:
     errors.append('data/portfolio.yaml: stale research fragment; use #resolve-structure-under-stimuli')
 
 security_text = (ROOT / 'static/.well-known/security.txt').read_text(encoding='utf-8')
@@ -75,7 +96,28 @@ header_text = texts[ROOT / 'layouts/partials/site_header.html']
 if 'class="u-photo indieweb-photo"' not in header_text or 'alt="Portrait of {{ $p.profile.name }}"' not in header_text:
     errors.append('layouts/partials/site_header.html: hidden IndieWeb photo requires a durable non-empty alt value')
 
-# Browser-audit tools must use exact direct versions rather than floating ranges.
+for path in (
+    ROOT / 'content/project/peel-trace-evaluation/index.md',
+    ROOT / 'content/project/fda-project/index.md',
+    ROOT / 'content/project/supply-chain-automation/index.md',
+):
+    if re.search(r'^toc:\s*true\s*$', texts[path], re.MULTILINE):
+        errors.append(f'{path.relative_to(ROOT)}: short page must not enable a table of contents')
+for path in (ROOT / 'layouts/_default/single.html', ROOT / 'layouts/project/single.html'):
+    text = texts[path]
+    if 'data-responsive-toc' not in text or '<details class="toc-disclosure" open' in text:
+        errors.append(f'{path.relative_to(ROOT)}: responsive TOC must not be hard-coded open')
+site_js = (ROOT / 'assets/js/site.js').read_text(encoding='utf-8')
+for token in ("data-responsive-toc", "matchMedia('(min-width: 981px)')", "responsiveToc.open = desktopToc.matches"):
+    if token not in site_js:
+        errors.append(f'assets/js/site.js: responsive TOC invariant missing {token!r}')
+if (ROOT / 'static/js/site.js').exists():
+    errors.append('static/js/site.js: unused duplicate runtime script must remain removed')
+
+workflow_text = (ROOT / '.github/workflows/hugo.yaml').read_text(encoding='utf-8')
+if 'node --check assets/js/site.js' not in workflow_text:
+    errors.append('.github/workflows/hugo.yaml: JavaScript syntax check must target the bundled asset')
+
 package = json.loads((ROOT / 'package.json').read_text(encoding='utf-8'))
 expected_tools = {'@lhci/cli': '0.15.1', 'pa11y-ci': '4.1.1'}
 if package.get('devDependencies') != expected_tools:
@@ -92,7 +134,6 @@ for required in (
     if not (ROOT / required).exists():
         errors.append(f'{required}: missing production hardening file')
 
-# The network checker must never test unreleased bhalaji.com routes against production.
 external_checker = (ROOT / "scripts" / "check_external_links.py").read_text(encoding="utf-8")
 required_external_checker_tokens = [
     "skipped_same_site",
@@ -108,7 +149,7 @@ for token in ("site_hosts", "Absolute links back to the canonical site are inter
     if token not in site_checker:
         errors.append(f"generated-site checker lost absolute same-site validation invariant: {token}")
 
-laptop_checker = (ROOT / 'scripts' / 'check_laptop_landing.py').read_text(encoding='utf-8')
+laptop_checker = (ROOT / 'scripts/check_laptop_landing.py').read_text(encoding='utf-8')
 for token in ('WIDTH = 1366', 'HEIGHT = 768', 'eyebrowLines', 'extends below the landing frame'):
     if token not in laptop_checker:
         errors.append(f'laptop landing audit lost required invariant: {token}')
