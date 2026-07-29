@@ -50,18 +50,28 @@ jobs:
             echo "sha256=$(sha256sum "evidence/${name}.body" | cut -d' ' -f1)"
             echo "bytes=$(wc -c < "evidence/${name}.body")"
             file "evidence/${name}.body" || true
-            if grep -aqE 'BK monogram|>BK<|BYK|Bhalaji Kantepalle' "evidence/${name}.body"; then
-              grep -aoE 'BK monogram|>BK<|BYK|Bhalaji Kantepalle' "evidence/${name}.body" | sort -u
-            fi
+            printf '%s' "${status}" > "evidence/${name}.status"
           }
 
-          check_url '/favicon.ico' 'favicon-ico'
+          check_url '/media/bk-favicon-20260729-3.ico' 'versioned-ico'
+          check_url '/favicon.ico' 'root-ico'
           check_url '/favicon.svg' 'favicon-svg'
-          check_url '/media/bk-monogram.svg' 'bk-monogram-svg'
-          check_url '/media/favicon.svg' 'legacy-favicon-svg'
+          check_url '/apple-touch-icon.png' 'apple-touch'
+          check_url '/media/bk-monogram-192.png' 'manifest-192'
+          check_url '/media/bk-monogram-512.png' 'manifest-512'
           check_url '/site.webmanifest' 'manifest'
 
           echo '--- Manifest icon entries ---'
-          cat evidence/manifest.body || true
+          cat evidence/manifest.body
 
-          test "$(awk 'NR==1{print $2}' evidence/favicon-ico.headers | tr -d '\r')" != '404'
+          grep -Fq '/media/bk-favicon-20260729-3.ico' evidence/home.html
+          test "$(cat evidence/versioned-ico.status)" = '200'
+          file evidence/versioned-ico.body | grep -Eiq 'icon|MS Windows'
+          test "$(cat evidence/favicon-svg.status)" = '200'
+          grep -aq '>BK<' evidence/favicon-svg.body
+          test "$(cat evidence/apple-touch.status)" = '200'
+          file evidence/apple-touch.body | grep -qi 'PNG image data'
+          test "$(cat evidence/manifest-192.status)" = '200'
+          test "$(cat evidence/manifest-512.status)" = '200'
+          grep -Fq '/media/bk-monogram-192.png?v=20260729-2' evidence/manifest.body
+          grep -Fq '/media/bk-monogram-512.png?v=20260729-2' evidence/manifest.body
