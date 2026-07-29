@@ -18,7 +18,7 @@
 {{ end }}
 <link rel="canonical" href="{{ $canonical }}">
 <link rel="author" href="{{ "/" | absURL }}">
-<link rel="manifest" href="{{ "site.webmanifest" | relURL }}">
+<link rel="manifest" href="{{ "site.webmanifest?v=20260729-1" | relURL }}">
 {{ with site.Home.OutputFormats.Get "RSS" }}
 <link rel="alternate feed" type="{{ .MediaType.Type }}" href="{{ .Permalink }}" title="{{ $siteName }}">
 {{ end }}
@@ -26,7 +26,7 @@
 {{ with site.Params.indieweb.pingback_endpoint }}<link rel="pingback" href="{{ . }}">{{ end }}
 {{ with site.Params.indieweb.authorization_endpoint }}<link rel="authorization_endpoint" href="{{ . }}">{{ end }}
 {{ with site.Params.indieweb.token_endpoint }}<link rel="token_endpoint" href="{{ . }}">{{ end }}
-{{ with site.Params.indieweb.micropub_endpoint }}<link rel="micropub" href="{{ . }}">{{ end }}
+{{ with site.Params.indieweb.micropub_endpoint }}<link rel="micropub_endpoint" href="{{ . }}">{{ end }}
 <link rel="me" href="{{ $p.profile.orcid }}">
 <link rel="me" href="{{ $p.profile.scholar }}">
 <link rel="me" href="{{ $p.profile.linkedin }}">
@@ -48,9 +48,9 @@
 <meta name="twitter:image:alt" content="Bhalaji Yadav Kantepalle research portfolio">
 {{ with site.Params.marketing.verification.google }}<meta name="google-site-verification" content="{{ . }}">{{ end }}
 {{ with site.Params.marketing.verification.bing }}<meta name="msvalidate.01" content="{{ . }}">{{ end }}
-<link rel="icon" type="image/svg+xml" href="{{ "media/favicon.svg?v=20260728-4" | relURL }}">
-<link rel="alternate icon" href="{{ "media/favicon.svg?v=20260728-4" | relURL }}">
-<link rel="apple-touch-icon" href="{{ "media/favicon.svg?v=20260728-4" | relURL }}">
+<link rel="icon" type="image/svg+xml" sizes="any" href="{{ "media/bk-monogram.svg?v=20260729-1" | relURL }}">
+<link rel="shortcut icon" type="image/svg+xml" href="{{ "favicon.svg?v=20260729-1" | relURL }}">
+<link rel="apple-touch-icon" href="{{ "media/bk-monogram.svg?v=20260729-1" | relURL }}">
 {{ $personID := printf "%s#person" ("/" | absURL) }}
 {{ $websiteID := printf "%s#website" ("/" | absURL) }}
 {{ $profileID := printf "%s#profile" ("/" | absURL) }}
