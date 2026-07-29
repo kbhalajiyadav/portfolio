@@ -17,9 +17,6 @@ confidential employer information, and unsupported claims.
 - `data/cv.yaml` — source for the generated two-page CV
 - `docs/content-taxonomy.md` — canonical classification and public-label decisions
 
-The owner-only **Propose portfolio display controls** workflow can change homepage
-limits and future feature switches through a draft pull request. Search and Latest
-Updates are intentionally disabled.
 
 ## Content taxonomy
 
