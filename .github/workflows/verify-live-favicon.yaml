@@ -1,0 +1,67 @@
+name: Verify live favicon
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - .github/workflows/verify-live-favicon.yaml
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Inspect production favicon surfaces
+        shell: bash
+        run: |
+          set -euo pipefail
+          stamp="${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          base="https://bhalaji.com"
+          mkdir -p evidence
+
+          curl --fail --silent --show-error --location \
+            --header 'Cache-Control: no-cache, no-store, max-age=0' \
+            --header 'Pragma: no-cache' \
+            "${base}/?favicon-verify=${stamp}" -D evidence/home.headers -o evidence/home.html
+
+          echo '--- Production icon declarations ---'
+          grep -Eio '<link[^>]+rel="[^"]*(icon|manifest)[^"]*"[^>]*>' evidence/home.html || true
+          echo '--- Production title marker ---'
+          grep -Eo '<title>[^<]+' evidence/home.html | head -1 || true
+
+          check_url() {
+            local path="$1"
+            local name="$2"
+            local url="${base}${path}"
+            local status
+            status=$(curl --silent --show-error --location \
+              --header 'Cache-Control: no-cache, no-store, max-age=0' \
+              --header 'Pragma: no-cache' \
+              --output "evidence/${name}.body" \
+              --dump-header "evidence/${name}.headers" \
+              --write-out '%{http_code}' \
+              "${url}?favicon-verify=${stamp}" || true)
+            echo "--- ${path} ---"
+            echo "status=${status}"
+            grep -Ei '^(content-type|content-length|cache-control|etag|last-modified|age|server|x-cache):' "evidence/${name}.headers" || true
+            echo "sha256=$(sha256sum "evidence/${name}.body" | cut -d' ' -f1)"
+            echo "bytes=$(wc -c < "evidence/${name}.body")"
+            file "evidence/${name}.body" || true
+            if grep -aqE 'BK monogram|>BK<|BYK|Bhalaji Kantepalle' "evidence/${name}.body"; then
+              grep -aoE 'BK monogram|>BK<|BYK|Bhalaji Kantepalle' "evidence/${name}.body" | sort -u
+            fi
+          }
+
+          check_url '/favicon.ico' 'favicon-ico'
+          check_url '/favicon.svg' 'favicon-svg'
+          check_url '/media/bk-monogram.svg' 'bk-monogram-svg'
+          check_url '/media/favicon.svg' 'legacy-favicon-svg'
+          check_url '/site.webmanifest' 'manifest'
+
+          echo '--- Manifest icon entries ---'
+          cat evidence/manifest.body || true
+
+          test "$(awk 'NR==1{print $2}' evidence/favicon-ico.headers | tr -d '\r')" != '404'
