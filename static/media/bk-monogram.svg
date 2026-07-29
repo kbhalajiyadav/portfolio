@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">BK monogram</title>
+  <desc id="desc">Bhalaji Kantepalle research portfolio monogram</desc>
+  <rect width="512" height="512" fill="#f7f5f0"/>
+  <rect x="48" y="48" width="416" height="416" fill="none" stroke="#16191c" stroke-width="14"/>
+  <text x="256" y="326" text-anchor="middle" fill="#16191c" font-family="Georgia, 'Times New Roman', serif" font-size="218" font-weight="700" letter-spacing="-18">BK</text>
+</svg>
