@@ -169,6 +169,7 @@ def target_for(
     if parsed.scheme in {"mailto", "tel", "data"} or url.startswith("//"):
         return None
     if parsed.scheme in {"http", "https"}:
+        # Absolute links back to the canonical site are internal.
         host = normalized_host(url)
         if not host or host not in site_hosts:
             return None
