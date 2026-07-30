@@ -1,19 +1,28 @@
 # Bhalaji Yadav Kantepalle — Research Portfolio
 
-Source for [bhalaji.com](https://bhalaji.com), an academic portfolio.
+Official source for [bhalaji.com](https://bhalaji.com), a Hugo-based academic
+portfolio and generated curriculum vitae.
 
-## Edit content
+## Repository structure
 
-- `data/portfolio.yaml` — homepage content, chronology, and public evidence
-- `data/site_controls.yaml` — homepage limits and future feature controls
-- `content/research/index.md` — stable research-program page
-- `content/publication/` and `content/project/` — detailed public records
-- `data/cv.yaml` — source for the generated two-page CV
+- `data/portfolio.yaml` — profile, chronology, and public records
+- `data/cv.yaml` — structured source for the two-page CV
+- `data/site_controls.yaml` — presentation limits and feature controls
+- `content/` — research and portfolio pages
+- `layouts/` — Hugo templates
+- `assets/` and `static/` — styles, scripts, and published assets
+- `scripts/` — deterministic build and validation utilities
 
-## Local validation
+Content classification decisions are recorded in
+`docs/content-taxonomy.md`.
+
+## Build and validation
+
+The validated local sequence is:
 
 ```bash
 python3 -m pip install PyYAML==6.0.3 websocket-client==1.9.0
+bash scripts/build_browser_icons.sh
 python3 scripts/build_cv.py --no-compile
 python3 scripts/audit_source.py
 python3 scripts/audit_styles.py
@@ -25,20 +34,12 @@ python3 scripts/check_site.py public
 python3 scripts/check_external_links.py public --site-origin https://bhalaji.com/
 ```
 
-GitHub Actions additionally runs Pa11y, mobile and desktop Lighthouse, responsive
-checks from 390 to 1920 pixels, a 200%-zoom-equivalent test, an exact 1366×768
-laptop landing-frame gate, and desktop/mobile table-of-contents state checks. CV
-compilation remains isolated in a path-filtered workflow using the proven XeLaTeX
-dependency set.
+GitHub Actions also runs accessibility, responsive-layout, laptop-frame, and
+mobile and desktop Lighthouse checks before deployment. CV compilation is
+handled by the dedicated XeLaTeX workflow.
 
-## Discovery and ownership
+## Rights
 
-The site includes canonical metadata, structured scholarly data, RSS, sitemap,
-`rel="me"`, IndieWeb microformats, crawler policy, `llms.txt`, and IndexNow support.
-Google Search Console, Bing Webmaster Tools, and optional IndieWeb endpoints still
-require account-issued values in `config/_default/params.yaml`.
-
-## License
-
-See `LICENSE`. The public security contact is published at
-`static/.well-known/security.txt`.
+Copyright © 2026 Bhalaji Yadav Kantepalle. All rights reserved. This repository
+is not released under an open-source license. See `LICENSE` for the applicable
+terms.
