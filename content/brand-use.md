@@ -1,9 +1,6 @@
 ---
 title: "Rights and permitted use"
 date: 2026-07-30
-url: "/rights/"
-aliases:
-  - "/brand-use/"
 summary: "Ownership and reuse terms for this portfolio and its visual identity."
 ---
 
