@@ -56,7 +56,7 @@ def fetch(url: str) -> tuple[int, str, bytes]:
     req = Request(
         url,
         headers={
-            "User-Agent": "BhalajiPortfolioDeployCheck/1.4",
+            "User-Agent": "BhalajiPortfolioDeployCheck/1.4.1",
             "Cache-Control": "no-cache, no-store, max-age=0",
             "Pragma": "no-cache",
         },
