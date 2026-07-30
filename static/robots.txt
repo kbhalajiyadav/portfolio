@@ -1,4 +1,5 @@
 # Public research portfolio: indexing and retrieval are permitted.
+# Deployment marker: Microsoft Clarity project xuo3lvzchr
 User-agent: *
 Allow: /
 
