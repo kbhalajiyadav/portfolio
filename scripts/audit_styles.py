@@ -6,6 +6,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 CSS = ROOT / "static/css/site.css"
+REFINEMENTS = ROOT / "static/css/refinements.css"
 
 
 def luminance(value: str) -> float:
@@ -21,6 +22,7 @@ def contrast(a: str, b: str) -> float:
 
 def main() -> int:
     text = CSS.read_text(encoding="utf-8")
+    refinements = REFINEMENTS.read_text(encoding="utf-8")
     errors: list[str] = []
     tokens = dict(re.findall(r"--([\w-]+):\s*(#[0-9a-fA-F]{6})", text))
     for name in ("paper", "surface", "ink", "ink-soft", "teal", "cyan", "rust"):
@@ -40,13 +42,20 @@ def main() -> int:
     for marker in required:
         if marker not in text:
             errors.append(f"missing required style marker {marker}")
+    footer_control_rule = (
+        ".site-footer nav .privacy-choice-link{color:var(--ink-soft);"
+        "font-family:var(--sans);font-size:.76rem;font-weight:400;"
+        "line-height:1.4;text-decoration:none}"
+    )
+    if footer_control_rule not in refinements:
+        errors.append("footer privacy control must match the adjacent footer-link typography")
     if "text-align:justify" in text.replace(" ", ""):
         errors.append("body copy must not use full justification")
     if errors:
         for error in errors:
             print(f"ERROR: {error}")
         return 1
-    print("Style audit passed: contrast, hidden microformats, focus, and breakpoints verified.")
+    print("Style audit passed: contrast, hidden microformats, focus, breakpoints, and footer controls verified.")
     return 0
 
 
