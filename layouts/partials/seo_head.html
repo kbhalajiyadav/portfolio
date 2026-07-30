@@ -23,7 +23,7 @@
 {{ end }}
 <link rel="canonical" href="{{ $canonical }}">
 <link rel="author" href="{{ "/" | absURL }}">
-<link rel="manifest" href="{{ "site.webmanifest?v=20260730-4" | relURL }}">
+<link rel="manifest" href="{{ "site.webmanifest?v=20260730-6" | relURL }}">
 {{ with site.Home.OutputFormats.Get "RSS" }}
 <link rel="alternate feed" type="{{ .MediaType.Type }}" href="{{ .Permalink }}" title="{{ $siteName }}">
 {{ end }}
@@ -46,10 +46,11 @@
 <meta name="twitter:description" content="{{ $description }}">
 {{ with site.Params.marketing.verification.google }}<meta name="google-site-verification" content="{{ . }}">{{ end }}
 {{ with site.Params.marketing.verification.bing }}<meta name="msvalidate.01" content="{{ . }}">{{ end }}
-<link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABmJLR0QA/wD/AP+gvaeTAAACkElEQVRYhe2WXUiTURjH/9te8YBTh+RAN9zrXeKujbGZDftAC9IwxYzQoBKJLoKCNANNqSjS7GM2zegq6kKFmnZlEKn4sQy7yIuk5XbRu8CPKe7jbe/ThTSS9NVI2M37vzvnf855fufjOeeoDFn8Km/KXkYc5Pn2NZnjTdnL798N6eMBYCuwC+p4BP5TCoACoAAoAJycubi4iKWlQKys0aih0+mg1WoBAD6fD9GoFPMzMzORkMDB6/VBkiRwnAYGg0EWQHYF5rxeNDReQ57FiouXLsPR6USexYb9B4vwZXYWY+MTOFR8BHkWKwYG30AUIwCAW7fvoO78BUy6P2wxfwDWfLtAMipr7yB9hpEeOR4TEZGzq5v0GUa6Un+ViIj2WGykzzDS/Pw8ERH19vXT2do6CgaDcsMSEZF1777vsluwkULhMACA501/eY5OJ+a8c3A8vA+1envHa9sAr1wufJ6ZwcDgIEpLjuJ0TfU6v6m5Bc9fvMSx0pJtBwf+IQsOFBaisaEe99ru4rXLhfLKKoiiGPNzcnbDZMpCb18/up707DwAYwzp6btwuLgIZrMZw8MjmJ7+FPPLj5ehp9sJxhiamq9jbHxiZwF+S5Ik+P0/wHEcDMb1KWbOzcXNG60QxZ84c64WguD/P4CpqY8YGR0FsHYGmltaUVZRCZVKhQcd7RgaeouFhQUAQM/TZxAEPyorynGy6gQEwY9T1TWYdLtlAVTWfLuw2ZcsFAohFA4jEo4gGAwCANLS0pCcvHYRLQUCIKJYe21SEjiOQzQaxfLKCgCAJSaCMbZhcFuBXZDNAsbYpp0BIDUlZcN6jUYDXWqq3NAxxf0tUAAUAAVAAVAZsvhVnucDWzfdeXk8npRfr8wh9DTSwoAAAAAASUVORK5CYII=">
-<link rel="shortcut icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABmJLR0QA/wD/AP+gvaeTAAACkElEQVRYhe2WXUiTURjH/9te8YBTh+RAN9zrXeKujbGZDftAC9IwxYzQoBKJLoKCNANNqSjS7GM2zegq6kKFmnZlEKn4sQy7yIuk5XbRu8CPKe7jbe/ThTSS9NVI2M37vzvnf855fufjOeeoDFn8Km/KXkYc5Pn2NZnjTdnL798N6eMBYCuwC+p4BP5TCoACoAAoAJycubi4iKWlQKys0aih0+mg1WoBAD6fD9GoFPMzMzORkMDB6/VBkiRwnAYGg0EWQHYF5rxeNDReQ57FiouXLsPR6USexYb9B4vwZXYWY+MTOFR8BHkWKwYG30AUIwCAW7fvoO78BUy6P2wxfwDWfLtAMipr7yB9hpEeOR4TEZGzq5v0GUa6Un+ViIj2WGykzzDS/Pw8ERH19vXT2do6CgaDcsMSEZF1777vsluwkULhMACA501/eY5OJ+a8c3A8vA+1envHa9sAr1wufJ6ZwcDgIEpLjuJ0TfU6v6m5Bc9fvMSx0pJtBwf+IQsOFBaisaEe99ru4rXLhfLKKoiiGPNzcnbDZMpCb18/up707DwAYwzp6btwuLgIZrMZw8MjmJ7+FPPLj5ehp9sJxhiamq9jbHxiZwF+S5Ik+P0/wHEcDMb1KWbOzcXNG60QxZ84c64WguD/P4CpqY8YGR0FsHYGmltaUVZRCZVKhQcd7RgaeouFhQUAQM/TZxAEPyorynGy6gQEwY9T1TWYdLtlAVTWfLuw2ZcsFAohFA4jEo4gGAwCANLS0pCcvHYRLQUCIKJYe21SEjiOQzQaxfLKCgCAJSaCMbZhcFuBXZDNAsbYpp0BIDUlZcN6jUYDXWqq3NAxxf0tUAAUAAVAAVAZsvhVnucDWzfdeXk8npRfr8wh9DTSwoAAAAAASUVORK5CYII=">
+<link rel="icon" type="image/svg+xml" href="{{ "favicon.svg?v=20260730-6" | relURL }}">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ "media/bk-browser-32-20260730-v6.png" | relURL }}">
+<link rel="shortcut icon" href="{{ "favicon.ico?v=20260730-6" | relURL }}">
+<link rel="apple-touch-icon" sizes="180x180" href="{{ "media/bk-apple-touch-20260730-v6.png" | relURL }}">
 <link rel="mask-icon" href="{{ "media/bk-monogram-canonical-20260730.svg" | relURL }}" color="#16191c">
-<link rel="apple-touch-icon" href="{{ "media/bk-monogram-canonical-20260730.svg" | relURL }}">
 {{ $personID := printf "%s#person" ("/" | absURL) }}
 {{ $websiteID := printf "%s#website" ("/" | absURL) }}
 {{ $profileID := printf "%s#profile" ("/" | absURL) }}
