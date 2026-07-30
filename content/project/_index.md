@@ -1,7 +1,8 @@
 ---
 title: "Research Software and Selected Projects"
-summary: "Open research software and selected public project records spanning quantitative metrology, reproducible analysis, and regulated engineering practice."
-description: "Open research software and selected public project records by Bhalaji Yadav Kantepalle."
+summary: "Research software and selected projects in quantitative metrology, reproducible analysis, and regulated engineering."
+description: "Research software and selected public project records by Bhalaji Yadav Kantepalle."
 ---
 
-Open research software and selected public records that support reproducible measurement and engineering practice.
+Research software and selected project records covering measurement methods,
+analysis workflows, and regulated engineering practice.
