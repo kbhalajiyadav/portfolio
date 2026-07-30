@@ -18,7 +18,7 @@
 {{ end }}
 <link rel="canonical" href="{{ $canonical }}">
 <link rel="author" href="{{ "/" | absURL }}">
-<link rel="manifest" href="{{ "site.webmanifest?v=20260729-3" | relURL }}">
+<link rel="manifest" href="{{ "site.webmanifest?v=20260730-1" | relURL }}">
 {{ with site.Home.OutputFormats.Get "RSS" }}
 <link rel="alternate feed" type="{{ .MediaType.Type }}" href="{{ .Permalink }}" title="{{ $siteName }}">
 {{ end }}
@@ -48,10 +48,11 @@
 <meta name="twitter:image:alt" content="Bhalaji Yadav Kantepalle research portfolio">
 {{ with site.Params.marketing.verification.google }}<meta name="google-site-verification" content="{{ . }}">{{ end }}
 {{ with site.Params.marketing.verification.bing }}<meta name="msvalidate.01" content="{{ . }}">{{ end }}
-<link rel="icon" href="{{ "media/bk-favicon-20260729-3.ico" | relURL }}" sizes="16x16 32x32" type="image/x-icon">
-<link rel="shortcut icon" href="{{ "media/bk-favicon-20260729-3.ico" | relURL }}" type="image/x-icon">
-<link rel="icon" type="image/svg+xml" sizes="any" href="{{ "favicon.svg?v=20260729-3" | relURL }}">
-<link rel="apple-touch-icon" sizes="180x180" href="{{ "apple-touch-icon.png?v=20260729-3" | relURL }}">
+<link rel="icon" type="image/svg+xml" sizes="any" href="{{ "media/bk-monogram.svg?v=20260730-1" | relURL }}">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ "media/bk-safari-tab-20260730-1.png" | relURL }}">
+<link rel="shortcut icon" type="image/png" href="{{ "media/bk-safari-tab-20260730-1.png" | relURL }}">
+<link rel="apple-touch-icon" sizes="180x180" href="{{ "media/bk-safari-touch-20260730-1.png" | relURL }}">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="{{ "media/bk-safari-touch-20260730-1.png" | relURL }}">
 {{ $personID := printf "%s#person" ("/" | absURL) }}
 {{ $websiteID := printf "%s#website" ("/" | absURL) }}
 {{ $profileID := printf "%s#profile" ("/" | absURL) }}
