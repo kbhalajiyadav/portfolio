@@ -57,6 +57,14 @@ jobs:
       - name: Install Python audit dependency
         run: python3 -m pip install --disable-pip-version-check PyYAML==6.0.3 websocket-client==1.9.0
 
+      - name: Build canonical browser icons
+        run: |
+          if ! command -v magick >/dev/null 2>&1 && ! command -v convert >/dev/null 2>&1; then
+            sudo apt-get update
+            sudo apt-get install --yes --no-install-recommends imagemagick
+          fi
+          bash scripts/build_browser_icons.sh
+
       - name: Audit source, visual system, workflows, templates, and JavaScript
         run: |
           python3 scripts/build_cv.py --no-compile
