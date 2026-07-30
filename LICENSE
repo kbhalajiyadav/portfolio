@@ -1,48 +1,19 @@
-Copyright (c) 2026 Bhalaji Yadav Kantepalle
+Copyright © 2026 Bhalaji Yadav Kantepalle
+All rights reserved.
 
-## Source-code license
+This repository and the portfolio it produces are proprietary. No license is
+granted to copy, modify, publish, distribute, sublicense, sell, create
+derivative works from, or otherwise reuse the source code, design system,
+content, data, documentation, curriculum vitae, images, monogram, or other
+assets, except with prior written permission or as permitted by applicable law.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of
-the source-code portions of this repository (including files under `layouts`,
-`scripts`, `static/css`, `static/js`, and `.github/workflows`) to use, copy,
-modify, merge, publish, distribute, sublicense, and/or sell copies of that
-source code, subject to the following conditions:
+Public availability on GitHub grants no rights beyond those provided by
+GitHub's Terms of Service. Accessing, downloading, or forking the repository
+does not transfer ownership or grant a separate license. Third-party materials
+remain subject to the rights of their respective owners.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the source code.
+The BK monogram and associated visual identity are reserved identifiers of
+Bhalaji Yadav Kantepalle. They may not be used to imply authorship, affiliation,
+sponsorship, endorsement, or origin without prior written permission.
 
-THE SOURCE CODE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM,
-OUT OF, OR IN CONNECTION WITH THE SOURCE CODE OR THE USE OR OTHER DEALINGS IN
-THE SOURCE CODE.
-
-## Reserved portfolio content
-
-The source-code permission above does not apply to personal photographs,
-curriculum vitae files, biography text, research narratives, publication
-metadata, presentation records, institutional materials, certificates, or
-other files under `content`, `data`, `static/media`, and `static/uploads`.
-Those materials remain all rights reserved unless a file or linked public
-record states a different license.
-
-## Brand assets and marks
-
-The BK monogram, its exact vector paths, proportions, spacing, border geometry,
-browser-icon presentation, and the portfolio's coordinated visual identity are
-proprietary brand assets of Bhalaji Yadav Kantepalle. They are excluded from
-the source-code license.
-
-No permission is granted to reproduce, adapt, distribute, sell, register, or
-use those brand assets as a trademark or service mark, or to imply affiliation,
-endorsement, authorship, or sponsorship, without prior written permission.
-
-`BK monogram™` denotes an unregistered claim of brand rights; it does not claim
-federal trademark registration. The registration symbol `®` must not be used.
-
-Accessing this repository, viewing the website, copying source code, or
-receiving a physical or digital copy does not transfer copyright ownership or
-exclusive brand rights. Any voluntary transfer of copyright ownership must be
-set out in a separate written instrument signed by the rights owner.
+Permission requests may be made through https://bhalaji.com/.
