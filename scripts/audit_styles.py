@@ -45,17 +45,26 @@ def main() -> int:
     footer_control_rule = (
         ".site-footer nav .privacy-choice-link{color:var(--ink-soft);"
         "font-family:var(--sans);font-size:.76rem;font-weight:400;"
-        "line-height:1.4;text-decoration:none}"
+        "text-decoration:none}"
     )
     if footer_control_rule not in refinements:
         errors.append("footer privacy control must match the adjacent footer-link typography")
+    footer_layout_rules = (
+        ".site-footer nav{align-items:baseline;justify-content:flex-end}",
+        ".site-footer nav a,.site-footer nav .privacy-choice-link{line-height:1.4}",
+        ".site-footer nav{flex-wrap:nowrap;column-gap:.875rem;white-space:nowrap}",
+        ".site-footer nav{justify-content:flex-start}",
+    )
+    for rule in footer_layout_rules:
+        if rule not in refinements:
+            errors.append(f"footer alignment invariant missing {rule!r}")
     if "text-align:justify" in text.replace(" ", ""):
         errors.append("body copy must not use full justification")
     if errors:
         for error in errors:
             print(f"ERROR: {error}")
         return 1
-    print("Style audit passed: contrast, hidden microformats, focus, breakpoints, and footer controls verified.")
+    print("Style audit passed: contrast, hidden microformats, focus, breakpoints, and footer alignment verified.")
     return 0
 
 

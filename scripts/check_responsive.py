@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Browser-level responsive, zoom-equivalent, reduced-motion, menu, and TOC audit."""
+"""Browser-level responsive, zoom-equivalent, reduced-motion, menu, footer, and TOC audit."""
 from __future__ import annotations
 
 import argparse
@@ -125,6 +125,15 @@ LAYOUT_EXPRESSION = r"""
       return arrowRect.right > width + 2 || arrowRect.bottom > linkRect.bottom + 1;
     })
     .map((arrow) => (arrow.closest('.lnk')?.textContent || '').trim());
+  const footerItems = [...document.querySelectorAll('.site-footer nav > a, .site-footer nav > button')]
+    .filter((element) => {
+      const style = getComputedStyle(element);
+      return style.display !== 'none' && style.visibility !== 'hidden';
+    });
+  const footerTops = footerItems.map((element) => element.getBoundingClientRect().top);
+  const footerRowSpread = footerTops.length
+    ? Math.max(...footerTops) - Math.min(...footerTops)
+    : null;
   const menu = document.querySelector('.menu-button');
   const nav = document.querySelector('#site-nav');
   const toc = document.querySelector('.toc-disclosure[data-responsive-toc]');
@@ -135,6 +144,8 @@ LAYOUT_EXPRESSION = r"""
     horizontalOverflow: Math.max(root.scrollWidth, body.scrollWidth) > width + 2,
     overflowNodes,
     arrowIssues,
+    footerItemCount: footerItems.length,
+    footerRowSpread,
     menuDisplay: menu ? getComputedStyle(menu).display : null,
     navDisplay: nav ? getComputedStyle(nav).display : null,
     tocOpen: toc ? toc.open : null,
@@ -248,6 +259,13 @@ def main() -> int:
                             record_errors.append(f"expected one h1, found {layout['h1Count']}")
                         if layout["mainCount"] != 1:
                             record_errors.append(f"expected one main, found {layout['mainCount']}")
+                        if page_name == "home" and width >= 981:
+                            if layout["footerItemCount"] < 2:
+                                record_errors.append("desktop footer navigation items are missing")
+                            elif layout["footerRowSpread"] is None or layout["footerRowSpread"] > 3:
+                                record_errors.append(
+                                    f"desktop footer navigation wrapped or lost baseline alignment: row spread={layout['footerRowSpread']}px"
+                                )
                         if page_name == "home" and label in {"390-mobile", "1440-desktop"}:
                             record_errors.extend(audit_menu(cdp, width <= 480))
                         if page_name == "research":
@@ -281,7 +299,7 @@ def main() -> int:
                 if errors:
                     print("\n".join(f"ERROR: {error}" for error in errors))
                     return 1
-                print(f"Responsive browser audit passed: {len(results)} page/viewport combinations plus reduced-motion, menu, and TOC checks.")
+                print(f"Responsive browser audit passed: {len(results)} page/viewport combinations plus reduced-motion, menu, footer, and TOC checks.")
                 return 0
             finally:
                 cdp.close()

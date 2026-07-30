@@ -26,8 +26,10 @@
 .related-package .actions{margin-top:.75rem}
 .engagement-grid{display:grid;grid-template-columns:1.1fr .85fr .95fr;gap:clamp(2rem,4vw,4rem)}
 .engagement-grid>div{min-width:0}
+.site-footer nav{align-items:baseline;justify-content:flex-end}
+.site-footer nav a,.site-footer nav .privacy-choice-link{line-height:1.4}
 .privacy-choice-link{appearance:none;margin:0;padding:0;border:0;background:transparent;cursor:pointer}
-.site-footer nav .privacy-choice-link{color:var(--ink-soft);font-family:var(--sans);font-size:.76rem;font-weight:400;line-height:1.4;text-decoration:none}
+.site-footer nav .privacy-choice-link{color:var(--ink-soft);font-family:var(--sans);font-size:.76rem;font-weight:400;text-decoration:none}
 .site-footer nav .privacy-choice-link:hover{color:var(--cyan)}
 .privacy-banner{position:fixed;right:1rem;bottom:1rem;left:1rem;z-index:500;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;width:min(calc(100% - 2rem),940px);margin-inline:auto;padding:1.15rem 1.25rem;border:1px solid var(--line-strong);background:var(--surface);box-shadow:0 18px 55px rgba(20,24,27,.18);font-family:var(--sans)}
 .privacy-banner[hidden]{display:none}
@@ -40,6 +42,9 @@
 .privacy-banner__decline:hover{border-color:var(--cyan);background:var(--surface-soft);color:var(--cyan)}
 @media(min-width:1180px){
   .hero .eyebrow{max-width:none;white-space:nowrap;font-size:.68rem;letter-spacing:.11em}
+}
+@media(min-width:981px){
+  .site-footer nav{flex-wrap:nowrap;column-gap:.875rem;white-space:nowrap}
 }
 @media(min-width:981px) and (max-width:1180px){
   .publication-header h1{max-width:22ch;font-size:clamp(2.7rem,4.4vw,3.7rem)}
@@ -58,6 +63,7 @@
 }
 @media(max-width:980px){
   .identity-note{right:0}
+  .site-footer nav{justify-content:flex-start}
 }
 @media(max-width:680px){
   .hero__visual{width:min(100%,390px)}
