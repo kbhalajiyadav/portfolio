@@ -12,6 +12,10 @@
       t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";
       y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "xuo3lvzchr");
+    window.clarity("consentv2", {
+      ad_Storage: "denied",
+      analytics_Storage: "denied"
+    });
   </script>
   {{ $styles := resources.Get "css/site.css" | minify | fingerprint "sha384" }}
   <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}" crossorigin="anonymous">
@@ -21,6 +25,7 @@
   {{ partial "site_header.html" . }}
   <main id="main-content">{{ block "main" . }}{{ end }}</main>
   {{ partial "site_footer.html" . }}
+  {{ partial "privacy_controls.html" . }}
   {{ $script := resources.Get "js/site.js" | minify | fingerprint "sha384" }}
   <script src="{{ $script.RelPermalink }}" integrity="{{ $script.Data.Integrity }}" crossorigin="anonymous" defer></script>
 </body>
