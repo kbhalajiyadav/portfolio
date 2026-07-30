@@ -11,29 +11,22 @@ weight: 3
 
 ## Professional context
 
-As a **Technical Project Manager** at **Kreative Organics**, following a prior
-internship with the company, I worked with quality, engineering, and external
-stakeholders during a regulated digital-transformation initiative.
+As a **Technical Project Manager** at **Kreative Organics**, after first joining
+the company as an intern, I worked with quality, engineering, and external
+stakeholders on a regulated digital-transformation initiative.
 
 ## Selected contributions
 
-- Translated process and quality requirements into traceable validation
-  documentation and structured test protocols.
-- Coordinated cross-functional review of requirements, evidence, and
-  implementation readiness.
-- Supported data-integrity, change-control, and documentation practices used in
-  regulated manufacturing.
-- Applied root-cause analysis and corrective-action thinking to technical and
-  operational issues.
-- Helped make complex system requirements understandable to both technical and
-  non-technical stakeholders.
+- Translated process and quality requirements into traceable validation documentation and structured test protocols.
+- Coordinated cross-functional review of requirements, evidence, and implementation readiness.
+- Supported data-integrity, change-control, and documentation practices used in regulated manufacturing.
+- Applied root-cause analysis and corrective-action methods to technical and operational issues.
+- Explained system requirements to technical and non-technical stakeholders.
 
-## Transferable perspective
+## Relevance to later work
 
-The experience reinforced an engineering principle that also shapes my
-research: a result is useful only when the method, assumptions, and evidence are
-clear enough to be reviewed and reproduced.
+The role established habits that now carry into research: define the method,
+record assumptions, preserve traceability, and make the evidence reviewable.
 
-> This public case study intentionally excludes employer system architecture,
-> operating data, customer information, deployment details, and confidential
-> performance measures.
+> This public case study excludes employer system architecture, operating data,
+> customer information, deployment details, and confidential performance measures.
