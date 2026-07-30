@@ -91,16 +91,41 @@
   const privacyBanner = document.querySelector('[data-privacy-banner]');
   if (privacyBanner) {
     const consentKey = 'bhalaji.analyticsConsent.v1';
+    const clarityProject = 'xuo3lvzchr';
     const allowButton = privacyBanner.querySelector('[data-consent-allow]');
     const declineButton = privacyBanner.querySelector('[data-consent-decline]');
     const openButtons = Array.from(document.querySelectorAll('[data-open-privacy]'));
 
-    const applyConsent = (choice) => {
+    const queueClarity = () => {
+      if (typeof window.clarity !== 'function') {
+        window.clarity = function clarityQueue() {
+          (window.clarity.q = window.clarity.q || []).push(arguments);
+        };
+      }
+    };
+
+    const grantAnalytics = () => {
+      queueClarity();
+      window.clarity('consentv2', {
+        ad_Storage: 'denied',
+        analytics_Storage: 'granted'
+      });
+      if (!document.querySelector('script[data-clarity-project]')) {
+        const script = document.createElement('script');
+        script.async = true;
+        script.dataset.clarityProject = clarityProject;
+        script.src = `https://www.clarity.ms/tag/${clarityProject}?ref=bwt`;
+        document.head.appendChild(script);
+      }
+    };
+
+    const denyAnalytics = () => {
       if (typeof window.clarity !== 'function') return;
       window.clarity('consentv2', {
         ad_Storage: 'denied',
-        analytics_Storage: choice === 'granted' ? 'granted' : 'denied'
+        analytics_Storage: 'denied'
       });
+      window.clarity('consent', false);
     };
 
     const readConsent = () => {
@@ -118,12 +143,13 @@
       } catch (error) {
         console.warn('Privacy preference could not be stored', error);
       }
-      applyConsent(choice);
+      if (choice === 'granted') grantAnalytics();
+      else denyAnalytics();
       privacyBanner.hidden = true;
     };
 
     const currentChoice = readConsent();
-    applyConsent(currentChoice || 'denied');
+    if (currentChoice === 'granted') grantAnalytics();
     privacyBanner.hidden = currentChoice !== null;
 
     if (allowButton) allowButton.addEventListener('click', () => saveConsent('granted'));

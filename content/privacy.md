@@ -30,12 +30,12 @@ inquiry and maintaining an appropriate record of the communication.
 
 ## Microsoft Clarity
 
-This site uses Microsoft Clarity to understand how visitors navigate and use
-the portfolio. Clarity can collect behavioral and technical events such as page
-views, clicks, scrolling, mouse movement, window resizing, performance and
-error information, and page-layout data used for heatmaps and session replay.
-Microsoft states that privacy-sensitive input content is masked in playback
-data.
+With a visitor's permission, this site uses Microsoft Clarity to understand how
+visitors navigate and use the portfolio. Clarity can collect behavioral and
+technical events such as page views, clicks, scrolling, mouse movement, window
+resizing, performance and error information, and page-layout data used for
+heatmaps and session replay. Microsoft states that privacy-sensitive input
+content is masked in playback data.
 
 Clarity is used only for site usability, accessibility, content organization,
 and performance improvement. This site does not use Clarity for advertising;
@@ -53,12 +53,10 @@ for up to 9 months.
 
 ## Analytics consent and cookies
 
-Before a visitor makes a choice, the site sends Clarity a denied signal for
-both analytics and advertising storage. Selecting **Allow analytics** permits
-analytics storage while advertising storage remains denied. Selecting
-**Decline** keeps both categories denied. In denied mode, Clarity may perform
-limited, non-persistent measurement without first- or third-party Clarity
-cookies; it does not associate page views across visits using those cookies.
+The Microsoft Clarity script is not loaded before a visitor allows analytics.
+Selecting **Allow analytics** loads Clarity, permits analytics storage, and
+continues to keep advertising storage denied. Selecting **Decline** prevents
+Clarity from loading on that and later visits unless the preference is changed.
 
 When analytics is allowed, Clarity may use cookies such as `_clck` and `_clsk`
 to associate page views and sessions. The site stores the visitor's consent
@@ -67,7 +65,9 @@ visits. That preference is necessary to remember the choice and is not used for
 profiling.
 
 The choice can be changed at any time using **Privacy choices** in the site
-footer. Browser controls can also be used to clear local storage and cookies.
+footer. Changing an allowed preference to declined sends Clarity a denied
+consent signal for analytics and advertising storage. Browser controls can also
+be used to clear local storage and cookies.
 
 ## Privacy inquiries and rights
 
