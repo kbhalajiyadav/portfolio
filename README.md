@@ -1,12 +1,6 @@
 # Bhalaji Yadav Kantepalle — Research Portfolio
 
-Source for [bhalaji.com](https://bhalaji.com), an academic portfolio focused on
-stimuli-responsive soft and liquid-crystalline materials, quantitative metrology,
-rheology, neutron scattering, and reproducible processing.
-
-The site is a public research record rather than a laboratory notebook. It excludes
-unpublished formulations, restricted datasets, detailed experimental schedules,
-confidential employer information, and unsupported claims.
+Source for [bhalaji.com](https://bhalaji.com), an academic portfolio.
 
 ## Edit content
 
@@ -15,22 +9,6 @@ confidential employer information, and unsupported claims.
 - `content/research/index.md` — stable research-program page
 - `content/publication/` and `content/project/` — detailed public records
 - `data/cv.yaml` — source for the generated two-page CV
-- `docs/content-taxonomy.md` — canonical classification and public-label decisions
-
-
-## Content taxonomy
-
-The homepage intentionally distinguishes formal scientific training from prototype
-translation:
-
-- `professional_development` is displayed as **Research training** and currently
-  contains the 1st National Neutron Scattering School at Oak Ridge National Laboratory.
-- `applied_innovation` is displayed as **Applied innovation** and currently contains
-  the Shelfie Program prototype demonstration and its linked design credentials.
-
-The source keys remain stable for backward compatibility and historical traceability.
-See `docs/content-taxonomy.md` before reclassifying either collection or changing its
-public label.
 
 ## Local validation
 
