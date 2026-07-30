@@ -87,4 +87,52 @@
     }, { rootMargin: '-18% 0px -72% 0px', threshold: 0.01 });
     tocTargets.forEach((item) => observer.observe(item.target));
   }
+
+  const privacyBanner = document.querySelector('[data-privacy-banner]');
+  if (privacyBanner) {
+    const consentKey = 'bhalaji.analyticsConsent.v1';
+    const allowButton = privacyBanner.querySelector('[data-consent-allow]');
+    const declineButton = privacyBanner.querySelector('[data-consent-decline]');
+    const openButtons = Array.from(document.querySelectorAll('[data-open-privacy]'));
+
+    const applyConsent = (choice) => {
+      if (typeof window.clarity !== 'function') return;
+      window.clarity('consentv2', {
+        ad_Storage: 'denied',
+        analytics_Storage: choice === 'granted' ? 'granted' : 'denied'
+      });
+    };
+
+    const readConsent = () => {
+      try {
+        const choice = window.localStorage.getItem(consentKey);
+        return choice === 'granted' || choice === 'denied' ? choice : null;
+      } catch (error) {
+        return null;
+      }
+    };
+
+    const saveConsent = (choice) => {
+      try {
+        window.localStorage.setItem(consentKey, choice);
+      } catch (error) {
+        console.warn('Privacy preference could not be stored', error);
+      }
+      applyConsent(choice);
+      privacyBanner.hidden = true;
+    };
+
+    const currentChoice = readConsent();
+    applyConsent(currentChoice || 'denied');
+    privacyBanner.hidden = currentChoice !== null;
+
+    if (allowButton) allowButton.addEventListener('click', () => saveConsent('granted'));
+    if (declineButton) declineButton.addEventListener('click', () => saveConsent('denied'));
+    openButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        privacyBanner.hidden = false;
+        if (allowButton) allowButton.focus();
+      });
+    });
+  }
 })();
