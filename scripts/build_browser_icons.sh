@@ -37,4 +37,4 @@ render_png 512 "$output_dir/bk-app-512-20260730-v6.png"
   "$temporary_dir/icon-32.png" \
   "$temporary_dir/icon-48.png" \
   "$temporary_dir/icon-64.png" \
-  "static/favicon.ico"
+  "$output_dir/bk-browser-20260730-v6.ico"
