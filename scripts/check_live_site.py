@@ -22,9 +22,14 @@ EXPECTED_TEXT = {
         "All rights reserved",
     ],
     "brand-use/": [
-        "Rights and permitted use",
-        "No license is granted",
+        "Copyright and trademark notice",
+        "does not place its contents in the public domain",
         "BK monogram",
+    ],
+    "project/optical-metrology/": [
+        "Optical Metrology for Mechanochromic Textiles",
+        "Measurement workflow",
+        "Evidence boundary",
     ],
     "research/": ["Resolve structure under stimuli", "Translate reproducibly"],
     "robots.txt": ["OAI-SearchBot", "Claude-SearchBot"],
