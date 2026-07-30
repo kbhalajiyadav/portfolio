@@ -9,19 +9,7 @@
   "theme_color": "#f7f5f0",
   "icons": [
     {
-      "src": "/media/bk-monogram-192-20260730-2.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "/media/bk-monogram-512-20260730-2.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "/media/bk-monogram-unified-20260730-2.svg",
+      "src": "/media/bk-monogram-canonical-20260730.svg",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any"
