@@ -2,7 +2,7 @@
 # service verifies bhalaji.com and provides a value.
 marketing:
   verification:
-    google: ''
+    google: 'as5N5_SEJNGjaG_h1ColBvOOF5g0omiYOaiQjDwxGfU'
     bing: ''
 
 # IndieWeb service discovery. Identity links, microformats, and RSS work
