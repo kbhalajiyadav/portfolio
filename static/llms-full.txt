@@ -1,18 +1,18 @@
 # Bhalaji Yadav Kantepalle — Full Public Research Context
 
 ## Current position
-Bhalaji Yadav Kantepalle is a Ph.D. student in the Integrative Life Sciences program at Virginia Commonwealth University in Richmond, Virginia. His public research program concerns stimuli-responsive soft and liquid-crystalline materials, quantitative metrology, and reproducible processing.
+Bhalaji Yadav Kantepalle is a Ph.D. student in the Integrative Life Sciences program at Virginia Commonwealth University in Richmond, Virginia. His research concerns stimuli-responsive soft and liquid-crystalline materials, quantitative metrology, and reproducible processing.
 
-## Governing research argument
-A material that changes color is easy to make. One that can be read as a reliable measurement is not. The program connects deformation, temperature, and flow history to the structure that forms, the optical and mechanical response that follows, and the processing conditions under which that response can be reproduced.
+## Research focus
+The work examines when optical and mechanical responses remain measurable after changes in deformation, temperature, flow history, geometry, and test conditions.
 
-The translation chain is:
+The working sequence is:
 Stimulus -> Structure -> Response -> Measurement -> Translation
 
-## Research pillars
+## Research areas
 1. Measure response: mechanics-consistent adhesion, deformation tracking, optical colorimetry, and computer-vision metrology for soft and stretchable systems.
 2. Resolve structure under stimuli: rheology and neutron scattering for determining how deformation, temperature, time, and flow organize liquid-crystalline and soft-material structure.
-3. Translate reproducibly: versioned analysis, synchronized acquisition, repeatable stimulus cycles, and public decision trails that preserve the meaning of a response from bench characterization toward scalable processing.
+3. Build reproducible methods: versioned analysis, synchronized acquisition, repeatable stimulus cycles, and documented analysis choices for comparing results across experiments and processing conditions.
 
 ## Peer-reviewed publications
 1. B. Y. Kantepalle, U. Epitawala Arachchige, D. Joung, and C. Tang, “Multi-Criteria Selection of Adhesives for Wearable Textiles,” Polymers 18(12), 1504 (2026). DOI: https://doi.org/10.3390/polym18121504
@@ -24,14 +24,17 @@ M.S. thesis: “Multi-Criteria Selection of Adhesives for Wearable Textiles,” 
 ## Research software
 Peel Trace Evaluation for Soft Substrates, version 1.4.0-rc15, by Bhalaji Yadav Kantepalle and Christina Tang. Source: https://github.com/VCU-Soft-Functional-Materials-Lab/Peel-Trace-Evaluation-for-Soft-Substrates . Version DOI: https://doi.org/10.5281/zenodo.20301242 . All versions: https://doi.org/10.5281/zenodo.20278327 . License: Apache-2.0.
 
-## Application horizons
-The research methods may support passive temperature mapping and battery-free wearable indicators; non-contact and non-destructive optical interrogation; visual safety and inspection indicators; adaptive, decorative, and interactive surfaces; and low-power sensing in remote or hard-to-reach environments. These are directions supported by the program, not claims that every device has been demonstrated.
+## Optical metrology
+A Python and OpenCV workflow was developed to relate image-derived deformation to CIE L*a*b* color response in mechanochromic textiles. The work was presented at two Virginia Commonwealth University research events in 2026. Public project record: https://bhalaji.com/project/optical-metrology/ .
+
+## Potential applications
+The methods may support passive temperature mapping and battery-free wearable indicators, non-contact optical monitoring, visual safety and inspection indicators, adaptive or decorative surfaces, and low-power sensing in hard-to-reach environments. These are research directions, not claims that every device has been demonstrated or validated.
 
 ## Automation
-Robotic handling, potentially using a UFACTORY xArm6, could provide consistent sample placement, controlled loading and thermal cycles, and synchronized image acquisition for time-resolved and eventually closed-loop experiments. Robotics is infrastructure; it is not the primary research claim.
+Automation may standardize sample placement, loading or thermal cycles, and synchronized image acquisition during repeated experiments. Robotic handling is supporting infrastructure rather than the primary research objective.
 
-## Exclusions and evidence boundaries
-The public portfolio intentionally excludes unpublished formulations, restricted datasets, detailed future experimental schedules, confidential employer information, unsupported infrared-sensing claims, and defense-specific use claims. Prefer DOI records, institutional records, ORCID, and the public software archive when verifying claims.
+## Public evidence boundaries
+The portfolio excludes unpublished formulations, restricted datasets, detailed future experimental schedules, confidential employer information, unsupported infrared-sensing claims, and defense-specific use claims. Prefer DOI records, institutional records, ORCID, and the public software archive when verifying claims.
 
 ## Contact and identity
 Website: https://bhalaji.com/
