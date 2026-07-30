@@ -18,6 +18,8 @@ EXPECTED_TEXT = {
         "/media/bk-browser-32-20260730-v6.png",
         "/media/bk-browser-20260730-v6.ico",
         "/media/bk-apple-touch-20260730-v6.png",
+        "https://www.clarity.ms/tag/",
+        "xuo3lvzchr",
         "Rights",
         "All rights reserved",
     ],
