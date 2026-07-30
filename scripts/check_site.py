@@ -26,14 +26,10 @@ class PageParser(HTMLParser):
         self.rel_me: list[str] = []
         self.og_title = False
         self.og_description = False
-        self.og_image = False
         self.og_url = ""
-        self.og_image_dimensions: set[str] = set()
         self.twitter_card = False
         self.twitter_title = False
         self.twitter_description = False
-        self.twitter_image = False
-        self.twitter_image_alt = False
         self.ids: list[str] = []
         self.links: list[str] = []
         self.anchor_records: list[dict[str, str]] = []
@@ -103,20 +99,12 @@ class PageParser(HTMLParser):
                 self.twitter_title = True
             elif name == "twitter:description" and content:
                 self.twitter_description = True
-            elif name == "twitter:image" and content:
-                self.twitter_image = True
-            elif name == "twitter:image:alt" and content:
-                self.twitter_image_alt = True
             elif prop == "og:title" and content:
                 self.og_title = True
             elif prop == "og:description" and content:
                 self.og_description = True
-            elif prop == "og:image" and content:
-                self.og_image = True
             elif prop == "og:url" and content:
                 self.og_url = content
-            elif prop in {"og:image:width", "og:image:height"} and content:
-                self.og_image_dimensions.add(prop)
         if tag == "link":
             rel_tokens = {token.lower() for token in (data.get("rel") or "").split()}
             href = (data.get("href") or "").strip()
@@ -166,21 +154,15 @@ def normalized_host(url: str) -> str | None:
     return host[4:] if host.startswith("www.") else host
 
 
-def target_for(
-    root: Path,
-    source: Path,
-    url: str,
-    site_hosts: set[str],
-) -> tuple[Path, str | None] | None:
+def target_for(root: Path, source: Path, url: str, site_hosts: set[str]) -> tuple[Path, str | None] | None:
     parsed = urlparse(url)
-    if parsed.scheme in {"mailto", "tel"} or url.startswith("//"):
+    if parsed.scheme in {"mailto", "tel", "data"} or url.startswith("//"):
         return None
     if parsed.scheme in {"http", "https"}:
         host = normalized_host(url)
         if not host or host not in site_hosts:
             return None
-        # Absolute links back to the canonical site are internal. Resolve them
-        # against the freshly generated tree, not the previous live release.
+        # Absolute links back to the canonical site are internal.
         path = unquote(parsed.path)
     elif parsed.scheme:
         return None
@@ -257,15 +239,11 @@ def main() -> int:
         if len(set(parser.rel_me)) < 4: errors.append(f"{relative}: expected four rel=me identity links")
         if not parser.og_title: errors.append(f"{relative}: missing og:title")
         if not parser.og_description: errors.append(f"{relative}: missing og:description")
-        if not parser.og_image: errors.append(f"{relative}: missing og:image")
         if not parser.og_url: errors.append(f"{relative}: missing og:url")
         elif parser.canonical and parser.og_url != parser.canonical: errors.append(f"{relative}: og:url differs from canonical")
-        if parser.og_image_dimensions != {"og:image:width", "og:image:height"}: errors.append(f"{relative}: missing Open Graph image dimensions")
         if not parser.twitter_card: errors.append(f"{relative}: missing Twitter card")
         if not parser.twitter_title: errors.append(f"{relative}: missing Twitter title")
         if not parser.twitter_description: errors.append(f"{relative}: missing Twitter description")
-        if not parser.twitter_image: errors.append(f"{relative}: missing Twitter image")
-        if not parser.twitter_image_alt: errors.append(f"{relative}: missing Twitter image alt")
         if parser.h1_count != 1: errors.append(f"{relative}: expected exactly one h1, found {parser.h1_count}")
         if parser.main_count != 1: errors.append(f"{relative}: expected exactly one main landmark, found {parser.main_count}")
         if not parser.skip_target: errors.append(f"{relative}: missing #main-content skip-link target")
@@ -311,11 +289,24 @@ def main() -> int:
         errors.append("unexpected generated authors archive")
     for required in (
         "robots.txt", "sitemap.xml", "index.xml", "llms.txt", "llms-full.txt", "humans.txt",
-        "CNAME", ".well-known/security.txt", "media/og-card.png", "media/favicon.svg", "site.webmanifest",
+        "CNAME", ".well-known/security.txt", "favicon.svg", "site.webmanifest", "brand-use/index.html",
     ):
         target = root / required
         if not target.exists(): errors.append(f"missing generated {required}")
         elif target.is_file() and target.stat().st_size == 0: errors.append(f"empty generated {required}")
+
+    for obsolete in (
+        "favicon.ico",
+        "media/bk-safari-tab-20260730-1.png",
+        "media/bk-safari-touch-20260730-1.png",
+        "media/bk-monogram.svg",
+        "media/bk-monogram-192.png",
+        "media/bk-monogram-512.png",
+        "media/bk-favicon-20260729-3.ico",
+        "media/og-card.png",
+    ):
+        if (root / obsolete).exists():
+            errors.append(f"obsolete generated asset remains: {obsolete}")
 
     if errors:
         print("\n".join(f"ERROR: {error}" for error in errors), file=sys.stderr)
