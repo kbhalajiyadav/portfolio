@@ -15,9 +15,7 @@ require permission.
 
 The BK monogram and related visual identity are claimed as unregistered trademarks
 of Bhalaji Yadav Kantepalle. They may not be used in a way that suggests
-authorship, affiliation, sponsorship, endorsement, or a common source. The ™
-symbol identifies an unregistered trademark claim; it does not indicate federal
-registration.
+authorship, affiliation, sponsorship, endorsement, or a common source.
 
 Making this repository publicly viewable on GitHub does not place its contents in the public domain
 or grant an open-source license. A file that carries a separate license remains
