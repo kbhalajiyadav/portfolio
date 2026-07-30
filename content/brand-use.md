@@ -1,5 +1,5 @@
 ---
-title: "Copyright and permitted use"
+title: "Rights and permitted use"
 date: 2026-07-30
 url: "/rights/"
 aliases:
