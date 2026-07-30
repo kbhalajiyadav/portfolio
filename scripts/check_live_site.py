@@ -13,8 +13,9 @@ EXPECTED_TEXT = {
     "": [
         "A material that changes color is easy to make",
         "Ph.D. student",
-        "/media/bk-safari-tab-20260730-1.png",
-        "/media/bk-safari-touch-20260730-1.png",
+        "/media/bk-monogram-unified-20260730-2.svg",
+        "/media/bk-tab-64-20260730-2.png",
+        "/media/bk-touch-180-20260730-2.png",
     ],
     "research/": ["Resolve structure under stimuli", "Translate reproducibly"],
     "robots.txt": ["OAI-SearchBot", "Claude-SearchBot"],
@@ -22,13 +23,21 @@ EXPECTED_TEXT = {
 }
 
 EXPECTED_BINARY = {
-    "media/bk-safari-tab-20260730-1.png": {
-        "content_type": "image/png",
-        "sha256": "4d0110c27d45cbe48418b8a84d5871de971b6839ebddf8da552e27c74b343b3d",
+    "media/bk-monogram-unified-20260730-2.svg": {
+        "content_type": "image/svg+xml",
+        "sha256": "be81e244ac7c634d5a2707290f859af8965f712843f724852097390788d0d090",
     },
-    "media/bk-safari-touch-20260730-1.png": {
+    "media/bk-tab-64-20260730-2.png": {
         "content_type": "image/png",
-        "sha256": "9208d9b32b7774b87ce7da8d00cebaf09a600f7a6cb3a59af14ca5ea75119233",
+        "sha256": "21a108bc2c1175fa304e70b92c706176cdd0084936e47a0f2a3ab48baf463223",
+    },
+    "media/bk-touch-180-20260730-2.png": {
+        "content_type": "image/png",
+        "sha256": "0f8cd19f18d87a9d3d90f16c758f289ac1021aaa6a1d1bb1342d27d9c3f51fc4",
+    },
+    "media/bk-favicon-20260730-2.ico": {
+        "content_type": "image/vnd.microsoft.icon",
+        "sha256": "e5762c12fe0acaa781905df645dc420d2d63fc19b878f0ca5a68215d5931069d",
     },
 }
 
@@ -37,7 +46,7 @@ def fetch(url: str) -> tuple[int, str, bytes]:
     req = Request(
         url,
         headers={
-            "User-Agent": "BhalajiPortfolioDeployCheck/1.1",
+            "User-Agent": "BhalajiPortfolioDeployCheck/1.2",
             "Cache-Control": "no-cache, no-store, max-age=0",
             "Pragma": "no-cache",
         },
