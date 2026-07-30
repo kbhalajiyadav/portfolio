@@ -20,8 +20,8 @@ class PageParser(HTMLParser):
         self.title_parts: list[str] = []
         self._in_title = False
         self.canonical = ""
-        self.manifest = False
-        self.icon = False
+        self.manifest_href = ""
+        self.icon_hrefs: list[str] = []
         self.has_feed = False
         self.rel_me: list[str] = []
         self.og_title = False
@@ -48,7 +48,7 @@ class PageParser(HTMLParser):
     def title(self) -> str:
         return " ".join("".join(self.title_parts).split())
 
-    def handle_starttag(self, tag, attrs):
+    def handle_starttag(self, tag: str, attrs) -> None:
         data = dict(attrs)
         if tag == "html" and (data.get("lang") or "").strip():
             self.html_lang = True
@@ -111,15 +111,20 @@ class PageParser(HTMLParser):
             if "canonical" in rel_tokens and href:
                 self.canonical = href
             if "manifest" in rel_tokens and href:
-                self.manifest = True
+                self.manifest_href = href
             if "icon" in rel_tokens and href:
-                self.icon = True
-            if "alternate" in rel_tokens and href and (data.get("type") or "").lower() in {"application/rss+xml", "application/atom+xml"}:
+                self.icon_hrefs.append(href)
+            if (
+                "alternate" in rel_tokens
+                and href
+                and (data.get("type") or "").lower()
+                in {"application/rss+xml", "application/atom+xml"}
+            ):
                 self.has_feed = True
             if "me" in rel_tokens and href:
                 self.rel_me.append(href)
 
-    def handle_data(self, data):
+    def handle_data(self, data: str) -> None:
         if self._in_title:
             self.title_parts.append(data)
         if self._anchor_depth:
@@ -127,7 +132,7 @@ class PageParser(HTMLParser):
         if self._in_json_ld:
             self._json_parts.append(data)
 
-    def handle_endtag(self, tag):
+    def handle_endtag(self, tag: str) -> None:
         if tag == "title":
             self._in_title = False
         if tag == "script" and self._in_json_ld:
@@ -154,7 +159,12 @@ def normalized_host(url: str) -> str | None:
     return host[4:] if host.startswith("www.") else host
 
 
-def target_for(root: Path, source: Path, url: str, site_hosts: set[str]) -> tuple[Path, str | None] | None:
+def target_for(
+    root: Path,
+    source: Path,
+    url: str,
+    site_hosts: set[str],
+) -> tuple[Path, str | None] | None:
     parsed = urlparse(url)
     if parsed.scheme in {"mailto", "tel", "data"} or url.startswith("//"):
         return None
@@ -162,7 +172,6 @@ def target_for(root: Path, source: Path, url: str, site_hosts: set[str]) -> tupl
         host = normalized_host(url)
         if not host or host not in site_hosts:
             return None
-        # Absolute links back to the canonical site are internal.
         path = unquote(parsed.path)
     elif parsed.scheme:
         return None
@@ -224,29 +233,52 @@ def main() -> int:
         relative = html.relative_to(root)
         pages[html.resolve()] = parser
 
-        if not parser.html_lang: errors.append(f"{relative}: missing html lang")
-        if not parser.viewport: errors.append(f"{relative}: missing viewport meta")
-        if not parser.title: errors.append(f"{relative}: missing or empty title")
-        if not parser.description: errors.append(f"{relative}: missing meta description")
-        if not parser.canonical: errors.append(f"{relative}: missing canonical URL")
-        elif urlparse(parser.canonical).scheme not in {"http", "https"}: errors.append(f"{relative}: canonical URL is not absolute: {parser.canonical}")
-        if not parser.robots: errors.append(f"{relative}: missing robots directive")
-        elif relative == Path("404.html") and "noindex" not in parser.robots: errors.append("404.html: must be noindex")
-        elif relative != Path("404.html") and "noindex" in parser.robots: errors.append(f"{relative}: unexpectedly noindex")
-        if not parser.manifest: errors.append(f"{relative}: missing web manifest discovery")
-        if not parser.icon: errors.append(f"{relative}: missing favicon discovery")
-        if not parser.has_feed: errors.append(f"{relative}: missing RSS discovery")
-        if len(set(parser.rel_me)) < 4: errors.append(f"{relative}: expected four rel=me identity links")
-        if not parser.og_title: errors.append(f"{relative}: missing og:title")
-        if not parser.og_description: errors.append(f"{relative}: missing og:description")
-        if not parser.og_url: errors.append(f"{relative}: missing og:url")
-        elif parser.canonical and parser.og_url != parser.canonical: errors.append(f"{relative}: og:url differs from canonical")
-        if not parser.twitter_card: errors.append(f"{relative}: missing Twitter card")
-        if not parser.twitter_title: errors.append(f"{relative}: missing Twitter title")
-        if not parser.twitter_description: errors.append(f"{relative}: missing Twitter description")
-        if parser.h1_count != 1: errors.append(f"{relative}: expected exactly one h1, found {parser.h1_count}")
-        if parser.main_count != 1: errors.append(f"{relative}: expected exactly one main landmark, found {parser.main_count}")
-        if not parser.skip_target: errors.append(f"{relative}: missing #main-content skip-link target")
+        if not parser.html_lang:
+            errors.append(f"{relative}: missing html lang")
+        if not parser.viewport:
+            errors.append(f"{relative}: missing viewport meta")
+        if not parser.title:
+            errors.append(f"{relative}: missing or empty title")
+        if not parser.description:
+            errors.append(f"{relative}: missing meta description")
+        if not parser.canonical:
+            errors.append(f"{relative}: missing canonical URL")
+        elif urlparse(parser.canonical).scheme not in {"http", "https"}:
+            errors.append(f"{relative}: canonical URL is not absolute: {parser.canonical}")
+        if not parser.robots:
+            errors.append(f"{relative}: missing robots directive")
+        elif relative == Path("404.html") and "noindex" not in parser.robots:
+            errors.append("404.html: must be noindex")
+        elif relative != Path("404.html") and "noindex" in parser.robots:
+            errors.append(f"{relative}: unexpectedly noindex")
+        if not parser.manifest_href:
+            errors.append(f"{relative}: missing web manifest discovery")
+        if not parser.icon_hrefs:
+            errors.append(f"{relative}: missing favicon discovery")
+        if not parser.has_feed:
+            errors.append(f"{relative}: missing RSS discovery")
+        if len(set(parser.rel_me)) < 4:
+            errors.append(f"{relative}: expected four rel=me identity links")
+        if not parser.og_title:
+            errors.append(f"{relative}: missing og:title")
+        if not parser.og_description:
+            errors.append(f"{relative}: missing og:description")
+        if not parser.og_url:
+            errors.append(f"{relative}: missing og:url")
+        elif parser.canonical and parser.og_url != parser.canonical:
+            errors.append(f"{relative}: og:url differs from canonical")
+        if not parser.twitter_card:
+            errors.append(f"{relative}: missing Twitter card")
+        if not parser.twitter_title:
+            errors.append(f"{relative}: missing Twitter title")
+        if not parser.twitter_description:
+            errors.append(f"{relative}: missing Twitter description")
+        if parser.h1_count != 1:
+            errors.append(f"{relative}: expected exactly one h1, found {parser.h1_count}")
+        if parser.main_count != 1:
+            errors.append(f"{relative}: expected exactly one main landmark, found {parser.main_count}")
+        if not parser.skip_target:
+            errors.append(f"{relative}: missing #main-content skip-link target")
 
         for anchor in parser.anchor_records:
             text = anchor.get("text", "").strip()
@@ -256,11 +288,23 @@ def main() -> int:
                 errors.append(f"{relative}: target=_blank link missing noopener: {anchor.get('href')}")
 
         duplicates = sorted(key for key, count in Counter(parser.ids).items() if count > 1)
-        if duplicates: errors.append(f"{relative}: duplicate IDs {duplicates}")
+        if duplicates:
+            errors.append(f"{relative}: duplicate IDs {duplicates}")
         for image in parser.images:
-            if image["alt"] is None: errors.append(f"{relative}: image missing alt attribute: {image['src']}")
-            if not image["width"] or not image["height"]: errors.append(f"{relative}: image missing intrinsic dimensions: {image['src']}")
+            if image["alt"] is None:
+                errors.append(f"{relative}: image missing alt attribute: {image['src']}")
+            if not image["width"] or not image["height"]:
+                errors.append(f"{relative}: image missing intrinsic dimensions: {image['src']}")
         validate_json_ld(relative, parser, errors)
+
+    home = pages.get((root / "index.html").resolve())
+    if home:
+        required_icons = {"/favicon.svg", "/favicon-48.png", "/favicon.ico"}
+        missing_icons = required_icons - set(home.icon_hrefs)
+        if missing_icons:
+            errors.append(f"index.html: missing stable favicon URLs {sorted(missing_icons)}")
+        if home.manifest_href != "/site.webmanifest":
+            errors.append(f"index.html: manifest URL must remain stable, found {home.manifest_href!r}")
 
     site_hosts = {
         host
@@ -272,7 +316,13 @@ def main() -> int:
         errors.append("generated site has no canonical host for same-site link validation")
 
     for html, parser in pages.items():
-        for ref in parser.links + [str(image["src"]) for image in parser.images]:
+        references = (
+            parser.links
+            + [str(image["src"]) for image in parser.images]
+            + parser.icon_hrefs
+            + ([parser.manifest_href] if parser.manifest_href else [])
+        )
+        for ref in references:
             result = target_for(root, html, ref, site_hosts)
             if result is None:
                 continue
@@ -289,14 +339,17 @@ def main() -> int:
         errors.append("unexpected generated authors archive")
     for required in (
         "robots.txt", "sitemap.xml", "index.xml", "llms.txt", "llms-full.txt", "humans.txt",
-        "CNAME", ".well-known/security.txt", "favicon.svg", "site.webmanifest", "brand-use/index.html",
+        "CNAME", ".well-known/security.txt", "favicon.svg", "favicon.ico", "favicon-48.png",
+        "apple-touch-icon.png", "icon-192.png", "icon-512.png", "site.webmanifest",
+        "brand-use/index.html",
     ):
         target = root / required
-        if not target.exists(): errors.append(f"missing generated {required}")
-        elif target.is_file() and target.stat().st_size == 0: errors.append(f"empty generated {required}")
+        if not target.exists():
+            errors.append(f"missing generated {required}")
+        elif target.is_file() and target.stat().st_size == 0:
+            errors.append(f"empty generated {required}")
 
     for obsolete in (
-        "favicon.ico",
         "media/bk-safari-tab-20260730-1.png",
         "media/bk-safari-touch-20260730-1.png",
         "media/bk-monogram.svg",
