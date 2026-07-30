@@ -40,6 +40,7 @@ handled by the dedicated XeLaTeX workflow.
 
 ## Rights
 
-Copyright © 2026 Bhalaji Yadav Kantepalle. All rights reserved. This repository
-is not released under an open-source license. See `LICENSE` for the applicable
-terms.
+Copyright © 2026 Bhalaji Yadav Kantepalle. All rights reserved. The repository
+is publicly viewable but is not released under an open-source license. Files
+that state a separate license remain governed by that license. See `LICENSE`
+for the applicable terms.
