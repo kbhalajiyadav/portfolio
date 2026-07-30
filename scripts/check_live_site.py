@@ -20,8 +20,17 @@ EXPECTED_TEXT = {
         "/media/bk-apple-touch-20260730-v6.png",
         "https://www.clarity.ms/tag/",
         "xuo3lvzchr",
+        "consentv2",
+        "analytics_Storage",
+        "Privacy choices",
         "Rights",
         "All rights reserved",
+    ],
+    "privacy/": [
+        "Privacy and analytics notice",
+        "Microsoft Clarity",
+        "Allow analytics",
+        "advertising storage remains denied",
     ],
     "brand-use/": [
         "Copyright and trademark notice",
@@ -34,7 +43,7 @@ EXPECTED_TEXT = {
         "Evidence boundary",
     ],
     "research/": ["Resolve structure under stimuli", "Translate reproducibly"],
-    "robots.txt": ["OAI-SearchBot", "Claude-SearchBot"],
+    "robots.txt": ["OAI-SearchBot", "Claude-SearchBot", "Microsoft Clarity project xuo3lvzchr"],
     "sitemap.xml": ["<urlset"],
     "site.webmanifest": [
         "/media/bk-app-192-20260730-v6.png",
@@ -73,7 +82,7 @@ def fetch(url: str) -> tuple[int, str, bytes]:
     request = Request(
         url,
         headers={
-            "User-Agent": "BhalajiPortfolioDeployCheck/1.5",
+            "User-Agent": "BhalajiPortfolioDeployCheck/1.6",
             "Cache-Control": "no-cache, no-store, max-age=0",
             "Pragma": "no-cache",
         },
