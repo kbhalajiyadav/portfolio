@@ -29,6 +29,12 @@ forbidden = {
     '>Repository ↗<': 'ambiguous thesis/source label',
     'Applied innovation & professional development': 'duplicated engagement taxonomy',
     'Netroschooltraining': 'incorrect name for the National Neutron Scattering School',
+    'The Situation: Beyond the Human Eye': 'legacy case-study framing',
+    'Ground Truth Pipeline': 'unverified optical-metrology overclaim',
+    'true material reflectance': 'unsupported optical-metrology claim',
+    'Reduced data processing time by >90%': 'unsupported performance claim',
+    'primary validation tool': 'unverified deployment claim',
+    'injury monitoring': 'unsupported clinical application',
 }
 errors: list[str] = []
 for needle, reason in forbidden.items():
@@ -103,6 +109,27 @@ for obsolete_marker in ('wowchemy', 'academicons', 'isotope', 'theme_day', 'goog
 if '/research/#resolve-structure\n' in portfolio_text:
     errors.append('data/portfolio.yaml: stale research fragment; use #resolve-structure-under-stimuli')
 
+rights_text = texts[ROOT / 'content/brand-use.md']
+for required in (
+    'Copyright and trademark notice',
+    'Uses permitted by applicable law',
+    'unregistered trademarks',
+    'does not place its contents in the public domain',
+    'separate license',
+):
+    if required not in rights_text:
+        errors.append(f'content/brand-use.md: missing rights clarification {required!r}')
+
+optical_text = texts[ROOT / 'content/project/optical-metrology/index.md']
+for required in (
+    'Presented research',
+    'CIE L\\*a\\*b\\*',
+    'clinical validation',
+    'public release of the underlying experimental data',
+):
+    if required not in optical_text:
+        errors.append(f'content/project/optical-metrology/index.md: missing evidence boundary {required!r}')
+
 security_text = (ROOT / 'static/.well-known/security.txt').read_text(encoding='utf-8')
 expiry_match = re.search(r'^Expires:\s*(.+)$', security_text, re.MULTILINE)
 if not expiry_match:
@@ -121,6 +148,7 @@ if 'class="u-photo indieweb-photo"' not in header_text or 'alt="Portrait of {{ $
 
 for path in (
     ROOT / 'content/project/peel-trace-evaluation/index.md',
+    ROOT / 'content/project/optical-metrology/index.md',
     ROOT / 'content/project/fda-project/index.md',
     ROOT / 'content/project/supply-chain-automation/index.md',
 ):
@@ -175,7 +203,7 @@ for token in ("site_hosts", "Absolute links back to the canonical site are inter
 laptop_checker = (ROOT / 'scripts/check_laptop_landing.py').read_text(encoding='utf-8')
 for token in ('WIDTH = 1366', 'HEIGHT = 768', 'eyebrowLines', 'extends below the landing frame'):
     if token not in laptop_checker:
-        errors.append(f'laptop landing audit lost required invariant: {token}')
+        errors.append(f'laptop landing audit lost required invariant {token!r}')
 
 if errors:
     print('\n'.join(f'ERROR: {error}' for error in errors), file=sys.stderr)
