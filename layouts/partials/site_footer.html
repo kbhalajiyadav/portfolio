@@ -3,12 +3,13 @@
 <footer class="site-footer">
   <div class="site-footer__inner">
     <div><strong>{{ $p.profile.name }}</strong><span>Stimuli-responsive materials · quantitative metrology · reproducible processing</span></div>
-    <nav aria-label="Academic and professional profiles">
+    <nav aria-label="Academic, professional, and legal links">
       <a href="{{ $p.profile.linkedin }}" target="_blank" rel="me noopener">LinkedIn</a>
       <a href="{{ $p.profile.github }}" target="_blank" rel="me noopener">GitHub</a>
       <a href="{{ $p.profile.scholar }}" target="_blank" rel="me noopener">Scholar</a>
       <a href="{{ $p.profile.orcid }}" target="_blank" rel="me noopener">ORCID</a>
       <a href="{{ $cvHref }}" download>CV ↓</a>
+      <a href="{{ "brand-use/" | relURL }}">Rights</a>
     </nav>
     <small>© {{ now.Year }} {{ $p.profile.name }} · All rights reserved · Last reviewed {{ $p.profile.last_updated }}</small>
   </div>
