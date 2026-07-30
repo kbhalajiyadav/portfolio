@@ -186,7 +186,7 @@ def main() -> int:
     screenshots.mkdir(parents=True, exist_ok=True)
 
     port = free_port()
-    with tempfile.TemporaryDirectory(prefix="portfolio-chrome-") as profile:
+    with tempfile.TemporaryDirectory(prefix="portfolio-chrome-", ignore_cleanup_errors=True) as profile:
         process = subprocess.Popen(
             [
                 chrome,
@@ -291,6 +291,7 @@ def main() -> int:
                 process.wait(timeout=5)
             except subprocess.TimeoutExpired:
                 process.kill()
+                process.wait(timeout=5)
 
 
 if __name__ == "__main__":
