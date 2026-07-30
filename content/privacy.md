@@ -5,7 +5,7 @@ lastmod: 2026-07-30
 summary: "How this portfolio handles technical data, Microsoft Clarity analytics, consent choices, and privacy inquiries."
 ---
 
-Last updated: July 30, 2026.
+Effective and last reviewed: July 30, 2026.
 
 ## Scope
 
