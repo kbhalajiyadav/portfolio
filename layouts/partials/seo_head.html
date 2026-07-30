@@ -23,7 +23,7 @@
 {{ end }}
 <link rel="canonical" href="{{ $canonical }}">
 <link rel="author" href="{{ "/" | absURL }}">
-<link rel="manifest" href="{{ "site.webmanifest?v=20260730-6" | relURL }}">
+<link rel="manifest" href="{{ "site.webmanifest" | relURL }}">
 {{ with site.Home.OutputFormats.Get "RSS" }}
 <link rel="alternate feed" type="{{ .MediaType.Type }}" href="{{ .Permalink }}" title="{{ $siteName }}">
 {{ end }}
@@ -46,11 +46,11 @@
 <meta name="twitter:description" content="{{ $description }}">
 {{ with site.Params.marketing.verification.google }}<meta name="google-site-verification" content="{{ . }}">{{ end }}
 {{ with site.Params.marketing.verification.bing }}<meta name="msvalidate.01" content="{{ . }}">{{ end }}
-<link rel="icon" type="image/svg+xml" href="{{ "favicon.svg?v=20260730-6" | relURL }}">
-<link rel="icon" type="image/png" sizes="32x32" href="{{ "media/bk-browser-32-20260730-v6.png" | relURL }}">
-<link rel="shortcut icon" href="{{ "media/bk-browser-20260730-v6.ico" | relURL }}">
-<link rel="apple-touch-icon" sizes="180x180" href="{{ "media/bk-apple-touch-20260730-v6.png" | relURL }}">
-<link rel="mask-icon" href="{{ "media/bk-monogram-canonical-20260730.svg" | relURL }}" color="#16191c">
+<link rel="icon" type="image/svg+xml" href="{{ "favicon.svg" | relURL }}">
+<link rel="icon" type="image/png" sizes="48x48" href="{{ "favicon-48.png" | relURL }}">
+<link rel="icon" href="{{ "favicon.ico" | relURL }}" sizes="any">
+<link rel="apple-touch-icon" sizes="180x180" href="{{ "apple-touch-icon.png" | relURL }}">
+<link rel="mask-icon" href="{{ "favicon.svg" | relURL }}" color="#16191c">
 {{ $personID := printf "%s#person" ("/" | absURL) }}
 {{ $websiteID := printf "%s#website" ("/" | absURL) }}
 {{ $profileID := printf "%s#profile" ("/" | absURL) }}

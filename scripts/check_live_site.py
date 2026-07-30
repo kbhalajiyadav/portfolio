@@ -15,10 +15,11 @@ EXPECTED_TEXT = {
     "": [
         "A material that changes color is easy to make",
         "Ph.D. student",
-        "/favicon.svg?v=20260730-6",
-        "/media/bk-browser-32-20260730-v6.png",
-        "/media/bk-browser-20260730-v6.ico",
-        "/media/bk-apple-touch-20260730-v6.png",
+        'href="/favicon.svg"',
+        'href="/favicon-48.png"',
+        'href="/favicon.ico"',
+        'href="/apple-touch-icon.png"',
+        'href="/site.webmanifest"',
         "data-site-runtime",
         "Privacy choices",
         "Rights",
@@ -44,9 +45,9 @@ EXPECTED_TEXT = {
     "robots.txt": ["OAI-SearchBot", "Claude-SearchBot", "Microsoft Clarity project xuo3lvzchr"],
     "sitemap.xml": ["<urlset"],
     "site.webmanifest": [
-        "/media/bk-app-192-20260730-v6.png",
-        "/media/bk-app-512-20260730-v6.png",
-        "/media/bk-monogram-canonical-20260730.svg",
+        "/icon-192.png",
+        "/icon-512.png",
+        "/favicon.svg",
     ],
 }
 
@@ -64,16 +65,22 @@ SVG_HASHES = {
 }
 
 PNG_SIZES = {
+    "favicon-48.png": (48, 48),
+    "apple-touch-icon.png": (180, 180),
+    "icon-192.png": (192, 192),
+    "icon-512.png": (512, 512),
     "media/bk-browser-32-20260730-v6.png": (32, 32),
     "media/bk-apple-touch-20260730-v6.png": (180, 180),
     "media/bk-app-192-20260730-v6.png": (192, 192),
     "media/bk-app-512-20260730-v6.png": (512, 512),
 }
 
-ICO_PATH = "media/bk-browser-20260730-v6.ico"
+ICO_PATHS = [
+    "favicon.ico",
+    "media/bk-browser-20260730-v6.ico",
+]
 
 REMOVED_PATHS = [
-    "favicon.ico",
     "media/bk-safari-tab-20260730-1.png",
     "media/bk-safari-touch-20260730-1.png",
     "media/bk-monogram.svg",
@@ -88,7 +95,7 @@ def fetch(url: str) -> tuple[int, str, bytes]:
     request = Request(
         url,
         headers={
-            "User-Agent": "BhalajiPortfolioDeployCheck/1.7",
+            "User-Agent": "BhalajiPortfolioDeployCheck/1.8",
             "Cache-Control": "no-cache, no-store, max-age=0",
             "Pragma": "no-cache",
         },
@@ -179,21 +186,22 @@ def validate_release(base: str) -> list[str]:
         except (URLError, HTTPError, TimeoutError) as exc:
             errors.append(f"{url}: {exc}")
 
-    ico_url = urljoin(base, ICO_PATH)
-    try:
-        status, content_type, raw = fetch(ico_url)
-        if status != 200:
-            errors.append(f"{ico_url}: HTTP {status}")
-        if content_type not in {"image/vnd.microsoft.icon", "image/x-icon", "application/octet-stream"}:
-            errors.append(f"{ico_url}: unexpected content type {content_type!r}")
-        if len(raw) < 6:
-            errors.append(f"{ico_url}: truncated ICO")
-        else:
-            reserved, kind, count = struct.unpack("<HHH", raw[:6])
-            if (reserved, kind) != (0, 1) or count < 4:
-                errors.append(f"{ico_url}: invalid ICO directory")
-    except (URLError, HTTPError, TimeoutError) as exc:
-        errors.append(f"{ico_url}: {exc}")
+    for path in ICO_PATHS:
+        ico_url = urljoin(base, path)
+        try:
+            status, content_type, raw = fetch(ico_url)
+            if status != 200:
+                errors.append(f"{ico_url}: HTTP {status}")
+            if content_type not in {"image/vnd.microsoft.icon", "image/x-icon", "application/octet-stream"}:
+                errors.append(f"{ico_url}: unexpected content type {content_type!r}")
+            if len(raw) < 6:
+                errors.append(f"{ico_url}: truncated ICO")
+            else:
+                reserved, kind, count = struct.unpack("<HHH", raw[:6])
+                if (reserved, kind) != (0, 1) or count < 4:
+                    errors.append(f"{ico_url}: invalid ICO directory")
+        except (URLError, HTTPError, TimeoutError) as exc:
+            errors.append(f"{ico_url}: {exc}")
 
     for path in REMOVED_PATHS:
         url = urljoin(base, path)
