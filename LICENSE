@@ -27,3 +27,22 @@ metadata, presentation records, institutional materials, certificates, or
 other files under `content`, `data`, `static/media`, and `static/uploads`.
 Those materials remain all rights reserved unless a file or linked public
 record states a different license.
+
+## Brand assets and marks
+
+The BK monogram, its exact vector paths, proportions, spacing, border geometry,
+browser-icon presentation, and the portfolio's coordinated visual identity are
+proprietary brand assets of Bhalaji Yadav Kantepalle. They are excluded from
+the source-code license.
+
+No permission is granted to reproduce, adapt, distribute, sell, register, or
+use those brand assets as a trademark or service mark, or to imply affiliation,
+endorsement, authorship, or sponsorship, without prior written permission.
+
+`BK monogram™` denotes an unregistered claim of brand rights; it does not claim
+federal trademark registration. The registration symbol `®` must not be used.
+
+Accessing this repository, viewing the website, copying source code, or
+receiving a physical or digital copy does not transfer copyright ownership or
+exclusive brand rights. Any voluntary transfer of copyright ownership must be
+set out in a separate written instrument signed by the rights owner.
