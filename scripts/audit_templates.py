@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """Static checks for the custom Hugo layout system before rendering."""
 from __future__ import annotations
-
 from pathlib import Path
 import re
 
@@ -31,8 +30,9 @@ def main() -> int:
         if marker not in base:
             errors.append(f"layouts/_default/baseof.html: missing {marker}")
     header = (LAYOUTS / "partials/site_header.html").read_text(encoding="utf-8")
-    if "brand__monogram" not in header or ">BK<" not in header:
-        errors.append("shared header must retain the BK monogram")
+    for marker in ('class="brand__monogram"', 'viewBox="0 0 40 40"', 'fill="currentColor"'):
+        if marker not in header:
+            errors.append(f"shared header must retain the canonical vector BK monogram marker {marker}")
     if errors:
         for error in errors:
             print(f"ERROR: {error}")
