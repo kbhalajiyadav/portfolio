@@ -70,8 +70,10 @@ def main() -> int:
             errors.append(f"research-program alignment invariant missing {rule!r}")
     privacy_layout_rules = (
         ".privacy-banner{position:relative;z-index:90;",
-        ".privacy-banner:not([hidden])+main .hero{padding-top:clamp(2.75rem,5vw,4.5rem)}",
-        ".privacy-banner:not([hidden])+main .page-shell{padding-top:clamp(2.5rem,4vw,3.75rem)}",
+        'html[data-analytics-consent="granted"] .privacy-banner:not(.is-open),html[data-analytics-consent="denied"] .privacy-banner:not(.is-open),.privacy-banner[hidden]{display:none}',
+        ".no-js .privacy-banner__actions{display:none}",
+        'html[data-analytics-consent="unset"] .privacy-banner+main .hero,.privacy-banner.is-open+main .hero{padding-top:clamp(2.75rem,5vw,4.5rem)}',
+        'html[data-analytics-consent="unset"] .privacy-banner+main .page-shell,.privacy-banner.is-open+main .page-shell{padding-top:clamp(2.5rem,4vw,3.75rem)}',
         ".privacy-banner{align-items:stretch;flex-direction:column;gap:.9rem;width:calc(100% - 2rem);padding:1rem}",
     )
     for rule in privacy_layout_rules:
@@ -80,7 +82,7 @@ def main() -> int:
     if ".privacy-banner{position:fixed" in refinements:
         errors.append("privacy controls must remain in document flow and must not obscure page content")
     spacing_rules = (
-        "--refined-section-space:clamp(4.5rem,7vw,6.5rem)",
+        "--refined-section-space:clamp(3.25rem,4.5vw,4.75rem)",
         ".section{padding-block:var(--refined-section-space)}",
         ".page-shell{padding-block:clamp(3rem,6vw,5.25rem)}",
         ".back-link{margin-bottom:2.1rem}",
@@ -96,7 +98,7 @@ def main() -> int:
         for error in errors:
             print(f"ERROR: {error}")
         return 1
-    print("Style audit passed: contrast, focus, breakpoints, footer and research-card alignment, in-flow privacy controls, and page spacing verified.")
+    print("Style audit passed: contrast, focus, breakpoints, footer and research-card alignment, pre-paint privacy controls, and page spacing verified.")
     return 0
 
 
