@@ -11,8 +11,8 @@ permissions:
   contents: read
 
 concurrency:
-  group: pages
-  cancel-in-progress: false
+  group: pages-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 defaults:
   run:
@@ -200,7 +200,7 @@ jobs:
           persist-credentials: false
 
       - name: Verify deployed release
-        run: python3 scripts/check_live_site.py "${{ steps.deployment.outputs.page_url }}"
+        run: python3 scripts/check_live_site.py "https://bhalaji.com/" --attempts 18 --delay 10
 
       - name: Notify IndexNow
         continue-on-error: true
