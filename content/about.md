@@ -1,5 +1,6 @@
 ---
-title: Bhalaji Yadav Kantepalle
+title: About Bhalaji Yadav Kantepalle
+display_title: Bhalaji Yadav Kantepalle
 type: about
 layout: single
 url: /about/
