@@ -1,15 +1,18 @@
 ---
 title: About Bhalaji Yadav Kantepalle
+display_title: Bhalaji Yadav Kantepalle
 type: about
 layout: single
 url: /about/
 kicker: About
-summary: Bhalaji Yadav Kantepalle is a Ph.D. student in Integrative Life Sciences at Virginia Commonwealth University studying stimuli-responsive soft and liquid-crystalline materials through quantitative metrology, rheology, neutron scattering, and reproducible analysis.
+summary: Ph.D. student in Integrative Life Sciences at Virginia Commonwealth University studying stimuli-responsive soft and liquid-crystalline materials through quantitative metrology, rheology, neutron scattering, and reproducible analysis.
 description: Research biography, scientific focus, professional path, methods, and authoritative profiles for Bhalaji Yadav Kantepalle.
-lastmod: 2026-07-30
+lastmod: 2026-07-31
 bio:
-  - I am a Ph.D. student in Integrative Life Sciences at Virginia Commonwealth University. My research focuses on stimuli-responsive soft and liquid-crystalline materials: how deformation, temperature, flow, and time reorganize structure, how those changes generate optical and mechanical responses, and how those responses can be measured reproducibly.
-  - My work combines materials experiments with quantitative metrology. I develop methods that align force, deformation, imaging, and structural measurements so that a material response can be interpreted as evidence rather than treated only as a visual effect.
+  - >-
+    I am a Ph.D. student in Integrative Life Sciences at Virginia Commonwealth University. My research focuses on stimuli-responsive soft and liquid-crystalline materials: how deformation, temperature, flow, and time reorganize structure, how those changes generate optical and mechanical responses, and how those responses can be measured reproducibly.
+  - >-
+    My work combines materials experiments with quantitative metrology. I develop methods that align force, deformation, imaging, and structural measurements so that a material response can be interpreted as evidence rather than treated only as a visual effect.
 research_identity:
   title: Research identity
   text: My research connects three linked problems—measuring response, resolving structure under stimuli, and translating both into repeatable methods and processing conditions. The unifying question is how the meaning of a material response can survive changes in scale, handling, and equipment.

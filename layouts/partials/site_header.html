@@ -1,5 +1,7 @@
 {{ $p := site.Data.portfolio }}
 {{ $root := "/" | relURL }}
+{{ $aboutURL := "about/" | relURL }}
+{{ $isAbout := eq .RelPermalink $aboutURL }}
 <header class="site-head">
   <div class="site-head__inner">
     <a class="brand h-card u-url" href="{{ $root }}" rel="me" aria-label="{{ $p.profile.name }}, portfolio home">
@@ -13,12 +15,12 @@
     </a>
     <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
     <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
+      <a class="nav-about{{ if $isAbout }} is-current-page{{ end }}" href="{{ $aboutURL }}"{{ if $isAbout }} aria-current="page"{{ end }}>About</a>
       <a href="{{ $root }}#research">Research</a>
       <a href="{{ $root }}#outputs">Outputs</a>
       <a href="{{ $root }}#trajectory">Trajectory</a>
-      <a href="{{ "about/" | relURL }}">About</a>
       <a href="{{ $root }}#experience">Experience</a>
-      <a class="nav-contact" href="mailto:{{ $p.profile.email }}">Contact</a>
+      <a class="nav-contact" href="{{ $root }}#contact">Contact</a>
     </nav>
   </div>
 </header>
