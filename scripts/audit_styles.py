@@ -70,8 +70,9 @@ def main() -> int:
             errors.append(f"research-program alignment invariant missing {rule!r}")
     privacy_layout_rules = (
         ".privacy-banner{position:relative;z-index:90;",
-        ".privacy-banner:not([hidden])+main .hero{padding-top:clamp(2.75rem,5vw,4.5rem)}",
-        ".privacy-banner:not([hidden])+main .page-shell{padding-top:clamp(2.5rem,4vw,3.75rem)}",
+        'html[data-analytics-consent="granted"] .privacy-banner,html[data-analytics-consent="denied"] .privacy-banner{display:none}',
+        'html[data-analytics-consent="unknown"] .privacy-banner+main .hero{padding-top:clamp(2.75rem,5vw,4.5rem)}',
+        'html[data-analytics-consent="unknown"] .privacy-banner+main .page-shell{padding-top:clamp(2.5rem,4vw,3.75rem)}',
         ".privacy-banner{align-items:stretch;flex-direction:column;gap:.9rem;width:calc(100% - 2rem);padding:1rem}",
     )
     for rule in privacy_layout_rules:
@@ -96,7 +97,7 @@ def main() -> int:
         for error in errors:
             print(f"ERROR: {error}")
         return 1
-    print("Style audit passed: contrast, focus, breakpoints, footer and research-card alignment, in-flow privacy controls, and page spacing verified.")
+    print("Style audit passed: contrast, focus, breakpoints, footer and research-card alignment, prepaint in-flow privacy controls, and page spacing verified.")
     return 0
 
 
