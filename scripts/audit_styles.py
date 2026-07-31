@@ -68,13 +68,35 @@ def main() -> int:
     for rule in pillar_alignment_rules:
         if rule not in refinements:
             errors.append(f"research-program alignment invariant missing {rule!r}")
+    privacy_layout_rules = (
+        ".privacy-banner{position:relative;z-index:90;",
+        ".privacy-banner:not([hidden])+main .hero{padding-top:clamp(2.75rem,5vw,4.5rem)}",
+        ".privacy-banner:not([hidden])+main .page-shell{padding-top:clamp(2.5rem,4vw,3.75rem)}",
+        ".privacy-banner{align-items:stretch;flex-direction:column;gap:.9rem;width:calc(100% - 2rem);padding:1rem}",
+    )
+    for rule in privacy_layout_rules:
+        if rule not in refinements:
+            errors.append(f"privacy-layout invariant missing {rule!r}")
+    if ".privacy-banner{position:fixed" in refinements:
+        errors.append("privacy controls must remain in document flow and must not obscure page content")
+    spacing_rules = (
+        "--refined-section-space:clamp(4.5rem,7vw,6.5rem)",
+        ".section{padding-block:var(--refined-section-space)}",
+        ".page-shell{padding-block:clamp(3rem,6vw,5.25rem)}",
+        ".back-link{margin-bottom:2.1rem}",
+        ".page-header{margin-bottom:2.55rem}",
+        ".article-layout{gap:clamp(2.5rem,4vw,4rem)}",
+    )
+    for rule in spacing_rules:
+        if rule not in refinements:
+            errors.append(f"page-spacing invariant missing {rule!r}")
     if "text-align:justify" in text.replace(" ", ""):
         errors.append("body copy must not use full justification")
     if errors:
         for error in errors:
             print(f"ERROR: {error}")
         return 1
-    print("Style audit passed: contrast, hidden microformats, focus, breakpoints, footer alignment, and research-card alignment verified.")
+    print("Style audit passed: contrast, focus, breakpoints, footer and research-card alignment, in-flow privacy controls, and page spacing verified.")
     return 0
 
 
