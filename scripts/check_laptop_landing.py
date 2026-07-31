@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Verify that the complete hero forms one landing frame at 1366×768.
+"""Verify the post-choice hero as one landing frame at 1366×768.
 
-This represents a common 14-inch laptop CSS viewport. The test uses the real
-rendered Hugo output and fails if the hero, portrait, identity note, status line,
-or one-line research eyebrow is clipped below the first screen.
+The first-visit analytics notice is validated separately while visible. This test
+selects Decline, verifies that no analytics script loads, and then checks the
+established laptop landing composition without a privacy overlay or notice.
 """
 from __future__ import annotations
 
@@ -87,6 +87,32 @@ def wait_ready(cdp: CDP, expected_url: str, timeout: float = 20.0) -> None:
     raise TimeoutError(f"page did not finish navigating to {expected_url}; last state={state}")
 
 
+DECLINE_PRIVACY_EXPRESSION = r"""
+(async () => {
+  const banner = document.querySelector('[data-privacy-banner]');
+  const decline = document.querySelector('[data-consent-decline]');
+  if (!banner || !decline) {
+    return {available: false};
+  }
+  decline.click();
+  await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+  let storedConsent = null;
+  try {
+    storedConsent = localStorage.getItem('bhalaji.analyticsConsent.v1');
+  } catch (error) {
+    storedConsent = 'storage-unavailable';
+  }
+  return {
+    available: true,
+    bannerHidden: banner.hidden,
+    storedConsent,
+    clarityScriptLoaded: Boolean(document.querySelector('script[data-clarity-project]')),
+    clarityQueueCreated: typeof window.clarity === 'function'
+  };
+})()
+"""
+
+
 LANDING_EXPRESSION = r"""
 (() => {
   const rect = (selector) => {
@@ -107,6 +133,7 @@ LANDING_EXPRESSION = r"""
   const eyebrowLineHeight = eyebrowStyle ? parseFloat(eyebrowStyle.lineHeight) : 0;
   const eyebrowHeight = eyebrow ? eyebrow.getBoundingClientRect().height : 0;
   const root = document.documentElement;
+  const privacyBanner = document.querySelector('[data-privacy-banner]');
   return {
     viewport: {width: innerWidth, height: innerHeight},
     scrollWidth: root.scrollWidth,
@@ -118,6 +145,8 @@ LANDING_EXPRESSION = r"""
     status: rect('.status-line'),
     eyebrow: rect('.hero .eyebrow'),
     eyebrowLines: eyebrowLineHeight ? Math.round(eyebrowHeight / eyebrowLineHeight) : null,
+    privacyBannerHidden: Boolean(privacyBanner && privacyBanner.hidden),
+    clarityScriptLoaded: Boolean(document.querySelector('script[data-clarity-project]')),
     desktopNavigationVisible: getComputedStyle(document.querySelector('#site-nav')).display !== 'none',
     menuButtonHidden: getComputedStyle(document.querySelector('.menu-button')).display === 'none'
   };
@@ -144,7 +173,8 @@ def main() -> int:
     screenshot.parent.mkdir(parents=True, exist_ok=True)
 
     port = free_port()
-    with tempfile.TemporaryDirectory(prefix="portfolio-laptop-chrome-") as profile:
+    privacy_choice: dict[str, Any] = {}
+    with tempfile.TemporaryDirectory(prefix="portfolio-laptop-chrome-", ignore_cleanup_errors=True) as profile:
         process = subprocess.Popen(
             [
                 chrome,
@@ -189,6 +219,7 @@ def main() -> int:
                 url = args.base_url.rstrip("/") + "/"
                 cdp.command("Page.navigate", {"url": url})
                 wait_ready(cdp, url)
+                privacy_choice = cdp.evaluate(DECLINE_PRIVACY_EXPRESSION)
                 metrics = cdp.evaluate(LANDING_EXPRESSION)
                 image = cdp.command("Page.captureScreenshot", {"format": "png", "fromSurface": True})
                 screenshot.write_bytes(base64.b64decode(image["data"]))
@@ -200,8 +231,18 @@ def main() -> int:
                 process.wait(timeout=5)
             except subprocess.TimeoutExpired:
                 process.kill()
+                process.wait(timeout=5)
 
     errors: list[str] = []
+    if not privacy_choice.get("available"):
+        errors.append("privacy decline control is unavailable")
+    if not privacy_choice.get("bannerHidden") or not metrics.get("privacyBannerHidden"):
+        errors.append("privacy notice did not leave the document flow after Decline")
+    if privacy_choice.get("storedConsent") != "denied":
+        errors.append(f"declined analytics preference was not stored: {privacy_choice.get('storedConsent')!r}")
+    if privacy_choice.get("clarityScriptLoaded") or metrics.get("clarityScriptLoaded"):
+        errors.append("Microsoft Clarity loaded after analytics was declined")
+
     viewport_height = int(metrics["viewport"]["height"])
     for name in ("hero", "copy", "headline", "portrait", "identity", "status", "eyebrow"):
         if not metrics.get(name):
@@ -220,11 +261,11 @@ def main() -> int:
         if box and int(box["top"]) < 0:
             errors.append(f"{name} begins above the visible viewport: top={box['top']}")
 
-    report.write_text(json.dumps({"metrics": metrics, "errors": errors}, indent=2) + "\n")
+    report.write_text(json.dumps({"privacyChoice": privacy_choice, "metrics": metrics, "errors": errors}, indent=2) + "\n")
     if errors:
         print("\n".join(f"ERROR: {error}" for error in errors))
         return 1
-    print("1366×768 laptop landing-frame audit passed.")
+    print("1366×768 post-choice laptop landing-frame audit passed.")
     return 0
 
 
