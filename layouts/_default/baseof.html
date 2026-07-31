@@ -1,10 +1,21 @@
 <!doctype html>
-<html lang="{{ site.Language.Lang | default "en" }}">
+<html lang="{{ site.Language.Lang | default "en" }}" data-analytics-consent="unknown">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#f7f5f0">
   {{ partial "seo_head.html" . }}
+  <script data-consent-bootstrap>
+    (() => {
+      const root = document.documentElement;
+      try {
+        const choice = window.localStorage.getItem('bhalaji.analyticsConsent.v1');
+        root.dataset.analyticsConsent = choice === 'granted' || choice === 'denied' ? choice : 'unknown';
+      } catch (error) {
+        root.dataset.analyticsConsent = 'unknown';
+      }
+    })();
+  </script>
   {{ $styles := resources.Get "css/site.css" | minify | fingerprint "sha384" }}
   <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}" crossorigin="anonymous">
 </head>
