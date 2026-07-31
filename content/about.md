@@ -5,7 +5,7 @@ type: about
 layout: single
 url: /about/
 kicker: About
-summary: Ph.D. student in Integrative Life Sciences at Virginia Commonwealth University studying stimuli-responsive soft and liquid-crystalline materials through quantitative metrology, rheology, neutron scattering, and reproducible analysis.
+summary: Connecting stimuli-responsive material structure to quantitative optical and mechanical response through reproducible experiments and analysis.
 description: Research biography, scientific focus, professional path, methods, and authoritative profiles for Bhalaji Yadav Kantepalle.
 lastmod: 2026-07-31
 bio:
