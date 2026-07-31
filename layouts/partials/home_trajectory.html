@@ -1,0 +1,9 @@
+{{ $p := site.Data.portfolio }}
+<section class="section trajectory" id="trajectory">
+  <div class="section-head"><p class="kicker">Doctoral trajectory</p><h2>{{ $p.doctoral.title }}</h2><p>{{ $p.doctoral.text }}</p></div>
+  <div class="trajectory-grid">
+    <article class="application-card"><h3>Application directions</h3><p>Directions the measurement and processing platform could support—not claims of validated products.</p><ul>{{ range $p.applications }}<li>{{ . }}</li>{{ end }}</ul></article>
+    <article class="robotics-card"><h3>Automation for repeatability</h3><p>{{ $p.doctoral.robotics }}</p></article>
+  </div>
+  <div class="questions"><h3>Questions for collaboration</h3>{{ range $p.collaboration_questions }}<article><strong>{{ .title }}</strong><p>{{ .text }}</p></article>{{ end }}</div>
+</section>

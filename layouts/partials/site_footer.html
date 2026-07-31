@@ -2,7 +2,7 @@
 {{ $cvHref := printf "%s?v=%s" ($p.profile.cv | relURL) $p.profile.cv_version }}
 <footer class="site-footer">
   <div class="site-footer__inner">
-    <div><strong>{{ $p.profile.name }}</strong><span>Stimuli-responsive materials · quantitative metrology · reproducible processing</span></div>
+    <div><a class="footer-profile-link" href="{{ "about/" | relURL }}"><strong>{{ $p.profile.name }}</strong></a><span>Stimuli-responsive materials · quantitative metrology · reproducible processing</span></div>
     <nav aria-label="Academic, professional, and legal links">
       <a href="{{ $p.profile.linkedin }}" target="_blank" rel="me noopener">LinkedIn</a>
       <a href="{{ $p.profile.github }}" target="_blank" rel="me noopener">GitHub</a>

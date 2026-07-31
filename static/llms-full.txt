@@ -1,5 +1,8 @@
 # Bhalaji Yadav Kantepalle — Full Public Research Context
 
+## Canonical profile
+The canonical biography and identity page is https://bhalaji.com/about/ . It consolidates research focus, professional path, methods, collaboration scope, and authoritative external profiles.
+
 ## Current position
 Bhalaji Yadav Kantepalle is a Ph.D. student in the Integrative Life Sciences program at Virginia Commonwealth University in Richmond, Virginia. His research concerns stimuli-responsive soft and liquid-crystalline materials, quantitative metrology, and reproducible processing.
 
@@ -38,6 +41,7 @@ The portfolio excludes unpublished formulations, restricted datasets, detailed f
 
 ## Contact and identity
 Website: https://bhalaji.com/
+Canonical profile: https://bhalaji.com/about/
 Research page: https://bhalaji.com/research/
 Email: contact@bhalaji.com
 ORCID: https://orcid.org/0000-0003-0551-6172

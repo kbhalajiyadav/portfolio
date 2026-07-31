@@ -1,0 +1,122 @@
+{{ define "main" }}
+{{ $p := site.Data.portfolio }}
+{{ $cvHref := printf "%s?v=%s" ($p.profile.cv | relURL) $p.profile.cv_version }}
+<article class="about-page h-card">
+  <div class="page-shell">
+    <a class="back-link lnk" href="{{ "/" | relURL }}"><span aria-hidden="true">←</span> Portfolio home</a>
+
+    <header class="about-hero">
+      <div class="about-hero__copy">
+        <p class="kicker">{{ .Params.kicker }}</p>
+        <h1 class="p-name">{{ .Title }}</h1>
+        <p class="page-lede p-note">{{ .Params.summary }}</p>
+        <div class="actions">
+          <a class="button button--primary" href="{{ "/research/" | relURL }}">Read the research program</a>
+          <a class="lnk" href="{{ $cvHref }}" target="_blank" rel="noopener">Open the CV <span class="arw" aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <div class="about-portrait">
+        <img class="u-photo" src="{{ "uploads/avatar-portrait.jpg" | relURL }}" alt="Portrait of {{ $p.profile.name }}" width="853" height="1056">
+        <div class="about-portrait__caption">
+          <strong>{{ $p.profile.short_name }}</strong>
+          <span>{{ $p.profile.status }}</span>
+          <span class="p-locality">{{ $p.profile.location }}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="about-body">
+      <section class="about-narrative" aria-labelledby="about-biography">
+        <p class="kicker">Biography</p>
+        <h2 id="about-biography">Research built around measurable response.</h2>
+        {{ range .Params.bio }}<p>{{ . }}</p>{{ end }}
+      </section>
+
+      <aside class="about-facts" aria-label="Profile at a glance">
+        <h2>At a glance</h2>
+        <dl>
+          <div><dt>Current role</dt><dd class="p-job-title">{{ $p.profile.status }}</dd></div>
+          <div><dt>Institution</dt><dd class="p-org">Virginia Commonwealth University</dd></div>
+          <div><dt>Location</dt><dd>{{ $p.profile.location }}</dd></div>
+          <div><dt>Research areas</dt><dd>Stimuli-responsive materials, soft matter, liquid crystals, and quantitative metrology</dd></div>
+          <div><dt>Contact</dt><dd><a class="u-email" href="mailto:{{ $p.profile.email }}">{{ $p.profile.email }}</a></dd></div>
+        </dl>
+      </aside>
+    </div>
+
+    <section class="about-section about-identity" aria-labelledby="research-identity">
+      <div class="about-section__head">
+        <p class="kicker">{{ .Params.research_identity.title }}</p>
+        <h2 id="research-identity">From material response to reproducible evidence.</h2>
+        <p>{{ .Params.research_identity.text }}</p>
+      </div>
+      <div class="about-program-grid">
+        {{ range $p.research }}
+        <article>
+          <span>{{ .number }}</span>
+          <h3>{{ .title }}</h3>
+          <p>{{ .text }}</p>
+          <a class="lnk" href="{{ .href | relURL }}">{{ .link_label }} <span class="arw" aria-hidden="true">↗</span></a>
+        </article>
+        {{ end }}
+      </div>
+    </section>
+
+    <section class="about-section" aria-labelledby="professional-path">
+      <div class="about-section__head">
+        <p class="kicker">Professional path</p>
+        <h2 id="professional-path">Chemical engineering, regulated practice, and research metrology.</h2>
+      </div>
+      <div class="about-path">
+        {{ range .Params.professional_path }}
+        <article>
+          <span>{{ .period }}</span>
+          <div><h3>{{ .title }}</h3><p>{{ .text }}</p></div>
+        </article>
+        {{ end }}
+      </div>
+    </section>
+
+    <section class="about-section" aria-labelledby="methods-capabilities">
+      <div class="about-section__head">
+        <p class="kicker">Methods and capabilities</p>
+        <h2 id="methods-capabilities">Measurement choices are part of the scientific claim.</h2>
+      </div>
+      <div class="about-method-grid">
+        {{ range .Params.methods }}
+        <article><h3>{{ .title }}</h3><p>{{ .text }}</p></article>
+        {{ end }}
+      </div>
+    </section>
+
+    <section class="about-section about-records" aria-labelledby="authoritative-records">
+      <div class="about-section__head">
+        <p class="kicker">Profiles and records</p>
+        <h2 id="authoritative-records">Authoritative links for identity, publications, software, and experience.</h2>
+      </div>
+      <div class="about-profile-links">
+        <a href="{{ $p.profile.orcid }}" target="_blank" rel="me noopener"><strong>ORCID</strong><span>Research identity and synchronized works</span></a>
+        <a href="{{ $p.profile.scholar }}" target="_blank" rel="me noopener"><strong>Google Scholar</strong><span>Publication and citation record</span></a>
+        <a href="{{ $p.profile.github }}" target="_blank" rel="me noopener"><strong>GitHub</strong><span>Research software and versioned methods</span></a>
+        <a href="{{ $p.profile.linkedin }}" target="_blank" rel="me noopener"><strong>LinkedIn</strong><span>Professional history and institutional context</span></a>
+        <a href="{{ $cvHref }}" target="_blank" rel="noopener"><strong>Curriculum vitae</strong><span>Complete academic and professional record</span></a>
+        <a href="{{ "/#outputs" | relURL }}"><strong>Selected outputs</strong><span>Connected articles, thesis, and software</span></a>
+      </div>
+    </section>
+
+    <section class="about-collaboration" aria-labelledby="about-collaboration">
+      <div>
+        <p class="kicker">{{ .Params.collaboration.title }}</p>
+        <h2 id="about-collaboration">Methods exchange where structure, mechanics, and imaging meet.</h2>
+        <p>{{ .Params.collaboration.text }}</p>
+      </div>
+      <div class="actions">
+        <a class="button button--primary" href="mailto:{{ $p.profile.email }}">Email {{ $p.profile.email }}</a>
+        <a class="lnk" href="{{ "/#trajectory" | relURL }}">Doctoral trajectory <span class="arw" aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+
+    <a class="u-url visually-hidden" href="{{ .Permalink }}">Canonical profile page</a>
+  </div>
+</article>
+{{ end }}
