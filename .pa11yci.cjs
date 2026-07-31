@@ -17,6 +17,7 @@ module.exports = {
   concurrency: 2,
   urls: [
     'http://127.0.0.1:4173/',
+    'http://127.0.0.1:4173/about/',
     'http://127.0.0.1:4173/research/',
     'http://127.0.0.1:4173/publication/adhesives-wearable/',
     'http://127.0.0.1:4173/publication/masters-thesis/',
