@@ -8,7 +8,7 @@
     <header class="about-hero">
       <div class="about-hero__copy">
         <p class="kicker">{{ .Params.kicker }}</p>
-        <h1 class="p-name">{{ .Title }}</h1>
+        <h1 class="p-name">{{ .Params.display_title | default .Title }}</h1>
         <p class="page-lede p-note">{{ .Params.summary }}</p>
         <div class="actions">
           <a class="button button--primary" href="{{ "/research/" | relURL }}">Read the research program</a>
