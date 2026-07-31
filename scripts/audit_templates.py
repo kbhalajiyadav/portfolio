@@ -33,6 +33,9 @@ def main() -> int:
     for marker in ('class="brand__monogram"', 'viewBox="0 0 40 40"', 'fill="currentColor"'):
         if marker not in header:
             errors.append(f"shared header must retain the canonical vector BK monogram marker {marker}")
+    privacy = (LAYOUTS / "partials/privacy_controls.html").read_text(encoding="utf-8")
+    if not re.search(r'<section\b[^>]*data-privacy-banner[^>]*\bhidden\b', privacy):
+        errors.append("privacy notice must be hidden in initial HTML until the stored consent state is known")
     if errors:
         for error in errors:
             print(f"ERROR: {error}")
