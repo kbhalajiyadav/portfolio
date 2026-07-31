@@ -1,3 +1,5 @@
+.footer-profile-link{color:var(--ink);text-decoration:none}
+.footer-profile-link:hover,.footer-profile-link:focus-visible{color:var(--teal)}
 .about-page{border-bottom:1px solid var(--line)}
 .about-hero{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(280px,.65fr);gap:clamp(3rem,7vw,7rem);align-items:center;padding-bottom:clamp(3rem,6vw,5rem);border-bottom:1px solid var(--line)}
 .about-hero__copy h1{max-width:13ch}
