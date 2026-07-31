@@ -96,6 +96,10 @@
     const declineButton = privacyBanner.querySelector('[data-consent-decline]');
     const openButtons = Array.from(document.querySelectorAll('[data-open-privacy]'));
 
+    const setConsentState = (choice) => {
+      document.documentElement.dataset.analyticsConsent = choice || 'unknown';
+    };
+
     const queueClarity = () => {
       if (typeof window.clarity !== 'function') {
         window.clarity = function clarityQueue() {
@@ -147,12 +151,14 @@
       } catch (error) {
         console.warn('Privacy preference could not be stored', error);
       }
+      setConsentState(choice);
       if (choice === 'granted') grantAnalytics();
       else denyAnalytics();
       setBannerVisible(false);
     };
 
     const currentChoice = readConsent();
+    setConsentState(currentChoice);
     if (currentChoice === 'granted') grantAnalytics();
     setBannerVisible(currentChoice === null);
 
@@ -160,6 +166,7 @@
     if (declineButton) declineButton.addEventListener('click', () => saveConsent('denied'));
     openButtons.forEach((button) => {
       button.addEventListener('click', () => {
+        setConsentState(null);
         setBannerVisible(true);
         const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         privacyBanner.scrollIntoView({ block: 'start', behavior: reducedMotion ? 'auto' : 'smooth' });

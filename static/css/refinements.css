@@ -32,9 +32,10 @@
 .site-footer nav .privacy-choice-link{color:var(--ink-soft);font-family:var(--sans);font-size:.76rem;font-weight:400;text-decoration:none}
 .site-footer nav .privacy-choice-link:hover{color:var(--cyan)}
 .privacy-banner{position:relative;z-index:90;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;width:min(calc(100% - 3rem),var(--shell));margin:1rem auto 0;padding:1.15rem 1.25rem;border:1px solid var(--line-strong);background:var(--surface);box-shadow:0 12px 36px rgba(20,24,27,.09);font-family:var(--sans);scroll-margin-top:calc(var(--header-h) + 1rem)}
+html[data-analytics-consent="granted"] .privacy-banner,html[data-analytics-consent="denied"] .privacy-banner{display:none}
 .privacy-banner[hidden]{display:none}
-.privacy-banner:not([hidden])+main .hero{padding-top:clamp(2.75rem,5vw,4.5rem)}
-.privacy-banner:not([hidden])+main .page-shell{padding-top:clamp(2.5rem,4vw,3.75rem)}
+html[data-analytics-consent="unknown"] .privacy-banner+main .hero{padding-top:clamp(2.75rem,5vw,4.5rem)}
+html[data-analytics-consent="unknown"] .privacy-banner+main .page-shell{padding-top:clamp(2.5rem,4vw,3.75rem)}
 .privacy-banner__copy{min-width:0}
 .privacy-banner__copy strong{display:block;margin-bottom:.28rem;color:var(--ink);font-size:.86rem}
 .privacy-banner__copy p{max-width:64ch;margin:0;color:var(--ink-soft);font-size:.82rem;line-height:1.5}
@@ -58,7 +59,7 @@
 }
 @media(min-width:981px) and (max-height:820px){
   .hero{grid-template-columns:minmax(0,1.35fr) minmax(290px,.65fr);gap:clamp(2.5rem,4vw,4rem);padding-block:2.25rem}
-  .privacy-banner:not([hidden])+main .hero{padding-top:2.25rem}
+  html[data-analytics-consent="unknown"] .privacy-banner+main .hero{padding-top:2.25rem}
   .hero h1{font-size:clamp(3.2rem,4.25vw,3.85rem)}
   .lede{margin-top:1.15rem;font-size:1.05rem;line-height:1.55}
   .actions{margin-top:1.05rem}
@@ -80,8 +81,8 @@
   .engagement-grid{grid-template-columns:1fr;gap:2.25rem}
   .engagement-grid>div:first-child{grid-column:auto}
   .privacy-banner{align-items:stretch;flex-direction:column;gap:.9rem;width:calc(100% - 2rem);padding:1rem}
-  .privacy-banner:not([hidden])+main .hero{padding-top:2.75rem}
-  .privacy-banner:not([hidden])+main .page-shell{padding-top:2.5rem}
+  html[data-analytics-consent="unknown"] .privacy-banner+main .hero{padding-top:2.75rem}
+  html[data-analytics-consent="unknown"] .privacy-banner+main .page-shell{padding-top:2.5rem}
   .privacy-banner__actions{width:100%}
   .privacy-banner__actions .button{flex:1;white-space:normal}
 }
