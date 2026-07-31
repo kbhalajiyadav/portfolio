@@ -36,6 +36,28 @@ def main() -> int:
     for marker in ('class="brand__monogram"', 'viewBox="0 0 40 40"', 'fill="currentColor"'):
         if marker not in header:
             errors.append(f"shared header must retain the canonical vector BK monogram marker {marker}")
+    nav_markers = (
+        'class="nav-about',
+        'href="{{ $root }}#research"',
+        'href="{{ $root }}#outputs"',
+        'href="{{ $root }}#trajectory"',
+        'href="{{ $root }}#experience"',
+        'class="nav-contact" href="{{ $root }}#contact"',
+    )
+    nav_positions = [header.find(marker) for marker in nav_markers]
+    if any(position < 0 for position in nav_positions):
+        errors.append("shared header must retain About plus the complete homepage section navigation")
+    elif nav_positions != sorted(nav_positions):
+        errors.append("shared header navigation must keep About separate and homepage anchors in scroll order")
+    if 'aria-current="page"' not in header:
+        errors.append("shared header must expose the current About page to assistive technology")
+    about_layout = (LAYOUTS / "about/single.html").read_text(encoding="utf-8")
+    for marker in ('class="about-fact-strip"', 'class="about-section__intro"', 'class="about-path__marker"', 'Professional path in chronological order'):
+        if marker not in about_layout:
+            errors.append(f"About template lost structural marker {marker!r}")
+    about_content = (ROOT / "content/about.md").read_text(encoding="utf-8")
+    if "bio:\n  - >-" not in about_content:
+        errors.append("content/about.md: biography entries must remain explicit YAML block scalars")
     privacy = (LAYOUTS / "partials/privacy_controls.html").read_text(encoding="utf-8")
     banner = re.search(r'<section\b[^>]*data-privacy-banner[^>]*>', privacy)
     if not banner:
