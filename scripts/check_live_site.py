@@ -98,13 +98,35 @@ def fetch(url: str, nonce: str) -> tuple[int, str, bytes]:
     request = Request(
         cache_busted(url, nonce),
         headers={
-            "User-Agent": "BhalajiPortfolioDeployCheck/1.9",
+            "User-Agent": "BhalajiPortfolioDeployCheck/2.0",
             "Cache-Control": "no-cache, no-store, max-age=0",
             "Pragma": "no-cache",
         },
     )
     with urlopen(request, timeout=25) as response:
         return int(response.status), response.headers.get_content_type(), response.read()
+
+
+def normalize_optional_attribute_quotes(body: str) -> str:
+    """Normalize standards-valid unquoted href/src values for stable marker checks."""
+    return re.sub(
+        r"\b(href|src)=([^\s\"'=<>`]+)",
+        r'\1="\2"',
+        body,
+        flags=re.IGNORECASE,
+    )
+
+
+def extract_attribute(tag: str, name: str) -> str | None:
+    """Return a quoted or unquoted HTML attribute value from one start tag."""
+    match = re.search(
+        rf"\b{re.escape(name)}=(?:\"([^\"]*)\"|'([^']*)'|([^\s>]+))",
+        tag,
+        flags=re.IGNORECASE,
+    )
+    if not match:
+        return None
+    return next((value for value in match.groups() if value is not None), None)
 
 
 def validate_runtime(base: str, nonce: str) -> list[str]:
@@ -121,11 +143,11 @@ def validate_runtime(base: str, nonce: str) -> list[str]:
         if len(tags) != 1:
             errors.append(f"{home_url}: expected one data-site-runtime script, found {len(tags)}")
             return errors
-        source_match = re.search(r'\bsrc="([^"]+)"', tags[0], re.IGNORECASE)
-        if not source_match:
+        source = extract_attribute(tags[0], "src")
+        if not source:
             errors.append(f"{home_url}: data-site-runtime script has no src")
             return errors
-        runtime_url = urljoin(base, source_match.group(1))
+        runtime_url = urljoin(base, source)
         runtime_status, runtime_type, runtime_raw = fetch(runtime_url, nonce)
         runtime = runtime_raw.decode("utf-8", errors="replace")
         if runtime_status != 200:
@@ -147,7 +169,7 @@ def validate_release(base: str, nonce: str) -> list[str]:
         url = urljoin(base, path)
         try:
             status, _content_type, raw = fetch(url, nonce)
-            body = raw.decode("utf-8", errors="replace")
+            body = normalize_optional_attribute_quotes(raw.decode("utf-8", errors="replace"))
             if status != 200:
                 errors.append(f"{url}: HTTP {status}")
             for needle in needles:
