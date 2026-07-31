@@ -152,6 +152,7 @@ def main() -> int:
                 document_node = cdp.command("DOM.getDocument", {"depth": 1})["root"]["nodeId"]
                 about_node = cdp.command("DOM.querySelector", {"nodeId": document_node, "selector": ".nav-about"})["nodeId"]
                 cdp.command("CSS.forcePseudoState", {"nodeId": about_node, "forcedPseudoClasses": ["hover"]})
+                cdp.evaluate("new Promise(resolve => setTimeout(resolve, 240))")
                 hover_geometry = cdp.evaluate(
                     """
                     (() => {
