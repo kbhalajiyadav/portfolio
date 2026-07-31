@@ -11,9 +11,9 @@
 <body class="page-{{ .Kind }} section-{{ .Section }}">
   <a class="skip-link" href="#main-content">Skip to content</a>
   {{ partial "site_header.html" . }}
+  {{ partial "privacy_controls.html" . }}
   <main id="main-content">{{ block "main" . }}{{ end }}</main>
   {{ partial "site_footer.html" . }}
-  {{ partial "privacy_controls.html" . }}
   {{ $script := resources.Get "js/site.js" | minify | fingerprint "sha384" }}
   <script data-site-runtime src="{{ $script.RelPermalink }}" integrity="{{ $script.Data.Integrity }}" crossorigin="anonymous" defer></script>
 </body>
