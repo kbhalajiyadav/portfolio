@@ -53,16 +53,48 @@
     const hash = new URL(link.href, window.location.href).hash;
     return hash ? { link, target: document.querySelector(hash) } : null;
   }).filter((item) => item && item.target);
-  if (sections.length && 'IntersectionObserver' in window) {
-    const observer = new IntersectionObserver((entries) => {
-      const current = entries.filter((entry) => entry.isIntersecting)
-        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-      if (!current) return;
-      navLinks.forEach((link) => link.classList.remove('is-active'));
-      const match = sections.find((item) => item.target === current.target);
-      if (match) match.link.classList.add('is-active');
-    }, { rootMargin: '-20% 0px -65% 0px', threshold: [0.05, 0.25] });
-    sections.forEach((item) => observer.observe(item.target));
+  if (sections.length) {
+    let navFrame = 0;
+    const clearSectionState = () => {
+      navLinks.forEach((link) => {
+        link.classList.remove('is-active');
+        if (link.getAttribute('aria-current') === 'location') link.removeAttribute('aria-current');
+      });
+    };
+    const updateSectionState = () => {
+      navFrame = 0;
+      const header = document.querySelector('.site-head');
+      const headerHeight = header ? header.getBoundingClientRect().height : 72;
+      const activationLine = headerHeight + Math.min(96, Math.max(48, window.innerHeight * 0.12));
+      const firstTop = sections[0].target.getBoundingClientRect().top;
+      let current = null;
+
+      if (firstTop <= activationLine) {
+        sections.forEach((item) => {
+          if (item.target.getBoundingClientRect().top <= activationLine) current = item;
+        });
+      }
+
+      const documentHeight = document.documentElement.scrollHeight;
+      const atBottom = Math.ceil(window.scrollY + window.innerHeight) >= documentHeight - 2;
+      if (atBottom) current = sections[sections.length - 1];
+
+      clearSectionState();
+      if (current) {
+        current.link.classList.add('is-active');
+        current.link.setAttribute('aria-current', 'location');
+      }
+    };
+    const scheduleSectionState = () => {
+      if (navFrame) return;
+      navFrame = window.requestAnimationFrame(updateSectionState);
+    };
+
+    window.addEventListener('scroll', scheduleSectionState, { passive: true });
+    window.addEventListener('resize', scheduleSectionState);
+    window.addEventListener('load', scheduleSectionState, { once: true });
+    window.addEventListener('pageshow', scheduleSectionState);
+    scheduleSectionState();
   }
 
   const responsiveToc = document.querySelector('.toc-disclosure[data-responsive-toc]');

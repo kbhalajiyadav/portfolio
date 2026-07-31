@@ -73,7 +73,7 @@ jobs:
           python3 scripts/audit_styles.py
           python3 scripts/audit_templates.py
           python3 scripts/check_workflows.py
-          python3 -m py_compile scripts/check_layout_spacing.py scripts/check_release_marker.py
+          python3 -m py_compile scripts/check_layout_spacing.py scripts/check_release_marker.py scripts/check_home_navigation.py
           node --check assets/js/site.js
 
       - name: Setup Pages
@@ -123,13 +123,17 @@ jobs:
           PA11Y_WIDTH=1440 PA11Y_HEIGHT=1000 npx pa11y-ci --config .pa11yci.cjs --json | tee artifacts/pa11y-desktop.json
           PA11Y_WIDTH=390 PA11Y_HEIGHT=844 npx pa11y-ci --config .pa11yci.cjs --json | tee artifacts/pa11y-mobile.json
 
-      - name: Responsive, spacing, laptop-frame, zoom-equivalent, reduced-motion, and menu audit
+      - name: Responsive, spacing, laptop-frame, zoom-equivalent, reduced-motion, menu, and navigation audit
         run: |
           python3 scripts/check_responsive.py \
             --base-url http://127.0.0.1:4173/ \
             --chrome "$CHROME_PATH" \
             --report artifacts/responsive-layout.json \
             --screenshots artifacts/responsive-screenshots
+          python3 scripts/check_home_navigation.py \
+            --base-url http://127.0.0.1:4173/ \
+            --chrome "$CHROME_PATH" \
+            --report artifacts/home-navigation.json
           python3 scripts/check_layout_spacing.py \
             --base-url http://127.0.0.1:4173/ \
             --chrome "$CHROME_PATH" \
