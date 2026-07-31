@@ -1,9 +1,24 @@
 <!doctype html>
-<html lang="{{ site.Language.Lang | default "en" }}">
+<html lang="{{ site.Language.Lang | default "en" }}" class="no-js" data-analytics-consent="unset">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#f7f5f0">
+  <script data-consent-bootstrap>
+    (() => {
+      const root = document.documentElement;
+      const key = 'bhalaji.analyticsConsent.v1';
+      let state = 'unset';
+      try {
+        const stored = window.localStorage.getItem(key);
+        if (stored === 'granted' || stored === 'denied') state = stored;
+      } catch (error) {
+        state = 'unset';
+      }
+      root.dataset.analyticsConsent = state;
+      root.classList.replace('no-js', 'js');
+    })();
+  </script>
   {{ partial "seo_head.html" . }}
   {{ $styles := resources.Get "css/site.css" | minify | fingerprint "sha384" }}
   <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}" crossorigin="anonymous">
