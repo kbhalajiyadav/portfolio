@@ -3,6 +3,7 @@
 > Public academic portfolio for a Ph.D. student at Virginia Commonwealth University studying stimuli-responsive soft and liquid-crystalline materials through quantitative metrology, rheology, neutron scattering, mechanics, and reproducible computation.
 
 ## Primary pages
+- [About Bhalaji Yadav Kantepalle](https://bhalaji.com/about/): Canonical biography, research identity, professional path, methods, and authoritative profile links.
 - [Research program](https://bhalaji.com/research/): Stable overview of the governing problem, research pillars, application horizons, and collaboration questions.
 - [First-author article](https://bhalaji.com/publication/adhesives-wearable/): Multi-criteria adhesive selection for wearable textiles.
 - [M.S. thesis record](https://bhalaji.com/publication/masters-thesis/): Public degree and repository information; full manuscript embargoed until July 20, 2031.
@@ -10,6 +11,7 @@
 - [Curriculum vitae](https://bhalaji.com/uploads/resume.pdf): Generated CV.
 
 ## Identity
+- Canonical profile: https://bhalaji.com/about/
 - ORCID: https://orcid.org/0000-0003-0551-6172
 - Google Scholar: https://scholar.google.com/citations?hl=en&user=DrfbtX4AAAAJ
 - GitHub: https://github.com/kbhalajiyadav
