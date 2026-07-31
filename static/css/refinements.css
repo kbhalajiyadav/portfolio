@@ -44,9 +44,14 @@
   .hero .eyebrow{max-width:none;white-space:nowrap;font-size:.68rem;letter-spacing:.11em}
 }
 @media(min-width:981px){
+  .pillar{display:flex;flex-direction:column}
+  .pillar h3{min-height:3.24em}
+  .pillar>p{min-height:8.1em}
+  .pillar>.lnk{align-self:flex-start;margin-top:auto}
   .site-footer nav{flex-wrap:nowrap;column-gap:.875rem;white-space:nowrap}
 }
 @media(min-width:981px) and (max-width:1180px){
+  .pillar>p{min-height:9.72em}
   .publication-header h1{max-width:22ch;font-size:clamp(2.7rem,4.4vw,3.7rem)}
 }
 @media(min-width:981px) and (max-height:820px){
