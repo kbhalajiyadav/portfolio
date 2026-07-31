@@ -15,40 +15,42 @@
           <a class="lnk" href="{{ $cvHref }}" target="_blank" rel="noopener">Open the CV <span class="arw" aria-hidden="true">↗</span></a>
         </div>
       </div>
-      <div class="about-portrait">
+      <figure class="about-portrait">
         <img class="u-photo" src="{{ "uploads/avatar-portrait.jpg" | relURL }}" alt="Portrait of {{ $p.profile.name }}" width="853" height="1056">
-        <div class="about-portrait__caption">
+        <figcaption class="about-portrait__caption">
           <strong>{{ $p.profile.short_name }}</strong>
           <span>{{ $p.profile.status }}</span>
           <span class="p-locality">{{ $p.profile.location }}</span>
-        </div>
-      </div>
+        </figcaption>
+      </figure>
     </header>
 
-    <div class="about-body">
-      <section class="about-narrative" aria-labelledby="about-biography">
-        <p class="kicker">Biography</p>
-        <h2 id="about-biography">Research built around measurable response.</h2>
-        {{ range .Params.bio }}<p>{{ . }}</p>{{ end }}
-      </section>
+    <dl class="about-fact-strip" aria-label="Profile at a glance">
+      <div><dt>Current role</dt><dd class="p-job-title">{{ $p.profile.status }}</dd></div>
+      <div><dt>Institution</dt><dd class="p-org">Virginia Commonwealth University</dd></div>
+      <div><dt>Location</dt><dd>{{ $p.profile.location }}</dd></div>
+      <div><dt>Research focus</dt><dd>Stimuli-responsive materials and quantitative metrology</dd></div>
+    </dl>
 
-      <aside class="about-facts" aria-label="Profile at a glance">
-        <h2>At a glance</h2>
-        <dl>
-          <div><dt>Current role</dt><dd class="p-job-title">{{ $p.profile.status }}</dd></div>
-          <div><dt>Institution</dt><dd class="p-org">Virginia Commonwealth University</dd></div>
-          <div><dt>Location</dt><dd>{{ $p.profile.location }}</dd></div>
-          <div><dt>Research areas</dt><dd>Stimuli-responsive materials, soft matter, liquid crystals, and quantitative metrology</dd></div>
-          <div><dt>Contact</dt><dd><a class="u-email" href="mailto:{{ $p.profile.email }}">{{ $p.profile.email }}</a></dd></div>
-        </dl>
-      </aside>
-    </div>
+    <section class="about-section about-biography" id="biography" aria-labelledby="about-biography">
+      <div class="about-section__intro">
+        <div class="about-section__title">
+          <p class="kicker">Biography</p>
+          <h2 id="about-biography">Research built around measurable response.</h2>
+        </div>
+        <div class="about-section__summary about-prose">
+          {{ range .Params.bio }}<p>{{ . }}</p>{{ end }}
+        </div>
+      </div>
+    </section>
 
-    <section class="about-section about-identity" aria-labelledby="research-identity">
-      <div class="about-section__head">
-        <p class="kicker">{{ .Params.research_identity.title }}</p>
-        <h2 id="research-identity">From material response to reproducible evidence.</h2>
-        <p>{{ .Params.research_identity.text }}</p>
+    <section class="about-section about-identity" id="research-identity" aria-labelledby="research-identity-heading">
+      <div class="about-section__intro">
+        <div class="about-section__title">
+          <p class="kicker">{{ .Params.research_identity.title }}</p>
+          <h2 id="research-identity-heading">From material response to reproducible evidence.</h2>
+        </div>
+        <div class="about-section__summary"><p>{{ .Params.research_identity.text }}</p></div>
       </div>
       <div class="about-program-grid">
         {{ range $p.research }}
@@ -62,25 +64,32 @@
       </div>
     </section>
 
-    <section class="about-section" aria-labelledby="professional-path">
-      <div class="about-section__head">
-        <p class="kicker">Professional path</p>
-        <h2 id="professional-path">Chemical engineering, regulated practice, and research metrology.</h2>
+    <section class="about-section" id="professional-path" aria-labelledby="professional-path-heading">
+      <div class="about-section__intro">
+        <div class="about-section__title">
+          <p class="kicker">Professional path</p>
+          <h2 id="professional-path-heading">Chemical engineering, regulated practice, and research metrology.</h2>
+        </div>
+        <div class="about-section__summary"><p>Presented chronologically, this path shows how engineering training, regulated manufacturing, and experimental research converged into the current doctoral program.</p></div>
       </div>
-      <div class="about-path">
+      <div class="about-path" aria-label="Professional path in chronological order">
         {{ range .Params.professional_path }}
         <article>
-          <span>{{ .period }}</span>
-          <div><h3>{{ .title }}</h3><p>{{ .text }}</p></div>
+          <span class="about-path__period">{{ .period }}</span>
+          <span class="about-path__marker" aria-hidden="true"></span>
+          <div class="about-path__content"><h3>{{ .title }}</h3><p>{{ .text }}</p></div>
         </article>
         {{ end }}
       </div>
     </section>
 
-    <section class="about-section" aria-labelledby="methods-capabilities">
-      <div class="about-section__head">
-        <p class="kicker">Methods and capabilities</p>
-        <h2 id="methods-capabilities">Measurement choices are part of the scientific claim.</h2>
+    <section class="about-section" id="methods" aria-labelledby="methods-capabilities">
+      <div class="about-section__intro">
+        <div class="about-section__title">
+          <p class="kicker">Methods and capabilities</p>
+          <h2 id="methods-capabilities">Measurement choices are part of the scientific claim.</h2>
+        </div>
+        <div class="about-section__summary"><p>The work combines experimental characterization, quantitative imaging, mechanics-consistent interpretation, and versioned analysis so that results remain comparable across conditions and equipment.</p></div>
       </div>
       <div class="about-method-grid">
         {{ range .Params.methods }}
@@ -89,10 +98,13 @@
       </div>
     </section>
 
-    <section class="about-section about-records" aria-labelledby="authoritative-records">
-      <div class="about-section__head">
-        <p class="kicker">Profiles and records</p>
-        <h2 id="authoritative-records">Authoritative links for identity, publications, software, and experience.</h2>
+    <section class="about-section about-records" id="profiles" aria-labelledby="authoritative-records">
+      <div class="about-section__intro">
+        <div class="about-section__title">
+          <p class="kicker">Profiles and records</p>
+          <h2 id="authoritative-records">Authoritative links for identity, publications, software, and experience.</h2>
+        </div>
+        <div class="about-section__summary"><p>These records provide the clearest public sources for verifying research identity, scholarly outputs, software, and professional history.</p></div>
       </div>
       <div class="about-profile-links">
         <a href="{{ $p.profile.orcid }}" target="_blank" rel="me noopener"><strong>ORCID</strong><span>Research identity and synchronized works</span></a>
