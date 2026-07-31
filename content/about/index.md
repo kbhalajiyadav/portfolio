@@ -10,7 +10,7 @@ bio:
 research_identity:
   title: Research identity
   text: My research connects three linked problems—measuring response, resolving structure under stimuli, and translating both into repeatable methods and processing conditions. The unifying question is how the meaning of a material response can survive changes in scale, handling, and equipment.
-path:
+professional_path:
   - period: 2018–2022
     title: Chemical-engineering foundation
     text: Completed a B.Tech. in Chemical Engineering at Amrita Vishwa Vidyapeetham, building a foundation in transport, thermodynamics, process analysis, and material behavior.
