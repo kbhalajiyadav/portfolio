@@ -42,8 +42,10 @@ def scroll_to(cdp: CDP, expression: str) -> None:
     cdp.evaluate(
         f"""
         new Promise((resolve) => {{
-          window.scrollTo({{top: {expression}, behavior: 'auto'}});
-          requestAnimationFrame(() => requestAnimationFrame(resolve));
+          document.documentElement.style.scrollBehavior = 'auto';
+          document.body.style.scrollBehavior = 'auto';
+          window.scrollTo(0, {expression});
+          requestAnimationFrame(() => requestAnimationFrame(() => requestAnimationFrame(resolve)));
         }})
         """
     )
@@ -120,10 +122,13 @@ def main() -> int:
                           const root = document.documentElement;
                           const items = [...document.querySelectorAll('#site-nav > a')]
                             .filter((link) => getComputedStyle(link).display !== 'none');
-                          const tops = items.map((link) => link.getBoundingClientRect().top);
+                          const centers = items.map((link) => {
+                            const rect = link.getBoundingClientRect();
+                            return rect.top + rect.height / 2;
+                          });
                           return {
                             labels: items.map((link) => link.textContent.trim()),
-                            navRowSpread: tops.length ? Math.max(...tops) - Math.min(...tops) : null,
+                            navCenterSpread: centers.length ? Math.max(...centers) - Math.min(...centers) : null,
                             horizontalOverflow: root.scrollWidth > root.clientWidth + 2
                           };
                         })()
@@ -132,8 +137,8 @@ def main() -> int:
                     results[f"layout-{width}"] = layout
                     if layout["labels"] != EXPECTED_LABELS:
                         errors.append(f"{width}px navigation labels/order {layout['labels']}, expected {EXPECTED_LABELS}")
-                    if layout["navRowSpread"] is None or layout["navRowSpread"] > 3:
-                        errors.append(f"{width}px desktop navigation wrapped: row spread={layout['navRowSpread']}")
+                    if layout["navCenterSpread"] is None or layout["navCenterSpread"] > 3:
+                        errors.append(f"{width}px desktop navigation lost one-row center alignment: spread={layout['navCenterSpread']}")
                     if layout["horizontalOverflow"]:
                         errors.append(f"{width}px homepage has horizontal overflow")
 
