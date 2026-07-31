@@ -44,7 +44,8 @@ GEOMETRY_EXPRESSION = r"""
   const number = (value) => Number.parseFloat(value) || 0;
   const banner = document.querySelector('[data-privacy-banner]');
   const sections = [...document.querySelectorAll('.section')];
-  const articleHeadings = [...document.querySelectorAll('.article-content h2')];
+  const articleHeadings = [...document.querySelectorAll('.article-content h2')]
+    .filter((element) => !element.closest('.abstract-block'));
   return {
     bannerVisible: Boolean(banner && !banner.hidden && getComputedStyle(banner).display !== 'none'),
     bannerPosition: banner ? getComputedStyle(banner).position : null,
