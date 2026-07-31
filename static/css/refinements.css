@@ -58,6 +58,10 @@ html[data-analytics-consent="unknown"] .privacy-banner+main .page-shell{padding-
   .site-footer nav{flex-wrap:nowrap;column-gap:.875rem;white-space:nowrap}
 }
 @media(min-width:981px) and (max-width:1180px){
+  .site-nav{gap:.92rem;font-size:.79rem}
+  .site-nav .nav-about{padding-right:1rem}
+  .site-nav .nav-about.is-current-page::after{right:1rem}
+  .nav-contact{padding:.48rem .66rem}
   .pillar>p{min-height:9.72em}
   .publication-header h1{max-width:22ch;font-size:clamp(2.7rem,4.4vw,3.7rem)}
 }
