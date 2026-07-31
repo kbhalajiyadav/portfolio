@@ -137,6 +137,10 @@
       }
     };
 
+    const setBannerVisible = (visible) => {
+      privacyBanner.hidden = !visible;
+    };
+
     const saveConsent = (choice) => {
       try {
         window.localStorage.setItem(consentKey, choice);
@@ -145,19 +149,23 @@
       }
       if (choice === 'granted') grantAnalytics();
       else denyAnalytics();
-      privacyBanner.hidden = true;
+      setBannerVisible(false);
     };
 
     const currentChoice = readConsent();
     if (currentChoice === 'granted') grantAnalytics();
-    privacyBanner.hidden = currentChoice !== null;
+    setBannerVisible(currentChoice === null);
 
     if (allowButton) allowButton.addEventListener('click', () => saveConsent('granted'));
     if (declineButton) declineButton.addEventListener('click', () => saveConsent('denied'));
     openButtons.forEach((button) => {
       button.addEventListener('click', () => {
-        privacyBanner.hidden = false;
-        if (allowButton) allowButton.focus();
+        setBannerVisible(true);
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        privacyBanner.scrollIntoView({ block: 'start', behavior: reducedMotion ? 'auto' : 'smooth' });
+        window.requestAnimationFrame(() => {
+          if (allowButton) allowButton.focus({ preventScroll: true });
+        });
       });
     });
   }
