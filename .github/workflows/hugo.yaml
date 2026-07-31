@@ -73,6 +73,7 @@ jobs:
           python3 scripts/audit_styles.py
           python3 scripts/audit_templates.py
           python3 scripts/check_workflows.py
+          python3 -m py_compile scripts/check_release_marker.py
           node --check assets/js/site.js
 
       - name: Setup Pages
@@ -92,6 +93,7 @@ jobs:
           rm -rf public artifacts .lighthouseci
           mkdir -p artifacts
           hugo --gc --minify --printPathWarnings --baseURL "${BASE_URL}"
+          printf '\n# Release commit: %s\n' "$GITHUB_SHA" >> public/robots.txt
 
       - name: Audit generated site and external records
         run: |
@@ -200,7 +202,9 @@ jobs:
           persist-credentials: false
 
       - name: Verify deployed release
-        run: python3 scripts/check_live_site.py "https://bhalaji.com/" --attempts 18 --delay 10
+        run: |
+          python3 scripts/check_live_site.py "https://bhalaji.com/" --attempts 18 --delay 10
+          python3 scripts/check_release_marker.py "https://bhalaji.com/" "$GITHUB_SHA" --attempts 18 --delay 10
 
       - name: Notify IndexNow
         continue-on-error: true
