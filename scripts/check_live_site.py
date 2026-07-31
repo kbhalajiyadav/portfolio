@@ -25,6 +25,13 @@ EXPECTED_TEXT = {
         "Rights",
         "All rights reserved",
     ],
+    "about/": [
+        "About Bhalaji Yadav Kantepalle",
+        "Research built around measurable response",
+        "Chemical engineering, regulated practice, and research metrology",
+        "Profiles and records",
+        "Collaboration and methods exchange",
+    ],
     "privacy/": [
         "Privacy and analytics notice",
         "Microsoft Clarity",
@@ -43,7 +50,7 @@ EXPECTED_TEXT = {
     ],
     "research/": ["Resolve structure under stimuli", "Translate reproducibly"],
     "robots.txt": ["OAI-SearchBot", "Claude-SearchBot", "Microsoft Clarity project xuo3lvzchr"],
-    "sitemap.xml": ["<urlset"],
+    "sitemap.xml": ["<urlset", "/about/"],
     "site.webmanifest": ["/icon-192.png", "/icon-512.png", "/favicon.svg"],
 }
 
@@ -98,7 +105,7 @@ def fetch(url: str, nonce: str) -> tuple[int, str, bytes]:
     request = Request(
         cache_busted(url, nonce),
         headers={
-            "User-Agent": "BhalajiPortfolioDeployCheck/2.0",
+            "User-Agent": "BhalajiPortfolioDeployCheck/2.1",
             "Cache-Control": "no-cache, no-store, max-age=0",
             "Pragma": "no-cache",
         },
