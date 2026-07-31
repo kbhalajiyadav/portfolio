@@ -42,6 +42,7 @@ def main() -> int:
         'href="{{ $root }}#outputs"',
         'href="{{ $root }}#trajectory"',
         'href="{{ $root }}#experience"',
+        'href="{{ $root }}#presentations">Engagement',
         'class="nav-contact" href="{{ $root }}#contact"',
     )
     nav_positions = [header.find(marker) for marker in nav_markers]
@@ -55,6 +56,8 @@ def main() -> int:
     for marker in ('class="about-fact-strip"', 'class="about-section__intro"', 'class="about-path__marker"', 'Professional path in chronological order'):
         if marker not in about_layout:
             errors.append(f"About template lost structural marker {marker!r}")
+    if 'about-portrait__caption' in about_layout:
+        errors.append("About portrait must not repeat name, role, and location already present in the page hierarchy")
     about_content = (ROOT / "content/about.md").read_text(encoding="utf-8")
     if "bio:\n  - >-" not in about_content:
         errors.append("content/about.md: biography entries must remain explicit YAML block scalars")
