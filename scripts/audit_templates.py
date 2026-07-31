@@ -29,6 +29,24 @@ def main() -> int:
     for marker in ('partial "seo_head.html"', 'partial "site_header.html"', 'block "main"', 'partial "site_footer.html"'):
         if marker not in base:
             errors.append(f"layouts/_default/baseof.html: missing {marker}")
+    consent_markers = (
+        'class="no-js" data-analytics-consent="unset"',
+        "<script data-consent-bootstrap>",
+        "window.localStorage.getItem(key)",
+        "root.dataset.analyticsConsent = state",
+        "root.classList.replace('no-js', 'js')",
+    )
+    for marker in consent_markers:
+        if marker not in base:
+            errors.append(f"shared template must retain pre-paint consent marker {marker!r}")
+    if base.find("<script data-consent-bootstrap>") > base.find('rel="stylesheet"'):
+        errors.append("consent-state bootstrap must run before the stylesheet can paint")
+    privacy = (LAYOUTS / "partials/privacy_controls.html").read_text(encoding="utf-8")
+    if "data-privacy-banner hidden" in privacy:
+        errors.append("privacy notice must not rely on delayed JavaScript insertion for first-time visitors")
+    for marker in ("<noscript>", "Analytics remains disabled because JavaScript is unavailable."):
+        if marker not in privacy:
+            errors.append(f"privacy controls must retain no-JavaScript fallback marker {marker!r}")
     header = (LAYOUTS / "partials/site_header.html").read_text(encoding="utf-8")
     for marker in ('class="brand__monogram"', 'viewBox="0 0 40 40"', 'fill="currentColor"'):
         if marker not in header:
