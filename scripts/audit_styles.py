@@ -58,13 +58,23 @@ def main() -> int:
     for rule in footer_layout_rules:
         if rule not in refinements:
             errors.append(f"footer alignment invariant missing {rule!r}")
+    pillar_alignment_rules = (
+        ".pillar{display:flex;flex-direction:column}",
+        ".pillar h3{min-height:3.24em}",
+        ".pillar>p{min-height:8.1em}",
+        ".pillar>p{min-height:9.72em}",
+        ".pillar>.lnk{align-self:flex-start;margin-top:auto}",
+    )
+    for rule in pillar_alignment_rules:
+        if rule not in refinements:
+            errors.append(f"research-program alignment invariant missing {rule!r}")
     if "text-align:justify" in text.replace(" ", ""):
         errors.append("body copy must not use full justification")
     if errors:
         for error in errors:
             print(f"ERROR: {error}")
         return 1
-    print("Style audit passed: contrast, hidden microformats, focus, breakpoints, and footer alignment verified.")
+    print("Style audit passed: contrast, hidden microformats, focus, breakpoints, footer alignment, and research-card alignment verified.")
     return 0
 
 
