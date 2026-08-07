@@ -32,6 +32,12 @@ def main() -> int:
     for marker in ('data-analytics-consent="unknown"', 'data-consent-bootstrap', 'bhalaji.analyticsConsent.v1', 'dataset.analyticsConsent'):
         if marker not in base:
             errors.append(f"layouts/_default/baseof.html: missing prepaint consent marker {marker}")
+    seo_head = (LAYOUTS / "partials/seo_head.html").read_text(encoding="utf-8")
+    mastodon_head_marker = '<link rel="me" href="https://infosec.exchange/@bhalaji">'
+    if mastodon_head_marker not in seo_head:
+        errors.append("SEO head must retain the Mastodon rel=me verification link")
+    if '"https://infosec.exchange/@bhalaji"' not in seo_head:
+        errors.append("Person structured data must retain Mastodon in sameAs")
     header = (LAYOUTS / "partials/site_header.html").read_text(encoding="utf-8")
     for marker in ('class="brand__monogram"', 'viewBox="0 0 40 40"', 'fill="currentColor"'):
         if marker not in header:
