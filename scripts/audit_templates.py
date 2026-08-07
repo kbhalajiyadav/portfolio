@@ -61,6 +61,10 @@ def main() -> int:
         errors.append("shared header navigation must keep About separate and homepage anchors in scroll order")
     if 'aria-current="page"' not in header:
         errors.append("shared header must expose the current About page to assistive technology")
+    footer = (LAYOUTS / "partials/site_footer.html").read_text(encoding="utf-8")
+    mastodon_footer_marker = '<a href="https://infosec.exchange/@bhalaji" rel="me">Mastodon</a>'
+    if mastodon_footer_marker not in footer:
+        errors.append("shared footer must expose a visible Mastodon rel=me link on the verified homepage")
     about_layout = (LAYOUTS / "about/single.html").read_text(encoding="utf-8")
     for marker in ('class="about-fact-strip"', 'class="about-section__intro"', 'class="about-path__marker"', 'Professional path in chronological order'):
         if marker not in about_layout:
