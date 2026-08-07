@@ -36,6 +36,9 @@ def main() -> int:
     for marker in ('class="brand__monogram"', 'viewBox="0 0 40 40"', 'fill="currentColor"'):
         if marker not in header:
             errors.append(f"shared header must retain the canonical vector BK monogram marker {marker}")
+    mastodon_marker = '<a class="visually-hidden" rel="me" href="https://infosec.exchange/@bhalaji" tabindex="-1" aria-hidden="true">Mastodon</a>'
+    if mastodon_marker not in header:
+        errors.append("shared header must retain the Mastodon rel=me verification link")
     nav_markers = (
         'class="nav-about',
         'href="{{ $root }}#research"',
