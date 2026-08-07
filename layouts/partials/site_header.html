@@ -13,6 +13,7 @@
       <span><strong class="p-name">{{ $p.profile.short_name }}</strong><small class="p-note">Research portfolio</small></span>
       <img class="u-photo indieweb-photo" src="{{ "uploads/avatar-portrait.jpg" | relURL }}" alt="Portrait of {{ $p.profile.name }}" width="853" height="1056" aria-hidden="true">
     </a>
+    <a class="visually-hidden" rel="me" href="https://infosec.exchange/@bhalaji" tabindex="-1" aria-hidden="true">Mastodon</a>
     <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
     <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
       <a class="nav-about{{ if $isAbout }} is-current-page{{ end }}" href="{{ $aboutURL }}"{{ if $isAbout }} aria-current="page"{{ end }}>About</a>

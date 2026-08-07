@@ -62,6 +62,8 @@ EXPECTED_RUNTIME_TEXT = [
     "bhalaji.analyticsConsent.v1",
 ]
 
+MASTODON_PROFILE = "https://infosec.exchange/@bhalaji"
+
 SVG_HASHES = {
     "media/bk-monogram-canonical-20260730.svg": "fa01ced619c53e23288298bbda048f4685452b86e0e72b6b25f9e695190893c9",
     "favicon.svg": "fa01ced619c53e23288298bbda048f4685452b86e0e72b6b25f9e695190893c9",
@@ -136,6 +138,29 @@ def extract_attribute(tag: str, name: str) -> str | None:
     return next((value for value in match.groups() if value is not None), None)
 
 
+def validate_mastodon_rel_me(base: str, nonce: str) -> list[str]:
+    errors: list[str] = []
+    home_url = urljoin(base, "")
+    try:
+        status, _content_type, raw = fetch(home_url, nonce)
+        if status != 200:
+            return [f"{home_url}: HTTP {status}"]
+        body = raw.decode("utf-8", errors="replace")
+        matched = False
+        for tag in re.findall(r"<a\b[^>]*>", body, flags=re.IGNORECASE):
+            if extract_attribute(tag, "href") != MASTODON_PROFILE:
+                continue
+            rel = (extract_attribute(tag, "rel") or "").split()
+            if "me" in rel:
+                matched = True
+                break
+        if not matched:
+            errors.append(f"{home_url}: missing Mastodon rel=me link to {MASTODON_PROFILE}")
+    except (URLError, HTTPError, TimeoutError, OSError) as exc:
+        errors.append(f"{home_url}: {exc}")
+    return errors
+
+
 def validate_runtime(base: str, nonce: str) -> list[str]:
     errors: list[str] = []
     home_url = urljoin(base, "")
@@ -185,6 +210,7 @@ def validate_release(base: str, nonce: str) -> list[str]:
         except (URLError, HTTPError, TimeoutError, OSError) as exc:
             errors.append(f"{url}: {exc}")
 
+    errors.extend(validate_mastodon_rel_me(base, nonce))
     errors.extend(validate_runtime(base, nonce))
 
     for path, expected_hash in SVG_HASHES.items():
