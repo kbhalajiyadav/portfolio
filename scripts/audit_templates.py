@@ -42,9 +42,8 @@ def main() -> int:
     for marker in ('class="brand__monogram"', 'viewBox="0 0 40 40"', 'fill="currentColor"'):
         if marker not in header:
             errors.append(f"shared header must retain the canonical vector BK monogram marker {marker}")
-    mastodon_marker = '<a class="visually-hidden" rel="me" href="https://infosec.exchange/@bhalaji" tabindex="-1" aria-hidden="true">Mastodon</a>'
-    if mastodon_marker not in header:
-        errors.append("shared header must retain the Mastodon rel=me verification link")
+    if "https://infosec.exchange/@bhalaji" in header:
+        errors.append("shared header must not contain a redundant Mastodon verification backlink")
     nav_markers = (
         'class="nav-about',
         'href="{{ $root }}#research"',
@@ -62,9 +61,8 @@ def main() -> int:
     if 'aria-current="page"' not in header:
         errors.append("shared header must expose the current About page to assistive technology")
     footer = (LAYOUTS / "partials/site_footer.html").read_text(encoding="utf-8")
-    mastodon_footer_marker = '<a href="https://infosec.exchange/@bhalaji" rel="me">Mastodon</a>'
-    if mastodon_footer_marker not in footer:
-        errors.append("shared footer must expose a visible Mastodon rel=me link on the verified homepage")
+    if "https://infosec.exchange/@bhalaji" in footer:
+        errors.append("shared footer must not expose Mastodon after verification is established")
     about_layout = (LAYOUTS / "about/single.html").read_text(encoding="utf-8")
     for marker in ('class="about-fact-strip"', 'class="about-section__intro"', 'class="about-path__marker"', 'Professional path in chronological order'):
         if marker not in about_layout:
