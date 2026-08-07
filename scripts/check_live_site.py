@@ -147,7 +147,7 @@ def validate_mastodon_rel_me(base: str, nonce: str) -> list[str]:
             return [f"{home_url}: HTTP {status}"]
         body = raw.decode("utf-8", errors="replace")
         matched = False
-        for tag in re.findall(r"<a\b[^>]*>", body, flags=re.IGNORECASE):
+        for tag in re.findall(r"<(?:a|link)\b[^>]*>", body, flags=re.IGNORECASE):
             if extract_attribute(tag, "href") != MASTODON_PROFILE:
                 continue
             rel = (extract_attribute(tag, "rel") or "").split()
@@ -155,7 +155,7 @@ def validate_mastodon_rel_me(base: str, nonce: str) -> list[str]:
                 matched = True
                 break
         if not matched:
-            errors.append(f"{home_url}: missing Mastodon rel=me link to {MASTODON_PROFILE}")
+            errors.append(f"{home_url}: missing Mastodon rel=me verification link to {MASTODON_PROFILE}")
     except (URLError, HTTPError, TimeoutError, OSError) as exc:
         errors.append(f"{home_url}: {exc}")
     return errors
