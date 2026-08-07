@@ -38,6 +38,7 @@
 <link rel="me" href="{{ $p.profile.scholar }}">
 <link rel="me" href="{{ $p.profile.linkedin }}">
 <link rel="me" href="{{ $p.profile.github }}">
+<link rel="me" href="https://infosec.exchange/@bhalaji">
 <meta property="og:type" content="{{ $ogType }}">
 <meta property="og:title" content="{{ $pageTitle }}">
 <meta property="og:description" content="{{ $description }}">
@@ -56,7 +57,7 @@
 {{ $personID := printf "%s#person" ("/" | absURL) }}
 {{ $websiteID := printf "%s#website" ("/" | absURL) }}
 {{ $profileID := printf "%s#profile" $aboutURL }}
-{{ $sameAs := slice $p.profile.orcid $p.profile.scholar $p.profile.linkedin $p.profile.github }}
+{{ $sameAs := slice $p.profile.orcid $p.profile.scholar $p.profile.linkedin $p.profile.github "https://infosec.exchange/@bhalaji" }}
 {{ $person := dict
   "@type" "Person"
   "@id" $personID
