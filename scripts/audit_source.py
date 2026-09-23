@@ -41,6 +41,8 @@ forbidden = {
     'ensuring GMP compliance': 'overstated compliance guarantee',
     'primary validation tool': 'unverified deployment claim',
     'injury monitoring': 'unsupported clinical application',
+    'ongoing Summer 2026': 'stale completed student-project status',
+    'two ongoing student projects': 'stale completed student-project status',
 }
 errors: list[str] = []
 for needle, reason in forbidden.items():
@@ -74,6 +76,9 @@ for required in (
 ):
     if required not in landing_text:
         errors.append(f'layouts/landing/list.html: missing taxonomy invariant {required!r}')
+
+if 'cv_version:' in portfolio_text:
+    errors.append('data/portfolio.yaml: manual cv_version must remain removed; templates hash the PDF')
 
 cv_text = texts[ROOT / 'data/cv.yaml']
 build_cv_text = (ROOT / 'scripts/build_cv.py').read_text(encoding='utf-8')
