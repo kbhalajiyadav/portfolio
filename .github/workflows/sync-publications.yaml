@@ -24,7 +24,10 @@ jobs:
         run: python3 scripts/sync_orcid.py
 
       - name: Validate synchronized metadata
-        run: python3 scripts/audit_source.py
+        run: |
+          python3 -m pip install --disable-pip-version-check PyYAML==6.0.3
+          python3 scripts/audit_source.py
+          python3 scripts/check_data_consistency.py
 
       - name: Commit verified metadata changes
         run: |
