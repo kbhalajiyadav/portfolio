@@ -11,17 +11,17 @@ weight: 4
 
 ## Professional context
 
-At **Kreative Organics**, I worked across chemical engineering, technical project
-management, and regulated operations. The role involved turning domain-specific
-requirements into structured workflows used by technical and business teams.
+During a **Technical Project Management internship with Deep Thought Edu Tech Ventures**,
+working at **Kreative Organics**, I focused on chemical trade-data, analysis, and
+project-tracking workflows used by technical and business teams.
 
 ## Selected contributions
 
-- Standardized chemical identifiers and nomenclature across working datasets.
-- Connected chemical-domain requirements with data-quality, documentation, and process controls.
-- Supported analytical workflows using Python, Docker, and Tableau.
-- Coordinated with cross-functional stakeholders during digital-transformation and enterprise-system initiatives.
-- Prepared technical documentation with attention to traceability, validation, and data integrity.
+- Directed a Python-based workflow for normalizing chemical names across trade records.
+- Built Tableau analyses that reduced recurring trade-data analysis time by about 70%.
+- Connected chemical-domain requirements with data-quality and documentation controls.
+- Co-developed a Notion project-management framework for initiation, tracking, risks, escalation, and completion.
+- Prepared technical documentation for use by non-specialist technical and business teams.
 
 ## Relevance to later work
 

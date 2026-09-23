@@ -1,9 +1,9 @@
 ---
 title: "Research Program"
 kicker: "Research overview"
-summary: "Research in stimuli-responsive soft and liquid-crystalline materials, quantitative metrology, and reproducible processing."
+summary: "How processing changes responsive soft and liquid-crystalline materials—and how to measure those changes."
 date: "2026-07-28T00:00:00Z"
-lastmod: "2026-07-30T00:00:00Z"
+lastmod: "2026-09-22T00:00:00Z"
 toc: true
 tags:
   - Stimuli-Responsive Materials
@@ -17,24 +17,21 @@ url: /research/
 
 ## Research focus
 
-My research examines when the optical and mechanical response of a responsive
-material can be measured reliably after changes in geometry, temperature,
-processing history, and test conditions. The work connects five parts of the
-same problem:
+My research asks two linked questions: what changes inside a responsive
+material during processing, and which measurements can track that change
+reliably? The work moves through five stages:
 
 **Stimulus → Structure → Response → Measurement → Translation**
 
-Deformation, temperature, and flow alter material structure. That structure
-produces an optical or mechanical response, which must then be measured under
-conditions that can be reproduced.
+Temperature, deformation, and flow alter structure; optical and mechanical
+measurements reveal the consequences.
 
 ## Measure response
 
-Current work develops mechanics-consistent, computation-supported measurements
-for soft, stretchable, and textile-supported systems. The methods combine
-force–displacement analysis, deformation tracking, optical colorimetry, and
-computer vision instead of relying on a single maximum-force value or a visual
-assessment of color change.
+Current work develops mechanics-consistent measurements for soft, stretchable,
+and textile-supported systems. The methods combine force–displacement analysis,
+deformation tracking, optical colorimetry, and computer vision instead of
+relying on a single maximum-force value or a visual assessment of color change.
 
 Related public work:
 
@@ -46,24 +43,22 @@ Related public work:
 
 ## Resolve structure under stimuli
 
-The doctoral direction examines how deformation, temperature, time, and flow
-organize stimuli-responsive liquid-crystalline and soft-material structure.
-Rheology defines the mechanical and processing history. Neutron scattering is
-used when the relevant length scale and contrast mechanism can answer a defined
-structural question. Synchronized optical measurements connect structural
-change to an observable response.
+The doctoral direction examines how thermal, flow, and deformation histories
+organize liquid-crystalline and soft-material structure. Rheology defines the
+mechanical history; neutron scattering is used when its length scale and
+contrast can answer a specific structural question. Optical measurements then
+connect structural change to observable behavior.
 
 ## Translate reproducibly
 
 Results can be compared across experiments only when stimulus cycles,
 acquisition timing, analysis rules, and software versions are documented. The
-[peel-trace analysis software](/project/peel-trace-evaluation/) and its archived
-releases provide one public example of that approach.
+[peel-trace analysis software](/project/peel-trace-evaluation/) is one public
+example.
 
-For repeated test sequences, automation can standardize sample placement,
-stimulus timing, and synchronized data capture. Robotic handling may support
-long-duration or feedback-controlled experiments, but it is supporting
-infrastructure rather than the research objective.
+For repeated sequences, automation can standardize sample placement, stimulus
+timing, and synchronized data capture. Robotic handling may support longer or
+feedback-controlled experiments, but it remains supporting infrastructure.
 
 ## Application directions
 

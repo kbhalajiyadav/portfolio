@@ -4,18 +4,23 @@
 The canonical biography and identity page is https://bhalaji.com/about/ . It consolidates research focus, professional path, methods, collaboration scope, and authoritative external profiles.
 
 ## Current position
-Bhalaji Yadav Kantepalle is a Ph.D. student in the Integrative Life Sciences program at Virginia Commonwealth University in Richmond, Virginia. His research concerns stimuli-responsive soft and liquid-crystalline materials, quantitative metrology, and reproducible processing.
+Bhalaji Yadav Kantepalle is a Ph.D. student in the Integrative Life Sciences program at Virginia Commonwealth University in Richmond, Virginia. He studies how temperature, deformation, and flow change responsive soft and liquid-crystalline materials, and develops measurements that connect those changes to optical and mechanical behavior.
 
 ## Research focus
-The work examines when optical and mechanical responses remain measurable after changes in deformation, temperature, flow history, geometry, and test conditions.
+The central question is what changes inside a responsive material during processing and how that change can be measured reliably.
 
 The working sequence is:
 Stimulus -> Structure -> Response -> Measurement -> Translation
 
 ## Research areas
-1. Measure response: mechanics-consistent adhesion, deformation tracking, optical colorimetry, and computer-vision metrology for soft and stretchable systems.
-2. Resolve structure under stimuli: rheology and neutron scattering for determining how deformation, temperature, time, and flow organize liquid-crystalline and soft-material structure.
-3. Build reproducible methods: versioned analysis, synchronized acquisition, repeatable stimulus cycles, and documented analysis choices for comparing results across experiments and processing conditions.
+1. Measure response: force-displacement analysis, deformation tracking, optical colorimetry, and computer vision for soft and stretchable systems.
+2. Resolve structure under stimuli: rheology and neutron scattering for testing how thermal, flow, and deformation histories organize liquid-crystalline and soft materials.
+3. Compare across conditions: versioned analysis, synchronized acquisition, repeatable stimulus cycles, and documented analysis choices.
+
+## Industry background
+From October 2022 to April 2023, Kantepalle completed a Technical Project Management internship through Deep Thought Edu Tech Ventures while working at Kreative Organics. The internship focused on chemical trade-data normalization, Tableau analysis, and project-workflow design; the Tableau work reduced recurring trade-data analysis time by about 70%.
+
+From May 2023 to May 2024, he worked directly at Kreative Organics as a Technical Project Manager, focusing on SAP requalification, validation documentation, data integrity, and cross-functional implementation in pharmaceutical-intermediate manufacturing.
 
 ## Peer-reviewed publications
 1. B. Y. Kantepalle, U. Epitawala Arachchige, D. Joung, and C. Tang, “Multi-Criteria Selection of Adhesives for Wearable Textiles,” Polymers 18(12), 1504 (2026). DOI: https://doi.org/10.3390/polym18121504
