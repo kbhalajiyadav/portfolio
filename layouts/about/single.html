@@ -1,6 +1,7 @@
 {{ define "main" }}
 {{ $p := site.Data.portfolio }}
-{{ $cvHref := printf "%s?v=%s" ($p.profile.cv | relURL) $p.profile.cv_version }}
+{{ $cvVersion := readFile "static/uploads/resume.pdf" | md5 }}
+{{ $cvHref := printf "%s?v=%s" ($p.profile.cv | relURL) $cvVersion }}
 <article class="about-page h-card">
   <div class="page-shell">
     <a class="back-link lnk" href="{{ "/" | relURL }}"><span aria-hidden="true">←</span> Portfolio home</a>
