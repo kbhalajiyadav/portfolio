@@ -13,7 +13,7 @@
 <title>{{ $pageTitle }}</title>
 <meta name="description" content="{{ $description }}">
 <meta name="author" content="{{ $p.profile.name }}">
-<meta name="copyright" content="© 2026 {{ $p.profile.name }}. All rights reserved.">
+<meta name="copyright" content="© 2026{{ if gt now.Year 2026 }}–{{ now.Year }}{{ end }} {{ $p.profile.name }}. All rights reserved.">
 <meta name="application-name" content="{{ $p.profile.short_name }}">
 <meta name="apple-mobile-web-app-title" content="{{ $p.profile.short_name }}">
 <meta name="theme-color" content="#f7f5f0">
