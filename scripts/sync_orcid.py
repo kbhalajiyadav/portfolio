@@ -143,7 +143,7 @@ def synchronize(orcid: str, output: Path) -> bool:
 
     payload = {
         **stable_payload,
-        "last_synced": dt.datetime.now(dt.timezone.utc)
+        "metadata_changed_at": dt.datetime.now(dt.timezone.utc)
         .replace(microsecond=0)
         .isoformat()
         .replace("+00:00", "Z"),
