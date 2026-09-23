@@ -74,7 +74,7 @@ jobs:
           python3 scripts/audit_templates.py
           python3 scripts/check_data_consistency.py
           python3 scripts/check_workflows.py
-          python3 -m py_compile scripts/check_data_consistency.py scripts/check_software_release.py scripts/check_layout_spacing.py scripts/check_release_marker.py scripts/check_home_navigation.py
+          python3 -m py_compile scripts/check_data_consistency.py scripts/check_software_release.py scripts/check_review_freshness.py scripts/check_layout_spacing.py scripts/check_release_marker.py scripts/check_home_navigation.py
           node --check assets/js/site.js
 
       - name: Setup Pages
