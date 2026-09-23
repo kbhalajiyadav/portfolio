@@ -20,7 +20,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 defaults:
   run:
@@ -34,7 +34,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          persist-credentials: false
+          ref: ${{ github.head_ref }}
+          persist-credentials: true
 
       - name: Install proven CV dependencies
         run: |
@@ -54,21 +55,25 @@ jobs:
             }
           done
 
-      - name: Preserve committed outputs
-        run: |
-          cp cv/generated/bhalaji_cv.tex "${RUNNER_TEMP}/committed.tex"
-          cp static/uploads/resume.pdf "${RUNNER_TEMP}/committed.pdf"
-          pdftotext -layout "${RUNNER_TEMP}/committed.pdf" "${RUNNER_TEMP}/committed.txt"
-
       - name: Regenerate and preflight CV
         run: |
           python3 scripts/build_cv.py
-          cmp --silent "${RUNNER_TEMP}/committed.tex" cv/generated/bhalaji_cv.tex
           pdfinfo static/uploads/resume.pdf | tee cv-pdfinfo.txt
           test "$(pdfinfo static/uploads/resume.pdf | awk '/^Pages:/ {print $2}')" = "2"
           test "$(pdfinfo static/uploads/resume.pdf | awk '/^Page size:/ {print $3, $5}')" = "612 792"
           pdftotext -layout static/uploads/resume.pdf generated-cv.txt
-          cmp --silent "${RUNNER_TEMP}/committed.txt" generated-cv.txt
+
+      - name: Refresh committed CV outputs on this branch
+        run: |
+          if git diff --quiet -- cv/generated/bhalaji_cv.tex static/uploads/resume.pdf; then
+            echo "CV outputs already current."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add cv/generated/bhalaji_cv.tex static/uploads/resume.pdf
+          git commit -m "Refresh generated CV outputs"
+          git push origin "HEAD:${{ github.head_ref }}"
 
       - name: Upload CV diagnostics on failure
         if: failure()
