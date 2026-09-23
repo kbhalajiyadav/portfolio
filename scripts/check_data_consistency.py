@@ -67,6 +67,18 @@ def main() -> int:
     if "cv_version" in p_profile:
         errors.append("portfolio.profile.cv_version must not be manually maintained; PDF hash is the cache key")
 
+    review_date = str(p_profile.get("last_updated_iso", ""))
+    try:
+        parsed_review = __import__("datetime").date.fromisoformat(review_date)
+        expected_review_label = parsed_review.strftime("%B %Y")
+        if norm_text(p_profile.get("last_updated")) != expected_review_label:
+            errors.append(
+                f"profile review label drift: last_updated={p_profile.get('last_updated')!r}, "
+                f"expected {expected_review_label!r} from last_updated_iso"
+            )
+    except ValueError:
+        errors.append(f"invalid profile.last_updated_iso: {review_date!r}")
+
     metric_by_label = {item["label"]: item for item in portfolio.get("metrics", [])}
     posters = metric_by_label.get("Research posters", {})
     if posters.get("source") != "presentations":
