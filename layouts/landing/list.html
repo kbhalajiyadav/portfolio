@@ -13,8 +13,7 @@
     <h1>{{ $p.profile.headline }}</h1>
     <p class="lede">{{ $p.profile.summary }}</p>
     <div class="actions">
-      <a class="button button--primary" href="#research">Explore the research</a>
-      <a class="lnk" href="{{ "/research/" | relURL }}">Read the research program <span class="arw" aria-hidden="true">↗</span></a>
+      <a class="button button--primary" href="{{ "/research/" | relURL }}">Explore the research</a>
       <a class="lnk" href="{{ $cvHref }}" target="_blank" rel="noopener">Open the CV <span class="arw" aria-hidden="true">↗</span></a>
     </div>
     <p class="status-line"><span aria-hidden="true"></span>{{ $p.profile.status }}</p>
@@ -119,7 +118,7 @@
 </section>
 
 <section class="contact-section" id="contact">
-  <div><p class="kicker">Contact</p><h2>For research collaboration, methods exchange, and academic opportunities.</h2><p>I am particularly interested in collaborations connecting rheology, neutron scattering, quantitative imaging, and reproducible processing of stimuli-responsive materials.</p></div>
+  <div><p class="kicker">Contact</p><h2>For research collaboration, methods exchange, and academic opportunities.</h2><p>I am interested in collaborations that combine rheology, neutron scattering, imaging, or mechanics to answer defined structure-processing questions in responsive materials.</p></div>
   <div class="contact-actions"><a class="button button--primary" href="mailto:{{ $p.profile.email }}">Email {{ $p.profile.email }}</a><a class="lnk" href="{{ $p.profile.orcid }}" target="_blank" rel="me noopener">ORCID <span class="arw" aria-hidden="true">↗</span></a><a class="lnk" href="{{ $p.profile.scholar }}" target="_blank" rel="me noopener">Google Scholar <span class="arw" aria-hidden="true">↗</span></a><a class="lnk" href="{{ $cvHref }}" download>Download the CV <span aria-hidden="true">↓</span></a></div>
 </section>
 {{ end }}
