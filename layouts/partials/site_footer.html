@@ -1,5 +1,6 @@
 {{ $p := site.Data.portfolio }}
-{{ $cvHref := printf "%s?v=%s" ($p.profile.cv | relURL) $p.profile.cv_version }}
+{{ $cvVersion := readFile "static/uploads/resume.pdf" | md5 }}
+{{ $cvHref := printf "%s?v=%s" ($p.profile.cv | relURL) $cvVersion }}
 <footer class="site-footer">
   <div class="site-footer__inner">
     <div><a class="footer-profile-link" href="{{ "about/" | relURL }}"><strong>{{ $p.profile.name }}</strong></a><span>Stimuli-responsive materials · measurement under processing</span></div>
