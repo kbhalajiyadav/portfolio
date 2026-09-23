@@ -62,6 +62,7 @@ monthly = (ROOT / '.github/workflows/monthly-integrity.yaml').read_text(encoding
 for marker in (
     'cron: "23 9 1 * *"',
     'python3 scripts/check_data_consistency.py',
+    'python3 scripts/check_review_freshness.py',
     'python3 scripts/sync_orcid.py --output artifacts/orcid-current.json',
     'python3 scripts/check_software_release.py',
     'python3 scripts/check_external_links.py public',
