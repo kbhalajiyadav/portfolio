@@ -58,6 +58,18 @@ for workflow in workflows:
                 f'{workflow.relative_to(ROOT)}: site-control publisher requires pull-requests: write'
             )
 
+monthly = (ROOT / '.github/workflows/monthly-integrity.yaml').read_text(encoding='utf-8')
+for marker in (
+    'cron: "23 9 1 * *"',
+    'python3 scripts/check_data_consistency.py',
+    'python3 scripts/sync_orcid.py --output artifacts/orcid-current.json',
+    'python3 scripts/check_software_release.py',
+    'python3 scripts/check_external_links.py public',
+    'python3 scripts/check_live_site.py',
+):
+    if marker not in monthly:
+        errors.append(f'.github/workflows/monthly-integrity.yaml: missing integrity gate {marker!r}')
+
 hugo = (ROOT / '.github/workflows/hugo.yaml').read_text(encoding='utf-8')
 for marker in (
     'sha256sum --check --strict',
