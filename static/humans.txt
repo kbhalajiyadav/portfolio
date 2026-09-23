@@ -8,4 +8,4 @@ Canonical URL: https://bhalaji.com/
 Source: https://github.com/kbhalajiyadav/portfolio
 Built with: Hugo
 Language: English
-Last substantive review: 2026-07-28
+Maintenance: automated integrity checks; substantive review dates remain human-authored
