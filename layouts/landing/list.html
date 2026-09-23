@@ -6,7 +6,8 @@
 {{ $teachingLimit := $controls.homepage.limits.teaching_records | default 4 }}
 {{ $serviceLimit := $controls.homepage.limits.service_records | default 3 }}
 {{ $innovationLimit := $controls.homepage.limits.innovation_records | default 2 }}
-{{ $cvHref := printf "%s?v=%s" ($p.profile.cv | relURL) $p.profile.cv_version }}
+{{ $cvVersion := readFile "static/uploads/resume.pdf" | md5 }}
+{{ $cvHref := printf "%s?v=%s" ($p.profile.cv | relURL) $cvVersion }}
 <section class="hero" id="top">
   <div class="hero__copy">
     <p class="eyebrow">{{ $p.profile.eyebrow }}</p>
@@ -26,7 +27,9 @@
 
 <section class="metrics" aria-label="Portfolio evidence at a glance">
   {{ range $p.metrics }}
-  {{ $value := .value }}{{ if and (eq .source "orcid") $publicationSync }}{{ $value = $publicationSync.journal_article_count }}{{ end }}
+  {{ $value := .value }}
+  {{ if and (eq .source "orcid") $publicationSync }}{{ $value = $publicationSync.journal_article_count }}{{ end }}
+  {{ if eq .source "presentations" }}{{ $value = len (where $p.presentations "kind" "Poster") }}{{ end }}
   <div><strong>{{ $value }}</strong><span>{{ .label }}</span></div>
   {{ end }}
 </section>
