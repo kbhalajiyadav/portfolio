@@ -14,6 +14,6 @@
       <a href="{{ "brand-use/" | relURL }}">Rights</a>
       <button class="privacy-choice-link" type="button" data-open-privacy>Privacy choices</button>
     </nav>
-    <small>© {{ now.Year }} {{ $p.profile.name }} · All rights reserved · Last reviewed {{ $p.profile.last_updated }}</small>
+    <small>© 2026{{ if gt now.Year 2026 }}–{{ now.Year }}{{ end }} {{ $p.profile.name }} · All rights reserved · Last reviewed {{ $p.profile.last_updated }}</small>
   </div>
 </footer>
