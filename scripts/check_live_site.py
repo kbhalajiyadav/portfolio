@@ -13,7 +13,7 @@ from urllib.request import Request, urlopen
 
 EXPECTED_TEXT = {
     "": [
-        "A material that changes color is easy to make",
+        "Research program",
         "Ph.D. student",
         'href="/favicon.svg"',
         'href="/favicon-48.png"',
