@@ -1,9 +1,9 @@
 homepage:
   limits:
-    presentation_series: 3
-    teaching_records: 4
-    service_records: 3
-    innovation_records: 2
+    presentation_series: 2
+    teaching_records: 3
+    service_records: 2
+    innovation_records: 1
 features:
   notes: false
   search: false
