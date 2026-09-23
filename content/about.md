@@ -15,7 +15,8 @@ bio:
     My work combines rheology, quantitative imaging, mechanics, and structure-sensitive characterization. The goal is straightforward: make a material response interpretable, comparable, and useful beyond a single experiment.
 research_identity:
   title: Research question
-  text: What changes inside a responsive material during processing, and which measurements can track that change reliably? I approach that question from three directions: response measurement, structure under stimuli, and comparison across experiments and processing conditions.
+  text: >-
+    What changes inside a responsive material during processing, and which measurements can track that change reliably? I approach that question from three directions: response measurement, structure under stimuli, and comparison across experiments and processing conditions.
 professional_path:
   - period: 2018–2022
     title: Chemical-engineering foundation
