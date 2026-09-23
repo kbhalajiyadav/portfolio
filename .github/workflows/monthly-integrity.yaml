@@ -48,6 +48,7 @@ jobs:
           python3 scripts/audit_templates.py
           python3 scripts/check_workflows.py
           python3 scripts/check_data_consistency.py
+          python3 scripts/check_review_freshness.py
 
       - name: Reconcile against current ORCID
         run: |
