@@ -13,15 +13,14 @@ profile:
   orcid: https://orcid.org/0000-0003-0551-6172
   scholar: https://scholar.google.com/citations?hl=en&user=DrfbtX4AAAAJ
   cv: uploads/resume.pdf
-  cv_version: 2026-08
   last_updated: September 2026
   last_updated_iso: '2026-09-22'
 metrics:
 - value: '2'
   label: Peer-reviewed articles
   source: orcid
-- value: '6'
-  label: Research posters
+- label: Research posters
+  source: presentations
 - value: '1'
   label: M.S. degree
 - value: '2'
@@ -219,9 +218,9 @@ experience:
 teaching:
 - date: Summer 2026
   type: Research guidance
-  title: Guidance for two ongoing student projects
-  detail: 'Guided two summer researchers on ongoing projects: one developing temperature-mapping methods
-    for stimuli-responsive liquid crystals, and one analyzing hyperspectral measurements of soil–plastic
+  title: Guidance for two Summer 2026 student projects
+  detail: 'Guided two Summer 2026 student research projects: one developed temperature-mapping methods
+    for stimuli-responsive liquid crystals, and one analyzed hyperspectral measurements of soil–plastic
     mixtures to evaluate concentration-dependent plastic detection and estimate the minimum detectable
     concentration.'
 - date: Spring 2026
