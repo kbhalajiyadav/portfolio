@@ -18,7 +18,7 @@ Stimulus -> Structure -> Response -> Measurement -> Translation
 3. Compare across conditions: versioned analysis, synchronized acquisition, repeatable stimulus cycles, and documented analysis choices.
 
 ## Industry background
-From October 2022 to April 2023, Kantepalle completed a Technical Project Management internship through Deep Thought Edu Tech Ventures while working at Kreative Organics. The internship focused on chemical trade-data normalization, Tableau analysis, and project-workflow design; historical resume records consistently report about a 70% reduction in recurring trade-data analysis time from the Tableau work.
+From October 2022 to April 2023, Kantepalle completed a Technical Project Management internship through Deep Thought Edu Tech Ventures while working at Kreative Organics. The internship focused on chemical trade-data normalization, Tableau analysis, and project-workflow design; the Tableau work reduced recurring trade-data analysis time by about 70%.
 
 From May 2023 to May 2024, he worked directly at Kreative Organics as a Technical Project Manager, focusing on SAP requalification, validation documentation, data integrity, and cross-functional implementation in pharmaceutical-intermediate manufacturing.
 
