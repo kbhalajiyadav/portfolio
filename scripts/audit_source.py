@@ -33,6 +33,12 @@ forbidden = {
     'Ground Truth Pipeline': 'unverified optical-metrology overclaim',
     'true material reflectance': 'unsupported optical-metrology claim',
     'Reduced data processing time by >90%': 'unsupported performance claim',
+    '99% reduction in data entry errors': 'quarantined historical metric with conflicting denominator',
+    '99% of compliance gaps': 'quarantined historical metric with conflicting denominator',
+    '90% increase in data accuracy': 'quarantined trade-normalization metric pending definition',
+    '96% reduction in system downtime': 'quarantined cutover metric pending baseline verification',
+    'zero production downtime': 'unsupported cutover claim',
+    'ensuring GMP compliance': 'overstated compliance guarantee',
     'primary validation tool': 'unverified deployment claim',
     'injury monitoring': 'unsupported clinical application',
 }
