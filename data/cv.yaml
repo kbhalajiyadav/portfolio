@@ -124,18 +124,17 @@ industry_experience:
   organization: Kreative Organics Pvt. Ltd.
   location: Hyderabad, India
   bullets:
-  - Coordinated SAP requalification with quality, engineering, senior management, and external consultants
-    in pharmaceutical-intermediate manufacturing.
-  - Prepared or supported user requirements, Performance Qualification, gap assessment, impact assessment,
-    and corrective-action documentation.
+  - Coordinated SAP requalification across quality, engineering, senior management, and external consultants;
+    prepared or supported user requirements, Performance Qualification, gap and impact assessments, and
+    corrective-action documentation.
   - Maintained traceability between process requirements, test evidence, and data-integrity controls.
 - period: Oct 2022–Apr 2023
   role: Technical Project Management Intern
   organization: Deep Thought Edu Tech Ventures · placement at Kreative Organics Pvt. Ltd.
   location: Hyderabad, India
   bullets:
-  - Directed a Python-based workflow for normalizing chemical names across pharmaceutical trade records.
-  - Built Tableau analyses that reduced recurring trade-data analysis time by about 70%.
+  - Directed a Python chemical-name normalization workflow and built Tableau analyses that reduced recurring
+    trade-data analysis time by about 70%.
   - Co-developed a Notion project-management framework for initiation, tracking, risks, escalation, and completion.
 honors_development:
 - label: Design credentials
