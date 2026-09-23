@@ -8,11 +8,11 @@ profile:
   orcid: https://orcid.org/0000-0003-0551-6172
   scholar: https://scholar.google.com/citations?hl=en&user=DrfbtX4AAAAJ
   headline: Ph.D. Student, Researcher, and Chemical Engineer
-  updated: August 2026
-  summary: Integrative Life Sciences Ph.D. student and chemical engineer studying stimuli-responsive soft
-    and liquid-crystalline materials through mechanics, quantitative imaging, rheology, and structure-sensitive
-    characterization. Develops reproducible experimental and computational workflows that connect processing,
-    structure, material response, and engineering decisions.
+  updated: September 2026
+  summary: Integrative Life Sciences Ph.D. student and chemical engineer studying how temperature,
+    deformation, and flow change stimuli-responsive soft and liquid-crystalline materials. Uses rheology,
+    quantitative imaging, mechanics, and structure-sensitive characterization to connect processing history
+    to optical and mechanical response.
 education:
 - period: Aug 2026–Present
   degree: Ph.D. Student, Integrative Life Sciences
@@ -124,19 +124,19 @@ industry_experience:
   organization: Kreative Organics Pvt. Ltd.
   location: Hyderabad, India
   bullets:
-  - Coordinated quality, engineering, and external stakeholders during a regulated digital-transformation
-    initiative.
-  - Translated process requirements into validation documentation, traceable test protocols, and data-integrity
-    controls.
-  - Standardized chemical nomenclature and analytical workflows to support more consistent technical and
-    business decisions.
+  - Coordinated SAP requalification with quality, engineering, senior management, and external consultants
+    in pharmaceutical-intermediate manufacturing.
+  - Prepared or supported user requirements, Performance Qualification, gap assessment, impact assessment,
+    and corrective-action documentation.
+  - Maintained traceability between process requirements, test evidence, and data-integrity controls.
 - period: Oct 2022–Apr 2023
-  role: Technical Project Manager Intern
-  organization: Kreative Organics Pvt. Ltd.
+  role: Technical Project Management Intern
+  organization: Deep Thought Edu Tech Ventures · placement at Kreative Organics Pvt. Ltd.
   location: Hyderabad, India
   bullets:
-  - Supported digital-transformation, chemical-data standardization, and technical-documentation workflows
-    in regulated manufacturing.
+  - Directed a Python-based workflow for normalizing chemical names across pharmaceutical trade records.
+  - Built Tableau analyses that reduced recurring trade-data analysis time by about 70%.
+  - Co-developed a Notion project-management framework for initiation, tracking, risks, escalation, and completion.
 honors_development:
 - label: Design credentials
   details: VCU da Vinci Center, Mar 2026
