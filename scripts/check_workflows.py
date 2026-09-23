@@ -15,7 +15,6 @@ workflows = sorted((ROOT / '.github/workflows').glob('*.y*ml'))
 PUBLISHING_WORKFLOWS = {
     'sync-publications.yaml',
     'manage-site-controls.yaml',
-    'cv-validation.yaml',
 }
 
 for workflow in workflows:
