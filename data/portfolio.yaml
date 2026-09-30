@@ -14,7 +14,7 @@ profile:
   scholar: https://scholar.google.com/citations?hl=en&user=DrfbtX4AAAAJ
   cv: uploads/resume.pdf
   last_updated: September 2026
-  last_updated_iso: '2026-09-23'
+  last_updated_iso: '2026-09-30'
 metrics:
 - value: '2'
   label: Peer-reviewed articles
@@ -178,8 +178,8 @@ experience:
   role: Graduate Teaching Assistant
   organization: Virginia Commonwealth University
   location: Richmond, Virginia
-  detail: Supports undergraduate instruction while pursuing doctoral training in the Integrative Life
-    Sciences Ph.D. program.
+  detail: Leads lab-session instruction for three BIOZ 101 sections serving 59 students while pursuing
+    doctoral training in the Integrative Life Sciences Ph.D. program.
 - period: Sep 2024–Aug 2026
   role: Graduate Researcher · Quantitative Metrology
   organization: VCU Soft Functional Materials Lab
