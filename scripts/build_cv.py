@@ -134,6 +134,25 @@ def render(data: dict) -> str:
     ]
     output.append(section("Peer-Reviewed Publications", pubs))
 
+    intellectual_property: list[str] = []
+    for item in data.get("intellectual_property", []):
+        intellectual_property.append(
+            rf"\smallentry{{{esc(item['title'])}}}"
+            rf"{{{esc(item['status'])} · {esc(item['year'])}}}"
+            rf"{{{esc(item['inventors'])}}}"
+        )
+        intellectual_property.append(
+            r"{\small "
+            + esc(item["description"])
+            + " "
+            + esc(item["organization"])
+            + r" \contactsep "
+            + esc(f"VCU Tech # {item['tech_id']}")
+            + "}"
+        )
+    if intellectual_property:
+        output.append(section("Intellectual Property", intellectual_property))
+
     software: list[str] = []
     for item in data["research_software"]:
         software.append(
