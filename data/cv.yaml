@@ -8,7 +8,7 @@ profile:
   orcid: https://orcid.org/0000-0003-0551-6172
   scholar: https://scholar.google.com/citations?hl=en&user=DrfbtX4AAAAJ
   headline: Ph.D. Student, Researcher, and Chemical Engineer
-  updated: September 2026
+  updated: October 2026
   summary: Integrative Life Sciences Ph.D. student and chemical engineer studying how temperature,
     deformation, and flow change stimuli-responsive soft and liquid-crystalline materials. Uses rheology,
     quantitative imaging, mechanics, and structure-sensitive characterization to connect processing history
@@ -59,6 +59,14 @@ publications:
   for Wearable Textiles. Polymers 2026, 18, 1504. https://doi.org/10.3390/polym18121504
 - Caloian, I.; Trapp, J.; Kantepalle, B. Y.; Latimer, P.; Lawton, T. J.; Tang, C. Mechanical Properties
   of Dual-Layer Electrospun Fiber Mats. Polymers 2025, 17, 1777. https://doi.org/10.3390/polym17131777
+intellectual_property:
+- title: Quantitative Thermal Imaging
+  status: Patent pending
+  year: '2026'
+  inventors: Bhalaji Yadav Kantepalle and Christina Tang
+  organization: Virginia Commonwealth University
+  tech_id: TAN-26-099
+  description: Provisional patent application filed.
 research_software:
 - title: Peel Trace Evaluation for Soft Substrates
   authors: Bhalaji Yadav Kantepalle and Christina Tang

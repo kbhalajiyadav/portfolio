@@ -57,6 +57,11 @@ jobs:
       - name: Install Python audit dependency
         run: python3 -m pip install --disable-pip-version-check PyYAML==6.0.3 websocket-client==1.9.0
 
+      - name: Install CV build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes latexmk texlive-xetex poppler-utils
+
       - name: Build canonical browser icons
         run: |
           if ! command -v rsvg-convert >/dev/null 2>&1 || ! command -v convert >/dev/null 2>&1; then
@@ -67,8 +72,9 @@ jobs:
 
       - name: Audit source, visual system, workflows, templates, and JavaScript
         run: |
-          python3 scripts/build_cv.py --no-compile
+          python3 scripts/build_cv.py
           git diff --exit-code -- cv/generated/bhalaji_cv.tex
+          test "$(pdfinfo static/uploads/resume.pdf | awk '/^Pages:/ {print $2}')" = "2"
           python3 scripts/audit_source.py
           python3 scripts/audit_styles.py
           python3 scripts/audit_templates.py
