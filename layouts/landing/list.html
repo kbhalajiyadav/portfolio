@@ -1,5 +1,7 @@
 {{ define "main" }}
 {{ $p := site.Data.portfolio }}
+{{ $cv := site.Data.cv }}
+{{ $ip := index $cv.intellectual_property 0 }}
 {{ $publicationSync := site.Data.publication_sync }}
 {{ $controls := site.Data.site_controls }}
 {{ $presentationLimit := $controls.homepage.limits.presentation_series | default 3 }}
@@ -59,7 +61,7 @@
 
 <section class="section" id="outputs">
   <div class="section-head split-head">
-    <div><p class="kicker">Selected outputs</p><h2>One research package, connected across article, thesis, and software.</h2></div>
+    <div><p class="kicker">Selected outputs</p><h2>Research outputs across article, thesis, software, and intellectual property.</h2></div>
     {{ with $publicationSync }}<p class="metadata-line">{{ .journal_article_count }} ORCID-synchronized journal articles</p>{{ end }}
   </div>
   {{ $primary := index $p.publications 0 }}
@@ -77,6 +79,10 @@
       <article><span>Associated thesis</span><h4>Multi-Criteria Selection of Adhesives for Wearable Textiles</h4><p>VCU M.S. thesis · defended July 1, 2026 · degree completed August 2026</p><a class="lnk" href="{{ "/publication/masters-thesis/" | relURL }}">Thesis record <span class="arw" aria-hidden="true">↗</span></a></article>
       <article><span>Research software</span><h4>{{ $p.software.title }}</h4><p>{{ $p.software.text }}</p><div class="actions"><a class="lnk" href="{{ $p.software.detail | relURL }}">Software details <span class="arw" aria-hidden="true">↗</span></a><a class="lnk" href="{{ $p.software.version_doi }}" target="_blank" rel="noopener">Software release <span class="arw" aria-hidden="true">↗</span></a></div></article>
     </div>
+  </article>
+  <article class="secondary-output">
+    <div><span class="overline">{{ $ip.status }} · {{ $ip.year }}</span><h3>{{ $ip.title }}</h3><p>{{ $ip.inventors }}</p><p class="venue">{{ $ip.organization }} · VCU Tech # {{ $ip.tech_id }}</p><p>{{ $ip.description }}</p></div>
+    <div class="actions"><a class="lnk" href="{{ "/project/quantitative-thermal-imaging/" | relURL }}">IP project details <span class="arw" aria-hidden="true">↗</span></a></div>
   </article>
   {{ $secondary := index $p.publications 1 }}
   <article class="secondary-output">
