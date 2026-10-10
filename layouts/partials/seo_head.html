@@ -58,6 +58,7 @@
 {{ $websiteID := printf "%s#website" ("/" | absURL) }}
 {{ $profileID := printf "%s#profile" $aboutURL }}
 {{ $sameAs := slice $p.profile.orcid $p.profile.scholar $p.profile.linkedin $p.profile.github "https://infosec.exchange/@bhalaji" }}
+{{ $jobTitle := printf "%s, %s" $p.profile.role $p.profile.program }}
 {{ $person := dict
   "@type" "Person"
   "@id" $personID
@@ -66,8 +67,8 @@
   "url" $aboutURL
   "image" ("uploads/avatar-portrait.jpg" | absURL)
   "email" (printf "mailto:%s" $p.profile.email)
-  "jobTitle" "Ph.D. Student and Soft Materials Researcher"
-  "affiliation" (dict "@type" "CollegeOrUniversity" "name" "Virginia Commonwealth University" "url" "https://www.vcu.edu/")
+  "jobTitle" $jobTitle
+  "affiliation" (dict "@type" "CollegeOrUniversity" "name" $p.profile.institution "url" "https://www.vcu.edu/")
   "sameAs" $sameAs
   "knowsAbout" (slice "Stimuli-responsive materials" "Soft materials" "Liquid crystals" "Adhesion and fracture mechanics" "Computer vision metrology" "Rheology" "Neutron scattering" "Wearable textiles")
 }}
