@@ -29,5 +29,5 @@ The work strengthened four practices that remain central to my research: define
 the decision, make the workflow repeatable, document assumptions, and present
 the result in a form the next user can evaluate.
 
-This case study focuses on my responsibilities and methods rather than company
-datasets, customer information, or system architecture.
+The record emphasizes the analytical workflow, project-management practice, and
+transferable methods from the role.
