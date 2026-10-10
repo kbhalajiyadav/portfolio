@@ -7,6 +7,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 CSS = ROOT / "static/css/site.css"
 REFINEMENTS = ROOT / "static/css/refinements.css"
+ABOUT = ROOT / "static/css/about.css"
 
 
 def luminance(value: str) -> float:
@@ -23,7 +24,8 @@ def contrast(a: str, b: str) -> float:
 def main() -> int:
     text = CSS.read_text(encoding="utf-8")
     refinements = REFINEMENTS.read_text(encoding="utf-8")
-    combined = text + "\n" + refinements
+    about = ABOUT.read_text(encoding="utf-8")
+    combined = text + "\n" + refinements + "\n" + about
     errors: list[str] = []
 
     # Later declarations intentionally win, matching the browser cascade for
@@ -109,6 +111,27 @@ def main() -> int:
     if re.search(r"\.pillar\{grid-template-rows:auto\s+[0-9.]+em\s+[0-9.]+em", refinements):
         errors.append("research-program cards must not restore fixed text-row heights that can cause content collisions")
 
+    # Asymmetric content columns must use natural height rather than inheriting
+    # the tallest sibling. This guards the large blank-space failures seen in
+    # the education and doctoral-extension panels.
+    flow_rules = (
+        ".two-col{align-items:start}",
+        ".education-panel{align-self:start;",
+        ".trajectory-grid{grid-template-columns:minmax(0,1.08fr) minmax(280px,.92fr);gap:0;align-items:start;",
+        ".section:target,.contact-section:target{scroll-margin-top:calc(var(--header-h) + 2.75rem)}",
+    )
+    for rule in flow_rules:
+        if rule not in refinements:
+            errors.append(f"natural-height/anchor-spacing invariant missing {rule!r}")
+
+    about_band = ".about-program-grid,.about-method-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-block:1px solid var(--line);background:transparent}"
+    if about_band not in about:
+        errors.append("About program/method content must retain the editorial-band treatment")
+    if re.search(r"\.about-(?:program|method)-grid article\{[^}]*min-height", about):
+        errors.append("About program/method content must not restore fixed minimum card heights")
+    if re.search(r"\.about-(?:program|method)-grid\{[^}]*border:1px", about):
+        errors.append("About program/method content must not revert to a fully boxed card grid")
+
     motif_match = re.search(r"--motif-opacity:([0-9.]+)", refinements)
     if not motif_match:
         errors.append("missing decorative motif opacity token")
@@ -171,7 +194,8 @@ def main() -> int:
     print(
         "Style audit passed: AA text contrast across all branded surfaces, "
         "3:1 interactive boundaries, 24px controls, focus, breakpoints, flexible card flow, "
-        "decorative restraint, reduced-motion-safe page continuity, privacy controls, and page spacing verified."
+        "natural-height asymmetric panels, editorial About bands, decorative restraint, "
+        "reduced-motion-safe page continuity, privacy controls, and page spacing verified."
     )
     return 0
 
