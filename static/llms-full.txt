@@ -30,7 +30,7 @@ From May 2023 to May 2024, he worked directly at Kreative Organics as a Technica
 M.S. thesis: “Multi-Criteria Selection of Adhesives for Wearable Textiles,” Virginia Commonwealth University, defended July 1, 2026. Public repository record: https://scholarscompass.vcu.edu/etd/8456/ . The complete manuscript is under embargo until July 20, 2031.
 
 ## Research software
-Peel Trace Evaluation for Soft Substrates, version 1.4.0-rc15, by Bhalaji Yadav Kantepalle and Christina Tang. Source: https://github.com/VCU-Soft-Functional-Materials-Lab/Peel-Trace-Evaluation-for-Soft-Substrates . Version DOI: https://doi.org/10.5281/zenodo.20301242 . All versions: https://doi.org/10.5281/zenodo.20278327 . License: Apache-2.0.
+Peel Trace Evaluation for Soft Substrates, version v1.4.0-rc15, by Bhalaji Yadav Kantepalle and Christina Tang. Source: https://github.com/VCU-Soft-Functional-Materials-Lab/Peel-Trace-Evaluation-for-Soft-Substrates . Version DOI: https://doi.org/10.5281/zenodo.20301242 . All versions: https://doi.org/10.5281/zenodo.20278327 . License: Apache-2.0.
 
 ## Intellectual property
 Quantitative Thermal Imaging is patent pending. Bhalaji Yadav Kantepalle and Christina Tang are identified as Inventors/Creators; the Virginia Commonwealth University technology identifier is TAN-26-099. Public portfolio record: https://bhalaji.com/project/quantitative-thermal-imaging/ .
