@@ -88,6 +88,7 @@ for marker in (
     'python3 scripts/check_accessibility_interactions.py',
     'python3 scripts/check_attention_hierarchy.py',
     'python3 scripts/check_component_integrity.py',
+    'python3 scripts/check_navigation_continuity.py',
     'python3 scripts/check_live_site.py',
     'Upload diagnostics on failure',
 ):
