@@ -80,9 +80,10 @@ jobs:
           python3 scripts/audit_templates.py
           python3 scripts/check_data_consistency.py
           python3 scripts/check_content_strategy.py
+          python3 scripts/check_design_governance.py
           python3 scripts/check_review_freshness.py
           python3 scripts/check_workflows.py
-          python3 -m py_compile scripts/check_data_consistency.py scripts/check_content_strategy.py scripts/check_software_release.py scripts/check_review_freshness.py scripts/check_layout_spacing.py scripts/check_release_marker.py scripts/check_home_navigation.py scripts/check_accessibility_interactions.py scripts/check_attention_hierarchy.py scripts/check_component_integrity.py scripts/check_navigation_continuity.py
+          python3 -m py_compile scripts/check_data_consistency.py scripts/check_content_strategy.py scripts/check_design_governance.py scripts/check_software_release.py scripts/check_review_freshness.py scripts/check_layout_spacing.py scripts/check_release_marker.py scripts/check_home_navigation.py scripts/check_accessibility_interactions.py scripts/check_attention_hierarchy.py scripts/check_component_integrity.py scripts/check_navigation_continuity.py scripts/check_deep_links.py
           node --check assets/js/site.js
 
       - name: Setup Pages
@@ -152,6 +153,10 @@ jobs:
             --base-url http://127.0.0.1:4173/ \
             --chrome "$CHROME_PATH" \
             --report artifacts/navigation-continuity.json
+          python3 scripts/check_deep_links.py \
+            --base-url http://127.0.0.1:4173/ \
+            --chrome "$CHROME_PATH" \
+            --report artifacts/deep-links.json
           python3 scripts/check_layout_spacing.py \
             --base-url http://127.0.0.1:4173/ \
             --chrome "$CHROME_PATH" \
