@@ -13,7 +13,7 @@
   <div class="page-shell">
     <a class="back-link lnk" href="{{ "/" | relURL }}"><span aria-hidden="true">←</span> Portfolio home</a>
     <header class="page-header">
-      <p class="kicker">Research record</p>
+      <p class="kicker">Articles · thesis · software · IP</p>
       <h1>{{ .Title }}</h1>
       <p class="page-lede">{{ .Params.summary }}</p>
     </header>
@@ -35,7 +35,7 @@
           <p class="output-row__byline">{{ $ip.inventors }} · {{ $ip.organization }} · VCU Tech # {{ $ip.tech_id }}</p>
           <p class="output-row__summary">{{ $ipPage.Params.summary }}</p>
           <div class="actions">
-            <a class="lnk" href="{{ $ipPage.RelPermalink }}">Intellectual property record <span class="arw" aria-hidden="true">→</span></a>
+            <a class="lnk" href="{{ $ipPage.RelPermalink }}">Technology details <span class="arw" aria-hidden="true">→</span></a>
             {{ with $ipPage.Params.public_listing }}<a class="lnk" href="{{ . }}" target="_blank" rel="noopener">Technology listing <span class="arw" aria-hidden="true">↗</span></a>{{ end }}
           </div>
         </div>
@@ -48,7 +48,7 @@
           <p class="output-row__byline">Virginia Commonwealth University · defended July 1, 2026 · degree completed August 2026</p>
           <p class="output-row__summary">{{ $thesisPage.Params.summary }}</p>
           <div class="actions">
-            <a class="lnk" href="{{ $thesisPage.RelPermalink }}">Thesis record <span class="arw" aria-hidden="true">→</span></a>
+            <a class="lnk" href="{{ $thesisPage.RelPermalink }}">Thesis details <span class="arw" aria-hidden="true">→</span></a>
             {{ with $thesisPage.Params.url_source }}<a class="lnk" href="{{ . }}" target="_blank" rel="noopener">VCU repository <span class="arw" aria-hidden="true">↗</span></a>{{ end }}
           </div>
         </div>
@@ -61,7 +61,7 @@
           <p class="output-row__byline">{{ $primary.authors }} · {{ $primary.venue }}</p>
           <p class="output-row__summary">{{ $primaryPage.Params.summary }}</p>
           <div class="actions">
-            <a class="lnk" href="{{ $primaryPage.RelPermalink }}">Article record <span class="arw" aria-hidden="true">→</span></a>
+            <a class="lnk" href="{{ $primaryPage.RelPermalink }}">Article details <span class="arw" aria-hidden="true">→</span></a>
             <a class="lnk" href="{{ $primary.doi }}" target="_blank" rel="noopener">DOI <span class="arw" aria-hidden="true">↗</span></a>
           </div>
         </div>
@@ -74,7 +74,7 @@
           <p class="output-row__byline">Version {{ $p.software.version }} · citable open research software</p>
           <p class="output-row__summary">{{ $p.software.text }}</p>
           <div class="actions">
-            <a class="lnk" href="{{ $softwarePage.RelPermalink }}">Software record <span class="arw" aria-hidden="true">→</span></a>
+            <a class="lnk" href="{{ $softwarePage.RelPermalink }}">Software details <span class="arw" aria-hidden="true">→</span></a>
             <a class="lnk" href="{{ $p.software.version_doi }}" target="_blank" rel="noopener">Version DOI <span class="arw" aria-hidden="true">↗</span></a>
           </div>
         </div>
@@ -87,13 +87,13 @@
           <p class="output-row__byline">{{ $secondary.authors }} · {{ $secondary.venue }}</p>
           <p class="output-row__summary">{{ $secondaryPage.Params.summary }}</p>
           <div class="actions">
-            <a class="lnk" href="{{ $secondaryPage.RelPermalink }}">Article record <span class="arw" aria-hidden="true">→</span></a>
+            <a class="lnk" href="{{ $secondaryPage.RelPermalink }}">Article details <span class="arw" aria-hidden="true">→</span></a>
             <a class="lnk" href="{{ $secondary.doi }}" target="_blank" rel="noopener">DOI <span class="arw" aria-hidden="true">↗</span></a>
           </div>
         </div>
       </article>
     </div>
-    <p class="output-list-note">Newest first. Filters change the visible record type without changing the underlying chronology.</p>
+    <p class="output-list-note">Newest first. Filters change which output types are shown without changing the chronology.</p>
   </div>
 </article>
 {{ end }}

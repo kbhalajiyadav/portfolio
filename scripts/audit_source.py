@@ -83,7 +83,9 @@ for required in (
     'range $p.professional_development',
     'range $p.applied_innovation',
     'Browse all research outputs',
-    'Intellectual property record',
+    '/project/quantitative-thermal-imaging/',
+    '{{ $ip.status }}',
+    'VCU Tech # {{ $ip.tech_id }}',
 ):
     if required not in landing_text:
         errors.append(f'layouts/landing/list.html: missing homepage invariant {required!r}')
@@ -94,9 +96,15 @@ if not outputs_content.exists() or not outputs_layout.exists():
     errors.append('first-class /outputs/ hub must remain present')
 else:
     outputs_text = outputs_layout.read_text(encoding='utf-8')
-    for required in ('Peer-reviewed article', 'M.S. thesis', 'Research software', 'Intellectual property record'):
+    for required in (
+        'data-output-type="intellectual-property"',
+        'data-output-type="thesis"',
+        'data-output-type="software"',
+        'Peer-reviewed article',
+        'Technology details',
+    ):
         if required not in outputs_text:
-            errors.append(f'layouts/outputs/list.html: missing output class {required!r}')
+            errors.append(f'layouts/outputs/list.html: missing output fact {required!r}')
 
 if 'cv_version:' in portfolio_text:
     errors.append('data/portfolio.yaml: manual cv_version must remain removed; templates hash the PDF')
@@ -157,7 +165,7 @@ optical_flat = ' '.join(optical_text.split())
 for required in (
     'Presented research',
     'CIE L\\*a\\*b\\*',
-    '## Research record',
+    '## Presentations',
     'VCU Engineering Graduate',
     '29th VCU Graduate Student Research Symposium',
 ):

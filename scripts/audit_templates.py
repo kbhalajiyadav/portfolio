@@ -53,7 +53,7 @@ def main() -> int:
     nav_markers = (
         'class="nav-about',
         'href="{{ $root }}#research"',
-        'href="{{ $outputsURL }}"',
+        'href="{{ $outputsHref }}"',
         'href="{{ $root }}#experience"',
         'href="{{ $root }}#presentations">Engagement',
         'class="nav-contact" href="{{ $root }}#contact"',
@@ -63,6 +63,12 @@ def main() -> int:
         errors.append("shared header must retain About, Research, Outputs, Experience, Engagement, and Contact navigation")
     elif nav_positions != sorted(nav_positions):
         errors.append("shared header navigation must keep the primary information architecture in order")
+    for marker in (
+        '{{ $outputsHref := $outputsURL }}',
+        '{{ if .IsHome }}{{ $outputsHref = printf "%s#outputs" $root }}{{ end }}',
+    ):
+        if marker not in header:
+            errors.append(f"shared header must preserve homepage Outputs continuity marker {marker!r}")
     if 'href="{{ $root }}#trajectory"' in header:
         errors.append("shared header must keep doctoral trajectory within Research rather than primary navigation")
     if 'aria-current="page"' not in header:
@@ -87,9 +93,9 @@ def main() -> int:
         errors.append("layouts/outputs/list.html: outputs hub template missing")
     else:
         outputs = outputs_layout.read_text(encoding="utf-8")
-        for marker in ('Research software', 'Intellectual property record', 'Peer-reviewed article'):
+        for marker in ('data-output-type="intellectual-property"', 'Research software', 'Peer-reviewed article'):
             if marker not in outputs:
-                errors.append(f"outputs hub lost record type {marker!r}")
+                errors.append(f"outputs hub lost output type {marker!r}")
         if 'role="group" aria-label="Filter research outputs by type"' not in outputs:
             errors.append("outputs filter must retain a concise accessible group label")
         if outputs.count('data-output-filter=') != 5:

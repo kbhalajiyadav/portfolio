@@ -33,14 +33,14 @@ and textile-supported systems. The methods combine force–displacement analysis
 deformation tracking, optical colorimetry, and computer vision instead of
 relying on a single maximum-force value or a visual assessment of color change.
 
-Related work:
+Related outputs and projects:
 
 - a [first-author article on multi-criteria adhesive selection](/publication/adhesives-wearable/) for wearable textiles;
-- the [associated M.S. thesis record](/publication/masters-thesis/);
+- the [associated M.S. thesis](/publication/masters-thesis/);
 - [versioned research software](/project/peel-trace-evaluation/) for protocol-defined peel-trace analysis;
-- an [optical-metrology project record](/project/optical-metrology/) for computer-vision measurement of mechanochromic textiles;
-- the [patent-pending Quantitative Thermal Imaging record](/project/quantitative-thermal-imaging/) (VCU Tech # TAN-26-099); and
-- a grouped [presentation record](/#presentations) covering adhesion and computer-vision metrology.
+- an [optical-metrology project](/project/optical-metrology/) for computer-vision measurement of mechanochromic textiles;
+- the [patent-pending Quantitative Thermal Imaging technology](/project/quantitative-thermal-imaging/) (VCU Tech # TAN-26-099); and
+- [presentation history](/#presentations) covering adhesion and computer-vision metrology.
 
 ## Resolve structure under stimuli
 
@@ -69,20 +69,19 @@ Potential applications include:
 - visual inspection and safety cues where powered instrumentation is impractical; and
 - adaptive or decorative surfaces whose response can be quantified and reproduced.
 
-## Research package
+## Connected outputs
 
-The first-author adhesion work is documented through three complementary
-records:
+The first-author adhesion work spans three complementary outputs:
 
 1. [Peer-reviewed article](/publication/adhesives-wearable/)
-2. [M.S. thesis record](/publication/masters-thesis/)
+2. [M.S. thesis](/publication/masters-thesis/)
 3. [Research software](/project/peel-trace-evaluation/)
 
-The article reports the scientific result, the thesis page documents the degree
-record and embargo, and the software page provides a citable implementation of
+The article reports the scientific result, the thesis develops the experimental
+and analytical context, and the software provides a citable implementation of
 the analysis workflow. Each page links to the other two.
 
-A separate [patent-pending thermal-imaging record](/project/quantitative-thermal-imaging/)
+A separate [patent-pending Quantitative Thermal Imaging page](/project/quantitative-thermal-imaging/)
 summarizes the technology and its current Virginia Commonwealth University
 intellectual-property status.
 

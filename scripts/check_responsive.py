@@ -29,6 +29,8 @@ VIEWPORTS = [
 ]
 PAGES = [
     ("", "home"),
+    ("about/", "about"),
+    ("outputs/", "outputs"),
     ("research/", "research"),
     ("publication/adhesives-wearable/", "publication"),
     ("project/peel-trace-evaluation/", "project"),
@@ -279,7 +281,7 @@ def main() -> int:
                         results.append(record)
                         errors.extend(f"{label}/{page_name}: {message}" for message in record_errors)
 
-                        if page_name == "home" or (page_name == "research" and label in {"390-mobile", "1440-desktop"}):
+                        if page_name == "home" or (page_name in {"about", "outputs", "research"} and label in {"390-mobile", "1440-desktop"}):
                             image = cdp.command("Page.captureScreenshot", {"format": "png", "fromSurface": True})
                             (screenshots / f"{label}-{page_name}.png").write_bytes(base64.b64decode(image["data"]))
 
