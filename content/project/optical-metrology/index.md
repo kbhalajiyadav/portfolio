@@ -46,6 +46,6 @@ Symposium.
 - [Research overview](/research/#measure-response)
 - [Presentation record](/#presentations)
 
-The presentations document the measurement approach and research question. A
-peer-reviewed performance benchmark and the underlying experimental dataset
-have not been published from this work.
+The current research record consists of those two presentations; no
+peer-reviewed article or dataset release is associated with this project at
+present.
