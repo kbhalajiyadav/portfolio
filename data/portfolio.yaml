@@ -238,7 +238,7 @@ collaboration_questions:
 - title: Structure to measurable response
   text: How can neutron scattering, rheology, optical metrology, and mechanics reveal structure–processing–property
     relationships?
-- title: Materials to use cases
+- title: Materials to applications
   text: How can passive thermochromic and soft-material systems be translated into reliable temperature-mapping,
     wearable, and sensing applications?
 narrative:
@@ -263,9 +263,8 @@ doctoral:
   text: I use rheology, structure-sensitive characterization, and quantitative optical and mechanical
     measurements to connect thermal and flow histories to material behavior, with an emphasis on methods
     that can be compared across experiments and scales.
-  robotics: Automation is useful where it standardizes sample placement, stimulus timing, and synchronized
-    data capture. Robotic handling may support repeated or long-duration sequences; it remains experimental
-    infrastructure rather than the research objective.
+  robotics: Automation can standardize sample placement, stimulus timing, and synchronized data capture for
+    repeated or long-duration experiments, improving consistency across stimulus cycles.
 presentation_series:
 - title: Adhesive selection and soft wearable interfaces
   summary: First-author article, M.S. thesis defense, research seminar, and three poster presentations.
