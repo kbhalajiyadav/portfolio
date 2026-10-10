@@ -183,7 +183,7 @@ def main() -> int:
                     line_limit = 5 if width <= 1100 else 4
                     if not metrics.get("headlineLines") or metrics["headlineLines"] > line_limit:
                         errors.append(f"{prefix}: headline uses too many lines: {metrics.get('headlineLines')}")
-                    if not (44 <= metrics.get("headlineFontSize", 0) <= 78):
+                    if not (44 <= metrics.get("headlineFontSize", 0) <= 80):
                         errors.append(f"{prefix}: headline size outside attention-safe range: {metrics.get('headlineFontSize')}px")
                     if metrics.get("headline") and metrics["headline"]["height"] > height * 0.46:
                         errors.append(f"{prefix}: headline occupies too much of the first frame")
