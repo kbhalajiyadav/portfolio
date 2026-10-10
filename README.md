@@ -14,7 +14,10 @@ portfolio and generated curriculum vitae.
 - `scripts/` — deterministic build and validation utilities
 
 Content classification decisions are recorded in
-`docs/content-taxonomy.md`.
+`docs/content-taxonomy.md`. Sitewide hierarchy, scientific-visual integrity,
+responsive composition, evidence-link behavior, spacing, and release lessons
+are recorded in `docs/design-governance.md`. Both documents are intended to
+carry forward into future changes rather than be rediscovered case by case.
 
 ## Build and validation
 
@@ -27,6 +30,7 @@ python3 scripts/build_cv.py --no-compile
 python3 scripts/audit_source.py
 python3 scripts/audit_styles.py
 python3 scripts/audit_templates.py
+python3 scripts/check_design_governance.py
 python3 scripts/check_workflows.py
 node --check assets/js/site.js
 hugo --gc --minify --printPathWarnings --baseURL https://bhalaji.com/
@@ -34,9 +38,10 @@ python3 scripts/check_site.py public
 python3 scripts/check_external_links.py public --site-origin https://bhalaji.com/
 ```
 
-GitHub Actions also runs accessibility, responsive-layout, laptop-frame, and
-mobile and desktop Lighthouse checks before deployment. CV compilation is
-handled by the dedicated XeLaTeX workflow.
+GitHub Actions also runs accessibility, responsive-layout, contextual-navigation,
+deep-link, spacing, component-integrity, laptop-frame, and mobile/desktop
+Lighthouse checks before deployment. CV compilation is handled by the dedicated
+XeLaTeX workflow.
 
 ## Rights
 

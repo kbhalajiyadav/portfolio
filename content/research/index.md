@@ -21,7 +21,7 @@ My research asks two linked questions: what changes inside a responsive
 material during processing, and which measurements can track that change
 reliably? The work moves through five stages:
 
-**Stimulus → Structure → Response → Measurement → Translation**
+{{< research-signature >}}
 
 Temperature, deformation, and flow alter structure; optical and mechanical
 measurements reveal the consequences.
@@ -40,7 +40,7 @@ Related work:
 - [versioned research software](/project/peel-trace-evaluation/) for protocol-defined peel-trace analysis;
 - an [optical-metrology project](/project/optical-metrology/) for computer-vision measurement of mechanochromic textiles;
 - the [patent-pending Quantitative Thermal Imaging technology](/project/quantitative-thermal-imaging/) (VCU Tech # TAN-26-099); and
-- [presentations on adhesion and computer-vision metrology](/#presentations).
+- presentation records for [adhesion and soft wearable interfaces](/engagement/#adhesion-soft-wearable-interfaces) and [computer-vision metrology](/engagement/#computer-vision-mechanochromic-textiles).
 
 ## Resolve structure under stimuli
 

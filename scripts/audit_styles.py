@@ -9,7 +9,8 @@ ROOT = Path(__file__).resolve().parents[1]
 SITE = (ROOT / "static/css/site.css").read_text(encoding="utf-8")
 REF = (ROOT / "static/css/refinements.css").read_text(encoding="utf-8")
 ABOUT = (ROOT / "static/css/about.css").read_text(encoding="utf-8")
-ALL = SITE + "\n" + REF + "\n" + ABOUT
+POLISH = (ROOT / "static/css/final-polish.css").read_text(encoding="utf-8")
+ALL = SITE + "\n" + REF + "\n" + ABOUT + "\n" + POLISH
 
 
 def compact(value: str) -> str:
@@ -37,6 +38,7 @@ def main() -> int:
     errors: list[str] = []
     all_compact = compact(ALL)
     ref_compact = compact(REF)
+    polish_compact = compact(POLISH)
 
     # Brand colors must remain readable on every site surface.
     tokens = dict(re.findall(r"--([\w-]+):\s*(#[0-9a-fA-F]{6})", ALL))
@@ -120,6 +122,32 @@ def main() -> int:
             if not rule_has(mobile, selector, declaration):
                 errors.append(f"mobile hero invariant missing {selector} {declaration}")
 
+    # Tablet composition, evidence targeting, and explanatory scientific visual are governed in the final polish layer.
+    for rule in (
+        ".trajectory-grid h3 + p{margin-top:.55rem}",
+        ".series[id]{scroll-margin-top:calc(var(--header-h) + 38px)}",
+        ".series:target{border-left:2px solid var(--teal);",
+        "@media(max-width:820px)",
+        ".research-signature__desktop",
+        ".research-signature__mobile",
+    ):
+        if compact(rule) not in polish_compact:
+            errors.append(f"final governed visual invariant missing {rule!r}")
+    tablet_match = re.search(r"@media\(max-width:820px\)\s*\{(.*)\}\s*@media\(prefers-reduced-motion", POLISH, re.DOTALL)
+    if not tablet_match:
+        errors.append("missing governed tablet composition block")
+    else:
+        tablet = tablet_match.group(1)
+        for selector, declaration in (
+            (".hero", "grid-template-columns:1fr"),
+            (".hero__copy", "width:100%"),
+            (".hero h1", "max-width:100%"),
+            (".identity-note", "position:static"),
+            (".research-signature__desktop", "display:none"),
+        ):
+            if not rule_has(tablet, selector, declaration):
+                errors.append(f"tablet governance invariant missing {selector} {declaration}")
+
     motif = re.search(r"--motif-opacity:([0-9.]+)", REF)
     if not motif:
         errors.append("missing decorative motif opacity token")
@@ -154,7 +182,7 @@ def main() -> int:
         for error in errors:
             print(f"ERROR: {error}")
         return 1
-    print("Style audit passed: contrast, interaction, intrinsic content flow, mobile hero composition, editorial restraint, motion, privacy, and spacing guardrails verified.")
+    print("Style audit passed: contrast, interaction, intrinsic content flow, mobile/tablet composition, editorial restraint, evidence targeting, scientific schematic integrity, motion, privacy, and spacing guardrails verified.")
     return 0
 
 

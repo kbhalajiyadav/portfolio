@@ -4,7 +4,6 @@
 {{ $cvVersion := readFile "static/uploads/resume.pdf" | md5 }}
 {{ $cvHref := printf "%s?v=%s" ($p.profile.cv | relURL) $cvVersion }}
 <article class="page-shell contact-page h-card">
-  <a class="back-link lnk" href="{{ "/" | relURL }}"><span aria-hidden="true">←</span> Portfolio home</a>
   <header class="page-header">
     <p class="kicker">Contact</p>
     <h1>{{ .Title }}</h1>

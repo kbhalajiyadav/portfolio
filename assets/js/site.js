@@ -84,6 +84,24 @@
     applyOutputFilter('all');
   }
 
+  const openDeepLinkedDetails = () => {
+    if (!window.location.hash) return;
+    let id = '';
+    try {
+      id = decodeURIComponent(window.location.hash.slice(1));
+    } catch (error) {
+      id = window.location.hash.slice(1);
+    }
+    if (!id) return;
+    const target = document.getElementById(id);
+    if (!target) return;
+    const details = target.matches('details') ? target : target.closest('details');
+    if (details) details.open = true;
+  };
+  openDeepLinkedDetails();
+  window.addEventListener('hashchange', openDeepLinkedDetails);
+  window.addEventListener('pageshow', openDeepLinkedDetails);
+
   const navLinks = Array.from(document.querySelectorAll('#site-nav a[href*="#"]'));
   const sections = navLinks.map((link) => {
     const hash = new URL(link.href, window.location.href).hash;

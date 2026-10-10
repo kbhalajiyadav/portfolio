@@ -35,10 +35,7 @@
     <h2>{{ $p.narrative.problem_title }}</h2>
     <p>{{ $p.narrative.problem }}</p>
   </div>
-  <ol class="research-chain" aria-label="Research translation chain">
-    {{ range $index, $step := $p.narrative.chain }}<li><span>{{ printf "%02d" (add $index 1) }}</span>{{ $step }}</li>{{ end }}
-  </ol>
-  <p class="chain-note">{{ $p.narrative.chain_note }}</p>
+  {{ partial "research_signature.html" . }}
   <div class="pillars">
     {{ range $p.research }}
     <article class="pillar pillar--{{ .motif }}">
@@ -105,7 +102,7 @@
   {{ $visibleService := slice }}{{ range $p.service }}{{ if ne .show false }}{{ $visibleService = $visibleService | append . }}{{ end }}{{ end }}
   {{ $visibleInnovation := slice }}{{ range $p.applied_innovation }}{{ if ne .show false }}{{ $visibleInnovation = $visibleInnovation | append . }}{{ end }}{{ end }}
   <div class="series-grid">
-    {{ range first $presentationLimit $visibleSeries }}<details class="series"><summary><span><strong>{{ .title }}</strong><small>{{ .summary }}</small></span><i aria-hidden="true">+</i></summary><ul>{{ range .records }}<li>{{ . }}</li>{{ end }}</ul></details>{{ end }}
+    {{ range first $presentationLimit $visibleSeries }}<details class="series" id="{{ .id }}"><summary><span><strong>{{ .title }}</strong><small>{{ .summary }}</small></span><i aria-hidden="true">+</i></summary><ul>{{ range .records }}<li>{{ . }}</li>{{ end }}</ul></details>{{ end }}
   </div>
   <div class="engagement-grid">
     <div><h3 class="subhead">Teaching and research guidance</h3>{{ range first $teachingLimit $visibleTeaching }}<article class="compact-record"><span>{{ .date }} · {{ .type }}</span><h4>{{ .title }}</h4><p>{{ .detail }}</p></article>{{ end }}</div>

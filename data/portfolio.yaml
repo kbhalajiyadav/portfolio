@@ -24,7 +24,7 @@ research:
     and textile-supported systems.
   tags:
   - Adhesion
-  - OpenCV
+  - Computer vision
   - Wearable textiles
   href: /research/#measure-response
   link_label: Measurement program
@@ -266,8 +266,12 @@ doctoral:
   robotics: Automation can standardize sample placement, stimulus timing, and synchronized data capture for
     repeated or long-duration experiments, improving consistency across stimulus cycles.
 presentation_series:
-- title: Adhesive selection and soft wearable interfaces
-  summary: First-author article, M.S. thesis defense, research seminar, and three poster presentations.
+- id: adhesion-soft-wearable-interfaces
+  title: Adhesive selection and soft wearable interfaces
+  summary: First-author article, M.S. thesis defense, research seminar, and four poster presentations.
+  presentation_titles:
+  - Multi-Criteria Selection of Adhesives for Wearable Textiles
+  - Adhesives for Personalized Wearable Devices
   records:
   - M.S. thesis defense · July 1, 2026 · VCU
   - PMDC 4th Annual Research Symposium · June 12, 2026 · VCU
@@ -275,8 +279,11 @@ presentation_series:
   - ACS Fall 2025 · August 20, 2025 · Washington, DC
   - VCU Graduate Student Research Symposium · April 23, 2025
   - VCU Engineering Graduate Research & Postdoc Showcase · March 26, 2025
-- title: Computer-vision metrology for mechanochromic textiles
+- id: computer-vision-mechanochromic-textiles
+  title: Computer-vision metrology for mechanochromic textiles
   summary: Two 2026 poster presentations on synchronized strain-to-color quantification.
+  presentation_titles:
+  - 'Quantifying Mechanochromic Response in Smart Textiles: A Computer Vision Approach'
   records:
   - 29th VCU Graduate Student Research Symposium · April 22, 2026
   - VCU Engineering Graduate Research & Postdoc Showcase · March 25, 2026

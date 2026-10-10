@@ -5,8 +5,6 @@
 {{ $cvHref := printf "%s?v=%s" ($p.profile.cv | relURL) $cvVersion }}
 <article class="about-page h-card">
   <div class="page-shell">
-    <a class="back-link lnk" href="{{ "/" | relURL }}"><span aria-hidden="true">←</span> Portfolio home</a>
-
     <header class="about-hero">
       <div class="about-hero__copy">
         <p class="kicker">{{ .Params.kicker }}</p>

@@ -1,7 +1,6 @@
 {{ define "main" }}
 {{ $p := site.Data.portfolio }}
 <article class="page-shell engagement-page">
-  <a class="back-link lnk" href="{{ "/" | relURL }}"><span aria-hidden="true">←</span> Portfolio home</a>
   <header class="page-header">
     <p class="kicker">Engagement</p>
     <h1>{{ .Title }}</h1>
@@ -12,7 +11,7 @@
     <div class="section-head"><p class="kicker">Research communication</p><h2 id="presentations-heading">Presentations and research events</h2><p>Selected presentation series and research events, shown with their individual records.</p></div>
     <div class="series-grid">
       {{ range $p.presentation_series }}{{ if ne .show false }}
-      <details class="series"><summary><span><strong>{{ .title }}</strong><small>{{ .summary }}</small></span><i aria-hidden="true">+</i></summary><ul>{{ range .records }}<li>{{ . }}</li>{{ end }}</ul></details>
+      <details class="series" id="{{ .id }}"><summary><span><strong>{{ .title }}</strong><small>{{ .summary }}</small></span><i aria-hidden="true">+</i></summary><ul>{{ range .records }}<li>{{ . }}</li>{{ end }}</ul></details>
       {{ end }}{{ end }}
     </div>
   </section>
