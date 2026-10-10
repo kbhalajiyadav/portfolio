@@ -92,21 +92,20 @@ def main() -> int:
         if rule not in refinements:
             errors.append(f"footer alignment invariant missing {rule!r}")
 
-    # Card alignment must remain content-driven. Fixed text-row heights previously
-    # let long copy collide with tags even though the card tops appeared aligned.
+    # Research cards reserve a common title zone while leaving the body track
+    # intrinsically flexible. Tags and actions stay in normal flow so longer
+    # copy cannot be painted on top of later content.
     pillar_alignment_rules = (
-        "@supports (grid-template-rows:subgrid)",
-        ".pillar{display:grid;grid-row:span 5;grid-template-rows:subgrid;min-height:0;align-items:start}",
+        ".pillar{display:grid;grid-template-rows:auto auto minmax(0,1fr) auto auto;min-height:430px;align-items:start}",
         ".pillar .card-number{margin-bottom:2.5rem}",
-        ".pillar h3{margin-top:0}",
-        ".pillar>.lnk{align-self:end}",
-        "@supports not (grid-template-rows:subgrid)",
-        ".pillar{display:flex;flex-direction:column;min-height:430px}",
-        ".pillar>.lnk{margin-top:auto}",
+        ".pillar h3{min-block-size:5.1em;margin-top:0}",
+        ".pillar>.lnk{align-self:end;margin-top:.25rem}",
     )
     for rule in pillar_alignment_rules:
         if rule not in refinements:
             errors.append(f"research-program content-flow invariant missing {rule!r}")
+    if "grid-template-rows:auto auto minmax(0,1fr) auto auto" not in refinements:
+        errors.append("research-program cards must retain an intrinsically flexible body row")
     if re.search(r"\.pillar\{grid-template-rows:auto\s+[0-9.]+em\s+[0-9.]+em", refinements):
         errors.append("research-program cards must not restore fixed text-row heights that can cause content collisions")
 
@@ -171,7 +170,7 @@ def main() -> int:
         return 1
     print(
         "Style audit passed: AA text contrast across all branded surfaces, "
-        "3:1 interactive boundaries, 24px controls, focus, breakpoints, content-driven card flow, "
+        "3:1 interactive boundaries, 24px controls, focus, breakpoints, flexible card flow, "
         "decorative restraint, reduced-motion-safe page continuity, privacy controls, and page spacing verified."
     )
     return 0
