@@ -7,10 +7,15 @@
 - [Research program](https://bhalaji.com/research/): Scientific questions, measurement strategy, structure under processing, reproducibility, and collaboration directions.
 - [Research outputs](https://bhalaji.com/outputs/): Complete reverse-chronological record of peer-reviewed articles, thesis, citable research software, and patent-pending intellectual property.
 - [First-author article](https://bhalaji.com/publication/adhesives-wearable/): Multi-criteria adhesive selection for wearable textiles.
-- [M.S. thesis record](https://bhalaji.com/publication/masters-thesis/): Public degree and repository information; full manuscript embargoed until July 20, 2031.
+- [M.S. thesis record](https://bhalaji.com/publication/masters-thesis/): Degree and repository information; full manuscript embargoed until July 20, 2031.
 - [Research software](https://bhalaji.com/project/peel-trace-evaluation/): Versioned workflow for protocol-defined peel-trace analysis.
 - [Quantitative Thermal Imaging](https://bhalaji.com/project/quantitative-thermal-imaging/): Patent-pending intellectual-property record, VCU Tech # TAN-26-099.
 - [Curriculum vitae](https://bhalaji.com/uploads/resume.pdf): Complete academic and professional record.
+
+## Current academic context
+- Program: Integrative Life Sciences Ph.D., Virginia Commonwealth University
+- Research group: VCU Soft Functional Materials Lab — https://vcusoftmaterialslab.weebly.com/
+- Advisor: Christina Tang, Ph.D. — https://egr.vcu.edu/directory/christina.tang/
 
 ## Identity
 - ORCID: https://orcid.org/0000-0003-0551-6172
@@ -18,8 +23,5 @@
 - GitHub: https://github.com/kbhalajiyadav
 - LinkedIn: https://www.linkedin.com/in/kbhalajiyadav
 - Contact: mailto:contact@bhalaji.com
-
-## Public scope
-The portfolio documents public research and professional records. Unpublished formulations, restricted datasets, confidential employer details, and detailed future experimental schedules are outside the public record.
 
 For a fuller machine-readable summary, see https://bhalaji.com/llms-full.txt
