@@ -114,6 +114,7 @@ Rules:
 
 - Desktop can use two-column editorial compositions when both columns retain readable measures.
 - The hero should stack before the text column becomes visibly squeezed by the portrait.
+- When the primary navigation collapses to the compact `Menu` treatment, the homepage hero should also leave the side-by-side desktop composition rather than creating a hybrid compact-header/squeezed-hero state.
 - Tablet is a first-class layout state, not merely compressed desktop.
 - Mobile ordering prioritizes orientation and action: context -> heading -> explanation -> actions/status -> visual.
 - The sticky header, menu, target offsets, and TOC must remain synchronized at every breakpoint.
@@ -126,6 +127,7 @@ Every interactive state must explain itself.
 Rules:
 
 - Hover, focus, active, current-page, expanded, and hash-target states must be distinguishable.
+- Clickable taxonomy tags/chips should visibly respond on hover and focus using the site accent language; they should not look inert simply because their default treatment is restrained.
 - Keyboard and pointer behavior must remain equivalent.
 - Focus should never be removed without a visible replacement.
 - Expandable records retain native `details/summary` semantics unless a stronger accessible pattern is required.
