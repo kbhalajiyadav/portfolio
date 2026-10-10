@@ -109,7 +109,7 @@
         <a href="{{ $p.profile.github }}" target="_blank" rel="me noopener"><strong>GitHub</strong><span>Research software and versioned methods</span></a>
         <a href="{{ $p.profile.linkedin }}" target="_blank" rel="me noopener"><strong>LinkedIn</strong><span>Professional history and institutional context</span></a>
         <a href="{{ $cvHref }}" target="_blank" rel="noopener"><strong>Curriculum vitae</strong><span>Complete academic and professional record</span></a>
-        <a href="{{ "/outputs/" | relURL }}"><strong>Research outputs</strong><span>Articles, thesis, software, and intellectual property</span></a>
+        <a href="{{ $aff.institutional_record_url }}" target="_blank" rel="noopener"><strong>{{ $aff.institutional_record_label }}</strong><span>Institutional thesis and degree record</span></a>
       </div>
     </section>
 
