@@ -2,6 +2,7 @@
 {{ $p := site.Data.portfolio }}
 {{ $cv := site.Data.cv }}
 {{ $ip := index $cv.intellectual_property 0 }}
+{{ $ipPage := site.GetPage "/project/quantitative-thermal-imaging/" }}
 {{ $primary := index $p.publications 0 }}
 {{ $secondary := index $p.publications 1 }}
 <article class="list-page">
@@ -44,11 +45,14 @@
 
       <article>
         <span class="overline">{{ $ip.status }} · {{ $ip.year }}</span>
-        <h2><a href="{{ "/project/quantitative-thermal-imaging/" | relURL }}">{{ $ip.title }}</a></h2>
+        <h2><a href="{{ $ipPage.RelPermalink }}">{{ $ip.title }}</a></h2>
         <p>{{ $ip.inventors }}</p>
         <p class="venue">{{ $ip.organization }} · VCU Tech # {{ $ip.tech_id }}</p>
         <p>{{ $ip.description }}</p>
-        <div class="actions"><a class="lnk" href="{{ "/project/quantitative-thermal-imaging/" | relURL }}">Intellectual property record <span class="arw" aria-hidden="true">↗</span></a></div>
+        <div class="actions">
+          <a class="lnk" href="{{ $ipPage.RelPermalink }}">Intellectual property record <span class="arw" aria-hidden="true">↗</span></a>
+          {{ with $ipPage.Params.public_listing }}<a class="lnk" href="{{ . }}" target="_blank" rel="noopener">Technology listing <span class="arw" aria-hidden="true">↗</span></a>{{ end }}
+        </div>
       </article>
 
       <article>
