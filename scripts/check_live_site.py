@@ -37,9 +37,11 @@ EXPECTED_TEXT = {
     ],
     "outputs/": [
         "Research Outputs",
+        "Research outputs",
         "Peer-reviewed article",
         "Research software",
-        "Intellectual property record",
+        "Intellectual property",
+        "Technology details",
     ],
     "privacy/": [
         "Privacy and analytics notice",
