@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Detect rendered content collisions and component overflow across portfolio components.
+"""Detect rendered content collisions, overflow, and avoidable editorial slack.
 
 The audit intentionally checks semantic component families rather than screenshot-perfect
 pixel positions. It protects cards, record rows, timelines, profile facts, citation boxes,
-and editorial panels against content overlap or horizontal escape as copy changes.
+and editorial panels against content overlap, horizontal escape, or large empty tails as
+copy changes.
 """
 from __future__ import annotations
 
@@ -48,11 +49,13 @@ SELECTORS = [
     ".questions article",
     ".trajectory-grid article",
     ".series",
+    ".series summary",
     ".compact-record",
     ".secondary-output",
     ".research-package",
     ".package-artifacts article",
     ".output-row",
+    ".education-panel",
     ".education-panel article",
     ".about-fact-strip div",
     ".about-program-grid article",
@@ -64,6 +67,17 @@ SELECTORS = [
     ".citation-box",
     ".related-package",
 ]
+
+# These are explanatory/editorial components, not promotional tiles. Large
+# unused tails usually indicate row stretching or a fixed/minimum height that
+# no longer reflects the content. Limits are deliberately generous so the
+# audit catches discontinuities rather than normal padding.
+EDITORIAL_SLACK_LIMITS = {
+    ".trajectory-grid article": 56.0,
+    ".series summary": 56.0,
+    ".education-panel": 72.0,
+    ".about-method-grid article": 56.0,
+}
 
 DECLINE_PRIVACY = r"""
 (async () => {
@@ -89,6 +103,7 @@ MEASURE = r"""
     const box = element.getBoundingClientRect();
     return {top:box.top,right:box.right,bottom:box.bottom,left:box.left,width:box.width,height:box.height};
   };
+  const number = value => Number.parseFloat(value) || 0;
   const overlaps = (a, b) => !(
     a.right <= b.left + 1 || b.right <= a.left + 1 ||
     a.bottom <= b.top + 1 || b.bottom <= a.top + 1
@@ -98,6 +113,7 @@ MEASURE = r"""
     [...document.querySelectorAll(selector)].forEach((component, index) => {
       if (!visible(component)) return;
       const componentRect = rect(component);
+      const componentStyle = getComputedStyle(component);
       const children = [...component.children]
         .filter(visible)
         .filter(child => {
@@ -124,6 +140,8 @@ MEASURE = r"""
         child.box.top < componentRect.top - 2 ||
         child.box.bottom > componentRect.bottom + 2
       ));
+      const contentBottom = children.length ? Math.max(...children.map(child => child.box.bottom)) : componentRect.top;
+      const trailingSlack = Math.max(0, componentRect.bottom - contentBottom - number(componentStyle.paddingBottom));
       results.push({
         selector,
         index,
@@ -132,6 +150,7 @@ MEASURE = r"""
         clientHeight: component.clientHeight,
         scrollWidth: component.scrollWidth,
         clientWidth: component.clientWidth,
+        trailingSlack,
         collisions,
         escaped,
       });
@@ -232,6 +251,12 @@ def main() -> int:
                                 errors.append(f"{prefix}: {label} has content outside its component bounds")
                             if component.get("scrollWidth", 0) > component.get("clientWidth", 0) + 2:
                                 errors.append(f"{prefix}: {label} has horizontal component overflow")
+                            slack_limit = EDITORIAL_SLACK_LIMITS.get(component["selector"])
+                            if slack_limit is not None and component.get("trailingSlack", 0) > slack_limit:
+                                errors.append(
+                                    f"{prefix}: {label} leaves {component['trailingSlack']:.1f}px of avoidable trailing whitespace "
+                                    f"(limit {slack_limit:.0f}px)"
+                                )
             finally:
                 cdp.close()
         finally:
@@ -248,7 +273,8 @@ def main() -> int:
         return 1
     print(
         "Component integrity passed: major cards, editorial records, timelines, profile facts, citation boxes, "
-        f"and related panels contain their rendered content without collisions or horizontal overflow across {len(PAGES) * len(VIEWPORTS)} page/viewport combinations."
+        "and related panels contain rendered content without collisions, horizontal overflow, or excessive editorial slack "
+        f"across {len(PAGES) * len(VIEWPORTS)} page/viewport combinations."
     )
     return 0
 
