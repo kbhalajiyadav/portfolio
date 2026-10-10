@@ -81,7 +81,7 @@ jobs:
           python3 scripts/check_data_consistency.py
           python3 scripts/check_review_freshness.py
           python3 scripts/check_workflows.py
-          python3 -m py_compile scripts/check_data_consistency.py scripts/check_software_release.py scripts/check_review_freshness.py scripts/check_layout_spacing.py scripts/check_release_marker.py scripts/check_home_navigation.py scripts/check_accessibility_interactions.py
+          python3 -m py_compile scripts/check_data_consistency.py scripts/check_software_release.py scripts/check_review_freshness.py scripts/check_layout_spacing.py scripts/check_release_marker.py scripts/check_home_navigation.py scripts/check_accessibility_interactions.py scripts/check_attention_hierarchy.py
           node --check assets/js/site.js
 
       - name: Setup Pages
@@ -132,7 +132,7 @@ jobs:
           PA11Y_WIDTH=390 PA11Y_HEIGHT=844 npx pa11y-ci --config .pa11yci.cjs --json | tee artifacts/pa11y-mobile.json
           PA11Y_WIDTH=320 PA11Y_HEIGHT=800 npx pa11y-ci --config .pa11yci.cjs --json | tee artifacts/pa11y-reflow-320.json
 
-      - name: Responsive, WCAG interaction, spacing, laptop-frame, reduced-motion, menu, and navigation audit
+      - name: Responsive, WCAG interaction, spacing, attention, reduced-motion, menu, and navigation audit
         run: |
           python3 scripts/check_responsive.py \
             --base-url http://127.0.0.1:4173/ \
@@ -157,6 +157,10 @@ jobs:
             --chrome "$CHROME_PATH" \
             --report artifacts/laptop-landing.json \
             --screenshot artifacts/responsive-screenshots/1366x768-laptop-home.png
+          python3 scripts/check_attention_hierarchy.py \
+            --base-url http://127.0.0.1:4173/ \
+            --chrome "$CHROME_PATH" \
+            --report artifacts/attention-hierarchy.json
 
       - name: Lighthouse audits for mobile and desktop
         run: |
