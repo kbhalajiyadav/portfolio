@@ -11,7 +11,7 @@
       {{ with .Params.summary }}<p class="page-lede publication-summary">{{ . | markdownify }}</p>{{ end }}
       {{ with .Params.authors }}<p class="publication-authors">{{ delimit . ", " }}</p>{{ end }}
       {{ with .Params.publication }}<p class="publication-venue">{{ . | markdownify }}</p>{{ end }}
-      <div class="page-meta"><time class="dt-published" datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ time.Format "2006" .Date }}</time>{{ if $isThesis }}<span>Public record; manuscript embargoed</span>{{ end }}</div>
+      <div class="page-meta"><time class="dt-published" datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ time.Format "2006" .Date }}</time>{{ if $isThesis }}<span>VCU repository record · manuscript embargoed</span>{{ end }}</div>
       {{ with .Params.tags }}<ul class="tag-list page-tags">{{ range . }}<li><a href="{{ (printf "/tags/%s/" (. | urlize)) | relURL }}">{{ . }}</a></li>{{ end }}</ul>{{ end }}
       <div class="actions publication-actions">
         {{ if .Params.doi }}<a class="lnk" href="{{ printf "https://doi.org/%s" .Params.doi }}" target="_blank" rel="noopener">Article <span class="arw" aria-hidden="true">↗</span></a>{{ end }}
@@ -24,7 +24,7 @@
     <div class="article-layout publication-layout">
       <div class="article-content e-content">
         {{ if $isThesis }}
-          {{ with .Params.abstract }}<section class="abstract-block"><h2>Public overview</h2><p>{{ . }}</p><p class="fine-print">The complete manuscript remains under repository embargo until July 20, 2031.</p></section>{{ end }}
+          {{ with .Params.abstract }}<section class="abstract-block"><h2>Thesis overview</h2><p>{{ . }}</p><p class="fine-print">The complete manuscript remains under repository embargo until July 20, 2031.</p></section>{{ end }}
         {{ else }}
           {{ with .Params.abstract }}<section class="abstract-block"><h2>Abstract</h2><p>{{ . }}</p></section>{{ end }}
         {{ end }}
