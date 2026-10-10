@@ -2,6 +2,8 @@
 {{ $root := "/" | relURL }}
 {{ $aboutURL := "about/" | relURL }}
 {{ $outputsURL := "outputs/" | relURL }}
+{{ $outputsHref := $outputsURL }}
+{{ if .IsHome }}{{ $outputsHref = printf "%s#outputs" $root }}{{ end }}
 {{ $isAbout := eq .RelPermalink $aboutURL }}
 {{ $isOutputs := eq .RelPermalink $outputsURL }}
 <header class="site-head">
@@ -19,7 +21,7 @@
     <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
       <a class="nav-about{{ if $isAbout }} is-current-page{{ end }}" href="{{ $aboutURL }}"{{ if $isAbout }} aria-current="page"{{ end }}>About</a>
       <a href="{{ $root }}#research">Research</a>
-      <a{{ if $isOutputs }} class="is-active"{{ end }} href="{{ $outputsURL }}"{{ if $isOutputs }} aria-current="page"{{ end }}>Outputs</a>
+      <a{{ if $isOutputs }} class="is-active"{{ end }} href="{{ $outputsHref }}"{{ if $isOutputs }} aria-current="page"{{ end }}>Outputs</a>
       <a href="{{ $root }}#experience">Experience</a>
       <a href="{{ $root }}#presentations">Engagement</a>
       <a class="nav-contact" href="{{ $root }}#contact">Contact</a>
