@@ -1,7 +1,8 @@
 {{ define "main" }}
+{{ $isPrimaryDestination := in (slice "/research/") .RelPermalink }}
 <article class="scholar-page h-entry">
   <div class="page-shell">
-    <a class="back-link lnk" href="{{ "/" | relURL }}"><span aria-hidden="true">←</span> Portfolio home</a>
+    {{ if not $isPrimaryDestination }}<a class="back-link lnk" href="{{ "/" | relURL }}"><span aria-hidden="true">←</span> Portfolio home</a>{{ end }}
     <header class="page-header">
       {{ $kicker := .Params.kicker | default (.Type | humanize) }}
       <p class="kicker">{{ $kicker }}</p>
