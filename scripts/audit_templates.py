@@ -90,6 +90,12 @@ def main() -> int:
         for marker in ('Research software', 'Intellectual property record', 'Peer-reviewed article'):
             if marker not in outputs:
                 errors.append(f"outputs hub lost record type {marker!r}")
+        if 'role="group" aria-label="Filter research outputs by type"' not in outputs:
+            errors.append("outputs filter must retain a concise accessible group label")
+        if outputs.count('data-output-filter=') != 5:
+            errors.append("outputs filter must retain exactly five type choices")
+        if "output-filter__label" in outputs or re.search(r">\s*Show\s*<", outputs, flags=re.IGNORECASE):
+            errors.append("outputs filter must not reintroduce a redundant visible Show label")
 
     privacy = (LAYOUTS / "partials/privacy_controls.html").read_text(encoding="utf-8")
     banner = re.search(r'<section\b[^>]*data-privacy-banner[^>]*>', privacy)
