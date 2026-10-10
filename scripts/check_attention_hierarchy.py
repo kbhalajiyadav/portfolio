@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate homepage attention hierarchy across common desktop and laptop frames."""
+"""Validate homepage attention hierarchy across desktop, laptop, and mobile frames."""
 from __future__ import annotations
 
 import argparse
@@ -14,12 +14,14 @@ from urllib.parse import quote
 from check_responsive import CDP, free_port, read_json, wait_ready
 
 VIEWPORTS = [
-    (1024, 768, "compact-desktop"),
-    (1280, 720, "small-laptop"),
-    (1366, 768, "laptop"),
-    (1440, 900, "large-laptop"),
-    (1536, 864, "wide-laptop"),
-    (1920, 1080, "desktop"),
+    (320, 800, "wcag-reflow", True),
+    (390, 844, "mobile", True),
+    (1024, 768, "compact-desktop", False),
+    (1280, 720, "small-laptop", False),
+    (1366, 768, "laptop", False),
+    (1440, 900, "large-laptop", False),
+    (1536, 864, "wide-laptop", False),
+    (1920, 1080, "desktop", False),
 ]
 
 DECLINE_PRIVACY = r"""
@@ -41,10 +43,15 @@ PAGE_METRICS = r"""
     const box = element.getBoundingClientRect();
     return {top:box.top,right:box.right,bottom:box.bottom,left:box.left,width:box.width,height:box.height};
   };
+  const lineCount = element => {
+    if (!element) return null;
+    const style = getComputedStyle(element);
+    const lineHeight = parseFloat(style.lineHeight) || 0;
+    return lineHeight ? Math.round(element.getBoundingClientRect().height / lineHeight) : null;
+  };
   const headline = document.querySelector('.hero h1');
+  const eyebrow = document.querySelector('.hero .eyebrow');
   const headlineStyle = headline ? getComputedStyle(headline) : null;
-  const headlineLineHeight = headlineStyle ? parseFloat(headlineStyle.lineHeight) || 0 : 0;
-  const headlineHeight = headline ? headline.getBoundingClientRect().height : 0;
   const lede = document.querySelector('.hero .lede');
   const ledeStyle = lede ? getComputedStyle(lede) : null;
   const heroActions = [...document.querySelectorAll('.hero .actions a')];
@@ -60,7 +67,6 @@ PAGE_METRICS = r"""
     const box = item.getBoundingClientRect();
     const title = item.querySelector('h3')?.getBoundingClientRect();
     const body = item.querySelector(':scope > p')?.getBoundingClientRect();
-    const tags = item.querySelector('.tag-list')?.getBoundingClientRect();
     const link = item.querySelector(':scope > .lnk')?.getBoundingClientRect();
     const motif = item.querySelector('.motif');
     return {
@@ -68,9 +74,13 @@ PAGE_METRICS = r"""
       bottom:box.bottom,
       height:box.height,
       titleTop:title?.top ?? null,
+      titleBottom:title?.bottom ?? null,
       bodyTop:body?.top ?? null,
-      tagsTop:tags?.top ?? null,
+      bodyBottom:body?.bottom ?? null,
+      linkTop:link?.top ?? null,
       linkBottom:link?.bottom ?? null,
+      titleBodyGap:title && body ? body.top - title.bottom : null,
+      bodyLinkGap:body && link ? link.top - body.bottom : null,
       motifOpacity:motif ? parseFloat(getComputedStyle(motif).opacity) : null,
     };
   });
@@ -80,6 +90,7 @@ PAGE_METRICS = r"""
     scrollWidth:document.documentElement.scrollWidth,
     hero:rect('.hero'),
     copy:rect('.hero__copy'),
+    eyebrow:rect('.hero .eyebrow'),
     headline:rect('.hero h1'),
     lede:rect('.hero .lede'),
     actions:rect('.hero .actions'),
@@ -87,8 +98,9 @@ PAGE_METRICS = r"""
     portrait:rect('.hero__visual'),
     identity:rect('.identity-note'),
     status:rect('.status-line'),
+    eyebrowLines:lineCount(eyebrow),
+    headlineLines:lineCount(headline),
     headlineFontSize:headlineStyle ? parseFloat(headlineStyle.fontSize) || 0 : 0,
-    headlineLines:headlineLineHeight ? Math.round(headlineHeight / headlineLineHeight) : null,
     ledeFontSize:ledeStyle ? parseFloat(ledeStyle.fontSize) || 0 : 0,
     ledeLineHeight:ledeStyle ? parseFloat(ledeStyle.lineHeight) || 0 : 0,
     heroActionCount:heroActions.length,
@@ -128,7 +140,6 @@ def spread(values: list[float | int | None]) -> float | None:
 
 
 def visual_rows(items: list[dict], tolerance: float = 3.0) -> list[list[dict]]:
-    """Group responsive cards that visibly share a row without assuming a column count."""
     rows: list[list[dict]] = []
     for item in sorted(items, key=lambda value: (value.get("top") or 0)):
         top = item.get("top")
@@ -201,12 +212,12 @@ def main() -> int:
                 cdp.command("Page.enable")
                 cdp.command("Runtime.enable")
                 url = args.base_url.rstrip("/") + "/"
-                for width, height, name in VIEWPORTS:
+                for width, height, name, mobile in VIEWPORTS:
                     cdp.command("Emulation.setDeviceMetricsOverride", {
                         "width": width,
                         "height": height,
                         "deviceScaleFactor": 1,
-                        "mobile": False,
+                        "mobile": mobile,
                     })
                     cdp.command("Page.navigate", {"url": url})
                     wait_ready(cdp, url)
@@ -214,27 +225,57 @@ def main() -> int:
                     metrics = cdp.evaluate(PAGE_METRICS)
                     metrics["name"] = name
                     results.append(metrics)
-
                     prefix = f"{width}x{height}/{name}"
+
                     if metrics["scrollWidth"] > width + 2:
                         errors.append(f"{prefix}: horizontal overflow ({metrics['scrollWidth']}px)")
-
-                    for key in ("hero", "copy", "headline", "lede", "actions", "primaryAction", "portrait", "identity", "status"):
+                    for key in ("hero", "copy", "eyebrow", "headline", "lede", "actions", "primaryAction", "portrait", "identity", "status"):
                         if not metrics.get(key):
                             errors.append(f"{prefix}: missing {key}")
 
-                    line_limit = 5 if width <= 1100 else 4
-                    if not metrics.get("headlineLines") or metrics["headlineLines"] > line_limit:
-                        errors.append(f"{prefix}: headline uses too many lines: {metrics.get('headlineLines')}")
-                    if not (44 <= metrics.get("headlineFontSize", 0) <= 80):
-                        errors.append(f"{prefix}: headline size outside attention-safe range: {metrics.get('headlineFontSize')}px")
-                    if metrics.get("headline") and metrics["headline"]["height"] > height * 0.46:
-                        errors.append(f"{prefix}: headline occupies too much of the first frame")
+                    if mobile:
+                        copy = metrics.get("copy")
+                        headline = metrics.get("headline")
+                        portrait = metrics.get("portrait")
+                        if copy and copy["width"] < width - 48:
+                            errors.append(f"{prefix}: hero copy collapsed too narrowly ({copy['width']:.1f}px)")
+                        if (metrics.get("eyebrowLines") or 99) > 3:
+                            errors.append(f"{prefix}: eyebrow fragments into {metrics.get('eyebrowLines')} lines")
+                        line_limit = 5 if width >= 390 else 6
+                        if (metrics.get("headlineLines") or 99) > line_limit:
+                            errors.append(f"{prefix}: headline fragments into {metrics.get('headlineLines')} lines (limit {line_limit})")
+                        if not (36 <= metrics.get("headlineFontSize", 0) <= 48):
+                            errors.append(f"{prefix}: headline size outside mobile range: {metrics.get('headlineFontSize')}px")
+                        if headline and headline["width"] < (width - 48) * 0.9:
+                            errors.append(f"{prefix}: headline block does not use the available mobile measure")
+                        if copy and portrait and portrait["top"] < copy["bottom"] + 20:
+                            errors.append(f"{prefix}: portrait is pulled into the hero copy")
+                    else:
+                        line_limit = 5 if width <= 1100 else 4
+                        if not metrics.get("headlineLines") or metrics["headlineLines"] > line_limit:
+                            errors.append(f"{prefix}: headline uses too many lines: {metrics.get('headlineLines')}")
+                        if not (44 <= metrics.get("headlineFontSize", 0) <= 80):
+                            errors.append(f"{prefix}: headline size outside attention-safe range: {metrics.get('headlineFontSize')}px")
+                        if metrics.get("headline") and metrics["headline"]["height"] > height * 0.46:
+                            errors.append(f"{prefix}: headline occupies too much of the first frame")
+                        for key in ("lede", "primaryAction", "portrait", "identity", "status"):
+                            box = metrics.get(key)
+                            if box and box["bottom"] > height - 4:
+                                errors.append(f"{prefix}: {key} falls below the first frame (bottom={box['bottom']:.1f})")
+                        if overlaps(metrics.get("copy"), metrics.get("portrait")):
+                            errors.append(f"{prefix}: hero copy and portrait overlap")
+                        portrait = metrics.get("portrait")
+                        hero = metrics.get("hero")
+                        if portrait and hero and hero["width"]:
+                            hero_share = portrait["width"] / hero["width"]
+                            metrics["portraitHeroShare"] = hero_share
+                            if not (0.23 <= hero_share <= 0.38):
+                                errors.append(f"{prefix}: portrait share of hero composition is unbalanced ({hero_share:.3f})")
+
                     if not (16 <= metrics.get("ledeFontSize", 0) <= 23):
                         errors.append(f"{prefix}: lede size outside readable range: {metrics.get('ledeFontSize')}px")
                     if metrics.get("ledeFontSize", 0) and metrics.get("ledeLineHeight", 0) < metrics["ledeFontSize"] * 1.45:
                         errors.append(f"{prefix}: lede line height is too tight")
-
                     if metrics.get("heroActionCount") != 2:
                         errors.append(f"{prefix}: hero must expose exactly one primary and one secondary action")
                     if transparent(metrics.get("primaryBackground", "")):
@@ -242,54 +283,33 @@ def main() -> int:
                     if not transparent(metrics.get("secondaryBackground", "")):
                         errors.append(f"{prefix}: secondary CV action is competing with the primary action")
 
-                    for key in ("lede", "primaryAction", "portrait", "identity", "status"):
-                        box = metrics.get(key)
-                        if box and box["bottom"] > height - 4:
-                            errors.append(f"{prefix}: {key} falls below the first frame (bottom={box['bottom']:.1f})")
-                    if overlaps(metrics.get("copy"), metrics.get("portrait")):
-                        errors.append(f"{prefix}: hero copy and portrait overlap")
-                    portrait = metrics.get("portrait")
-                    hero = metrics.get("hero")
-                    if portrait and hero and hero["width"]:
-                        # The site uses a fixed maximum content shell, so portrait balance
-                        # must be judged against that composition rather than the full
-                        # browser width on large monitors.
-                        hero_share = portrait["width"] / hero["width"]
-                        metrics["portraitHeroShare"] = hero_share
-                        if not (0.23 <= hero_share <= 0.38):
-                            errors.append(f"{prefix}: portrait share of hero composition is unbalanced ({hero_share:.3f})")
-
                     pillars = metrics.get("pillars", [])
                     if len(pillars) != 3:
                         errors.append(f"{prefix}: expected exactly three research-program cards, found {len(pillars)}")
                     else:
-                        row_reports: list[dict] = []
+                        for index, card in enumerate(pillars, start=1):
+                            gap = card.get("titleBodyGap")
+                            if gap is None or gap < 8 or gap > 42:
+                                errors.append(f"{prefix}: research card {index} title/body gap is unstable ({gap})")
+                            link_gap = card.get("bodyLinkGap")
+                            if link_gap is None or link_gap < 14 or link_gap > 88:
+                                errors.append(f"{prefix}: research card {index} body/action gap is excessive ({link_gap})")
                         for row_index, row in enumerate(visual_rows(pillars), start=1):
-                            # A single card on a wrapped final row has no peer baseline to compare.
                             if len(row) < 2:
                                 continue
-                            alignment = {
-                                "row": row_index,
-                                "cardTops": spread([item.get("top") for item in row]),
-                                "cardHeights": spread([item.get("height") for item in row]),
-                                "titleTops": spread([item.get("titleTop") for item in row]),
-                                "bodyTops": spread([item.get("bodyTop") for item in row]),
-                                "tagTops": spread([item.get("tagsTop") for item in row]),
-                                "linkBottoms": spread([item.get("linkBottom") for item in row]),
-                            }
-                            row_reports.append(alignment)
-                            for label, delta in alignment.items():
-                                if label == "row":
-                                    continue
-                                if delta is None or delta > 3:
-                                    errors.append(
-                                        f"{prefix}: research-card row {row_index} {label} lost alignment (spread={delta})"
-                                    )
-                        metrics["pillarAlignmentRows"] = row_reports
+                            top_spread = spread([item.get("top") for item in row])
+                            title_spread = spread([item.get("titleTop") for item in row])
+                            link_spread = spread([item.get("linkBottom") for item in row])
+                            if top_spread is None or top_spread > 3:
+                                errors.append(f"{prefix}: research-card row {row_index} tops lost alignment ({top_spread})")
+                            if title_spread is None or title_spread > 3:
+                                errors.append(f"{prefix}: research-card row {row_index} title tops lost alignment ({title_spread})")
+                            if not mobile and (link_spread is None or link_spread > 3):
+                                errors.append(f"{prefix}: research-card row {row_index} actions lost baseline alignment ({link_spread})")
                         opacities = [item.get("motifOpacity") for item in pillars if item.get("motifOpacity") is not None]
                         if len(opacities) != 3:
                             errors.append(f"{prefix}: research motifs missing opacity metrics")
-                        elif max(opacities) > 0.5 or spread(opacities) > 0.02:
+                        elif max(opacities) > 0.5 or (spread(opacities) or 0) > 0.02:
                             errors.append(f"{prefix}: research motifs are visually unbalanced: {opacities}")
 
                     expected_labels = [
@@ -306,9 +326,8 @@ def main() -> int:
                         errors.append(f"{prefix}: patent-pending proof count must remain 1")
                     if values.get("Citable software release") != "1":
                         errors.append(f"{prefix}: citable-software proof count must remain 1")
-
                     if metrics.get("researchPackageCount") != 1 or metrics.get("secondaryOutputCount") != 1:
-                        errors.append(f"{prefix}: homepage outputs must stay curated to one flagship package plus one IP record")
+                        errors.append(f"{prefix}: homepage outputs must stay curated to one flagship research group plus one IP record")
                     if "Mechanical Properties of Dual-Layer Electrospun Fiber Mats" in metrics.get("selectedOutputsText", ""):
                         errors.append(f"{prefix}: complete coauthor publication record belongs on Outputs, not homepage selected evidence")
             finally:
@@ -325,7 +344,7 @@ def main() -> int:
     if errors:
         print("\n".join(f"ERROR: {error}" for error in errors))
         return 1
-    print("Homepage attention hierarchy passed across six desktop/laptop frames: proposition, primary action, portrait, proof signals, row-aware research-card alignment, decorative restraint, and selected evidence remain prioritized.")
+    print("Homepage attention hierarchy passed across mobile, WCAG reflow, laptop, and desktop frames: the hero does not collapse, research-card spacing remains intrinsic, and selected evidence stays prioritized.")
     return 0
 
 

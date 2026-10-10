@@ -45,7 +45,6 @@
       <div class="motif" aria-hidden="true"><i></i><i></i><i></i></div>
       <span class="card-number">{{ .number }}</span>
       <h3>{{ .title }}</h3><p>{{ .text }}</p>
-      <ul class="tag-list">{{ range .tags }}<li>{{ . }}</li>{{ end }}</ul>
       <a class="lnk" href="{{ .href | relURL }}">{{ .link_label }} <span class="arw" aria-hidden="true">→</span></a>
     </article>
     {{ end }}
@@ -57,12 +56,12 @@
   <div class="section-head">
     <p class="kicker">Selected outputs</p>
     <h2>Peer-reviewed work, citable software, and patent-pending technology.</h2>
-    <p>Flagship evidence is shown here; the complete chronological record remains available in Research Outputs.</p>
+    <p>Selected work is highlighted here; the complete chronological list is available in Research Outputs.</p>
   </div>
   {{ $primary := index $p.publications 0 }}
   <article class="research-package">
     <div class="package-lead">
-      <span class="overline">First-author research package · 2026</span>
+      <span class="overline">First-author research · 2026</span>
       <h3>{{ $primary.title }}</h3>
       <p>{{ $primary.authors }}</p><p class="venue">{{ $primary.venue }}</p>
       <div class="actions">

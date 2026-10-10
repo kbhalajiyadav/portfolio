@@ -3,9 +3,12 @@
 > Public academic portfolio for a Ph.D. student in Integrative Life Sciences at Virginia Commonwealth University studying stimuli-responsive soft and liquid-crystalline materials through quantitative metrology, rheology, neutron scattering, mechanics, and reproducible computation.
 
 ## Primary pages
-- [About Bhalaji Yadav Kantepalle](https://bhalaji.com/about/): Research biography, professional path, current scientific focus, methods, and persistent profile links.
-- [Research program](https://bhalaji.com/research/): Scientific questions, measurement strategy, structure under processing, reproducibility, and collaboration directions.
+- [About Bhalaji Yadav Kantepalle](https://bhalaji.com/about/): Research biography, professional path, current scientific focus, methods, research profiles, and institutional links.
+- [Research program](https://bhalaji.com/research/): Scientific questions, measurement strategy, structure under processing, reproducibility, and open research questions.
 - [Research outputs](https://bhalaji.com/outputs/): Complete reverse-chronological record of peer-reviewed articles, thesis, citable research software, and patent-pending intellectual property.
+- [Experience and education](https://bhalaji.com/experience/): Professional and research experience, education, and research training.
+- [Engagement](https://bhalaji.com/engagement/): Research presentations, teaching and research guidance, service, review, and applied innovation.
+- [Contact](https://bhalaji.com/contact/): Research collaboration, methods exchange, and research-profile links.
 - [First-author article](https://bhalaji.com/publication/adhesives-wearable/): Multi-criteria adhesive selection for wearable textiles.
 - [M.S. thesis record](https://bhalaji.com/publication/masters-thesis/): Degree and repository information; full manuscript embargoed until July 20, 2031.
 - [Research software](https://bhalaji.com/project/peel-trace-evaluation/): Versioned workflow for protocol-defined peel-trace analysis.
@@ -14,7 +17,7 @@
 
 ## Current academic context
 - Program: Integrative Life Sciences Ph.D., Virginia Commonwealth University
-- Research group: VCU Soft Functional Materials Lab — https://vcusoftmaterialslab.weebly.com/
+- Research group: VCU Soft Functional Materials Lab — https://vcusoftmaterialslab.weebly.com/people.html
 - Advisor: Christina Tang, Ph.D. — https://egr.vcu.edu/directory/christina.tang/
 
 ## Identity

@@ -32,14 +32,37 @@ EXPECTED_TEXT = {
         "Chemical engineering, regulated practice, and research metrology",
         "VCU Soft Functional Materials Lab",
         "Christina Tang, Ph.D.",
-        "Profiles and records",
-        "Collaboration and methods exchange",
+        "Research profiles and institutional links",
+        "Research questions open to collaboration",
+    ],
+    "research/": [
+        "Resolve structure under stimuli",
+        "Translate reproducibly",
+        "Connected research outputs",
+        "Open research questions",
     ],
     "outputs/": [
         "Research Outputs",
         "Peer-reviewed article",
         "Research software",
         "Intellectual property record",
+    ],
+    "experience/": [
+        "Experience &amp; Education",
+        "Professional and research experience",
+        "Education",
+        "Research training",
+    ],
+    "engagement/": [
+        "Engagement",
+        "Presentations and research events",
+        "Teaching and research guidance",
+        "Service and review",
+    ],
+    "contact/": [
+        "Research collaboration and methods exchange",
+        "contact@bhalaji.com",
+        "VCU Soft Functional Materials Lab",
     ],
     "privacy/": [
         "Privacy and analytics notice",
@@ -55,18 +78,19 @@ EXPECTED_TEXT = {
     "project/optical-metrology/": [
         "Optical Metrology for Mechanochromic Textiles",
         "Measurement workflow",
-        "Research record",
-        "peer-reviewed performance benchmark",
+        "Presentations and outputs",
+        "VCU Engineering Graduate",
+        "29th VCU Graduate Student Research Symposium",
     ],
     "project/quantitative-thermal-imaging/": [
-        "Intellectual property",
+        "Intellectual-property status",
         "Patent pending",
         "Technology overview",
         "VCU Tech # TAN-26-099",
+        "What patent pending means",
     ],
-    "research/": ["Resolve structure under stimuli", "Translate reproducibly", "Research package"],
     "robots.txt": ["OAI-SearchBot", "Claude-SearchBot", "Microsoft Clarity project xuo3lvzchr"],
-    "sitemap.xml": ["<urlset", "/about/", "/outputs/"],
+    "sitemap.xml": ["<urlset", "/about/", "/research/", "/outputs/", "/experience/", "/engagement/", "/contact/"],
     "site.webmanifest": ["/icon-192.png", "/icon-512.png", "/favicon.svg"],
 }
 
@@ -98,10 +122,6 @@ PNG_SIZES = {
 }
 
 ICO_PATHS = ["favicon.ico", "media/bk-browser-20260730-v6.ico"]
-
-# These paths are expected to disappear eventually, but CDN or browser-edge caches
-# may continue serving them after a successful Pages deployment. They are therefore
-# reported as cleanup warnings, not used as release-blocking evidence.
 OBSOLETE_CACHE_PATHS = [
     "media/bk-safari-tab-20260730-1.png",
     "media/bk-safari-touch-20260730-1.png",
@@ -124,7 +144,7 @@ def fetch(url: str, nonce: str) -> tuple[int, str, bytes]:
     request = Request(
         cache_busted(url, nonce),
         headers={
-            "User-Agent": "BhalajiPortfolioDeployCheck/2.2",
+            "User-Agent": "BhalajiPortfolioDeployCheck/2.4",
             "Cache-Control": "no-cache, no-store, max-age=0",
             "Pragma": "no-cache",
         },
@@ -134,7 +154,6 @@ def fetch(url: str, nonce: str) -> tuple[int, str, bytes]:
 
 
 def normalize_optional_attribute_quotes(body: str) -> str:
-    """Normalize standards-valid unquoted href/src values for stable marker checks."""
     return re.sub(
         r"\b(href|src)=([^\s\"'=<>`]+)",
         r'\1="\2"',
@@ -144,7 +163,6 @@ def normalize_optional_attribute_quotes(body: str) -> str:
 
 
 def extract_attribute(tag: str, name: str) -> str | None:
-    """Return a quoted or unquoted HTML attribute value from one start tag."""
     match = re.search(
         rf"\b{re.escape(name)}=(?:\"([^\"]*)\"|'([^']*)'|([^\s>]+))",
         tag,

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Verify homepage navigation order, hover geometry, scroll state, and short-height About layout."""
+"""Verify stable primary navigation and short-height About layout."""
 from __future__ import annotations
 
 import argparse
@@ -13,41 +13,14 @@ from urllib.parse import quote, urljoin
 
 from check_responsive import CDP, free_port, read_json, wait_ready
 
-EXPECTED_LABELS = [
-    "About",
-    "Research",
-    "Outputs",
-    "Experience",
-    "Engagement",
-    "Contact",
-]
-
-
-def active_state(cdp: CDP) -> dict:
-    return cdp.evaluate(
-        """
-        (() => {
-          const links = [...document.querySelectorAll('#site-nav > a')];
-          return {
-            active: links.filter((link) => link.classList.contains('is-active')).map((link) => link.textContent.trim()),
-            currentLocation: links.filter((link) => link.getAttribute('aria-current') === 'location').map((link) => link.textContent.trim())
-          };
-        })()
-        """
-    )
-
-
-def scroll_to(cdp: CDP, expression: str) -> None:
-    cdp.evaluate(
-        f"""
-        new Promise((resolve) => {{
-          document.documentElement.style.scrollBehavior = 'auto';
-          document.body.style.scrollBehavior = 'auto';
-          window.scrollTo(0, {expression});
-          requestAnimationFrame(() => requestAnimationFrame(() => requestAnimationFrame(resolve)));
-        }})
-        """
-    )
+EXPECTED_LINKS = {
+    "About": "/about/",
+    "Research": "/research/",
+    "Outputs": "/outputs/",
+    "Experience": "/experience/",
+    "Engagement": "/engagement/",
+    "Contact": "/contact/",
+}
 
 
 def main() -> int:
@@ -129,25 +102,28 @@ def main() -> int:
                           });
                           return {
                             labels: items.map((link) => link.textContent.trim()),
+                            hrefs: Object.fromEntries(items.map((link) => [link.textContent.trim(), link.getAttribute('href')])),
+                            current: items.filter(link => link.getAttribute('aria-current') === 'page').map(link => link.textContent.trim()),
+                            locationCurrent: items.filter(link => link.getAttribute('aria-current') === 'location').map(link => link.textContent.trim()),
                             navCenterSpread: centers.length ? Math.max(...centers) - Math.min(...centers) : null,
                             horizontalOverflow: root.scrollWidth > root.clientWidth + 2
                           };
                         })()
                         """
                     )
-                    results[f"layout-{width}"] = layout
-                    if layout["labels"] != EXPECTED_LABELS:
-                        errors.append(f"{width}px navigation labels/order {layout['labels']}, expected {EXPECTED_LABELS}")
+                    results[f"home-{width}"] = layout
+                    if layout["labels"] != list(EXPECTED_LINKS):
+                        errors.append(f"{width}px navigation labels/order {layout['labels']}, expected {list(EXPECTED_LINKS)}")
+                    if layout["hrefs"] != EXPECTED_LINKS:
+                        errors.append(f"{width}px primary navigation must use stable canonical destinations: {layout['hrefs']}")
+                    if layout["current"] or layout["locationCurrent"]:
+                        errors.append(f"{width}px homepage must not pretend a child destination is current: {layout}")
                     if layout["navCenterSpread"] is None or layout["navCenterSpread"] > 3:
                         errors.append(f"{width}px desktop navigation lost one-row center alignment: spread={layout['navCenterSpread']}")
                     if layout["horizontalOverflow"]:
                         errors.append(f"{width}px homepage has horizontal overflow")
 
-                initial = active_state(cdp)
-                results["initialHero"] = initial
-                if initial["active"] or initial["currentLocation"]:
-                    errors.append(f"hero must not retain a section highlight: {initial}")
-
+                # About hover geometry remains a useful desktop-divider regression check.
                 document_node = cdp.command("DOM.getDocument", {"depth": 1})["root"]["nodeId"]
                 about_node = cdp.command("DOM.querySelector", {"nodeId": document_node, "selector": ".nav-about"})["nodeId"]
                 cdp.command("CSS.forcePseudoState", {"nodeId": about_node, "forcedPseudoClasses": ["hover"]})
@@ -168,30 +144,32 @@ def main() -> int:
                 if abs(hover_geometry["pseudoRight"] - hover_geometry["paddingRight"]) > 1:
                     errors.append(f"About hover underline extends into divider spacing: {hover_geometry}")
 
-                scroll_to(cdp, "document.querySelector('#research').offsetTop")
-                research = active_state(cdp)
-                results["research"] = research
-                if research != {"active": ["Research"], "currentLocation": ["Research"]}:
-                    errors.append(f"Research section did not activate Research exactly: {research}")
+                # Every primary page must keep the same destinations and mark exactly itself current.
+                for label, path in EXPECTED_LINKS.items():
+                    url = urljoin(base_url, path.lstrip("/"))
+                    cdp.command("Page.navigate", {"url": url})
+                    wait_ready(cdp, url)
+                    state = cdp.evaluate(
+                        """
+                        (() => {
+                          const links = [...document.querySelectorAll('#site-nav > a')];
+                          return {
+                            hrefs:Object.fromEntries(links.map(link => [link.textContent.trim(), link.getAttribute('href')])),
+                            current:links.filter(link => link.getAttribute('aria-current') === 'page').map(link => link.textContent.trim()),
+                            active:links.filter(link => link.classList.contains('is-active') || link.classList.contains('is-current-page')).map(link => link.textContent.trim())
+                          };
+                        })()
+                        """
+                    )
+                    results[f"destination-{label}"] = state
+                    if state["hrefs"] != EXPECTED_LINKS:
+                        errors.append(f"{label} page changed primary destinations: {state['hrefs']}")
+                    if state["current"] != [label]:
+                        errors.append(f"{label} page must expose exactly aria-current=page on itself: {state}")
+                    if label not in state["active"]:
+                        errors.append(f"{label} page does not visually identify the current destination: {state}")
 
-                scroll_to(cdp, "document.querySelector('#presentations').offsetTop")
-                engagement = active_state(cdp)
-                results["engagement"] = engagement
-                if engagement != {"active": ["Engagement"], "currentLocation": ["Engagement"]}:
-                    errors.append(f"presentations section did not activate Engagement exactly: {engagement}")
-
-                scroll_to(cdp, "document.documentElement.scrollHeight")
-                contact = active_state(cdp)
-                results["contact"] = contact
-                if contact != {"active": ["Contact"], "currentLocation": ["Contact"]}:
-                    errors.append(f"page end did not activate Contact exactly: {contact}")
-
-                scroll_to(cdp, "0")
-                returned = active_state(cdp)
-                results["returnedHero"] = returned
-                if returned["active"] or returned["currentLocation"]:
-                    errors.append(f"returning to the hero left a stale section highlight: {returned}")
-
+                # Short laptop frame: About must remain balanced and keep profile facts in the first viewport.
                 cdp.evaluate("document.querySelector('[data-consent-decline]')?.click()")
                 cdp.command(
                     "Emulation.setDeviceMetricsOverride",
@@ -209,7 +187,6 @@ def main() -> int:
                       const portrait = document.querySelector('.about-portrait');
                       const heading = document.querySelector('.about-hero h1');
                       const facts = document.querySelector('.about-fact-strip');
-                      const aboutLink = document.querySelector('.nav-about');
                       const copyRect = copy.getBoundingClientRect();
                       const portraitRect = portrait.getBoundingClientRect();
                       return {
@@ -220,8 +197,7 @@ def main() -> int:
                         headingSize: parseFloat(getComputedStyle(heading).fontSize),
                         pageTopPadding: parseFloat(getComputedStyle(document.querySelector('.about-page .page-shell')).paddingTop),
                         factStripTop: facts.getBoundingClientRect().top,
-                        viewportHeight: window.innerHeight,
-                        aboutCurrentPage: aboutLink.getAttribute('aria-current') === 'page'
+                        viewportHeight: window.innerHeight
                       };
                     })()
                     """
@@ -239,8 +215,6 @@ def main() -> int:
                     errors.append(f"1366x768 About top spacing did not compact: {about_layout['pageTopPadding']}px")
                 if about_layout["factStripTop"] > about_layout["viewportHeight"] + 4:
                     errors.append(f"1366x768 About profile facts begin below the first viewport: {about_layout}")
-                if not about_layout["aboutCurrentPage"]:
-                    errors.append("About page did not expose aria-current=page in the header")
             finally:
                 cdp.close()
         finally:
@@ -255,7 +229,7 @@ def main() -> int:
     if errors:
         print("\n".join(f"ERROR: {error}" for error in errors))
         return 1
-    print("Navigation and About audit passed: order, hover geometry, section state, hero reset, and 1366x768 About adaptation verified.")
+    print("Primary navigation passed: all six destinations remain canonical and stable across pages; current-page state, desktop alignment, hover geometry, and short-height About adaptation are verified.")
     return 0
 
 

@@ -25,10 +25,10 @@ professional_path:
     title: Regulated manufacturing and technical project work
     text: Started in technical project management through Deep Thought Edu Tech Ventures at Kreative Organics, then moved into a full-time Technical Project Manager role. The work progressed from chemical-data and analysis workflows to SAP requalification, validation documentation, and cross-functional implementation in regulated manufacturing.
   - period: 2024–2026
-    title: Quantitative metrology for soft materials
-    text: Conducted M.S. research at VCU on adhesion and wearable-textile interfaces, producing a first-author article, a defended thesis, and citable open research software for protocol-defined peel-trace analysis. Related thermochromic measurement work also led to the patent-pending Quantitative Thermal Imaging invention (VCU Tech # TAN-26-099), with Bhalaji Yadav Kantepalle and Christina Tang identified as Inventors/Creators.
+    title: M.S. research in quantitative metrology
+    text: Conducted research in the VCU Soft Functional Materials Lab on soft-interface adhesion and quantitative optical metrology. The work produced a first-author peer-reviewed article, a defended M.S. thesis, citable peel-trace software, and two 2026 presentations on computer-vision metrology for mechanochromic textiles.
   - period: 2026–present
-    title: Structure under processing
+    title: Doctoral research in structure under processing
     text: Pursuing doctoral research in stimuli-responsive soft and liquid-crystalline materials, with emphasis on rheology, neutron scattering, optical metrology, repeatable stimulus histories, and structure–processing–response relationships.
 methods:
   - title: Measurement development
@@ -38,6 +38,6 @@ methods:
   - title: Reproducible experiments
     text: Versioned analysis, synchronized acquisition, repeatable stimulus cycles, and automation where it improves consistency.
 collaboration:
-  title: Collaboration and methods exchange
+  title: Collaboration
   text: I am interested in collaborations that combine rheology, neutron scattering, imaging, or mechanics to answer a defined structure–processing question in responsive materials.
 ---

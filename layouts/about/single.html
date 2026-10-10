@@ -47,17 +47,10 @@
           <p class="kicker">{{ .Params.research_identity.title }}</p>
           <h2 id="research-identity-heading">From material response to reproducible measurement.</h2>
         </div>
-        <div class="about-section__summary"><p>{{ .Params.research_identity.text }}</p></div>
-      </div>
-      <div class="about-program-grid">
-        {{ range $p.research }}
-        <article>
-          <span>{{ .number }}</span>
-          <h3>{{ .title }}</h3>
-          <p>{{ .text }}</p>
-          <a class="lnk" href="{{ .href | relURL }}">{{ .link_label }} <span class="arw" aria-hidden="true">→</span></a>
-        </article>
-        {{ end }}
+        <div class="about-section__summary">
+          <p>{{ .Params.research_identity.text }}</p>
+          <a class="lnk about-inline-link" href="{{ "/research/" | relURL }}">Explore the research questions <span class="arw" aria-hidden="true">→</span></a>
+        </div>
       </div>
     </section>
 
@@ -67,7 +60,7 @@
           <p class="kicker">Professional path</p>
           <h2 id="professional-path-heading">Chemical engineering, regulated practice, and research metrology.</h2>
         </div>
-        <div class="about-section__summary"><p>Presented chronologically, this path shows how engineering training, regulated manufacturing, and experimental research converged into the current doctoral program.</p></div>
+        <div class="about-section__summary"><p>Chemical-engineering training led through regulated manufacturing into quantitative soft-materials research and the current doctoral program.</p></div>
       </div>
       <div class="about-path" aria-label="Professional path in chronological order">
         {{ range .Params.professional_path }}
@@ -99,9 +92,9 @@
       <div class="about-section__intro">
         <div class="about-section__title">
           <p class="kicker">Profiles and records</p>
-          <h2 id="research-professional-records">Research and professional records.</h2>
+          <h2 id="research-professional-records">Research profiles and institutional links.</h2>
         </div>
-        <div class="about-section__summary"><p>These links connect the portfolio to persistent research identifiers, publication records, software, and professional history.</p></div>
+        <div class="about-section__summary"><p>Use these links for publications, software, professional history, the curriculum vitae, and VCU's institutional thesis record.</p></div>
       </div>
       <div class="about-profile-links">
         <a href="{{ $p.profile.orcid }}" target="_blank" rel="me noopener"><strong>ORCID</strong><span>Research identity and synchronized works</span></a>
@@ -116,12 +109,12 @@
     <section class="about-collaboration" aria-labelledby="about-collaboration">
       <div>
         <p class="kicker">{{ .Params.collaboration.title }}</p>
-        <h2 id="about-collaboration">Methods exchange where structure, mechanics, and imaging meet.</h2>
+        <h2 id="about-collaboration">Research questions open to collaboration.</h2>
         <p>{{ .Params.collaboration.text }}</p>
       </div>
       <div class="actions">
         <a class="button button--primary" href="mailto:{{ $p.profile.email }}">Email {{ $p.profile.email }}</a>
-        <a class="lnk" href="{{ "/research/" | relURL }}">Research program <span class="arw" aria-hidden="true">→</span></a>
+        <a class="lnk" href="{{ "/research/" | relURL }}">Research questions <span class="arw" aria-hidden="true">→</span></a>
       </div>
     </section>
 

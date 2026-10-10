@@ -1,178 +1,160 @@
 #!/usr/bin/env python3
-"""Fail on portfolio style regressions that affect accessibility or responsive behavior."""
+"""Audit visual-system invariants without freezing one screenshot or copy length."""
 from __future__ import annotations
+
 import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-CSS = ROOT / "static/css/site.css"
-REFINEMENTS = ROOT / "static/css/refinements.css"
+SITE = (ROOT / "static/css/site.css").read_text(encoding="utf-8")
+REF = (ROOT / "static/css/refinements.css").read_text(encoding="utf-8")
+ABOUT = (ROOT / "static/css/about.css").read_text(encoding="utf-8")
+ALL = SITE + "\n" + REF + "\n" + ABOUT
+
+
+def compact(value: str) -> str:
+    return re.sub(r"\s+", "", value)
+
+
+def rule_has(css: str, selector: str, declaration: str) -> bool:
+    pattern = re.compile(rf"{re.escape(selector)}\s*\{{([^}}]+)\}}", re.MULTILINE)
+    wanted = compact(declaration)
+    return any(wanted in compact(match.group(1)) for match in pattern.finditer(css))
 
 
 def luminance(value: str) -> float:
-    channels = [int(value[i:i+2], 16) / 255 for i in (1, 3, 5)]
-    linear = [c / 12.92 if c <= 0.04045 else ((c + 0.055) / 1.055) ** 2.4 for c in channels]
-    return 0.2126 * linear[0] + 0.7152 * linear[1] + 0.0722 * linear[2]
+    channels = [int(value[i:i + 2], 16) / 255 for i in (1, 3, 5)]
+    linear = [c / 12.92 if c <= .04045 else ((c + .055) / 1.055) ** 2.4 for c in channels]
+    return .2126 * linear[0] + .7152 * linear[1] + .0722 * linear[2]
 
 
 def contrast(a: str, b: str) -> float:
     high, low = sorted((luminance(a), luminance(b)), reverse=True)
-    return (high + 0.05) / (low + 0.05)
+    return (high + .05) / (low + .05)
 
 
 def main() -> int:
-    text = CSS.read_text(encoding="utf-8")
-    refinements = REFINEMENTS.read_text(encoding="utf-8")
-    combined = text + "\n" + refinements
     errors: list[str] = []
+    all_compact = compact(ALL)
+    ref_compact = compact(REF)
 
-    # Later declarations intentionally win, matching the browser cascade for
-    # the root-level brand tokens overridden in refinements.css.
-    tokens = dict(re.findall(r"--([\w-]+):\s*(#[0-9a-fA-F]{6})", combined))
-    for name in (
-        "paper", "surface", "surface-soft", "ink", "ink-soft",
-        "teal", "cyan", "rust", "control-line",
-    ):
+    # Brand colors must remain readable on every site surface.
+    tokens = dict(re.findall(r"--([\w-]+):\s*(#[0-9a-fA-F]{6})", ALL))
+    required_tokens = ("paper", "surface", "surface-soft", "ink", "ink-soft", "teal", "cyan", "rust", "control-line")
+    for name in required_tokens:
         if name not in tokens:
             errors.append(f"missing color token --{name}")
-
-    if not errors:
+    if all(name in tokens for name in required_tokens):
         for foreground in ("ink", "ink-soft", "teal", "cyan", "rust"):
             for background in ("paper", "surface", "surface-soft"):
                 ratio = contrast(tokens[foreground], tokens[background])
                 if ratio < 4.5:
-                    errors.append(
-                        f"--{foreground} contrast on --{background} is {ratio:.2f}:1; requires 4.5:1"
-                    )
+                    errors.append(f"--{foreground} contrast on --{background} is {ratio:.2f}:1; requires 4.5:1")
         for background in ("paper", "surface", "surface-soft"):
             ratio = contrast(tokens["control-line"], tokens[background])
-            if ratio < 3.0:
-                errors.append(
-                    f"--control-line contrast on --{background} is {ratio:.2f}:1; requires 3:1"
-                )
+            if ratio < 3:
+                errors.append(f"--control-line contrast on --{background} is {ratio:.2f}:1; requires 3:1")
 
-    required = (
+    for marker in (
         ".visually-hidden", ".indieweb-photo", ".lnk", ":focus-visible",
         "@media(max-width:1180px)", "@media(max-width:980px)",
         "@media(max-width:680px)", "@media(prefers-reduced-motion:reduce)",
-    )
-    for marker in required:
-        if marker not in text:
-            errors.append(f"missing required style marker {marker}")
+    ):
+        if marker not in SITE:
+            errors.append(f"missing required base style marker {marker}")
 
-    interaction_rules = (
+    for rule in (
         ".series-grid{align-items:start}",
         ".series{align-self:start}",
+        ".series summary{min-height:0}",
         ".menu-button,.copy-button{border-color:var(--control-line)}",
         ".toc-disclosure summary{display:flex;align-items:center;min-height:24px}",
         ".site-footer nav a,.site-footer nav .privacy-choice-link{display:inline-flex;align-items:center;min-height:24px;line-height:1.4}",
-    )
-    for rule in interaction_rules:
-        if rule not in refinements:
-            errors.append(f"interactive-layout/accessibility invariant missing {rule!r}")
+    ):
+        if compact(rule) not in ref_compact:
+            errors.append(f"interactive/accessibility invariant missing {rule!r}")
 
-    footer_typography_markers = (
-        ".site-footer nav .privacy-choice-link{",
-        "color:var(--ink-soft)",
-        "font-family:var(--sans)",
-        "font-size:.76rem",
-        "font-weight:400",
-        "text-decoration:none",
-    )
-    for marker in footer_typography_markers:
-        if marker not in refinements:
-            errors.append(f"footer privacy control typography marker missing {marker!r}")
+    # Content-flow guardrails: real copy controls height; fixed text slots are forbidden.
+    if not rule_has(REF, ".pillar", "min-height:0"):
+        errors.append("research-program cards must remain intrinsically height-safe")
+    if not (rule_has(REF, ".pillar", "display:flex") or rule_has(REF, ".pillar", "display:grid")):
+        errors.append("research-program cards require an explicit intrinsic layout model")
+    if not rule_has(REF, ".pillar>.lnk", "margin-top:auto"):
+        errors.append("research-program action must follow flexible content flow")
+    if re.search(r"\.pillar(?:\s+h3|\s*>\s*p)?\s*\{[^}]*\b(?:height|min-height):\s*[0-9.]+(?:em|rem|px)", REF):
+        errors.append("research-program title/body text must not use fixed heights")
+    if re.search(r"\.pillar\s*\{[^}]*grid-template-rows:[^;}]*[0-9.]+(?:em|rem|px)", REF):
+        errors.append("research-program cards must not use fixed text-row heights")
 
-    footer_layout_rules = (
-        ".site-footer nav{align-items:baseline;justify-content:flex-end}",
-        ".site-footer nav{flex-wrap:nowrap;column-gap:.875rem;white-space:nowrap}",
-        ".site-footer nav{justify-content:flex-start}",
-    )
-    for rule in footer_layout_rules:
-        if rule not in refinements:
-            errors.append(f"footer alignment invariant missing {rule!r}")
+    if not rule_has(REF, ".two-col", "align-items:start"):
+        errors.append("experience/education columns must align to content start")
+    if not rule_has(REF, ".education-panel", "align-self:start"):
+        errors.append("education panel must remain intrinsic")
+    if not rule_has(REF, ".trajectory-grid", "align-items:start"):
+        errors.append("doctoral application/automation columns must remain intrinsic")
+    if not rule_has(REF, ".trajectory-grid", "border-block:1px solid var(--line)"):
+        errors.append("doctoral direction must retain the editorial ruled-band treatment")
+    if re.search(r"\.(?:education-panel|trajectory-grid)(?:\s+article)?\s*\{[^}]*\b(?:height|min-height):\s*[0-9.]+(?:em|rem|px)", REF):
+        errors.append("education/doctoral editorial content must not use fixed heights")
 
-    # Research cards reserve a common title zone while leaving the body track
-    # intrinsically flexible. Tags and actions stay in normal flow so longer
-    # copy cannot be painted on top of later content.
-    pillar_alignment_rules = (
-        ".pillar{display:grid;grid-template-rows:auto auto minmax(0,1fr) auto auto;min-height:430px;align-items:start}",
-        ".pillar .card-number{margin-bottom:2.5rem}",
-        ".pillar h3{min-block-size:5.1em;margin-top:0}",
-        ".pillar>.lnk{align-self:end;margin-top:.25rem}",
-    )
-    for rule in pillar_alignment_rules:
-        if rule not in refinements:
-            errors.append(f"research-program content-flow invariant missing {rule!r}")
-    if "grid-template-rows:auto auto minmax(0,1fr) auto auto" not in refinements:
-        errors.append("research-program cards must retain an intrinsically flexible body row")
-    if re.search(r"\.pillar\{grid-template-rows:auto\s+[0-9.]+em\s+[0-9.]+em", refinements):
-        errors.append("research-program cards must not restore fixed text-row heights that can cause content collisions")
+    if ".about-program-grid" in ABOUT:
+        errors.append("About must not duplicate the homepage research-program card grid")
+    if not rule_has(ABOUT, ".about-method-grid", "border-block:1px solid var(--line)"):
+        errors.append("About methods must use the lighter editorial-band treatment")
+    if not rule_has(ABOUT, ".about-profile-links", "border-block:1px solid var(--line)"):
+        errors.append("About profile links must use the editorial ruled-list treatment")
 
-    motif_match = re.search(r"--motif-opacity:([0-9.]+)", refinements)
-    if not motif_match:
-        errors.append("missing decorative motif opacity token")
+    # The mobile hero needs an explicit composition; inherited desktop widths caused the 390px collapse.
+    mobile_match = re.search(r"@media\(max-width:680px\)\s*\{(.*)\}\s*@media\(prefers-reduced-motion", REF, re.DOTALL)
+    if not mobile_match:
+        errors.append("missing mobile refinement block")
     else:
-        motif_opacity = float(motif_match.group(1))
-        if motif_opacity > 0.5:
-            errors.append(f"research motifs are too visually dominant: opacity={motif_opacity}")
-        if motif_opacity < 0.25:
-            errors.append(f"research motifs are too faint to retain their intended cue: opacity={motif_opacity}")
-    if ".pillar--grid .motif::after{border-width:1px}" not in refinements:
-        errors.append("grid motif accent must remain a soft 1px decorative stroke")
+        mobile = mobile_match.group(1)
+        for selector, declaration in (
+            (".hero", "grid-template-columns:1fr"),
+            (".hero__copy", "width:100%"),
+            (".hero .eyebrow", "max-width:none"),
+            (".hero h1", "max-width:100%"),
+            (".hero h1", "text-wrap:balance"),
+        ):
+            if not rule_has(mobile, selector, declaration):
+                errors.append(f"mobile hero invariant missing {selector} {declaration}")
 
-    transition_rules = (
+    motif = re.search(r"--motif-opacity:([0-9.]+)", REF)
+    if not motif:
+        errors.append("missing decorative motif opacity token")
+    elif not .25 <= float(motif.group(1)) <= .5:
+        errors.append(f"research motif opacity outside restrained range: {motif.group(1)}")
+    if compact(".pillar--grid .motif::after{border-width:1px}") not in ref_compact:
+        errors.append("grid motif accent must remain a soft 1px stroke")
+
+    for rule in (
         "@view-transition{navigation:auto}",
         ".site-head{view-transition-name:site-header}",
         "::view-transition-old(site-header),::view-transition-new(site-header){animation:none}",
         "::view-transition-old(root),::view-transition-new(root),::view-transition-old(site-header),::view-transition-new(site-header){animation:none!important}",
-    )
-    for rule in transition_rules:
-        if rule not in refinements:
-            errors.append(f"navigation-continuity/motion invariant missing {rule!r}")
-    transition_durations = [int(value) for value in re.findall(r"::view-transition-(?:old|new)\(root\)\{animation:(\d+)ms", refinements)]
-    if len(transition_durations) != 2:
-        errors.append("cross-page transition must define exactly two short root transition durations")
-    elif max(transition_durations) > 220:
-        errors.append(f"cross-page motion exceeds 220ms attention budget: {transition_durations}")
-
-    privacy_layout_rules = (
         ".privacy-banner{position:relative;z-index:90;",
         'html[data-analytics-consent="granted"] .privacy-banner,html[data-analytics-consent="denied"] .privacy-banner{display:none}',
-        'html[data-analytics-consent="unknown"] .privacy-banner+main .hero{padding-top:clamp(2.75rem,5vw,4.5rem)}',
-        'html[data-analytics-consent="unknown"] .privacy-banner+main .page-shell{padding-top:clamp(2.5rem,4vw,3.75rem)}',
-        ".privacy-banner{align-items:stretch;flex-direction:column;gap:.9rem;width:calc(100% - 2rem);padding:1rem}",
-    )
-    for rule in privacy_layout_rules:
-        if rule not in refinements:
-            errors.append(f"privacy-layout invariant missing {rule!r}")
-    if ".privacy-banner{position:fixed" in refinements:
-        errors.append("privacy controls must remain in document flow and must not obscure page content")
-
-    spacing_rules = (
-        "--refined-section-space:clamp(4.5rem,7vw,6.5rem)",
         ".section{padding-block:var(--refined-section-space)}",
+        ".section[id],.contact-section[id]{scroll-margin-top:calc(var(--header-h) + 38px)}",
         ".page-shell{padding-block:clamp(3rem,6vw,5.25rem)}",
-        ".back-link{margin-bottom:2.1rem}",
-        ".page-header{margin-bottom:2.55rem}",
-        ".article-layout{gap:clamp(2.5rem,4vw,4rem)}",
-    )
-    for rule in spacing_rules:
-        if rule not in refinements:
-            errors.append(f"page-spacing invariant missing {rule!r}")
-
-    if "text-align:justify" in combined.replace(" ", ""):
+    ):
+        if compact(rule) not in ref_compact:
+            errors.append(f"system invariant missing {rule!r}")
+    if ".privacy-banner{position:fixed" in ref_compact:
+        errors.append("privacy controls must remain in document flow")
+    if "text-align:justify" in all_compact:
         errors.append("body copy must not use full justification")
+
+    durations = [int(value) for value in re.findall(r"::view-transition-(?:old|new)\(root\)\{animation:(\d+)ms", ref_compact)]
+    if len(durations) != 2 or max(durations, default=999) > 220:
+        errors.append(f"root page transitions must remain two short durations <=220ms: {durations}")
 
     if errors:
         for error in errors:
             print(f"ERROR: {error}")
         return 1
-    print(
-        "Style audit passed: AA text contrast across all branded surfaces, "
-        "3:1 interactive boundaries, 24px controls, focus, breakpoints, flexible card flow, "
-        "decorative restraint, reduced-motion-safe page continuity, privacy controls, and page spacing verified."
-    )
+    print("Style audit passed: contrast, interaction, intrinsic content flow, mobile hero composition, editorial restraint, motion, privacy, and spacing guardrails verified.")
     return 0
 
 

@@ -1,13 +1,21 @@
 # Bhalaji Yadav Kantepalle — Full Public Research Context
 
 ## Profile
-The research biography and identity page is https://bhalaji.com/about/ . It describes the professional path, current scientific focus, methods, collaboration context, and persistent research and professional profiles.
+The research biography and identity page is https://bhalaji.com/about/ . It describes the professional path, current scientific focus, methods, collaboration context, research profiles, and institutional links.
 
 ## Current position
 Bhalaji Yadav Kantepalle is a Ph.D. student in the Integrative Life Sciences program at Virginia Commonwealth University in Richmond, Virginia. He conducts research in the VCU Soft Functional Materials Lab with Christina Tang, Ph.D., as advisor. His research examines how processing histories reorganize responsive soft and liquid-crystalline materials and how those changes can be measured through optical, mechanical, rheological, and structure-sensitive methods.
 
-Research group: https://vcusoftmaterialslab.weebly.com/
+Research group: https://vcusoftmaterialslab.weebly.com/people.html
 Advisor profile: https://egr.vcu.edu/directory/christina.tang/
+
+## Primary pages
+About: https://bhalaji.com/about/
+Research: https://bhalaji.com/research/
+Research outputs: https://bhalaji.com/outputs/
+Experience and education: https://bhalaji.com/experience/
+Engagement: https://bhalaji.com/engagement/
+Contact: https://bhalaji.com/contact/
 
 ## Research focus
 The central question is what changes inside a responsive material during processing and which measurements can track that change reliably.
@@ -36,10 +44,10 @@ M.S. thesis: “Multi-Criteria Selection of Adhesives for Wearable Textiles,” 
 Peel Trace Evaluation for Soft Substrates, version v1.4.0-rc15, by Bhalaji Yadav Kantepalle and Christina Tang. Source: https://github.com/VCU-Soft-Functional-Materials-Lab/Peel-Trace-Evaluation-for-Soft-Substrates . Version DOI: https://doi.org/10.5281/zenodo.20301242 . All versions: https://doi.org/10.5281/zenodo.20278327 . License: Apache-2.0.
 
 ## Intellectual property
-Quantitative Thermal Imaging is patent pending. Bhalaji Yadav Kantepalle and Christina Tang are identified as Inventors/Creators; the Virginia Commonwealth University technology identifier is TAN-26-099. Portfolio record: https://bhalaji.com/project/quantitative-thermal-imaging/ .
+Quantitative Thermal Imaging is patent pending. Bhalaji Yadav Kantepalle and Christina Tang are identified as Inventors/Creators; the Virginia Commonwealth University technology identifier is TAN-26-099. Portfolio page: https://bhalaji.com/project/quantitative-thermal-imaging/ .
 
 ## Optical metrology
-A Python and OpenCV workflow was developed to relate image-derived deformation to CIE L*a*b* color response in mechanochromic textiles. The work was presented at two Virginia Commonwealth University research events in 2026. Project record: https://bhalaji.com/project/optical-metrology/ .
+A Python and OpenCV workflow was developed to relate image-derived deformation to CIE L*a*b* color response in mechanochromic textiles. The work was presented at two Virginia Commonwealth University research events in 2026. Project page: https://bhalaji.com/project/optical-metrology/ .
 
 ## Potential applications
 The methods may support passive temperature mapping and battery-free wearable indicators, non-contact optical monitoring, visual safety and inspection indicators, adaptive or decorative surfaces, and low-power sensing in hard-to-reach environments.
@@ -55,6 +63,9 @@ Website: https://bhalaji.com/
 Profile: https://bhalaji.com/about/
 Research page: https://bhalaji.com/research/
 Research outputs: https://bhalaji.com/outputs/
+Experience and education: https://bhalaji.com/experience/
+Engagement: https://bhalaji.com/engagement/
+Contact page: https://bhalaji.com/contact/
 Email: contact@bhalaji.com
 ORCID: https://orcid.org/0000-0003-0551-6172
 Google Scholar: https://scholar.google.com/citations?hl=en&user=DrfbtX4AAAAJ
