@@ -83,7 +83,9 @@ for required in (
     'range $p.professional_development',
     'range $p.applied_innovation',
     'Browse all research outputs',
-    'Intellectual property record',
+    '/project/quantitative-thermal-imaging/',
+    '{{ $ip.status }}',
+    'VCU Tech # {{ $ip.tech_id }}',
 ):
     if required not in landing_text:
         errors.append(f'layouts/landing/list.html: missing homepage invariant {required!r}')
