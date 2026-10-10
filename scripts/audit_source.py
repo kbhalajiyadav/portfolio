@@ -44,6 +44,10 @@ forbidden = {
     'ongoing Summer 2026': 'stale completed student-project status',
     'two ongoing student projects': 'stale completed student-project status',
     '## Evidence boundary': 'internal audit wording exposed in public content',
+    '## Public scope': 'internal disclosure framing exposed in public content',
+    '## Current public scope': 'internal disclosure framing exposed in public content',
+    '## Public technical scope': 'internal disclosure framing exposed in public content',
+    '## Verification scope': 'internal disclosure framing exposed in public content',
     'IP project details': 'intellectual-property output mislabeled as a generic project',
 }
 errors: list[str] = []
@@ -68,6 +72,9 @@ for required in (
 ):
     if required.lower() not in portfolio_text.lower():
         errors.append(f'data/portfolio.yaml: missing {required!r}')
+
+if not (ROOT / 'data/current_affiliation.yaml').exists():
+    errors.append('data/current_affiliation.yaml: canonical current lab/advisor context must remain present')
 
 landing_text = texts[ROOT / 'layouts/landing/list.html']
 for required in (
@@ -149,12 +156,12 @@ optical_text = texts[ROOT / 'content/project/optical-metrology/index.md']
 for required in (
     'Presented research',
     'CIE L\\*a\\*b\\*',
-    'Current public scope',
-    'clinical validation',
-    'underlying experimental dataset has not been',
+    '## Research record',
+    'peer-reviewed performance benchmark',
+    'underlying experimental dataset',
 ):
     if required not in optical_text:
-        errors.append(f'content/project/optical-metrology/index.md: missing public-scope fact {required!r}')
+        errors.append(f'content/project/optical-metrology/index.md: missing optical-metrology fact {required!r}')
 
 ip_text = texts[ROOT / 'content/project/quantitative-thermal-imaging/index.md']
 for required in (
@@ -162,7 +169,8 @@ for required in (
     'Patent pending',
     'VCU Tech # TAN-26-099',
     'Bhalaji Yadav Kantepalle and Christina Tang',
-    'Patent status and public record',
+    '## Technology overview',
+    '## Status',
 ):
     if required not in ip_text:
         errors.append(f'content/project/quantitative-thermal-imaging/index.md: missing IP fact {required!r}')
@@ -249,7 +257,7 @@ for required in (
     'scripts/check_external_links.py', 'scripts/check_workflows.py',
     'scripts/check_live_site.py', 'scripts/check_responsive.py',
     'scripts/check_accessibility_interactions.py',
-    'scripts/check_laptop_landing.py',
+    'scripts/check_laptop_landing.py', 'scripts/check_component_integrity.py',
 ):
     if not (ROOT / required).exists():
         errors.append(f'{required}: missing production hardening file')
