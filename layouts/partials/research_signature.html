@@ -1,0 +1,51 @@
+{{ $p := site.Data.portfolio }}
+<figure class="research-signature" aria-labelledby="research-signature-caption">
+  <div class="research-signature__desktop" aria-hidden="true">
+    <svg viewBox="0 0 1000 220" role="img" aria-labelledby="research-signature-title research-signature-desc" preserveAspectRatio="xMidYMid meet">
+      <title id="research-signature-title">Stimulus to translation research framework</title>
+      <desc id="research-signature-desc">A schematic sequence connecting stimulus, structure, response, measurement, and translation. It is explanatory and does not represent measured data.</desc>
+      <defs>
+        <marker id="research-signature-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0 L8 4 L0 8 Z" class="research-signature__arrowhead" />
+        </marker>
+      </defs>
+      <path class="research-signature__rail" d="M112 108 H888" marker-end="url(#research-signature-arrow)" />
+
+      <g class="research-signature__stage" transform="translate(105 108)">
+        <circle r="25" class="research-signature__node" />
+        <path d="M-10 -7 C-4 -13 4 -13 10 -7 M-10 0 C-4 -6 4 -6 10 0 M-10 7 C-4 1 4 1 10 7" class="research-signature__motif" />
+        <text x="0" y="-48" text-anchor="middle">{{ index $p.narrative.chain 0 }}</text>
+      </g>
+
+      <g class="research-signature__stage" transform="translate(300 108)">
+        <circle r="25" class="research-signature__node" />
+        <circle r="7" class="research-signature__motif" />
+        <circle r="14" class="research-signature__motif" />
+        <text x="0" y="-48" text-anchor="middle">{{ index $p.narrative.chain 1 }}</text>
+      </g>
+
+      <g class="research-signature__stage" transform="translate(495 108)">
+        <circle r="25" class="research-signature__node" />
+        <path d="M-11 7 L-4 -2 L3 3 L11 -9" class="research-signature__motif" />
+        <text x="0" y="-48" text-anchor="middle">{{ index $p.narrative.chain 2 }}</text>
+      </g>
+
+      <g class="research-signature__stage" transform="translate(690 108)">
+        <circle r="25" class="research-signature__node" />
+        <path d="M-12 8 L-6 2 L0 5 L6 -5 L12 -8" class="research-signature__motif" />
+        <path d="M-12 13 H12" class="research-signature__motif research-signature__motif--quiet" />
+        <text x="0" y="-48" text-anchor="middle">{{ index $p.narrative.chain 3 }}</text>
+      </g>
+
+      <g class="research-signature__stage" transform="translate(885 108)">
+        <circle r="25" class="research-signature__node" />
+        <path d="M-12 -12 H12 M-12 0 H12 M-12 12 H12 M-12 -12 V12 M0 -12 V12 M12 -12 V12" class="research-signature__motif research-signature__motif--quiet" />
+        <text x="0" y="-48" text-anchor="middle">{{ index $p.narrative.chain 4 }}</text>
+      </g>
+    </svg>
+  </div>
+  <ol class="research-signature__mobile" aria-label="Research translation chain">
+    {{ range $index, $step := $p.narrative.chain }}<li><span>{{ printf "%02d" (add $index 1) }}</span><strong>{{ $step }}</strong></li>{{ end }}
+  </ol>
+  <figcaption id="research-signature-caption">{{ $p.narrative.chain_note }} <span class="research-signature__note">Schematic; no quantitative data are implied.</span></figcaption>
+</figure>
