@@ -25,7 +25,7 @@ jobs:
       pages: write
       id-token: write
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 35
     env:
       HUGO_VERSION: 0.124.1
       PUPPETEER_SKIP_DOWNLOAD: "true"
@@ -79,8 +79,9 @@ jobs:
           python3 scripts/audit_styles.py
           python3 scripts/audit_templates.py
           python3 scripts/check_data_consistency.py
+          python3 scripts/check_review_freshness.py
           python3 scripts/check_workflows.py
-          python3 -m py_compile scripts/check_data_consistency.py scripts/check_software_release.py scripts/check_review_freshness.py scripts/check_layout_spacing.py scripts/check_release_marker.py scripts/check_home_navigation.py
+          python3 -m py_compile scripts/check_data_consistency.py scripts/check_software_release.py scripts/check_review_freshness.py scripts/check_layout_spacing.py scripts/check_release_marker.py scripts/check_home_navigation.py scripts/check_accessibility_interactions.py
           node --check assets/js/site.js
 
       - name: Setup Pages
@@ -124,19 +125,24 @@ jobs:
           test -n "$chrome"
           echo "CHROME_PATH=$chrome" >> "$GITHUB_ENV"
 
-      - name: Accessibility audit at desktop and mobile widths
+      - name: Accessibility audit at desktop, mobile, and WCAG reflow widths
         run: |
           set -o pipefail
           PA11Y_WIDTH=1440 PA11Y_HEIGHT=1000 npx pa11y-ci --config .pa11yci.cjs --json | tee artifacts/pa11y-desktop.json
           PA11Y_WIDTH=390 PA11Y_HEIGHT=844 npx pa11y-ci --config .pa11yci.cjs --json | tee artifacts/pa11y-mobile.json
+          PA11Y_WIDTH=320 PA11Y_HEIGHT=800 npx pa11y-ci --config .pa11yci.cjs --json | tee artifacts/pa11y-reflow-320.json
 
-      - name: Responsive, spacing, laptop-frame, zoom-equivalent, reduced-motion, menu, and navigation audit
+      - name: Responsive, WCAG interaction, spacing, laptop-frame, reduced-motion, menu, and navigation audit
         run: |
           python3 scripts/check_responsive.py \
             --base-url http://127.0.0.1:4173/ \
             --chrome "$CHROME_PATH" \
             --report artifacts/responsive-layout.json \
             --screenshots artifacts/responsive-screenshots
+          python3 scripts/check_accessibility_interactions.py \
+            --base-url http://127.0.0.1:4173/ \
+            --chrome "$CHROME_PATH" \
+            --report artifacts/accessibility-interactions.json
           python3 scripts/check_home_navigation.py \
             --base-url http://127.0.0.1:4173/ \
             --chrome "$CHROME_PATH" \
