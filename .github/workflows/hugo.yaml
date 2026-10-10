@@ -70,7 +70,7 @@ jobs:
           fi
           bash scripts/build_browser_icons.sh
 
-      - name: Audit source, visual system, workflows, templates, and JavaScript
+      - name: Audit source, content strategy, visual system, workflows, templates, and JavaScript
         run: |
           python3 scripts/build_cv.py
           git diff --exit-code -- cv/generated/bhalaji_cv.tex
@@ -79,9 +79,10 @@ jobs:
           python3 scripts/audit_styles.py
           python3 scripts/audit_templates.py
           python3 scripts/check_data_consistency.py
+          python3 scripts/check_content_strategy.py
           python3 scripts/check_review_freshness.py
           python3 scripts/check_workflows.py
-          python3 -m py_compile scripts/check_data_consistency.py scripts/check_software_release.py scripts/check_review_freshness.py scripts/check_layout_spacing.py scripts/check_release_marker.py scripts/check_home_navigation.py scripts/check_accessibility_interactions.py scripts/check_attention_hierarchy.py
+          python3 -m py_compile scripts/check_data_consistency.py scripts/check_content_strategy.py scripts/check_software_release.py scripts/check_review_freshness.py scripts/check_layout_spacing.py scripts/check_release_marker.py scripts/check_home_navigation.py scripts/check_accessibility_interactions.py scripts/check_attention_hierarchy.py
           node --check assets/js/site.js
 
       - name: Setup Pages
