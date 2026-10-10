@@ -57,12 +57,12 @@
   <div class="section-head">
     <p class="kicker">Selected outputs</p>
     <h2>Peer-reviewed work, citable software, and patent-pending technology.</h2>
-    <p>Flagship evidence is shown here; the complete chronological record remains available in Research Outputs.</p>
+    <p>Selected work appears here; Research Outputs contains the full chronological list.</p>
   </div>
   {{ $primary := index $p.publications 0 }}
   <article class="research-package">
     <div class="package-lead">
-      <span class="overline">First-author research package · 2026</span>
+      <span class="overline">Article, thesis, and software · 2026</span>
       <h3>{{ $primary.title }}</h3>
       <p>{{ $primary.authors }}</p><p class="venue">{{ $primary.venue }}</p>
       <div class="actions">
@@ -71,13 +71,13 @@
       </div>
     </div>
     <div class="package-artifacts">
-      <article><span>Associated thesis</span><h4>Multi-Criteria Selection of Adhesives for Wearable Textiles</h4><p>VCU M.S. thesis · defended July 1, 2026 · degree completed August 2026</p><a class="lnk" href="{{ "/publication/masters-thesis/" | relURL }}">Thesis record <span class="arw" aria-hidden="true">→</span></a></article>
+      <article><span>Associated thesis</span><h4>Multi-Criteria Selection of Adhesives for Wearable Textiles</h4><p>VCU M.S. thesis · defended July 1, 2026 · degree completed August 2026</p><a class="lnk" href="{{ "/publication/masters-thesis/" | relURL }}">Thesis <span class="arw" aria-hidden="true">→</span></a></article>
       <article><span>Research software</span><h4>{{ $p.software.title }}</h4><p>{{ $p.software.text }}</p><div class="actions"><a class="lnk" href="{{ $p.software.detail | relURL }}">Software details <span class="arw" aria-hidden="true">→</span></a><a class="lnk" href="{{ $p.software.version_doi }}" target="_blank" rel="noopener">Software release <span class="arw" aria-hidden="true">↗</span></a></div></article>
     </div>
   </article>
   <article class="secondary-output">
     <div><span class="overline">{{ $ip.status }} · {{ $ip.year }}</span><h3>{{ $ip.title }}</h3><p>{{ $ip.inventors }}</p><p class="venue">{{ $ip.organization }} · VCU Tech # {{ $ip.tech_id }}</p><p>{{ $ip.description }}</p></div>
-    <div class="actions"><a class="lnk" href="{{ "/project/quantitative-thermal-imaging/" | relURL }}">Intellectual property record <span class="arw" aria-hidden="true">→</span></a></div>
+    <div class="actions"><a class="lnk" href="{{ "/project/quantitative-thermal-imaging/" | relURL }}">Intellectual property <span class="arw" aria-hidden="true">→</span></a></div>
   </article>
   <div class="actions"><a class="lnk" href="{{ "/outputs/" | relURL }}">Browse all research outputs <span class="arw" aria-hidden="true">→</span></a></div>
 </section>
