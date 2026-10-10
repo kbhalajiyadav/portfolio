@@ -57,12 +57,12 @@
   <div class="section-head">
     <p class="kicker">Selected outputs</p>
     <h2>Peer-reviewed work, citable software, and patent-pending technology.</h2>
-    <p>Flagship evidence is shown here; the complete chronological record remains available in Research Outputs.</p>
+    <p>Selected work is highlighted here; the complete chronological list is available in Research Outputs.</p>
   </div>
   {{ $primary := index $p.publications 0 }}
   <article class="research-package">
     <div class="package-lead">
-      <span class="overline">First-author research package · 2026</span>
+      <span class="overline">First-author research · 2026</span>
       <h3>{{ $primary.title }}</h3>
       <p>{{ $primary.authors }}</p><p class="venue">{{ $primary.venue }}</p>
       <div class="actions">
@@ -87,7 +87,7 @@
   <div class="two-col">
     <div class="timeline">
       {{ range $p.experience }}{{ if ne .show false }}
-      <article class="timeline-item"><span>{{ .period }}</span><h3>{{ .role }}</h3><p class="org">{{ .organization }}{{ with .location }} · {{ . }}{{ end }}</p><p>{{ .detail }}</p>{{ with .outcomes }}<ul>{{ range . }}<li>{{ . }}</li>{{ end }}</ul>{{ end }}{{ with .links }}<div class="actions">{{ range . }}<a class="lnk" href="{{ .href | relURL }}">{{ .label }} <span class="arw" aria-hidden="true">→</span></a>{{ end }}</div>{{ end }}</article>
+      <article class="timeline-item"><span>{{ .period }}</span><h3>{{ .role }}</h3><p class="org">{{ .organization }}{{ with .location }} · {{ . }}{{ end }}</p><p>{{ .detail }}</p>{{ with .outcomes }}<ul>{{ range . }}<li>{{ . }}</li>{{ end }}{{ end }}{{ with .links }}<div class="actions">{{ range . }}<a class="lnk" href="{{ .href | relURL }}">{{ .label }} <span class="arw" aria-hidden="true">→</span></a>{{ end }}</div>{{ end }}</article>
       {{ end }}{{ end }}
     </div>
     <aside class="education-panel">
