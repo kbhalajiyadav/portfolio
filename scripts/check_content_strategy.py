@@ -121,12 +121,18 @@ def main() -> int:
         errors.append("current program differs between portfolio identity and first CV education record")
 
     # Current research-group context is independently structured and must remain connected to the profile.
-    for field in ("lab", "lab_url", "advisor", "advisor_url", "institution"):
+    for field in (
+        "lab", "lab_url", "advisor", "advisor_url", "institution",
+        "institutional_record_label", "institutional_record_url",
+    ):
         if not str(affiliation.get(field, "")).strip():
             errors.append(f"current_affiliation.{field} is required")
     if norm(affiliation.get("institution")) != norm(profile.get("institution")):
         errors.append("current lab/advisor affiliation institution differs from the current profile institution")
-    for marker in ("site.Data.current_affiliation", "$aff.lab", "$aff.lab_url", "$aff.advisor", "$aff.advisor_url"):
+    for marker in (
+        "site.Data.current_affiliation", "$aff.lab", "$aff.lab_url", "$aff.advisor", "$aff.advisor_url",
+        "$aff.institutional_record_label", "$aff.institutional_record_url",
+    ):
         if marker not in about_template:
             errors.append(f"About profile must consume canonical current affiliation marker: {marker}")
     for value, label in (
@@ -183,16 +189,12 @@ def main() -> int:
                         f"near-duplicate public sentence across {name_a}/{name_b}: {sentence_a!r}"
                     )
 
-    # Public tone remains evidence-led and avoids internal governance vocabulary everywhere public.
-    public_files = [
-        ROOT / "content" / "about.md",
-        ROOT / "content" / "research" / "index.md",
-        ROOT / "content" / "outputs" / "_index.md",
+    # Public tone checks all authored content plus machine-readable public context.
+    # Legal/privacy wording is not banned; only the explicit internal-process phrases below are rejected.
+    public_files = sorted((ROOT / "content").glob("**/*.md")) + [
         ROOT / "static" / "llms.txt",
         ROOT / "static" / "llms-full.txt",
     ]
-    public_files.extend(sorted((ROOT / "content" / "project").glob("**/*.md")))
-    public_files.extend(sorted((ROOT / "content" / "publication").glob("**/*.md")))
     public_text = "\n".join(path.read_text(encoding="utf-8") for path in public_files).casefold()
     for phrase in HYPE_TERMS:
         if phrase in public_text:
