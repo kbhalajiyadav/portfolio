@@ -36,7 +36,7 @@ The workflow uses Python and OpenCV to:
 The method treats image acquisition, deformation tracking, and color analysis
 as one measurement sequence rather than as separate visual observations.
 
-## Research record
+## Presentations and outputs
 
 The work was presented in 2026 as **“Quantifying Mechanochromic Response in
 Smart Textiles: A Computer Vision Approach”** at the VCU Engineering Graduate
@@ -44,7 +44,7 @@ Research and Postdoc Showcase and the 29th VCU Graduate Student Research
 Symposium.
 
 - [Research overview](/research/#measure-response)
-- [Presentation record](/#presentations)
+- [Presentation record](/engagement/)
 
 These presentations are the current outputs for this project; no peer-reviewed
 article or released dataset is associated with it at present.

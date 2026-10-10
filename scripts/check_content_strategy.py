@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
-"""Protect complementary content roles, tone, facts, and derived proof metrics.
-
-This check is intentionally semantic rather than sentence-exact. Shared facts
-must stay synchronized while the homepage, About, Research, Outputs, CV, and
-machine-readable public context retain different jobs in the portfolio story.
-"""
+"""Protect complementary content roles, public tone, synchronized facts, and derived proof metrics."""
 from __future__ import annotations
 
 from difflib import SequenceMatcher
@@ -18,13 +13,8 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 
 HYPE_TERMS = (
-    "groundbreaking",
-    "cutting-edge",
-    "world-class",
-    "revolutionary",
-    "game-changing",
-    "best-in-class",
-    "unparalleled",
+    "groundbreaking", "cutting-edge", "world-class", "revolutionary",
+    "game-changing", "best-in-class", "unparalleled",
 )
 INTERNAL_PROCESS_TERMS = (
     "evidence boundary",
@@ -40,6 +30,10 @@ INTERNAL_PROCESS_TERMS = (
     "deliberately omits",
     "this public case study excludes",
     "not part of the public software record",
+    "research package",
+    "research record",
+    "questions worth combining methods around",
+    "persistent identifiers and institutional records",
 )
 
 
@@ -95,6 +89,7 @@ def main() -> int:
     about, _ = parse_markdown(ROOT / "content" / "about.md")
     research, research_body = parse_markdown(ROOT / "content" / "research" / "index.md")
     outputs, outputs_body = parse_markdown(ROOT / "content" / "outputs" / "_index.md")
+    ip_page, ip_body = parse_markdown(ROOT / "content" / "project" / "quantitative-thermal-imaging" / "index.md")
     home_proof = (ROOT / "layouts" / "partials" / "home_proof.html").read_text(encoding="utf-8")
     about_template = (ROOT / "layouts" / "about" / "single.html").read_text(encoding="utf-8")
     llms = (ROOT / "static" / "llms.txt").read_text(encoding="utf-8")
@@ -104,7 +99,6 @@ def main() -> int:
     profile = portfolio.get("profile", {})
     cv_profile = cv.get("profile", {})
 
-    # Current identity is structured once; display strings and metadata consume it.
     for field in ("role", "program", "institution"):
         if not norm(profile.get(field)):
             errors.append(f"portfolio.profile.{field} is required for structured current identity")
@@ -120,7 +114,6 @@ def main() -> int:
     if norm(profile.get("program")) not in norm(current_education.get("degree")):
         errors.append("current program differs between portfolio identity and first CV education record")
 
-    # Current research-group context is independently structured and must remain connected to the profile.
     for field in (
         "lab", "lab_url", "advisor", "advisor_url", "institution",
         "institutional_record_label", "institutional_record_url",
@@ -146,7 +139,6 @@ def main() -> int:
         if value and norm(value) not in norm(llms_full):
             errors.append(f"llms-full.txt is missing synchronized {label}: {value!r}")
 
-    # Surface roles: orientation -> biography -> scientific argument -> evidence index -> exhaustive CV.
     home_summary = str(profile.get("summary", ""))
     about_bio_items = [str(item) for item in about.get("bio", [])]
     about_bio = " ".join(about_bio_items)
@@ -167,7 +159,6 @@ def main() -> int:
     if re.search(r"\b(?:I|my|me)\b", f"{outputs_summary} {outputs_body}", re.I):
         errors.append("Outputs should use objective record language rather than first-person biography")
 
-    # Guard against copy-paste drift. Shared scientific terminology is expected; near-identical prose is not.
     surfaces = {
         "home": home_summary,
         "about": about_bio,
@@ -178,19 +169,13 @@ def main() -> int:
     for (name_a, text_a), (name_b, text_b) in combinations(surfaces.items(), 2):
         seq, jaccard = similarity(text_a, text_b)
         if seq >= 0.82 and jaccard >= 0.72:
-            errors.append(
-                f"surface narratives are too similar ({name_a} vs {name_b}: sequence={seq:.2f}, token={jaccard:.2f})"
-            )
+            errors.append(f"surface narratives are too similar ({name_a} vs {name_b}: sequence={seq:.2f}, token={jaccard:.2f})")
         for sentence_a in sentences(text_a):
             for sentence_b in sentences(text_b):
                 sseq, sj = similarity(sentence_a, sentence_b)
                 if sseq >= 0.93 and sj >= 0.82:
-                    errors.append(
-                        f"near-duplicate public sentence across {name_a}/{name_b}: {sentence_a!r}"
-                    )
+                    errors.append(f"near-duplicate public sentence across {name_a}/{name_b}: {sentence_a!r}")
 
-    # Public tone checks all authored content plus machine-readable public context.
-    # Legal/privacy wording is not banned; only the explicit internal-process phrases below are rejected.
     public_files = sorted((ROOT / "content").glob("**/*.md")) + [
         ROOT / "static" / "llms.txt",
         ROOT / "static" / "llms-full.txt",
@@ -203,8 +188,7 @@ def main() -> int:
         if phrase in public_text:
             errors.append(f"internal governance wording leaked into public content: {phrase!r}")
 
-    # Distinct page jobs remain explicit.
-    for heading in ("Research focus", "Measure response", "Resolve structure under stimuli", "Translate reproducibly", "Collaboration questions"):
+    for heading in ("Research focus", "Measure response", "Resolve structure under stimuli", "Translate reproducibly", "Open research questions"):
         if f"## {heading}" not in research_body:
             errors.append(f"Research page missing role-defining section: {heading}")
     for phrase in ("peer-reviewed articles", "M.S. thesis", "citable research software", "patent-pending intellectual property"):
@@ -213,14 +197,21 @@ def main() -> int:
     if "newest first" not in outputs_body.casefold():
         errors.append("Outputs page must explain reverse-chronological ordering")
 
-    # Shared high-stakes facts should appear where context requires them, not everywhere.
     ip = (cv.get("intellectual_property") or [{}])[0]
-    about_serialized = (ROOT / "content" / "about.md").read_text(encoding="utf-8")
+    ms_items = [item for item in about.get("professional_path", []) if str(item.get("period", "")).strip() == "2024–2026"]
+    if len(ms_items) != 1:
+        errors.append("About must contain exactly one 2024–2026 M.S. professional-path entry")
+    else:
+        ms_text = norm(f"{ms_items[0].get('title', '')} {ms_items[0].get('text', '')}")
+        for forbidden in ("patent", norm(ip.get("title")), norm(ip.get("tech_id"))):
+            if forbidden and forbidden in ms_text:
+                errors.append("About 2024–2026 M.S. entry must not mix in the separate patent-pending thermal-imaging outcome")
+
     for value, label in ((ip.get("title"), "IP title"), (ip.get("tech_id"), "VCU Tech ID")):
-        if value and str(value) not in about_serialized:
-            errors.append(f"About professional path is missing synchronized {label}: {value!r}")
         if value and str(value) not in research_body:
             errors.append(f"Research page is missing synchronized {label}: {value!r}")
+        if value and str(value) not in f"{ip_page} {ip_body}":
+            errors.append(f"IP page is missing synchronized {label}: {value!r}")
         if value and str(value) not in llms_full:
             errors.append(f"llms-full.txt is missing synchronized {label}: {value!r}")
 
@@ -241,10 +232,7 @@ def main() -> int:
         if doi and doi not in llms_full:
             errors.append(f"llms-full.txt is missing publication DOI: {doi}")
 
-    for value, label in (
-        (profile.get("program"), "current program"),
-        (profile.get("institution"), "current institution"),
-    ):
+    for value, label in ((profile.get("program"), "current program"), (profile.get("institution"), "current institution")):
         if value and norm(value) not in norm(llms):
             errors.append(f"llms.txt is missing synchronized {label}: {value!r}")
         if value and norm(value) not in norm(llms_full):
@@ -252,10 +240,20 @@ def main() -> int:
 
     if "translate reproducibly" not in llms_full.casefold():
         errors.append("llms-full.txt must use the canonical third research-program label 'Translate reproducibly'")
-    if "https://bhalaji.com/outputs/" not in llms or "https://bhalaji.com/outputs/" not in llms_full:
-        errors.append("machine-readable public context must include the Research Outputs hub")
+    primary_urls = (
+        "https://bhalaji.com/about/",
+        "https://bhalaji.com/research/",
+        "https://bhalaji.com/outputs/",
+        "https://bhalaji.com/experience/",
+        "https://bhalaji.com/engagement/",
+        "https://bhalaji.com/contact/",
+    )
+    for url in primary_urls:
+        if url not in llms:
+            errors.append(f"llms.txt is missing canonical primary destination: {url}")
+        if url not in llms_full:
+            errors.append(f"llms-full.txt is missing canonical primary destination: {url}")
 
-    # Homepage proof numbers must be derived from canonical collections, not presentation-layer magic values.
     guided_count = sum(int(item.get("project_count", 0) or 0) for item in portfolio.get("teaching", []))
     if guided_count <= 0:
         errors.append("student-project proof metric must derive from structured teaching.project_count values")
@@ -274,8 +272,8 @@ def main() -> int:
         return 1
 
     print(
-        "Content strategy guardrail passed: complementary page roles, restrained tone, "
-        f"structured identity/affiliation, synchronized public context, and derived proof metrics ({guided_count} guided projects)."
+        "Content strategy guardrail passed: complementary page roles, restrained public tone, "
+        f"structured identity/affiliation, correctly separated chronology, synchronized public context, and derived proof metrics ({guided_count} guided projects)."
     )
     return 0
 

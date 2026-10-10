@@ -48,6 +48,10 @@ forbidden = {
     '## Current public scope': 'internal disclosure framing exposed in public content',
     '## Public technical scope': 'internal disclosure framing exposed in public content',
     '## Verification scope': 'internal disclosure framing exposed in public content',
+    '## Research record': 'internal record-keeping heading exposed in public content',
+    'Questions worth combining methods around': 'internal workshop-style collaboration wording exposed in public content',
+    'Research package': 'internal packaging language exposed in public content',
+    'Persistent identifiers and institutional records': 'internal cataloguing language exposed in public content',
     'IP project details': 'intellectual-property output mislabeled as a generic project',
 }
 errors: list[str] = []
@@ -88,11 +92,17 @@ for required in (
     if required not in landing_text:
         errors.append(f'layouts/landing/list.html: missing homepage invariant {required!r}')
 
-outputs_content = ROOT / 'content/outputs/_index.md'
+for page_path, layout_path in (
+    ('content/outputs/_index.md', 'layouts/outputs/list.html'),
+    ('content/experience/_index.md', 'layouts/experience/list.html'),
+    ('content/engagement/_index.md', 'layouts/engagement/list.html'),
+    ('content/contact/_index.md', 'layouts/contact/list.html'),
+):
+    if not (ROOT / page_path).exists() or not (ROOT / layout_path).exists():
+        errors.append(f'first-class primary destination must remain present: {page_path} + {layout_path}')
+
 outputs_layout = ROOT / 'layouts/outputs/list.html'
-if not outputs_content.exists() or not outputs_layout.exists():
-    errors.append('first-class /outputs/ hub must remain present')
-else:
+if outputs_layout.exists():
     outputs_text = outputs_layout.read_text(encoding='utf-8')
     for required in ('Peer-reviewed article', 'M.S. thesis', 'Research software', 'Intellectual property record'):
         if required not in outputs_text:
@@ -128,7 +138,6 @@ if (ROOT / 'content' / 'authors').exists():
 config_text = (ROOT / 'config/_default/config.yaml').read_text(encoding='utf-8')
 if 'author: authors' in config_text or 'publication_type: publication_types' in config_text or 'category: categories' in config_text:
     errors.append('unused legacy taxonomies must remain disabled')
-
 for obsolete in ('go.mod', 'go.sum', 'config/_default/module.yaml'):
     if (ROOT / obsolete).exists():
         errors.append(f'{obsolete}: obsolete HugoBlox module dependency must remain removed')
@@ -157,7 +166,7 @@ optical_flat = ' '.join(optical_text.split())
 for required in (
     'Presented research',
     'CIE L\\*a\\*b\\*',
-    '## Research record',
+    '## Presentations and outputs',
     'VCU Engineering Graduate',
     '29th VCU Graduate Student Research Symposium',
 ):
@@ -171,7 +180,7 @@ for required in (
     'VCU Tech # TAN-26-099',
     'Bhalaji Yadav Kantepalle and Christina Tang',
     '## Technology overview',
-    '## Status',
+    '## What patent pending means',
 ):
     if required not in ip_text:
         errors.append(f'content/project/quantitative-thermal-imaging/index.md: missing IP fact {required!r}')
@@ -191,9 +200,14 @@ else:
 header_text = texts[ROOT / 'layouts/partials/site_header.html']
 if 'class="u-photo indieweb-photo"' not in header_text or 'alt="Portrait of {{ $p.profile.name }}"' not in header_text:
     errors.append('layouts/partials/site_header.html: hidden IndieWeb photo requires a durable non-empty alt value')
-for required in ('About</a>', 'Research</a>', 'Outputs</a>', 'Experience</a>', 'Engagement</a>', 'Contact</a>'):
-    if required not in header_text:
-        errors.append(f'layouts/partials/site_header.html: missing primary-navigation item {required!r}')
+for label, destination in (
+    ('About', '/about/'), ('Research', '/research/'), ('Outputs', '/outputs/'),
+    ('Experience', '/experience/'), ('Engagement', '/engagement/'), ('Contact', '/contact/'),
+):
+    if f'>{label}</a>' not in header_text:
+        errors.append(f'layouts/partials/site_header.html: missing primary-navigation item {label!r}')
+    if destination.strip('/') not in header_text:
+        errors.append(f'layouts/partials/site_header.html: missing canonical primary destination {destination!r}')
 if '>Trajectory</a>' in header_text:
     errors.append('layouts/partials/site_header.html: doctoral direction belongs within Research, not primary navigation')
 
@@ -264,12 +278,7 @@ for required in (
         errors.append(f'{required}: missing production hardening file')
 
 external_checker = (ROOT / "scripts" / "check_external_links.py").read_text(encoding="utf-8")
-required_external_checker_tokens = [
-    "skipped_same_site",
-    "site_hosts",
-    "same_site_urls_validated_locally",
-]
-for token in required_external_checker_tokens:
+for token in ("skipped_same_site", "site_hosts", "same_site_urls_validated_locally"):
     if token not in external_checker:
         errors.append(f"external-link checker lost same-site exclusion invariant: {token}")
 

@@ -50,38 +50,44 @@ def main() -> int:
             errors.append(f"shared header must retain the canonical vector BK monogram marker {marker}")
     if "https://infosec.exchange/@bhalaji" in header:
         errors.append("shared header must not contain a redundant Mastodon verification backlink")
-    contextual_nav_markers = (
+
+    # Primary navigation is intentionally canonical and stable across pages; do not
+    # restore the old mix of homepage fragments and standalone destinations.
+    canonical_url_markers = (
+        '{{ $aboutURL := "about/" | relURL }}',
         '{{ $researchURL := "research/" | relURL }}',
         '{{ $outputsURL := "outputs/" | relURL }}',
-        '{{ $researchHref = printf "%s#research" $root }}',
-        '{{ $outputsHref = printf "%s#outputs" $root }}',
-        'href="{{ $researchHref }}"',
-        'href="{{ $outputsHref }}"',
+        '{{ $experienceURL := "experience/" | relURL }}',
+        '{{ $engagementURL := "engagement/" | relURL }}',
+        '{{ $contactURL := "contact/" | relURL }}',
     )
-    for marker in contextual_nav_markers:
+    for marker in canonical_url_markers:
         if marker not in header:
-            errors.append(f"shared header lost contextual Research/Outputs navigation marker {marker!r}")
+            errors.append(f"shared header lost canonical primary destination marker {marker!r}")
     nav_markers = (
-        'class="nav-about',
-        'href="{{ $researchHref }}"',
-        'href="{{ $outputsHref }}"',
-        'href="{{ $root }}#experience"',
-        'href="{{ $root }}#presentations">Engagement',
-        'class="nav-contact" href="{{ $root }}#contact"',
+        '>About</a>',
+        '>Research</a>',
+        '>Outputs</a>',
+        '>Experience</a>',
+        '>Engagement</a>',
+        '>Contact</a>',
     )
     nav_positions = [header.find(marker) for marker in nav_markers]
     if any(position < 0 for position in nav_positions):
         errors.append("shared header must retain About, Research, Outputs, Experience, Engagement, and Contact navigation")
     elif nav_positions != sorted(nav_positions):
         errors.append("shared header navigation must keep the primary information architecture in order")
+    for obsolete in ('#research', '#outputs', '#experience', '#presentations', '#contact'):
+        if obsolete in header:
+            errors.append(f"shared header must not mix canonical navigation with homepage fragment {obsolete!r}")
     if 'href="{{ $root }}#trajectory"' in header:
         errors.append("shared header must keep doctoral trajectory within Research rather than primary navigation")
     if 'aria-current="page"' not in header:
         errors.append("shared header must expose current standalone pages to assistive technology")
 
     trajectory = (LAYOUTS / "partials/home_trajectory.html").read_text(encoding="utf-8")
-    if ">Research questions</h3>" not in trajectory:
-        errors.append("doctoral collaboration block must use the reader-facing 'Research questions' heading")
+    if ">Open research questions</h3>" not in trajectory:
+        errors.append("doctoral collaboration block must use the reader-facing 'Open research questions' heading")
     if "Questions worth combining methods around" in trajectory:
         errors.append("doctoral collaboration block must not restore process-oriented collaboration wording")
 
@@ -95,14 +101,23 @@ def main() -> int:
             errors.append(f"About template lost structural marker {marker!r}")
     if 'about-portrait__caption' in about_layout:
         errors.append("About portrait must not repeat name, role, and location already present in the page hierarchy")
+    if 'about-program-grid' in about_layout:
+        errors.append("About must not duplicate the homepage research-program card grid")
     about_content = (ROOT / "content/about.md").read_text(encoding="utf-8")
     if "bio:\n  - >-" not in about_content:
         errors.append("content/about.md: biography entries must remain explicit YAML block scalars")
 
+    for required in (
+        LAYOUTS / "outputs/list.html",
+        LAYOUTS / "experience/list.html",
+        LAYOUTS / "engagement/list.html",
+        LAYOUTS / "contact/list.html",
+    ):
+        if not required.exists():
+            errors.append(f"{required.relative_to(ROOT)}: primary destination template missing")
+
     outputs_layout = LAYOUTS / "outputs/list.html"
-    if not outputs_layout.exists():
-        errors.append("layouts/outputs/list.html: outputs hub template missing")
-    else:
+    if outputs_layout.exists():
         outputs = outputs_layout.read_text(encoding="utf-8")
         for marker in ('Research software', 'Intellectual property record', 'Peer-reviewed article'):
             if marker not in outputs:

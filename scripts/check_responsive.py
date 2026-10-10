@@ -32,10 +32,13 @@ PAGES = [
     ("about/", "about"),
     ("research/", "research"),
     ("outputs/", "outputs"),
+    ("experience/", "experience"),
+    ("engagement/", "engagement"),
+    ("contact/", "contact"),
     ("publication/adhesives-wearable/", "publication"),
     ("project/peel-trace-evaluation/", "project"),
 ]
-EVIDENCE_PAGES = {"home", "about", "research", "outputs"}
+EVIDENCE_PAGES = {"home", "about", "research", "outputs", "experience", "engagement", "contact"}
 EVIDENCE_VIEWPORTS = {"390-mobile", "1440-desktop"}
 
 
@@ -135,9 +138,7 @@ LAYOUT_EXPRESSION = r"""
       return style.display !== 'none' && style.visibility !== 'hidden';
     });
   const footerTops = footerItems.map((element) => element.getBoundingClientRect().top);
-  const footerRowSpread = footerTops.length
-    ? Math.max(...footerTops) - Math.min(...footerTops)
-    : null;
+  const footerRowSpread = footerTops.length ? Math.max(...footerTops) - Math.min(...footerTops) : null;
   const menu = document.querySelector('.menu-button');
   const nav = document.querySelector('#site-nav');
   const toc = document.querySelector('.toc-disclosure[data-responsive-toc]');
@@ -267,9 +268,7 @@ def main() -> int:
                             if layout["footerItemCount"] < 2:
                                 record_errors.append("desktop footer navigation items are missing")
                             elif layout["footerRowSpread"] is None or layout["footerRowSpread"] > 3:
-                                record_errors.append(
-                                    f"desktop footer navigation wrapped or lost baseline alignment: row spread={layout['footerRowSpread']}px"
-                                )
+                                record_errors.append(f"desktop footer navigation wrapped or lost baseline alignment: row spread={layout['footerRowSpread']}px")
                         if page_name == "home" and label in EVIDENCE_VIEWPORTS:
                             record_errors.extend(audit_menu(cdp, width <= 480))
                         if page_name == "research":
@@ -287,12 +286,8 @@ def main() -> int:
                             image = cdp.command("Page.captureScreenshot", {"format": "png", "fromSurface": True})
                             (screenshots / f"{label}-{page_name}.png").write_bytes(base64.b64decode(image["data"]))
 
-                cdp.command("Emulation.setDeviceMetricsOverride", {
-                    "width": 1440, "height": 1000, "deviceScaleFactor": 1, "mobile": False,
-                })
-                cdp.command("Emulation.setEmulatedMedia", {
-                    "features": [{"name": "prefers-reduced-motion", "value": "reduce"}],
-                })
+                cdp.command("Emulation.setDeviceMetricsOverride", {"width": 1440, "height": 1000, "deviceScaleFactor": 1, "mobile": False})
+                cdp.command("Emulation.setEmulatedMedia", {"features": [{"name": "prefers-reduced-motion", "value": "reduce"}]})
                 cdp.command("Page.navigate", {"url": base_url})
                 wait_ready(cdp, base_url)
                 reduced = cdp.evaluate("({scroll:getComputedStyle(document.documentElement).scrollBehavior, transition:getComputedStyle(document.querySelector('.lnk .arw')).transitionDuration})")
@@ -303,7 +298,7 @@ def main() -> int:
                 if errors:
                     print("\n".join(f"ERROR: {error}" for error in errors))
                     return 1
-                print(f"Responsive browser audit passed: {len(results)} page/viewport combinations plus reduced-motion, menu, footer, and TOC checks; desktop/mobile evidence captured for Home, About, Research, and Outputs.")
+                print(f"Responsive browser audit passed: {len(results)} page/viewport combinations plus reduced-motion, menu, footer, and TOC checks; desktop/mobile evidence captured for all seven primary destinations.")
                 return 0
             finally:
                 cdp.close()

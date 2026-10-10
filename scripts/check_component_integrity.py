@@ -29,8 +29,11 @@ VIEWPORTS = [
 PAGES = [
     ("/", "home"),
     ("/about/", "about"),
-    ("/outputs/", "outputs"),
     ("/research/", "research"),
+    ("/outputs/", "outputs"),
+    ("/experience/", "experience"),
+    ("/engagement/", "engagement"),
+    ("/contact/", "contact"),
     ("/publication/", "publication-index"),
     ("/publication/adhesives-wearable/", "article"),
     ("/publication/masters-thesis/", "thesis"),
@@ -55,8 +58,10 @@ SELECTORS = [
     ".research-package",
     ".package-artifacts article",
     ".output-row",
+    ".timeline-item",
     ".education-panel",
     ".education-panel article",
+    ".contact-section",
     ".about-fact-strip div",
     ".about-method-grid article",
     ".about-profile-links a",
@@ -67,9 +72,6 @@ SELECTORS = [
     ".related-package",
 ]
 
-# Large unused tails usually indicate row stretching or a fixed/minimum height that
-# no longer reflects the content. Limits are deliberately generous so the audit
-# catches discontinuities rather than normal padding.
 EDITORIAL_SLACK_LIMITS = {
     ".trajectory-grid article": 56.0,
     ".series summary": 56.0,
@@ -77,9 +79,6 @@ EDITORIAL_SLACK_LIMITS = {
     ".about-method-grid article": 56.0,
 }
 
-# Direct content blocks in these components are expected to read as one vertical
-# sequence. This catches the failure mode where a grid row or min-height creates a
-# visually empty band in the middle even though trailing-slack and collision checks pass.
 INTERNAL_GAP_LIMITS = {
     ".pillar": 92.0,
     ".questions article": 44.0,
@@ -146,16 +145,12 @@ MEASURE = r"""
       const collisions = [];
       for (let i = 0; i < children.length; i += 1) {
         for (let j = i + 1; j < children.length; j += 1) {
-          if (overlaps(children[i].box, children[j].box)) {
-            collisions.push([children[i], children[j]]);
-          }
+          if (overlaps(children[i].box, children[j].box)) collisions.push([children[i], children[j]]);
         }
       }
       const escaped = children.filter(child => (
-        child.box.left < componentRect.left - 2 ||
-        child.box.right > componentRect.right + 2 ||
-        child.box.top < componentRect.top - 2 ||
-        child.box.bottom > componentRect.bottom + 2
+        child.box.left < componentRect.left - 2 || child.box.right > componentRect.right + 2 ||
+        child.box.top < componentRect.top - 2 || child.box.bottom > componentRect.bottom + 2
       ));
       const ordered = [...children].sort((a, b) => (a.box.top - b.box.top) || (a.box.left - b.box.left));
       const internalGaps = [];
@@ -166,29 +161,17 @@ MEASURE = r"""
         const minimumComparableWidth = Math.min(current.box.width, next.box.width) * 0.5;
         const gap = next.box.top - current.box.bottom;
         if (gap > 0 && overlap >= minimumComparableWidth) {
-          internalGaps.push({
-            gap,
-            first:{tag:current.tag,className:current.className},
-            second:{tag:next.tag,className:next.className},
-          });
+          internalGaps.push({gap, first:{tag:current.tag,className:current.className}, second:{tag:next.tag,className:next.className}});
         }
       }
       const maxInternalGap = internalGaps.length ? Math.max(...internalGaps.map(item => item.gap)) : 0;
       const contentBottom = children.length ? Math.max(...children.map(child => child.box.bottom)) : componentRect.top;
       const trailingSlack = Math.max(0, componentRect.bottom - contentBottom - number(componentStyle.paddingBottom));
       results.push({
-        selector,
-        index,
-        component: componentRect,
-        scrollHeight: component.scrollHeight,
-        clientHeight: component.clientHeight,
-        scrollWidth: component.scrollWidth,
-        clientWidth: component.clientWidth,
-        trailingSlack,
-        maxInternalGap,
-        internalGaps,
-        collisions,
-        escaped,
+        selector, index, component: componentRect,
+        scrollHeight: component.scrollHeight, clientHeight: component.clientHeight,
+        scrollWidth: component.scrollWidth, clientWidth: component.clientWidth,
+        trailingSlack, maxInternalGap, internalGaps, collisions, escaped,
       });
     });
   });
@@ -217,21 +200,9 @@ def main() -> int:
 
     with tempfile.TemporaryDirectory(prefix="portfolio-components-chrome-", ignore_cleanup_errors=True) as profile:
         process = subprocess.Popen(
-            [
-                chrome,
-                "--headless=new",
-                "--no-sandbox",
-                "--disable-dev-shm-usage",
-                "--disable-gpu",
-                "--hide-scrollbars",
-                "--remote-allow-origins=*",
-                f"--remote-debugging-port={port}",
-                f"--user-data-dir={profile}",
-                "about:blank",
-            ],
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.PIPE,
-            text=True,
+            [chrome, "--headless=new", "--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu", "--hide-scrollbars",
+             "--remote-allow-origins=*", f"--remote-debugging-port={port}", f"--user-data-dir={profile}", "about:blank"],
+            stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, text=True,
         )
         try:
             deadline = time.time() + 20
@@ -245,10 +216,7 @@ def main() -> int:
                         raise RuntimeError(f"Chrome DevTools endpoint did not start: {stderr[-2000:]}")
                     time.sleep(0.2)
 
-            target = read_json(
-                f"http://127.0.0.1:{port}/json/new?{quote('about:blank', safe=':/?=&')}",
-                method="PUT",
-            )
+            target = read_json(f"http://127.0.0.1:{port}/json/new?{quote('about:blank', safe=':/?=&')}", method="PUT")
             cdp = CDP(target["webSocketDebuggerUrl"])
             try:
                 cdp.command("Page.enable")
@@ -258,48 +226,30 @@ def main() -> int:
                     url = args.base_url.rstrip("/") + path
                     for width, height, viewport_name in VIEWPORTS:
                         cdp.command("Emulation.setDeviceMetricsOverride", {
-                            "width": width,
-                            "height": height,
-                            "deviceScaleFactor": 1,
-                            "mobile": width <= 680,
+                            "width": width, "height": height, "deviceScaleFactor": 1, "mobile": width <= 680,
                         })
                         cdp.command("Page.navigate", {"url": url})
                         wait_ready(cdp, url)
                         cdp.evaluate(DECLINE_PRIVACY)
                         measured = cdp.evaluate(expression)
-                        case = {
-                            "page": page_name,
-                            "path": path,
-                            "viewport": {"width": width, "height": height, "name": viewport_name},
-                            "components": measured,
-                        }
-                        results.append(case)
+                        results.append({"page": page_name, "path": path, "viewport": {"width": width, "height": height, "name": viewport_name}, "components": measured})
                         prefix = f"{page_name}/{width}x{height}"
                         for component in measured:
                             label = f"{component['selector']}[{component['index']}]"
                             for collision in component.get("collisions", []):
                                 first, second = collision
-                                errors.append(
-                                    f"{prefix}: {label} has overlapping direct content blocks "
-                                    f"({first['tag']}.{first['className']} and {second['tag']}.{second['className']})"
-                                )
+                                errors.append(f"{prefix}: {label} has overlapping direct content blocks ({first['tag']}.{first['className']} and {second['tag']}.{second['className']})")
                             if component.get("escaped"):
                                 errors.append(f"{prefix}: {label} has content outside its component bounds")
                             if component.get("scrollWidth", 0) > component.get("clientWidth", 0) + 2:
                                 errors.append(f"{prefix}: {label} has horizontal component overflow")
                             slack_limit = EDITORIAL_SLACK_LIMITS.get(component["selector"])
                             if slack_limit is not None and component.get("trailingSlack", 0) > slack_limit:
-                                errors.append(
-                                    f"{prefix}: {label} leaves {component['trailingSlack']:.1f}px of avoidable trailing whitespace "
-                                    f"(limit {slack_limit:.0f}px)"
-                                )
+                                errors.append(f"{prefix}: {label} leaves {component['trailingSlack']:.1f}px of avoidable trailing whitespace (limit {slack_limit:.0f}px)")
                             gap_limit = INTERNAL_GAP_LIMITS.get(component["selector"])
                             if gap_limit is not None and component.get("maxInternalGap", 0) > gap_limit:
                                 worst = max(component.get("internalGaps", []), key=lambda item: item["gap"], default=None)
-                                errors.append(
-                                    f"{prefix}: {label} leaves {component['maxInternalGap']:.1f}px of avoidable internal whitespace "
-                                    f"(limit {gap_limit:.0f}px; blocks={worst})"
-                                )
+                                errors.append(f"{prefix}: {label} leaves {component['maxInternalGap']:.1f}px of avoidable internal whitespace (limit {gap_limit:.0f}px; blocks={worst})")
             finally:
                 cdp.close()
         finally:
@@ -317,8 +267,7 @@ def main() -> int:
     print(
         "Component integrity passed: major cards, editorial records, timelines, profile facts, citation boxes, "
         "and related panels contain rendered content without collisions, horizontal overflow, excessive tails, "
-        "or excessive internal whitespace across "
-        f"{len(PAGES) * len(VIEWPORTS)} page/viewport combinations."
+        f"or excessive internal whitespace across {len(PAGES) * len(VIEWPORTS)} page/viewport combinations."
     )
     return 0
 
