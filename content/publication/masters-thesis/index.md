@@ -57,6 +57,5 @@ The thesis-associated analysis workflow is openly available as
 The manuscript-baseline release is archived as version `v1.4.0-rc15`
 ([doi:10.5281/zenodo.20301242](https://doi.org/10.5281/zenodo.20301242)).
 
-The thesis manuscript remains under embargo. This page contains only
-information available through the public repository record and associated
-public research outputs.
+The thesis manuscript remains under embargo; the VCU repository record and
+associated research outputs provide the currently available sources.
