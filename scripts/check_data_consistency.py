@@ -79,13 +79,18 @@ def main() -> int:
     except ValueError:
         errors.append(f"invalid profile.last_updated_iso: {review_date!r}")
 
-    metric_by_label = {item["label"]: item for item in portfolio.get("metrics", [])}
-    posters = metric_by_label.get("Research posters", {})
-    if posters.get("source") != "presentations":
-        errors.append("Research posters metric must be derived from presentations")
+    current_education = (cv.get("education") or [{}])[0]
+    if norm_text(p_profile.get("institution")) != norm_text(current_education.get("institution")):
+        errors.append("current institution differs between portfolio and CV")
+    if norm_text(p_profile.get("program")) not in norm_text(current_education.get("degree")):
+        errors.append("current doctoral program differs between portfolio and CV")
+
     actual_posters = sum(1 for item in portfolio.get("presentations", []) if item.get("kind") == "Poster")
     if actual_posters < 1:
-        errors.append("no Poster records found for derived poster metric")
+        errors.append("no Poster records found in canonical presentation data")
+    guided_projects = sum(int(item.get("project_count", 0) or 0) for item in portfolio.get("teaching", []))
+    if guided_projects < 1:
+        errors.append("no structured student-project count found in canonical teaching data")
 
     stale_phrases = ("ongoing Summer 2026", "two ongoing student projects", "summer researchers on ongoing projects")
     serialized = (
@@ -115,6 +120,8 @@ def main() -> int:
 
     p_software = portfolio.get("software", {})
     cv_software = (cv.get("research_software") or [{}])[0]
+    if norm_text(p_software.get("title")) != norm_text(cv_software.get("title")):
+        errors.append("research software title differs between portfolio and CV")
     if norm_text(p_software.get("version")) != norm_text(cv_software.get("version")):
         errors.append("research software version differs between portfolio and CV")
     if norm_doi(p_software.get("version_doi", "")) != norm_doi(cv_software.get("archive", "")):
@@ -162,7 +169,7 @@ def main() -> int:
 
     print(
         "Cross-source consistency passed: "
-        f"{len(portfolio_pubs)} publications, {actual_posters} posters, "
+        f"{len(portfolio_pubs)} publications, {actual_posters} posters, {guided_projects} guided projects, "
         f"{len(portfolio_industry)} industry roles, shared identity fields aligned."
     )
     return 0
