@@ -64,22 +64,27 @@ def main() -> int:
         ".series-grid{align-items:start}",
         ".series{align-self:start}",
         ".menu-button,.copy-button{border-color:var(--control-line)}",
+        ".toc-disclosure summary{display:flex;align-items:center;min-height:24px}",
+        ".site-footer nav a,.site-footer nav .privacy-choice-link{display:inline-flex;align-items:center;min-height:24px;line-height:1.4}",
     )
     for rule in interaction_rules:
         if rule not in refinements:
             errors.append(f"interactive-layout/accessibility invariant missing {rule!r}")
 
-    footer_control_rule = (
-        ".site-footer nav .privacy-choice-link{color:var(--ink-soft);"
-        "font-family:var(--sans);font-size:.76rem;font-weight:400;"
-        "text-decoration:none}"
+    footer_typography_markers = (
+        ".site-footer nav .privacy-choice-link{",
+        "color:var(--ink-soft)",
+        "font-family:var(--sans)",
+        "font-size:.76rem",
+        "font-weight:400",
+        "text-decoration:none",
     )
-    if footer_control_rule not in refinements:
-        errors.append("footer privacy control must match the adjacent footer-link typography")
+    for marker in footer_typography_markers:
+        if marker not in refinements:
+            errors.append(f"footer privacy control typography marker missing {marker!r}")
 
     footer_layout_rules = (
         ".site-footer nav{align-items:baseline;justify-content:flex-end}",
-        ".site-footer nav a,.site-footer nav .privacy-choice-link{line-height:1.4}",
         ".site-footer nav{flex-wrap:nowrap;column-gap:.875rem;white-space:nowrap}",
         ".site-footer nav{justify-content:flex-start}",
     )
@@ -132,7 +137,7 @@ def main() -> int:
         return 1
     print(
         "Style audit passed: AA text contrast across all branded surfaces, "
-        "3:1 interactive boundaries, focus, breakpoints, card alignment, "
+        "3:1 interactive boundaries, 24px controls, focus, breakpoints, card alignment, "
         "privacy controls, and page spacing verified."
     )
     return 0
