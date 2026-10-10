@@ -25,6 +25,7 @@
 .page-header{margin-bottom:2.55rem}
 .article-layout{gap:clamp(2.5rem,4vw,4rem)}
 .abstract-block{padding:1.45rem}
+.abstract-block>p:not(.fine-print){font-size:1rem}
 .publication-summary{max-width:60ch;margin-top:1.15rem;color:var(--ink-soft);font-size:1.08rem;line-height:1.55}
 .related-package{margin-top:2.45rem;padding:1.5rem;border:1px solid var(--line);background:var(--surface-soft)}
 .related-package h2{margin:0 0 .65rem;padding:0;font-family:var(--sans);font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:var(--teal)}
@@ -36,7 +37,7 @@
 .outputs-page .page-header{max-width:760px}
 .output-filter{display:flex;align-items:flex-end;flex-wrap:wrap;gap:.25rem 1.15rem;margin:0 0 1.35rem;border-bottom:1px solid var(--line);font-family:var(--sans)}
 .output-filter__label{padding:0 0 .75rem;color:var(--ink-soft);font-size:.78rem;font-weight:650;letter-spacing:.08em;text-transform:uppercase}
-.output-filter button{appearance:none;min-height:40px;margin:0;padding:.58rem 0 .68rem;border:0;border-bottom:2px solid transparent;background:transparent;color:var(--ink-soft);font-family:var(--sans);font-size:.86rem;font-weight:650;cursor:pointer}
+.output-filter button{appearance:none;min-width:24px;min-height:40px;margin:0;padding:.58rem 0 .68rem;border:0;border-bottom:2px solid transparent;background:transparent;color:var(--ink-soft);font-family:var(--sans);font-size:.86rem;font-weight:650;cursor:pointer}
 .output-filter button:hover,.output-filter button:focus-visible{color:var(--teal)}
 .output-filter button[aria-pressed="true"]{border-bottom-color:var(--teal);color:var(--teal)}
 .output-list{border-top:1px solid var(--line-strong)}
