@@ -56,6 +56,24 @@ PAGE_METRICS = r"""
     value:(item.querySelector('strong')?.textContent || '').trim(),
     label:(item.querySelector('span')?.textContent || '').trim(),
   }));
+  const pillars = [...document.querySelectorAll('.pillar')].map((item) => {
+    const box = item.getBoundingClientRect();
+    const title = item.querySelector('h3')?.getBoundingClientRect();
+    const body = item.querySelector(':scope > p')?.getBoundingClientRect();
+    const tags = item.querySelector('.tag-list')?.getBoundingClientRect();
+    const link = item.querySelector(':scope > .lnk')?.getBoundingClientRect();
+    const motif = item.querySelector('.motif');
+    return {
+      top:box.top,
+      bottom:box.bottom,
+      height:box.height,
+      titleTop:title?.top ?? null,
+      bodyTop:body?.top ?? null,
+      tagsTop:tags?.top ?? null,
+      linkBottom:link?.bottom ?? null,
+      motifOpacity:motif ? parseFloat(getComputedStyle(motif).opacity) : null,
+    };
+  });
   const selectedOutputs = document.querySelector('#outputs');
   return {
     viewport:{width:innerWidth,height:innerHeight},
@@ -77,6 +95,7 @@ PAGE_METRICS = r"""
     primaryBackground:primaryStyle ? primaryStyle.backgroundColor : '',
     secondaryBackground:secondaryStyle ? secondaryStyle.backgroundColor : '',
     proof,
+    pillars,
     researchPackageCount:selectedOutputs ? selectedOutputs.querySelectorAll('.research-package').length : 0,
     secondaryOutputCount:selectedOutputs ? selectedOutputs.querySelectorAll('.secondary-output').length : 0,
     selectedOutputsText:selectedOutputs ? (selectedOutputs.textContent || '').replace(/\s+/g,' ').trim() : '',
@@ -99,6 +118,13 @@ def overlaps(a: dict | None, b: dict | None) -> bool:
 def transparent(value: str) -> bool:
     normalized = value.replace(" ", "").lower()
     return normalized in {"transparent", "rgba(0,0,0,0)"}
+
+
+def spread(values: list[float | int | None]) -> float | None:
+    usable = [float(value) for value in values if value is not None]
+    if not usable:
+        return None
+    return max(usable) - min(usable)
 
 
 def main() -> int:
@@ -216,6 +242,28 @@ def main() -> int:
                         if not (0.23 <= hero_share <= 0.38):
                             errors.append(f"{prefix}: portrait share of hero composition is unbalanced ({hero_share:.3f})")
 
+                    pillars = metrics.get("pillars", [])
+                    if len(pillars) != 3:
+                        errors.append(f"{prefix}: expected exactly three research-program cards, found {len(pillars)}")
+                    elif width >= 1280:
+                        alignment = {
+                            "cardTops": spread([item.get("top") for item in pillars]),
+                            "cardHeights": spread([item.get("height") for item in pillars]),
+                            "titleTops": spread([item.get("titleTop") for item in pillars]),
+                            "bodyTops": spread([item.get("bodyTop") for item in pillars]),
+                            "tagTops": spread([item.get("tagsTop") for item in pillars]),
+                            "linkBottoms": spread([item.get("linkBottom") for item in pillars]),
+                        }
+                        metrics["pillarAlignment"] = alignment
+                        for label, delta in alignment.items():
+                            if delta is None or delta > 3:
+                                errors.append(f"{prefix}: research-card {label} lost alignment (spread={delta})")
+                        opacities = [item.get("motifOpacity") for item in pillars if item.get("motifOpacity") is not None]
+                        if len(opacities) != 3:
+                            errors.append(f"{prefix}: research motifs missing opacity metrics")
+                        elif max(opacities) > 0.5 or spread(opacities) > 0.02:
+                            errors.append(f"{prefix}: research motifs are visually unbalanced: {opacities}")
+
                     expected_labels = [
                         "Peer-reviewed articles",
                         "Patent-pending technology",
@@ -249,7 +297,7 @@ def main() -> int:
     if errors:
         print("\n".join(f"ERROR: {error}" for error in errors))
         return 1
-    print("Homepage attention hierarchy passed across six desktop/laptop frames: proposition, primary action, portrait, proof signals, and selected evidence remain prioritized.")
+    print("Homepage attention hierarchy passed across six desktop/laptop frames: proposition, primary action, portrait, proof signals, aligned research cards, decorative restraint, and selected evidence remain prioritized.")
     return 0
 
 
