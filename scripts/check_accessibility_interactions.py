@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Browser checks for WCAG reflow, target size, focus visibility, and stateful UI regressions."""
+"""Browser checks for WCAG reflow, target size, keyboard focus, and stateful UI regressions."""
 from __future__ import annotations
 
 import argparse
@@ -55,41 +55,64 @@ REFLOW_EXPRESSION = r"""
 })()
 """
 
+ACTIVE_FOCUS_EXPRESSION = r"""
+(() => {
+  const target = document.activeElement;
+  if (!target || target === document.body || target === document.documentElement) {
+    return {found:false, inMain:false};
+  }
+  const rect = target.getBoundingClientRect();
+  const header = document.querySelector('.site-head')?.getBoundingClientRect();
+  const style = getComputedStyle(target);
+  return {
+    found:true,
+    inMain:Boolean(target.closest('main')),
+    tag:target.tagName.toLowerCase(),
+    text:(target.textContent || target.getAttribute('aria-label') || '').trim().replace(/\s+/g, ' ').slice(0,80),
+    top:rect.top,
+    bottom:rect.bottom,
+    left:rect.left,
+    right:rect.right,
+    viewportWidth:innerWidth,
+    viewportHeight:innerHeight,
+    headerBottom:header ? header.bottom : 0,
+    outlineStyle:style.outlineStyle,
+    outlineWidth:parseFloat(style.outlineWidth) || 0,
+    outlineOffset:parseFloat(style.outlineOffset) || 0,
+  };
+})()
+"""
 
-def focus_check(cdp: CDP) -> dict:
-    return cdp.evaluate(
-        r"""
-        new Promise((resolve) => {
-          const target = [...document.querySelectorAll('main a[href], main button, main summary')]
-            .find((element) => {
-              const style = getComputedStyle(element);
-              const rect = element.getBoundingClientRect();
-              return style.display !== 'none' && style.visibility !== 'hidden' && rect.width > 0 && rect.height > 0;
-            });
-          if (!target) return resolve({missing:true});
-          target.focus({preventScroll:true});
-          target.scrollIntoView({block:'center', inline:'nearest'});
-          requestAnimationFrame(() => requestAnimationFrame(() => {
-            const rect = target.getBoundingClientRect();
-            const header = document.querySelector('.site-head')?.getBoundingClientRect();
-            const style = getComputedStyle(target);
-            resolve({
-              missing:false,
-              text:(target.textContent || '').trim().replace(/\s+/g, ' ').slice(0,80),
-              top:rect.top,
-              bottom:rect.bottom,
-              left:rect.left,
-              right:rect.right,
-              viewportWidth:innerWidth,
-              viewportHeight:innerHeight,
-              headerBottom:header ? header.bottom : 0,
-              outlineStyle:style.outlineStyle,
-              outlineWidth:parseFloat(style.outlineWidth) || 0,
-            });
-          }));
-        })
-        """
+
+def press_tab(cdp: CDP) -> None:
+    cdp.command(
+        "Input.dispatchKeyEvent",
+        {"type": "keyDown", "key": "Tab", "code": "Tab", "windowsVirtualKeyCode": 9},
     )
+    cdp.command(
+        "Input.dispatchKeyEvent",
+        {"type": "keyUp", "key": "Tab", "code": "Tab", "windowsVirtualKeyCode": 9},
+    )
+    cdp.evaluate("new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))")
+
+
+def keyboard_focus_check(cdp: CDP) -> dict:
+    cdp.evaluate(
+        "document.documentElement.style.scrollBehavior='auto';"
+        "document.body.style.scrollBehavior='auto';"
+        "window.scrollTo(0,0);"
+        "if(document.activeElement && document.activeElement.blur) document.activeElement.blur();"
+    )
+    visited: list[dict] = []
+    for _ in range(30):
+        press_tab(cdp)
+        state = cdp.evaluate(ACTIVE_FOCUS_EXPRESSION)
+        if state.get("found"):
+            visited.append({"tag": state.get("tag"), "text": state.get("text"), "inMain": state.get("inMain")})
+        if state.get("inMain"):
+            state["visited"] = visited
+            return state
+    return {"missing": True, "visited": visited}
 
 
 def series_check(cdp: CDP) -> dict:
@@ -201,6 +224,7 @@ def main() -> int:
             try:
                 cdp.command("Page.enable")
                 cdp.command("Runtime.enable")
+                cdp.command("Input.setIgnoreInputEvents", {"ignore": False})
                 base_url = args.base_url.rstrip("/") + "/"
 
                 # 320 CSS px is the WCAG 2.2 AA reflow reference width.
@@ -212,7 +236,7 @@ def main() -> int:
                     cdp.command("Page.navigate", {"url": url})
                     wait_ready(cdp, url)
                     reflow = cdp.evaluate(REFLOW_EXPRESSION)
-                    focus = focus_check(cdp)
+                    focus = keyboard_focus_check(cdp)
                     record = {"page": name, **reflow, "focus": focus}
                     results["reflow"].append(record)
 
@@ -225,14 +249,14 @@ def main() -> int:
                     if reflow["mainCount"] != 1:
                         errors.append(f"320px/{name}: expected exactly one main landmark, found {reflow['mainCount']}")
                     if focus.get("missing"):
-                        errors.append(f"320px/{name}: no focusable main-content control found")
+                        errors.append(f"320px/{name}: keyboard traversal did not reach a main-content control: {focus.get('visited')}")
                     else:
                         if focus["top"] < focus["headerBottom"] - 2 or focus["bottom"] > focus["viewportHeight"] + 2:
-                            errors.append(f"320px/{name}: focused control is obscured or outside viewport: {focus}")
+                            errors.append(f"320px/{name}: keyboard-focused control is obscured or outside viewport: {focus}")
                         if focus["left"] < -2 or focus["right"] > focus["viewportWidth"] + 2:
-                            errors.append(f"320px/{name}: focused control overflows horizontally: {focus}")
+                            errors.append(f"320px/{name}: keyboard-focused control overflows horizontally: {focus}")
                         if focus["outlineStyle"] == "none" or focus["outlineWidth"] < 2:
-                            errors.append(f"320px/{name}: focused control lacks a visible >=2px outline: {focus}")
+                            errors.append(f"320px/{name}: keyboard-focused control lacks a visible >=2px focus indicator: {focus}")
 
                 # Reproduce the presentation-card bug at the desktop layout where
                 # sibling grid items previously stretched when one details opened.
@@ -284,7 +308,7 @@ def main() -> int:
         return 1
     print(
         "Accessibility interaction audit passed: 320px reflow, 24px non-inline targets, "
-        "unobscured focus, independent presentation details, and live copy feedback verified."
+        "keyboard focus visibility, independent presentation details, and live copy feedback verified."
     )
     return 0
 
