@@ -5,10 +5,11 @@
 }
 .hero{
   min-height:auto;
-  gap:clamp(2.75rem,6vw,6rem);
-  padding-block:clamp(4rem,7vw,6.5rem);
+  grid-template-columns:minmax(0,1.38fr) minmax(280px,.62fr);
+  gap:clamp(2.75rem,5vw,5rem);
+  padding-block:clamp(3.5rem,6vw,5.5rem);
 }
-.hero h1{max-width:22ch}
+.hero h1{max-width:24ch;font-size:clamp(3rem,4.4vw,4.4rem)}
 .identity-note{right:-.85rem}
 .section{padding-block:var(--refined-section-space)}
 .section-head{gap:1.6rem 4.5rem;margin-bottom:2.6rem}
