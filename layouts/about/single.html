@@ -1,5 +1,6 @@
 {{ define "main" }}
 {{ $p := site.Data.portfolio }}
+{{ $aff := site.Data.current_affiliation }}
 {{ $cvVersion := readFile "static/uploads/resume.pdf" | md5 }}
 {{ $cvHref := printf "%s?v=%s" ($p.profile.cv | relURL) $cvVersion }}
 <article class="about-page h-card">
@@ -24,8 +25,8 @@
     <dl class="about-fact-strip" aria-label="Profile at a glance">
       <div><dt>Current role</dt><dd class="p-job-title">{{ $p.profile.role }} · {{ $p.profile.program }}</dd></div>
       <div><dt>Institution</dt><dd class="p-org">{{ $p.profile.institution }}</dd></div>
-      <div><dt>Location</dt><dd>{{ $p.profile.location }}</dd></div>
-      <div><dt>Research focus</dt><dd>Stimuli-responsive materials and quantitative metrology</dd></div>
+      <div><dt>Research group</dt><dd><a href="{{ $aff.lab_url }}" target="_blank" rel="noopener">{{ $aff.lab }}</a></dd></div>
+      <div><dt>Advisor</dt><dd><a href="{{ $aff.advisor_url }}" target="_blank" rel="noopener">{{ $aff.advisor }}</a></dd></div>
     </dl>
 
     <section class="about-section about-biography" id="biography" aria-labelledby="about-biography">
