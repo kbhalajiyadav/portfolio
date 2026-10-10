@@ -127,6 +127,23 @@ def spread(values: list[float | int | None]) -> float | None:
     return max(usable) - min(usable)
 
 
+def visual_rows(items: list[dict], tolerance: float = 3.0) -> list[list[dict]]:
+    """Group responsive cards that visibly share a row without assuming a column count."""
+    rows: list[list[dict]] = []
+    for item in sorted(items, key=lambda value: (value.get("top") or 0)):
+        top = item.get("top")
+        if top is None:
+            continue
+        for row in rows:
+            row_top = row[0].get("top")
+            if row_top is not None and abs(float(top) - float(row_top)) <= tolerance:
+                row.append(item)
+                break
+        else:
+            rows.append([item])
+    return rows
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--base-url", default="http://127.0.0.1:4173/")
@@ -245,19 +262,30 @@ def main() -> int:
                     pillars = metrics.get("pillars", [])
                     if len(pillars) != 3:
                         errors.append(f"{prefix}: expected exactly three research-program cards, found {len(pillars)}")
-                    elif width >= 981:
-                        alignment = {
-                            "cardTops": spread([item.get("top") for item in pillars]),
-                            "cardHeights": spread([item.get("height") for item in pillars]),
-                            "titleTops": spread([item.get("titleTop") for item in pillars]),
-                            "bodyTops": spread([item.get("bodyTop") for item in pillars]),
-                            "tagTops": spread([item.get("tagsTop") for item in pillars]),
-                            "linkBottoms": spread([item.get("linkBottom") for item in pillars]),
-                        }
-                        metrics["pillarAlignment"] = alignment
-                        for label, delta in alignment.items():
-                            if delta is None or delta > 3:
-                                errors.append(f"{prefix}: research-card {label} lost alignment (spread={delta})")
+                    else:
+                        row_reports: list[dict] = []
+                        for row_index, row in enumerate(visual_rows(pillars), start=1):
+                            # A single card on a wrapped final row has no peer baseline to compare.
+                            if len(row) < 2:
+                                continue
+                            alignment = {
+                                "row": row_index,
+                                "cardTops": spread([item.get("top") for item in row]),
+                                "cardHeights": spread([item.get("height") for item in row]),
+                                "titleTops": spread([item.get("titleTop") for item in row]),
+                                "bodyTops": spread([item.get("bodyTop") for item in row]),
+                                "tagTops": spread([item.get("tagsTop") for item in row]),
+                                "linkBottoms": spread([item.get("linkBottom") for item in row]),
+                            }
+                            row_reports.append(alignment)
+                            for label, delta in alignment.items():
+                                if label == "row":
+                                    continue
+                                if delta is None or delta > 3:
+                                    errors.append(
+                                        f"{prefix}: research-card row {row_index} {label} lost alignment (spread={delta})"
+                                    )
+                        metrics["pillarAlignmentRows"] = row_reports
                         opacities = [item.get("motifOpacity") for item in pillars if item.get("motifOpacity") is not None]
                         if len(opacities) != 3:
                             errors.append(f"{prefix}: research motifs missing opacity metrics")
@@ -297,7 +325,7 @@ def main() -> int:
     if errors:
         print("\n".join(f"ERROR: {error}" for error in errors))
         return 1
-    print("Homepage attention hierarchy passed across six desktop/laptop frames: proposition, primary action, portrait, proof signals, aligned research cards, decorative restraint, and selected evidence remain prioritized.")
+    print("Homepage attention hierarchy passed across six desktop/laptop frames: proposition, primary action, portrait, proof signals, row-aware research-card alignment, decorative restraint, and selected evidence remain prioritized.")
     return 0
 
 
