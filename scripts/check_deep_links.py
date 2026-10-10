@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Browser audit for contextual parent links and hash-addressed evidence records."""
+"""Browser audit for contextual navigation, evidence deep links, and governed layout states."""
 from __future__ import annotations
 
 import argparse
@@ -172,6 +172,41 @@ def main() -> int:
                         errors.append(f"deep-linked presentation series is obscured by sticky header: {series_id}")
                     if state.get("borderLeftWidth") in (None, "0px"):
                         errors.append(f"deep-linked presentation series lacks persistent target emphasis: {series_id}")
+
+                cdp.command("Emulation.setDeviceMetricsOverride", {"width": 820, "height": 900, "deviceScaleFactor": 1, "mobile": False})
+                cdp.command("Page.navigate", {"url": base_url})
+                wait_ready(cdp, base_url)
+                tablet = cdp.evaluate(r"""(() => {
+                  const hero=document.querySelector('.hero');
+                  const copy=document.querySelector('.hero__copy');
+                  const visual=document.querySelector('.hero__visual');
+                  const note=document.querySelector('.identity-note');
+                  const appHeading=document.querySelector('.trajectory-grid .application-card h3');
+                  const appBody=document.querySelector('.trajectory-grid .application-card h3 + p');
+                  const desktopSig=document.querySelector('.research-signature__desktop');
+                  const mobileSig=document.querySelector('.research-signature__mobile');
+                  const copyRect=copy?.getBoundingClientRect();
+                  const visualRect=visual?.getBoundingClientRect();
+                  const hRect=appHeading?.getBoundingClientRect();
+                  const pRect=appBody?.getBoundingClientRect();
+                  return {
+                    columns:hero?getComputedStyle(hero).gridTemplateColumns:null,
+                    visualAfterCopy:!!(copyRect&&visualRect&&visualRect.top>=copyRect.bottom+12),
+                    identityPosition:note?getComputedStyle(note).position:null,
+                    headingBodyGap:Math.round((pRect?.top||0)-(hRect?.bottom||0)),
+                    desktopSignatureDisplay:desktopSig?getComputedStyle(desktopSig).display:null,
+                    mobileSignatureDisplay:mobileSig?getComputedStyle(mobileSig).display:null
+                  };
+                })()""")
+                observations.append({"path": "", "kind": "tablet-820", **tablet})
+                if not tablet.get("visualAfterCopy"):
+                    errors.append("820px hero has not transitioned to an intentional stacked composition")
+                if tablet.get("identityPosition") != "static":
+                    errors.append(f"820px hero identity note should be static, got {tablet.get('identityPosition')}")
+                if tablet.get("headingBodyGap", 0) < 7:
+                    errors.append(f"doctoral application heading/body rhythm is too tight: {tablet.get('headingBodyGap')}px")
+                if tablet.get("desktopSignatureDisplay") != "none" or tablet.get("mobileSignatureDisplay") == "none":
+                    errors.append("820px research signature did not switch to the legible mobile/tablet representation")
             finally:
                 cdp.close()
         finally:
@@ -187,7 +222,7 @@ def main() -> int:
         for error in errors:
             print(f"- {error}")
         return 1
-    print("Deep-link and contextual-navigation audit passed")
+    print("Deep-link, contextual-navigation, and governed tablet-layout audit passed")
     return 0
 
 
