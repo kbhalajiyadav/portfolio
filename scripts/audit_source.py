@@ -153,6 +153,7 @@ for required in (
         errors.append(f'content/brand-use.md: missing rights clarification {required!r}')
 
 optical_text = texts[ROOT / 'content/project/optical-metrology/index.md']
+optical_flat = ' '.join(optical_text.split())
 for required in (
     'Presented research',
     'CIE L\\*a\\*b\\*',
@@ -160,7 +161,7 @@ for required in (
     'VCU Engineering Graduate',
     '29th VCU Graduate Student Research Symposium',
 ):
-    if required not in optical_text:
+    if required not in optical_flat:
         errors.append(f'content/project/optical-metrology/index.md: missing optical-metrology fact {required!r}')
 
 ip_text = texts[ROOT / 'content/project/quantitative-thermal-imaging/index.md']
