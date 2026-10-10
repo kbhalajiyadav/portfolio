@@ -48,7 +48,7 @@ jobs:
           fi
           bash scripts/build_browser_icons.sh
 
-      - name: Check source and cross-source consistency
+      - name: Check source, content strategy, and cross-source consistency
         run: |
           mkdir -p artifacts
           date -u +"checked_at=%Y-%m-%dT%H:%M:%SZ" | tee artifacts/integrity-check.txt
@@ -56,6 +56,7 @@ jobs:
           python3 scripts/audit_templates.py
           python3 scripts/check_workflows.py
           python3 scripts/check_data_consistency.py
+          python3 scripts/check_content_strategy.py
           python3 scripts/check_review_freshness.py
 
       - name: Reconcile against current ORCID
