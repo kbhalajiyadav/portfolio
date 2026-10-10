@@ -20,10 +20,10 @@ VIEWPORTS = [
     (1440, 1000, "1440-desktop"),
 ]
 PAGES = [
-    ("", "home"),
-    ("research/", "research"),
-    ("publication/adhesives-wearable/", "publication"),
-    ("project/peel-trace-evaluation/", "project"),
+    ("", "home", "home"),
+    ("research/", "research", "primary"),
+    ("publication/adhesives-wearable/", "publication", "detail"),
+    ("project/peel-trace-evaluation/", "project", "detail"),
 ]
 
 GEOMETRY_EXPRESSION = r"""
@@ -74,7 +74,7 @@ def between(value: float, low: float, high: float) -> bool:
     return low <= value <= high
 
 
-def validate(record: dict, page_name: str) -> list[str]:
+def validate(record: dict, page_name: str, page_level: str) -> list[str]:
     errors: list[str] = []
     banner = record.get("banner")
     header = record.get("siteHeader")
@@ -95,7 +95,7 @@ def validate(record: dict, page_name: str) -> list[str]:
             f"privacy notice is too tall for the viewport: {banner['height']:.1f}px of {record['viewportHeight']}px"
         )
 
-    if page_name == "home":
+    if page_level == "home":
         hero_padding = record.get("heroPaddingTop")
         if hero_padding is None or not between(hero_padding, 36, 96):
             errors.append(f"home introduction top spacing is outside the intended range: {hero_padding}")
@@ -107,18 +107,37 @@ def validate(record: dict, page_name: str) -> list[str]:
         back = record.get("backLink")
         page_header = record.get("pageHeader")
         article = record.get("articleLayout")
-        if not all((shell, back, page_header, article)):
-            errors.append("internal-page spacing anchors are missing")
+
+        # Primary destinations orient through the persistent header and deliberately
+        # do not expose a redundant back-to-home control. Detail records retain one
+        # contextual parent link, so the two hierarchy levels need different spacing
+        # anchors instead of forcing the old universal-back-link geometry on both.
+        if page_level == "primary":
+            if not all((shell, page_header, article)):
+                errors.append("primary-page spacing anchors are missing")
+            else:
+                shell_to_header = page_header["top"] - shell["top"]
+                header_to_article = article["top"] - page_header["bottom"]
+                if not between(shell_to_header, 28, 100):
+                    errors.append(f"primary page top spacing is inconsistent: {shell_to_header:.1f}px")
+                if not between(header_to_article, 24, 84):
+                    errors.append(f"header to article spacing is inconsistent: {header_to_article:.1f}px")
+            if back:
+                errors.append("primary destination must not reintroduce a redundant back link")
         else:
-            shell_top_space = back["top"] - shell["top"]
-            back_to_header = page_header["top"] - back["bottom"]
-            header_to_article = article["top"] - page_header["bottom"]
-            if not between(shell_top_space, 28, 100):
-                errors.append(f"internal page top spacing is inconsistent: {shell_top_space:.1f}px")
-            if not between(back_to_header, 20, 72):
-                errors.append(f"back-link to header spacing is inconsistent: {back_to_header:.1f}px")
-            if not between(header_to_article, 24, 84):
-                errors.append(f"header to article spacing is inconsistent: {header_to_article:.1f}px")
+            if not all((shell, back, page_header, article)):
+                errors.append("detail-page spacing anchors are missing")
+            else:
+                shell_top_space = back["top"] - shell["top"]
+                back_to_header = page_header["top"] - back["bottom"]
+                header_to_article = article["top"] - page_header["bottom"]
+                if not between(shell_top_space, 28, 100):
+                    errors.append(f"detail page top spacing is inconsistent: {shell_top_space:.1f}px")
+                if not between(back_to_header, 20, 72):
+                    errors.append(f"contextual back-link to header spacing is inconsistent: {back_to_header:.1f}px")
+                if not between(header_to_article, 24, 84):
+                    errors.append(f"header to article spacing is inconsistent: {header_to_article:.1f}px")
+
         for margin in record.get("articleHeadingMargins", []):
             if not between(margin, 32, 56):
                 errors.append(f"article section-heading spacing is inconsistent: {margin:.1f}px")
@@ -193,13 +212,13 @@ def main() -> int:
                         "deviceScaleFactor": 1,
                         "mobile": width <= 480,
                     })
-                    for path, page_name in PAGES:
+                    for path, page_name, page_level in PAGES:
                         url = urljoin(base_url, path)
                         cdp.command("Page.navigate", {"url": url})
                         wait_ready(cdp, url)
                         geometry = cdp.evaluate(GEOMETRY_EXPRESSION)
-                        record_errors = validate(geometry, page_name)
-                        record = {"viewport": label, "page": page_name, **geometry, "errors": record_errors}
+                        record_errors = validate(geometry, page_name, page_level)
+                        record = {"viewport": label, "page": page_name, "level": page_level, **geometry, "errors": record_errors}
                         results.append(record)
                         errors.extend(f"{label}/{page_name}: {message}" for message in record_errors)
 
@@ -210,7 +229,7 @@ def main() -> int:
                 if errors:
                     print("\n".join(f"ERROR: {error}" for error in errors))
                     return 1
-                print(f"Privacy and spacing audit passed: {len(results)} page/viewport combinations.")
+                print(f"Privacy and spacing audit passed: {len(results)} page/viewport combinations with level-aware primary/detail rhythm checks.")
                 return 0
             finally:
                 cdp.close()
