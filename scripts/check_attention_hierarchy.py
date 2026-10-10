@@ -206,10 +206,15 @@ def main() -> int:
                     if overlaps(metrics.get("copy"), metrics.get("portrait")):
                         errors.append(f"{prefix}: hero copy and portrait overlap")
                     portrait = metrics.get("portrait")
-                    if portrait:
-                        ratio = portrait["width"] / width
-                        if not (0.17 <= ratio <= 0.38):
-                            errors.append(f"{prefix}: portrait share of viewport is unbalanced ({ratio:.3f})")
+                    hero = metrics.get("hero")
+                    if portrait and hero and hero["width"]:
+                        # The site uses a fixed maximum content shell, so portrait balance
+                        # must be judged against that composition rather than the full
+                        # browser width on large monitors.
+                        hero_share = portrait["width"] / hero["width"]
+                        metrics["portraitHeroShare"] = hero_share
+                        if not (0.23 <= hero_share <= 0.38):
+                            errors.append(f"{prefix}: portrait share of hero composition is unbalanced ({hero_share:.3f})")
 
                     expected_labels = [
                         "Peer-reviewed articles",
