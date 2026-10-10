@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Detect rendered content collisions and component overflow across key portfolio surfaces."""
+"""Detect rendered content collisions and component overflow across portfolio components.
+
+The audit intentionally checks semantic component families rather than screenshot-perfect
+pixel positions. It protects cards, record rows, timelines, profile facts, citation boxes,
+and editorial panels against content overlap or horizontal escape as copy changes.
+"""
 from __future__ import annotations
 
 import argparse
@@ -25,9 +30,20 @@ PAGES = [
     ("/about/", "about"),
     ("/outputs/", "outputs"),
     ("/research/", "research"),
+    ("/publication/", "publication-index"),
+    ("/publication/adhesives-wearable/", "article"),
+    ("/publication/masters-thesis/", "thesis"),
+    ("/project/", "project-index"),
+    ("/project/peel-trace-evaluation/", "software"),
+    ("/project/optical-metrology/", "optical-metrology"),
+    ("/project/quantitative-thermal-imaging/", "intellectual-property"),
+    ("/project/fda-project/", "industry-quality"),
+    ("/project/supply-chain-automation/", "industry-data"),
+    ("/tags/", "topic-index"),
 ]
 
 SELECTORS = [
+    ".metrics div",
     ".pillar",
     ".questions article",
     ".trajectory-grid article",
@@ -35,11 +51,17 @@ SELECTORS = [
     ".compact-record",
     ".secondary-output",
     ".research-package",
+    ".package-artifacts article",
     ".output-row",
+    ".education-panel article",
+    ".about-fact-strip div",
     ".about-program-grid article",
     ".about-method-grid article",
     ".about-profile-links a",
     ".about-path article",
+    ".listing-grid article",
+    ".abstract-block",
+    ".citation-box",
     ".related-package",
 ]
 
@@ -224,7 +246,10 @@ def main() -> int:
     if errors:
         print("\n".join(f"ERROR: {error}" for error in errors))
         return 1
-    print("Component integrity passed: key card, record, question, and profile surfaces contain their rendered content without collisions or horizontal overflow across desktop, compact, tablet, and mobile frames.")
+    print(
+        "Component integrity passed: major cards, editorial records, timelines, profile facts, citation boxes, "
+        f"and related panels contain their rendered content without collisions or horizontal overflow across {len(PAGES) * len(VIEWPORTS)} page/viewport combinations."
+    )
     return 0
 
 
