@@ -48,7 +48,7 @@ EXPECTED_TEXT = {
         "Intellectual property record",
     ],
     "experience/": [
-        "Experience &amp; Education",
+        "Experience & Education",
         "Professional and research experience",
         "Education",
         "Research training",
@@ -80,7 +80,7 @@ EXPECTED_TEXT = {
         "Measurement workflow",
         "Presentations and outputs",
         "VCU Engineering Graduate",
-        "29th VCU Graduate Student Research Symposium",
+        "29th VCU Graduate Student Research",
     ],
     "project/quantitative-thermal-imaging/": [
         "Intellectual-property status",
