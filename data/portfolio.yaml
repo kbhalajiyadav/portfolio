@@ -1,10 +1,12 @@
 profile:
   name: Bhalaji Yadav Kantepalle
   short_name: Bhalaji Kantepalle
+  role: Ph.D. student
+  program: Integrative Life Sciences
+  institution: Virginia Commonwealth University
   eyebrow: Stimuli-responsive materials · Measurement under processing
   headline: Making responsive materials measurable under real processing conditions.
-  summary: I study how temperature, deformation, and flow change soft and liquid-crystalline materials,
-    and develop measurements that connect those changes to optical and mechanical behavior.
+  summary: I study how processing histories reshape responsive soft and liquid-crystalline materials, then build measurements that connect those structural changes to optical and mechanical response.
   status: Ph.D. student · Integrative Life Sciences · Virginia Commonwealth University
   location: Richmond, Virginia
   email: contact@bhalaji.com
@@ -15,16 +17,6 @@ profile:
   cv: uploads/resume.pdf
   last_updated: October 2026
   last_updated_iso: '2026-10-10'
-metrics:
-- value: '2'
-  label: Peer-reviewed articles
-  source: orcid
-- label: Research posters
-  source: presentations
-- value: '1'
-  label: M.S. degree
-- value: '2'
-  label: Student projects guided
 research:
 - number: '01'
   title: Measure response
@@ -219,6 +211,7 @@ teaching:
 - date: Summer 2026
   type: Research guidance
   title: Guidance for two Summer 2026 student projects
+  project_count: 2
   detail: 'Guided two Summer 2026 student research projects: one developed temperature-mapping methods
     for stimuli-responsive liquid crystals, and one analyzed hyperspectral measurements of soil–plastic
     mixtures to evaluate concentration-dependent plastic detection and estimate the minimum detectable
