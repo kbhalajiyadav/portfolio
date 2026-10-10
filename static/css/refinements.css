@@ -1,5 +1,7 @@
 :root{
   --refined-section-space:clamp(4.5rem,7vw,6.5rem);
+  --cyan:#0c757c;
+  --control-line:#7d858c;
 }
 .hero{
   min-height:auto;
@@ -13,7 +15,10 @@
 .section-head h2{max-width:19ch}
 .pillar{min-height:350px;padding:1.85rem}
 .pillar .tag-list{opacity:.88}
+.series-grid{align-items:start}
+.series{align-self:start}
 .series summary{min-height:132px}
+.menu-button,.copy-button{border-color:var(--control-line)}
 .page-shell{padding-block:clamp(3rem,6vw,5.25rem)}
 .back-link{margin-bottom:2.1rem}
 .page-header{margin-bottom:2.55rem}
