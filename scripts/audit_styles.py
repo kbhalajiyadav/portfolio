@@ -7,6 +7,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 CSS = ROOT / "static/css/site.css"
 REFINEMENTS = ROOT / "static/css/refinements.css"
+ABOUT = ROOT / "static/css/about.css"
 
 
 def luminance(value: str) -> float:
@@ -23,7 +24,8 @@ def contrast(a: str, b: str) -> float:
 def main() -> int:
     text = CSS.read_text(encoding="utf-8")
     refinements = REFINEMENTS.read_text(encoding="utf-8")
-    combined = text + "\n" + refinements
+    about = ABOUT.read_text(encoding="utf-8")
+    combined = text + "\n" + refinements + "\n" + about
     errors: list[str] = []
 
     # Later declarations intentionally win, matching the browser cascade for
@@ -63,6 +65,7 @@ def main() -> int:
     interaction_rules = (
         ".series-grid{align-items:start}",
         ".series{align-self:start}",
+        ".series summary{min-height:0}",
         ".menu-button,.copy-button{border-color:var(--control-line)}",
         ".toc-disclosure summary{display:flex;align-items:center;min-height:24px}",
         ".site-footer nav a,.site-footer nav .privacy-choice-link{display:inline-flex;align-items:center;min-height:24px;line-height:1.4}",
@@ -92,13 +95,13 @@ def main() -> int:
         if rule not in refinements:
             errors.append(f"footer alignment invariant missing {rule!r}")
 
-    # Research cards reserve a common title zone while leaving the body track
-    # intrinsically flexible. Tags and actions stay in normal flow so longer
-    # copy cannot be painted on top of later content.
+    # Research cards share only the small title allowance needed for the
+    # longest heading. Their overall height comes from content and the outer
+    # grid rather than a fixed card height, so copy growth remains safe.
     pillar_alignment_rules = (
-        ".pillar{display:grid;grid-template-rows:auto auto minmax(0,1fr) auto auto;min-height:430px;align-items:start}",
-        ".pillar .card-number{margin-bottom:2.5rem}",
-        ".pillar h3{min-block-size:5.1em;margin-top:0}",
+        ".pillar{display:grid;grid-template-rows:auto auto minmax(0,1fr) auto auto;min-height:0;align-items:start}",
+        ".pillar .card-number{margin-bottom:1.75rem}",
+        ".pillar h3{min-block-size:3.35em;margin-top:0}",
         ".pillar>.lnk{align-self:end;margin-top:.25rem}",
     )
     for rule in pillar_alignment_rules:
@@ -108,6 +111,22 @@ def main() -> int:
         errors.append("research-program cards must retain an intrinsically flexible body row")
     if re.search(r"\.pillar\{grid-template-rows:auto\s+[0-9.]+em\s+[0-9.]+em", refinements):
         errors.append("research-program cards must not restore fixed text-row heights that can cause content collisions")
+
+    editorial_flow_rules = (
+        ".two-col{align-items:start}",
+        ".education-panel{align-self:start;",
+        ".trajectory-grid{position:relative;display:grid;grid-template-columns:minmax(0,1.08fr) minmax(280px,.92fr);",
+        "align-items:start;padding-block:1.75rem;border-block:1px solid var(--line)",
+        ".trajectory-grid article{min-width:0;padding:0;border:0;background:transparent}",
+        ".trajectory-grid .robotics-card{padding-left:clamp(1.5rem,3vw,2.5rem);border:0!important;border-left:2px solid var(--teal)!important}",
+    )
+    for rule in editorial_flow_rules:
+        if rule not in refinements:
+            errors.append(f"editorial-flow invariant missing {rule!r}")
+    if re.search(r"\.about-(?:program|method)-grid article\{[^}]*min-height", about):
+        errors.append("About research/method editorial blocks must not use fixed minimum heights")
+    if ".about-program-grid,.about-method-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-block:1px solid var(--line);background:transparent}" not in about:
+        errors.append("About supporting grids must retain the lighter editorial-band treatment")
 
     motif_match = re.search(r"--motif-opacity:([0-9.]+)", refinements)
     if not motif_match:
@@ -152,6 +171,7 @@ def main() -> int:
     spacing_rules = (
         "--refined-section-space:clamp(4.5rem,7vw,6.5rem)",
         ".section{padding-block:var(--refined-section-space)}",
+        ".section[id],.contact-section[id]{scroll-margin-top:calc(var(--header-h) + 38px)}",
         ".page-shell{padding-block:clamp(3rem,6vw,5.25rem)}",
         ".back-link{margin-bottom:2.1rem}",
         ".page-header{margin-bottom:2.55rem}",
@@ -170,7 +190,7 @@ def main() -> int:
         return 1
     print(
         "Style audit passed: AA text contrast across all branded surfaces, "
-        "3:1 interactive boundaries, 24px controls, focus, breakpoints, flexible card flow, "
+        "3:1 interactive boundaries, 24px controls, focus, breakpoints, intrinsic card/editorial flow, "
         "decorative restraint, reduced-motion-safe page continuity, privacy controls, and page spacing verified."
     )
     return 0
