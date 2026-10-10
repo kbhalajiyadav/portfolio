@@ -96,9 +96,15 @@ if not outputs_content.exists() or not outputs_layout.exists():
     errors.append('first-class /outputs/ hub must remain present')
 else:
     outputs_text = outputs_layout.read_text(encoding='utf-8')
-    for required in ('Peer-reviewed article', 'M.S. thesis', 'Research software', 'Intellectual property record'):
+    for required in (
+        'data-output-type="intellectual-property"',
+        'data-output-type="thesis"',
+        'data-output-type="software"',
+        'Peer-reviewed article',
+        'Technology details',
+    ):
         if required not in outputs_text:
-            errors.append(f'layouts/outputs/list.html: missing output class {required!r}')
+            errors.append(f'layouts/outputs/list.html: missing output fact {required!r}')
 
 if 'cv_version:' in portfolio_text:
     errors.append('data/portfolio.yaml: manual cv_version must remain removed; templates hash the PDF')
