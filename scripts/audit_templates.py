@@ -93,9 +93,9 @@ def main() -> int:
         errors.append("layouts/outputs/list.html: outputs hub template missing")
     else:
         outputs = outputs_layout.read_text(encoding="utf-8")
-        for marker in ('Research software', 'Intellectual property record', 'Peer-reviewed article'):
+        for marker in ('data-output-type="intellectual-property"', 'Research software', 'Peer-reviewed article'):
             if marker not in outputs:
-                errors.append(f"outputs hub lost record type {marker!r}")
+                errors.append(f"outputs hub lost output type {marker!r}")
         if 'role="group" aria-label="Filter research outputs by type"' not in outputs:
             errors.append("outputs filter must retain a concise accessible group label")
         if outputs.count('data-output-filter=') != 5:
