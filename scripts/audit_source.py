@@ -57,7 +57,7 @@ for required in (
     'Ph.D. student',
     'Stimuli-responsive',
     'Aug 2026–present',
-    'M.S. degree',
+    'M.S. · Chemical & Life Science Engineering',
     'professional_development:',
     '1st National Neutron Scattering School',
     'Oak Ridge National Laboratory',
