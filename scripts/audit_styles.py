@@ -93,9 +93,11 @@ def main() -> int:
             errors.append(f"footer alignment invariant missing {rule!r}")
 
     pillar_alignment_rules = (
-        ".pillar{display:grid;grid-template-rows:auto minmax(3.24em,auto) minmax(8.1em,auto) auto 1fr;align-items:start}",
+        ".pillar{display:grid;grid-template-rows:auto 3.24em 8.1em auto 1fr;align-items:start}",
+        ".pillar .card-number{margin-bottom:2.5rem}",
+        ".pillar h3{margin-top:0}",
         ".pillar>.lnk{align-self:end}",
-        ".pillar{grid-template-rows:auto minmax(3.24em,auto) minmax(9.72em,auto) auto 1fr}",
+        ".pillar{grid-template-rows:auto 3.24em 9.72em auto 1fr}",
     )
     for rule in pillar_alignment_rules:
         if rule not in refinements:
