@@ -129,6 +129,7 @@ def main() -> int:
                           });
                           return {
                             labels: items.map((link) => link.textContent.trim()),
+                            hrefs: Object.fromEntries(items.map((link) => [link.textContent.trim(), link.getAttribute('href')])),
                             navCenterSpread: centers.length ? Math.max(...centers) - Math.min(...centers) : null,
                             horizontalOverflow: root.scrollWidth > root.clientWidth + 2
                           };
@@ -138,6 +139,10 @@ def main() -> int:
                     results[f"layout-{width}"] = layout
                     if layout["labels"] != EXPECTED_LABELS:
                         errors.append(f"{width}px navigation labels/order {layout['labels']}, expected {EXPECTED_LABELS}")
+                    if layout["hrefs"].get("Research") != "/#research":
+                        errors.append(f"{width}px homepage Research nav must target the in-page research section: {layout['hrefs']}")
+                    if layout["hrefs"].get("Outputs") != "/#outputs":
+                        errors.append(f"{width}px homepage Outputs nav must target the in-page outputs section: {layout['hrefs']}")
                     if layout["navCenterSpread"] is None or layout["navCenterSpread"] > 3:
                         errors.append(f"{width}px desktop navigation lost one-row center alignment: spread={layout['navCenterSpread']}")
                     if layout["horizontalOverflow"]:
@@ -173,6 +178,18 @@ def main() -> int:
                 results["research"] = research
                 if research != {"active": ["Research"], "currentLocation": ["Research"]}:
                     errors.append(f"Research section did not activate Research exactly: {research}")
+
+                scroll_to(cdp, "document.querySelector('#outputs').offsetTop")
+                outputs = active_state(cdp)
+                results["outputs"] = outputs
+                if outputs != {"active": ["Outputs"], "currentLocation": ["Outputs"]}:
+                    errors.append(f"Outputs section did not activate Outputs exactly: {outputs}")
+
+                scroll_to(cdp, "document.querySelector('#experience').offsetTop")
+                experience = active_state(cdp)
+                results["experience"] = experience
+                if experience != {"active": ["Experience"], "currentLocation": ["Experience"]}:
+                    errors.append(f"Experience section did not activate Experience exactly: {experience}")
 
                 scroll_to(cdp, "document.querySelector('#presentations').offsetTop")
                 engagement = active_state(cdp)
@@ -210,6 +227,8 @@ def main() -> int:
                       const heading = document.querySelector('.about-hero h1');
                       const facts = document.querySelector('.about-fact-strip');
                       const aboutLink = document.querySelector('.nav-about');
+                      const links = [...document.querySelectorAll('#site-nav > a')];
+                      const hrefs = Object.fromEntries(links.map((link) => [link.textContent.trim(), link.getAttribute('href')]));
                       const copyRect = copy.getBoundingClientRect();
                       const portraitRect = portrait.getBoundingClientRect();
                       return {
@@ -221,7 +240,8 @@ def main() -> int:
                         pageTopPadding: parseFloat(getComputedStyle(document.querySelector('.about-page .page-shell')).paddingTop),
                         factStripTop: facts.getBoundingClientRect().top,
                         viewportHeight: window.innerHeight,
-                        aboutCurrentPage: aboutLink.getAttribute('aria-current') === 'page'
+                        aboutCurrentPage: aboutLink.getAttribute('aria-current') === 'page',
+                        hrefs
                       };
                     })()
                     """
@@ -241,6 +261,10 @@ def main() -> int:
                     errors.append(f"1366x768 About profile facts begin below the first viewport: {about_layout}")
                 if not about_layout["aboutCurrentPage"]:
                     errors.append("About page did not expose aria-current=page in the header")
+                if not about_layout["hrefs"].get("Research", "").endswith("/research/"):
+                    errors.append(f"standalone pages must send Research to the canonical research page: {about_layout['hrefs']}")
+                if not about_layout["hrefs"].get("Outputs", "").endswith("/outputs/"):
+                    errors.append(f"standalone pages must send Outputs to the canonical outputs page: {about_layout['hrefs']}")
             finally:
                 cdp.close()
         finally:
@@ -255,7 +279,7 @@ def main() -> int:
     if errors:
         print("\n".join(f"ERROR: {error}" for error in errors))
         return 1
-    print("Navigation and About audit passed: order, hover geometry, section state, hero reset, and 1366x768 About adaptation verified.")
+    print("Navigation and About audit passed: order, continuous Research/Outputs/Experience state, canonical inner-page destinations, hover geometry, hero reset, and 1366x768 About adaptation verified.")
     return 0
 
 
