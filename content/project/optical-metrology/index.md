@@ -46,5 +46,5 @@ Symposium.
 - [Research overview](/research/#measure-response)
 - [Presentation record](/#presentations)
 
-The work has been presented at these two 2026 events; a peer-reviewed
-performance benchmark or released dataset is not yet available.
+These presentations are the current outputs for this project; no peer-reviewed
+article or released dataset is associated with it at present.

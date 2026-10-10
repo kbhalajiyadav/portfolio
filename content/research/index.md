@@ -69,7 +69,7 @@ Potential applications include:
 - visual inspection and safety cues where powered instrumentation is impractical; and
 - adaptive or decorative surfaces whose response can be quantified and reproduced.
 
-## Research package
+## Connected research outputs
 
 The first-author adhesion work connects three complementary outputs:
 
@@ -81,11 +81,11 @@ Together, the article reports the scientific result, the thesis records the
 degree and embargo status, and the software provides a citable implementation
 of the analysis workflow.
 
-A separate [patent-pending thermal-imaging record](/project/quantitative-thermal-imaging/)
-summarizes the technology and its current Virginia Commonwealth University
-intellectual-property status.
+The separate [Quantitative Thermal Imaging page](/project/quantitative-thermal-imaging/)
+summarizes the patent-pending technology and its current Virginia Commonwealth
+University intellectual-property status.
 
-## Collaboration questions
+## Open research questions
 
 - How do thermal and flow histories organize liquid-crystal structure across relevant time and length scales?
 - How can neutron scattering, rheology, optical metrology, and mechanics reveal structure–processing–property relationships?

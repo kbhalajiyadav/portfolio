@@ -45,7 +45,6 @@
       <div class="motif" aria-hidden="true"><i></i><i></i><i></i></div>
       <span class="card-number">{{ .number }}</span>
       <h3>{{ .title }}</h3><p>{{ .text }}</p>
-      <ul class="tag-list">{{ range .tags }}<li>{{ . }}</li>{{ end }}</ul>
       <a class="lnk" href="{{ .href | relURL }}">{{ .link_label }} <span class="arw" aria-hidden="true">→</span></a>
     </article>
     {{ end }}
@@ -87,7 +86,7 @@
   <div class="two-col">
     <div class="timeline">
       {{ range $p.experience }}{{ if ne .show false }}
-      <article class="timeline-item"><span>{{ .period }}</span><h3>{{ .role }}</h3><p class="org">{{ .organization }}{{ with .location }} · {{ . }}{{ end }}</p><p>{{ .detail }}</p>{{ with .outcomes }}<ul>{{ range . }}<li>{{ . }}</li>{{ end }}{{ end }}{{ with .links }}<div class="actions">{{ range . }}<a class="lnk" href="{{ .href | relURL }}">{{ .label }} <span class="arw" aria-hidden="true">→</span></a>{{ end }}</div>{{ end }}</article>
+      <article class="timeline-item"><span>{{ .period }}</span><h3>{{ .role }}</h3><p class="org">{{ .organization }}{{ with .location }} · {{ . }}{{ end }}</p><p>{{ .detail }}</p>{{ with .outcomes }}<ul>{{ range . }}<li>{{ . }}</li>{{ end }}</ul>{{ end }}{{ with .links }}<div class="actions">{{ range . }}<a class="lnk" href="{{ .href | relURL }}">{{ .label }} <span class="arw" aria-hidden="true">→</span></a>{{ end }}</div>{{ end }}</article>
       {{ end }}{{ end }}
     </div>
     <aside class="education-panel">
