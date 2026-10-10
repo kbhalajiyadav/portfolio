@@ -46,7 +46,7 @@
       <span class="card-number">{{ .number }}</span>
       <h3>{{ .title }}</h3><p>{{ .text }}</p>
       <ul class="tag-list">{{ range .tags }}<li>{{ . }}</li>{{ end }}</ul>
-      <a class="lnk" href="{{ .href | relURL }}">{{ .link_label }} <span class="arw" aria-hidden="true">↗</span></a>
+      <a class="lnk" href="{{ .href | relURL }}">{{ .link_label }} <span class="arw" aria-hidden="true">→</span></a>
     </article>
     {{ end }}
   </div>
@@ -66,20 +66,20 @@
       <h3>{{ $primary.title }}</h3>
       <p>{{ $primary.authors }}</p><p class="venue">{{ $primary.venue }}</p>
       <div class="actions">
-        <a class="lnk" href="{{ $primary.detail | relURL }}">Article details <span class="arw" aria-hidden="true">↗</span></a>
+        <a class="lnk" href="{{ $primary.detail | relURL }}">Article details <span class="arw" aria-hidden="true">→</span></a>
         <a class="lnk" href="{{ $primary.doi }}" target="_blank" rel="noopener">Article <span class="arw" aria-hidden="true">↗</span></a>
       </div>
     </div>
     <div class="package-artifacts">
-      <article><span>Associated thesis</span><h4>Multi-Criteria Selection of Adhesives for Wearable Textiles</h4><p>VCU M.S. thesis · defended July 1, 2026 · degree completed August 2026</p><a class="lnk" href="{{ "/publication/masters-thesis/" | relURL }}">Thesis record <span class="arw" aria-hidden="true">↗</span></a></article>
-      <article><span>Research software</span><h4>{{ $p.software.title }}</h4><p>{{ $p.software.text }}</p><div class="actions"><a class="lnk" href="{{ $p.software.detail | relURL }}">Software details <span class="arw" aria-hidden="true">↗</span></a><a class="lnk" href="{{ $p.software.version_doi }}" target="_blank" rel="noopener">Software release <span class="arw" aria-hidden="true">↗</span></a></div></article>
+      <article><span>Associated thesis</span><h4>Multi-Criteria Selection of Adhesives for Wearable Textiles</h4><p>VCU M.S. thesis · defended July 1, 2026 · degree completed August 2026</p><a class="lnk" href="{{ "/publication/masters-thesis/" | relURL }}">Thesis record <span class="arw" aria-hidden="true">→</span></a></article>
+      <article><span>Research software</span><h4>{{ $p.software.title }}</h4><p>{{ $p.software.text }}</p><div class="actions"><a class="lnk" href="{{ $p.software.detail | relURL }}">Software details <span class="arw" aria-hidden="true">→</span></a><a class="lnk" href="{{ $p.software.version_doi }}" target="_blank" rel="noopener">Software release <span class="arw" aria-hidden="true">↗</span></a></div></article>
     </div>
   </article>
   <article class="secondary-output">
     <div><span class="overline">{{ $ip.status }} · {{ $ip.year }}</span><h3>{{ $ip.title }}</h3><p>{{ $ip.inventors }}</p><p class="venue">{{ $ip.organization }} · VCU Tech # {{ $ip.tech_id }}</p><p>{{ $ip.description }}</p></div>
-    <div class="actions"><a class="lnk" href="{{ "/project/quantitative-thermal-imaging/" | relURL }}">Intellectual property record <span class="arw" aria-hidden="true">↗</span></a></div>
+    <div class="actions"><a class="lnk" href="{{ "/project/quantitative-thermal-imaging/" | relURL }}">Intellectual property record <span class="arw" aria-hidden="true">→</span></a></div>
   </article>
-  <div class="actions"><a class="lnk" href="{{ "/outputs/" | relURL }}">Browse all research outputs <span class="arw" aria-hidden="true">↗</span></a></div>
+  <div class="actions"><a class="lnk" href="{{ "/outputs/" | relURL }}">Browse all research outputs <span class="arw" aria-hidden="true">→</span></a></div>
 </section>
 
 <section class="section" id="experience">
@@ -87,7 +87,7 @@
   <div class="two-col">
     <div class="timeline">
       {{ range $p.experience }}{{ if ne .show false }}
-      <article class="timeline-item"><span>{{ .period }}</span><h3>{{ .role }}</h3><p class="org">{{ .organization }}{{ with .location }} · {{ . }}{{ end }}</p><p>{{ .detail }}</p>{{ with .outcomes }}<ul>{{ range . }}<li>{{ . }}</li>{{ end }}</ul>{{ end }}{{ with .links }}<div class="actions">{{ range . }}<a class="lnk" href="{{ .href | relURL }}">{{ .label }} <span class="arw" aria-hidden="true">↗</span></a>{{ end }}</div>{{ end }}</article>
+      <article class="timeline-item"><span>{{ .period }}</span><h3>{{ .role }}</h3><p class="org">{{ .organization }}{{ with .location }} · {{ . }}{{ end }}</p><p>{{ .detail }}</p>{{ with .outcomes }}<ul>{{ range . }}<li>{{ . }}</li>{{ end }}</ul>{{ end }}{{ with .links }}<div class="actions">{{ range . }}<a class="lnk" href="{{ .href | relURL }}">{{ .label }} <span class="arw" aria-hidden="true">→</span></a>{{ end }}</div>{{ end }}</article>
       {{ end }}{{ end }}
     </div>
     <aside class="education-panel">
