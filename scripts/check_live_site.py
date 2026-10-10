@@ -32,7 +32,7 @@ EXPECTED_TEXT = {
         "Chemical engineering, regulated practice, and research metrology",
         "VCU Soft Functional Materials Lab",
         "Christina Tang, Ph.D.",
-        "Profiles and records",
+        "Profiles and professional links",
         "Collaboration and methods exchange",
     ],
     "outputs/": [
@@ -54,9 +54,10 @@ EXPECTED_TEXT = {
     ],
     "project/optical-metrology/": [
         "Optical Metrology for Mechanochromic Textiles",
+        "Presented research",
         "Measurement workflow",
-        "Research record",
-        "peer-reviewed performance benchmark",
+        "Presentations",
+        "29th VCU Graduate Student Research Symposium",
     ],
     "project/quantitative-thermal-imaging/": [
         "Intellectual property",
@@ -64,7 +65,7 @@ EXPECTED_TEXT = {
         "Technology overview",
         "VCU Tech # TAN-26-099",
     ],
-    "research/": ["Resolve structure under stimuli", "Translate reproducibly", "Research package"],
+    "research/": ["Resolve structure under stimuli", "Translate reproducibly", "Connected outputs"],
     "robots.txt": ["OAI-SearchBot", "Claude-SearchBot", "Microsoft Clarity project xuo3lvzchr"],
     "sitemap.xml": ["<urlset", "/about/", "/outputs/"],
     "site.webmanifest": ["/icon-192.png", "/icon-512.png", "/favicon.svg"],
