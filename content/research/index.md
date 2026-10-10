@@ -63,15 +63,14 @@ feedback-controlled experiments, but it remains supporting infrastructure.
 
 ## Application directions
 
-The measurement methods may support the following applications. These are
-research directions, not claims of validated products:
+Potential applications include:
 
 - passive visual temperature mapping and wearable indicators;
 - non-contact optical monitoring and condition indication;
 - visual inspection and safety cues where powered instrumentation is impractical; and
 - adaptive or decorative surfaces whose response can be quantified and reproduced.
 
-## Public research package
+## Research package
 
 The first-author adhesion work is documented through three complementary
 records:
@@ -85,8 +84,8 @@ record and embargo, and the software page provides a citable implementation of
 the analysis workflow. Each page links to the other two.
 
 A separate [patent-pending thermal-imaging record](/project/quantitative-thermal-imaging/)
-documents the current public intellectual-property status without exposing
-confidential application text or unpublished experimental details.
+summarizes the technology and its current Virginia Commonwealth University
+intellectual-property status.
 
 ## Collaboration questions
 
