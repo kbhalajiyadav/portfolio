@@ -157,7 +157,7 @@ optical_flat = ' '.join(optical_text.split())
 for required in (
     'Presented research',
     'CIE L\\*a\\*b\\*',
-    '## Research record',
+    '## Presentations',
     'VCU Engineering Graduate',
     '29th VCU Graduate Student Research Symposium',
 ):
