@@ -33,7 +33,7 @@ and textile-supported systems. The methods combine force–displacement analysis
 deformation tracking, optical colorimetry, and computer vision instead of
 relying on a single maximum-force value or a visual assessment of color change.
 
-Related public work:
+Related work:
 
 - a [first-author article on multi-criteria adhesive selection](/publication/adhesives-wearable/) for wearable textiles;
 - the [associated M.S. thesis record](/publication/masters-thesis/);
@@ -54,8 +54,7 @@ connect structural change to observable behavior.
 
 Results can be compared across experiments only when stimulus cycles,
 acquisition timing, analysis rules, and software versions are documented. The
-[peel-trace analysis software](/project/peel-trace-evaluation/) is one public
-example.
+[peel-trace analysis software](/project/peel-trace-evaluation/) is one example.
 
 For repeated sequences, automation can standardize sample placement, stimulus
 timing, and synchronized data capture. Robotic handling may support longer or
