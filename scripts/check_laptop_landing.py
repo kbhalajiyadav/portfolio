@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Verify the post-choice hero as one landing frame at 1366×768.
+"""Verify the post-choice hero as one readable landing frame at 1366×768.
 
 The first-visit analytics notice is validated separately while visible. This test
 selects Decline, verifies that no analytics script loads, and then checks the
@@ -128,26 +128,46 @@ LANDING_EXPRESSION = r"""
       height: Math.round(box.height)
     };
   };
+  const lineMetrics = (selector) => {
+    const element = document.querySelector(selector);
+    if (!element) return null;
+    const style = getComputedStyle(element);
+    const lineHeight = parseFloat(style.lineHeight) || 0;
+    const height = element.getBoundingClientRect().height;
+    return {
+      fontSize: parseFloat(style.fontSize) || 0,
+      lineHeight,
+      lines: lineHeight ? Math.round(height / lineHeight) : null,
+    };
+  };
   const eyebrow = document.querySelector('.hero .eyebrow');
   const eyebrowStyle = eyebrow ? getComputedStyle(eyebrow) : null;
   const eyebrowLineHeight = eyebrowStyle ? parseFloat(eyebrowStyle.lineHeight) : 0;
   const eyebrowHeight = eyebrow ? eyebrow.getBoundingClientRect().height : 0;
   const root = document.documentElement;
   const privacyBanner = document.querySelector('[data-privacy-banner]');
+  const nav = document.querySelector('#site-nav');
+  const navStyle = nav ? getComputedStyle(nav) : null;
   return {
     viewport: {width: innerWidth, height: innerHeight},
     scrollWidth: root.scrollWidth,
     hero: rect('.hero'),
     copy: rect('.hero__copy'),
     headline: rect('.hero h1'),
+    lede: rect('.hero .lede'),
+    actions: rect('.hero .actions'),
+    primaryAction: rect('.hero .button--primary'),
     portrait: rect('.hero__visual'),
     identity: rect('.identity-note'),
     status: rect('.status-line'),
     eyebrow: rect('.hero .eyebrow'),
+    headlineType: lineMetrics('.hero h1'),
+    ledeType: lineMetrics('.hero .lede'),
     eyebrowLines: eyebrowLineHeight ? Math.round(eyebrowHeight / eyebrowLineHeight) : null,
+    navFontSize: navStyle ? parseFloat(navStyle.fontSize) || 0 : 0,
     privacyBannerHidden: Boolean(privacyBanner && privacyBanner.hidden),
     clarityScriptLoaded: Boolean(document.querySelector('script[data-clarity-project]')),
-    desktopNavigationVisible: getComputedStyle(document.querySelector('#site-nav')).display !== 'none',
+    desktopNavigationVisible: nav ? getComputedStyle(nav).display !== 'none' : false,
     menuButtonHidden: getComputedStyle(document.querySelector('.menu-button')).display === 'none'
   };
 })()
@@ -244,7 +264,7 @@ def main() -> int:
         errors.append("Microsoft Clarity loaded after analytics was declined")
 
     viewport_height = int(metrics["viewport"]["height"])
-    for name in ("hero", "copy", "headline", "portrait", "identity", "status", "eyebrow"):
+    for name in ("hero", "copy", "headline", "lede", "actions", "primaryAction", "portrait", "identity", "status", "eyebrow"):
         if not metrics.get(name):
             errors.append(f"missing hero element: {name}")
     if int(metrics.get("scrollWidth", WIDTH)) > WIDTH + 2:
@@ -253,8 +273,21 @@ def main() -> int:
         errors.append(f"research eyebrow must remain one line at 1366×768; found {metrics.get('eyebrowLines')}")
     if not metrics.get("desktopNavigationVisible") or not metrics.get("menuButtonHidden"):
         errors.append("1366×768 must use complete desktop navigation")
+    if float(metrics.get("navFontSize", 0)) < 13:
+        errors.append(f"desktop navigation text is too small: {metrics.get('navFontSize')}px")
 
-    for name in ("hero", "copy", "portrait", "identity", "status"):
+    headline_type = metrics.get("headlineType") or {}
+    if not (46 <= float(headline_type.get("fontSize", 0)) <= 62):
+        errors.append(f"laptop hero headline size must remain between 46px and 62px: {headline_type}")
+    if int(headline_type.get("lines") or 99) > 4:
+        errors.append(f"laptop hero headline must fit in four lines or fewer: {headline_type}")
+    lede_type = metrics.get("ledeType") or {}
+    if not (16 <= float(lede_type.get("fontSize", 0)) <= 22):
+        errors.append(f"laptop hero summary must remain 16–22px: {lede_type}")
+    if float(lede_type.get("lineHeight", 0)) < float(lede_type.get("fontSize", 0)) * 1.45:
+        errors.append(f"laptop hero summary line height is too tight: {lede_type}")
+
+    for name in ("hero", "copy", "portrait", "identity", "status", "lede", "actions", "primaryAction"):
         box = metrics.get(name)
         if box and int(box["bottom"]) > viewport_height - 8:
             errors.append(f"{name} extends below the landing frame: bottom={box['bottom']} viewport={viewport_height}")
@@ -265,7 +298,7 @@ def main() -> int:
     if errors:
         print("\n".join(f"ERROR: {error}" for error in errors))
         return 1
-    print("1366×768 post-choice laptop landing-frame audit passed.")
+    print("1366×768 laptop landing-frame audit passed: typography, hierarchy, actions, portrait, and privacy state fit the first frame.")
     return 0
 
 

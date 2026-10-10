@@ -3,9 +3,13 @@
 {{ $cv := site.Data.cv }}
 {{ $ip := index $cv.intellectual_property 0 }}
 {{ $ipPage := site.GetPage "/project/quantitative-thermal-imaging/" }}
+{{ $thesisPage := site.GetPage "/publication/masters-thesis/" }}
+{{ $softwarePage := site.GetPage "/project/peel-trace-evaluation/" }}
+{{ $primaryPage := site.GetPage "/publication/adhesives-wearable/" }}
+{{ $secondaryPage := site.GetPage "/publication/electrospun-fiber-mats/" }}
 {{ $primary := index $p.publications 0 }}
 {{ $secondary := index $p.publications 1 }}
-<article class="list-page">
+<article class="list-page outputs-page">
   <div class="page-shell">
     <a class="back-link lnk" href="{{ "/" | relURL }}"><span aria-hidden="true">←</span> Portfolio home</a>
     <header class="page-header">
@@ -14,58 +18,83 @@
       <p class="page-lede">{{ .Params.summary }}</p>
     </header>
 
-    <div class="listing-grid" aria-label="Research outputs by record type">
-      <article>
-        <span class="overline">Peer-reviewed article · First author · {{ $primary.year }}</span>
-        <h2><a href="{{ $primary.detail | relURL }}">{{ $primary.title }}</a></h2>
-        <p>{{ $primary.authors }}</p>
-        <p class="venue">{{ $primary.venue }}</p>
-        <div class="actions">
-          <a class="lnk" href="{{ $primary.detail | relURL }}">Article record <span class="arw" aria-hidden="true">↗</span></a>
-          <a class="lnk" href="{{ $primary.doi }}" target="_blank" rel="noopener">DOI <span class="arw" aria-hidden="true">↗</span></a>
+    <div class="output-filter" role="group" aria-label="Filter research outputs">
+      <span class="output-filter__label" aria-hidden="true">Show</span>
+      <button type="button" data-output-filter="all" aria-pressed="true">All</button>
+      <button type="button" data-output-filter="publication" aria-pressed="false">Publications</button>
+      <button type="button" data-output-filter="intellectual-property" aria-pressed="false">Intellectual Property</button>
+      <button type="button" data-output-filter="software" aria-pressed="false">Software</button>
+      <button type="button" data-output-filter="thesis" aria-pressed="false">Thesis</button>
+    </div>
+    <p class="visually-hidden" role="status" aria-live="polite" data-output-filter-status>Showing all 5 research outputs.</p>
+
+    <div class="output-list" data-output-list aria-label="Research outputs, newest first">
+      <article class="output-row" data-output-type="intellectual-property" data-output-date="2026-10-07">
+        <div class="output-row__meta"><time datetime="2026-10-07">Oct 2026</time><span>Intellectual property</span></div>
+        <div class="output-row__content">
+          <h2><a href="{{ $ipPage.RelPermalink }}">{{ $ip.title }}</a></h2>
+          <p class="output-row__byline">{{ $ip.inventors }} · {{ $ip.organization }} · VCU Tech # {{ $ip.tech_id }}</p>
+          <p class="output-row__summary">{{ $ipPage.Params.summary }}</p>
+          <div class="actions">
+            <a class="lnk" href="{{ $ipPage.RelPermalink }}">Intellectual property record <span class="arw" aria-hidden="true">↗</span></a>
+            {{ with $ipPage.Params.public_listing }}<a class="lnk" href="{{ . }}" target="_blank" rel="noopener">Technology listing <span class="arw" aria-hidden="true">↗</span></a>{{ end }}
+          </div>
         </div>
       </article>
 
-      <article>
-        <span class="overline">M.S. thesis · 2026</span>
-        <h2><a href="{{ "/publication/masters-thesis/" | relURL }}">Multi-Criteria Selection of Adhesives for Wearable Textiles</a></h2>
-        <p>Virginia Commonwealth University · defended July 1, 2026 · degree completed August 2026.</p>
-        <div class="actions"><a class="lnk" href="{{ "/publication/masters-thesis/" | relURL }}">Thesis record <span class="arw" aria-hidden="true">↗</span></a></div>
-      </article>
-
-      <article>
-        <span class="overline">Research software · {{ $p.software.version }}</span>
-        <h2><a href="{{ $p.software.detail | relURL }}">{{ $p.software.title }}</a></h2>
-        <p>{{ $p.software.text }}</p>
-        <div class="actions">
-          <a class="lnk" href="{{ $p.software.detail | relURL }}">Software record <span class="arw" aria-hidden="true">↗</span></a>
-          <a class="lnk" href="{{ $p.software.version_doi }}" target="_blank" rel="noopener">Version DOI <span class="arw" aria-hidden="true">↗</span></a>
+      <article class="output-row" data-output-type="thesis" data-output-date="2026-07-21">
+        <div class="output-row__meta"><time datetime="2026-07-21">Jul 2026</time><span>M.S. thesis</span></div>
+        <div class="output-row__content">
+          <h2><a href="{{ $thesisPage.RelPermalink }}">{{ $thesisPage.Title }}</a></h2>
+          <p class="output-row__byline">Virginia Commonwealth University · defended July 1, 2026 · degree completed August 2026</p>
+          <p class="output-row__summary">{{ $thesisPage.Params.summary }}</p>
+          <div class="actions">
+            <a class="lnk" href="{{ $thesisPage.RelPermalink }}">Thesis record <span class="arw" aria-hidden="true">↗</span></a>
+            {{ with $thesisPage.Params.url_source }}<a class="lnk" href="{{ . }}" target="_blank" rel="noopener">VCU repository <span class="arw" aria-hidden="true">↗</span></a>{{ end }}
+          </div>
         </div>
       </article>
 
-      <article>
-        <span class="overline">{{ $ip.status }} · {{ $ip.year }}</span>
-        <h2><a href="{{ $ipPage.RelPermalink }}">{{ $ip.title }}</a></h2>
-        <p>{{ $ip.inventors }}</p>
-        <p class="venue">{{ $ip.organization }} · VCU Tech # {{ $ip.tech_id }}</p>
-        <p>{{ $ip.description }}</p>
-        <div class="actions">
-          <a class="lnk" href="{{ $ipPage.RelPermalink }}">Intellectual property record <span class="arw" aria-hidden="true">↗</span></a>
-          {{ with $ipPage.Params.public_listing }}<a class="lnk" href="{{ . }}" target="_blank" rel="noopener">Technology listing <span class="arw" aria-hidden="true">↗</span></a>{{ end }}
+      <article class="output-row" data-output-type="publication" data-output-date="2026-06-16">
+        <div class="output-row__meta"><time datetime="2026-06-16">Jun 2026</time><span>Peer-reviewed article</span></div>
+        <div class="output-row__content">
+          <h2><a href="{{ $primaryPage.RelPermalink }}">{{ $primary.title }}</a></h2>
+          <p class="output-row__byline">{{ $primary.authors }} · {{ $primary.venue }}</p>
+          <p class="output-row__summary">{{ $primaryPage.Params.summary }}</p>
+          <div class="actions">
+            <a class="lnk" href="{{ $primaryPage.RelPermalink }}">Article record <span class="arw" aria-hidden="true">↗</span></a>
+            <a class="lnk" href="{{ $primary.doi }}" target="_blank" rel="noopener">DOI <span class="arw" aria-hidden="true">↗</span></a>
+          </div>
         </div>
       </article>
 
-      <article>
-        <span class="overline">{{ $secondary.type }} · {{ $secondary.year }}</span>
-        <h2><a href="{{ $secondary.detail | relURL }}">{{ $secondary.title }}</a></h2>
-        <p>{{ $secondary.authors }}</p>
-        <p class="venue">{{ $secondary.venue }}</p>
-        <div class="actions">
-          <a class="lnk" href="{{ $secondary.detail | relURL }}">Article record <span class="arw" aria-hidden="true">↗</span></a>
-          <a class="lnk" href="{{ $secondary.doi }}" target="_blank" rel="noopener">DOI <span class="arw" aria-hidden="true">↗</span></a>
+      <article class="output-row" data-output-type="software" data-output-date="2026-06-16">
+        <div class="output-row__meta"><time datetime="2026-06-16">Jun 2026</time><span>Research software</span></div>
+        <div class="output-row__content">
+          <h2><a href="{{ $softwarePage.RelPermalink }}">{{ $p.software.title }}</a></h2>
+          <p class="output-row__byline">Version {{ $p.software.version }} · citable open research software</p>
+          <p class="output-row__summary">{{ $p.software.text }}</p>
+          <div class="actions">
+            <a class="lnk" href="{{ $softwarePage.RelPermalink }}">Software record <span class="arw" aria-hidden="true">↗</span></a>
+            <a class="lnk" href="{{ $p.software.version_doi }}" target="_blank" rel="noopener">Version DOI <span class="arw" aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+      </article>
+
+      <article class="output-row" data-output-type="publication" data-output-date="2025-06-26">
+        <div class="output-row__meta"><time datetime="2025-06-26">Jun 2025</time><span>Peer-reviewed article</span></div>
+        <div class="output-row__content">
+          <h2><a href="{{ $secondaryPage.RelPermalink }}">{{ $secondary.title }}</a></h2>
+          <p class="output-row__byline">{{ $secondary.authors }} · {{ $secondary.venue }}</p>
+          <p class="output-row__summary">{{ $secondaryPage.Params.summary }}</p>
+          <div class="actions">
+            <a class="lnk" href="{{ $secondaryPage.RelPermalink }}">Article record <span class="arw" aria-hidden="true">↗</span></a>
+            <a class="lnk" href="{{ $secondary.doi }}" target="_blank" rel="noopener">DOI <span class="arw" aria-hidden="true">↗</span></a>
+          </div>
         </div>
       </article>
     </div>
+    <p class="output-list-note">Newest first. Filters change the visible record type without changing the underlying chronology.</p>
   </div>
 </article>
 {{ end }}

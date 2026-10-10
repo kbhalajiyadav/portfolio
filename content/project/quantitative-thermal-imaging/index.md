@@ -30,10 +30,6 @@ The work extends the broader measurement program on responsive materials: conver
 
 ## Patent status and public record
 
-“Patent pending” indicates that an application has been filed; it does not mean a patent has been examined or granted. This public record does not reproduce confidential application text, unpublished datasets, or detailed experimental parameters. Rights in the invention have been assigned to Virginia Commonwealth University.
+“Patent pending” indicates that an application has been filed; it does not mean a patent has been examined or granted. Rights in the invention have been assigned to Virginia Commonwealth University.
 
-- [Technology commercialization listing (FirstIgnite)](https://app.firstignite.com/public/listings/53618a61-8e86-4673-9651-053ab0d790c8)
-- [Research outputs](/outputs/)
-- [Research program](/research/#measure-response)
-- [Optical metrology project](/project/optical-metrology/)
-- [Curriculum vitae](/uploads/resume.pdf)
+[View the public technology commercialization listing on FirstIgnite](https://app.firstignite.com/public/listings/53618a61-8e86-4673-9651-053ab0d790c8).

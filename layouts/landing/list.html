@@ -57,6 +57,7 @@
     </article>
     {{ end }}
   </div>
+  {{ partial "home_trajectory.html" . }}
 </section>
 
 <section class="section" id="outputs">
@@ -89,10 +90,8 @@
     <div><span class="overline">{{ $secondary.type }} · {{ $secondary.year }}</span><h3>{{ $secondary.title }}</h3><p>{{ $secondary.authors }}</p><p class="venue">{{ $secondary.venue }}</p></div>
     <div class="actions"><a class="lnk" href="{{ $secondary.detail | relURL }}">Article details <span class="arw" aria-hidden="true">↗</span></a><a class="lnk" href="{{ $secondary.doi }}" target="_blank" rel="noopener">Article <span class="arw" aria-hidden="true">↗</span></a></div>
   </article>
-  <div class="actions"><a class="button" href="{{ "/outputs/" | relURL }}">Browse all research outputs</a></div>
+  <div class="actions"><a class="lnk" href="{{ "/outputs/" | relURL }}">Browse all research outputs <span class="arw" aria-hidden="true">↗</span></a></div>
 </section>
-
-{{ partial "home_trajectory.html" . }}
 
 <section class="section" id="experience">
   <div class="section-head"><p class="kicker">Experience and education</p><h2>Research rigor shaped by laboratory work and regulated manufacturing.</h2></div>

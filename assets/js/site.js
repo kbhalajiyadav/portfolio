@@ -52,6 +52,38 @@
     window.setTimeout(() => { button.textContent = original; }, 1200);
   });
 
+  const outputFilterButtons = Array.from(document.querySelectorAll('[data-output-filter]'));
+  const outputRecords = Array.from(document.querySelectorAll('[data-output-type][data-output-date]'));
+  const outputFilterStatus = document.querySelector('[data-output-filter-status]');
+  if (outputFilterButtons.length && outputRecords.length) {
+    const labelByFilter = {
+      all: 'research outputs',
+      publication: 'publications',
+      'intellectual-property': 'intellectual-property records',
+      software: 'software records',
+      thesis: 'thesis records'
+    };
+    const applyOutputFilter = (filter) => {
+      const normalized = labelByFilter[filter] ? filter : 'all';
+      let visible = 0;
+      outputRecords.forEach((record) => {
+        const show = normalized === 'all' || record.dataset.outputType === normalized;
+        record.hidden = !show;
+        if (show) visible += 1;
+      });
+      outputFilterButtons.forEach((button) => {
+        button.setAttribute('aria-pressed', String(button.dataset.outputFilter === normalized));
+      });
+      if (outputFilterStatus) {
+        outputFilterStatus.textContent = `Showing ${visible} ${labelByFilter[normalized]}.`;
+      }
+    };
+    outputFilterButtons.forEach((button) => {
+      button.addEventListener('click', () => applyOutputFilter(button.dataset.outputFilter || 'all'));
+    });
+    applyOutputFilter('all');
+  }
+
   const navLinks = Array.from(document.querySelectorAll('#site-nav a[href*="#"]'));
   const sections = navLinks.map((link) => {
     const hash = new URL(link.href, window.location.href).hash;
