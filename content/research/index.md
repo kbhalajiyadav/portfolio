@@ -3,7 +3,7 @@ title: "Research Program"
 kicker: "Research overview"
 summary: "How processing changes responsive soft and liquid-crystalline materials—and how to measure those changes."
 date: "2026-07-28T00:00:00Z"
-lastmod: "2026-10-09T00:00:00Z"
+lastmod: "2026-10-10T00:00:00Z"
 toc: true
 tags:
   - Stimuli-Responsive Materials
@@ -39,7 +39,7 @@ Related public work:
 - the [associated M.S. thesis record](/publication/masters-thesis/);
 - [versioned research software](/project/peel-trace-evaluation/) for protocol-defined peel-trace analysis;
 - an [optical-metrology project record](/project/optical-metrology/) for computer-vision measurement of mechanochromic textiles;
-- the [patent-pending Quantitative Thermal Imaging project](/project/quantitative-thermal-imaging/) (VCU Tech # TAN-26-099); and
+- the [patent-pending Quantitative Thermal Imaging record](/project/quantitative-thermal-imaging/) (VCU Tech # TAN-26-099); and
 - a grouped [presentation record](/#presentations) covering adhesion and computer-vision metrology.
 
 ## Resolve structure under stimuli
