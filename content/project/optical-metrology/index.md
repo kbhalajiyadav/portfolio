@@ -1,7 +1,7 @@
 ---
 title: "Optical Metrology for Mechanochromic Textiles"
 date: "2026-04-22T00:00:00Z"
-lastmod: "2026-07-30T00:00:00Z"
+lastmod: "2026-10-09T00:00:00Z"
 status: "Presented research"
 summary: "A Python and OpenCV workflow for measuring deformation and color response in mechanochromic textiles from synchronized image data."
 tags:
@@ -46,9 +46,10 @@ Symposium.
 - [Research overview](/research/#measure-response)
 - [Presentation record](/#presentations)
 
-## Evidence boundary
+## Current public scope
 
-This page describes the public method at a high level. It does not claim
-clinical validation, product deployment, a published performance benchmark, or
-public release of the underlying experimental data. Detailed acquisition
-settings, specimen data, and unpublished analysis results are not included.
+The public record documents the measurement approach and presentation history.
+It does not establish clinical validation, product deployment, or a published
+performance benchmark, and the underlying experimental dataset has not been
+released publicly. Detailed acquisition settings and unpublished analysis
+results are outside the current public record.
