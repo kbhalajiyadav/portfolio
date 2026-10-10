@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Protect complementary content roles, tone, and derived proof metrics.
+"""Protect complementary content roles, tone, facts, and derived proof metrics.
 
-This check is intentionally semantic rather than pixel- or sentence-exact. It
-keeps shared facts synchronized while preventing the homepage, About, Research,
-Outputs, and CV from collapsing into repeated copies of the same narrative.
+This check is intentionally semantic rather than sentence-exact. Shared facts
+must stay synchronized while the homepage, About, Research, Outputs, CV, and
+machine-readable public context retain different jobs in the portfolio story.
 """
 from __future__ import annotations
 
@@ -86,12 +86,14 @@ def main() -> int:
     research, research_body = parse_markdown(ROOT / "content" / "research" / "index.md")
     outputs, outputs_body = parse_markdown(ROOT / "content" / "outputs" / "_index.md")
     home_proof = (ROOT / "layouts" / "partials" / "home_proof.html").read_text(encoding="utf-8")
+    llms = (ROOT / "static" / "llms.txt").read_text(encoding="utf-8")
+    llms_full = (ROOT / "static" / "llms-full.txt").read_text(encoding="utf-8")
     errors: list[str] = []
 
     profile = portfolio.get("profile", {})
     cv_profile = cv.get("profile", {})
 
-    # Current identity is structured once, while the hero status remains a concise display string.
+    # Current identity is structured once; display strings and metadata consume it.
     for field in ("role", "program", "institution"):
         if not norm(profile.get(field)):
             errors.append(f"portfolio.profile.{field} is required for structured current identity")
@@ -107,7 +109,7 @@ def main() -> int:
     if norm(profile.get("program")) not in norm(current_education.get("degree")):
         errors.append("current program differs between portfolio identity and first CV education record")
 
-    # Surface roles: concise orientation -> biography -> scientific argument -> evidence index -> exhaustive CV.
+    # Surface roles: orientation -> biography -> scientific argument -> evidence index -> exhaustive CV.
     home_summary = str(profile.get("summary", ""))
     about_bio_items = [str(item) for item in about.get("bio", [])]
     about_bio = " ".join(about_bio_items)
@@ -128,7 +130,7 @@ def main() -> int:
     if re.search(r"\b(?:I|my|me)\b", f"{outputs_summary} {outputs_body}", re.I):
         errors.append("Outputs should use objective record language rather than first-person biography")
 
-    # Guard against copy-paste drift. Shared terminology is expected; near-identical sentences are not.
+    # Guard against copy-paste drift. Shared scientific terminology is expected; near-identical prose is not.
     surfaces = {
         "home": home_summary,
         "about": about_bio,
@@ -150,11 +152,13 @@ def main() -> int:
                         f"near-duplicate public sentence across {name_a}/{name_b}: {sentence_a!r}"
                     )
 
-    # Public tone remains evidence-led and avoids internal governance vocabulary.
+    # Public tone remains evidence-led and avoids internal governance vocabulary everywhere public.
     public_files = [
         ROOT / "content" / "about.md",
         ROOT / "content" / "research" / "index.md",
         ROOT / "content" / "outputs" / "_index.md",
+        ROOT / "static" / "llms.txt",
+        ROOT / "static" / "llms-full.txt",
     ]
     public_files.extend(sorted((ROOT / "content" / "project").glob("**/*.md")))
     public_files.extend(sorted((ROOT / "content" / "publication").glob("**/*.md")))
@@ -184,11 +188,39 @@ def main() -> int:
             errors.append(f"About professional path is missing synchronized {label}: {value!r}")
         if value and str(value) not in research_body:
             errors.append(f"Research page is missing synchronized {label}: {value!r}")
+        if value and str(value) not in llms_full:
+            errors.append(f"llms-full.txt is missing synchronized {label}: {value!r}")
 
     p_software = portfolio.get("software", {})
     cv_software = (cv.get("research_software") or [{}])[0]
     if norm(p_software.get("title")) != norm(cv_software.get("title")):
         errors.append("software title differs between portfolio and CV")
+    for value, label in (
+        (p_software.get("title"), "software title"),
+        (p_software.get("version"), "software version"),
+        (p_software.get("version_doi"), "software DOI"),
+    ):
+        if value and str(value) not in llms_full:
+            errors.append(f"llms-full.txt is missing synchronized {label}: {value!r}")
+
+    for publication in portfolio.get("publications", []):
+        doi = str(publication.get("doi", ""))
+        if doi and doi not in llms_full:
+            errors.append(f"llms-full.txt is missing publication DOI: {doi}")
+
+    for value, label in (
+        (profile.get("program"), "current program"),
+        (profile.get("institution"), "current institution"),
+    ):
+        if value and norm(value) not in norm(llms):
+            errors.append(f"llms.txt is missing synchronized {label}: {value!r}")
+        if value and norm(value) not in norm(llms_full):
+            errors.append(f"llms-full.txt is missing synchronized {label}: {value!r}")
+
+    if "translate reproducibly" not in llms_full.casefold():
+        errors.append("llms-full.txt must use the canonical third research-program label 'Translate reproducibly'")
+    if "https://bhalaji.com/outputs/" not in llms or "https://bhalaji.com/outputs/" not in llms_full:
+        errors.append("machine-readable public context must include the Research Outputs hub")
 
     # Homepage proof numbers must be derived from canonical collections, not presentation-layer magic values.
     guided_count = sum(int(item.get("project_count", 0) or 0) for item in portfolio.get("teaching", []))
@@ -210,7 +242,7 @@ def main() -> int:
 
     print(
         "Content strategy guardrail passed: complementary page roles, restrained tone, "
-        f"structured current identity, and derived proof metrics ({guided_count} guided projects)."
+        f"structured identity, synchronized public context, and derived proof metrics ({guided_count} guided projects)."
     )
     return 0
 
