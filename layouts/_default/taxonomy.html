@@ -11,7 +11,7 @@
       <span class="overline">{{ with .Date }}{{ .Format "2006" }}{{ end }}{{ with .Params.status }} · {{ . }}{{ end }}</span>
       <h2 class="p-name"><a class="u-url" href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
       {{ with .Params.summary }}<p class="p-summary">{{ . }}</p>{{ end }}
-      <a class="lnk" href="{{ .RelPermalink }}">View record <span class="arw" aria-hidden="true">↗</span></a>
+      <a class="lnk" href="{{ .RelPermalink }}">View record <span class="arw" aria-hidden="true">→</span></a>
     </article>
     {{ end }}
   </div>
