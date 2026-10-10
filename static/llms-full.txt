@@ -36,10 +36,10 @@ M.S. thesis: “Multi-Criteria Selection of Adhesives for Wearable Textiles,” 
 Peel Trace Evaluation for Soft Substrates, version v1.4.0-rc15, by Bhalaji Yadav Kantepalle and Christina Tang. Source: https://github.com/VCU-Soft-Functional-Materials-Lab/Peel-Trace-Evaluation-for-Soft-Substrates . Version DOI: https://doi.org/10.5281/zenodo.20301242 . All versions: https://doi.org/10.5281/zenodo.20278327 . License: Apache-2.0.
 
 ## Intellectual property
-Quantitative Thermal Imaging is patent pending. Bhalaji Yadav Kantepalle and Christina Tang are identified as Inventors/Creators; the Virginia Commonwealth University technology identifier is TAN-26-099. Portfolio record: https://bhalaji.com/project/quantitative-thermal-imaging/ .
+Quantitative Thermal Imaging is patent pending. Bhalaji Yadav Kantepalle and Christina Tang are identified as Inventors/Creators; the Virginia Commonwealth University technology identifier is TAN-26-099. Portfolio page: https://bhalaji.com/project/quantitative-thermal-imaging/ .
 
 ## Optical metrology
-A Python and OpenCV workflow was developed to relate image-derived deformation to CIE L*a*b* color response in mechanochromic textiles. The work was presented at two Virginia Commonwealth University research events in 2026. Project record: https://bhalaji.com/project/optical-metrology/ .
+A Python and OpenCV workflow was developed to relate image-derived deformation to CIE L*a*b* color response in mechanochromic textiles. The work was presented at two Virginia Commonwealth University research events in 2026. Project page: https://bhalaji.com/project/optical-metrology/ .
 
 ## Potential applications
 The methods may support passive temperature mapping and battery-free wearable indicators, non-contact optical monitoring, visual safety and inspection indicators, adaptive or decorative surfaces, and low-power sensing in hard-to-reach environments.
@@ -47,7 +47,7 @@ The methods may support passive temperature mapping and battery-free wearable in
 ## Automation
 Automation may standardize sample placement, loading or thermal cycles, and synchronized image acquisition during repeated experiments. Robotic handling is supporting infrastructure rather than the primary research objective.
 
-## Verification sources
+## Primary research links
 Persistent sources include DOI records, VCU Scholars Compass, ORCID, Zenodo, GitHub, the VCU advisor directory, and VCU technology records where available.
 
 ## Contact and identity
