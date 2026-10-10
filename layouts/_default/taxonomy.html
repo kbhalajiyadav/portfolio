@@ -3,7 +3,7 @@
   <header class="page-header">
     <p class="kicker">Research topic</p>
     <h1 class="p-name">{{ .Title }}</h1>
-    <p class="page-lede">Public portfolio records associated with {{ .Title | lower }}.</p>
+    <p class="page-lede">Research associated with {{ .Title | lower }}.</p>
   </header>
   <div class="listing-grid">
     {{ range .Pages.ByDate.Reverse }}
