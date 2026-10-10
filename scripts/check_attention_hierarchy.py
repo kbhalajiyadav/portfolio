@@ -214,8 +214,8 @@ def main() -> int:
                     expected_labels = [
                         "Peer-reviewed articles",
                         "Patent-pending technology",
-                        "Citable research-software release",
-                        "Student research projects guided",
+                        "Citable software release",
+                        "Student projects guided",
                     ]
                     labels = [item["label"] for item in metrics.get("proof", [])]
                     if labels != expected_labels:
@@ -223,7 +223,7 @@ def main() -> int:
                     values = {item["label"]: item["value"] for item in metrics.get("proof", [])}
                     if values.get("Patent-pending technology") != "1":
                         errors.append(f"{prefix}: patent-pending proof count must remain 1")
-                    if values.get("Citable research-software release") != "1":
+                    if values.get("Citable software release") != "1":
                         errors.append(f"{prefix}: citable-software proof count must remain 1")
 
                     if metrics.get("researchPackageCount") != 1 or metrics.get("secondaryOutputCount") != 1:
