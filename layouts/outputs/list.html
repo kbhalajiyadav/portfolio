@@ -1,0 +1,67 @@
+{{ define "main" }}
+{{ $p := site.Data.portfolio }}
+{{ $cv := site.Data.cv }}
+{{ $ip := index $cv.intellectual_property 0 }}
+{{ $primary := index $p.publications 0 }}
+{{ $secondary := index $p.publications 1 }}
+<article class="list-page">
+  <div class="page-shell">
+    <a class="back-link lnk" href="{{ "/" | relURL }}"><span aria-hidden="true">←</span> Portfolio home</a>
+    <header class="page-header">
+      <p class="kicker">Research record</p>
+      <h1>{{ .Title }}</h1>
+      <p class="page-lede">{{ .Params.summary }}</p>
+    </header>
+
+    <div class="listing-grid" aria-label="Research outputs by record type">
+      <article>
+        <span class="overline">Peer-reviewed article · First author · {{ $primary.year }}</span>
+        <h2><a href="{{ $primary.detail | relURL }}">{{ $primary.title }}</a></h2>
+        <p>{{ $primary.authors }}</p>
+        <p class="venue">{{ $primary.venue }}</p>
+        <div class="actions">
+          <a class="lnk" href="{{ $primary.detail | relURL }}">Article record <span class="arw" aria-hidden="true">↗</span></a>
+          <a class="lnk" href="{{ $primary.doi }}" target="_blank" rel="noopener">DOI <span class="arw" aria-hidden="true">↗</span></a>
+        </div>
+      </article>
+
+      <article>
+        <span class="overline">M.S. thesis · 2026</span>
+        <h2><a href="{{ "/publication/masters-thesis/" | relURL }}">Multi-Criteria Selection of Adhesives for Wearable Textiles</a></h2>
+        <p>Virginia Commonwealth University · defended July 1, 2026 · degree completed August 2026.</p>
+        <div class="actions"><a class="lnk" href="{{ "/publication/masters-thesis/" | relURL }}">Thesis record <span class="arw" aria-hidden="true">↗</span></a></div>
+      </article>
+
+      <article>
+        <span class="overline">Research software · {{ $p.software.version }}</span>
+        <h2><a href="{{ $p.software.detail | relURL }}">{{ $p.software.title }}</a></h2>
+        <p>{{ $p.software.text }}</p>
+        <div class="actions">
+          <a class="lnk" href="{{ $p.software.detail | relURL }}">Software record <span class="arw" aria-hidden="true">↗</span></a>
+          <a class="lnk" href="{{ $p.software.version_doi }}" target="_blank" rel="noopener">Version DOI <span class="arw" aria-hidden="true">↗</span></a>
+        </div>
+      </article>
+
+      <article>
+        <span class="overline">{{ $ip.status }} · {{ $ip.year }}</span>
+        <h2><a href="{{ "/project/quantitative-thermal-imaging/" | relURL }}">{{ $ip.title }}</a></h2>
+        <p>{{ $ip.inventors }}</p>
+        <p class="venue">{{ $ip.organization }} · VCU Tech # {{ $ip.tech_id }}</p>
+        <p>{{ $ip.description }}</p>
+        <div class="actions"><a class="lnk" href="{{ "/project/quantitative-thermal-imaging/" | relURL }}">Intellectual property record <span class="arw" aria-hidden="true">↗</span></a></div>
+      </article>
+
+      <article>
+        <span class="overline">{{ $secondary.type }} · {{ $secondary.year }}</span>
+        <h2><a href="{{ $secondary.detail | relURL }}">{{ $secondary.title }}</a></h2>
+        <p>{{ $secondary.authors }}</p>
+        <p class="venue">{{ $secondary.venue }}</p>
+        <div class="actions">
+          <a class="lnk" href="{{ $secondary.detail | relURL }}">Article record <span class="arw" aria-hidden="true">↗</span></a>
+          <a class="lnk" href="{{ $secondary.doi }}" target="_blank" rel="noopener">DOI <span class="arw" aria-hidden="true">↗</span></a>
+        </div>
+      </article>
+    </div>
+  </div>
+</article>
+{{ end }}
