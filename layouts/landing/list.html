@@ -27,7 +27,7 @@
   </div>
 </section>
 
-<section class="metrics" aria-label="Portfolio evidence at a glance">
+<section class="metrics" aria-label="Portfolio record at a glance">
   {{ range $p.metrics }}
   {{ $value := .value }}
   {{ if and (eq .source "orcid") $publicationSync }}{{ $value = $publicationSync.journal_article_count }}{{ end }}
@@ -82,13 +82,14 @@
   </article>
   <article class="secondary-output">
     <div><span class="overline">{{ $ip.status }} · {{ $ip.year }}</span><h3>{{ $ip.title }}</h3><p>{{ $ip.inventors }}</p><p class="venue">{{ $ip.organization }} · VCU Tech # {{ $ip.tech_id }}</p><p>{{ $ip.description }}</p></div>
-    <div class="actions"><a class="lnk" href="{{ "/project/quantitative-thermal-imaging/" | relURL }}">IP project details <span class="arw" aria-hidden="true">↗</span></a></div>
+    <div class="actions"><a class="lnk" href="{{ "/project/quantitative-thermal-imaging/" | relURL }}">Intellectual property record <span class="arw" aria-hidden="true">↗</span></a></div>
   </article>
   {{ $secondary := index $p.publications 1 }}
   <article class="secondary-output">
     <div><span class="overline">{{ $secondary.type }} · {{ $secondary.year }}</span><h3>{{ $secondary.title }}</h3><p>{{ $secondary.authors }}</p><p class="venue">{{ $secondary.venue }}</p></div>
     <div class="actions"><a class="lnk" href="{{ $secondary.detail | relURL }}">Article details <span class="arw" aria-hidden="true">↗</span></a><a class="lnk" href="{{ $secondary.doi }}" target="_blank" rel="noopener">Article <span class="arw" aria-hidden="true">↗</span></a></div>
   </article>
+  <div class="actions"><a class="button" href="{{ "/outputs/" | relURL }}">Browse all research outputs</a></div>
 </section>
 
 {{ partial "home_trajectory.html" . }}
@@ -111,7 +112,7 @@
 </section>
 
 <section class="section" id="presentations">
-  <div class="section-head"><p class="kicker">Presentations and professional engagement</p><h2>Evidence communicated through publications, posters, instruction, review, and applied innovation.</h2></div>
+  <div class="section-head"><p class="kicker">Presentations and professional engagement</p><h2>Research communicated through publications, posters, instruction, service, and applied innovation.</h2></div>
   {{ $visibleSeries := slice }}{{ range $p.presentation_series }}{{ if ne .show false }}{{ $visibleSeries = $visibleSeries | append . }}{{ end }}{{ end }}
   {{ $visibleTeaching := slice }}{{ range $p.teaching }}{{ if ne .show false }}{{ $visibleTeaching = $visibleTeaching | append . }}{{ end }}{{ end }}
   {{ $visibleService := slice }}{{ range $p.service }}{{ if ne .show false }}{{ $visibleService = $visibleService | append . }}{{ end }}{{ end }}
