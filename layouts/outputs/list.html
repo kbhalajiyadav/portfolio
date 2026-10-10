@@ -35,7 +35,7 @@
           <p class="output-row__byline">{{ $ip.inventors }} · {{ $ip.organization }} · VCU Tech # {{ $ip.tech_id }}</p>
           <p class="output-row__summary">{{ $ipPage.Params.summary }}</p>
           <div class="actions">
-            <a class="lnk" href="{{ $ipPage.RelPermalink }}">Intellectual property record <span class="arw" aria-hidden="true">↗</span></a>
+            <a class="lnk" href="{{ $ipPage.RelPermalink }}">Intellectual property record <span class="arw" aria-hidden="true">→</span></a>
             {{ with $ipPage.Params.public_listing }}<a class="lnk" href="{{ . }}" target="_blank" rel="noopener">Technology listing <span class="arw" aria-hidden="true">↗</span></a>{{ end }}
           </div>
         </div>
@@ -48,7 +48,7 @@
           <p class="output-row__byline">Virginia Commonwealth University · defended July 1, 2026 · degree completed August 2026</p>
           <p class="output-row__summary">{{ $thesisPage.Params.summary }}</p>
           <div class="actions">
-            <a class="lnk" href="{{ $thesisPage.RelPermalink }}">Thesis record <span class="arw" aria-hidden="true">↗</span></a>
+            <a class="lnk" href="{{ $thesisPage.RelPermalink }}">Thesis record <span class="arw" aria-hidden="true">→</span></a>
             {{ with $thesisPage.Params.url_source }}<a class="lnk" href="{{ . }}" target="_blank" rel="noopener">VCU repository <span class="arw" aria-hidden="true">↗</span></a>{{ end }}
           </div>
         </div>
@@ -61,7 +61,7 @@
           <p class="output-row__byline">{{ $primary.authors }} · {{ $primary.venue }}</p>
           <p class="output-row__summary">{{ $primaryPage.Params.summary }}</p>
           <div class="actions">
-            <a class="lnk" href="{{ $primaryPage.RelPermalink }}">Article record <span class="arw" aria-hidden="true">↗</span></a>
+            <a class="lnk" href="{{ $primaryPage.RelPermalink }}">Article record <span class="arw" aria-hidden="true">→</span></a>
             <a class="lnk" href="{{ $primary.doi }}" target="_blank" rel="noopener">DOI <span class="arw" aria-hidden="true">↗</span></a>
           </div>
         </div>
@@ -74,7 +74,7 @@
           <p class="output-row__byline">Version {{ $p.software.version }} · citable open research software</p>
           <p class="output-row__summary">{{ $p.software.text }}</p>
           <div class="actions">
-            <a class="lnk" href="{{ $softwarePage.RelPermalink }}">Software record <span class="arw" aria-hidden="true">↗</span></a>
+            <a class="lnk" href="{{ $softwarePage.RelPermalink }}">Software record <span class="arw" aria-hidden="true">→</span></a>
             <a class="lnk" href="{{ $p.software.version_doi }}" target="_blank" rel="noopener">Version DOI <span class="arw" aria-hidden="true">↗</span></a>
           </div>
         </div>
@@ -87,7 +87,7 @@
           <p class="output-row__byline">{{ $secondary.authors }} · {{ $secondary.venue }}</p>
           <p class="output-row__summary">{{ $secondaryPage.Params.summary }}</p>
           <div class="actions">
-            <a class="lnk" href="{{ $secondaryPage.RelPermalink }}">Article record <span class="arw" aria-hidden="true">↗</span></a>
+            <a class="lnk" href="{{ $secondaryPage.RelPermalink }}">Article record <span class="arw" aria-hidden="true">→</span></a>
             <a class="lnk" href="{{ $secondary.doi }}" target="_blank" rel="noopener">DOI <span class="arw" aria-hidden="true">↗</span></a>
           </div>
         </div>
