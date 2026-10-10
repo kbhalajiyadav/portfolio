@@ -1,10 +1,13 @@
 # Bhalaji Yadav Kantepalle — Full Public Research Context
 
 ## Profile
-The research biography and identity page is https://bhalaji.com/about/ . It describes the professional path, current scientific focus, methods, collaboration scope, and persistent research and professional profiles.
+The research biography and identity page is https://bhalaji.com/about/ . It describes the professional path, current scientific focus, methods, collaboration context, and persistent research and professional profiles.
 
 ## Current position
-Bhalaji Yadav Kantepalle is a Ph.D. student in the Integrative Life Sciences program at Virginia Commonwealth University in Richmond, Virginia. His research examines how processing histories reorganize responsive soft and liquid-crystalline materials and how those changes can be measured through optical, mechanical, rheological, and structure-sensitive methods.
+Bhalaji Yadav Kantepalle is a Ph.D. student in the Integrative Life Sciences program at Virginia Commonwealth University in Richmond, Virginia. He conducts research in the VCU Soft Functional Materials Lab with Christina Tang, Ph.D., as advisor. His research examines how processing histories reorganize responsive soft and liquid-crystalline materials and how those changes can be measured through optical, mechanical, rheological, and structure-sensitive methods.
+
+Research group: https://vcusoftmaterialslab.weebly.com/
+Advisor profile: https://egr.vcu.edu/directory/christina.tang/
 
 ## Research focus
 The central question is what changes inside a responsive material during processing and which measurements can track that change reliably.
@@ -27,25 +30,25 @@ From May 2023 to May 2024, he worked directly at Kreative Organics as a Technica
 2. I. Caloian, J. Trapp, B. Y. Kantepalle, P. Latimer, T. J. Lawton, and C. Tang, “Mechanical Properties of Dual-Layer Electrospun Fiber Mats,” Polymers 17(13), 1777 (2025). DOI: https://doi.org/10.3390/polym17131777
 
 ## Thesis
-M.S. thesis: “Multi-Criteria Selection of Adhesives for Wearable Textiles,” Virginia Commonwealth University, defended July 1, 2026. Public repository record: https://scholarscompass.vcu.edu/etd/8456/ . The complete manuscript is under embargo until July 20, 2031.
+M.S. thesis: “Multi-Criteria Selection of Adhesives for Wearable Textiles,” Virginia Commonwealth University, defended July 1, 2026. Repository record: https://scholarscompass.vcu.edu/etd/8456/ . The complete manuscript is under embargo until July 20, 2031.
 
 ## Research software
 Peel Trace Evaluation for Soft Substrates, version v1.4.0-rc15, by Bhalaji Yadav Kantepalle and Christina Tang. Source: https://github.com/VCU-Soft-Functional-Materials-Lab/Peel-Trace-Evaluation-for-Soft-Substrates . Version DOI: https://doi.org/10.5281/zenodo.20301242 . All versions: https://doi.org/10.5281/zenodo.20278327 . License: Apache-2.0.
 
 ## Intellectual property
-Quantitative Thermal Imaging is patent pending. Bhalaji Yadav Kantepalle and Christina Tang are identified as Inventors/Creators; the Virginia Commonwealth University technology identifier is TAN-26-099. Public portfolio record: https://bhalaji.com/project/quantitative-thermal-imaging/ .
+Quantitative Thermal Imaging is patent pending. Bhalaji Yadav Kantepalle and Christina Tang are identified as Inventors/Creators; the Virginia Commonwealth University technology identifier is TAN-26-099. Portfolio record: https://bhalaji.com/project/quantitative-thermal-imaging/ .
 
 ## Optical metrology
-A Python and OpenCV workflow was developed to relate image-derived deformation to CIE L*a*b* color response in mechanochromic textiles. The work was presented at two Virginia Commonwealth University research events in 2026. Public project record: https://bhalaji.com/project/optical-metrology/ .
+A Python and OpenCV workflow was developed to relate image-derived deformation to CIE L*a*b* color response in mechanochromic textiles. The work was presented at two Virginia Commonwealth University research events in 2026. Project record: https://bhalaji.com/project/optical-metrology/ .
 
 ## Potential applications
-The methods may support passive temperature mapping and battery-free wearable indicators, non-contact optical monitoring, visual safety and inspection indicators, adaptive or decorative surfaces, and low-power sensing in hard-to-reach environments. These are research directions, not claims that every device has been demonstrated or validated.
+The methods may support passive temperature mapping and battery-free wearable indicators, non-contact optical monitoring, visual safety and inspection indicators, adaptive or decorative surfaces, and low-power sensing in hard-to-reach environments.
 
 ## Automation
 Automation may standardize sample placement, loading or thermal cycles, and synchronized image acquisition during repeated experiments. Robotic handling is supporting infrastructure rather than the primary research objective.
 
-## Verification scope
-The portfolio documents public records and deliberately omits unpublished formulations, restricted datasets, detailed future experimental schedules, confidential employer information, unsupported infrared-sensing claims, and defense-specific use claims. DOI records, institutional records, ORCID, and the public software archive provide persistent sources for verification where available.
+## Verification sources
+Persistent sources include DOI records, VCU Scholars Compass, ORCID, Zenodo, GitHub, the VCU advisor directory, and VCU technology records where available.
 
 ## Contact and identity
 Website: https://bhalaji.com/
