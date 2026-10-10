@@ -5,14 +5,14 @@ type: about
 layout: single
 url: /about/
 kicker: About
-summary: Research on responsive soft and liquid-crystalline materials, with measurement methods for tracking how processing changes structure and observable behavior.
-description: Research biography, scientific focus, professional path, methods, and authoritative profiles for Bhalaji Yadav Kantepalle.
-lastmod: 2026-10-09
+summary: Research biography and current scientific focus spanning responsive materials, quantitative metrology, and structure under processing.
+description: Research biography, scientific focus, professional path, methods, and research profiles for Bhalaji Yadav Kantepalle.
+lastmod: 2026-10-10
 bio:
   - >-
-    I am a Ph.D. student in Integrative Life Sciences at Virginia Commonwealth University. I study how temperature, deformation, and flow change soft and liquid-crystalline materials, and how those changes appear in optical and mechanical measurements.
+    My work sits at the intersection of soft-matter science, measurement development, and reproducible experimentation. A chemical-engineering and regulated-manufacturing background now informs doctoral research on stimuli-responsive soft and liquid-crystalline materials at Virginia Commonwealth University.
   - >-
-    My work combines rheology, quantitative imaging, mechanics, and structure-sensitive characterization. The goal is straightforward: make a material response interpretable, comparable, and useful beyond a single experiment.
+    I combine rheology, neutron scattering, quantitative imaging, and mechanics to test how processing histories reorganize material structure and how those changes appear in optical and mechanical response. I focus on methods that remain interpretable across experiments, scales, and processing conditions.
 research_identity:
   title: Research question
   text: >-
