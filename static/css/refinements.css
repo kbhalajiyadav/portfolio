@@ -77,7 +77,7 @@ html[data-analytics-consent="unknown"] .privacy-banner+main .page-shell{padding-
 .privacy-banner__decline{background:transparent;color:var(--teal)}
 .privacy-banner__decline:hover{border-color:var(--cyan);background:var(--surface-soft);color:var(--cyan)}
 @media(min-width:1180px){
-  .hero .eyebrow{max-width:none;white-space:nowrap;font-size:.68rem;letter-spacing:.11em}
+  .hero .eyebrow{max-width:none;white-space:nowrap;font-size:.7rem;letter-spacing:.11em}
 }
 @media(min-width:981px){
   .pillar{display:flex;flex-direction:column}
