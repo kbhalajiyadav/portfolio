@@ -18,7 +18,8 @@
   {{ $core := resources.FromString "css/core.css" (readFile "static/css/site.css") }}
   {{ $refinements := resources.FromString "css/refinements.css" (readFile "static/css/refinements.css") }}
   {{ $about := resources.FromString "css/about.css" (readFile "static/css/about.css") }}
-  {{ $styles := (slice $core $refinements $about) | resources.Concat "css/site.css" | minify | fingerprint "sha384" }}
+  {{ $polish := resources.FromString "css/final-polish.css" (readFile "static/css/final-polish.css") }}
+  {{ $styles := (slice $core $refinements $about $polish) | resources.Concat "css/site.css" | minify | fingerprint "sha384" }}
   <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}" crossorigin="anonymous">
 </head>
 <body class="page-{{ .Kind }} section-{{ .Section }}">
