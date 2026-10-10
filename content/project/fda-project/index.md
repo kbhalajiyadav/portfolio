@@ -28,5 +28,5 @@ and external consultants in pharmaceutical-intermediate manufacturing.
 The role established habits that now carry into research: define the method,
 record assumptions, preserve traceability, and make the evidence reviewable.
 
-> This public case study excludes employer system architecture, operating data,
-> customer information, deployment details, and confidential performance measures.
+This case study focuses on my responsibilities and methods rather than company
+data, customer information, or system implementation details.
