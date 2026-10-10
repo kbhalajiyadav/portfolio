@@ -28,7 +28,7 @@ The technology uses thermochromic materials together with visible-light camera i
 
 The work extends the broader measurement program on responsive materials: convert an observable color response into a quantitative result while retaining explicit validity limits.
 
-## Public record
+## Patent status and public record
 
 “Patent pending” indicates that an application has been filed; it does not mean a patent has been examined or granted. Rights in the invention have been assigned to Virginia Commonwealth University.
 
