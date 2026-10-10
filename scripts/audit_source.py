@@ -157,8 +157,8 @@ for required in (
     'Presented research',
     'CIE L\\*a\\*b\\*',
     '## Research record',
-    'peer-reviewed performance benchmark',
-    'underlying experimental dataset',
+    'VCU Engineering Graduate',
+    '29th VCU Graduate Student Research Symposium',
 ):
     if required not in optical_text:
         errors.append(f'content/project/optical-metrology/index.md: missing optical-metrology fact {required!r}')
