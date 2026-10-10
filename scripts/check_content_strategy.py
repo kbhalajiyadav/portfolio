@@ -31,6 +31,15 @@ INTERNAL_PROCESS_TERMS = (
     "canonical facts",
     "public-safe",
     "quarantine",
+    "current public scope",
+    "public technical scope",
+    "verification scope",
+    "without exposing",
+    "without publishing restricted",
+    "outside the current public record",
+    "deliberately omits",
+    "this public case study excludes",
+    "not part of the public software record",
 )
 
 
@@ -82,10 +91,12 @@ def section_after_heading(body: str, heading: str) -> str:
 def main() -> int:
     portfolio = load_yaml(ROOT / "data" / "portfolio.yaml")
     cv = load_yaml(ROOT / "data" / "cv.yaml")
+    affiliation = load_yaml(ROOT / "data" / "current_affiliation.yaml")
     about, _ = parse_markdown(ROOT / "content" / "about.md")
     research, research_body = parse_markdown(ROOT / "content" / "research" / "index.md")
     outputs, outputs_body = parse_markdown(ROOT / "content" / "outputs" / "_index.md")
     home_proof = (ROOT / "layouts" / "partials" / "home_proof.html").read_text(encoding="utf-8")
+    about_template = (ROOT / "layouts" / "about" / "single.html").read_text(encoding="utf-8")
     llms = (ROOT / "static" / "llms.txt").read_text(encoding="utf-8")
     llms_full = (ROOT / "static" / "llms-full.txt").read_text(encoding="utf-8")
     errors: list[str] = []
@@ -108,6 +119,26 @@ def main() -> int:
         errors.append("current institution differs between portfolio identity and first CV education record")
     if norm(profile.get("program")) not in norm(current_education.get("degree")):
         errors.append("current program differs between portfolio identity and first CV education record")
+
+    # Current research-group context is independently structured and must remain connected to the profile.
+    for field in ("lab", "lab_url", "advisor", "advisor_url", "institution"):
+        if not str(affiliation.get(field, "")).strip():
+            errors.append(f"current_affiliation.{field} is required")
+    if norm(affiliation.get("institution")) != norm(profile.get("institution")):
+        errors.append("current lab/advisor affiliation institution differs from the current profile institution")
+    for marker in ("site.Data.current_affiliation", "$aff.lab", "$aff.lab_url", "$aff.advisor", "$aff.advisor_url"):
+        if marker not in about_template:
+            errors.append(f"About profile must consume canonical current affiliation marker: {marker}")
+    for value, label in (
+        (affiliation.get("lab"), "current research group"),
+        (affiliation.get("lab_url"), "research-group URL"),
+        (affiliation.get("advisor"), "current advisor"),
+        (affiliation.get("advisor_url"), "advisor URL"),
+    ):
+        if value and norm(value) not in norm(llms):
+            errors.append(f"llms.txt is missing synchronized {label}: {value!r}")
+        if value and norm(value) not in norm(llms_full):
+            errors.append(f"llms-full.txt is missing synchronized {label}: {value!r}")
 
     # Surface roles: orientation -> biography -> scientific argument -> evidence index -> exhaustive CV.
     home_summary = str(profile.get("summary", ""))
@@ -242,7 +273,7 @@ def main() -> int:
 
     print(
         "Content strategy guardrail passed: complementary page roles, restrained tone, "
-        f"structured identity, synchronized public context, and derived proof metrics ({guided_count} guided projects)."
+        f"structured identity/affiliation, synchronized public context, and derived proof metrics ({guided_count} guided projects)."
     )
     return 0
 
