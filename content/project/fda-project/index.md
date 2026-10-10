@@ -27,6 +27,3 @@ and external consultants in pharmaceutical-intermediate manufacturing.
 
 The role established habits that now carry into research: define the method,
 record assumptions, preserve traceability, and make the evidence reviewable.
-
-The record emphasizes responsibilities, validation practice, and transferable
-methods from the role.
