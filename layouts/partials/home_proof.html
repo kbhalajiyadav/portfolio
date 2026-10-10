@@ -7,7 +7,7 @@
 {{ $softwareCount := len $cv.research_software }}
 {{ $guidedCount := 0 }}
 {{ range $p.teaching }}{{ with .project_count }}{{ $guidedCount = add $guidedCount . }}{{ end }}{{ end }}
-<section class="metrics" aria-label="Research record at a glance">
+<section class="metrics" aria-label="Research activity at a glance">
   <div><strong>{{ $articleCount }}</strong><span>Peer-reviewed articles</span></div>
   <div><strong>{{ $ipCount }}</strong><span>Patent-pending technology</span></div>
   <div><strong>{{ $softwareCount }}</strong><span>Citable software release</span></div>
