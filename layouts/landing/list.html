@@ -90,7 +90,7 @@
     <div><span class="overline">{{ $secondary.type }} · {{ $secondary.year }}</span><h3>{{ $secondary.title }}</h3><p>{{ $secondary.authors }}</p><p class="venue">{{ $secondary.venue }}</p></div>
     <div class="actions"><a class="lnk" href="{{ $secondary.detail | relURL }}">Article details <span class="arw" aria-hidden="true">↗</span></a><a class="lnk" href="{{ $secondary.doi }}" target="_blank" rel="noopener">Article <span class="arw" aria-hidden="true">↗</span></a></div>
   </article>
-  <div class="actions"><a class="lnk" href="{{ "/outputs/" | relURL }}">View all research outputs <span class="arw" aria-hidden="true">↗</span></a></div>
+  <div class="actions"><a class="lnk" href="{{ "/outputs/" | relURL }}">Browse all research outputs <span class="arw" aria-hidden="true">↗</span></a></div>
 </section>
 
 <section class="section" id="experience">
@@ -103,7 +103,7 @@
     </div>
     <aside class="education-panel">
       <h3>Education</h3>
-      {{ range $p.education }}{{ if ne .show false }}<article><span>{{ .period }}</span><strong>{{ .degree }}</strong><p>{{ .institution }}</p>{{ with .note }}<small>{{ . }}</small></article>{{ end }}{{ end }}
+      {{ range $p.education }}{{ if ne .show false }}<article><span>{{ .period }}</span><strong>{{ .degree }}</strong><p>{{ .institution }}</p>{{ with .note }}<small>{{ . }}</small>{{ end }}</article>{{ end }}{{ end }}
       <h3>Research training</h3>
       {{ range $p.professional_development }}{{ if ne .show false }}<article><span>{{ .period }}</span><strong>{{ .title }}</strong><p>{{ .organization }}</p><small>{{ .note }}</small></article>{{ end }}{{ end }}
     </aside>
