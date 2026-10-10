@@ -23,7 +23,6 @@
 .section-head{gap:1.6rem 4.5rem;margin-bottom:2.6rem}
 .section-head h2{max-width:19ch}
 .pillar{min-height:350px;padding:1.85rem}
-.pillar .tag-list{opacity:.84}
 .motif{opacity:var(--motif-opacity)}
 .pillar--grid .motif::after{border-width:1px}
 .series-grid{align-items:start}
