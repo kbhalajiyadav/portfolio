@@ -53,7 +53,7 @@ def main() -> int:
     nav_markers = (
         'class="nav-about',
         'href="{{ $root }}#research"',
-        'href="{{ $outputsURL }}"',
+        'href="{{ $outputsHref }}"',
         'href="{{ $root }}#experience"',
         'href="{{ $root }}#presentations">Engagement',
         'class="nav-contact" href="{{ $root }}#contact"',
@@ -63,6 +63,12 @@ def main() -> int:
         errors.append("shared header must retain About, Research, Outputs, Experience, Engagement, and Contact navigation")
     elif nav_positions != sorted(nav_positions):
         errors.append("shared header navigation must keep the primary information architecture in order")
+    for marker in (
+        '{{ $outputsHref := $outputsURL }}',
+        '{{ if .IsHome }}{{ $outputsHref = printf "%s#outputs" $root }}{{ end }}',
+    ):
+        if marker not in header:
+            errors.append(f"shared header must preserve homepage Outputs continuity marker {marker!r}")
     if 'href="{{ $root }}#trajectory"' in header:
         errors.append("shared header must keep doctoral trajectory within Research rather than primary navigation")
     if 'aria-current="page"' not in header:
