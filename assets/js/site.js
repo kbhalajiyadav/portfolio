@@ -25,7 +25,9 @@
     const button = event.target.closest('.js-copy');
     if (!button) return;
     const text = button.getAttribute('data-copy') || '';
+    const label = button.getAttribute('data-copy-label') || 'Text';
     const original = button.textContent;
+    const status = button.closest('.citation-box')?.querySelector('[data-copy-status]');
     try {
       if (navigator.clipboard && window.isSecureContext) {
         await navigator.clipboard.writeText(text);
@@ -41,9 +43,11 @@
         area.remove();
       }
       button.textContent = 'Copied';
+      if (status) status.textContent = `${label} copied to clipboard.`;
     } catch (error) {
       console.error('Clipboard copy failed', error);
       button.textContent = 'Copy failed';
+      if (status) status.textContent = `${label} could not be copied.`;
     }
     window.setTimeout(() => { button.textContent = original; }, 1200);
   });
@@ -100,7 +104,9 @@
   const responsiveToc = document.querySelector('.toc-disclosure[data-responsive-toc]');
   if (responsiveToc) {
     const desktopToc = window.matchMedia('(min-width: 981px)');
-    responsiveToc.open = desktopToc.matches;
+    const syncToc = () => { responsiveToc.open = desktopToc.matches; };
+    syncToc();
+    desktopToc.addEventListener?.('change', syncToc);
   }
 
   const tocLinks = Array.from(document.querySelectorAll('.toc-disclosure a[href^="#"]'));

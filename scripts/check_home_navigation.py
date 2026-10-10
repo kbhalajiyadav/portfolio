@@ -17,7 +17,6 @@ EXPECTED_LABELS = [
     "About",
     "Research",
     "Outputs",
-    "Trajectory",
     "Experience",
     "Engagement",
     "Contact",

@@ -18,9 +18,16 @@ module.exports = {
   urls: [
     'http://127.0.0.1:4173/',
     'http://127.0.0.1:4173/about/',
+    'http://127.0.0.1:4173/outputs/',
     'http://127.0.0.1:4173/research/',
     'http://127.0.0.1:4173/publication/adhesives-wearable/',
     'http://127.0.0.1:4173/publication/masters-thesis/',
-    'http://127.0.0.1:4173/project/peel-trace-evaluation/'
+    'http://127.0.0.1:4173/project/peel-trace-evaluation/',
+    'http://127.0.0.1:4173/project/optical-metrology/',
+    'http://127.0.0.1:4173/project/quantitative-thermal-imaging/',
+    'http://127.0.0.1:4173/project/fda-project/',
+    'http://127.0.0.1:4173/privacy/',
+    'http://127.0.0.1:4173/brand-use/',
+    'http://127.0.0.1:4173/404.html'
   ]
 };

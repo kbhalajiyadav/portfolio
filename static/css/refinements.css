@@ -1,5 +1,7 @@
 :root{
   --refined-section-space:clamp(4.5rem,7vw,6.5rem);
+  --cyan:#0c757c;
+  --control-line:#7d858c;
 }
 .hero{
   min-height:auto;
@@ -13,7 +15,11 @@
 .section-head h2{max-width:19ch}
 .pillar{min-height:350px;padding:1.85rem}
 .pillar .tag-list{opacity:.88}
+.series-grid{align-items:start}
+.series{align-self:start}
 .series summary{min-height:132px}
+.menu-button,.copy-button{border-color:var(--control-line)}
+.toc-disclosure summary{display:flex;align-items:center;min-height:24px}
 .page-shell{padding-block:clamp(3rem,6vw,5.25rem)}
 .back-link{margin-bottom:2.1rem}
 .page-header{margin-bottom:2.55rem}
@@ -31,7 +37,7 @@
 .site-nav .nav-about:hover::after,.site-nav .nav-about:focus-visible::after,.site-nav .nav-about.is-current-page::after{right:1.45rem}
 .nav-contact.is-active{border-color:var(--teal);background:var(--teal);color:#fff!important}
 .site-footer nav{align-items:baseline;justify-content:flex-end}
-.site-footer nav a,.site-footer nav .privacy-choice-link{line-height:1.4}
+.site-footer nav a,.site-footer nav .privacy-choice-link{display:inline-flex;align-items:center;min-height:24px;line-height:1.4}
 .privacy-choice-link{appearance:none;margin:0;padding:0;border:0;background:transparent;cursor:pointer}
 .site-footer nav .privacy-choice-link{color:var(--ink-soft);font-family:var(--sans);font-size:.76rem;font-weight:400;text-decoration:none}
 .site-footer nav .privacy-choice-link:hover{color:var(--cyan)}

@@ -33,4 +33,14 @@
     <a class="lnk" href="{{ $p.software.concept_doi }}" target="_blank" rel="noopener">All archived versions <span class="arw" aria-hidden="true">↗</span></a>
   </div>
 </section>
+{{ else if eq $path "/project/quantitative-thermal-imaging/" }}
+<section class="related-package" aria-labelledby="related-package-title">
+  <h2 id="related-package-title">Research context</h2>
+  <p>The patent-pending technology is part of the broader quantitative-metrology program for responsive materials.</p>
+  <div class="actions">
+    <a class="lnk" href="{{ "/outputs/" | relURL }}">Research outputs <span class="arw" aria-hidden="true">↗</span></a>
+    <a class="lnk" href="{{ "/research/#measure-response" | relURL }}">Measurement program <span class="arw" aria-hidden="true">↗</span></a>
+    <a class="lnk" href="{{ "/project/optical-metrology/" | relURL }}">Optical metrology <span class="arw" aria-hidden="true">↗</span></a>
+  </div>
+</section>
 {{ end }}

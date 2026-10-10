@@ -3,7 +3,6 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#f7f5f0">
   {{ partial "seo_head.html" . }}
   <script data-consent-bootstrap>
     (() => {
@@ -16,7 +15,10 @@
       }
     })();
   </script>
-  {{ $styles := resources.Get "css/site.css" | minify | fingerprint "sha384" }}
+  {{ $core := resources.FromString "css/core.css" (readFile "static/css/site.css") }}
+  {{ $refinements := resources.FromString "css/refinements.css" (readFile "static/css/refinements.css") }}
+  {{ $about := resources.FromString "css/about.css" (readFile "static/css/about.css") }}
+  {{ $styles := (slice $core $refinements $about) | resources.Concat "css/site.css" | minify | fingerprint "sha384" }}
   <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}" crossorigin="anonymous">
 </head>
 <body class="page-{{ .Kind }} section-{{ .Section }}">

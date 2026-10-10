@@ -1,6 +1,7 @@
 ---
 title: "Peel Trace Evaluation for Soft Substrates"
 date: "2026-06-16T00:00:00Z"
+lastmod: "2026-10-09T00:00:00Z"
 status: "Open source"
 summary: "A versioned, reproducible workflow for protocol-defined analysis of force–displacement peel traces from soft and stretchable substrates."
 tags:
@@ -37,8 +38,8 @@ sample-level summaries without publishing restricted experimental data.
 Kantepalle, B. Y.; Tang, C. *Peel Trace Evaluation for Soft Substrates*,
 version 1.4.0-rc15; Zenodo, 2026.
 
-## Scope and disclosure
+## Public scope
 
-The public software page describes the analysis method and archival record.
-Unpublished formulations, datasets, images, and experimental schedules are
-intentionally excluded.
+The software record documents the analysis method, source repository, and
+archival releases. Unpublished formulations, experimental datasets, source
+images, and experimental schedules are not part of the public software record.

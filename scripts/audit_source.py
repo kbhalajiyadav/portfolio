@@ -43,6 +43,8 @@ forbidden = {
     'injury monitoring': 'unsupported clinical application',
     'ongoing Summer 2026': 'stale completed student-project status',
     'two ongoing student projects': 'stale completed student-project status',
+    '## Evidence boundary': 'internal audit wording exposed in public content',
+    'IP project details': 'intellectual-property output mislabeled as a generic project',
 }
 errors: list[str] = []
 for needle, reason in forbidden.items():
@@ -73,9 +75,21 @@ for required in (
     '<h3 class="subhead">Applied innovation</h3>',
     'range $p.professional_development',
     'range $p.applied_innovation',
+    'Browse all research outputs',
+    'Intellectual property record',
 ):
     if required not in landing_text:
-        errors.append(f'layouts/landing/list.html: missing taxonomy invariant {required!r}')
+        errors.append(f'layouts/landing/list.html: missing homepage invariant {required!r}')
+
+outputs_content = ROOT / 'content/outputs/_index.md'
+outputs_layout = ROOT / 'layouts/outputs/list.html'
+if not outputs_content.exists() or not outputs_layout.exists():
+    errors.append('first-class /outputs/ hub must remain present')
+else:
+    outputs_text = outputs_layout.read_text(encoding='utf-8')
+    for required in ('Peer-reviewed article', 'M.S. thesis', 'Research software', 'Intellectual property record'):
+        if required not in outputs_text:
+            errors.append(f'layouts/outputs/list.html: missing output class {required!r}')
 
 if 'cv_version:' in portfolio_text:
     errors.append('data/portfolio.yaml: manual cv_version must remain removed; templates hash the PDF')
@@ -96,8 +110,8 @@ for required in (
     if required.lower() not in (cv_text + build_cv_text).lower():
         errors.append(f'CV source: missing {required!r}')
 
-for path in [ROOT / 'layouts/landing/list.html', ROOT / 'layouts/publication/single.html']:
-    for match in re.finditer(r'<a\b[^>]*>[^<\n]*(?:↗|↓)', texts[path]):
+for path in [ROOT / 'layouts/landing/list.html', ROOT / 'layouts/publication/single.html', ROOT / 'layouts/outputs/list.html']:
+    for match in re.finditer(r'<a\b[^>]*>[^<\n]*(?:↗|↓)', path.read_text(encoding='utf-8')):
         snippet = match.group(0)
         if 'class="lnk"' not in snippet and 'class="button' not in snippet:
             errors.append(f'{path.relative_to(ROOT)}: arrow link is not a link atom: {snippet[:100]}')
@@ -135,11 +149,23 @@ optical_text = texts[ROOT / 'content/project/optical-metrology/index.md']
 for required in (
     'Presented research',
     'CIE L\\*a\\*b\\*',
+    'Current public scope',
     'clinical validation',
-    'public release of the underlying experimental data',
+    'underlying experimental dataset has not been',
 ):
     if required not in optical_text:
-        errors.append(f'content/project/optical-metrology/index.md: missing evidence boundary {required!r}')
+        errors.append(f'content/project/optical-metrology/index.md: missing public-scope fact {required!r}')
+
+ip_text = texts[ROOT / 'content/project/quantitative-thermal-imaging/index.md']
+for required in (
+    'record_type: "intellectual-property"',
+    'Patent pending',
+    'VCU Tech # TAN-26-099',
+    'Bhalaji Yadav Kantepalle and Christina Tang',
+    'Patent status and public record',
+):
+    if required not in ip_text:
+        errors.append(f'content/project/quantitative-thermal-imaging/index.md: missing IP fact {required!r}')
 
 security_text = (ROOT / 'static/.well-known/security.txt').read_text(encoding='utf-8')
 expiry_match = re.search(r'^Expires:\s*(.+)$', security_text, re.MULTILINE)
@@ -156,12 +182,18 @@ else:
 header_text = texts[ROOT / 'layouts/partials/site_header.html']
 if 'class="u-photo indieweb-photo"' not in header_text or 'alt="Portrait of {{ $p.profile.name }}"' not in header_text:
     errors.append('layouts/partials/site_header.html: hidden IndieWeb photo requires a durable non-empty alt value')
+for required in ('About</a>', 'Research</a>', 'Outputs</a>', 'Experience</a>', 'Engagement</a>', 'Contact</a>'):
+    if required not in header_text:
+        errors.append(f'layouts/partials/site_header.html: missing primary-navigation item {required!r}')
+if '>Trajectory</a>' in header_text:
+    errors.append('layouts/partials/site_header.html: doctoral direction belongs within Research, not primary navigation')
 
 for path in (
     ROOT / 'content/project/peel-trace-evaluation/index.md',
     ROOT / 'content/project/optical-metrology/index.md',
     ROOT / 'content/project/fda-project/index.md',
     ROOT / 'content/project/supply-chain-automation/index.md',
+    ROOT / 'content/project/quantitative-thermal-imaging/index.md',
 ):
     if re.search(r'^toc:\s*true\s*$', texts[path], re.MULTILINE):
         errors.append(f'{path.relative_to(ROOT)}: short page must not enable a table of contents')
@@ -169,12 +201,37 @@ for path in (ROOT / 'layouts/_default/single.html', ROOT / 'layouts/project/sing
     text = texts[path]
     if 'data-responsive-toc' not in text or '<details class="toc-disclosure" open' in text:
         errors.append(f'{path.relative_to(ROOT)}: responsive TOC must not be hard-coded open')
+
+base_template = (ROOT / 'layouts/_default/baseof.html').read_text(encoding='utf-8')
+for token in (
+    'resources.FromString "css/core.css"',
+    'resources.FromString "css/refinements.css"',
+    'resources.FromString "css/about.css"',
+    'resources.Concat "css/site.css"',
+    'fingerprint "sha384"',
+):
+    if token not in base_template:
+        errors.append(f'layouts/_default/baseof.html: bundled fingerprinted CSS invariant missing {token!r}')
+if (ROOT / 'assets/css/site.css').exists():
+    errors.append('assets/css/site.css: obsolete manual @import wrapper must remain removed')
+
 site_js = (ROOT / 'assets/js/site.js').read_text(encoding='utf-8')
-for token in ("data-responsive-toc", "matchMedia('(min-width: 981px)')", "responsiveToc.open = desktopToc.matches"):
+for token in (
+    "data-responsive-toc",
+    "matchMedia('(min-width: 981px)')",
+    "responsiveToc.open = desktopToc.matches",
+    "data-copy-status",
+    "copied to clipboard",
+):
     if token not in site_js:
-        errors.append(f'assets/js/site.js: responsive TOC invariant missing {token!r}')
+        errors.append(f'assets/js/site.js: interaction/accessibility invariant missing {token!r}')
 if (ROOT / 'static/js/site.js').exists():
     errors.append('static/js/site.js: unused duplicate runtime script must remain removed')
+
+publication_template = texts[ROOT / 'layouts/publication/single.html']
+for token in ('role="status"', 'aria-live="polite"', 'data-copy-status', 'data-copy-label="Citation"'):
+    if token not in publication_template:
+        errors.append(f'layouts/publication/single.html: copy-feedback accessibility marker missing {token!r}')
 
 workflow_text = (ROOT / '.github/workflows/hugo.yaml').read_text(encoding='utf-8')
 if 'node --check assets/js/site.js' not in workflow_text:
@@ -191,6 +248,7 @@ for required in (
     'package.json', '.pa11yci.cjs', '.lighthouserc.cjs',
     'scripts/check_external_links.py', 'scripts/check_workflows.py',
     'scripts/check_live_site.py', 'scripts/check_responsive.py',
+    'scripts/check_accessibility_interactions.py',
     'scripts/check_laptop_landing.py',
 ):
     if not (ROOT / required).exists():

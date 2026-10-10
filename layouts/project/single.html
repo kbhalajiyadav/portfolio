@@ -1,11 +1,12 @@
 {{ define "main" }}
 {{ $isIndustry := in (.Params.tags | default (slice)) "Industry" }}
-{{ $backHref := cond $isIndustry "/#experience" "/#research" }}
+{{ $isIP := eq (.Params.record_type | default "") "intellectual-property" }}
+{{ $backHref := cond $isIndustry "/#experience" (cond $isIP "/outputs/" "/#research") }}
 <article class="scholar-page h-entry">
   <div class="page-shell">
-    <a class="back-link lnk" href="{{ $backHref | relURL }}"><span aria-hidden="true">←</span> {{ if $isIndustry }}Professional experience{{ else }}Research program{{ end }}</a>
+    <a class="back-link lnk" href="{{ $backHref | relURL }}"><span aria-hidden="true">←</span> {{ if $isIndustry }}Professional experience{{ else if $isIP }}Research outputs{{ else }}Research program{{ end }}</a>
     <header class="page-header">
-      <p class="kicker">{{ if $isIndustry }}Professional case study{{ else }}Research project{{ end }}</p>
+      <p class="kicker">{{ if $isIndustry }}Professional case study{{ else if $isIP }}Intellectual property{{ else }}Research project{{ end }}</p>
       <h1 class="p-name">{{ .Title }}</h1>
       <a class="u-url visually-hidden" href="{{ .Permalink }}">Permalink</a>
       {{ with .Params.summary }}<p class="page-lede">{{ . | markdownify }}</p>{{ end }}
