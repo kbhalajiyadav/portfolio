@@ -15,6 +15,7 @@ EXPECTED_TEXT = {
     "": [
         "Research program",
         "Ph.D. student",
+        "Browse all research outputs",
         'href="/favicon.svg"',
         'href="/favicon-48.png"',
         'href="/favicon.ico"',
@@ -32,6 +33,12 @@ EXPECTED_TEXT = {
         "Profiles and records",
         "Collaboration and methods exchange",
     ],
+    "outputs/": [
+        "Research Outputs",
+        "Peer-reviewed article",
+        "Research software",
+        "Intellectual property record",
+    ],
     "privacy/": [
         "Privacy and analytics notice",
         "Microsoft Clarity",
@@ -46,11 +53,17 @@ EXPECTED_TEXT = {
     "project/optical-metrology/": [
         "Optical Metrology for Mechanochromic Textiles",
         "Measurement workflow",
-        "Evidence boundary",
+        "Current public scope",
+    ],
+    "project/quantitative-thermal-imaging/": [
+        "Intellectual property",
+        "Patent pending",
+        "Patent status and public record",
+        "VCU Tech # TAN-26-099",
     ],
     "research/": ["Resolve structure under stimuli", "Translate reproducibly"],
     "robots.txt": ["OAI-SearchBot", "Claude-SearchBot", "Microsoft Clarity project xuo3lvzchr"],
-    "sitemap.xml": ["<urlset", "/about/"],
+    "sitemap.xml": ["<urlset", "/about/", "/outputs/"],
     "site.webmanifest": ["/icon-192.png", "/icon-512.png", "/favicon.svg"],
 }
 
@@ -60,6 +73,7 @@ EXPECTED_RUNTIME_TEXT = [
     "consentv2",
     "analytics_Storage",
     "bhalaji.analyticsConsent.v1",
+    "copied to clipboard",
 ]
 
 MASTODON_PROFILE = "https://infosec.exchange/@bhalaji"
@@ -107,7 +121,7 @@ def fetch(url: str, nonce: str) -> tuple[int, str, bytes]:
     request = Request(
         cache_busted(url, nonce),
         headers={
-            "User-Agent": "BhalajiPortfolioDeployCheck/2.1",
+            "User-Agent": "BhalajiPortfolioDeployCheck/2.2",
             "Cache-Control": "no-cache, no-store, max-age=0",
             "Pragma": "no-cache",
         },
@@ -188,7 +202,7 @@ def validate_runtime(base: str, nonce: str) -> list[str]:
             errors.append(f"{runtime_url}: unexpected content type {runtime_type!r}")
         for needle in EXPECTED_RUNTIME_TEXT:
             if needle not in runtime:
-                errors.append(f"{runtime_url}: missing deferred analytics marker {needle!r}")
+                errors.append(f"{runtime_url}: missing deferred runtime marker {needle!r}")
     except (URLError, HTTPError, TimeoutError, OSError) as exc:
         errors.append(f"{home_url}: {exc}")
     return errors
