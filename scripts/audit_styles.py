@@ -23,17 +23,34 @@ def contrast(a: str, b: str) -> float:
 def main() -> int:
     text = CSS.read_text(encoding="utf-8")
     refinements = REFINEMENTS.read_text(encoding="utf-8")
+    combined = text + "\n" + refinements
     errors: list[str] = []
-    tokens = dict(re.findall(r"--([\w-]+):\s*(#[0-9a-fA-F]{6})", text))
-    for name in ("paper", "surface", "ink", "ink-soft", "teal", "cyan", "rust"):
+
+    # Later declarations intentionally win, matching the browser cascade for
+    # the root-level brand tokens overridden in refinements.css.
+    tokens = dict(re.findall(r"--([\w-]+):\s*(#[0-9a-fA-F]{6})", combined))
+    for name in (
+        "paper", "surface", "surface-soft", "ink", "ink-soft",
+        "teal", "cyan", "rust", "control-line",
+    ):
         if name not in tokens:
             errors.append(f"missing color token --{name}")
+
     if not errors:
         for foreground in ("ink", "ink-soft", "teal", "cyan", "rust"):
-            for background in ("paper", "surface"):
+            for background in ("paper", "surface", "surface-soft"):
                 ratio = contrast(tokens[foreground], tokens[background])
                 if ratio < 4.5:
-                    errors.append(f"--{foreground} contrast on --{background} is {ratio:.2f}:1; requires 4.5:1")
+                    errors.append(
+                        f"--{foreground} contrast on --{background} is {ratio:.2f}:1; requires 4.5:1"
+                    )
+        for background in ("paper", "surface", "surface-soft"):
+            ratio = contrast(tokens["control-line"], tokens[background])
+            if ratio < 3.0:
+                errors.append(
+                    f"--control-line contrast on --{background} is {ratio:.2f}:1; requires 3:1"
+                )
+
     required = (
         ".visually-hidden", ".indieweb-photo", ".lnk", ":focus-visible",
         "@media(max-width:1180px)", "@media(max-width:980px)",
@@ -42,6 +59,16 @@ def main() -> int:
     for marker in required:
         if marker not in text:
             errors.append(f"missing required style marker {marker}")
+
+    interaction_rules = (
+        ".series-grid{align-items:start}",
+        ".series{align-self:start}",
+        ".menu-button,.copy-button{border-color:var(--control-line)}",
+    )
+    for rule in interaction_rules:
+        if rule not in refinements:
+            errors.append(f"interactive-layout/accessibility invariant missing {rule!r}")
+
     footer_control_rule = (
         ".site-footer nav .privacy-choice-link{color:var(--ink-soft);"
         "font-family:var(--sans);font-size:.76rem;font-weight:400;"
@@ -49,6 +76,7 @@ def main() -> int:
     )
     if footer_control_rule not in refinements:
         errors.append("footer privacy control must match the adjacent footer-link typography")
+
     footer_layout_rules = (
         ".site-footer nav{align-items:baseline;justify-content:flex-end}",
         ".site-footer nav a,.site-footer nav .privacy-choice-link{line-height:1.4}",
@@ -58,6 +86,7 @@ def main() -> int:
     for rule in footer_layout_rules:
         if rule not in refinements:
             errors.append(f"footer alignment invariant missing {rule!r}")
+
     pillar_alignment_rules = (
         ".pillar{display:flex;flex-direction:column}",
         ".pillar h3{min-height:3.24em}",
@@ -68,6 +97,7 @@ def main() -> int:
     for rule in pillar_alignment_rules:
         if rule not in refinements:
             errors.append(f"research-program alignment invariant missing {rule!r}")
+
     privacy_layout_rules = (
         ".privacy-banner{position:relative;z-index:90;",
         'html[data-analytics-consent="granted"] .privacy-banner,html[data-analytics-consent="denied"] .privacy-banner{display:none}',
@@ -80,6 +110,7 @@ def main() -> int:
             errors.append(f"privacy-layout invariant missing {rule!r}")
     if ".privacy-banner{position:fixed" in refinements:
         errors.append("privacy controls must remain in document flow and must not obscure page content")
+
     spacing_rules = (
         "--refined-section-space:clamp(4.5rem,7vw,6.5rem)",
         ".section{padding-block:var(--refined-section-space)}",
@@ -91,13 +122,19 @@ def main() -> int:
     for rule in spacing_rules:
         if rule not in refinements:
             errors.append(f"page-spacing invariant missing {rule!r}")
-    if "text-align:justify" in text.replace(" ", ""):
+
+    if "text-align:justify" in combined.replace(" ", ""):
         errors.append("body copy must not use full justification")
+
     if errors:
         for error in errors:
             print(f"ERROR: {error}")
         return 1
-    print("Style audit passed: contrast, focus, breakpoints, footer and research-card alignment, prepaint in-flow privacy controls, and page spacing verified.")
+    print(
+        "Style audit passed: AA text contrast across all branded surfaces, "
+        "3:1 interactive boundaries, focus, breakpoints, card alignment, "
+        "privacy controls, and page spacing verified."
+    )
     return 0
 
 
