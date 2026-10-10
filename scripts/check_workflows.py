@@ -74,6 +74,7 @@ for marker in (
 
 hugo = (ROOT / '.github/workflows/hugo.yaml').read_text(encoding='utf-8')
 for marker in (
+    'cancel-in-progress: true',
     'sha256sum --check --strict',
     'python3 scripts/check_site.py public',
     'python3 scripts/check_external_links.py public',
