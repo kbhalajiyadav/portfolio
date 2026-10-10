@@ -29,10 +29,14 @@ VIEWPORTS = [
 ]
 PAGES = [
     ("", "home"),
+    ("about/", "about"),
     ("research/", "research"),
+    ("outputs/", "outputs"),
     ("publication/adhesives-wearable/", "publication"),
     ("project/peel-trace-evaluation/", "project"),
 ]
+EVIDENCE_PAGES = {"home", "about", "research", "outputs"}
+EVIDENCE_VIEWPORTS = {"390-mobile", "1440-desktop"}
 
 
 def free_port() -> int:
@@ -266,7 +270,7 @@ def main() -> int:
                                 record_errors.append(
                                     f"desktop footer navigation wrapped or lost baseline alignment: row spread={layout['footerRowSpread']}px"
                                 )
-                        if page_name == "home" and label in {"390-mobile", "1440-desktop"}:
+                        if page_name == "home" and label in EVIDENCE_VIEWPORTS:
                             record_errors.extend(audit_menu(cdp, width <= 480))
                         if page_name == "research":
                             expected_open = width >= 981
@@ -279,7 +283,7 @@ def main() -> int:
                         results.append(record)
                         errors.extend(f"{label}/{page_name}: {message}" for message in record_errors)
 
-                        if page_name == "home" or (page_name == "research" and label in {"390-mobile", "1440-desktop"}):
+                        if page_name in EVIDENCE_PAGES and label in EVIDENCE_VIEWPORTS:
                             image = cdp.command("Page.captureScreenshot", {"format": "png", "fromSurface": True})
                             (screenshots / f"{label}-{page_name}.png").write_bytes(base64.b64decode(image["data"]))
 
@@ -299,7 +303,7 @@ def main() -> int:
                 if errors:
                     print("\n".join(f"ERROR: {error}" for error in errors))
                     return 1
-                print(f"Responsive browser audit passed: {len(results)} page/viewport combinations plus reduced-motion, menu, footer, and TOC checks.")
+                print(f"Responsive browser audit passed: {len(results)} page/viewport combinations plus reduced-motion, menu, footer, and TOC checks; desktop/mobile evidence captured for Home, About, Research, and Outputs.")
                 return 0
             finally:
                 cdp.close()
