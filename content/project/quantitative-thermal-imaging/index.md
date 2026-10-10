@@ -4,6 +4,7 @@ date: "2026-10-07T00:00:00Z"
 lastmod: "2026-10-09T00:00:00Z"
 status: "Patent pending"
 record_type: "intellectual-property"
+public_listing: "https://app.firstignite.com/public/listings/53618a61-8e86-4673-9651-053ab0d790c8"
 summary: "Patent-pending VCU technology for visible-light, camera-based quantitative interpretation of thermochromic materials and corresponding-region temperature differences."
 tags:
   - Thermochromic Materials
@@ -31,6 +32,7 @@ The work extends the broader measurement program on responsive materials: conver
 
 “Patent pending” indicates that an application has been filed; it does not mean a patent has been examined or granted. This public record does not reproduce confidential application text, unpublished datasets, or detailed experimental parameters. Rights in the invention have been assigned to Virginia Commonwealth University.
 
+- [Technology commercialization listing (FirstIgnite)](https://app.firstignite.com/public/listings/53618a61-8e86-4673-9651-053ab0d790c8)
 - [Research outputs](/outputs/)
 - [Research program](/research/#measure-response)
 - [Optical metrology project](/project/optical-metrology/)
