@@ -22,8 +22,8 @@
     </header>
 
     <dl class="about-fact-strip" aria-label="Profile at a glance">
-      <div><dt>Current role</dt><dd class="p-job-title">{{ $p.profile.status }}</dd></div>
-      <div><dt>Institution</dt><dd class="p-org">Virginia Commonwealth University</dd></div>
+      <div><dt>Current role</dt><dd class="p-job-title">{{ $p.profile.role }} · {{ $p.profile.program }}</dd></div>
+      <div><dt>Institution</dt><dd class="p-org">{{ $p.profile.institution }}</dd></div>
       <div><dt>Location</dt><dd>{{ $p.profile.location }}</dd></div>
       <div><dt>Research focus</dt><dd>Stimuli-responsive materials and quantitative metrology</dd></div>
     </dl>
@@ -54,7 +54,7 @@
           <span>{{ .number }}</span>
           <h3>{{ .title }}</h3>
           <p>{{ .text }}</p>
-          <a class="lnk" href="{{ .href | relURL }}">{{ .link_label }} <span class="arw" aria-hidden="true">↗</span></a>
+          <a class="lnk" href="{{ .href | relURL }}">{{ .link_label }} <span class="arw" aria-hidden="true">→</span></a>
         </article>
         {{ end }}
       </div>
@@ -120,7 +120,7 @@
       </div>
       <div class="actions">
         <a class="button button--primary" href="mailto:{{ $p.profile.email }}">Email {{ $p.profile.email }}</a>
-        <a class="lnk" href="{{ "/research/" | relURL }}">Research program <span class="arw" aria-hidden="true">↗</span></a>
+        <a class="lnk" href="{{ "/research/" | relURL }}">Research program <span class="arw" aria-hidden="true">→</span></a>
       </div>
     </section>
 
