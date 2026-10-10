@@ -57,7 +57,7 @@
 .trajectory-grid article{align-self:start;padding:1.6rem 1.75rem;border:0;background:transparent}
 .trajectory-grid article:first-child{padding-left:0;padding-right:2rem}
 .trajectory-grid article+article{padding-right:0;padding-left:2rem;border-left:1px solid var(--line)}
-.robotics-card{border-left:1px solid var(--line)!important}
+.robotics-card{border-left:1px solid var(--line)}
 .research-extension .questions{display:block;margin-top:3rem;padding-top:2.4rem;border:0;border-top:1px solid var(--line);background:transparent}
 .questions__head{display:grid;grid-template-columns:minmax(160px,.42fr) minmax(0,1.58fr);gap:1rem 3rem;align-items:start;margin-bottom:1.35rem}
 .questions__head .kicker{margin:0}
