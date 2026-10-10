@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
-"""Detect rendered content collisions and component overflow across portfolio components.
+"""Detect rendered content collisions, overflow, and stretched empty panels.
 
 The audit intentionally checks semantic component families rather than screenshot-perfect
 pixel positions. It protects cards, record rows, timelines, profile facts, citation boxes,
-and editorial panels against content overlap or horizontal escape as copy changes.
+and editorial panels against content overlap or horizontal escape as copy changes. It also
+checks selected asymmetric panels that should size to their own content rather than inherit
+the height of a taller sibling.
 """
 from __future__ import annotations
 
@@ -53,6 +55,7 @@ SELECTORS = [
     ".research-package",
     ".package-artifacts article",
     ".output-row",
+    ".education-panel",
     ".education-panel article",
     ".about-fact-strip div",
     ".about-program-grid article",
@@ -64,6 +67,13 @@ SELECTORS = [
     ".citation-box",
     ".related-package",
 ]
+
+# These components are intentionally asymmetric. A shorter sibling should not
+# stretch to match a taller neighbor and create a large empty lower half.
+NATURAL_HEIGHT_SELECTORS = {
+    ".trajectory-grid article": 72,
+    ".education-panel": 48,
+}
 
 DECLINE_PRIVACY = r"""
 (async () => {
@@ -98,6 +108,7 @@ MEASURE = r"""
     [...document.querySelectorAll(selector)].forEach((component, index) => {
       if (!visible(component)) return;
       const componentRect = rect(component);
+      const componentStyle = getComputedStyle(component);
       const children = [...component.children]
         .filter(visible)
         .filter(child => {
@@ -124,6 +135,11 @@ MEASURE = r"""
         child.box.top < componentRect.top - 2 ||
         child.box.bottom > componentRect.bottom + 2
       ));
+      const lastBottom = children.length ? Math.max(...children.map(child => child.box.bottom)) : componentRect.top;
+      const trailingSpace = Math.max(
+        0,
+        componentRect.bottom - (parseFloat(componentStyle.paddingBottom) || 0) - lastBottom
+      );
       results.push({
         selector,
         index,
@@ -132,6 +148,7 @@ MEASURE = r"""
         clientHeight: component.clientHeight,
         scrollWidth: component.scrollWidth,
         clientWidth: component.clientWidth,
+        trailingSpace,
         collisions,
         escaped,
       });
@@ -232,6 +249,12 @@ def main() -> int:
                                 errors.append(f"{prefix}: {label} has content outside its component bounds")
                             if component.get("scrollWidth", 0) > component.get("clientWidth", 0) + 2:
                                 errors.append(f"{prefix}: {label} has horizontal component overflow")
+                            allowed_trailing = NATURAL_HEIGHT_SELECTORS.get(component["selector"])
+                            if allowed_trailing is not None and component.get("trailingSpace", 0) > allowed_trailing:
+                                errors.append(
+                                    f"{prefix}: {label} has {component['trailingSpace']:.1f}px unused trailing space; "
+                                    f"natural-height limit is {allowed_trailing}px"
+                                )
             finally:
                 cdp.close()
         finally:
@@ -248,7 +271,8 @@ def main() -> int:
         return 1
     print(
         "Component integrity passed: major cards, editorial records, timelines, profile facts, citation boxes, "
-        f"and related panels contain their rendered content without collisions or horizontal overflow across {len(PAGES) * len(VIEWPORTS)} page/viewport combinations."
+        "and related panels contain their rendered content without collisions, horizontal overflow, or stretched "
+        f"empty asymmetric panels across {len(PAGES) * len(VIEWPORTS)} page/viewport combinations."
     )
     return 0
 
