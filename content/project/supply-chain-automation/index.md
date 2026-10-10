@@ -28,6 +28,3 @@ project-tracking workflows used by technical and business teams.
 The work strengthened four practices that remain central to my research: define
 the decision, make the workflow repeatable, document assumptions, and present
 the result in a form the next user can evaluate.
-
-The record emphasizes the analytical workflow, project-management practice, and
-transferable methods from the role.
