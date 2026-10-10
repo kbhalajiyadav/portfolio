@@ -27,14 +27,7 @@
   </div>
 </section>
 
-<section class="metrics" aria-label="Portfolio record at a glance">
-  {{ range $p.metrics }}
-  {{ $value := .value }}
-  {{ if and (eq .source "orcid") $publicationSync }}{{ $value = $publicationSync.journal_article_count }}{{ end }}
-  {{ if eq .source "presentations" }}{{ $value = len (where $p.presentations "kind" "Poster") }}{{ end }}
-  <div><strong>{{ $value }}</strong><span>{{ .label }}</span></div>
-  {{ end }}
-</section>
+{{ partial "home_proof.html" . }}
 
 <section class="section" id="research">
   <div class="section-head">
@@ -61,9 +54,10 @@
 </section>
 
 <section class="section" id="outputs">
-  <div class="section-head split-head">
-    <div><p class="kicker">Selected outputs</p><h2>Research outputs across article, thesis, software, and intellectual property.</h2></div>
-    {{ with $publicationSync }}<p class="metadata-line">{{ .journal_article_count }} ORCID-synchronized journal articles</p>{{ end }}
+  <div class="section-head">
+    <p class="kicker">Selected outputs</p>
+    <h2>Peer-reviewed work, citable software, and patent-pending technology.</h2>
+    <p>Flagship evidence is shown here; the complete chronological record remains available in Research Outputs.</p>
   </div>
   {{ $primary := index $p.publications 0 }}
   <article class="research-package">
@@ -84,11 +78,6 @@
   <article class="secondary-output">
     <div><span class="overline">{{ $ip.status }} · {{ $ip.year }}</span><h3>{{ $ip.title }}</h3><p>{{ $ip.inventors }}</p><p class="venue">{{ $ip.organization }} · VCU Tech # {{ $ip.tech_id }}</p><p>{{ $ip.description }}</p></div>
     <div class="actions"><a class="lnk" href="{{ "/project/quantitative-thermal-imaging/" | relURL }}">Intellectual property record <span class="arw" aria-hidden="true">↗</span></a></div>
-  </article>
-  {{ $secondary := index $p.publications 1 }}
-  <article class="secondary-output">
-    <div><span class="overline">{{ $secondary.type }} · {{ $secondary.year }}</span><h3>{{ $secondary.title }}</h3><p>{{ $secondary.authors }}</p><p class="venue">{{ $secondary.venue }}</p></div>
-    <div class="actions"><a class="lnk" href="{{ $secondary.detail | relURL }}">Article details <span class="arw" aria-hidden="true">↗</span></a><a class="lnk" href="{{ $secondary.doi }}" target="_blank" rel="noopener">Article <span class="arw" aria-hidden="true">↗</span></a></div>
   </article>
   <div class="actions"><a class="lnk" href="{{ "/outputs/" | relURL }}">Browse all research outputs <span class="arw" aria-hidden="true">↗</span></a></div>
 </section>
@@ -111,7 +100,7 @@
 </section>
 
 <section class="section" id="presentations">
-  <div class="section-head"><p class="kicker">Presentations and professional engagement</p><h2>Research communicated through publications, posters, instruction, service, and applied innovation.</h2></div>
+  <div class="section-head"><p class="kicker">Selected professional engagement</p><h2>Research communicated, taught, reviewed, and translated beyond the lab.</h2></div>
   {{ $visibleSeries := slice }}{{ range $p.presentation_series }}{{ if ne .show false }}{{ $visibleSeries = $visibleSeries | append . }}{{ end }}{{ end }}
   {{ $visibleTeaching := slice }}{{ range $p.teaching }}{{ if ne .show false }}{{ $visibleTeaching = $visibleTeaching | append . }}{{ end }}{{ end }}
   {{ $visibleService := slice }}{{ range $p.service }}{{ if ne .show false }}{{ $visibleService = $visibleService | append . }}{{ end }}{{ end }}
