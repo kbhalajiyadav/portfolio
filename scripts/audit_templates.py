@@ -25,6 +25,7 @@ def main() -> int:
             for attribute in ("src=", "alt=", "width=", "height="):
                 if attribute not in image:
                     errors.append(f"{relative}: image missing {attribute[:-1]}: {image[:140]}")
+
     base = (LAYOUTS / "_default/baseof.html").read_text(encoding="utf-8")
     for marker in ('partial "seo_head.html"', 'partial "site_header.html"', 'block "main"', 'partial "site_footer.html"'):
         if marker not in base:
@@ -32,12 +33,17 @@ def main() -> int:
     for marker in ('data-analytics-consent="unknown"', 'data-consent-bootstrap', 'bhalaji.analyticsConsent.v1', 'dataset.analyticsConsent'):
         if marker not in base:
             errors.append(f"layouts/_default/baseof.html: missing prepaint consent marker {marker}")
+    for marker in ('resources.FromString "css/core.css"', 'resources.Concat "css/site.css"', 'fingerprint "sha384"'):
+        if marker not in base:
+            errors.append(f"layouts/_default/baseof.html: missing bundled CSS marker {marker}")
+
     seo_head = (LAYOUTS / "partials/seo_head.html").read_text(encoding="utf-8")
     mastodon_head_marker = '<link rel="me" href="https://infosec.exchange/@bhalaji">'
     if mastodon_head_marker not in seo_head:
         errors.append("SEO head must retain the Mastodon rel=me verification link")
     if '"https://infosec.exchange/@bhalaji"' not in seo_head:
         errors.append("Person structured data must retain Mastodon in sameAs")
+
     header = (LAYOUTS / "partials/site_header.html").read_text(encoding="utf-8")
     for marker in ('class="brand__monogram"', 'viewBox="0 0 40 40"', 'fill="currentColor"'):
         if marker not in header:
@@ -47,22 +53,25 @@ def main() -> int:
     nav_markers = (
         'class="nav-about',
         'href="{{ $root }}#research"',
-        'href="{{ $root }}#outputs"',
-        'href="{{ $root }}#trajectory"',
+        'href="{{ $outputsURL }}"',
         'href="{{ $root }}#experience"',
         'href="{{ $root }}#presentations">Engagement',
         'class="nav-contact" href="{{ $root }}#contact"',
     )
     nav_positions = [header.find(marker) for marker in nav_markers]
     if any(position < 0 for position in nav_positions):
-        errors.append("shared header must retain About plus the complete homepage section navigation")
+        errors.append("shared header must retain About, Research, Outputs, Experience, Engagement, and Contact navigation")
     elif nav_positions != sorted(nav_positions):
-        errors.append("shared header navigation must keep About separate and homepage anchors in scroll order")
+        errors.append("shared header navigation must keep the primary information architecture in order")
+    if 'href="{{ $root }}#trajectory"' in header:
+        errors.append("shared header must keep doctoral trajectory within Research rather than primary navigation")
     if 'aria-current="page"' not in header:
-        errors.append("shared header must expose the current About page to assistive technology")
+        errors.append("shared header must expose current standalone pages to assistive technology")
+
     footer = (LAYOUTS / "partials/site_footer.html").read_text(encoding="utf-8")
     if "https://infosec.exchange/@bhalaji" in footer:
         errors.append("shared footer must not expose Mastodon after verification is established")
+
     about_layout = (LAYOUTS / "about/single.html").read_text(encoding="utf-8")
     for marker in ('class="about-fact-strip"', 'class="about-section__intro"', 'class="about-path__marker"', 'Professional path in chronological order'):
         if marker not in about_layout:
@@ -72,12 +81,23 @@ def main() -> int:
     about_content = (ROOT / "content/about.md").read_text(encoding="utf-8")
     if "bio:\n  - >-" not in about_content:
         errors.append("content/about.md: biography entries must remain explicit YAML block scalars")
+
+    outputs_layout = LAYOUTS / "outputs/list.html"
+    if not outputs_layout.exists():
+        errors.append("layouts/outputs/list.html: outputs hub template missing")
+    else:
+        outputs = outputs_layout.read_text(encoding="utf-8")
+        for marker in ('Research software', 'Intellectual property record', 'Peer-reviewed article'):
+            if marker not in outputs:
+                errors.append(f"outputs hub lost record type {marker!r}")
+
     privacy = (LAYOUTS / "partials/privacy_controls.html").read_text(encoding="utf-8")
     banner = re.search(r'<section\b[^>]*data-privacy-banner[^>]*>', privacy)
     if not banner:
         errors.append("privacy notice must retain the shared data-privacy-banner element")
     elif re.search(r'\bhidden\b', banner.group(0)):
         errors.append("privacy notice must render from the prepaint consent state, not reveal later from deferred JavaScript")
+
     if errors:
         for error in errors:
             print(f"ERROR: {error}")
