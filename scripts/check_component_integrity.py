@@ -57,6 +57,8 @@ DECLINE_PRIVACY = r"""
 MEASURE = r"""
 (selectors => {
   const visible = element => {
+    const closedDetails = element.closest('details:not([open])');
+    if (closedDetails && !element.closest('summary')) return false;
     const style = getComputedStyle(element);
     const rect = element.getBoundingClientRect();
     return style.display !== 'none' && style.visibility !== 'hidden' && rect.width > 0 && rect.height > 0;
@@ -222,7 +224,7 @@ def main() -> int:
     if errors:
         print("\n".join(f"ERROR: {error}" for error in errors))
         return 1
-    print("Component integrity passed: key card, record, question, and profile surfaces contain their content without collisions or horizontal overflow across desktop, compact, tablet, and mobile frames.")
+    print("Component integrity passed: key card, record, question, and profile surfaces contain their rendered content without collisions or horizontal overflow across desktop, compact, tablet, and mobile frames.")
     return 0
 
 
