@@ -245,7 +245,7 @@ def main() -> int:
                     pillars = metrics.get("pillars", [])
                     if len(pillars) != 3:
                         errors.append(f"{prefix}: expected exactly three research-program cards, found {len(pillars)}")
-                    elif width >= 1280:
+                    elif width >= 981:
                         alignment = {
                             "cardTops": spread([item.get("top") for item in pillars]),
                             "cardHeights": spread([item.get("height") for item in pillars]),
