@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Detect rendered content collisions, overflow, and avoidable editorial slack.
 
-The audit intentionally checks semantic component families rather than screenshot-perfect
-pixel positions. It protects cards, record rows, timelines, profile facts, citation boxes,
-and editorial panels against content overlap, horizontal escape, or large empty tails as
-copy changes.
+The audit checks semantic component families rather than screenshot-perfect pixel
+positions. It protects cards, record rows, timelines, profile facts, citation boxes,
+and editorial panels against content overlap, horizontal escape, large empty tails,
+or excessive internal vertical gaps as copy changes.
 """
 from __future__ import annotations
 
@@ -58,7 +58,6 @@ SELECTORS = [
     ".education-panel",
     ".education-panel article",
     ".about-fact-strip div",
-    ".about-program-grid article",
     ".about-method-grid article",
     ".about-profile-links a",
     ".about-path article",
@@ -68,15 +67,32 @@ SELECTORS = [
     ".related-package",
 ]
 
-# These are explanatory/editorial components, not promotional tiles. Large
-# unused tails usually indicate row stretching or a fixed/minimum height that
-# no longer reflects the content. Limits are deliberately generous so the
-# audit catches discontinuities rather than normal padding.
+# Large unused tails usually indicate row stretching or a fixed/minimum height that
+# no longer reflects the content. Limits are deliberately generous so the audit
+# catches discontinuities rather than normal padding.
 EDITORIAL_SLACK_LIMITS = {
     ".trajectory-grid article": 56.0,
     ".series summary": 56.0,
     ".education-panel": 72.0,
     ".about-method-grid article": 56.0,
+}
+
+# Direct content blocks in these components are expected to read as one vertical
+# sequence. This catches the failure mode where a grid row or min-height creates a
+# visually empty band in the middle even though trailing-slack and collision checks pass.
+INTERNAL_GAP_LIMITS = {
+    ".pillar": 92.0,
+    ".questions article": 44.0,
+    ".trajectory-grid article": 48.0,
+    ".education-panel": 64.0,
+    ".education-panel article": 36.0,
+    ".about-method-grid article": 40.0,
+    ".about-profile-links a": 36.0,
+    ".package-artifacts article": 52.0,
+    ".listing-grid article": 56.0,
+    ".abstract-block": 48.0,
+    ".citation-box": 48.0,
+    ".related-package": 52.0,
 }
 
 DECLINE_PRIVACY = r"""
@@ -108,6 +124,7 @@ MEASURE = r"""
     a.right <= b.left + 1 || b.right <= a.left + 1 ||
     a.bottom <= b.top + 1 || b.bottom <= a.top + 1
   );
+  const horizontalOverlap = (a, b) => Math.max(0, Math.min(a.right, b.right) - Math.max(a.left, b.left));
   const results = [];
   selectors.forEach(selector => {
     [...document.querySelectorAll(selector)].forEach((component, index) => {
@@ -123,7 +140,7 @@ MEASURE = r"""
         .map((child, childIndex) => ({
           index: childIndex,
           tag: child.tagName.toLowerCase(),
-          className: child.className || '',
+          className: typeof child.className === 'string' ? child.className : '',
           box: rect(child),
         }));
       const collisions = [];
@@ -140,6 +157,23 @@ MEASURE = r"""
         child.box.top < componentRect.top - 2 ||
         child.box.bottom > componentRect.bottom + 2
       ));
+      const ordered = [...children].sort((a, b) => (a.box.top - b.box.top) || (a.box.left - b.box.left));
+      const internalGaps = [];
+      for (let i = 0; i < ordered.length - 1; i += 1) {
+        const current = ordered[i];
+        const next = ordered[i + 1];
+        const overlap = horizontalOverlap(current.box, next.box);
+        const minimumComparableWidth = Math.min(current.box.width, next.box.width) * 0.5;
+        const gap = next.box.top - current.box.bottom;
+        if (gap > 0 && overlap >= minimumComparableWidth) {
+          internalGaps.push({
+            gap,
+            first:{tag:current.tag,className:current.className},
+            second:{tag:next.tag,className:next.className},
+          });
+        }
+      }
+      const maxInternalGap = internalGaps.length ? Math.max(...internalGaps.map(item => item.gap)) : 0;
       const contentBottom = children.length ? Math.max(...children.map(child => child.box.bottom)) : componentRect.top;
       const trailingSlack = Math.max(0, componentRect.bottom - contentBottom - number(componentStyle.paddingBottom));
       results.push({
@@ -151,6 +185,8 @@ MEASURE = r"""
         scrollWidth: component.scrollWidth,
         clientWidth: component.clientWidth,
         trailingSlack,
+        maxInternalGap,
+        internalGaps,
         collisions,
         escaped,
       });
@@ -257,6 +293,13 @@ def main() -> int:
                                     f"{prefix}: {label} leaves {component['trailingSlack']:.1f}px of avoidable trailing whitespace "
                                     f"(limit {slack_limit:.0f}px)"
                                 )
+                            gap_limit = INTERNAL_GAP_LIMITS.get(component["selector"])
+                            if gap_limit is not None and component.get("maxInternalGap", 0) > gap_limit:
+                                worst = max(component.get("internalGaps", []), key=lambda item: item["gap"], default=None)
+                                errors.append(
+                                    f"{prefix}: {label} leaves {component['maxInternalGap']:.1f}px of avoidable internal whitespace "
+                                    f"(limit {gap_limit:.0f}px; blocks={worst})"
+                                )
             finally:
                 cdp.close()
         finally:
@@ -273,8 +316,9 @@ def main() -> int:
         return 1
     print(
         "Component integrity passed: major cards, editorial records, timelines, profile facts, citation boxes, "
-        "and related panels contain rendered content without collisions, horizontal overflow, or excessive editorial slack "
-        f"across {len(PAGES) * len(VIEWPORTS)} page/viewport combinations."
+        "and related panels contain rendered content without collisions, horizontal overflow, excessive tails, "
+        "or excessive internal whitespace across "
+        f"{len(PAGES) * len(VIEWPORTS)} page/viewport combinations."
     )
     return 0
 

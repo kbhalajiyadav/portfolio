@@ -3,15 +3,15 @@
 {{ $aboutURL := "about/" | relURL }}
 {{ $researchURL := "research/" | relURL }}
 {{ $outputsURL := "outputs/" | relURL }}
-{{ $researchHref := $researchURL }}
-{{ $outputsHref := $outputsURL }}
-{{ if .IsHome }}
-  {{ $researchHref = printf "%s#research" $root }}
-  {{ $outputsHref = printf "%s#outputs" $root }}
-{{ end }}
+{{ $experienceURL := "experience/" | relURL }}
+{{ $engagementURL := "engagement/" | relURL }}
+{{ $contactURL := "contact/" | relURL }}
 {{ $isAbout := eq .RelPermalink $aboutURL }}
 {{ $isResearch := eq .RelPermalink $researchURL }}
 {{ $isOutputs := eq .RelPermalink $outputsURL }}
+{{ $isExperience := eq .RelPermalink $experienceURL }}
+{{ $isEngagement := eq .RelPermalink $engagementURL }}
+{{ $isContact := eq .RelPermalink $contactURL }}
 <header class="site-head">
   <div class="site-head__inner">
     <a class="brand h-card u-url" href="{{ $root }}" rel="me" aria-label="{{ $p.profile.short_name }}, portfolio home">
@@ -26,11 +26,11 @@
     <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
     <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
       <a class="nav-about{{ if $isAbout }} is-current-page{{ end }}" href="{{ $aboutURL }}"{{ if $isAbout }} aria-current="page"{{ end }}>About</a>
-      <a{{ if $isResearch }} class="is-active"{{ end }} href="{{ $researchHref }}"{{ if $isResearch }} aria-current="page"{{ end }}>Research</a>
-      <a{{ if $isOutputs }} class="is-active"{{ end }} href="{{ $outputsHref }}"{{ if $isOutputs }} aria-current="page"{{ end }}>Outputs</a>
-      <a href="{{ $root }}#experience">Experience</a>
-      <a href="{{ $root }}#presentations">Engagement</a>
-      <a class="nav-contact" href="{{ $root }}#contact">Contact</a>
+      <a{{ if $isResearch }} class="is-active"{{ end }} href="{{ $researchURL }}"{{ if $isResearch }} aria-current="page"{{ end }}>Research</a>
+      <a{{ if $isOutputs }} class="is-active"{{ end }} href="{{ $outputsURL }}"{{ if $isOutputs }} aria-current="page"{{ end }}>Outputs</a>
+      <a{{ if $isExperience }} class="is-active"{{ end }} href="{{ $experienceURL }}"{{ if $isExperience }} aria-current="page"{{ end }}>Experience</a>
+      <a{{ if $isEngagement }} class="is-active"{{ end }} href="{{ $engagementURL }}"{{ if $isEngagement }} aria-current="page"{{ end }}>Engagement</a>
+      <a class="nav-contact{{ if $isContact }} is-active{{ end }}" href="{{ $contactURL }}"{{ if $isContact }} aria-current="page"{{ end }}>Contact</a>
     </nav>
   </div>
 </header>

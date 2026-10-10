@@ -1,0 +1,28 @@
+{{ define "main" }}
+{{ $p := site.Data.portfolio }}
+{{ $aff := site.Data.current_affiliation }}
+{{ $cvVersion := readFile "static/uploads/resume.pdf" | md5 }}
+{{ $cvHref := printf "%s?v=%s" ($p.profile.cv | relURL) $cvVersion }}
+<article class="page-shell contact-page h-card">
+  <a class="back-link lnk" href="{{ "/" | relURL }}"><span aria-hidden="true">←</span> Portfolio home</a>
+  <header class="page-header">
+    <p class="kicker">Contact</p>
+    <h1>{{ .Title }}</h1>
+    <p class="page-lede">{{ .Params.summary }}</p>
+  </header>
+  <section class="contact-section contact-section--page">
+    <div>
+      <h2>Research collaboration and methods exchange.</h2>
+      <p>I am interested in collaborations that combine rheology, neutron scattering, imaging, or mechanics to answer defined structure–processing questions in responsive materials.</p>
+      <p class="fine-print">{{ $p.profile.institution }} · {{ $aff.lab }}</p>
+    </div>
+    <div class="contact-actions">
+      <a class="button button--primary u-email" href="mailto:{{ $p.profile.email }}">Email {{ $p.profile.email }}</a>
+      <a class="lnk" href="{{ $p.profile.orcid }}" target="_blank" rel="me noopener">ORCID <span class="arw" aria-hidden="true">↗</span></a>
+      <a class="lnk" href="{{ $p.profile.scholar }}" target="_blank" rel="me noopener">Google Scholar <span class="arw" aria-hidden="true">↗</span></a>
+      <a class="lnk" href="{{ $p.profile.github }}" target="_blank" rel="me noopener">GitHub <span class="arw" aria-hidden="true">↗</span></a>
+      <a class="lnk" href="{{ $cvHref }}" target="_blank" rel="noopener">Curriculum vitae <span class="arw" aria-hidden="true">↗</span></a>
+    </div>
+  </section>
+</article>
+{{ end }}

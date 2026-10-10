@@ -1,0 +1,36 @@
+{{ define "main" }}
+{{ $p := site.Data.portfolio }}
+<article class="page-shell experience-page">
+  <a class="back-link lnk" href="{{ "/" | relURL }}"><span aria-hidden="true">←</span> Portfolio home</a>
+  <header class="page-header">
+    <p class="kicker">Experience</p>
+    <h1>{{ .Title }}</h1>
+    <p class="page-lede">{{ .Params.summary }}</p>
+  </header>
+  <div class="two-col">
+    <section class="timeline" aria-labelledby="experience-history-heading">
+      <h2 class="subhead" id="experience-history-heading">Professional and research experience</h2>
+      {{ range $p.experience }}{{ if ne .show false }}
+      <article class="timeline-item">
+        <span>{{ .period }}</span>
+        <h3>{{ .role }}</h3>
+        <p class="org">{{ .organization }}{{ with .location }} · {{ . }}{{ end }}</p>
+        <p>{{ .detail }}</p>
+        {{ with .outcomes }}<ul>{{ range . }}<li>{{ . }}</li>{{ end }}</ul>{{ end }}
+        {{ with .links }}<div class="actions">{{ range . }}<a class="lnk" href="{{ .href | relURL }}">{{ .label }} <span class="arw" aria-hidden="true">→</span></a>{{ end }}</div>{{ end }}
+      </article>
+      {{ end }}{{ end }}
+    </section>
+    <aside class="education-panel" aria-label="Education and research training">
+      <h2 class="subhead">Education</h2>
+      {{ range $p.education }}{{ if ne .show false }}
+      <article><span>{{ .period }}</span><strong>{{ .degree }}</strong><p>{{ .institution }}</p>{{ with .note }}<small>{{ . }}</small>{{ end }}</article>
+      {{ end }}{{ end }}
+      <h2 class="subhead">Research training</h2>
+      {{ range $p.professional_development }}{{ if ne .show false }}
+      <article><span>{{ .period }}</span><strong>{{ .title }}</strong><p>{{ .organization }}</p><small>{{ .note }}</small></article>
+      {{ end }}{{ end }}
+    </aside>
+  </div>
+</article>
+{{ end }}

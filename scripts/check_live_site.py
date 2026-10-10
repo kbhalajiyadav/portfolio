@@ -11,6 +11,9 @@ from urllib.error import HTTPError, URLError
 from urllib.parse import parse_qsl, urlencode, urljoin, urlsplit, urlunsplit
 from urllib.request import Request, urlopen
 
+# Visible-page checks deliberately use stable factual/structural markers rather than
+# awkward prose that exists only to satisfy deployment verification. The exact release
+# commit is verified separately by check_release_marker.py.
 EXPECTED_TEXT = {
     "": [
         "Research program",
@@ -32,8 +35,8 @@ EXPECTED_TEXT = {
         "Chemical engineering, regulated practice, and research metrology",
         "VCU Soft Functional Materials Lab",
         "Christina Tang, Ph.D.",
-        "Profiles and records",
-        "Collaboration and methods exchange",
+        "Research profiles and institutional links",
+        "Research questions open to collaboration",
     ],
     "outputs/": [
         "Research Outputs",
@@ -56,7 +59,8 @@ EXPECTED_TEXT = {
         "Optical Metrology for Mechanochromic Textiles",
         "Measurement workflow",
         "Research record",
-        "peer-reviewed performance benchmark",
+        "VCU Engineering Graduate",
+        "29th VCU Graduate Student Research Symposium",
     ],
     "project/quantitative-thermal-imaging/": [
         "Intellectual property",
@@ -64,7 +68,12 @@ EXPECTED_TEXT = {
         "Technology overview",
         "VCU Tech # TAN-26-099",
     ],
-    "research/": ["Resolve structure under stimuli", "Translate reproducibly", "Research package"],
+    "research/": [
+        "Resolve structure under stimuli",
+        "Translate reproducibly",
+        "Connected research outputs",
+        "Open research questions",
+    ],
     "robots.txt": ["OAI-SearchBot", "Claude-SearchBot", "Microsoft Clarity project xuo3lvzchr"],
     "sitemap.xml": ["<urlset", "/about/", "/outputs/"],
     "site.webmanifest": ["/icon-192.png", "/icon-512.png", "/favicon.svg"],
@@ -124,7 +133,7 @@ def fetch(url: str, nonce: str) -> tuple[int, str, bytes]:
     request = Request(
         cache_busted(url, nonce),
         headers={
-            "User-Agent": "BhalajiPortfolioDeployCheck/2.2",
+            "User-Agent": "BhalajiPortfolioDeployCheck/2.3",
             "Cache-Control": "no-cache, no-store, max-age=0",
             "Pragma": "no-cache",
         },
