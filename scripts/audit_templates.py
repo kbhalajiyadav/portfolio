@@ -50,10 +50,21 @@ def main() -> int:
             errors.append(f"shared header must retain the canonical vector BK monogram marker {marker}")
     if "https://infosec.exchange/@bhalaji" in header:
         errors.append("shared header must not contain a redundant Mastodon verification backlink")
+    contextual_nav_markers = (
+        '{{ $researchURL := "research/" | relURL }}',
+        '{{ $outputsURL := "outputs/" | relURL }}',
+        '{{ $researchHref = printf "%s#research" $root }}',
+        '{{ $outputsHref = printf "%s#outputs" $root }}',
+        'href="{{ $researchHref }}"',
+        'href="{{ $outputsHref }}"',
+    )
+    for marker in contextual_nav_markers:
+        if marker not in header:
+            errors.append(f"shared header lost contextual Research/Outputs navigation marker {marker!r}")
     nav_markers = (
         'class="nav-about',
-        'href="{{ $root }}#research"',
-        'href="{{ $outputsURL }}"',
+        'href="{{ $researchHref }}"',
+        'href="{{ $outputsHref }}"',
         'href="{{ $root }}#experience"',
         'href="{{ $root }}#presentations">Engagement',
         'class="nav-contact" href="{{ $root }}#contact"',
@@ -67,6 +78,12 @@ def main() -> int:
         errors.append("shared header must keep doctoral trajectory within Research rather than primary navigation")
     if 'aria-current="page"' not in header:
         errors.append("shared header must expose current standalone pages to assistive technology")
+
+    trajectory = (LAYOUTS / "partials/home_trajectory.html").read_text(encoding="utf-8")
+    if ">Research questions</h3>" not in trajectory:
+        errors.append("doctoral collaboration block must use the reader-facing 'Research questions' heading")
+    if "Questions worth combining methods around" in trajectory:
+        errors.append("doctoral collaboration block must not restore process-oriented collaboration wording")
 
     footer = (LAYOUTS / "partials/site_footer.html").read_text(encoding="utf-8")
     if "https://infosec.exchange/@bhalaji" in footer:
