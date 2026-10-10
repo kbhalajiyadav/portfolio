@@ -176,10 +176,19 @@ def main() -> int:
                 if sseq >= 0.93 and sj >= 0.82:
                     errors.append(f"near-duplicate public sentence across {name_a}/{name_b}: {sentence_a!r}")
 
-    public_files = sorted((ROOT / "content").glob("**/*.md")) + [
-        ROOT / "static" / "llms.txt",
-        ROOT / "static" / "llms-full.txt",
-    ]
+    # Scan every source that can emit visible public prose. This deliberately
+    # excludes scripts so the guardrail can name the phrases it is banning.
+    public_files = (
+        sorted((ROOT / "content").glob("**/*.md"))
+        + sorted((ROOT / "layouts").glob("**/*.html"))
+        + [
+            ROOT / "data" / "portfolio.yaml",
+            ROOT / "data" / "cv.yaml",
+            ROOT / "data" / "current_affiliation.yaml",
+            ROOT / "static" / "llms.txt",
+            ROOT / "static" / "llms-full.txt",
+        ]
+    )
     public_text = "\n".join(path.read_text(encoding="utf-8") for path in public_files).casefold()
     for phrase in HYPE_TERMS:
         if phrase in public_text:
