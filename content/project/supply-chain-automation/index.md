@@ -29,6 +29,5 @@ The work strengthened four practices that remain central to my research: define
 the decision, make the workflow repeatable, document assumptions, and present
 the result in a form the next user can evaluate.
 
-> This page describes responsibilities and methods at a high level. Employer
-> datasets, system architecture, customer information, and confidential
-> operating details are excluded.
+This case study focuses on my responsibilities and methods rather than company
+datasets, customer information, or system architecture.
