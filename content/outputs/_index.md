@@ -5,7 +5,7 @@ description: "Research outputs by Bhalaji Yadav Kantepalle, including publicatio
 type: outputs
 layout: list
 url: /outputs/
-lastmod: 2026-10-09
+lastmod: 2026-10-10
 ---
 
 Research outputs are listed newest first and can be filtered by record type. Publications, software, the thesis, and intellectual property remain distinct record classes so each item can be evaluated in the context appropriate to it.
