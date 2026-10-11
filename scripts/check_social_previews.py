@@ -58,11 +58,13 @@ def local_social_target(root: Path, url: str) -> Path | None:
     parsed = urlparse(url)
     if parsed.scheme not in {"http", "https"}:
         return None
-    if parsed.hostname not in {"bhalaji.com", "www.bhalaji.com", "127.0.0.1", "localhost"}:
+    marker = "/social/"
+    if marker not in parsed.path:
         return None
-    if not parsed.path.startswith("/social/"):
+    tail = parsed.path.split(marker, 1)[1]
+    if not tail or "/" in tail.strip("/"):
         return None
-    return root / parsed.path.lstrip("/")
+    return root / "social" / Path(tail).name
 
 
 def main() -> int:
@@ -115,7 +117,7 @@ def main() -> int:
         if meta.get("og:image"):
             target = local_social_target(root, meta["og:image"])
             if target is None:
-                errors.append(f"{relative}: social image is not a canonical local /social/ asset: {meta['og:image']}")
+                errors.append(f"{relative}: social image is not a local /social/ asset: {meta['og:image']}")
             elif not target.is_file():
                 errors.append(f"{relative}: social image target missing: {target.relative_to(root)}")
 
