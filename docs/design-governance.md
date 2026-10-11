@@ -152,8 +152,11 @@ The site should use the smallest set of component patterns that accurately fit t
 - Structured data, canonical URLs, OpenGraph/Twitter metadata, ORCID, Scholar, GitHub, institutional records, and DOI links must remain synchronized.
 - Social-preview artwork is part of the same design system, not an unrelated marketing layer: use the BK identity, paper/ink/teal/rust palette, restrained scientific motifs, and research-level language.
 - Social-preview cards are deterministic 1200x630 PNG assets with explicit OpenGraph and Twitter image metadata and useful alt text.
+- Social-image alt text describes the card's substantive scientific or professional proposition, not its styling. Preserve meaningful text; omit decorative motifs, colors, layout descriptions, and generic phrases such as `branded preview`, `image of`, or `graphic showing`.
+- OpenGraph and Twitter image alt text must be identical for the same card, and each governed card family has one content-specific alt description checked in CI.
 - A social card may summarize a page category or record, but it must not introduce unsupported scientific claims, fabricated data, or quantitative-looking evidence.
 - Representative page-to-card mappings and image dimensions are checked in CI so a missing or stale preview does not silently ship.
+- Person structured data should reuse the canonical research summary for `description`; do not maintain a separate machine-readable biography that can drift from the public identity record.
 - External institutional pages can support a claim only to the extent that their current text supports it; stale external pages must not override newer canonical records.
 - Search/indexing lag must not be mistaken for deployment state. Verify the live response directly.
 
@@ -181,6 +184,8 @@ Before merging any change, ask:
 - Are all interaction states keyboard-accessible and understandable?
 - If a user dismisses a highlighted/expanded state, does the UI respect that action immediately?
 - Does shared-link metadata carry a branded, accurate, large preview image?
+- Does social-image alt text communicate the card's proposition rather than describe decoration?
+- Does Person structured data reuse the canonical research summary rather than a parallel biography?
 - Did we create a one-off exception that should instead become a reusable rule?
 - Did source, rendered, and live-release checks all pass?
 

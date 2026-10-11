@@ -152,9 +152,22 @@ def main() -> int:
         'name="twitter:card" content="summary_large_image"',
         'name="twitter:image"',
         'name="twitter:image:alt"',
+        "$socialAltByCard := dict",
+        '"description" $personDescription',
     ):
         if marker not in seo:
-            errors.append(f"social-preview metadata missing marker {marker!r}")
+            errors.append(f"social/structured metadata missing governed marker {marker!r}")
+    if "branded preview" in seo.lower():
+        errors.append("social-image alt text must describe substantive card content, not generic branded-preview styling")
+
+    governance = read("docs/design-governance.md")
+    for marker in (
+        "Social-image alt text describes the card's substantive scientific or professional proposition",
+        "OpenGraph and Twitter image alt text must be identical",
+        "Person structured data should reuse the canonical research summary",
+    ):
+        if marker not in governance:
+            errors.append(f"design governance is missing social/structured-data rule {marker!r}")
 
     social_builder = read("scripts/build_social_cards.py")
     for marker in ('"portfolio"', '"research"', '"outputs"', '"experience"', '"engagement"', '"publication"', '"technology"', 'width="1200" height="630"'):

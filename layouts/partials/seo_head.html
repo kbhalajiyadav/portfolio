@@ -36,7 +36,16 @@
 {{ if eq .RelPermalink "/publication/adhesives-wearable/" }}{{ $socialCard = "publication" }}{{ end }}
 {{ with .Params.social_card }}{{ $socialCard = . }}{{ end }}
 {{ $socialImage := (printf "social/%s.png" $socialCard) | absURL }}
-{{ $socialImageAlt := printf "%s research portfolio — branded %s preview" $p.profile.short_name $socialCard }}
+{{ $socialAltByCard := dict
+  "portfolio" (printf "%s research portfolio: making responsive materials measurable under real processing conditions." $p.profile.short_name)
+  "research" (printf "%s research program: stimulus to structure to response to measurement to translation." $p.profile.short_name)
+  "outputs" (printf "%s research outputs: publications, software, and intellectual property." $p.profile.short_name)
+  "experience" (printf "%s experience and education across materials, data, and regulated systems." $p.profile.short_name)
+  "engagement" (printf "%s engagement: presentations, teaching, service, and professional engagement." $p.profile.short_name)
+  "publication" "Peer-reviewed research on wearable-textile adhesion measured beyond a single maximum-force value."
+  "technology" (printf "%s — Quantitative Thermal Imaging, patent-pending technology for camera-based interpretation of thermochromic materials." $p.profile.short_name)
+}}
+{{ $socialImageAlt := index $socialAltByCard $socialCard | default (printf "%s research portfolio: %s" $p.profile.short_name $description) }}
 <title>{{ $pageTitle }}</title>
 <meta name="description" content="{{ $description }}">
 <meta name="author" content="{{ $p.profile.name }}">
@@ -93,6 +102,7 @@
 {{ $profileID := printf "%s#profile" $aboutURL }}
 {{ $sameAs := slice $p.profile.orcid $p.profile.scholar $p.profile.linkedin $p.profile.github "https://infosec.exchange/@bhalaji" }}
 {{ $jobTitle := printf "%s, %s" $p.profile.role $p.profile.program }}
+{{ $personDescription := $p.profile.summary | markdownify | plainify }}
 {{ $person := dict
   "@type" "Person"
   "@id" $personID
@@ -102,6 +112,7 @@
   "image" ("uploads/avatar-portrait.jpg" | absURL)
   "email" (printf "mailto:%s" $p.profile.email)
   "jobTitle" $jobTitle
+  "description" $personDescription
   "affiliation" (dict "@type" "CollegeOrUniversity" "name" $p.profile.institution "url" "https://www.vcu.edu/")
   "sameAs" $sameAs
   "knowsAbout" (slice "Stimuli-responsive materials" "Soft materials" "Liquid crystals" "Adhesion and fracture mechanics" "Computer vision metrology" "Rheology" "Neutron scattering" "Wearable textiles")
