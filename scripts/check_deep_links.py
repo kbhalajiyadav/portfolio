@@ -176,23 +176,24 @@ def main() -> int:
                     dismissed = cdp.evaluate(f"""(() => {{
                       const target=document.getElementById({json.dumps(series_id)});
                       target.open=false;
-                      return new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(() => {{
+                      return new Promise(resolve => setTimeout(() => {{
                         const style=getComputedStyle(target);
                         resolve({{
                           open:target.open===true,
                           hash:window.location.hash,
-                          isTarget:target.matches(':target'),
-                          borderLeftWidth:style.borderLeftWidth
+                          dismissedClass:target.classList.contains('is-target-dismissed'),
+                          borderLeftWidth:style.borderLeftWidth,
+                          backgroundColor:style.backgroundColor
                         }});
-                      }})));
+                      }}, 80));
                     }})()""")
                     observations.append({"path": path, "kind": "series-dismissed", **dismissed})
                     if dismissed.get("open"):
                         errors.append(f"manually dismissed presentation series remained open: {series_id}")
                     if dismissed.get("hash"):
                         errors.append(f"manually dismissed presentation series retained URL fragment: {series_id}")
-                    if dismissed.get("isTarget"):
-                        errors.append(f"manually dismissed presentation series retained :target state: {series_id}")
+                    if not dismissed.get("dismissedClass"):
+                        errors.append(f"manually dismissed presentation series did not record explicit dismissal: {series_id}")
                     if dismissed.get("borderLeftWidth") != "1px":
                         errors.append(f"manually dismissed presentation series retained target border emphasis: {series_id}")
 
