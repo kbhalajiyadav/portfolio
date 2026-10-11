@@ -49,7 +49,8 @@ For hash-linked expandable evidence:
 - the browser scroll position reserves the sticky-header offset;
 - the target automatically opens when addressed by the hash;
 - the target receives a restrained persistent target state so the visitor can identify what the link referenced;
-- target emphasis must not depend on animation or color alone.
+- target emphasis must not depend on animation or color alone;
+- if the visitor manually closes the targeted record, that explicit action overrides the arrival cue: clear the URL fragment and remove the `:target` emphasis without moving the page.
 
 ## 4. Scientific visual integrity
 
@@ -131,6 +132,7 @@ Rules:
 - Keyboard and pointer behavior must remain equivalent.
 - Focus should never be removed without a visible replacement.
 - Expandable records retain native `details/summary` semantics unless a stronger accessible pattern is required.
+- When a visitor dismisses a deep-linked expandable record, its special target state must disappear immediately rather than implying that the closed record remains selected.
 - Reduced-motion preference is respected.
 
 ## 10. Card and component discipline
@@ -144,10 +146,14 @@ The site should use the smallest set of component patterns that accurately fit t
 - Do not introduce a new card style when an existing semantic pattern fits.
 - Visual variation is acceptable when structural hierarchy remains predictable.
 
-## 11. Provenance, SEO, and external records
+## 11. Provenance, SEO, social previews, and external records
 
 - Claims should link to authoritative records when reasonable.
 - Structured data, canonical URLs, OpenGraph/Twitter metadata, ORCID, Scholar, GitHub, institutional records, and DOI links must remain synchronized.
+- Social-preview artwork is part of the same design system, not an unrelated marketing layer: use the BK identity, paper/ink/teal/rust palette, restrained scientific motifs, and research-level language.
+- Social-preview cards are deterministic 1200x630 PNG assets with explicit OpenGraph and Twitter image metadata and useful alt text.
+- A social card may summarize a page category or record, but it must not introduce unsupported scientific claims, fabricated data, or quantitative-looking evidence.
+- Representative page-to-card mappings and image dimensions are checked in CI so a missing or stale preview does not silently ship.
 - External institutional pages can support a claim only to the extent that their current text supports it; stale external pages must not override newer canonical records.
 - Search/indexing lag must not be mistaken for deployment state. Verify the live response directly.
 
@@ -173,6 +179,8 @@ Before merging any change, ask:
 - Is whitespace carrying hierarchy rather than accidental emptiness?
 - Is a new visual clearly schematic or clearly empirical?
 - Are all interaction states keyboard-accessible and understandable?
+- If a user dismisses a highlighted/expanded state, does the UI respect that action immediately?
+- Does shared-link metadata carry a branded, accurate, large preview image?
 - Did we create a one-off exception that should instead become a reusable rule?
 - Did source, rendered, and live-release checks all pass?
 
