@@ -173,6 +173,30 @@ def main() -> int:
                     if state.get("borderLeftWidth") in (None, "0px"):
                         errors.append(f"deep-linked presentation series lacks persistent target emphasis: {series_id}")
 
+                    dismissed = cdp.evaluate(f"""(() => {{
+                      const target=document.getElementById({json.dumps(series_id)});
+                      target.open=false;
+                      return new Promise(resolve => setTimeout(() => {{
+                        const style=getComputedStyle(target);
+                        resolve({{
+                          open:target.open===true,
+                          hash:window.location.hash,
+                          dismissedClass:target.classList.contains('is-target-dismissed'),
+                          borderLeftWidth:style.borderLeftWidth,
+                          backgroundColor:style.backgroundColor
+                        }});
+                      }}, 80));
+                    }})()""")
+                    observations.append({"path": path, "kind": "series-dismissed", **dismissed})
+                    if dismissed.get("open"):
+                        errors.append(f"manually dismissed presentation series remained open: {series_id}")
+                    if dismissed.get("hash"):
+                        errors.append(f"manually dismissed presentation series retained URL fragment: {series_id}")
+                    if not dismissed.get("dismissedClass"):
+                        errors.append(f"manually dismissed presentation series did not record explicit dismissal: {series_id}")
+                    if dismissed.get("borderLeftWidth") != "1px":
+                        errors.append(f"manually dismissed presentation series retained target border emphasis: {series_id}")
+
                 cdp.command("Emulation.setDeviceMetricsOverride", {"width": 820, "height": 900, "deviceScaleFactor": 1, "mobile": False})
                 cdp.command("Page.navigate", {"url": base_url})
                 wait_ready(cdp, base_url)
@@ -222,7 +246,7 @@ def main() -> int:
         for error in errors:
             print(f"- {error}")
         return 1
-    print("Deep-link, contextual-navigation, and governed tablet-layout audit passed")
+    print("Deep-link, dismissal-state, contextual-navigation, and governed tablet-layout audit passed")
     return 0
 
 

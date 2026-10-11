@@ -62,13 +62,14 @@ jobs:
           sudo apt-get update
           sudo apt-get install --yes latexmk texlive-xetex poppler-utils
 
-      - name: Build canonical browser icons
+      - name: Build canonical browser icons and social previews
         run: |
           if ! command -v rsvg-convert >/dev/null 2>&1 || ! command -v convert >/dev/null 2>&1; then
             sudo apt-get update
             sudo apt-get install --yes --no-install-recommends imagemagick librsvg2-bin
           fi
           bash scripts/build_browser_icons.sh
+          python3 scripts/build_social_cards.py
 
       - name: Audit source, content strategy, visual system, workflows, templates, and JavaScript
         run: |
@@ -83,8 +84,9 @@ jobs:
           python3 scripts/check_design_governance.py
           python3 scripts/check_review_freshness.py
           python3 scripts/check_workflows.py
-          python3 -m py_compile scripts/check_data_consistency.py scripts/check_content_strategy.py scripts/check_design_governance.py scripts/check_software_release.py scripts/check_review_freshness.py scripts/check_layout_spacing.py scripts/check_release_marker.py scripts/check_home_navigation.py scripts/check_accessibility_interactions.py scripts/check_attention_hierarchy.py scripts/check_component_integrity.py scripts/check_navigation_continuity.py scripts/check_deep_links.py
+          python3 -m py_compile scripts/build_social_cards.py scripts/check_social_previews.py scripts/check_data_consistency.py scripts/check_content_strategy.py scripts/check_design_governance.py scripts/check_software_release.py scripts/check_review_freshness.py scripts/check_layout_spacing.py scripts/check_release_marker.py scripts/check_home_navigation.py scripts/check_accessibility_interactions.py scripts/check_attention_hierarchy.py scripts/check_component_integrity.py scripts/check_navigation_continuity.py scripts/check_deep_links.py
           node --check assets/js/site.js
+          node --check assets/js/evidence-target.js
 
       - name: Setup Pages
         id: pages
@@ -108,6 +110,7 @@ jobs:
       - name: Audit generated site and external records
         run: |
           python3 scripts/check_site.py public
+          python3 scripts/check_social_previews.py public
           python3 scripts/check_external_links.py public --site-origin https://bhalaji.com/ --report artifacts/external-links.json
 
       - name: Start rendered-site test server
@@ -189,6 +192,10 @@ jobs:
             echo "HTML pages: $(find public -type f -name '*.html' | wc -l)"
             echo "Largest generated assets:"
             find public -type f -printf '%s %p\n' | sort -nr | head -20
+            if [[ -d public/social ]]; then
+              mkdir -p artifacts/social-previews
+              cp public/social/*.png artifacts/social-previews/
+            fi
           fi
 
       - name: Upload successful pre-deployment evidence

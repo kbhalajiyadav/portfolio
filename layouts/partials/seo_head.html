@@ -10,6 +10,33 @@
 {{ $canonical := .Permalink }}
 {{ $ogType := cond $isAbout "profile" (cond (eq .Section "publication") "article" "website") }}
 {{ $aboutURL := "/about/" | absURL }}
+{{ $socialCard := "portfolio" }}
+{{ if eq .RelPermalink "/research/" }}
+  {{ $socialCard = "research" }}
+{{ else if eq .RelPermalink "/outputs/" }}
+  {{ $socialCard = "outputs" }}
+{{ else if eq .RelPermalink "/experience/" }}
+  {{ $socialCard = "experience" }}
+{{ else if eq .RelPermalink "/engagement/" }}
+  {{ $socialCard = "engagement" }}
+{{ else if eq .Section "publication" }}
+  {{ $socialCard = "outputs" }}
+{{ else if eq .Section "project" }}
+  {{ $tags := .Params.tags | default (slice) }}
+  {{ if eq .RelPermalink "/project/quantitative-thermal-imaging/" }}
+    {{ $socialCard = "technology" }}
+  {{ else if in $tags "Industry" }}
+    {{ $socialCard = "experience" }}
+  {{ else if or (eq (.Params.record_type | default "") "intellectual-property") (in $tags "Research Software") }}
+    {{ $socialCard = "outputs" }}
+  {{ else }}
+    {{ $socialCard = "research" }}
+  {{ end }}
+{{ end }}
+{{ if eq .RelPermalink "/publication/adhesives-wearable/" }}{{ $socialCard = "publication" }}{{ end }}
+{{ with .Params.social_card }}{{ $socialCard = . }}{{ end }}
+{{ $socialImage := (printf "social/%s.png" $socialCard) | absURL }}
+{{ $socialImageAlt := printf "%s research portfolio — branded %s preview" $p.profile.short_name $socialCard }}
 <title>{{ $pageTitle }}</title>
 <meta name="description" content="{{ $description }}">
 <meta name="author" content="{{ $p.profile.name }}">
@@ -44,9 +71,16 @@
 <meta property="og:description" content="{{ $description }}">
 <meta property="og:url" content="{{ $canonical }}">
 <meta property="og:site_name" content="{{ $siteName }}">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="{{ $socialImage }}">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="{{ $socialImageAlt }}">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{{ $pageTitle }}">
 <meta name="twitter:description" content="{{ $description }}">
+<meta name="twitter:image" content="{{ $socialImage }}">
+<meta name="twitter:image:alt" content="{{ $socialImageAlt }}">
 {{ with site.Params.marketing.verification.google }}<meta name="google-site-verification" content="{{ . }}">{{ end }}
 {{ with site.Params.marketing.verification.bing }}<meta name="msvalidate.01" content="{{ . }}">{{ end }}
 <link rel="icon" type="image/svg+xml" href="{{ "favicon.svg" | relURL }}">

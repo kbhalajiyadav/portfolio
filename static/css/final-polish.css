@@ -3,6 +3,9 @@
 .series:target{border-left:2px solid var(--teal);background:color-mix(in srgb,var(--teal) 5%,var(--surface))}
 .series:target summary{padding-left:calc(1.25rem - 2px)}
 .series:target summary strong{color:var(--teal)}
+.series.is-target-dismissed{border-left:1px solid var(--line);background:var(--surface)}
+.series.is-target-dismissed summary{padding-left:1.5rem}
+.series.is-target-dismissed summary strong{color:var(--ink)}
 .tag-list a{transition:color .16s ease,background-color .16s ease}
 .tag-list a:hover,.tag-list a:focus-visible{color:var(--cyan);background:color-mix(in srgb,var(--cyan) 7%,transparent)}
 

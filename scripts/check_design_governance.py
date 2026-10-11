@@ -109,8 +109,14 @@ def main() -> int:
         if 'id="{{ .id }}"' not in text:
             errors.append(f"presentation-series template must emit stable ids: {path}")
 
-    runtime = read("assets/js/site.js")
-    for marker in ("openDeepLinkedDetails", "hashchange", "details.open = true"):
+    runtime = read("assets/js/site.js") + "\n" + read("assets/js/evidence-target.js")
+    for marker in (
+        "openDeepLinkedDetails",
+        "hashchange",
+        "details.open = true",
+        "details.addEventListener('toggle'",
+        "history.replaceState",
+    ):
         if marker not in runtime:
             errors.append(f"deep-linked expandable evidence runtime missing {marker!r}")
 
@@ -125,8 +131,9 @@ def main() -> int:
             errors.append(f"final polish layer missing governance style marker {marker!r}")
 
     base = read("layouts/_default/baseof.html")
-    if "final-polish.css" not in base:
-        errors.append("base template does not load final-polish.css")
+    for marker in ("final-polish.css", "js/evidence-target.js", 'resources.Concat "js/site.js"'):
+        if marker not in base:
+            errors.append(f"base template missing governed runtime/style marker {marker!r}")
 
     signature = read("layouts/partials/research_signature.html")
     for marker in (
@@ -136,6 +143,23 @@ def main() -> int:
     ):
         if marker not in signature:
             errors.append(f"research signature is missing integrity/accessibility marker {marker!r}")
+
+    seo = read("layouts/partials/seo_head.html")
+    for marker in (
+        'property="og:image"',
+        'property="og:image:width" content="1200"',
+        'property="og:image:height" content="630"',
+        'name="twitter:card" content="summary_large_image"',
+        'name="twitter:image"',
+        'name="twitter:image:alt"',
+    ):
+        if marker not in seo:
+            errors.append(f"social-preview metadata missing marker {marker!r}")
+
+    social_builder = read("scripts/build_social_cards.py")
+    for marker in ('"portfolio"', '"research"', '"outputs"', '"experience"', '"engagement"', '"publication"', '"technology"', 'width="1200" height="630"'):
+        if marker not in social_builder:
+            errors.append(f"social-preview generator missing governed marker {marker!r}")
 
     if errors:
         print("Design-governance audit failed:")

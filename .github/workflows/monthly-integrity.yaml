@@ -40,13 +40,14 @@ jobs:
       - name: Install audit dependency
         run: python3 -m pip install --disable-pip-version-check PyYAML==6.0.3
 
-      - name: Build canonical browser icons
+      - name: Build canonical browser icons and social previews
         run: |
           if ! command -v rsvg-convert >/dev/null 2>&1 || ! command -v convert >/dev/null 2>&1; then
             sudo apt-get update
             sudo apt-get install --yes --no-install-recommends imagemagick librsvg2-bin
           fi
           bash scripts/build_browser_icons.sh
+          python3 scripts/build_social_cards.py
 
       - name: Check source, content strategy, and cross-source consistency
         run: |
@@ -74,6 +75,7 @@ jobs:
         run: |
           hugo --gc --minify --printPathWarnings --baseURL "https://bhalaji.com/"
           python3 scripts/check_site.py public
+          python3 scripts/check_social_previews.py public
           python3 scripts/check_external_links.py public --site-origin https://bhalaji.com/ --report artifacts/external-links.json
 
       - name: Check current live site

@@ -15,9 +15,10 @@ portfolio and generated curriculum vitae.
 
 Content classification decisions are recorded in
 `docs/content-taxonomy.md`. Sitewide hierarchy, scientific-visual integrity,
-responsive composition, evidence-link behavior, spacing, and release lessons
-are recorded in `docs/design-governance.md`. Both documents are intended to
-carry forward into future changes rather than be rediscovered case by case.
+responsive composition, evidence-link behavior, spacing, social-preview
+behavior, and release lessons are recorded in `docs/design-governance.md`.
+Both documents are intended to carry forward into future changes rather than be
+rediscovered case by case.
 
 ## Build and validation
 
@@ -26,6 +27,7 @@ The validated local sequence is:
 ```bash
 python3 -m pip install PyYAML==6.0.3 websocket-client==1.9.0
 bash scripts/build_browser_icons.sh
+python3 scripts/build_social_cards.py
 python3 scripts/build_cv.py --no-compile
 python3 scripts/audit_source.py
 python3 scripts/audit_styles.py
@@ -33,15 +35,17 @@ python3 scripts/audit_templates.py
 python3 scripts/check_design_governance.py
 python3 scripts/check_workflows.py
 node --check assets/js/site.js
+node --check assets/js/evidence-target.js
 hugo --gc --minify --printPathWarnings --baseURL https://bhalaji.com/
 python3 scripts/check_site.py public
+python3 scripts/check_social_previews.py public
 python3 scripts/check_external_links.py public --site-origin https://bhalaji.com/
 ```
 
 GitHub Actions also runs accessibility, responsive-layout, contextual-navigation,
-deep-link, spacing, component-integrity, laptop-frame, and mobile/desktop
-Lighthouse checks before deployment. CV compilation is handled by the dedicated
-XeLaTeX workflow.
+deep-link and dismissal-state, spacing, component-integrity, laptop-frame, and
+mobile/desktop Lighthouse checks before deployment. CV compilation is handled
+by the dedicated XeLaTeX workflow.
 
 ## Rights
 
