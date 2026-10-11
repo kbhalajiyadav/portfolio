@@ -62,11 +62,13 @@ monthly = (ROOT / '.github/workflows/monthly-integrity.yaml').read_text(encoding
 for marker in (
     'cron: "23 9 1 * *"',
     'bash scripts/build_browser_icons.sh',
+    'python3 scripts/build_social_cards.py',
     'python3 scripts/check_data_consistency.py',
     'python3 scripts/check_content_strategy.py',
     'python3 scripts/check_review_freshness.py',
     'python3 scripts/sync_orcid.py --output artifacts/orcid-current.json',
     'python3 scripts/check_software_release.py',
+    'python3 scripts/check_social_previews.py public',
     'python3 scripts/check_external_links.py public',
     'python3 scripts/check_live_site.py',
 ):
@@ -77,7 +79,9 @@ hugo = (ROOT / '.github/workflows/hugo.yaml').read_text(encoding='utf-8')
 for marker in (
     'cancel-in-progress: true',
     'sha256sum --check --strict',
+    'python3 scripts/build_social_cards.py',
     'python3 scripts/check_site.py public',
+    'python3 scripts/check_social_previews.py public',
     'python3 scripts/check_external_links.py public',
     'python3 scripts/check_content_strategy.py',
     'python3 scripts/check_review_freshness.py',
