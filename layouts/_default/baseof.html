@@ -28,7 +28,9 @@
   {{ partial "privacy_controls.html" . }}
   <main id="main-content">{{ block "main" . }}{{ end }}</main>
   {{ partial "site_footer.html" . }}
-  {{ $script := resources.Get "js/site.js" | minify | fingerprint "sha384" }}
+  {{ $siteRuntime := resources.Get "js/site.js" }}
+  {{ $evidenceRuntime := resources.Get "js/evidence-target.js" }}
+  {{ $script := (slice $siteRuntime $evidenceRuntime) | resources.Concat "js/site.js" | minify | fingerprint "sha384" }}
   <script data-site-runtime src="{{ $script.RelPermalink }}" integrity="{{ $script.Data.Integrity }}" crossorigin="anonymous" defer></script>
 </body>
 </html>
