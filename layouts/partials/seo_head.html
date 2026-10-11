@@ -11,13 +11,13 @@
 {{ $ogType := cond $isAbout "profile" (cond (eq .Section "publication") "article" "website") }}
 {{ $aboutURL := "/about/" | absURL }}
 {{ $socialCard := "portfolio" }}
-{{ if eq .Section "research" }}
+{{ if eq .RelPermalink "/research/" }}
   {{ $socialCard = "research" }}
-{{ else if eq .Section "outputs" }}
+{{ else if eq .RelPermalink "/outputs/" }}
   {{ $socialCard = "outputs" }}
-{{ else if eq .Section "experience" }}
+{{ else if eq .RelPermalink "/experience/" }}
   {{ $socialCard = "experience" }}
-{{ else if eq .Section "engagement" }}
+{{ else if eq .RelPermalink "/engagement/" }}
   {{ $socialCard = "engagement" }}
 {{ else if eq .Section "publication" }}
   {{ $socialCard = "outputs" }}
