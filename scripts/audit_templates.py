@@ -18,7 +18,14 @@ def main() -> int:
         relative = path.relative_to(ROOT)
         if text.count("{{") != text.count("}}"):
             errors.append(f"{relative}: unbalanced Hugo template delimiters")
-        if "partials" not in path.parts and "shortcodes" not in path.parts and path.name != "baseof.html":
+        # Only page templates are required to define the main block. Partials,
+        # shortcodes, and Goldmark render hooks are invoked by other templates.
+        if (
+            "partials" not in path.parts
+            and "shortcodes" not in path.parts
+            and "_markup" not in path.parts
+            and path.name != "baseof.html"
+        ):
             if '{{ define "main" }}' not in text:
                 errors.append(f"{relative}: missing main template definition")
         for image in re.findall(r"<img\b[^>]*>", text, flags=re.IGNORECASE):
@@ -140,7 +147,10 @@ def main() -> int:
         for error in errors:
             print(f"ERROR: {error}")
         return 1
-    print(f"Template audit passed: {len(templates)} Hugo templates checked, including shortcode syntax without treating shortcodes as page templates.")
+    print(
+        f"Template audit passed: {len(templates)} Hugo templates checked, "
+        "including shortcodes and render hooks without treating them as page templates."
+    )
     return 0
 
 
