@@ -41,6 +41,18 @@
   [\vspace{1.8pt}\color{Rule}\titlerule]
 \titlespacing*{\section}{0pt}{6.0pt}{3.0pt}
 
+% Use the three-page format as three coherent records rather than allowing
+% section headings to orphan at page bottoms.
+\let\cvsection\section
+\def\cvsoftwaretitle{Research Software}
+\def\cvindustrytitle{Industry Experience}
+\renewcommand{\section}[1]{%
+  \def\cvcurrenttitle{#1}%
+  \ifx\cvcurrenttitle\cvsoftwaretitle\newpage\fi
+  \ifx\cvcurrenttitle\cvindustrytitle\newpage\fi
+  \cvsection{#1}%
+}
+
 \newcommand{\entry}[4]{%
   \begin{tabularx}{\textwidth}{@{}Xr@{}}
     {\bfseries\color{Ink} #1} & {\color{Muted}\small #2}\\
