@@ -111,15 +111,15 @@ def render_education(data: dict) -> str:
 
 def render_research_experience(data: dict, compact: bool = False) -> str:
     research: list[str] = []
-    for item in data["research_experience"]:
+    for index, item in enumerate(data["research_experience"]):
         subtitle = item["organization"]
         if item.get("advisor"):
             subtitle += f" | Advisor: {item['advisor']}"
         if compact:
-            # Compact resume roles should start only when enough room remains for
-            # the heading and a substantive part of the role, avoiding page splits
-            # that strand most bullets on the following page.
-            research.append(r"\Needspace{12\baselineskip}")
+            # The first compact role is short enough to use the lower portion of
+            # page 1; later roles keep a larger guard to avoid awkward splits.
+            required_baselines = 6 if index == 0 else 9
+            research.append(rf"\Needspace{{{required_baselines}\baselineskip}}")
         research.append(
             rf"\entry{{{esc(item['role'])}}}{{{esc(item['period'])}}}"
             rf"{{{esc(subtitle)}}}{{{esc(item['location'])}}}"
@@ -130,9 +130,9 @@ def render_research_experience(data: dict, compact: bool = False) -> str:
         research.append(bullets(item_bullets))
     rendered = section("Research and Teaching Experience", research)
     if compact:
-        # Keep the section heading with its first role instead of allowing a
-        # heading-only orphan at the foot of page 1.
-        return r"\Needspace{16\baselineskip}" + "\n" + rendered
+        # Reserve enough room for the section heading and the short first role,
+        # while still allowing natural use of the end of page 1.
+        return r"\Needspace{9\baselineskip}" + "\n" + rendered
     return rendered
 
 
