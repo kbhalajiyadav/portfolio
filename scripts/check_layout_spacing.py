@@ -42,10 +42,50 @@ GEOMETRY_EXPRESSION = r"""
     };
   };
   const number = (value) => Number.parseFloat(value) || 0;
+  const label = (element) => {
+    if (!element) return 'unknown';
+    const className = typeof element.className === 'string' && element.className.trim()
+      ? `.${element.className.trim().split(/\s+/).slice(0, 2).join('.')}`
+      : '';
+    return `${element.tagName.toLowerCase()}${className}`;
+  };
+  const inspectFlow = (container) => {
+    if (!container) return [];
+    const children = [...container.children].filter((element) => {
+      const style = getComputedStyle(element);
+      const box = element.getBoundingClientRect();
+      return style.display !== 'none' && style.visibility !== 'hidden' && box.width > 0 && box.height > 0;
+    });
+    const records = [];
+    let previous = null;
+    for (const element of children) {
+      const box = element.getBoundingClientRect();
+      if (previous && box.top >= previous.box.bottom - 1) {
+        const previousStyle = getComputedStyle(previous.element);
+        const style = getComputedStyle(element);
+        const gap = Math.max(0, box.top - previous.box.bottom);
+        records.push({
+          from: label(previous.element),
+          to: label(element),
+          gap,
+          stackedRules:
+            number(previousStyle.borderBottomWidth) > 0 &&
+            number(style.borderTopWidth) > 0 &&
+            gap <= 20
+        });
+      }
+      if (!previous || box.bottom > previous.box.bottom) {
+        previous = {element, box};
+      }
+    }
+    return records;
+  };
   const banner = document.querySelector('[data-privacy-banner]');
   const sections = [...document.querySelectorAll('.section')];
   const articleHeadings = [...document.querySelectorAll('.article-content h2')]
     .filter((element) => !element.closest('.abstract-block'));
+  const abstract = document.querySelector('.publication-layout .abstract-block');
+  const abstractStyle = abstract ? getComputedStyle(abstract) : null;
   return {
     bannerVisible: Boolean(banner && !banner.hidden && getComputedStyle(banner).display !== 'none'),
     bannerPosition: banner ? getComputedStyle(banner).position : null,
@@ -63,6 +103,13 @@ GEOMETRY_EXPRESSION = r"""
       return {top: number(style.paddingTop), bottom: number(style.paddingBottom)};
     }),
     articleHeadingMargins: articleHeadings.map((element) => number(getComputedStyle(element).marginTop)),
+    articleFlowRhythm: [...document.querySelectorAll('.article-content')].flatMap(inspectFlow),
+    abstractSurface: abstractStyle ? {
+      backgroundColor: abstractStyle.backgroundColor,
+      boxShadow: abstractStyle.boxShadow,
+      borderLeftWidth: number(abstractStyle.borderLeftWidth),
+      borderRightWidth: number(abstractStyle.borderRightWidth)
+    } : null,
     viewportHeight: innerHeight,
     viewportWidth: innerWidth
   };
@@ -141,6 +188,37 @@ def validate(record: dict, page_name: str, page_level: str) -> list[str]:
         for margin in record.get("articleHeadingMargins", []):
             if not between(margin, 32, 56):
                 errors.append(f"article section-heading spacing is inconsistent: {margin:.1f}px")
+
+        # Regression guardrail for the kinds of rhythm failures that are easy to
+        # introduce when content changes: giant blank gaps and stacked dividers.
+        max_flow_gap = 112 if record.get("viewportWidth", 0) <= 480 else 144
+        for item in record.get("articleFlowRhythm", []):
+            if item.get("gap", 0) > max_flow_gap:
+                errors.append(
+                    "article flow has an unusually large whitespace discontinuity: "
+                    f"{item.get('from')} -> {item.get('to')} = {item.get('gap'):.1f}px"
+                )
+            if item.get("stackedRules"):
+                errors.append(
+                    "adjacent article blocks create stacked divider rules: "
+                    f"{item.get('from')} -> {item.get('to')}"
+                )
+
+        # The abstract is scholarly reading content. Keep it in the editorial
+        # surface rather than allowing it to regress into a nested utility card.
+        if page_name == "publication":
+            surface = record.get("abstractSurface")
+            if not surface:
+                errors.append("publication abstract surface is missing")
+            else:
+                if surface.get("backgroundColor") not in {"rgba(0, 0, 0, 0)", "transparent"}:
+                    errors.append(
+                        f"publication abstract must remain on the editorial surface; background={surface.get('backgroundColor')}"
+                    )
+                if surface.get("boxShadow") != "none":
+                    errors.append("publication abstract must not regain a card shadow")
+                if surface.get("borderLeftWidth", 0) > 0 or surface.get("borderRightWidth", 0) > 0:
+                    errors.append("publication abstract must not regain boxed side borders")
     return errors
 
 
@@ -229,7 +307,10 @@ def main() -> int:
                 if errors:
                     print("\n".join(f"ERROR: {error}" for error in errors))
                     return 1
-                print(f"Privacy and spacing audit passed: {len(results)} page/viewport combinations with level-aware primary/detail rhythm checks.")
+                print(
+                    f"Privacy and spacing audit passed: {len(results)} page/viewport combinations with "
+                    "level-aware spacing, flow-gap, divider, and publication-surface guardrails."
+                )
                 return 0
             finally:
                 cdp.close()
