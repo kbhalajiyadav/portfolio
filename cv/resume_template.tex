@@ -41,6 +41,16 @@
   [\vspace{1.5pt}\color{Rule}\titlerule]
 \titlespacing*{\section}{0pt}{4.0pt}{2.0pt}
 
+% Keep page 1 focused on qualifications and experience and start the
+% supporting research record cleanly on page 2.
+\let\resumesection\section
+\def\resumepublicationstitle{Selected Peer-Reviewed Publications}
+\renewcommand{\section}[1]{%
+  \def\resumecurrenttitle{#1}%
+  \ifx\resumecurrenttitle\resumepublicationstitle\newpage\fi
+  \resumesection{#1}%
+}
+
 \newcommand{\entry}[4]{%
   \begin{tabularx}{\textwidth}{@{}Xr@{}}
     {\bfseries\color{Ink} #1} & {\color{Muted}\small #2}\\
