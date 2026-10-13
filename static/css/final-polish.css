@@ -18,10 +18,11 @@
 .publication-layout .abstract-block h2{margin-top:0}
 .publication-layout .abstract-block>p:last-child{margin-bottom:0}
 
-/* Markdown content follows the same directional-link language as action links. */
-.content-link__arrow{display:inline-block;margin-left:.14em;font-family:var(--sans);font-size:.8em;line-height:1;transition:transform .16s ease}
-a:hover .content-link__arrow--external,a:focus-visible .content-link__arrow--external{transform:translate(1.5px,-1.5px)}
+/* Content links use one directional language: internal →, external/new-tab ↗. */
+.content-link__arrow,.about-external-cue,.about-profile-links__arrow{display:inline-block;margin-left:.14em;font-family:var(--sans);font-size:.8em;line-height:1;transition:transform .16s ease}
+a:hover .content-link__arrow--external,a:focus-visible .content-link__arrow--external,a:hover .about-external-cue,a:focus-visible .about-external-cue,a:hover .about-profile-links__arrow,a:focus-visible .about-profile-links__arrow{transform:translate(1.5px,-1.5px)}
 a:hover .content-link__arrow--internal,a:focus-visible .content-link__arrow--internal{transform:translateX(1.5px)}
+.about-profile-links strong .about-profile-links__arrow{margin-top:0;color:var(--teal);font-size:.8em;line-height:1}
 
 .research-signature{margin:2rem 0 2.5rem;padding:1.35rem 0 1.15rem;border-block:1px solid var(--line)}
 .research-signature__desktop{width:100%}
@@ -65,5 +66,5 @@ a:hover .content-link__arrow--internal,a:focus-visible .content-link__arrow--int
 
 @media(prefers-reduced-motion:reduce){
   .series:target{scroll-behavior:auto}
-  .content-link__arrow{transition:none}
+  .content-link__arrow,.about-external-cue,.about-profile-links__arrow{transition:none}
 }
