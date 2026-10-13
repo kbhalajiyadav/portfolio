@@ -251,10 +251,10 @@ def render_resume(data: dict) -> str:
         render_education(data),
         # Skills remain an early recruiter scan target in the compact document.
         render_skills(data),
-        render_research_experience(data, compact=True),
-        # Let Needspace protections in the resume template determine the natural
-        # two-page break instead of forcing Industry Experience onto page 2.
+        # Prioritize prior professional responsibility before the academic record
+        # in the industry-oriented document; Needspace handles the page boundary.
         render_industry(data, compact=True),
+        render_research_experience(data, compact=True),
         render_publications(data, title="Selected Peer-Reviewed Publications"),
         render_intellectual_property(data),
         render_software(data),
