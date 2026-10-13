@@ -210,7 +210,7 @@ experience:
   detail: Built chemical trade-data, normalization, visualization, and decision-support workflows for pharmaceutical market intelligence.
   outcomes:
   - Tableau analyses reduced recurring trade-data analysis time by about 70%
-  - Directed a Python chemical-name normalization workflow and connected trade records with FDA drug-master-file information
+  - Directed a Python chemical-name normalization workflow and connected trade records with FDA regulatory master-file information
   links:
   - label: Chemical data & digital operations
     href: project/supply-chain-automation/
