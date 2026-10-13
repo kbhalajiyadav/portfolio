@@ -7,7 +7,7 @@ url: /about/
 kicker: About
 summary: Research biography and current scientific focus spanning responsive materials, quantitative metrology, and structure under processing.
 description: Research biography, scientific focus, professional path, methods, and research profiles for Bhalaji Yadav Kantepalle.
-lastmod: 2026-10-10
+lastmod: 2026-10-12
 bio:
   - >-
     My work sits at the intersection of soft-matter science, measurement development, and reproducible experimentation. A chemical-engineering and regulated-manufacturing background now informs doctoral research on stimuli-responsive soft and liquid-crystalline materials at Virginia Commonwealth University.
@@ -23,7 +23,7 @@ professional_path:
     text: Completed a B.Tech. in Chemical Engineering at Amrita Vishwa Vidyapeetham, building a foundation in transport, thermodynamics, process analysis, and material behavior.
   - period: 2022–2024
     title: Regulated manufacturing and technical project work
-    text: Started in technical project management through Deep Thought Edu Tech Ventures at Kreative Organics, then moved into a full-time Technical Project Manager role. The work progressed from chemical-data and analysis workflows to SAP requalification, validation documentation, and cross-functional implementation in regulated manufacturing.
+    text: Joined Kreative Organics through a technical project management internship with Deep Thought Edu Tech Ventures and was subsequently appointed Technical Project Manager. The work progressed from chemical-data and analysis workflows to working directly with the CEO and cross-functional teams on SAP requalification, configuration, validation documentation, and project-management systems in regulated manufacturing.
   - period: 2024–2026
     title: M.S. research in quantitative metrology
     text: Conducted research in the VCU Soft Functional Materials Lab on soft-interface adhesion and quantitative optical metrology. The work produced a first-author peer-reviewed article, a defended M.S. thesis, citable peel-trace software, and two 2026 presentations on computer-vision metrology for mechanochromic textiles.

@@ -16,7 +16,7 @@ profile:
   scholar: https://scholar.google.com/citations?hl=en&user=DrfbtX4AAAAJ
   cv: uploads/resume.pdf
   last_updated: October 2026
-  last_updated_iso: '2026-10-10'
+  last_updated_iso: '2026-10-12'
 research:
 - number: '01'
   title: Measure response
@@ -192,21 +192,30 @@ experience:
   role: Technical Project Manager
   organization: Kreative Organics Pvt. Ltd.
   location: Hyderabad, India
-  detail: Coordinated SAP requalification and validation work in pharmaceutical-intermediate manufacturing,
-    linking quality, engineering, senior management, and external consultants.
+  detail: Worked directly with the CEO and cross-functional quality, technical, and external teams on SAP
+    requalification and configuration in pharmaceutical-intermediate manufacturing.
   outcomes:
-  - Prepared or supported user requirements, Performance Qualification, gap assessment, impact assessment,
-    and corrective-action documentation
-  - Maintained traceability between process requirements, test evidence, and data-integrity controls
+  - Spearheaded gap assessment, impact assessment, Performance Qualification, configuration, and corrective-action work
+  - Project outcomes included a 99% reduction in data-entry errors and a reduction in SAP requalification blackout from five days to a few hours
+  - Developed project-management systems supporting cross-department execution and new-product-development tracking
+  links:
+  - label: Quality systems & validation
+    href: project/fda-project/
+  - label: Public SAP reference
+    href: https://www.linkedin.com/posts/tarunsciensation_deepthought-dtgrowthteams-growth-activity-7285134476228149248-QWaP
 - period: Oct 2022–Apr 2023
   role: Technical Project Management Intern
   organization: Deep Thought Edu Tech Ventures · placement at Kreative Organics Pvt. Ltd.
   location: Hyderabad, India
-  detail: Built chemical trade-data and analysis workflows for pharmaceutical market intelligence and
-    project tracking.
+  detail: Built chemical trade-data, normalization, visualization, and decision-support workflows for pharmaceutical market intelligence.
   outcomes:
   - Tableau analyses reduced recurring trade-data analysis time by about 70%
-  - Directed a Python-based chemical-name normalization workflow and co-developed a Notion project-management framework
+  - Directed a Python chemical-name normalization workflow and connected trade records with FDA regulatory master-file information
+  links:
+  - label: Chemical data & digital operations
+    href: project/supply-chain-automation/
+  - label: Public team context
+    href: https://www.linkedin.com/posts/tarunsciensation_deepthought-dtgrowthteams-contributorrevolution-activity-7003898159890411520-Vulj
 teaching:
 - date: Summer 2026
   type: Research guidance
