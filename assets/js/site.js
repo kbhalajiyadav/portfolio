@@ -180,6 +180,8 @@
   if (privacyBanner) {
     const consentKey = 'bhalaji.analyticsConsent.v1';
     const clarityProject = 'xuo3lvzchr';
+    const clarityHosts = new Set(['bhalaji.com', 'www.bhalaji.com']);
+    const clarityEnabledHere = clarityHosts.has(window.location.hostname);
     const allowButton = privacyBanner.querySelector('[data-consent-allow]');
     const declineButton = privacyBanner.querySelector('[data-consent-decline]');
     const openButtons = Array.from(document.querySelectorAll('[data-open-privacy]'));
@@ -197,6 +199,7 @@
     };
 
     const grantAnalytics = () => {
+      if (!clarityEnabledHere) return;
       queueClarity();
       window.clarity('consentv2', {
         ad_Storage: 'denied',
