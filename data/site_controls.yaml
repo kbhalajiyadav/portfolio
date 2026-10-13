@@ -1,9 +1,15 @@
 homepage:
   limits:
+    experience_records: 3
+    experience_outcomes: 1
     presentation_series: 2
     teaching_records: 2
     service_records: 1
     innovation_records: 1
+experience_page:
+  limits:
+    outcomes_per_role: 3
+    links_per_role: 1
 features:
   notes: false
   search: false
