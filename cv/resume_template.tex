@@ -8,6 +8,7 @@
 \usepackage{fancyhdr}
 \usepackage{microtype}
 \usepackage{lastpage}
+\usepackage{needspace}
 
 \renewcommand{\familydefault}{\sfdefault}
 \definecolor{Ink}{HTML}{13222A}
@@ -41,17 +42,16 @@
   [\vspace{1.5pt}\color{Rule}\titlerule]
 \titlespacing*{\section}{0pt}{4.0pt}{2.0pt}
 
-% Keep page 1 focused on qualifications and experience and start the
-% supporting research record cleanly on page 2.
+% Avoid orphaned headings while allowing the two-page resume to find its own
+% natural page break. This is intentionally not tied to a specific section.
 \let\resumesection\section
-\def\resumepublicationstitle{Selected Peer-Reviewed Publications}
 \renewcommand{\section}[1]{%
-  \def\resumecurrenttitle{#1}%
-  \ifx\resumecurrenttitle\resumepublicationstitle\newpage\fi
+  \Needspace{4\baselineskip}%
   \resumesection{#1}%
 }
 
 \newcommand{\entry}[4]{%
+  \Needspace{3\baselineskip}%
   \begin{tabularx}{\textwidth}{@{}Xr@{}}
     {\bfseries\color{Ink} #1} & {\color{Muted}\small #2}\\
     {\itshape #3} & {\itshape\color{Muted}\small #4}
@@ -59,6 +59,7 @@
 }
 
 \newcommand{\smallentry}[3]{%
+  \Needspace{3\baselineskip}%
   \begin{tabularx}{\textwidth}{@{}Xr@{}}
     {\bfseries #1} & {\color{Muted}\small #2}\\
     {\small #3} &
