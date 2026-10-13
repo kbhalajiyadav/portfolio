@@ -234,10 +234,9 @@ def render_cv(data: dict) -> str:
         render_software(data),
         # Professional experience belongs in the main record, not at the tail.
         render_industry(data),
+        # Keep service and applied innovation ahead of dissemination so LaTeX can
+        # distribute the long presentation record naturally across pages 2 and 3.
         render_engagement(data),
-        # Start the dissemination record on a fresh page so pages 2 and 3 form
-        # two intentional, comparably weighted blocks instead of an overflow page.
-        r"\newpage",
         render_presentations(data),
         render_honors(data),
         render_skills(data),
