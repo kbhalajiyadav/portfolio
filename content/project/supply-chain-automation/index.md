@@ -23,7 +23,7 @@ and decision-support workflows used by technical and business teams.
 - Connected chemical-domain requirements with data-quality and documentation controls, and prepared maintainable workflow references for source-structure and automation changes.
 - Began developing a structured project-management framework in Notion for project tracking and decision support. That framework was later expanded and refined with the CEO during the subsequent Technical Project Manager role.
 
-## Public context and corroboration
+## Supporting public sources
 
 The public post below corroborates the team and Data Science context. The implementation stack and quantified workflow outcomes above are drawn from contemporaneous project records.
 

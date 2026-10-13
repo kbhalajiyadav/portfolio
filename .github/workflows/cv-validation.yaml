@@ -44,7 +44,7 @@ jobs:
 
       - name: Verify required LaTeX packages
         run: |
-          for package in enumitem.sty titlesec.sty fancyhdr.sty microtype.sty lastpage.sty; do
+          for package in enumitem.sty titlesec.sty fancyhdr.sty microtype.sty lastpage.sty needspace.sty; do
             kpsewhich "$package" >/dev/null || {
               echo "Missing required LaTeX package: $package" >&2
               exit 1

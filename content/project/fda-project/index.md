@@ -25,7 +25,7 @@ computerized-system requalification and configuration in pharmaceutical-intermed
 - Expanded and refined with the CEO a structured project-management framework that had been initiated during the preceding internship, supporting cross-department execution and new-product-development tracking.
 - Following reconfiguration, project records showed an approximately 99% reduction in recurring data-entry errors; planning and execution also reduced the SAP requalification blackout period from five days to a few hours.
 
-## Public context and corroboration
+## Supporting public sources
 
 These public sources corroborate the role context and leadership assignment. The validation details and quantified outcomes above are drawn from contemporaneous project records rather than from the public posts.
 
