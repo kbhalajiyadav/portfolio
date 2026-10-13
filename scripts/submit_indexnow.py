@@ -9,13 +9,23 @@ import urllib.request
 HOST = "bhalaji.com"
 KEY = "8fb5b8e8103c4be597843ff2e7860f4a"
 KEY_LOCATION = f"https://{HOST}/{KEY}.txt"
+
+# Keep the deploy notification focused on canonical, high-value discovery paths.
+# The sitemap remains the complete discovery surface; this list gives newly
+# deployed primary destinations and flagship records an immediate IndexNow ping.
 URLS = [
     f"https://{HOST}/",
+    f"https://{HOST}/about/",
     f"https://{HOST}/research/",
+    f"https://{HOST}/outputs/",
+    f"https://{HOST}/experience/",
+    f"https://{HOST}/engagement/",
+    f"https://{HOST}/contact/",
     f"https://{HOST}/publication/adhesives-wearable/",
     f"https://{HOST}/publication/electrospun-fiber-mats/",
     f"https://{HOST}/publication/masters-thesis/",
     f"https://{HOST}/project/peel-trace-evaluation/",
+    f"https://{HOST}/project/quantitative-thermal-imaging/",
     f"https://{HOST}/llms.txt",
     f"https://{HOST}/llms-full.txt",
 ]
