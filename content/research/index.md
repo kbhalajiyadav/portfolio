@@ -3,7 +3,7 @@ title: "Research Program"
 kicker: "Research overview"
 summary: "How processing changes responsive soft and liquid-crystalline materials—and how to measure those changes."
 date: "2026-07-28T00:00:00Z"
-lastmod: "2026-10-10T00:00:00Z"
+lastmod: "2026-10-13T00:00:00Z"
 toc: true
 tags:
   - Stimuli-Responsive Materials
@@ -68,6 +68,11 @@ Potential applications include:
 - non-contact optical monitoring and condition indication;
 - visual inspection and safety cues where powered instrumentation is impractical; and
 - adaptive or decorative surfaces whose response can be quantified and reproduced.
+
+A Spring 2026 applied-innovation prototype explored this translation through a
+battery-free thermochromic foot-care sock concept for personalized heat-pattern
+monitoring in people with diabetes. It was demonstrated as a prototype rather
+than evaluated as a clinical device; see the [applied-innovation record](/engagement/#engagement-contributions-heading).
 
 ## Connected research outputs
 
