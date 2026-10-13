@@ -50,7 +50,10 @@
   \cvsection{#1}%
 }
 
+% Keep a role/degree heading with its first content line instead of leaving the
+% entry label stranded at a page bottom.
 \newcommand{\entry}[4]{%
+  \Needspace{4\baselineskip}%
   \begin{tabularx}{\textwidth}{@{}Xr@{}}
     {\bfseries\color{Ink} #1} & {\color{Muted}\small #2}\\
     {\itshape #3} & {\itshape\color{Muted}\small #4}
