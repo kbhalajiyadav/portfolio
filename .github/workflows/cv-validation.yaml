@@ -68,6 +68,19 @@ jobs:
           grep -F "INDUSTRY EXPERIENCE" generated-resume.txt >/dev/null
           grep -F "Kreative Organics" generated-resume.txt >/dev/null
 
+      - name: Upload validated CV and resume
+        if: success()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: validated-career-documents-${{ github.run_attempt }}
+          path: |
+            static/uploads/cv.pdf
+            static/uploads/resume.pdf
+            cv/generated/bhalaji_cv.tex
+            cv/generated/bhalaji_resume.tex
+          if-no-files-found: error
+          retention-days: 14
+
       - name: Upload CV diagnostics on failure
         if: failure()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
