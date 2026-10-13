@@ -16,7 +16,7 @@ profile:
   scholar: https://scholar.google.com/citations?hl=en&user=DrfbtX4AAAAJ
   cv: uploads/resume.pdf
   last_updated: October 2026
-  last_updated_iso: '2026-10-10'
+  last_updated_iso: '2026-10-12'
 research:
 - number: '01'
   title: Measure response
@@ -192,21 +192,37 @@ experience:
   role: Technical Project Manager
   organization: Kreative Organics Pvt. Ltd.
   location: Hyderabad, India
-  detail: Coordinated SAP requalification and validation work in pharmaceutical-intermediate manufacturing,
-    linking quality, engineering, senior management, and external consultants.
+  detail: Worked directly with executive leadership and cross-functional quality, engineering, and SAP
+    service-provider teams on organization-wide SAP requalification, customization, and validation in
+    pharmaceutical-intermediate manufacturing.
   outcomes:
-  - Prepared or supported user requirements, Performance Qualification, gap assessment, impact assessment,
-    and corrective-action documentation
-  - Maintained traceability between process requirements, test evidence, and data-integrity controls
+  - Coordinated gap assessment, user requirements, Performance Qualification, impact assessment,
+    corrective-action documentation, and implementation readiness across functions
+  - Maintained traceability between process requirements, test evidence, data-integrity controls, and
+    qualification records
+  - Planning and execution reduced the SAP requalification blackout period from five days to a few hours
+  links:
+  - label: External reference · organization-wide SAP responsibility
+    href: https://www.linkedin.com/posts/tarunsciensation_deepthought-dtgrowthteams-growth-activity-7285134476228149248-QWaP
+  - label: External profile · leadership progression
+    href: https://www.linkedin.com/posts/deepthoughtedutech_leadership-career-learning-activity-7033467848710656000-vjpq
 - period: Oct 2022–Apr 2023
   role: Technical Project Management Intern
   organization: Deep Thought Edu Tech Ventures · placement at Kreative Organics Pvt. Ltd.
   location: Hyderabad, India
-  detail: Built chemical trade-data and analysis workflows for pharmaceutical market intelligence and
-    project tracking.
+  detail: Built chemical trade-data, decision-support, and project-management workflows for pharmaceutical
+    market intelligence while working across technical, business, and company-leadership stakeholders.
   outcomes:
-  - Tableau analyses reduced recurring trade-data analysis time by about 70%
-  - Directed a Python-based chemical-name normalization workflow and co-developed a Notion project-management framework
+  - Directed a Python-based chemical-name normalization workflow; recommendation documentation reports about
+    a 90% improvement in data accuracy
+  - Built Tableau analyses that reduced recurring trade-data analysis time by about 70%
+  - Co-developed a Notion project-management framework for new-product-development initiation, tracking,
+    risks, escalation, and completion
+  links:
+  - label: External reference · team and Data Science vertical
+    href: https://www.linkedin.com/posts/tarunsciensation_deepthought-dtgrowthteams-contributorrevolution-activity-7003898159890411520-Vulj
+  - label: External profile · leadership progression
+    href: https://www.linkedin.com/posts/deepthoughtedutech_leadership-career-learning-activity-7033467848710656000-vjpq
 teaching:
 - date: Summer 2026
   type: Research guidance
