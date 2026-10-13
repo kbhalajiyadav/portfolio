@@ -25,8 +25,8 @@
     <dl class="about-fact-strip" aria-label="Profile at a glance">
       <div><dt>Current role</dt><dd class="p-job-title">{{ $p.profile.role }} · {{ $p.profile.program }}</dd></div>
       <div><dt>Institution</dt><dd class="p-org">{{ $p.profile.institution }}</dd></div>
-      <div><dt>Research group</dt><dd><a href="{{ $aff.lab_url }}" target="_blank" rel="noopener">{{ $aff.lab }}</a></dd></div>
-      <div><dt>Advisor</dt><dd><a href="{{ $aff.advisor_url }}" target="_blank" rel="noopener">{{ $aff.advisor }}</a></dd></div>
+      <div><dt>Research group</dt><dd><a href="{{ $aff.lab_url }}" target="_blank" rel="noopener">{{ $aff.lab }} <span class="about-external-cue" aria-hidden="true">↗</span></a></dd></div>
+      <div><dt>Advisor</dt><dd><a href="{{ $aff.advisor_url }}" target="_blank" rel="noopener">{{ $aff.advisor }} <span class="about-external-cue" aria-hidden="true">↗</span></a></dd></div>
     </dl>
 
     <section class="about-section about-biography" id="biography" aria-labelledby="about-biography">
@@ -97,13 +97,13 @@
         <div class="about-section__summary"><p>Use these links for publications, software, professional history, the curriculum vitae, the compact professional résumé, and VCU's institutional thesis record.</p></div>
       </div>
       <div class="about-profile-links">
-        <a href="{{ $p.profile.orcid }}" target="_blank" rel="me noopener"><strong>ORCID</strong><span>Research identity and synchronized works</span></a>
-        <a href="{{ $p.profile.scholar }}" target="_blank" rel="me noopener"><strong>Google Scholar</strong><span>Publication and citation record</span></a>
-        <a href="{{ $p.profile.github }}" target="_blank" rel="me noopener"><strong>GitHub</strong><span>Research software and versioned methods</span></a>
-        <a href="{{ $p.profile.linkedin }}" target="_blank" rel="me noopener"><strong>LinkedIn</strong><span>Professional history and institutional context</span></a>
-        <a href="{{ $cvHref }}" target="_blank" rel="noopener"><strong>Curriculum vitae</strong><span>Three-page academic and professional record</span></a>
-        <a href="{{ $resumeHref }}" target="_blank" rel="noopener"><strong>Professional résumé</strong><span>Two-page industry-oriented summary</span></a>
-        <a href="{{ $aff.institutional_record_url }}" target="_blank" rel="noopener"><strong>{{ $aff.institutional_record_label }}</strong><span>Institutional thesis and degree record</span></a>
+        <a href="{{ $p.profile.orcid }}" target="_blank" rel="me noopener"><strong>ORCID <span class="about-profile-links__arrow" aria-hidden="true">↗</span></strong><span>Research identity and synchronized works</span></a>
+        <a href="{{ $p.profile.scholar }}" target="_blank" rel="me noopener"><strong>Google Scholar <span class="about-profile-links__arrow" aria-hidden="true">↗</span></strong><span>Publication and citation record</span></a>
+        <a href="{{ $p.profile.github }}" target="_blank" rel="me noopener"><strong>GitHub <span class="about-profile-links__arrow" aria-hidden="true">↗</span></strong><span>Research software and versioned methods</span></a>
+        <a href="{{ $p.profile.linkedin }}" target="_blank" rel="me noopener"><strong>LinkedIn <span class="about-profile-links__arrow" aria-hidden="true">↗</span></strong><span>Professional history and institutional context</span></a>
+        <a href="{{ $cvHref }}" target="_blank" rel="noopener"><strong>Curriculum vitae <span class="about-profile-links__arrow" aria-hidden="true">↗</span></strong><span>Three-page academic and professional record</span></a>
+        <a href="{{ $resumeHref }}" target="_blank" rel="noopener"><strong>Professional résumé <span class="about-profile-links__arrow" aria-hidden="true">↗</span></strong><span>Two-page industry-oriented summary</span></a>
+        <a href="{{ $aff.institutional_record_url }}" target="_blank" rel="noopener"><strong>{{ $aff.institutional_record_label }} <span class="about-profile-links__arrow" aria-hidden="true">↗</span></strong><span>Institutional thesis and degree record</span></a>
       </div>
     </section>
 
