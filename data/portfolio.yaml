@@ -195,7 +195,9 @@ experience:
   detail: Worked directly with the CEO and cross-functional quality, technical, and external teams on SAP Business
     One computerized-system requalification and configuration in pharmaceutical-intermediate manufacturing.
   outcomes:
-  - Led user-requirements review, gap and impact assessment, qualification-environment testing, Performance Qualification, user-access and approval-workflow controls, and corrective-action follow-through
+  - Led user-requirements review, deviation and root-cause investigation, gap and impact assessment, CAPA and preventive controls, qualification-environment testing, Performance Qualification, change-control verification, and user-access and approval-workflow controls
+  - Translated procedural and cross-department workflow requirements into system-enforced validations, access restrictions, approval gates, alerts, mandatory fields, and exception controls designed to reduce recurrence and prevent uncontrolled or out-of-sequence transactions
+  - Developed and iterated module-level PQ protocols and test scripts with internal QA and external consultant review, defining test steps, expected results, and qualification evidence after configuration changes
   - Following reconfiguration, project records showed an approximately 99% reduction in recurring data-entry errors; planning and execution reduced the SAP requalification blackout period from five days to a few hours
   - Developed project-management systems supporting cross-department execution and new-product-development tracking
   links:
