@@ -132,20 +132,22 @@ industry_experience:
   organization: Kreative Organics Pvt. Ltd.
   location: Hyderabad, India
   bullets:
-  - Worked directly with the CEO and cross-functional quality, technical, and external teams to steer SAP
-    requalification and configuration; prepared or supported gap and impact assessments, Performance Qualification,
-    and corrective-action documentation.
-  - Project outcomes included a 99% reduction in data-entry errors and a reduction in the SAP requalification
-    blackout period from five days to a few hours.
+  - Worked directly with the CEO and cross-functional quality, technical, and external teams on SAP Business
+    One computerized-system requalification spanning user-requirements review, gap and impact assessment,
+    qualification-environment testing, Performance Qualification, user-access and approval-workflow controls,
+    and corrective-action follow-through.
+  - Following reconfiguration, project records showed an approximately 99% reduction in recurring data-entry
+    errors; planning and execution also reduced the SAP requalification blackout period from five days to a
+    few hours.
 - period: Oct 2022–Apr 2023
   role: Technical Project Management Intern
   organization: Deep Thought Edu Tech Ventures · placement at Kreative Organics Pvt. Ltd.
   location: Hyderabad, India
   bullets:
-  - Directed a Python chemical-name normalization workflow and built Tableau analyses that reduced recurring
-    trade-data analysis time by about 70%.
-  - Built chemical import/export decision-support workflows and linked trade records with FDA regulatory
-    master-file information for technical and business use.
+  - Directed development and implementation of a Python-based chemical-name normalization model across
+    heterogeneous import/export trade records, improving data accuracy by approximately 90%.
+  - Built end-to-end trade-data automation and Tableau decision-support workflows integrating U.S. FDA Drug
+    Master File information, reducing recurring analysis time by about 70%.
 honors_development:
 - label: Design credentials
   details: VCU da Vinci Center, Mar 2026
@@ -173,4 +175,4 @@ technical_skills:
 - category: Instrumentation
   items: Universal testing machine, optical microscopy, UV-Vis spectroscopy, Abbe refractometry, 3D printing
 - category: Compliance and Process
-  items: Validation documentation, data integrity, cGMP, V-model, RCA, CAPA, DOE, Lean manufacturing
+  items: Computerized-system requalification, PQ, validation documentation, data integrity, cGMP, RCA/CAPA, DOE

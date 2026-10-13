@@ -192,11 +192,11 @@ experience:
   role: Technical Project Manager
   organization: Kreative Organics Pvt. Ltd.
   location: Hyderabad, India
-  detail: Worked directly with the CEO and cross-functional quality, technical, and external teams on SAP
-    requalification and configuration in pharmaceutical-intermediate manufacturing.
+  detail: Worked directly with the CEO and cross-functional quality, technical, and external teams on SAP Business
+    One computerized-system requalification and configuration in pharmaceutical-intermediate manufacturing.
   outcomes:
-  - Spearheaded gap assessment, impact assessment, Performance Qualification, configuration, and corrective-action work
-  - Project outcomes included a 99% reduction in data-entry errors and a reduction in SAP requalification blackout from five days to a few hours
+  - Led user-requirements review, gap and impact assessment, qualification-environment testing, Performance Qualification, user-access and approval-workflow controls, and corrective-action follow-through
+  - Following reconfiguration, project records showed an approximately 99% reduction in recurring data-entry errors; planning and execution reduced the SAP requalification blackout period from five days to a few hours
   - Developed project-management systems supporting cross-department execution and new-product-development tracking
   links:
   - label: Quality systems & validation
@@ -207,10 +207,10 @@ experience:
   role: Technical Project Management Intern
   organization: Deep Thought Edu Tech Ventures · placement at Kreative Organics Pvt. Ltd.
   location: Hyderabad, India
-  detail: Built chemical trade-data, normalization, visualization, and decision-support workflows for pharmaceutical market intelligence.
+  detail: Directed chemical-data normalization and end-to-end trade-data automation for pharmaceutical market intelligence and decision support.
   outcomes:
-  - Tableau analyses reduced recurring trade-data analysis time by about 70%
-  - Directed a Python chemical-name normalization workflow and connected trade records with FDA regulatory master-file information
+  - Directed a Python-based chemical-name normalization model across heterogeneous import/export records, improving data accuracy by approximately 90%
+  - Built automated trade-data and Tableau decision-support workflows integrating U.S. FDA Drug Master File information; recurring analysis time fell by about 70%
   links:
   - label: Chemical data & digital operations
     href: project/supply-chain-automation/

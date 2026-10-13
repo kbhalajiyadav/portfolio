@@ -9,6 +9,10 @@
 .tag-list a{transition:color .16s ease,background-color .16s ease}
 .tag-list a:hover,.tag-list a:focus-visible{color:var(--cyan);background:color-mix(in srgb,var(--cyan) 7%,transparent)}
 
+/* Keep experience/education subheads on a single divider rhythm. */
+.two-col>.timeline{border-top:0}
+.two-col>.education-panel{border-top:0}
+
 .research-signature{margin:2rem 0 2.5rem;padding:1.35rem 0 1.15rem;border-block:1px solid var(--line)}
 .research-signature__desktop{width:100%}
 .research-signature__desktop svg{display:block;width:100%;height:auto;color:var(--ink)}
