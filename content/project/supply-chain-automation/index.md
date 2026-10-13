@@ -19,7 +19,7 @@ decision-support workflows used by technical and business teams.
 
 - Directed a Python-based workflow for normalizing chemical names across trade records.
 - Built Tableau analyses that reduced recurring trade-data analysis time by about 70%.
-- Developed import/export data workflows and connected trade records with FDA drug-master-file information for more consistent technical and business analysis.
+- Developed import/export data workflows and connected trade records with FDA regulatory master-file information for more consistent technical and business analysis.
 - Connected chemical-domain requirements with data-quality and documentation controls.
 - Prepared repeatable analysis and project-tracking workflows for non-specialist technical and business users.
 
