@@ -249,12 +249,11 @@ def render_resume(data: dict) -> str:
     output = [
         section("Profile", [rf"\color{{Ink}} {esc(p['summary'])}\color{{black}}"]),
         render_education(data),
-        # Skills are a first-page recruiter scan target in the compact document.
+        # Skills remain an early recruiter scan target in the compact document.
         render_skills(data),
         render_research_experience(data, compact=True),
-        # Page 2 begins with industry experience, then the supporting scholarly
-        # record. This produces two balanced pages without filler or stretched type.
-        r"\newpage",
+        # Let Needspace protections in the resume template determine the natural
+        # two-page break instead of forcing Industry Experience onto page 2.
         render_industry(data, compact=True),
         render_publications(data, title="Selected Peer-Reviewed Publications"),
         render_intellectual_property(data),
