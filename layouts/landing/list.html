@@ -8,8 +8,10 @@
 {{ $teachingLimit := $controls.homepage.limits.teaching_records | default 4 }}
 {{ $serviceLimit := $controls.homepage.limits.service_records | default 3 }}
 {{ $innovationLimit := $controls.homepage.limits.innovation_records | default 2 }}
-{{ $cvVersion := readFile "static/uploads/resume.pdf" | md5 }}
+{{ $cvVersion := readFile "static/uploads/cv.pdf" | md5 }}
+{{ $resumeVersion := readFile "static/uploads/resume.pdf" | md5 }}
 {{ $cvHref := printf "%s?v=%s" ($p.profile.cv | relURL) $cvVersion }}
+{{ $resumeHref := printf "%s?v=%s" ($p.profile.resume | relURL) $resumeVersion }}
 <section class="hero" id="top">
   <div class="hero__copy">
     <p class="eyebrow">{{ $p.profile.eyebrow }}</p>
@@ -113,6 +115,6 @@
 
 <section class="contact-section" id="contact">
   <div><p class="kicker">Contact</p><h2>For research collaboration, methods exchange, and academic opportunities.</h2><p>I am interested in collaborations that combine rheology, neutron scattering, imaging, or mechanics to answer defined structure-processing questions in responsive materials.</p></div>
-  <div class="contact-actions"><a class="button button--primary" href="mailto:{{ $p.profile.email }}">Email {{ $p.profile.email }}</a><a class="lnk" href="{{ $p.profile.orcid }}" target="_blank" rel="me noopener">ORCID <span class="arw" aria-hidden="true">↗</span></a><a class="lnk" href="{{ $p.profile.scholar }}" target="_blank" rel="me noopener">Google Scholar <span class="arw" aria-hidden="true">↗</span></a><a class="lnk" href="{{ $cvHref }}" download>Download the CV <span aria-hidden="true">↓</span></a></div>
+  <div class="contact-actions"><a class="button button--primary" href="mailto:{{ $p.profile.email }}">Email {{ $p.profile.email }}</a><a class="lnk" href="{{ $p.profile.orcid }}" target="_blank" rel="me noopener">ORCID <span class="arw" aria-hidden="true">↗</span></a><a class="lnk" href="{{ $p.profile.scholar }}" target="_blank" rel="me noopener">Google Scholar <span class="arw" aria-hidden="true">↗</span></a><a class="lnk" href="{{ $cvHref }}" download>Download the CV <span aria-hidden="true">↓</span></a><a class="lnk" href="{{ $resumeHref }}" download>Two-page professional résumé <span aria-hidden="true">↓</span></a></div>
 </section>
 {{ end }}
