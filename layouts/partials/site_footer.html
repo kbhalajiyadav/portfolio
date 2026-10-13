@@ -1,5 +1,5 @@
 {{ $p := site.Data.portfolio }}
-{{ $cvVersion := readFile "static/uploads/resume.pdf" | md5 }}
+{{ $cvVersion := readFile "static/uploads/cv.pdf" | md5 }}
 {{ $cvHref := printf "%s?v=%s" ($p.profile.cv | relURL) $cvVersion }}
 <footer class="site-footer">
   <div class="site-footer__inner">

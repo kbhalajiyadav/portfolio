@@ -7,7 +7,6 @@ on:
       - data/cv.yaml
       - cv/**
       - scripts/build_cv.py
-      - static/uploads/resume.pdf
       - .github/workflows/cv-validation.yaml
       - .github/workflows/hugo.yaml
   pull_request:
@@ -16,7 +15,6 @@ on:
       - data/cv.yaml
       - cv/**
       - scripts/build_cv.py
-      - static/uploads/resume.pdf
       - .github/workflows/cv-validation.yaml
       - .github/workflows/hugo.yaml
   workflow_dispatch:
@@ -41,8 +39,6 @@ jobs:
       - name: Install proven CV dependencies
         run: |
           sudo apt-get update
-          # Deliberately retain Ubuntu's recommended TeX packages. The CV uses
-          # enumitem, titlesec, fancyhdr, microtype, and lastpage.
           sudo apt-get install -y latexmk texlive-xetex poppler-utils
           python3 -m pip install --disable-pip-version-check PyYAML==6.0.3
 
@@ -55,20 +51,35 @@ jobs:
             }
           done
 
-      - name: Preserve committed generated source
-        run: cp cv/generated/bhalaji_cv.tex "${RUNNER_TEMP}/committed.tex"
-
-      - name: Regenerate and preflight CV
+      - name: Regenerate and preflight CV and resume
         run: |
           python3 scripts/build_cv.py
-          cmp --silent "${RUNNER_TEMP}/committed.tex" cv/generated/bhalaji_cv.tex
-          pdfinfo static/uploads/resume.pdf | tee cv-pdfinfo.txt
+          pdfinfo static/uploads/cv.pdf | tee cv-pdfinfo.txt
+          pdfinfo static/uploads/resume.pdf | tee resume-pdfinfo.txt
+          test "$(pdfinfo static/uploads/cv.pdf | awk '/^Pages:/ {print $2}')" = "3"
           test "$(pdfinfo static/uploads/resume.pdf | awk '/^Pages:/ {print $2}')" = "2"
+          test "$(pdfinfo static/uploads/cv.pdf | awk '/^Page size:/ {print $3, $5}')" = "612 792"
           test "$(pdfinfo static/uploads/resume.pdf | awk '/^Page size:/ {print $3, $5}')" = "612 792"
-          pdftotext -layout static/uploads/resume.pdf generated-cv.txt
+          pdftotext -layout static/uploads/cv.pdf generated-cv.txt
+          pdftotext -layout static/uploads/resume.pdf generated-resume.txt
           grep -F "INTELLECTUAL PROPERTY" generated-cv.txt >/dev/null
           grep -F "Quantitative Thermal Imaging" generated-cv.txt >/dev/null
           grep -F "TAN-26-099" generated-cv.txt >/dev/null
+          grep -F "INDUSTRY EXPERIENCE" generated-resume.txt >/dev/null
+          grep -F "Kreative Organics" generated-resume.txt >/dev/null
+
+      - name: Upload validated CV and resume
+        if: success()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: validated-career-documents-${{ github.run_attempt }}
+          path: |
+            static/uploads/cv.pdf
+            static/uploads/resume.pdf
+            cv/generated/bhalaji_cv.tex
+            cv/generated/bhalaji_resume.tex
+          if-no-files-found: error
+          retention-days: 14
 
       - name: Upload CV diagnostics on failure
         if: failure()
@@ -76,14 +87,12 @@ jobs:
         with:
           name: cv-validation-diagnostics-${{ github.run_attempt }}
           path: |
-            cv/generated/bhalaji_cv.tex
-            cv/generated/*.log
-            cv/generated/*.fls
-            cv/generated/*.aux
-            cv/generated/*.out
-            cv/generated/*.xdv
+            cv/generated/
+            static/uploads/cv.pdf
             static/uploads/resume.pdf
             cv-pdfinfo.txt
+            resume-pdfinfo.txt
             generated-cv.txt
+            generated-resume.txt
           if-no-files-found: warn
           retention-days: 14

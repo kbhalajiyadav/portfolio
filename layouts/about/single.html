@@ -1,8 +1,10 @@
 {{ define "main" }}
 {{ $p := site.Data.portfolio }}
 {{ $aff := site.Data.current_affiliation }}
-{{ $cvVersion := readFile "static/uploads/resume.pdf" | md5 }}
+{{ $cvVersion := readFile "static/uploads/cv.pdf" | md5 }}
+{{ $resumeVersion := readFile "static/uploads/resume.pdf" | md5 }}
 {{ $cvHref := printf "%s?v=%s" ($p.profile.cv | relURL) $cvVersion }}
+{{ $resumeHref := printf "%s?v=%s" ($p.profile.resume | relURL) $resumeVersion }}
 <article class="about-page h-card">
   <div class="page-shell">
     <header class="about-hero">
@@ -92,14 +94,15 @@
           <p class="kicker">Profiles and records</p>
           <h2 id="research-professional-records">Research profiles and institutional links.</h2>
         </div>
-        <div class="about-section__summary"><p>Use these links for publications, software, professional history, the curriculum vitae, and VCU's institutional thesis record.</p></div>
+        <div class="about-section__summary"><p>Use these links for publications, software, professional history, the curriculum vitae, the compact professional résumé, and VCU's institutional thesis record.</p></div>
       </div>
       <div class="about-profile-links">
         <a href="{{ $p.profile.orcid }}" target="_blank" rel="me noopener"><strong>ORCID</strong><span>Research identity and synchronized works</span></a>
         <a href="{{ $p.profile.scholar }}" target="_blank" rel="me noopener"><strong>Google Scholar</strong><span>Publication and citation record</span></a>
         <a href="{{ $p.profile.github }}" target="_blank" rel="me noopener"><strong>GitHub</strong><span>Research software and versioned methods</span></a>
         <a href="{{ $p.profile.linkedin }}" target="_blank" rel="me noopener"><strong>LinkedIn</strong><span>Professional history and institutional context</span></a>
-        <a href="{{ $cvHref }}" target="_blank" rel="noopener"><strong>Curriculum vitae</strong><span>Complete academic and professional record</span></a>
+        <a href="{{ $cvHref }}" target="_blank" rel="noopener"><strong>Curriculum vitae</strong><span>Three-page academic and professional record</span></a>
+        <a href="{{ $resumeHref }}" target="_blank" rel="noopener"><strong>Professional résumé</strong><span>Two-page industry-oriented summary</span></a>
         <a href="{{ $aff.institutional_record_url }}" target="_blank" rel="noopener"><strong>{{ $aff.institutional_record_label }}</strong><span>Institutional thesis and degree record</span></a>
       </div>
     </section>

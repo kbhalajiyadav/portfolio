@@ -14,7 +14,8 @@ profile:
   github: https://github.com/kbhalajiyadav
   orcid: https://orcid.org/0000-0003-0551-6172
   scholar: https://scholar.google.com/citations?hl=en&user=DrfbtX4AAAAJ
-  cv: uploads/resume.pdf
+  cv: uploads/cv.pdf
+  resume: uploads/resume.pdf
   last_updated: October 2026
   last_updated_iso: '2026-10-12'
 research:
@@ -199,7 +200,7 @@ experience:
   - Translated procedural and cross-department workflow requirements into system-enforced validations, access restrictions, approval gates, alerts, mandatory fields, and exception controls designed to reduce recurrence and prevent uncontrolled or out-of-sequence transactions
   - Developed and iterated module-level PQ protocols and test scripts with internal QA and external consultant review, defining test steps, expected results, and qualification evidence after configuration changes
   - Following reconfiguration, project records showed an approximately 99% reduction in recurring data-entry errors; planning and execution reduced the SAP requalification blackout period from five days to a few hours
-  - Developed project-management systems supporting cross-department execution and new-product-development tracking
+  - Expanded and refined a structured project-management framework with the CEO for cross-department execution and new-product-development tracking, building on work initiated during the preceding internship
   links:
   - label: Quality systems & validation
     href: project/fda-project/
@@ -213,6 +214,7 @@ experience:
   outcomes:
   - Directed a Python-based chemical-name normalization model across heterogeneous import/export records, improving data accuracy by approximately 90%
   - Built automated trade-data and Tableau decision-support workflows integrating U.S. FDA Drug Master File information; recurring analysis time fell by about 70%
+  - Began developing a structured project-management framework in Notion for project tracking and decision support; it was later expanded and refined with the CEO during the subsequent Technical Project Manager role
   links:
   - label: Chemical data & digital operations
     href: project/supply-chain-automation/

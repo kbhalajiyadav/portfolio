@@ -13,7 +13,8 @@
 - [M.S. thesis record](https://bhalaji.com/publication/masters-thesis/): Degree and repository information; full manuscript embargoed until July 20, 2031.
 - [Research software](https://bhalaji.com/project/peel-trace-evaluation/): Versioned workflow for protocol-defined peel-trace analysis.
 - [Quantitative Thermal Imaging](https://bhalaji.com/project/quantitative-thermal-imaging/): Patent-pending intellectual-property record, VCU Tech # TAN-26-099.
-- [Curriculum vitae](https://bhalaji.com/uploads/resume.pdf): Complete academic and professional record.
+- [Curriculum vitae](https://bhalaji.com/uploads/cv.pdf): Three-page academic and professional record.
+- [Professional résumé](https://bhalaji.com/uploads/resume.pdf): Compact two-page industry-oriented summary.
 
 ## Current academic context
 - Program: Integrative Life Sciences Ph.D., Virginia Commonwealth University

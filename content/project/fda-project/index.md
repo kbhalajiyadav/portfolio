@@ -22,7 +22,7 @@ computerized-system requalification and configuration in pharmaceutical-intermed
 - Developed and iterated module-level PQ protocols and test scripts with internal QA and external consultant review, defining test steps, expected results, and qualification evidence after configuration changes.
 - Coordinated with SAP service providers and internal stakeholders to translate process requirements into test evidence and implementation readiness.
 - Maintained traceability between process requirements, validation evidence, and data-integrity controls.
-- Developed project-management systems supporting cross-department execution and new-product-development tracking.
+- Expanded and refined with the CEO a structured project-management framework that had been initiated during the preceding internship, supporting cross-department execution and new-product-development tracking.
 - Following reconfiguration, project records showed an approximately 99% reduction in recurring data-entry errors; planning and execution also reduced the SAP requalification blackout period from five days to a few hours.
 
 ## Public references
