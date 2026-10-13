@@ -166,7 +166,7 @@ honors_development:
 technical_skills:
 - category: Materials and Testing
   items: Adhesion testing, T-peel, fracture mechanics, tensile testing, rheology, viscoelasticity, soft
-    interfaces, wearable textiles
+    interfaces, textiles
 - category: Computational
   items: Python, OpenCV, NumPy, Pandas, SciPy, Matplotlib, image processing, CIE L*a*b* colorimetry, automated
     analysis
