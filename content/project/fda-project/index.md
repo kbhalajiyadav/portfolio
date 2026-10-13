@@ -3,7 +3,7 @@ title: "Quality Systems & Validation"
 summary: "Professional experience connecting executive priorities, user and process requirements, computerized-system requalification, deviation/CAPA controls, validation evidence, and data integrity in regulated manufacturing."
 tags: ["Quality Systems", "Validation", "cGMP", "Project Management", "Industry"]
 status: "COMPLETED"
-date: 2023-05-01
+date: 2024-05-01
 type: project
 toc: false
 weight: 3
@@ -25,10 +25,12 @@ computerized-system requalification and configuration in pharmaceutical-intermed
 - Expanded and refined with the CEO a structured project-management framework that had been initiated during the preceding internship, supporting cross-department execution and new-product-development tracking.
 - Following reconfiguration, project records showed an approximately 99% reduction in recurring data-entry errors; planning and execution also reduced the SAP requalification blackout period from five days to a few hours.
 
-## Public references
+## Public context and corroboration
 
-- [Tarun Ayitam on the CEO entrusting Bhalaji with organization-wide SAP responsibility](https://www.linkedin.com/posts/tarunsciensation_deepthought-dtgrowthteams-growth-activity-7285134476228149248-QWaP)
-- [DeepThought CultureTech Ventures profile describing Bhalaji as a young leader at Kreative Organics](https://www.linkedin.com/posts/deepthoughtedutech_leadership-career-learning-activity-7033467848710656000-vjpq)
+These public sources corroborate the role context and leadership assignment. The validation details and quantified outcomes above are drawn from contemporaneous project records rather than from the public posts.
+
+- [Tarun Ayitam — public post on CEO trust and organization-wide SAP responsibility](https://www.linkedin.com/posts/tarunsciensation_deepthought-dtgrowthteams-growth-activity-7285134476228149248-QWaP)
+- [DeepThought CultureTech Ventures — profile highlighting Bhalaji's leadership at Kreative Organics](https://www.linkedin.com/posts/deepthoughtedutech_leadership-career-learning-activity-7033467848710656000-vjpq)
 
 ## Relevance to later work
 
