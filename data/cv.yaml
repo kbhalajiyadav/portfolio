@@ -132,13 +132,11 @@ industry_experience:
   organization: Kreative Organics Pvt. Ltd.
   location: Hyderabad, India
   bullets:
-  - Worked directly with the CEO and cross-functional quality, technical, and external teams on SAP Business
-    One computerized-system requalification spanning user-requirements review, deviation and root-cause
-    investigation, gap and impact assessment, CAPA and preventive controls, qualification-environment testing,
-    Performance Qualification, change-control verification, and user-access and approval-workflow controls.
-  - Following reconfiguration, project records showed an approximately 99% reduction in recurring data-entry
-    errors; planning and execution also reduced the SAP requalification blackout period from five days to a
-    few hours.
+  - Worked directly with the CEO and cross-functional teams on SAP Business One requalification, leading
+    URS review, deviation/RCA and gap assessment, CAPA/preventive controls, PQ, change-control verification,
+    and access/approval controls.
+  - Project records showed approximately 99% fewer recurring data-entry errors after reconfiguration; planning
+    reduced the requalification blackout from five days to a few hours.
 - period: Oct 2022–Apr 2023
   role: Technical Project Management Intern
   organization: Deep Thought Edu Tech Ventures · placement at Kreative Organics Pvt. Ltd.
