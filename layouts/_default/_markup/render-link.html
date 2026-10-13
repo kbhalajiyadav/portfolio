@@ -1,0 +1,7 @@
+{{- $dest := .Destination -}}
+{{- $lower := lower $dest -}}
+{{- $isExternal := or (strings.HasPrefix $lower "http://") (strings.HasPrefix $lower "https://") -}}
+{{- $isFragment := strings.HasPrefix $dest "#" -}}
+{{- $isProtocolLink := or (strings.HasPrefix $lower "mailto:") (strings.HasPrefix $lower "tel:") -}}
+{{- $isInternal := and (not $isExternal) (not $isFragment) (not $isProtocolLink) -}}
+<a href="{{ $dest | safeURL }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if $isExternal }} target="_blank" rel="noopener"{{ end }}>{{ .Text | safeHTML }}{{ if $isExternal }} <span class="content-link__arrow content-link__arrow--external" aria-hidden="true">↗</span>{{ else if $isInternal }} <span class="content-link__arrow content-link__arrow--internal" aria-hidden="true">→</span>{{ end }}</a>
