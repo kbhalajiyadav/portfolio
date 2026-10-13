@@ -24,6 +24,11 @@ a:hover .content-link__arrow--external,a:focus-visible .content-link__arrow--ext
 a:hover .content-link__arrow--internal,a:focus-visible .content-link__arrow--internal{transform:translateX(1.5px)}
 .about-profile-links strong .about-profile-links__arrow{margin-top:0;color:var(--teal);font-size:.8em;line-height:1}
 
+/* Keep two-column profile-card rules balanced when the card count is odd. */
+.about-profile-links a:nth-last-child(-n+2){border-bottom:1px solid var(--line)}
+.about-profile-links a:last-child{border-bottom:0}
+.about-profile-links a:nth-last-child(2):nth-child(odd){border-bottom:0}
+
 .research-signature{margin:2rem 0 2.5rem;padding:1.35rem 0 1.15rem;border-block:1px solid var(--line)}
 .research-signature__desktop{width:100%}
 .research-signature__desktop svg{display:block;width:100%;height:auto;color:var(--ink)}
