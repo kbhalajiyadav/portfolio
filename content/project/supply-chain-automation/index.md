@@ -21,6 +21,7 @@ and decision-support workflows used by technical and business teams.
 - Developed an end-to-end automated trade-data workflow using Python with Docker, MiniConda3, Hyper-V, Power Automate, Microsoft Access, Excel/VBA macros, and Tableau to reduce manual intervention and support repeatable operation.
 - Built Tableau decision-support analyses that connected normalized trade records with U.S. FDA Drug Master File information and reduced recurring analysis time by about 70%.
 - Connected chemical-domain requirements with data-quality and documentation controls, and prepared maintainable workflow references for source-structure and automation changes.
+- Began developing a structured project-management framework in Notion for project tracking and decision support. That framework was later expanded and refined with the CEO during the subsequent Technical Project Manager role.
 
 ## Public reference
 
