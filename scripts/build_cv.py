@@ -232,9 +232,12 @@ def render_cv(data: dict) -> str:
         render_publications(data),
         render_intellectual_property(data),
         render_software(data),
+        # Industry work is substantive professional experience, not an appendix.
+        # Place it before the long presentation record so the three-page CV
+        # balances naturally without filler or forced page breaks.
+        render_industry(data),
         render_presentations(data),
         render_engagement(data),
-        render_industry(data),
         render_honors(data),
         render_skills(data),
     ]
