@@ -16,6 +16,8 @@ Research outputs: https://bhalaji.com/outputs/
 Experience and education: https://bhalaji.com/experience/
 Engagement: https://bhalaji.com/engagement/
 Contact: https://bhalaji.com/contact/
+Curriculum vitae: https://bhalaji.com/uploads/cv.pdf
+Professional resume: https://bhalaji.com/uploads/resume.pdf
 
 ## Research focus
 The central question is what changes inside a responsive material during processing and which measurements can track that change reliably.
@@ -29,9 +31,9 @@ Stimulus -> Structure -> Response -> Measurement -> Translation
 3. Translate reproducibly: versioned analysis, synchronized acquisition, repeatable stimulus cycles, and documented analysis choices that preserve comparability across experiments and processing conditions.
 
 ## Industry background
-From October 2022 to April 2023, Kantepalle completed a Technical Project Management internship through Deep Thought Edu Tech Ventures while working at Kreative Organics. He directed development and implementation of a Python-based chemical-name normalization model across heterogeneous import/export trade records, with project records indicating an approximately 90% improvement in data accuracy. He also developed end-to-end trade-data automation and Tableau decision-support workflows integrating U.S. FDA Drug Master File information; recurring analysis time was reduced by about 70%.
+From October 2022 to April 2023, Kantepalle completed a Technical Project Management internship through Deep Thought Edu Tech Ventures while working at Kreative Organics. He directed development and implementation of a Python-based chemical-name normalization model across heterogeneous import/export trade records, with project records indicating an approximately 90% improvement in data accuracy. He also developed end-to-end trade-data automation and Tableau decision-support workflows integrating U.S. FDA Drug Master File information; recurring analysis time was reduced by about 70%. During the internship, he began developing a structured project-management framework in Notion for project tracking and decision support.
 
-He was subsequently appointed Technical Project Manager at Kreative Organics. From May 2023 to May 2024, he worked directly with the CEO and cross-functional quality, technical, and external teams on SAP Business One computerized-system requalification and configuration. The work included user-requirements review, deviation and root-cause investigation, gap and impact assessment, CAPA and preventive controls, qualification-environment testing, Performance Qualification, change-control verification, user-access and approval-workflow controls, validation evidence, vendor coordination, and data integrity. Procedural and cross-department workflow requirements were translated into system-enforced validations, access restrictions, approval gates, alerts, mandatory fields, and exception controls intended to reduce recurrence and prevent uncontrolled or out-of-sequence transactions. He also developed and iterated module-level PQ protocols and test scripts with internal QA and external consultant review. Following reconfiguration, project records showed an approximately 99% reduction in recurring data-entry errors; planning and execution also reduced the SAP requalification blackout period from five days to a few hours.
+He was subsequently appointed Technical Project Manager at Kreative Organics. From May 2023 to May 2024, he worked directly with the CEO and cross-functional quality, technical, and external teams on SAP Business One computerized-system requalification and configuration. The work included user-requirements review, deviation and root-cause investigation, gap and impact assessment, CAPA and preventive controls, qualification-environment testing, Performance Qualification, change-control verification, user-access and approval-workflow controls, validation evidence, vendor coordination, and data integrity. Procedural and cross-department workflow requirements were translated into system-enforced validations, access restrictions, approval gates, alerts, mandatory fields, and exception controls intended to reduce recurrence and prevent uncontrolled or out-of-sequence transactions. He also developed and iterated module-level PQ protocols and test scripts with internal QA and external consultant review. The project-management framework initiated during the internship was expanded and refined with the CEO for cross-department execution and new-product-development tracking. Following reconfiguration, project records showed an approximately 99% reduction in recurring data-entry errors; planning and execution also reduced the SAP requalification blackout period from five days to a few hours.
 
 Early-career mentorship included Ravi Seelamsetty at Kreative Organics (https://in.linkedin.com/in/raviseelamsetty) and Tarun Ayitam through DeepThought (https://in.linkedin.com/in/tarunsciensation).
 
@@ -73,6 +75,8 @@ Research outputs: https://bhalaji.com/outputs/
 Experience and education: https://bhalaji.com/experience/
 Engagement: https://bhalaji.com/engagement/
 Contact page: https://bhalaji.com/contact/
+Curriculum vitae: https://bhalaji.com/uploads/cv.pdf
+Professional resume: https://bhalaji.com/uploads/resume.pdf
 Email: contact@bhalaji.com
 ORCID: https://orcid.org/0000-0003-0551-6172
 Google Scholar: https://scholar.google.com/citations?hl=en&user=DrfbtX4AAAAJ
