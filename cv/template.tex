@@ -8,6 +8,7 @@
 \usepackage{fancyhdr}
 \usepackage{microtype}
 \usepackage{lastpage}
+\usepackage{needspace}
 
 \renewcommand{\familydefault}{\sfdefault}
 \definecolor{Ink}{HTML}{13222A}
@@ -41,15 +42,11 @@
   [\vspace{1.8pt}\color{Rule}\titlerule]
 \titlespacing*{\section}{0pt}{6.0pt}{3.0pt}
 
-% Use the three-page format as three coherent records rather than allowing
-% section headings to orphan at page bottoms.
+% Keep each section heading with enough following material to avoid orphaned
+% headings while allowing LaTeX to balance the three-page CV naturally.
 \let\cvsection\section
-\def\cvsoftwaretitle{Research Software}
-\def\cvindustrytitle{Industry Experience}
 \renewcommand{\section}[1]{%
-  \def\cvcurrenttitle{#1}%
-  \ifx\cvcurrenttitle\cvsoftwaretitle\newpage\fi
-  \ifx\cvcurrenttitle\cvindustrytitle\newpage\fi
+  \Needspace{5\baselineskip}%
   \cvsection{#1}%
 }
 
