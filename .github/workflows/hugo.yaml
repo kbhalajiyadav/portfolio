@@ -74,8 +74,10 @@ jobs:
       - name: Audit source, content strategy, visual system, workflows, templates, and JavaScript
         run: |
           python3 scripts/build_cv.py
-          git diff --exit-code -- cv/generated/bhalaji_cv.tex
+          test "$(pdfinfo static/uploads/cv.pdf | awk '/^Pages:/ {print $2}')" = "3"
           test "$(pdfinfo static/uploads/resume.pdf | awk '/^Pages:/ {print $2}')" = "2"
+          test "$(pdfinfo static/uploads/cv.pdf | awk '/^Page size:/ {print $3, $5}')" = "612 792"
+          test "$(pdfinfo static/uploads/resume.pdf | awk '/^Page size:/ {print $3, $5}')" = "612 792"
           python3 scripts/audit_source.py
           python3 scripts/audit_styles.py
           python3 scripts/audit_templates.py
@@ -216,6 +218,9 @@ jobs:
             artifacts/
             public/
             .lighthouseci/
+            cv/generated/
+            static/uploads/cv.pdf
+            static/uploads/resume.pdf
           if-no-files-found: warn
           retention-days: 14
           include-hidden-files: true
