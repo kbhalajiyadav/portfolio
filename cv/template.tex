@@ -1,5 +1,5 @@
 \documentclass[10pt,letterpaper]{article}
-\usepackage[margin=0.54in,top=0.40in,bottom=0.48in]{geometry}
+\usepackage[margin=0.64in,top=0.55in,bottom=0.58in]{geometry}
 \usepackage{xcolor}
 \usepackage{enumitem}
 \usepackage{tabularx}
@@ -32,33 +32,33 @@
 
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0pt}
-\linespread{0.94}
-\setlist[itemize]{leftmargin=1.1em,itemsep=1.0pt,topsep=1.5pt,parsep=0pt}
-\setlist[enumerate]{leftmargin=1.45em,itemsep=2.2pt,topsep=2.5pt,parsep=0pt}
+\linespread{0.98}
+\setlist[itemize]{leftmargin=1.12em,itemsep=1.8pt,topsep=2.4pt,parsep=0pt}
+\setlist[enumerate]{leftmargin=1.48em,itemsep=2.8pt,topsep=3.0pt,parsep=0pt}
 \titleformat{\section}
   {\large\bfseries\color{Ink}}
   {}{0pt}{\MakeUppercase}
-  [\vspace{1.5pt}\color{Rule}\titlerule]
-\titlespacing*{\section}{0pt}{4.0pt}{2.0pt}
+  [\vspace{1.8pt}\color{Rule}\titlerule]
+\titlespacing*{\section}{0pt}{6.0pt}{3.0pt}
 
 \newcommand{\entry}[4]{%
   \begin{tabularx}{\textwidth}{@{}Xr@{}}
     {\bfseries\color{Ink} #1} & {\color{Muted}\small #2}\\
     {\itshape #3} & {\itshape\color{Muted}\small #4}
-  \end{tabularx}\vspace{1pt}
+  \end{tabularx}\vspace{1.5pt}
 }
 
 \newcommand{\smallentry}[3]{%
   \begin{tabularx}{\textwidth}{@{}Xr@{}}
     {\bfseries #1} & {\color{Muted}\small #2}\\
     {\small #3} &
-  \end{tabularx}\vspace{1pt}
+  \end{tabularx}\vspace{1.5pt}
 }
 
 \newcommand{\contactsep}{\hspace{0.45em}{\color{Rule}|}\hspace{0.45em}}
 \newcommand{\cvlink}[2]{\href{#1}{#2}}
 \newcommand{\dateditem}[2]{%
-  \begin{tabularx}{\linewidth}{@{}X>{\raggedleft\arraybackslash}p{0.82in}@{}}
+  \begin{tabularx}{\linewidth}{@{}X>{\raggedleft\arraybackslash}p{0.84in}@{}}
     #1 & {\color{Muted}\small #2}
   \end{tabularx}
 }
@@ -66,12 +66,12 @@
 \begin{document}
 
 \begin{center}
-  {\fontsize{25}{28}\selectfont\bfseries\color{Ink} @@NAME@@}\\[3pt]
-  {\large\color{Teal} @@HEADLINE@@}\\[5pt]
+  {\fontsize{25}{28}\selectfont\bfseries\color{Ink} @@NAME@@}\\[4pt]
+  {\large\color{Teal} @@HEADLINE@@}\\[6pt]
   {\small @@CONTACT_LINE_ONE@@}\\[2pt]
   {\small @@CONTACT_LINE_TWO@@}
 \end{center}
-\vspace{2pt}
+\vspace{3pt}
 
 @@BODY@@
 
