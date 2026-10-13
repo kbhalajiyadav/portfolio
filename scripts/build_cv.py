@@ -115,6 +115,11 @@ def render_research_experience(data: dict, compact: bool = False) -> str:
         subtitle = item["organization"]
         if item.get("advisor"):
             subtitle += f" | Advisor: {item['advisor']}"
+        if compact:
+            # Compact resume roles should start only when enough room remains for
+            # the heading and a substantive part of the role, avoiding page splits
+            # that strand most bullets on the following page.
+            research.append(r"\Needspace{12\baselineskip}")
         research.append(
             rf"\entry{{{esc(item['role'])}}}{{{esc(item['period'])}}}"
             rf"{{{esc(subtitle)}}}{{{esc(item['location'])}}}"
