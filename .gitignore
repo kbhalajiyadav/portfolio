@@ -15,9 +15,10 @@ hugo.linux
 /.hugo_build.lock
 /tmp/
 
-# LaTeX CV build intermediates (the generated .tex remains reviewable)
-/cv/generated/*
-!/cv/generated/bhalaji_cv.tex
+# Generated CV/resume build outputs
+/cv/generated/
+/static/uploads/cv.pdf
+/static/uploads/resume.pdf
 
 # IDE
 .vscode/
