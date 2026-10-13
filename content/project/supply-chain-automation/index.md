@@ -3,7 +3,7 @@ title: "Chemical Data & Digital Operations"
 summary: "Professional experience translating chemical-domain requirements into reliable data, automation, documentation, and decision-support workflows."
 tags: ["Technical Project Management", "Chemical Operations", "Data Quality", "Industry"]
 status: "COMPLETED"
-date: 2022-10-01
+date: 2023-04-01
 type: project
 toc: false
 weight: 4
@@ -23,9 +23,11 @@ and decision-support workflows used by technical and business teams.
 - Connected chemical-domain requirements with data-quality and documentation controls, and prepared maintainable workflow references for source-structure and automation changes.
 - Began developing a structured project-management framework in Notion for project tracking and decision support. That framework was later expanded and refined with the CEO during the subsequent Technical Project Manager role.
 
-## Public reference
+## Public context and corroboration
 
-- [Tarun Ayitam on the self-managed Kreative Organics team and DeepThought's role in establishing its Data Science vertical](https://www.linkedin.com/posts/tarunsciensation_deepthought-dtgrowthteams-contributorrevolution-activity-7003898159890411520-Vulj)
+The public post below corroborates the team and Data Science context. The implementation stack and quantified workflow outcomes above are drawn from contemporaneous project records.
+
+- [Tarun Ayitam — public post on the self-managed Kreative Organics team and DeepThought's Data Science involvement](https://www.linkedin.com/posts/tarunsciensation_deepthought-dtgrowthteams-contributorrevolution-activity-7003898159890411520-Vulj)
 
 ## Relevance to later work
 
