@@ -1,5 +1,10 @@
 {{ define "main" }}
 {{ $p := site.Data.portfolio }}
+{{ $controls := site.Data.site_controls }}
+{{ $outcomeLimit := $controls.experience_page.limits.outcomes_per_role | default 3 }}
+{{ $linkLimit := $controls.experience_page.limits.links_per_role | default 1 }}
+{{ $qualityCase := site.GetPage "/project/fda-project/" }}
+{{ $dataCase := site.GetPage "/project/supply-chain-automation/" }}
 <article class="page-shell experience-page">
   <header class="page-header">
     <p class="kicker">Experience</p>
@@ -15,8 +20,8 @@
         <h3>{{ .role }}</h3>
         <p class="org">{{ .organization }}{{ with .location }} · {{ . }}{{ end }}</p>
         <p>{{ .detail }}</p>
-        {{ with .outcomes }}<ul>{{ range . }}<li>{{ . }}</li>{{ end }}</ul>{{ end }}
-        {{ with .links }}<div class="actions">{{ range . }}<a class="lnk" href="{{ .href | relURL }}">{{ .label }} <span class="arw" aria-hidden="true">→</span></a>{{ end }}</div>{{ end }}
+        {{ with .outcomes }}<ul>{{ range first $outcomeLimit . }}<li>{{ . }}</li>{{ end }}</ul>{{ end }}
+        {{ with .links }}<div class="actions">{{ range first $linkLimit . }}<a class="lnk" href="{{ .href | relURL }}">{{ .label }} <span class="arw" aria-hidden="true">→</span></a>{{ end }}</div>{{ end }}
       </article>
       {{ end }}{{ end }}
     </section>
@@ -31,5 +36,27 @@
       {{ end }}{{ end }}
     </aside>
   </div>
+
+  <section class="research-extension" aria-labelledby="professional-case-studies-heading">
+    <div class="section-head">
+      <div>
+        <p class="kicker">Professional case studies</p>
+        <h2 id="professional-case-studies-heading">Detailed evidence behind the industry roles.</h2>
+      </div>
+      <p>The chronology above stays concise. These case studies preserve the implementation detail, quantified outcomes, and public references that support the work.</p>
+    </div>
+    {{ with $qualityCase }}
+    <article class="secondary-output">
+      <div><span class="overline">Regulated manufacturing · validation</span><h3>{{ .Title }}</h3><p>{{ .Params.summary }}</p></div>
+      <div class="actions"><a class="lnk" href="{{ .RelPermalink }}">Read case study <span class="arw" aria-hidden="true">→</span></a></div>
+    </article>
+    {{ end }}
+    {{ with $dataCase }}
+    <article class="secondary-output">
+      <div><span class="overline">Chemical data · digital operations</span><h3>{{ .Title }}</h3><p>{{ .Params.summary }}</p></div>
+      <div class="actions"><a class="lnk" href="{{ .RelPermalink }}">Read case study <span class="arw" aria-hidden="true">→</span></a></div>
+    </article>
+    {{ end }}
+  </section>
 </article>
 {{ end }}
