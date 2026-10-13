@@ -17,7 +17,7 @@ profile:
   cv: uploads/cv.pdf
   resume: uploads/resume.pdf
   last_updated: October 2026
-  last_updated_iso: '2026-10-12'
+  last_updated_iso: '2026-10-13'
 research:
 - number: '01'
   title: Measure response
@@ -140,8 +140,7 @@ applied_innovation:
 - date: Spring 2026
   role: Prototype Demonstrator · Shelfie Program
   organization: VCU da Vinci Center · Feedback Friday
-  detail: Demonstrated a battery-free thermochromic sock concept at Feedback Friday and completed credentials
-    in Design Thinking, Prototyping, and Pitching & Storytelling.
+  detail: Demonstrated a battery-free thermochromic foot-care sock prototype for personalized heat-pattern monitoring in people with diabetes at Feedback Friday; the concept was presented as a prototype rather than a clinically evaluated device. Completed credentials in Design Thinking, Prototyping, and Pitching & Storytelling.
   links:
   - label: Design Thinking
     href: https://www.credly.com/badges/e6785521-d537-4ea8-983f-3e1b123f01c7/public_url
