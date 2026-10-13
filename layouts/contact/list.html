@@ -1,8 +1,10 @@
 {{ define "main" }}
 {{ $p := site.Data.portfolio }}
 {{ $aff := site.Data.current_affiliation }}
-{{ $cvVersion := readFile "static/uploads/resume.pdf" | md5 }}
+{{ $cvVersion := readFile "static/uploads/cv.pdf" | md5 }}
+{{ $resumeVersion := readFile "static/uploads/resume.pdf" | md5 }}
 {{ $cvHref := printf "%s?v=%s" ($p.profile.cv | relURL) $cvVersion }}
+{{ $resumeHref := printf "%s?v=%s" ($p.profile.resume | relURL) $resumeVersion }}
 <article class="page-shell contact-page h-card">
   <header class="page-header">
     <p class="kicker">Contact</p>
@@ -21,6 +23,7 @@
       <a class="lnk" href="{{ $p.profile.scholar }}" target="_blank" rel="me noopener">Google Scholar <span class="arw" aria-hidden="true">↗</span></a>
       <a class="lnk" href="{{ $p.profile.github }}" target="_blank" rel="me noopener">GitHub <span class="arw" aria-hidden="true">↗</span></a>
       <a class="lnk" href="{{ $cvHref }}" target="_blank" rel="noopener">Curriculum vitae <span class="arw" aria-hidden="true">↗</span></a>
+      <a class="lnk" href="{{ $resumeHref }}" target="_blank" rel="noopener">Two-page professional résumé <span class="arw" aria-hidden="true">↗</span></a>
     </div>
   </section>
 </article>
