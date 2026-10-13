@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the public CV from data/cv.yaml using XeLaTeX."""
+"""Build the public academic CV and compact industry resume from data/cv.yaml."""
 
 from __future__ import annotations
 
@@ -15,9 +15,12 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_DATA = ROOT / "data" / "cv.yaml"
-DEFAULT_TEMPLATE = ROOT / "cv" / "template.tex"
-DEFAULT_TEX = ROOT / "cv" / "generated" / "bhalaji_cv.tex"
-DEFAULT_PDF = ROOT / "static" / "uploads" / "resume.pdf"
+CV_TEMPLATE = ROOT / "cv" / "template.tex"
+RESUME_TEMPLATE = ROOT / "cv" / "resume_template.tex"
+CV_TEX = ROOT / "cv" / "generated" / "bhalaji_cv.tex"
+RESUME_TEX = ROOT / "cv" / "generated" / "bhalaji_resume.tex"
+CV_PDF = ROOT / "static" / "uploads" / "cv.pdf"
+RESUME_PDF = ROOT / "static" / "uploads" / "resume.pdf"
 
 
 LATEX_REPLACEMENTS = {
@@ -95,17 +98,7 @@ def section(title: str, content: list[str]) -> str:
     return rf"\section{{{esc(title)}}}" + "\n" + "\n".join(content) + "\n"
 
 
-def render(data: dict) -> str:
-    p = data["profile"]
-    output: list[str] = []
-
-    output.append(
-        section(
-            "Research Profile",
-            [rf"\color{{Ink}} {esc(p['summary'])}\color{{black}}"],
-        )
-    )
-
+def render_education(data: dict) -> str:
     education: list[str] = []
     for item in data["education"]:
         education.append(
@@ -113,8 +106,10 @@ def render(data: dict) -> str:
             rf"{{{esc(item['institution'])}}}{{{esc(item['location'])}}}"
         )
         education.append(bullets(item.get("details", [])))
-    output.append(section("Education", education))
+    return section("Education", education)
 
+
+def render_research_experience(data: dict, compact: bool = False) -> str:
     research: list[str] = []
     for item in data["research_experience"]:
         subtitle = item["organization"]
@@ -124,16 +119,23 @@ def render(data: dict) -> str:
             rf"\entry{{{esc(item['role'])}}}{{{esc(item['period'])}}}"
             rf"{{{esc(subtitle)}}}{{{esc(item['location'])}}}"
         )
-        research.append(bullets(item.get("bullets", [])))
-    output.append(section("Research and Teaching Experience", research))
+        item_bullets = item.get("bullets", [])
+        if compact and len(item_bullets) > 3:
+            item_bullets = item_bullets[:3]
+        research.append(bullets(item_bullets))
+    return section("Research and Teaching Experience", research)
 
+
+def render_publications(data: dict, title: str = "Peer-Reviewed Publications") -> str:
     pubs = [
         "\\begin{enumerate}\n"
         + "\n".join(rf"  \item {esc(item)}" for item in data["publications"])
         + "\n\\end{enumerate}"
     ]
-    output.append(section("Peer-Reviewed Publications", pubs))
+    return section(title, pubs)
 
+
+def render_intellectual_property(data: dict) -> str:
     intellectual_property: list[str] = []
     for item in data.get("intellectual_property", []):
         intellectual_property.append(
@@ -150,9 +152,10 @@ def render(data: dict) -> str:
             + esc(f"VCU Tech # {item['tech_id']}")
             + "}"
         )
-    if intellectual_property:
-        output.append(section("Intellectual Property", intellectual_property))
+    return section("Intellectual Property", intellectual_property) if intellectual_property else ""
 
+
+def render_software(data: dict) -> str:
     software: list[str] = []
     for item in data["research_software"]:
         software.append(
@@ -166,8 +169,10 @@ def render(data: dict) -> str:
             + href(item["archive"], "Archived release")
             + "}"
         )
-    output.append(section("Research Software", software))
+    return section("Research Software", software)
 
+
+def render_presentations(data: dict) -> str:
     presentations = [
         "\\begin{enumerate}\n"
         + "\n".join(
@@ -177,37 +182,79 @@ def render(data: dict) -> str:
         )
         + "\n\\end{enumerate}"
     ]
-    output.append(section("Presentations, Seminar, and Defense", presentations))
+    return section("Presentations, Seminar, and Defense", presentations)
 
+
+def render_engagement(data: dict) -> str:
     engagement: list[str] = []
     for item in data["engagement"]:
         engagement.append(
             rf"\smallentry{{{esc(item['role'])}}}{{{esc(item['period'])}}}"
             rf"{{{esc(item['organization'])}}}"
         )
-    output.append(section("Teaching, Review, and Applied Innovation", engagement))
+    return section("Teaching, Review, and Applied Innovation", engagement)
 
+
+def render_industry(data: dict, compact: bool = False) -> str:
     industry: list[str] = []
     for item in data["industry_experience"]:
         industry.append(
             rf"\entry{{{esc(item['role'])}}}{{{esc(item['period'])}}}"
             rf"{{{esc(item['organization'])}}}{{{esc(item['location'])}}}"
         )
-        industry.append(bullets(item.get("bullets", [])))
-    output.append(section("Industry Experience", industry))
+        item_bullets = item.get("bullets", [])
+        if compact and len(item_bullets) > 3:
+            item_bullets = item_bullets[:3]
+        industry.append(bullets(item_bullets))
+    return section("Industry Experience", industry)
 
-    honors = [honors_bullets(data["honors_development"])]
-    output.append(section("Honors and Professional Development", honors))
 
+def render_honors(data: dict) -> str:
+    return section("Honors and Professional Development", [honors_bullets(data["honors_development"])])
+
+
+def render_skills(data: dict) -> str:
     skills = []
     for index, item in enumerate(data["technical_skills"]):
         suffix = r"\\[2pt]" if index < len(data["technical_skills"]) - 1 else ""
         skills.append(
             rf"\textbf{{{esc(item['category'])}:}} {esc(item['items'])}{suffix}"
         )
-    output.append(section("Technical Skills", [r"{\small " + "\n".join(skills) + "}"]))
+    return section("Technical Skills", [r"{\small " + "\n".join(skills) + "}"])
 
-    return "\n".join(output)
+
+def render_cv(data: dict) -> str:
+    p = data["profile"]
+    output = [
+        section("Research Profile", [rf"\color{{Ink}} {esc(p['summary'])}\color{{black}}"]),
+        render_education(data),
+        render_research_experience(data),
+        render_publications(data),
+        render_intellectual_property(data),
+        render_software(data),
+        render_presentations(data),
+        render_engagement(data),
+        render_industry(data),
+        render_honors(data),
+        render_skills(data),
+    ]
+    return "\n".join(part for part in output if part)
+
+
+def render_resume(data: dict) -> str:
+    p = data["profile"]
+    output = [
+        section("Profile", [rf"\color{{Ink}} {esc(p['summary'])}\color{{black}}"]),
+        render_education(data),
+        render_research_experience(data, compact=True),
+        render_industry(data, compact=True),
+        render_publications(data, title="Selected Peer-Reviewed Publications"),
+        render_intellectual_property(data),
+        render_software(data),
+        render_honors(data),
+        render_skills(data),
+    ]
+    return "\n".join(part for part in output if part)
 
 
 def compile_pdf(tex_path: Path, pdf_path: Path) -> None:
@@ -237,17 +284,8 @@ def compile_pdf(tex_path: Path, pdf_path: Path) -> None:
             artifact.unlink()
 
 
-def main() -> int:
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--data", type=Path, default=DEFAULT_DATA)
-    parser.add_argument("--template", type=Path, default=DEFAULT_TEMPLATE)
-    parser.add_argument("--tex", type=Path, default=DEFAULT_TEX)
-    parser.add_argument("--pdf", type=Path, default=DEFAULT_PDF)
-    parser.add_argument("--no-compile", action="store_true")
-    args = parser.parse_args()
-
-    data = yaml.safe_load(args.data.read_text(encoding="utf-8"))
-    template = args.template.read_text(encoding="utf-8")
+def render_template(data: dict, template_path: Path, body: str) -> str:
+    template = template_path.read_text(encoding="utf-8")
     profile = data["profile"]
     updated = str(profile["updated"])
 
@@ -271,23 +309,42 @@ def main() -> int:
         + href(profile["github"], "GitHub")
     )
 
-    tex = (
+    return (
         template.replace("@@PDF_AUTHOR@@", esc(profile["name"]))
         .replace("@@UPDATED@@", esc(updated))
         .replace("@@NAME@@", esc(profile["name"]))
         .replace("@@HEADLINE@@", esc(profile["headline"]))
         .replace("@@CONTACT_LINE_ONE@@", contact_one)
         .replace("@@CONTACT_LINE_TWO@@", contact_two)
-        .replace("@@BODY@@", render(data))
+        .replace("@@BODY@@", body)
     )
-    args.tex.parent.mkdir(parents=True, exist_ok=True)
-    args.tex.write_text(tex, encoding="utf-8")
 
-    if not args.no_compile:
-        compile_pdf(args.tex, args.pdf)
-    print(f"Generated {args.tex.relative_to(ROOT)}")
-    if not args.no_compile:
-        print(f"Generated {args.pdf.relative_to(ROOT)}")
+
+def build_document(data: dict, template_path: Path, tex_path: Path, pdf_path: Path, body: str, compile_output: bool) -> None:
+    tex = render_template(data, template_path, body)
+    tex_path.parent.mkdir(parents=True, exist_ok=True)
+    tex_path.write_text(tex, encoding="utf-8")
+    if compile_output:
+        compile_pdf(tex_path, pdf_path)
+    print(f"Generated {tex_path.relative_to(ROOT)}")
+    if compile_output:
+        print(f"Generated {pdf_path.relative_to(ROOT)}")
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--data", type=Path, default=DEFAULT_DATA)
+    parser.add_argument("--document", choices=("all", "cv", "resume"), default="all")
+    parser.add_argument("--no-compile", action="store_true")
+    args = parser.parse_args()
+
+    data = yaml.safe_load(args.data.read_text(encoding="utf-8"))
+    compile_output = not args.no_compile
+
+    if args.document in ("all", "cv"):
+        build_document(data, CV_TEMPLATE, CV_TEX, CV_PDF, render_cv(data), compile_output)
+    if args.document in ("all", "resume"):
+        build_document(data, RESUME_TEMPLATE, RESUME_TEX, RESUME_PDF, render_resume(data), compile_output)
     return 0
 
 
