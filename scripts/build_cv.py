@@ -232,12 +232,13 @@ def render_cv(data: dict) -> str:
         render_publications(data),
         render_intellectual_property(data),
         render_software(data),
-        # Industry work is substantive professional experience, not an appendix.
-        # Place it before the long presentation record so the three-page CV
-        # balances naturally without filler or forced page breaks.
+        # Professional experience belongs in the main record, not at the tail.
         render_industry(data),
-        render_presentations(data),
         render_engagement(data),
+        # Start the dissemination record on a fresh page so pages 2 and 3 form
+        # two intentional, comparably weighted blocks instead of an overflow page.
+        r"\newpage",
+        render_presentations(data),
         render_honors(data),
         render_skills(data),
     ]
@@ -249,13 +250,17 @@ def render_resume(data: dict) -> str:
     output = [
         section("Profile", [rf"\color{{Ink}} {esc(p['summary'])}\color{{black}}"]),
         render_education(data),
+        # Skills are a first-page recruiter scan target in the compact document.
+        render_skills(data),
         render_research_experience(data, compact=True),
+        # Page 2 begins with industry experience, then the supporting scholarly
+        # record. This produces two balanced pages without filler or stretched type.
+        r"\newpage",
         render_industry(data, compact=True),
         render_publications(data, title="Selected Peer-Reviewed Publications"),
         render_intellectual_property(data),
         render_software(data),
         render_honors(data),
-        render_skills(data),
     ]
     return "\n".join(part for part in output if part)
 
