@@ -1,6 +1,6 @@
 ---
 title: "Quality Systems & Validation"
-summary: "Professional experience connecting executive priorities, engineering requirements, validation documentation, and data integrity in regulated manufacturing."
+summary: "Professional experience connecting executive priorities, system requirements, computerized-system requalification, validation evidence, and data integrity in regulated manufacturing."
 tags: ["Quality Systems", "Validation", "cGMP", "Project Management", "Industry"]
 status: "COMPLETED"
 date: 2023-05-01
@@ -12,16 +12,16 @@ weight: 3
 ## Professional context
 
 As a **Technical Project Manager** at **Kreative Organics**, I worked directly with
-the CEO and cross-functional quality, technical, and external teams on SAP
-requalification and configuration in pharmaceutical-intermediate manufacturing.
+the CEO and cross-functional quality, technical, and external teams on SAP Business One
+computerized-system requalification and configuration in pharmaceutical-intermediate manufacturing.
 
 ## Selected contributions
 
-- Spearheaded cross-functional gap assessment, impact assessment, Performance Qualification, configuration, and corrective-action work.
+- Led requirements-based requalification work spanning user-requirements review, gap and impact assessment, configuration changes, testing in a qualification environment, Performance Qualification, user-access and approval-workflow controls, and corrective-action follow-through.
 - Coordinated with SAP service providers and internal stakeholders to translate process requirements into test evidence and implementation readiness.
 - Maintained traceability between process requirements, validation evidence, and data-integrity controls.
 - Developed project-management systems supporting cross-department execution and new-product-development tracking.
-- Project outcomes included a 99% reduction in data-entry errors and a reduction in the SAP requalification blackout period from five days to a few hours.
+- Following reconfiguration, project records showed an approximately 99% reduction in recurring data-entry errors; planning and execution also reduced the SAP requalification blackout period from five days to a few hours.
 
 ## Public references
 
@@ -30,5 +30,5 @@ requalification and configuration in pharmaceutical-intermediate manufacturing.
 
 ## Relevance to later work
 
-The role established habits that now carry into research: define the method,
-record assumptions, preserve traceability, and make the evidence reviewable.
+The role established habits that now carry into research: define requirements,
+verify changes against intended function, preserve traceability, and make the evidence reviewable.
