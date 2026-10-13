@@ -1,6 +1,6 @@
 ---
 title: "Quality Systems & Validation"
-summary: "Professional experience connecting executive priorities, system requirements, computerized-system requalification, validation evidence, and data integrity in regulated manufacturing."
+summary: "Professional experience connecting executive priorities, user and process requirements, computerized-system requalification, deviation/CAPA controls, validation evidence, and data integrity in regulated manufacturing."
 tags: ["Quality Systems", "Validation", "cGMP", "Project Management", "Industry"]
 status: "COMPLETED"
 date: 2023-05-01
@@ -17,7 +17,9 @@ computerized-system requalification and configuration in pharmaceutical-intermed
 
 ## Selected contributions
 
-- Led requirements-based requalification work spanning user-requirements review, gap and impact assessment, configuration changes, testing in a qualification environment, Performance Qualification, user-access and approval-workflow controls, and corrective-action follow-through.
+- Led requirements-based requalification work spanning user-requirements review, deviation and root-cause investigation, gap and impact assessment, CAPA and preventive controls, configuration changes, testing in a qualification environment, Performance Qualification, change-control verification, and user-access and approval-workflow controls.
+- Translated procedural and cross-department workflow requirements into system-enforced validations, access restrictions, approval gates, alerts, mandatory fields, and exception controls designed to reduce recurrence and prevent uncontrolled or out-of-sequence transactions.
+- Developed and iterated module-level PQ protocols and test scripts with internal QA and external consultant review, defining test steps, expected results, and qualification evidence after configuration changes.
 - Coordinated with SAP service providers and internal stakeholders to translate process requirements into test evidence and implementation readiness.
 - Maintained traceability between process requirements, validation evidence, and data-integrity controls.
 - Developed project-management systems supporting cross-department execution and new-product-development tracking.
