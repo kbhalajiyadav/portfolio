@@ -4,6 +4,8 @@
 {{ $ip := index $cv.intellectual_property 0 }}
 {{ $publicationSync := site.Data.publication_sync }}
 {{ $controls := site.Data.site_controls }}
+{{ $experienceLimit := $controls.homepage.limits.experience_records | default 3 }}
+{{ $experienceOutcomeLimit := $controls.homepage.limits.experience_outcomes | default 1 }}
 {{ $presentationLimit := $controls.homepage.limits.presentation_series | default 3 }}
 {{ $teachingLimit := $controls.homepage.limits.teaching_records | default 4 }}
 {{ $serviceLimit := $controls.homepage.limits.service_records | default 3 }}
@@ -81,12 +83,14 @@
 </section>
 
 <section class="section" id="experience">
-  <div class="section-head"><p class="kicker">Experience and education</p><h2>Research rigor shaped by laboratory work and regulated manufacturing.</h2></div>
+  <div class="section-head"><p class="kicker">Experience and education</p><h2>Research rigor shaped by laboratory work and regulated manufacturing.</h2><p>Selected roles are shown here; the complete chronology, supporting case studies, education, and research training are available on the Experience page.</p></div>
+  {{ $visibleExperience := slice }}{{ range $p.experience }}{{ if ne .show false }}{{ $visibleExperience = $visibleExperience | append . }}{{ end }}{{ end }}
   <div class="two-col">
     <div class="timeline">
-      {{ range $p.experience }}{{ if ne .show false }}
-      <article class="timeline-item"><span>{{ .period }}</span><h3>{{ .role }}</h3><p class="org">{{ .organization }}{{ with .location }} · {{ . }}{{ end }}</p><p>{{ .detail }}</p>{{ with .outcomes }}<ul>{{ range . }}<li>{{ . }}</li>{{ end }}</ul>{{ end }}{{ with .links }}<div class="actions">{{ range . }}<a class="lnk" href="{{ .href | relURL }}">{{ .label }} <span class="arw" aria-hidden="true">→</span></a>{{ end }}</div>{{ end }}</article>
-      {{ end }}{{ end }}
+      {{ range first $experienceLimit $visibleExperience }}
+      <article class="timeline-item"><span>{{ .period }}</span><h3>{{ .role }}</h3><p class="org">{{ .organization }}{{ with .location }} · {{ . }}{{ end }}</p><p>{{ .detail }}</p>{{ with .outcomes }}<ul>{{ range first $experienceOutcomeLimit . }}<li>{{ . }}</li>{{ end }}</ul>{{ end }}</article>
+      {{ end }}
+      <div class="actions"><a class="lnk" href="{{ "/experience/" | relURL }}">View full experience and education <span class="arw" aria-hidden="true">→</span></a></div>
     </div>
     <aside class="education-panel">
       <h3>Education</h3>
