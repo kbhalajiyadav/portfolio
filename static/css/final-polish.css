@@ -26,6 +26,12 @@
 .research-signature__note{font-family:var(--sans);font-size:.76rem;letter-spacing:.02em}
 .research-signature__mobile{display:none}
 
+/* Preserve editorial line lengths while using large desktop displays more effectively. */
+@media(min-width:1440px){
+  :root{--shell:1280px}
+  .hero__visual{width:min(100%,410px)}
+}
+
 @media(max-width:980px){
   .hero{grid-template-columns:1fr;gap:2.5rem;padding-block:3rem 3.75rem}
   .hero__copy{width:100%;max-width:none}
