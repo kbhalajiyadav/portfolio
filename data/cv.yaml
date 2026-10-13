@@ -133,9 +133,9 @@ industry_experience:
   location: Hyderabad, India
   bullets:
   - Worked directly with the CEO and cross-functional quality, technical, and external teams on SAP Business
-    One computerized-system requalification spanning user-requirements review, gap and impact assessment,
-    qualification-environment testing, Performance Qualification, user-access and approval-workflow controls,
-    and corrective-action follow-through.
+    One computerized-system requalification spanning user-requirements review, deviation and root-cause
+    investigation, gap and impact assessment, CAPA and preventive controls, qualification-environment testing,
+    Performance Qualification, change-control verification, and user-access and approval-workflow controls.
   - Following reconfiguration, project records showed an approximately 99% reduction in recurring data-entry
     errors; planning and execution also reduced the SAP requalification blackout period from five days to a
     few hours.
@@ -175,4 +175,5 @@ technical_skills:
 - category: Instrumentation
   items: Universal testing machine, optical microscopy, UV-Vis spectroscopy, Abbe refractometry, 3D printing
 - category: Compliance and Process
-  items: Computerized-system requalification, PQ, validation documentation, data integrity, cGMP, RCA/CAPA, DOE
+  items: Computerized-system requalification, PQ, validation documentation, data integrity, cGMP, deviation
+    investigation, RCA/CAPA, change control, DOE
