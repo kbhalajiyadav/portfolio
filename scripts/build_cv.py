@@ -128,7 +128,12 @@ def render_research_experience(data: dict, compact: bool = False) -> str:
         if compact and len(item_bullets) > 3:
             item_bullets = item_bullets[:3]
         research.append(bullets(item_bullets))
-    return section("Research and Teaching Experience", research)
+    rendered = section("Research and Teaching Experience", research)
+    if compact:
+        # Keep the section heading with its first role instead of allowing a
+        # heading-only orphan at the foot of page 1.
+        return r"\Needspace{16\baselineskip}" + "\n" + rendered
+    return rendered
 
 
 def render_publications(data: dict, title: str = "Peer-Reviewed Publications") -> str:
