@@ -115,6 +115,11 @@ def render_research_experience(data: dict, compact: bool = False) -> str:
         subtitle = item["organization"]
         if item.get("advisor"):
             subtitle += f" | Advisor: {item['advisor']}"
+        if compact:
+            # Compact resume roles should start only when enough room remains for
+            # the heading and a substantive part of the role, avoiding page splits
+            # that strand most bullets on the following page.
+            research.append(r"\Needspace{12\baselineskip}")
         research.append(
             rf"\entry{{{esc(item['role'])}}}{{{esc(item['period'])}}}"
             rf"{{{esc(subtitle)}}}{{{esc(item['location'])}}}"
@@ -123,7 +128,12 @@ def render_research_experience(data: dict, compact: bool = False) -> str:
         if compact and len(item_bullets) > 3:
             item_bullets = item_bullets[:3]
         research.append(bullets(item_bullets))
-    return section("Research and Teaching Experience", research)
+    rendered = section("Research and Teaching Experience", research)
+    if compact:
+        # Keep the section heading with its first role instead of allowing a
+        # heading-only orphan at the foot of page 1.
+        return r"\Needspace{16\baselineskip}" + "\n" + rendered
+    return rendered
 
 
 def render_publications(data: dict, title: str = "Peer-Reviewed Publications") -> str:
@@ -249,13 +259,12 @@ def render_resume(data: dict) -> str:
     output = [
         section("Profile", [rf"\color{{Ink}} {esc(p['summary'])}\color{{black}}"]),
         render_education(data),
-        # Skills are a first-page recruiter scan target in the compact document.
+        # Skills remain an early recruiter scan target in the compact document.
         render_skills(data),
-        render_research_experience(data, compact=True),
-        # Page 2 begins with industry experience, then the supporting scholarly
-        # record. This produces two balanced pages without filler or stretched type.
-        r"\newpage",
+        # Prioritize prior professional responsibility before the academic record
+        # in the industry-oriented document; Needspace handles the page boundary.
         render_industry(data, compact=True),
+        render_research_experience(data, compact=True),
         render_publications(data, title="Selected Peer-Reviewed Publications"),
         render_intellectual_property(data),
         render_software(data),
