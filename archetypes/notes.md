@@ -8,24 +8,44 @@ note_type: concept # method | concept | reflection
 status: evolving # stable | evolving
 tags: []
 
-# Research-governance metadata is deliberately fail-closed. Keep draft: true
-# until every applicable review is resolved. See docs/research-notes-governance.md.
+# IMPORTANT: this repository is public. `draft: true` only prevents Hugo from
+# rendering the page; it does NOT make this source private. Do not commit this
+# file until repository_safe=true and every repository-boundary review below
+# is resolved. Drafting before that belongs in the private incubation workspace.
 governance:
+  repository_safe: false
   disclosure_basis: "" # public_literature | published_own_work | authorized_public_disclosure
   contains_unpublished_research: true
   contains_unpublished_collaborator_material: true
   contains_confidential_or_sponsor_material: true
+
   potentially_patent_sensitive: true
   ip_clearance: "" # not_applicable | cleared
+
+  venue_policy_review: "" # not_applicable | cleared
+  embargo_status: "" # none only for material entering this public repository
+
   regulated_research_material: false
   ethics_review: "" # not_applicable | cleared
+  export_control_review: "" # not_applicable | cleared
+  dual_use_review: "" # not_applicable | cleared
+
   ownership_review: pending # pending | complete
+  contributor_review: pending # pending | complete
+  funding_review: pending # pending | complete
+  privacy_review: pending # pending | complete
+  external_tool_review: pending # pending | complete
+
   coi_status: "" # none_declared | disclosed | managed
   coi_statement: ""
   copyright_review: pending # pending | complete
-  publication_approval: pending # pending | approved
+  source_status_review: pending # pending | complete
 
-# Every published note needs at least one independently verified source.
+  # This is the author's release decision, not a representation of institutional approval.
+  author_release_decision: pending # pending | approved
+
+# Published notes need independently verified sources. Public-source staging may
+# still refine this list, but factual claims must be fully verified before release.
 sources: []
 related_publications: []
 related_software: []
@@ -40,6 +60,9 @@ related_notes: []
 #     url: https://bsky.app/profile/.../post/...
 ---
 
-Write the canonical note here. Keep it private/draft until the scientific,
-citation, disclosure, ownership, IP, ethics/COI, copyright, and web-quality
-gates in `docs/research-notes-governance.md` have been satisfied.
+This file is **public-source staging**, not a private draft environment.
+
+Develop rough or unpublished material in the private incubation workspace described
+in `docs/research-notes-lifecycle.md`. Copy a candidate here only after it is safe
+to disclose publicly. Keep `draft: true` while editorial, design, accessibility,
+metadata, performance, and final publication checks are still in progress.
