@@ -22,7 +22,7 @@ Research publishing adds three separate controls:
 
 - `docs/research-notes-governance.md` — **can** the material be publicly disclosed?
 - `docs/research-publishing-visibility-strategy.md` — **should** it be published, and how should it compound into credible discovery?
-- `docs/research-notes-lifecycle.md` — **where** drafting, private incubation, public-source staging, publication, correction, retirement, and archival are allowed to occur.
+- `docs/research-notes-lifecycle.md` — **where** drafting, private incubation, local release testing, public-source staging, publication, correction, retirement, and archival are allowed to occur.
 
 These documents are intended to carry forward into future changes rather than
 be rediscovered case by case.
@@ -31,20 +31,42 @@ be rediscovered case by case.
 
 This repository is public. Therefore `draft: true` is **not a privacy control**:
 it prevents Hugo from rendering a note on the website, but the Markdown source
-would still be public through GitHub if committed.
+would still be public through GitHub if committed or pushed.
 
 Unpublished research, confidential/collaborator material, embargoed content,
 uncleared patent-sensitive information, restricted data, and other non-public
 work stay outside this repository in an institutionally appropriate private
-workspace.
+workspace. Storage/service choices for VCU research should follow the applicable
+data classification and VCU Data Management System guidance rather than assume
+that a private third-party repository is automatically approved.
 
 The recommended lifecycle is:
 
-`private embryo -> private incubation -> private clearance -> repository-safe public-source staging -> website QA -> publication -> maintenance/correction`
+`private embryo -> private incubation -> private clearance -> private local release candidate -> repository-safe public source -> website publication -> maintenance/correction`
 
 Obsidian and a local-only Quartz 5 preview may support the private incubation
 stage. Quartz is an authoring/navigation layer, not a confidentiality boundary;
 the private vault is not coupled to the public Hugo deployment.
+
+## Local pre-disclosure guard
+
+The repository includes executable `pre-commit` and `pre-push` hooks that run
+the Research Notes governance checker before a candidate leaves the local
+machine. Enable the tracked hooks once per clone:
+
+```bash
+npm run setup:hooks
+```
+
+or equivalently:
+
+```bash
+git config core.hooksPath .githooks
+```
+
+These hooks are an accident barrier, not an authorization system; they can be
+bypassed and do not replace correct private storage or human disclosure review.
+Remote GitHub Actions repeats the guard as a second line of defense.
 
 ## Research Notes publication gate
 
