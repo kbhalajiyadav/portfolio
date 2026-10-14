@@ -108,12 +108,12 @@ institutional, sponsor, journal, protocol, and collaboration requirements.
 Dependabot monitors GitHub Actions and npm dependencies. GitHub Dependency Graph
 is enabled, and pull requests run the official dependency-review action pinned
 to an immutable commit SHA. Dependency review is configured to fail on newly
-introduced vulnerabilities at moderate severity or higher.
+introduced vulnerabilities at moderate severity or higher and has validated
+successfully on PR #77.
 
-Repository administration should require the `build`, `governance`, and—after
-successful validation on PR #77—`dependency-review` checks in the `main`
-ruleset. Issue #78 tracks these ruleset changes so the administrative control
-cannot be silently forgotten.
+Repository administration should require the `build`, `governance`, and
+`dependency-review` checks in the `main` ruleset. Issue #78 tracks this final
+manual repository-admin control so it cannot be silently forgotten.
 
 ## Build and validation
 
