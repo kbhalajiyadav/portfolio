@@ -171,10 +171,12 @@ Keep:
 - GitHub Dependency Graph;
 - official pinned dependency-review action on pull requests.
 
+Dependency Graph was enabled during PR #77. The restored official dependency-review action subsequently passed on the PR, confirming the prerequisite and workflow are functional.
+
 Administrative additions:
 
 - main-branch ruleset requiring `governance` and `build` status checks;
-- after successful validation on PR #77, require `dependency-review` as well;
+- require `dependency-review` as well now that it has validated successfully;
 - expected source app set to GitHub Actions where possible;
 - no bypass except deliberate emergency/admin use.
 
