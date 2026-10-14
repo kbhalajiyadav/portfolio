@@ -56,6 +56,11 @@ numbered figures/tables, or reproducible computational output. Hugo remains the
 only production renderer and owner of the public visual system. The controlled
 Quarto + curated Zotero/Better-BibTeX pilot for Note 001 is tracked in issue #79.
 
+Required tooling remains free/open-source or part of the existing repository and
+hosting stack. Optional integrations must have a genuine free tier or a
+verifiable academic/student-access route; paid-only tools are not core
+dependencies.
+
 ## Local pre-disclosure guard
 
 The repository includes executable `pre-commit` and `pre-push` hooks that run
@@ -100,19 +105,15 @@ institutional, sponsor, journal, protocol, and collaboration requirements.
 
 ## Dependency and merge safety
 
-Dependabot monitors GitHub Actions and npm dependencies.
+Dependabot monitors GitHub Actions and npm dependencies. GitHub Dependency Graph
+is enabled, and pull requests run the official dependency-review action pinned
+to an immutable commit SHA. Dependency review is configured to fail on newly
+introduced vulnerabilities at moderate severity or higher.
 
-GitHub's official dependency-review action was tested during PR #77, but GitHub
-reported that Dependency Graph is currently disabled for this repository. The
-failing workflow was removed rather than leave permanently red CI. Issue #78
-tracks the administrative sequence: enable Dependency Graph, restore and
-validate the pinned dependency-review action, and only then make it a required
-check.
-
-Repository administration should require the `build` and `governance` checks in
-the `main` ruleset now, and add `dependency-review` only after its prerequisite
-and validation are complete. Issue #78 also tracks these ruleset changes so the
-administrative control cannot be silently forgotten.
+Repository administration should require the `build`, `governance`, and—after
+successful validation on PR #77—`dependency-review` checks in the `main`
+ruleset. Issue #78 tracks these ruleset changes so the administrative control
+cannot be silently forgotten.
 
 ## Build and validation
 
@@ -140,8 +141,8 @@ python3 scripts/check_external_links.py public --site-origin https://bhalaji.com
 GitHub Actions also runs accessibility, responsive-layout, contextual-navigation,
 deep-link and dismissal-state, spacing, component-integrity, laptop-frame, and
 mobile/desktop Lighthouse checks before deployment. Research Notes have an
-additional repository/publication-governance workflow. CV compilation is handled
-by the dedicated XeLaTeX workflow.
+additional repository/publication-governance workflow, and pull requests receive
+dependency review. CV compilation is handled by the dedicated XeLaTeX workflow.
 
 ## Rights
 
