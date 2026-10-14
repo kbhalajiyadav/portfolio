@@ -17,24 +17,56 @@ Content classification decisions are recorded in
 `docs/content-taxonomy.md`. Sitewide hierarchy, scientific-visual integrity,
 responsive composition, evidence-link behavior, spacing, social-preview
 behavior, and release lessons are recorded in `docs/design-governance.md`.
-Research Note disclosure, ownership, IP, ethics/COI, citation, copyright, and
-publication-release rules are recorded in `docs/research-notes-governance.md`.
+
+Research publishing adds three separate controls:
+
+- `docs/research-notes-governance.md` — **can** the material be publicly disclosed?
+- `docs/research-publishing-visibility-strategy.md` — **should** it be published, and how should it compound into credible discovery?
+- `docs/research-notes-lifecycle.md` — **where** drafting, private incubation, public-source staging, publication, correction, retirement, and archival are allowed to occur.
+
 These documents are intended to carry forward into future changes rather than
 be rediscovered case by case.
 
+## Research Notes disclosure boundary
+
+This repository is public. Therefore `draft: true` is **not a privacy control**:
+it prevents Hugo from rendering a note on the website, but the Markdown source
+would still be public through GitHub if committed.
+
+Unpublished research, confidential/collaborator material, embargoed content,
+uncleared patent-sensitive information, restricted data, and other non-public
+work stay outside this repository in an institutionally appropriate private
+workspace.
+
+The recommended lifecycle is:
+
+`private embryo -> private incubation -> private clearance -> repository-safe public-source staging -> website QA -> publication -> maintenance/correction`
+
+Obsidian and a local-only Quartz 5 preview may support the private incubation
+stage. Quartz is an authoring/navigation layer, not a confidentiality boundary;
+the private vault is not coupled to the public Hugo deployment.
+
 ## Research Notes publication gate
 
-Research Notes are fail-closed by default. `archetypes/notes.md` creates drafts
-with conservative governance flags, and `scripts/check_notes_governance.py`
-rejects a public note when required publication metadata is incomplete or an
-unsafe disclosure flag remains set. The dedicated GitHub Actions workflow runs
-on relevant pull requests, main-branch changes, a monthly schedule, and manual
-dispatch.
+`archetypes/notes.md` is deliberately fail-closed. A generated note cannot be
+committed safely until `governance.repository_safe: true` is defensible and the
+public-repository boundary reviews are resolved.
+
+`scripts/check_notes_governance.py` enforces the boundary for both Hugo drafts
+and published notes. It rejects public-repository candidates containing
+unpublished/collaborator/confidential material, active embargoes, unresolved IP
+or venue restrictions, incomplete ownership/contributor/funding/privacy/tool or
+copyright review, unresolved ethics/export/dual-use checks, or invalid COI
+metadata. Website publication adds source-status and explicit author-release
+requirements.
+
+The dedicated GitHub Actions workflow runs on every pull request and main-branch
+change, plus a monthly schedule and manual dispatch.
 
 A passing automated check is necessary but not sufficient: scientific,
-disclosure, ownership/collaboration, IP, ethics/COI, and copyright judgments
-still require appropriate human review under the governing institutional,
-sponsor, journal, and collaboration requirements.
+disclosure, ownership/collaboration, IP, venue, ethics/COI, privacy, copyright,
+and other judgments still require appropriate human review under the governing
+institutional, sponsor, journal, protocol, and collaboration requirements.
 
 ## Build and validation
 
@@ -62,8 +94,8 @@ python3 scripts/check_external_links.py public --site-origin https://bhalaji.com
 GitHub Actions also runs accessibility, responsive-layout, contextual-navigation,
 deep-link and dismissal-state, spacing, component-integrity, laptop-frame, and
 mobile/desktop Lighthouse checks before deployment. Research Notes have an
-additional publication-governance workflow. CV compilation is handled by the
-dedicated XeLaTeX workflow.
+additional repository/publication-governance workflow. CV compilation is handled
+by the dedicated XeLaTeX workflow.
 
 ## Rights
 
