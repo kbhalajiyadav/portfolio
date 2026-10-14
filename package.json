@@ -2,13 +2,14 @@
   "name": "bhalaji-research-portfolio",
   "version": "1.0.0",
   "private": true,
-  "description": "Build-time accessibility and performance audits for bhalaji.com",
+  "description": "Build-time accessibility, performance, and research-publication audits for bhalaji.com",
   "engines": {
     "node": ">=24"
   },
   "scripts": {
     "audit:a11y": "pa11y-ci --config .pa11yci.cjs",
-    "audit:lighthouse": "lhci autorun --config=.lighthouserc.cjs"
+    "audit:lighthouse": "lhci autorun --config=.lighthouserc.cjs",
+    "audit:notes": "python3 scripts/check_notes_governance.py"
   },
   "devDependencies": {
     "@lhci/cli": "0.15.1",
