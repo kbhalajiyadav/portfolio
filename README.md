@@ -18,11 +18,13 @@ Content classification decisions are recorded in
 responsive composition, evidence-link behavior, spacing, social-preview
 behavior, and release lessons are recorded in `docs/design-governance.md`.
 
-Research publishing adds three separate controls:
+Research publishing uses five separate controls:
 
 - `docs/research-notes-governance.md` — **can** the material be publicly disclosed?
 - `docs/research-publishing-visibility-strategy.md` — **should** it be published, and how should it compound into credible discovery?
 - `docs/research-notes-lifecycle.md` — **where** drafting, private incubation, local release testing, public-source staging, publication, correction, retirement, and archival are allowed to occur.
+- `docs/research-notes-design-standard.md` — **how** a public note should read, look, perform, remain accessible, and handle scientific figures/citations/revisions.
+- `docs/research-notes-tooling-evaluation.md` — **which tools** own each part of the workflow and which alternatives are intentionally not adopted.
 
 These documents are intended to carry forward into future changes rather than
 be rediscovered case by case.
@@ -47,6 +49,11 @@ The recommended lifecycle is:
 Obsidian and a local-only Quartz 5 preview may support the private incubation
 stage. Quartz is an authoring/navigation layer, not a confidentiality boundary;
 the private vault is not coupled to the public Hugo deployment.
+
+Quarto is reserved as an optional scientific-authoring/compiler layer for notes
+that genuinely need bibliography automation, cross-references, equations,
+numbered figures/tables, or reproducible computational output. Hugo remains the
+only production renderer and owner of the public visual system.
 
 ## Local pre-disclosure guard
 
@@ -90,6 +97,17 @@ disclosure, ownership/collaboration, IP, venue, ethics/COI, privacy, copyright,
 and other judgments still require appropriate human review under the governing
 institutional, sponsor, journal, protocol, and collaboration requirements.
 
+## Dependency and merge safety
+
+Dependabot monitors GitHub Actions and npm dependencies. Pull requests also run
+the pinned official GitHub dependency-review action, which fails when a newly
+introduced dependency reaches the configured vulnerability threshold.
+
+Repository administration should additionally require the `build`, `governance`,
+and—after stable validation—`dependency-review` checks in the `main` ruleset.
+The manual ruleset task is tracked separately in GitHub so this administrative
+control cannot be silently forgotten.
+
 ## Build and validation
 
 The validated local sequence is:
@@ -116,8 +134,8 @@ python3 scripts/check_external_links.py public --site-origin https://bhalaji.com
 GitHub Actions also runs accessibility, responsive-layout, contextual-navigation,
 deep-link and dismissal-state, spacing, component-integrity, laptop-frame, and
 mobile/desktop Lighthouse checks before deployment. Research Notes have an
-additional repository/publication-governance workflow. CV compilation is handled
-by the dedicated XeLaTeX workflow.
+additional repository/publication-governance workflow and pull requests receive
+dependency review. CV compilation is handled by the dedicated XeLaTeX workflow.
 
 ## Rights
 
