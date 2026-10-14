@@ -53,7 +53,8 @@ the private vault is not coupled to the public Hugo deployment.
 Quarto is reserved as an optional scientific-authoring/compiler layer for notes
 that genuinely need bibliography automation, cross-references, equations,
 numbered figures/tables, or reproducible computational output. Hugo remains the
-only production renderer and owner of the public visual system.
+only production renderer and owner of the public visual system. The controlled
+Quarto + curated Zotero/Better-BibTeX pilot for Note 001 is tracked in issue #79.
 
 ## Local pre-disclosure guard
 
@@ -110,8 +111,8 @@ check.
 
 Repository administration should require the `build` and `governance` checks in
 the `main` ruleset now, and add `dependency-review` only after its prerequisite
-and validation are complete. The manual ruleset/security task is tracked in
-GitHub so this control cannot be silently forgotten.
+and validation are complete. Issue #78 also tracks these ruleset changes so the
+administrative control cannot be silently forgotten.
 
 ## Build and validation
 
