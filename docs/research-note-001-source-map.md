@@ -54,6 +54,23 @@ Safe uses:
 
 The repository record is **not** permission to reconstruct, paraphrase, or disclose thesis-only technical material.
 
+## General peel-mechanics sources
+
+The pilot uses a deliberately small set of primary sources for general boundary claims rather than turning the note into a broad literature review.
+
+- Kendall, K. **Thin-film peeling—the elastic term.** *Journal of Physics D: Applied Physics* 1975, 8, 1449–1452. DOI: `10.1088/0022-3727/8/13/005`.
+  - Use: classical point that peel force reflects geometry and elastic deformation as well as interfacial work.
+- Villey, R. et al. **Rate-dependent elastic hysteresis during the peeling of pressure sensitive adhesives.** *Soft Matter* 2015, 11, 3480–3491. DOI: `10.1039/C5SM00260E`.
+  - Use: rate/rheology/dissipation sensitivity in pressure-sensitive adhesive peeling.
+- Perrin, H. et al. **Peeling an elastic film from a soft viscoelastic adhesive: experiments and scaling laws.** *Soft Matter* 2019, 15, 770–778. DOI: `10.1039/C8SM01946K`.
+  - Use: coupling among peel force, velocity, geometry, and viscoelastic dissipation in a soft adhesive system.
+- Dalbe, M.-J. et al. **Inertial and stick-slip regimes of unstable adhesive tape peeling.** *Soft Matter* 2016, 12, 4537–4548. DOI: `10.1039/C6SM00119J`.
+  - Use: oscillatory stick–slip/inertial peeling as a real instability rather than generic measurement noise.
+
+The note must not imply that pressure-sensitive tape, polymer-gel, and textile-interface systems are mechanically identical. These references support general mechanics boundaries only.
+
+The four general references above and the 2026 *Polymers* article were independently DOI/title matched and screened for retraction/expression-of-concern signals on October 14, 2026. All five matched their identifiers and none were flagged as retracted.
+
 ## Explicitly excluded
 
 Do not use in Note 001:
@@ -89,9 +106,9 @@ Primary reader job:
 
 The note should explain the measurement logic, not act as a replacement for the peer-reviewed paper or the software documentation.
 
-## Figure plan
+## Figure plan and current status
 
-### Figure 1 — preferred
+### Figure 1 — built privately
 
 An **original conceptual schematic** showing two illustrative force–displacement traces with similar central force level but different stability/oscillation behavior.
 
@@ -99,11 +116,13 @@ Required label/caption language: **Illustrative schematic; not experimental data
 
 Purpose: make the information-loss problem visible without reproducing a journal figure.
 
-### Figure 2 — optional
+### Figure 2 — built privately
 
 An original workflow schematic:
 
 `raw trace -> QC/analysis window -> force descriptors + stability descriptors -> replicate summary -> interpretation with limitations`
+
+The private SVG includes an accessible `<title>` and `<desc>`. A clipping defect found during visual QA was corrected before any promotion.
 
 Avoid reproducing journal figures for the first pilot unless reuse rights are explicitly checked. Public software figures/screenshots may be considered later only with clear provenance, attribution, and a reason they are superior to an original explanatory figure.
 
@@ -112,11 +131,36 @@ Avoid reproducing journal figures for the first pilot unless reuse rights are ex
 - Use the peer-reviewed article for scientific claims specific to the published study.
 - Use the public software repository/release for workflow, implementation, QC, provenance, validation, and current software behavior.
 - Use the public thesis record only for bibliographic relationship and embargo context.
-- Add general peel-mechanics primary literature or standards only after claim-level source verification.
+- Use the four general peel-mechanics papers only for the limited mechanics claims identified above.
 - Citation existence is not enough; each citation must support the nearby claim.
+
+## Provenance/disclosure rule for the note
+
+The public note should state that it discusses work the author co-authored and software the author co-developed. Funding and conflict-of-interest statements for the underlying study remain those of the peer-reviewed article. The note introduces no new experimental results or unpublished thesis material, and its explanatory figures are original schematics rather than measured data.
 
 ## Pilot status
 
-A private/local Quarto scaffold has been created outside public Git using only the sources above. It has **not** been rendered because Quarto is not installed in the current execution environment, and Quarto has not been added to portfolio CI.
+Completed privately/local-only:
 
-No Note 001 prose should enter `content/notes/` until the private pilot is scientifically reviewed, source status is verified, the proposed figures are cleared, and `repository_safe: true` is defensible under the Research Notes governance standard.
+- public-source inventory and disclosure boundary;
+- Quarto-style `.qmd` candidate scaffold;
+- curated `.bib` bibliography;
+- four-source general peel-mechanics expansion;
+- DOI/title/retraction screening for the five peer-reviewed references;
+- Pandoc citeproc dry run;
+- two original SVG explanatory figures;
+- visual QA of both figures and correction of a Figure 2 clipping defect;
+- provenance/disclosure block in the private candidate.
+
+Still required before any Note 001 source enters `content/notes/`:
+
+- actual Quarto `hugo-md` render in an environment with Quarto installed;
+- claim-level scientific review against the full cited sources;
+- final mapping to the repository governance front matter;
+- Hugo/mobile/print/accessibility integration QA;
+- final rights/provenance review at promotion time;
+- passing governance, dependency-review, full build, accessibility, and Lighthouse checks.
+
+Quarto has not been added to portfolio CI and no Quarto-render success is claimed yet.
+
+No Note 001 prose or figures should enter `content/notes/` until the private pilot is scientifically reviewed, the promotion checks above are complete, and `repository_safe: true` is defensible under the Research Notes governance standard.
