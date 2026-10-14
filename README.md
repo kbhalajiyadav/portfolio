@@ -17,8 +17,24 @@ Content classification decisions are recorded in
 `docs/content-taxonomy.md`. Sitewide hierarchy, scientific-visual integrity,
 responsive composition, evidence-link behavior, spacing, social-preview
 behavior, and release lessons are recorded in `docs/design-governance.md`.
-Both documents are intended to carry forward into future changes rather than be
-rediscovered case by case.
+Research Note disclosure, ownership, IP, ethics/COI, citation, copyright, and
+publication-release rules are recorded in `docs/research-notes-governance.md`.
+These documents are intended to carry forward into future changes rather than
+be rediscovered case by case.
+
+## Research Notes publication gate
+
+Research Notes are fail-closed by default. `archetypes/notes.md` creates drafts
+with conservative governance flags, and `scripts/check_notes_governance.py`
+rejects a public note when required publication metadata is incomplete or an
+unsafe disclosure flag remains set. The dedicated GitHub Actions workflow runs
+on relevant pull requests, main-branch changes, a monthly schedule, and manual
+dispatch.
+
+A passing automated check is necessary but not sufficient: scientific,
+disclosure, ownership/collaboration, IP, ethics/COI, and copyright judgments
+still require appropriate human review under the governing institutional,
+sponsor, journal, and collaboration requirements.
 
 ## Build and validation
 
@@ -33,6 +49,7 @@ python3 scripts/audit_source.py
 python3 scripts/audit_styles.py
 python3 scripts/audit_templates.py
 python3 scripts/check_design_governance.py
+python3 scripts/check_notes_governance.py
 python3 scripts/check_workflows.py
 node --check assets/js/site.js
 node --check assets/js/evidence-target.js
@@ -44,8 +61,9 @@ python3 scripts/check_external_links.py public --site-origin https://bhalaji.com
 
 GitHub Actions also runs accessibility, responsive-layout, contextual-navigation,
 deep-link and dismissal-state, spacing, component-integrity, laptop-frame, and
-mobile/desktop Lighthouse checks before deployment. CV compilation is handled
-by the dedicated XeLaTeX workflow.
+mobile/desktop Lighthouse checks before deployment. Research Notes have an
+additional publication-governance workflow. CV compilation is handled by the
+dedicated XeLaTeX workflow.
 
 ## Rights
 
