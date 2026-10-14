@@ -1,108 +1,148 @@
 # Research Notes publication governance
 
-This document is the release standard for any public note published from this repository. It is deliberately conservative: a personal research website is a public disclosure channel, not a substitute for a laboratory, sponsor, journal, university, ethics, or technology-transfer review process.
+This document is the release standard for Research Notes associated with the portfolio. It is deliberately conservative: a personal research website and its public Git repository are public-disclosure channels, not substitutes for laboratory, sponsor, journal, university, ethics, technology-transfer, or legal review.
 
-The default rule is **fail closed**. If disclosure status, ownership, confidentiality, attribution, intellectual-property status, ethics, or conflict-of-interest treatment is uncertain, keep the note as a draft and obtain the appropriate clarification before publication.
+The default rule is **fail closed**. If disclosure status, ownership, confidentiality, attribution, intellectual-property status, ethics, venue restrictions, privacy, or conflict-of-interest treatment is uncertain, keep the material in the private incubation workspace described in `research-notes-lifecycle.md`.
 
-## 1. Scope and authority
+## 1. Scope, authority, and the public-repository boundary
 
-These rules apply to every file under `content/notes/` other than section index pages. They govern whether a note may be made public; they do not determine legal rights or replace institutional review.
+These rules apply to every Research Note and associated asset.
+
+The `kbhalajiyadav/portfolio` repository is public. Therefore **anything committed here is already publicly disclosed at the source level**, regardless of Hugo's `draft` flag. `draft: true` means only “do not render this page on bhalaji.com yet.” It does not mean private, confidential, embargoed, or undiscoverable.
+
+A note may enter `content/notes/` only after `governance.repository_safe: true` is defensible and all public-repository boundary checks have been resolved.
 
 The standard is grounded in current authoritative guidance, including:
 
-- [VCU Research and Innovation — policies, procedures and compliance notices](https://research.vcu.edu/integrity-and-compliance/compliance/policies-procedures-and-compliance-notices/), which currently lists policies covering conflicts of interest in research, intellectual property, export compliance and research security, research data ownership/retention/access/security, research misconduct, human research protections, animal research, and sponsored-program obligations.
-- [VCU conflicts of interest in research](https://research.vcu.edu/integrity-and-compliance/integrity-and-ethics/conflicts-of-interest-in-research/), which treats financial and other personal interests as matters requiring disclosure, assessment, and management to protect objectivity and research integrity.
-- [VCU research ethics consultation](https://research.vcu.edu/integrity-and-compliance/research-ethics-consultation/), which explicitly covers authorship/publication questions, conflicts of interest, protocol issues, and research-integrity concerns.
-- [HHS Office of Research Integrity RCR Casebook](https://ori.hhs.gov/rcr-casebook-introduction), which treats authorship/publication, collaboration, data management, conflicts of interest, mentor/trainee responsibilities, and social responsibility as overlapping responsible-conduct issues.
-- [WIPO patent FAQ](https://www.wipo.int/en/web/patents/faq_patents) and [WIPO patent-protection guidance](https://www.wipo.int/en/web/patents/protection), which caution that public disclosure before filing can become prior art and can destroy novelty in many jurisdictions.
-- [USPTO international patent guidance](https://www.uspto.gov/patents/basics/international-protection/filing-patents-abroad), which notes that the United States has a one-year inventor-originated disclosure grace period while many other jurisdictions may not protect patentability after pre-filing public disclosure.
+- [VCU Research and Innovation — policies, procedures and compliance notices](https://research.vcu.edu/integrity-and-compliance/compliance/policies-procedures-and-compliance-notices/), covering research integrity/compliance areas including conflicts of interest, intellectual property, export compliance and research security, research data, human/animal research, misconduct, and sponsored-program obligations;
+- [VCU conflicts of interest in research](https://research.vcu.edu/integrity-and-compliance/integrity-and-ethics/conflicts-of-interest-in-research/);
+- [VCU research ethics consultation](https://research.vcu.edu/integrity-and-compliance/research-ethics-consultation/), including authorship/publication and research-integrity questions;
+- [HHS Office of Research Integrity RCR Casebook](https://ori.hhs.gov/rcr-casebook-introduction), addressing authorship/publication, collaboration, data management, conflicts, mentoring, and social responsibility;
+- [WIPO patent FAQ](https://www.wipo.int/en/web/patents/faq_patents) and [WIPO patent-protection guidance](https://www.wipo.int/en/web/patents/protection), which caution that public disclosure can affect novelty/patentability;
+- [USPTO international patent guidance](https://www.uspto.gov/patents/basics/international-protection/filing-patents-abroad), because patent consequences differ across jurisdictions;
+- [ICMJE recommendations on overlapping/public dissemination](https://www.icmje.org/recommendations/browse/publishing-and-editorial-issues/overlapping-publications.html), because journal, preprint, conference, and embargo rules can constrain further public dissemination;
+- [Crossref Crossmark](https://www.crossref.org/crossmark/), because a citation can be real yet later corrected, updated, or retracted;
+- [CRediT contributor roles](https://credit.niso.org/), as a useful standard when substantive contributions need explicit attribution.
 
-When a VCU policy, sponsor agreement, journal policy, collaboration agreement, law, regulation, or formal instruction is more restrictive than this repository standard, the more restrictive requirement controls.
+When a university policy, sponsor agreement, journal policy, collaboration agreement, protocol, law, regulation, or formal instruction is more restrictive than this repository standard, the more restrictive requirement controls.
 
-## 2. Permitted publication bases
+## 2. Permitted public-disclosure bases
 
-A public Research Note must rest on at least one defensible public-disclosure basis:
+A note entering the public repository must rest on a defensible public-disclosure basis:
 
 1. `public_literature` — established public sources such as peer-reviewed literature, standards, authoritative technical guidance, or public datasets;
-2. `published_own_work` — the author's already-public paper, thesis, dataset, software release, patent publication, or other stable scholarly record; or
-3. `authorized_public_disclosure` — material already made public through an authorized channel, such as an approved public presentation or other cleared disclosure.
+2. `published_own_work` — already-public paper, thesis, dataset, software release, published patent record, or other stable public scholarly record; or
+3. `authorized_public_disclosure` — material already made public through an authorized channel, such as a cleared public presentation.
 
-A note may combine these bases, but the front matter records the primary basis.
+A manuscript being drafted, under review, accepted but embargoed, discussed internally, shown in a closed meeting, stored in a private repository, or contained in a non-public patent application is **not** public merely because later release is expected.
 
-A manuscript being drafted, under review, accepted but embargoed, discussed internally, shown in a closed meeting, stored in a private repository, or included in a non-public patent application is **not** public merely because a future public release is expected.
+## 3. Absolute public-repository hold conditions
 
-## 3. Absolute hold conditions
-
-A note remains `draft: true` if it contains or materially reveals any of the following unless the relevant material has already become an authorized public disclosure and any additional required approval has been obtained:
+Do **not commit** a note or asset to this repository if it contains or materially reveals:
 
 - unpublished experimental results, trends, images, datasets, formulations, parameters, or mechanistic conclusions;
 - unpublished work of a collaborator, laboratory member, student, mentor, or external partner;
-- confidential, NDA-bound, sponsor-restricted, export-controlled, security-sensitive, or otherwise restricted information;
+- confidential, NDA-bound, sponsor-restricted, export-controlled, security-sensitive, embargoed, or otherwise restricted information;
 - enabling details of potentially patentable subject matter that have not been cleared for public disclosure;
 - peer-review material, grant-review material, internal research discussions, or non-public sponsor communications;
-- identifiable or restricted human-subject information, non-public animal-research information, or material whose disclosure conflicts with an approved protocol or data-use condition;
+- identifiable/restricted human-subject information, non-public regulated data, or material inconsistent with an approved protocol or data-use condition;
 - third-party figures, tables, photographs, text, or other copyrighted material without an applicable license, permission, or defensible original replacement.
 
-Absence of numerical data is not sufficient to make a disclosure safe. A workflow, schematic, choice of variables, sequence of operations, interpretation, or framing can itself reveal unpublished intellectual contribution.
+Absence of numbers is not sufficient. A workflow, schematic, choice of variables, sequence of operations, interpretation, or framing can itself reveal unpublished intellectual contribution.
 
-## 4. PI, collaborator, sponsor, and ownership rule
+## 4. PI, collaborator, ownership, and contributor rule
 
-If another researcher could reasonably say, “this is partly our unpublished work,” the note is held until the appropriate author/PI/collaborator review is resolved.
+If another researcher could reasonably say “this is partly our unpublished work,” hold the material privately until the appropriate author/PI/collaborator review is resolved.
 
-If work was performed using university resources, within a laboratory, under sponsored research, under a collaboration, or in connection with institutional intellectual property, ownership and disclosure obligations must be checked before publication. A personal website does not supersede those obligations.
+If work was performed using university resources, within a laboratory, under sponsored research, under a collaboration, or in connection with institutional intellectual property, ownership/disclosure obligations must be checked before public-repository entry.
 
-`ownership_review: complete` means the author has checked that the proposed public note does not conflict with applicable ownership, collaboration, sponsor, or laboratory obligations. It does not assert that the author personally owns every underlying research asset.
+`ownership_review: complete` means the author has checked applicable ownership, collaboration, sponsor, or laboratory obligations; it does not claim sole personal ownership of every underlying asset.
 
-## 5. Intellectual-property rule
+`contributor_review: complete` means substantive intellectual, methodological, software, visualization, supervisory, or writing contributions have been considered for appropriate credit. When useful, CRediT roles can guide attribution. Do not publicly name contributors merely to create an acknowledgement if doing so would disclose sensitive context or if permission is needed.
 
-Treat a Research Note as a public disclosure.
+## 5. Intellectual property
 
-If a note is potentially patent-sensitive, set `potentially_patent_sensitive: true`. The note cannot be published unless `ip_clearance: cleared` and the text stays within the authorized public scope.
+Treat both the public repository and the public website as public disclosure.
 
-A filed patent application does not automatically authorize disclosure of every implementation detail. A published patent application makes its published contents public, but related undisclosed improvements, data, know-how, or later inventions may remain sensitive.
+If material is potentially patent-sensitive, set `potentially_patent_sensitive: true`. It cannot enter this repository unless `ip_clearance: cleared` and the candidate stays within the cleared public scope.
 
-If there is any uncertainty, consult the relevant institutional technology-transfer or intellectual-property contact before publication.
+A filed application does not automatically authorize disclosure of every related implementation detail. A published patent application makes the published contents public, but undisclosed improvements, data, know-how, or later inventions can remain sensitive.
 
-## 6. Research ethics and regulated research
+When uncertain, use the relevant institutional technology-transfer/IP channel before repository entry.
 
-For material involving human participants, animals, regulated data, export controls, dual-use concerns, controlled technology, or another formal oversight regime, publication requires compatibility with the applicable protocol, authorization, data-use terms, and institutional requirements.
+## 6. Journal, preprint, conference, and embargo status
 
-Set `regulated_research_material: true` whenever a note touches such material. Publication then requires `ethics_review: cleared`.
+A note that overlaps with a manuscript, accepted article, conference disclosure, preprint, or other venue must be checked against the applicable venue/publicity policy.
 
-For ordinary materials-science notes that do not involve regulated research, use `regulated_research_material: false` and `ethics_review: not_applicable`.
+Use:
 
-## 7. Conflicts of interest
+- `venue_policy_review: not_applicable` when no relevant venue restriction exists;
+- `venue_policy_review: cleared` when the applicable policy has been checked and permits the proposed public disclosure.
 
-Every public note receives a COI review.
+`embargo_status` must be `none` before material enters this public repository. An embargo end date does not trigger automatic publication; a human re-review is required after the restriction expires.
 
-Use one of:
+## 7. Ethics, regulated research, export control, and dual use
+
+Human participants, animals, regulated data, controlled technology, export restrictions, dual-use concerns, or another formal oversight regime require compatibility with the applicable authorization, protocol, data-use terms, and institutional requirements.
+
+These are separate questions:
+
+- `regulated_research_material` + `ethics_review` address protocol/regulated-research concerns;
+- `export_control_review` addresses export/research-security restrictions;
+- `dual_use_review` addresses dual-use concerns where applicable.
+
+Ordinary materials-science notes with no such issues use the corresponding `not_applicable` values.
+
+## 8. Privacy and non-research personal information
+
+Research-regulation status does not exhaust privacy risk. Screenshots, photographs, teaching examples, student work, internal messages, sample labels, badges, whiteboards, email excerpts, or collaborator names can expose personal or sensitive information.
+
+`privacy_review: complete` means the note and every associated asset have been reviewed for unnecessary personal information, consent/permission needs, and context-specific privacy obligations.
+
+## 9. Conflicts of interest and funding
+
+Every public-source candidate receives a COI review.
+
+Use:
 
 - `coi_status: none_declared` — no relevant conflict identified for the note;
-- `coi_status: disclosed` — a relevant relationship exists and is transparently disclosed in `coi_statement`;
-- `coi_status: managed` — a relevant relationship is subject to a formal management arrangement and the public statement is appropriate to the allowed disclosure.
+- `coi_status: disclosed` — a relevant relationship exists and a suitable public statement is provided;
+- `coi_status: managed` — a relevant relationship is subject to a formal management arrangement and the public statement is appropriate.
 
-Potentially relevant interests can include financial interests, consulting/advisory relationships, employment, sponsorship, licensing interests, inventorship/patent interests, or other relationships that a reasonable reader could consider relevant to interpretation of the note.
+Potentially relevant interests include financial interests, consulting/advisory relationships, employment, sponsorship, licensing interests, inventorship/patent interests, or other relationships a reasonable reader could consider relevant.
 
-The repository check enforces disclosure metadata; it does not determine whether an institutional COI filing or management plan is required.
+`funding_review: complete` means any applicable award terms, acknowledgement language, grant identifiers, sponsor disclaimers, and publication clauses have been considered. Do not publish confidential award documents or management plans as repository evidence.
 
-## 8. Citation and evidentiary rule
+The repository records only minimal release status; authoritative institutional records remain in their proper systems.
 
-A public note must contain a non-empty `sources` list and should distinguish:
+## 10. Citation, source status, and evidentiary calibration
 
-- established scientific claims — supported by primary literature, standards, or authoritative sources where practicable;
-- the author's published results — linked to the corresponding paper, thesis, dataset, software release, patent publication, or other public record;
-- interpretation — written as interpretation rather than established fact and grounded in cited evidence;
-- reflection or methodological preference — clearly framed as perspective rather than universal scientific fact.
+A published note requires independently verified sources and must distinguish:
 
-Citations must be verified against the underlying source. AI output, search snippets, or a secondary summary are not substitutes for checking the cited record.
+- established scientific claims — primary literature, standards, or authoritative sources where practicable;
+- the author's published results — corresponding paper, thesis, dataset, software release, patent publication, or other public record;
+- interpretation — explicitly framed as interpretation and grounded in evidence;
+- reflection/methodological preference — clearly framed as perspective rather than universal fact.
 
-Raw AI/chat transcripts are not publication-ready source material. AI may assist drafting or adversarial review, but the final note must be independently checked for scientific accuracy, citations, disclosure safety, authorship, and provenance.
+Citations must be checked against the underlying source. AI output, search snippets, or secondary summaries are not substitutes for source verification.
 
-## 9. Copyright and figure provenance
+`source_status_review: complete` means important sources have also been checked for known corrections, updates, expressions of concern, or retractions where such status information is available. Crossmark and publisher records are useful for DOI-backed literature.
 
-Every published note requires `copyright_review: complete`.
+## 11. AI/external-tool input governance
 
-Public figures are classified as one of:
+AI or external tools may assist outlining, language editing, adversarial review, or public-source synthesis, but they are not evidentiary authorities.
+
+More importantly, **input governance precedes output governance**. Do not supply non-public research, collaborator-confidential information, sponsor-restricted material, regulated data, unpublished peer/grant review material, or IP-sensitive details to an external AI/cloud service unless that use is permitted by all applicable institutional, sponsor, collaboration, protocol, data-governance, and confidentiality requirements.
+
+`external_tool_review: complete` means the author has considered whether drafting/review tools received material they were permitted to receive. It does not create or imply institutional approval.
+
+Raw AI/chat transcripts are not publication-ready source material.
+
+## 12. Copyright, figures, photographs, and metadata
+
+Every public-source candidate requires `copyright_review: complete`.
+
+Figures are classified as:
 
 - original schematic;
 - original data already cleared for public use;
@@ -112,34 +152,60 @@ Public figures are classified as one of:
 - clearly labelled illustrative/simulated material;
 - photograph with appropriate rights and disclosure clearance.
 
-Illustrative or simulated material must never be presented in a way that could reasonably be mistaken for observed experimental evidence.
+Illustrative/simulated material must never be presented as observed evidence.
 
-## 10. Required release metadata
+Images and exported assets must also be reviewed for visible confidential information and unnecessary metadata such as location/device information before repository entry.
 
-Each note uses the `archetypes/notes.md` governance block. Drafts may retain pending review values. A note with `draft: false` must satisfy all automated checks in `scripts/check_notes_governance.py`.
+## 13. Repository-safe metadata versus publication metadata
 
-At minimum a published note requires:
+A note committed to this public repository must already satisfy the **repository-safe gate**:
 
-- a valid note type and status;
-- a clear disclosure basis;
-- no unpublished/collaborator/confidential material flags;
-- IP clearance when patent-sensitive;
-- ethics clearance when regulated-research material is involved;
-- completed ownership and copyright review;
-- completed COI review and statement when needed;
-- explicit publication approval;
-- at least one verified source.
+- `repository_safe: true`;
+- valid disclosure basis;
+- unpublished/collaborator/confidential flags explicitly false;
+- IP review resolved;
+- venue policy resolved and no active embargo;
+- ethics/export/dual-use questions resolved;
+- ownership, contributor, funding, privacy, external-tool, copyright, and COI review resolved.
 
-## 11. Release sequence
+A note may remain `draft: true` after that while public-site QA continues.
 
-Use this order for every Research Note:
+A note with `draft: false` additionally requires:
 
-`draft -> source/citation review -> disclosure review -> ownership/collaboration review -> IP review if applicable -> ethics/COI review -> copyright/figure review -> web/accessibility/performance checks -> publication approval -> merge -> live verification`
+- non-empty final body/summary;
+- verified source list;
+- `source_status_review: complete`;
+- `author_release_decision: approved`;
+- successful web/accessibility/performance/metadata checks.
 
-No search, social, RSS, POSSE, or syndication step is allowed to precede canonical publication on `bhalaji.com`.
+`author_release_decision` is the author's final publication action. It must never be described as institutional, sponsor, PI, journal, ethics, or legal approval unless such approval actually exists through the appropriate external process.
 
-## 12. Human review remains mandatory
+## 14. Corrections, retirement, and withdrawal
 
-Automation can detect missing metadata and known unsafe states; it cannot decide whether a scientific idea is confidential, whether a figure exceeds a license, whether a sponsor term applies, or whether a disclosure creates patent risk.
+Publication creates an effectively irreversible public record. Deleting a page or Git commit does not reliably restore confidentiality.
 
-Accordingly, a passing CI check is necessary but not sufficient. When the scientific or governance judgment is uncertain, keep the note private and use the appropriate PI, collaborator, VCU ethics/compliance, technology-transfer, sponsor, or journal channel for clarification.
+After publication:
+
+- minor spelling/layout/link fixes may be corrected without a substantive notice;
+- substantive scientific clarification updates `lastmod` and receives a short revision note;
+- material factual errors receive a visible correction;
+- superseded material may be retired and redirected/contextualized;
+- content that should no longer be relied upon receives a withdrawal notice rather than silent deletion.
+
+Never repeat sensitive material unnecessarily in a withdrawal notice.
+
+## 15. Release sequence
+
+Use this lifecycle:
+
+`private embryo -> private incubation -> private clearance -> repository-safe public-source staging -> web QA -> author release -> live verification -> POSSE -> maintenance/correction`
+
+No search, RSS, social, POSSE, or syndication step precedes canonical publication on `bhalaji.com`.
+
+The private stages live outside this public repository. See `research-notes-lifecycle.md`.
+
+## 16. Human review remains mandatory
+
+Automation can detect missing metadata and known unsafe states; it cannot decide whether an idea is confidential, whether a sponsor/journal term applies, whether a figure exceeds a license, or whether a disclosure creates patent, ethics, privacy, export, or collaboration risk.
+
+A passing CI check is necessary but not sufficient. When judgment is uncertain, keep the material in the private incubation environment and use the appropriate PI, collaborator, VCU ethics/compliance, technology-transfer, sponsor, journal, or other authoritative channel.
