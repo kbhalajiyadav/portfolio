@@ -195,15 +195,20 @@ Keep:
 - full Hugo/accessibility/performance CI;
 - monthly integrity checks.
 
-Add/require administratively:
+Administrative prerequisites/additions:
 
+- enable GitHub **Dependency Graph** before attempting to enforce dependency review;
+- once enabled, restore the official `actions/dependency-review-action`, pin it to an immutable commit SHA, validate it on a PR, and only then make it required;
 - main-branch ruleset requiring `governance` and `build` status checks;
 - expected source app set to GitHub Actions where possible;
-- no bypass except deliberate emergency/admin use;
-- consider requiring the dependency-review check after it proves stable.
+- no bypass except deliberate emergency/admin use.
 
-GitHub documents that required status checks can be bound to an expected GitHub App source and must pass before merge when enabled in a ruleset:
-<https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/available-rules-for-rulesets>
+The dependency-review action was tested during PR #77 and correctly failed because Dependency Graph is currently disabled. The failing workflow was removed rather than leave permanently red CI. The prerequisite and restoration steps are tracked in issue #78.
+
+GitHub documents that dependency review is available for public repositories when the prerequisite repository capability is enabled, and that required status checks can be bound to an expected GitHub App source and must pass before merge when enabled in a ruleset:
+
+- <https://docs.github.com/en/pull-requests/how-tos/review-pull-requests/reviewing-dependency-changes-in-a-pull-request>
+- <https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/available-rules-for-rulesets>
 
 ## 7. Tool-adoption test
 
@@ -226,8 +231,11 @@ Adopt now:
 - local-only Quartz preview;
 - existing governance/build CI;
 - local disclosure hooks;
-- dependency review (after CI validation);
 - explicit GitHub ruleset required checks (manual repository-admin action).
+
+Administrative prerequisite:
+
+- enable Dependency Graph, then restore/test dependency review before enforcing it.
 
 Pilot next:
 
