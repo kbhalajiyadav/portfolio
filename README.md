@@ -99,14 +99,19 @@ institutional, sponsor, journal, protocol, and collaboration requirements.
 
 ## Dependency and merge safety
 
-Dependabot monitors GitHub Actions and npm dependencies. Pull requests also run
-the pinned official GitHub dependency-review action, which fails when a newly
-introduced dependency reaches the configured vulnerability threshold.
+Dependabot monitors GitHub Actions and npm dependencies.
 
-Repository administration should additionally require the `build`, `governance`,
-and—after stable validation—`dependency-review` checks in the `main` ruleset.
-The manual ruleset task is tracked separately in GitHub so this administrative
-control cannot be silently forgotten.
+GitHub's official dependency-review action was tested during PR #77, but GitHub
+reported that Dependency Graph is currently disabled for this repository. The
+failing workflow was removed rather than leave permanently red CI. Issue #78
+tracks the administrative sequence: enable Dependency Graph, restore and
+validate the pinned dependency-review action, and only then make it a required
+check.
+
+Repository administration should require the `build` and `governance` checks in
+the `main` ruleset now, and add `dependency-review` only after its prerequisite
+and validation are complete. The manual ruleset/security task is tracked in
+GitHub so this control cannot be silently forgotten.
 
 ## Build and validation
 
@@ -134,8 +139,8 @@ python3 scripts/check_external_links.py public --site-origin https://bhalaji.com
 GitHub Actions also runs accessibility, responsive-layout, contextual-navigation,
 deep-link and dismissal-state, spacing, component-integrity, laptop-frame, and
 mobile/desktop Lighthouse checks before deployment. Research Notes have an
-additional repository/publication-governance workflow and pull requests receive
-dependency review. CV compilation is handled by the dedicated XeLaTeX workflow.
+additional repository/publication-governance workflow. CV compilation is handled
+by the dedicated XeLaTeX workflow.
 
 ## Rights
 
