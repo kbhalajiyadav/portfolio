@@ -74,7 +74,7 @@ jobs:
           mkdir -p content/notes artifacts/notes-presentation
           cp testdata/research-notes/*.md content/notes/
           hugo --gc --buildDrafts --minify --printPathWarnings \
-            --baseURL "https://notes-fixture.invalid/" \
+            --baseURL "http://127.0.0.1:4174/" \
             --destination artifacts/notes-presentation
           python3 scripts/check_notes_presentation.py artifacts/notes-presentation
 
