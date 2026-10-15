@@ -20,10 +20,21 @@
   "publisher" (dict "@id" $personID)
   "isPartOf" (dict "@id" $websiteID)
   "creativeWorkStatus" $status
+  "articleSection" "Research Notes"
+  "inLanguage" (site.Language.Lang | default "en")
+  "isAccessibleForFree" true
 }}
 {{ if ne $status "withdrawn" }}
   {{ with .Params.tags }}{{ $article = merge $article (dict "keywords" .) }}{{ end }}
   {{ with .Params.image }}{{ $article = merge $article (dict "image" (. | absURL)) }}{{ end }}
+  {{ $citationRefs := slice }}
+  {{ range $path := (.Params.related_publications | default (slice)) }}
+    {{ with site.GetPage $path }}{{ $citationRefs = $citationRefs | append (dict "@id" .Permalink) }}{{ end }}
+  {{ end }}
+  {{ range $path := (.Params.related_software | default (slice)) }}
+    {{ with site.GetPage $path }}{{ $citationRefs = $citationRefs | append (dict "@id" .Permalink) }}{{ end }}
+  {{ end }}
+  {{ if gt (len $citationRefs) 0 }}{{ $article = merge $article (dict "citation" $citationRefs) }}{{ end }}
 {{ end }}
 <script type="application/ld+json">{{ $article | jsonify | safeJS }}</script>
 {{ $crumbs := slice
