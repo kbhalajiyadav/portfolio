@@ -1,0 +1,75 @@
+name: Research Notes presentation
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "archetypes/notes.md"
+      - "content/notes/**"
+      - "layouts/_default/baseof.html"
+      - "layouts/notes/**"
+      - "layouts/partials/notes/**"
+      - "static/css/notes.css"
+      - "scripts/check_notes_presentation.py"
+      - "testdata/research-notes/**"
+      - ".github/workflows/research-notes-presentation.yaml"
+  push:
+    branches: [main]
+    paths:
+      - "archetypes/notes.md"
+      - "content/notes/**"
+      - "layouts/_default/baseof.html"
+      - "layouts/notes/**"
+      - "layouts/partials/notes/**"
+      - "static/css/notes.css"
+      - "scripts/check_notes_presentation.py"
+      - "testdata/research-notes/**"
+      - ".github/workflows/research-notes-presentation.yaml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  notes-presentation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      HUGO_VERSION: 0.124.1
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Install verified Hugo CLI
+        run: |
+          package="hugo_${HUGO_VERSION}_linux-amd64.deb"
+          release="https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}"
+          curl --fail --location --retry 3 --output "${RUNNER_TEMP}/${package}" "${release}/${package}"
+          curl --fail --location --retry 3 --output "${RUNNER_TEMP}/checksums.txt" "${release}/hugo_${HUGO_VERSION}_checksums.txt"
+          (cd "${RUNNER_TEMP}" && grep " ${package}$" checksums.txt | sha256sum --check --strict)
+          sudo dpkg -i "${RUNNER_TEMP}/${package}"
+          hugo version
+
+      - name: Render non-publishing Research Notes fixtures
+        run: |
+          mkdir -p content/notes artifacts/notes-presentation
+          cp testdata/research-notes/*.md content/notes/
+          hugo --gc --buildDrafts --minify --printPathWarnings \
+            --baseURL "https://notes-fixture.invalid/" \
+            --destination artifacts/notes-presentation
+          python3 scripts/check_notes_presentation.py artifacts/notes-presentation
+
+      - name: Upload presentation evidence
+        if: github.event_name == 'pull_request' && success()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: research-notes-presentation-${{ github.run_attempt }}
+          path: artifacts/notes-presentation/
+          if-no-files-found: error
+          retention-days: 14
