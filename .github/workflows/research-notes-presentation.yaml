@@ -69,7 +69,7 @@ jobs:
       - name: Install exact accessibility-tool versions
         run: npm install --ignore-scripts --no-audit --no-fund
 
-      - name: Render non-publishing Research Notes fixtures
+      - name: Render non-publishing Research Notes fixtures and staged drafts
         run: |
           mkdir -p content/notes artifacts/notes-presentation
           cp testdata/research-notes/*.md content/notes/
@@ -108,6 +108,12 @@ jobs:
             --window-size=1440,1000 --screenshot=artifacts/notes-screenshots/index-desktop.png \
             http://127.0.0.1:4174/notes/
           "$CHROME_PATH" --headless=new --no-sandbox --disable-dev-shm-usage --hide-scrollbars \
+            --window-size=1440,1000 --screenshot=artifacts/notes-screenshots/note-001-desktop.png \
+            http://127.0.0.1:4174/notes/peel-trace-beyond-single-force/
+          "$CHROME_PATH" --headless=new --no-sandbox --disable-dev-shm-usage --hide-scrollbars \
+            --window-size=390,844 --screenshot=artifacts/notes-screenshots/note-001-mobile.png \
+            http://127.0.0.1:4174/notes/peel-trace-beyond-single-force/
+          "$CHROME_PATH" --headless=new --no-sandbox --disable-dev-shm-usage --hide-scrollbars \
             --window-size=1440,1000 --screenshot=artifacts/notes-screenshots/method-desktop.png \
             http://127.0.0.1:4174/notes/presentation-method/
           "$CHROME_PATH" --headless=new --no-sandbox --disable-dev-shm-usage --hide-scrollbars \
@@ -117,6 +123,8 @@ jobs:
             --window-size=1440,1000 --screenshot=artifacts/notes-screenshots/withdrawn-desktop.png \
             http://127.0.0.1:4174/notes/presentation-withdrawn/
           test -s artifacts/notes-screenshots/index-desktop.png
+          test -s artifacts/notes-screenshots/note-001-desktop.png
+          test -s artifacts/notes-screenshots/note-001-mobile.png
           test -s artifacts/notes-screenshots/method-desktop.png
           test -s artifacts/notes-screenshots/method-mobile.png
           test -s artifacts/notes-screenshots/withdrawn-desktop.png
