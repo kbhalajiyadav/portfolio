@@ -103,6 +103,33 @@ disclosure, ownership/collaboration, IP, venue, ethics/COI, privacy, copyright,
 and other judgments still require appropriate human review under the governing
 institutional, sponsor, journal, protocol, and collaboration requirements.
 
+## Research Notes presentation QA
+
+The public-facing Notes components are tested without publishing a real Research
+Note. Synthetic drafts in `testdata/research-notes/` exercise the three note
+types and the `evolving`, `corrected`, `retired`, and `withdrawn` lifecycle
+states. They contain no research findings.
+
+`.github/workflows/research-notes-presentation.yaml` copies those fixtures into
+the build workspace only, renders them with Hugo `--buildDrafts`, and uploads the
+result as a private pull-request artifact. The workflow checks:
+
+- the relevance-oriented Notes index and article hierarchy;
+- the dedicated fingerprinted `site-notes` stylesheet bundle;
+- Article and BreadcrumbList structured data;
+- Open Graph article metadata, branded Research social-card fallback, and draft
+  `noindex` behavior;
+- table-of-contents, correction, retirement, and withdrawal rendering;
+- withdrawn-note tombstones do not expose the previous body or summary;
+- WCAG 2 AA automated accessibility at 1440 px desktop, 390 px mobile, and
+  320 px reflow widths; and
+- desktop/mobile screenshots for manual visual review.
+
+The Notes CSS reuses the portfolio's existing visual tokens but has a distinct
+fingerprinted bundle target, preventing conditional Hugo resource caching from
+silently dropping the editorial layer. `content/notes/_index.md` remains a draft,
+so this infrastructure does not create a public `/notes/` section by itself.
+
 ## Dependency and merge safety
 
 Dependabot monitors GitHub Actions and npm dependencies. GitHub Dependency Graph
@@ -113,7 +140,10 @@ successfully on PR #77.
 
 Repository administration should require the `build`, `governance`, and
 `dependency-review` checks in the `main` ruleset. Issue #78 tracks this final
-manual repository-admin control so it cannot be silently forgotten.
+manual repository-admin control so it cannot be silently forgotten. The
+path-scoped `notes-presentation` workflow remains an additional Notes-specific
+quality gate rather than a global required check, so unrelated pull requests are
+not blocked when it does not run.
 
 ## Build and validation
 
@@ -140,9 +170,10 @@ python3 scripts/check_external_links.py public --site-origin https://bhalaji.com
 
 GitHub Actions also runs accessibility, responsive-layout, contextual-navigation,
 deep-link and dismissal-state, spacing, component-integrity, laptop-frame, and
-mobile/desktop Lighthouse checks before deployment. Research Notes have an
-additional repository/publication-governance workflow, and pull requests receive
-dependency review. CV compilation is handled by the dedicated XeLaTeX workflow.
+mobile/desktop Lighthouse checks before deployment. Research Notes add separate
+governance and private presentation-validation workflows, and pull requests
+receive dependency review. CV compilation is handled by the dedicated XeLaTeX
+workflow.
 
 ## Rights
 
