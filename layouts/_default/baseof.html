@@ -23,7 +23,8 @@
   {{ $styleParts := slice $core $refinements $about $polish }}
   {{ if eq .Section "notes" }}
     {{ $notes := resources.FromString "css/notes.css" (readFile "static/css/notes.css") }}
-    {{ $styleParts = $styleParts | append $notes }}
+    {{ $noteEnhancements := resources.FromString "css/notes-enhancements.css" (readFile "static/css/notes-enhancements.css") }}
+    {{ $styleParts = $styleParts | append $notes | append $noteEnhancements }}
     {{ $styles := $styleParts | resources.Concat "css/site-notes.css" | minify | fingerprint "sha384" }}
     <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}" crossorigin="anonymous">
   {{ else }}
