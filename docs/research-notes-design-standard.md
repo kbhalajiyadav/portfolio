@@ -143,7 +143,7 @@ Table of contents rule:
 
 - short note with fewer than about four substantial sections: no TOC;
 - longer technical note: compact TOC;
-- mobile: collapsed/disclosure UI;
+- mobile: collapsed/disclosure UI or a restrained inline treatment;
 - desktop: inline or restrained side treatment.
 
 No permanent large digital-garden sidebar is required on public notes.
@@ -272,7 +272,7 @@ Public target thresholds:
 
 - LCP: ≤ 2.5 s;
 - INP: ≤ 200 ms;
-- CLS: ≤ 0.1;
+- CLS: ≤ 0.1.
 
 Internal Lighthouse goal for the static note template where practical:
 
@@ -316,6 +316,8 @@ Require:
 
 Animation must be scientifically useful and must not be required to understand the content.
 
+The private presentation fixture workflow audits the Notes templates at desktop, mobile, and 320 px reflow widths before a real note is released. Contrast failures are release blockers rather than warnings.
+
 Authoritative reference: <https://www.w3.org/WAI/WCAG22/>
 
 ## 15. Metadata and machine readability
@@ -325,19 +327,21 @@ Published notes should expose:
 - unique page title;
 - meta description;
 - canonical URL;
-- Open Graph metadata;
+- Open Graph metadata with `og:type=article`;
 - social preview image where appropriate;
 - `Article` structured data;
 - author linkage;
 - `datePublished`;
 - substantive `dateModified`;
 - representative image where useful;
-- breadcrumb structured data;
+- `BreadcrumbList` structured data;
 - related-publication/software links.
 
 `dateModified` must represent a substantive intellectual/content update, not a CSS or build-system change.
 
 Use `Article`, not `BlogPosting`, unless the content model materially changes.
+
+Draft renderings are `noindex`. Withdrawn notes use generic tombstone descriptions across visible summaries, metadata, and structured data rather than leaking the superseded scientific summary.
 
 Google reference: <https://developers.google.com/search/docs/appearance/structured-data/article>
 
@@ -352,6 +356,8 @@ Default composition:
 - author identity/monogram as appropriate;
 - `bhalaji.com` provenance;
 - portfolio palette and typography.
+
+Until a title-specific generator is justified by an actual cleared note, Research Notes may use the existing branded Research social card as a safe fallback. Do not introduce a second card system solely for the empty section.
 
 Do not use unrelated stock photographs simply to fill the social card.
 
@@ -371,6 +377,8 @@ Dates remain visible metadata but should not dominate discovery.
 
 Full-text search is deferred until the corpus is large enough to justify it; topic/tag filtering and strong internal linking are sufficient initially.
 
+The section itself remains a draft until the first note is cleared for publication, so presentation infrastructure alone does not create an empty discoverable `/notes/` surface.
+
 ## 18. Internal-link architecture
 
 Every note should be evaluated for meaningful links to:
@@ -385,6 +393,8 @@ Every note should be evaluated for meaningful links to:
 Anchor text should describe the destination/question rather than use generic `read more` language where context permits.
 
 The public site may borrow Quartz's knowledge-graph principles without exposing a large graph visualization.
+
+Related internal evidence should resolve through real Hugo page objects where possible; a published note must fail the build rather than silently link to a missing related page.
 
 ## 19. Revision, correction, retirement, and withdrawal rendering
 
@@ -423,7 +433,9 @@ Superseded/no longer maintained:
 Content should not be relied upon:
 
 - retain a minimal status/tombstone page unless legal/safety circumstances require otherwise;
-- avoid repeating problematic material unnecessarily;
+- suppress the previous article body from normal rendering;
+- use a generic safe summary in the header, listing, search/social metadata, and structured data rather than repeating the withdrawn claim;
+- link to current material when available;
 - preserve enough provenance to prevent silent historical rewriting.
 
 ## 20. Print and archival behavior
@@ -461,7 +473,7 @@ Avoid:
 - duplicate articles differing only by wording;
 - automatic content expansion based on search-volume opportunities.
 
-Discovery optimization occurs after scientific/gov/strategic eligibility.
+Discovery optimization occurs after scientific/governance/strategic eligibility.
 
 ## 23. Release QA
 
@@ -498,10 +510,13 @@ Before `draft: false`, a note must pass:
 
 - canonical/meta/social/schema valid;
 - internal/external links pass;
-- accessibility automation/manual checks pass;
-- responsive checks pass;
+- Notes-specific stylesheet bundle is present;
+- accessibility automation/manual checks pass at desktop, mobile, and 320 px reflow;
+- responsive screenshots are manually inspected before first release and after material layout changes;
 - Lighthouse/performance gates pass;
 - print output is acceptable for technical notes where relevant.
+
+Synthetic presentation fixtures may exercise this rendering/QA layer, but they are test data only and are never scholarly evidence or deployable content.
 
 ## 24. Anti-complexity rule
 
