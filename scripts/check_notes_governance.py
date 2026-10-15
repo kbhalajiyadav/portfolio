@@ -28,6 +28,8 @@ ALLOWED_DISCLOSURE_BASES = {
 ALLOWED_COI = {"none_declared", "disclosed", "managed"}
 ALLOWED_REVIEW = {"not_applicable", "cleared"}
 ALLOWED_VENUE = {"not_applicable", "cleared"}
+ALLOWED_STAGING_DECISIONS = {"pending", "approved"}
+ALLOWED_EXTERNAL_SCIENCE_REVIEW = {"pending", "complete", "not_required"}
 
 UNSAFE_TRUE_FLAGS = (
     "contains_unpublished_research",
@@ -38,6 +40,7 @@ UNSAFE_TRUE_FLAGS = (
 COMPLETE_REVIEW_FIELDS = (
     "ownership_review",
     "contributor_review",
+    "editorial_value_review",
     "funding_review",
     "privacy_review",
     "external_tool_review",
@@ -46,6 +49,7 @@ COMPLETE_REVIEW_FIELDS = (
 
 REQUIRED_GOVERNANCE_FIELDS = (
     "repository_safe",
+    "repository_staging_decision",
     "disclosure_basis",
     "contains_unpublished_research",
     "contains_unpublished_collaborator_material",
@@ -60,9 +64,12 @@ REQUIRED_GOVERNANCE_FIELDS = (
     "dual_use_review",
     "ownership_review",
     "contributor_review",
+    "editorial_value_review",
     "funding_review",
     "privacy_review",
     "external_tool_review",
+    "external_scientific_review_required",
+    "external_scientific_review_status",
     "coi_status",
     "coi_statement",
     "copyright_review",
@@ -165,6 +172,16 @@ def main() -> int:
         else:
             staged += 1
 
+        staging_decision = review_value(governance, "repository_staging_decision")
+        if staging_decision not in ALLOWED_STAGING_DECISIONS:
+            errors.append(
+                f"{rel}: governance.repository_staging_decision must be one of {sorted(ALLOWED_STAGING_DECISIONS)}"
+            )
+        if staging_decision != "approved":
+            errors.append(
+                f"{rel}: governance.repository_staging_decision must be approved before the source enters public Git"
+            )
+
         disclosure_basis = review_value(governance, "disclosure_basis")
         if disclosure_basis not in ALLOWED_DISCLOSURE_BASES:
             errors.append(
@@ -215,6 +232,25 @@ def main() -> int:
             if review_value(governance, field) != "complete":
                 errors.append(f"{rel}: governance.{field} must be complete before repository entry")
 
+        external_science_required = governance.get("external_scientific_review_required")
+        external_science_status = review_value(governance, "external_scientific_review_status")
+        if external_science_required not in (True, False):
+            errors.append(f"{rel}: governance.external_scientific_review_required must be true or false")
+        if external_science_status not in ALLOWED_EXTERNAL_SCIENCE_REVIEW:
+            errors.append(
+                f"{rel}: governance.external_scientific_review_status must be one of "
+                f"{sorted(ALLOWED_EXTERNAL_SCIENCE_REVIEW)}"
+            )
+        if external_science_required is False and external_science_status != "not_required":
+            errors.append(
+                f"{rel}: when external scientific review is not required, "
+                "governance.external_scientific_review_status must be not_required"
+            )
+        if external_science_required is True and external_science_status == "not_required":
+            errors.append(
+                f"{rel}: required external scientific review cannot use status=not_required"
+            )
+
         coi_status = review_value(governance, "coi_status")
         coi_statement = review_value(governance, "coi_statement")
         if coi_status not in ALLOWED_COI:
@@ -225,7 +261,7 @@ def main() -> int:
         is_draft = bool(metadata.get("draft", True))
         if is_draft:
             # At this point the source may be public on GitHub but intentionally
-            # absent from the rendered site while editorial/web QA continues.
+            # absent from the rendered site while editorial/web/human QA continues.
             continue
 
         # ---- Website publication boundary. ----
@@ -236,6 +272,10 @@ def main() -> int:
 
         if review_value(governance, "source_status_review") != "complete":
             errors.append(f"{rel}: governance.source_status_review must be complete before website publication")
+        if external_science_required is True and external_science_status != "complete":
+            errors.append(
+                f"{rel}: required independent human scientific review must be complete before website publication"
+            )
         if review_value(governance, "author_release_decision") != "approved":
             errors.append(f"{rel}: governance.author_release_decision must be approved before website publication")
 
