@@ -15,6 +15,7 @@
   {{ end }}
 
   {{ if ne (index $g "repository_safe") true }}{{ errorf "Research Note %q requires repository_safe=true" .File.Path }}{{ end }}
+  {{ if ne (index $g "repository_staging_decision" | default "") "approved" }}{{ errorf "Research Note %q requires repository_staging_decision=approved" .File.Path }}{{ end }}
 
   {{ $basis := index $g "disclosure_basis" | default "" }}
   {{ if not (in (slice "public_literature" "published_own_work" "authorized_public_disclosure") $basis) }}{{ errorf "Research Note %q has unresolved disclosure_basis" .File.Path }}{{ end }}
@@ -50,8 +51,18 @@
     {{ if not (in (slice "not_applicable" "cleared") (index $g $field | default "")) }}{{ errorf "Research Note %q has unresolved governance.%s" $.File.Path $field }}{{ end }}
   {{ end }}
 
-  {{ range $field := slice "ownership_review" "contributor_review" "funding_review" "privacy_review" "external_tool_review" "copyright_review" }}
+  {{ range $field := slice "ownership_review" "contributor_review" "editorial_value_review" "funding_review" "privacy_review" "external_tool_review" "copyright_review" }}
     {{ if ne (index $g $field | default "") "complete" }}{{ errorf "Research Note %q requires governance.%s=complete" $.File.Path $field }}{{ end }}
+  {{ end }}
+
+  {{ $externalScienceRequired := index $g "external_scientific_review_required" }}
+  {{ $externalScienceStatus := index $g "external_scientific_review_status" | default "" }}
+  {{ if eq $externalScienceRequired true }}
+    {{ if ne $externalScienceStatus "complete" }}{{ errorf "Research Note %q requires completed independent human scientific review before publication" .File.Path }}{{ end }}
+  {{ else if eq $externalScienceRequired false }}
+    {{ if ne $externalScienceStatus "not_required" }}{{ errorf "Research Note %q with external review not required must use external_scientific_review_status=not_required" .File.Path }}{{ end }}
+  {{ else }}
+    {{ errorf "Research Note %q requires an explicit external_scientific_review_required boolean" .File.Path }}
   {{ end }}
 
   {{ $coi := index $g "coi_status" | default "" }}
