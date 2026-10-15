@@ -5,8 +5,20 @@ lastmod: {{ .Date }}
 draft: true
 summary: ""
 note_type: concept # method | concept | reflection
-status: evolving # stable | evolving
+status: evolving # stable | evolving | corrected | retired | withdrawn
+featured: false
+toc: false
+social_card: research
 tags: []
+image: ""
+image_alt: ""
+
+# Lifecycle/display metadata. Required conditionally by the publication guard.
+revision_note: "" # required when status=corrected
+status_reason: "" # required when status=retired or withdrawn
+replacement_url: "" # optional for retired/withdrawn notes
+funding_statement: "" # public statement only when relevant
+acknowledgements: "" # public acknowledgement only with appropriate consent
 
 # IMPORTANT: this repository is public. `draft: true` only prevents Hugo from
 # rendering the page; it does NOT make this source private. Do not commit this
@@ -47,6 +59,9 @@ governance:
 # Published notes need independently verified sources. Public-source staging may
 # still refine this list, but factual claims must be fully verified before release.
 sources: []
+
+# Use site-relative content paths so Hugo can verify these relationships.
+# Examples: /publication/example/, /project/example/, /notes/example/
 related_publications: []
 related_software: []
 related_projects: []
