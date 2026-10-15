@@ -40,11 +40,12 @@
     </div>
 
     {{ partial "notes/related_work.html" . }}
+    {{ partial "notes/revision_history.html" . }}
 
     {{ $g := .Params.governance }}
     {{ $coi := "" }}{{ if $g }}{{ $coi = index $g "coi_status" | default "" }}{{ end }}
     {{ if or (.Params.funding_statement | default "") (and (in (slice "disclosed" "managed") $coi) (index $g "coi_statement" | default "")) (.Params.acknowledgements | default "") }}
-    <section class="note-related" aria-labelledby="note-disclosures-title">
+    <section class="note-transparency" aria-labelledby="note-disclosures-title">
       <p class="overline">Transparency</p>
       <h2 id="note-disclosures-title">Funding, interests, and acknowledgements</h2>
       {{ with .Params.funding_statement }}<p><strong>Funding.</strong> {{ . | markdownify }}</p>{{ end }}
