@@ -1,89 +1,64 @@
 {{ define "main" }}
-{{ if not .Draft }}
-  {{ $g := .Params.governance }}
-  {{ if not $g }}{{ errorf "Research Note %q cannot publish without governance front matter" .File.Path }}{{ end }}
-
-  {{ $noteType := .Params.note_type | default "" }}
-  {{ if not (in (slice "method" "concept" "reflection") $noteType) }}{{ errorf "Research Note %q has invalid note_type %q" .File.Path $noteType }}{{ end }}
-  {{ $status := .Params.status | default "" }}
-  {{ if not (in (slice "stable" "evolving" "corrected" "retired" "withdrawn") $status) }}{{ errorf "Research Note %q has invalid status %q" .File.Path $status }}{{ end }}
-
-  {{ if ne (index $g "repository_safe") true }}{{ errorf "Research Note %q requires repository_safe=true" .File.Path }}{{ end }}
-
-  {{ $basis := index $g "disclosure_basis" | default "" }}
-  {{ if not (in (slice "public_literature" "published_own_work" "authorized_public_disclosure") $basis) }}{{ errorf "Research Note %q has unresolved disclosure_basis" .File.Path }}{{ end }}
-
-  {{ range $field := slice "contains_unpublished_research" "contains_unpublished_collaborator_material" "contains_confidential_or_sponsor_material" }}
-    {{ if ne (index $g $field) false }}{{ errorf "Research Note %q cannot publish unless governance.%s is explicitly false" $.File.Path $field }}{{ end }}
-  {{ end }}
-
-  {{ $patentSensitive := index $g "potentially_patent_sensitive" }}
-  {{ $ipClearance := index $g "ip_clearance" | default "" }}
-  {{ if eq $patentSensitive true }}
-    {{ if ne $ipClearance "cleared" }}{{ errorf "Research Note %q is patent-sensitive and requires ip_clearance=cleared" .File.Path }}{{ end }}
-  {{ else if eq $patentSensitive false }}
-    {{ if ne $ipClearance "not_applicable" }}{{ errorf "Research Note %q is not patent-sensitive and requires ip_clearance=not_applicable" .File.Path }}{{ end }}
-  {{ else }}
-    {{ errorf "Research Note %q requires an explicit potentially_patent_sensitive boolean" .File.Path }}
-  {{ end }}
-
-  {{ if not (in (slice "not_applicable" "cleared") (index $g "venue_policy_review" | default "")) }}{{ errorf "Research Note %q has unresolved venue_policy_review" .File.Path }}{{ end }}
-  {{ if ne (index $g "embargo_status" | default "") "none" }}{{ errorf "Research Note %q cannot publish under an active or unresolved embargo" .File.Path }}{{ end }}
-
-  {{ $regulated := index $g "regulated_research_material" }}
-  {{ $ethicsReview := index $g "ethics_review" | default "" }}
-  {{ if eq $regulated true }}
-    {{ if ne $ethicsReview "cleared" }}{{ errorf "Research Note %q contains regulated-research material and requires ethics_review=cleared" .File.Path }}{{ end }}
-  {{ else if eq $regulated false }}
-    {{ if ne $ethicsReview "not_applicable" }}{{ errorf "Research Note %q is non-regulated and requires ethics_review=not_applicable" .File.Path }}{{ end }}
-  {{ else }}
-    {{ errorf "Research Note %q requires an explicit regulated_research_material boolean" .File.Path }}
-  {{ end }}
-
-  {{ range $field := slice "export_control_review" "dual_use_review" }}
-    {{ if not (in (slice "not_applicable" "cleared") (index $g $field | default "")) }}{{ errorf "Research Note %q has unresolved governance.%s" $.File.Path $field }}{{ end }}
-  {{ end }}
-
-  {{ range $field := slice "ownership_review" "contributor_review" "funding_review" "privacy_review" "external_tool_review" "copyright_review" }}
-    {{ if ne (index $g $field | default "") "complete" }}{{ errorf "Research Note %q requires governance.%s=complete" $.File.Path $field }}{{ end }}
-  {{ end }}
-
-  {{ $coi := index $g "coi_status" | default "" }}
-  {{ if not (in (slice "none_declared" "disclosed" "managed") $coi) }}{{ errorf "Research Note %q has unresolved coi_status" .File.Path }}{{ end }}
-  {{ if and (in (slice "disclosed" "managed") $coi) (not (index $g "coi_statement" | default "")) }}{{ errorf "Research Note %q requires coi_statement for disclosed or managed COI" .File.Path }}{{ end }}
-
-  {{ if ne (index $g "source_status_review" | default "") "complete" }}{{ errorf "Research Note %q requires source_status_review=complete" .File.Path }}{{ end }}
-  {{ if ne (index $g "author_release_decision" | default "") "approved" }}{{ errorf "Research Note %q requires author_release_decision=approved" .File.Path }}{{ end }}
-
-  {{ $sources := .Params.sources | default (slice) }}
-  {{ if lt (len $sources) 1 }}{{ errorf "Research Note %q requires at least one verified source" .File.Path }}{{ end }}
-{{ end }}
-
+{{ partial "notes/governance_guard.html" . }}
 {{ $p := site.Data.portfolio }}
-<article class="note-page h-entry">
+{{ $typeLabels := dict "method" "Method" "concept" "Concept" "reflection" "Reflection" }}
+{{ $statusLabels := dict "stable" "Stable" "evolving" "Evolving" "corrected" "Corrected" "retired" "Retired" "withdrawn" "Withdrawn" }}
+{{ $noteType := .Params.note_type | default "concept" }}
+{{ $status := .Params.status | default "evolving" }}
+<article class="note-page note-page--{{ $status }} h-entry">
   <div class="page-shell">
-    <a class="back-link lnk" href="{{ "/notes/" | relURL }}"><span aria-hidden="true">←</span> Notes</a>
-    <header class="page-header">
-      <p class="kicker">Research note</p>
+    <a class="back-link lnk" href="{{ "/notes/" | relURL }}"><span aria-hidden="true">←</span> Research Notes</a>
+    <header class="note-header">
+      <p class="note-kicker"><span>Research Note</span><span class="note-kicker__sep" aria-hidden="true">·</span><span>{{ index $typeLabels $noteType | default (title $noteType) }}</span></p>
       <h1 class="p-name">{{ .Title }}</h1>
       <a class="u-url visually-hidden" href="{{ .Permalink }}">Permalink</a>
-      <div class="page-meta">
-        <time class="dt-published" datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date.Format "January 2, 2006" }}</time>
-        {{ if ne .Lastmod .Date }}<time class="dt-updated" datetime="{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}">Updated {{ .Lastmod.Format "January 2, 2006" }}</time>{{ end }}
+      {{ with .Params.summary }}<p class="note-lede p-summary">{{ . | markdownify }}</p>{{ end }}
+      <div class="note-meta" aria-label="Article metadata">
+        <span class="note-meta__author">{{ $p.profile.name }}</span>
+        <span class="note-meta__item"><time class="dt-published" datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">Published {{ .Date.Format "January 2, 2006" }}</time></span>
+        {{ if ne .Lastmod .Date }}<span class="note-meta__item"><time class="dt-updated" datetime="{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}">Reviewed {{ .Lastmod.Format "January 2, 2006" }}</time></span>{{ end }}
+        <span class="note-meta__item">{{ .ReadingTime }} min read</span>
+        <span class="note-meta__item"><span class="note-status-chip note-status-chip--{{ $status }}">{{ index $statusLabels $status | default (title $status) }}</span></span>
       </div>
-      {{ with .Params.summary }}<p class="page-lede p-summary">{{ . | markdownify }}</p>{{ end }}
     </header>
-    <div class="article-layout article-layout--single">
+
+    {{ partial "notes/status_notice.html" . }}
+
+    {{ if ne $status "withdrawn" }}
+    <div class="note-reading-grid{{ if .Params.toc }} has-toc{{ end }}">
+      {{ if .Params.toc }}
+      <aside class="note-toc" aria-label="On this page">
+        <span class="overline">On this page</span>
+        {{ .TableOfContents }}
+      </aside>
+      {{ end }}
       <div class="article-content e-content">{{ .Content }}</div>
     </div>
+
+    {{ partial "notes/related_work.html" . }}
+
+    {{ $g := .Params.governance }}
+    {{ $coi := "" }}{{ if $g }}{{ $coi = index $g "coi_status" | default "" }}{{ end }}
+    {{ if or (.Params.funding_statement | default "") (and (in (slice "disclosed" "managed") $coi) (index $g "coi_statement" | default "")) (.Params.acknowledgements | default "") }}
+    <section class="note-related" aria-labelledby="note-disclosures-title">
+      <p class="overline">Transparency</p>
+      <h2 id="note-disclosures-title">Funding, interests, and acknowledgements</h2>
+      {{ with .Params.funding_statement }}<p><strong>Funding.</strong> {{ . | markdownify }}</p>{{ end }}
+      {{ if and (in (slice "disclosed" "managed") $coi) (index $g "coi_statement" | default "") }}<p><strong>Competing interests.</strong> {{ index $g "coi_statement" | markdownify }}</p>{{ end }}
+      {{ with .Params.acknowledgements }}<p><strong>Acknowledgements.</strong> {{ . | markdownify }}</p>{{ end }}
+    </section>
+    {{ end }}
+
     {{ with .Params.syndication }}
-    <aside class="syndication-links" aria-label="Syndicated copies">
+    <aside class="note-syndication" aria-label="Syndicated copies">
       <span class="overline">Also published on</span>
       <div class="actions">
         {{ range . }}<a class="lnk u-syndication" href="{{ .url }}" target="_blank" rel="syndication noopener">{{ .name }} <span class="arw" aria-hidden="true">↗</span></a>{{ end }}
       </div>
     </aside>
     {{ end }}
+    {{ end }}
+
     <span class="p-author h-card visually-hidden"><a class="p-name u-url" href="{{ "/" | absURL }}">{{ $p.profile.name }}</a></span>
   </div>
 </article>
