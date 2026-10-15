@@ -2,13 +2,14 @@
 {{ $p := site.Data.portfolio }}
 {{ $isHome := .IsHome }}
 {{ $isAbout := eq .RelPermalink "/about/" }}
+{{ $isNoteArticle := and .IsPage (eq .Section "notes") }}
 {{ $siteName := printf "%s · Research Portfolio" $p.profile.name }}
 {{ $pageTitle := cond $isHome $siteName (printf "%s · %s" .Title $p.profile.short_name) }}
 {{ $description := $p.profile.summary }}
 {{ with .Params.summary }}{{ $description = . | markdownify | plainify }}{{ end }}
 {{ with .Description }}{{ $description = . | markdownify | plainify }}{{ end }}
+{{ if and $isNoteArticle (eq (.Params.status | default "") "withdrawn") }}{{ $description = "This Research Note has been withdrawn and should not be relied upon." }}{{ end }}
 {{ $canonical := .Permalink }}
-{{ $isNoteArticle := and .IsPage (eq .Section "notes") }}
 {{ $ogType := cond $isAbout "profile" (cond (or (eq .Section "publication") $isNoteArticle) "article" "website") }}
 {{ $aboutURL := "/about/" | absURL }}
 {{ $socialCard := "portfolio" }}
