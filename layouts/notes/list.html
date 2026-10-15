@@ -1,21 +1,47 @@
 {{ define "main" }}
-{{ $p := site.Data.portfolio }}
-<section class="list-page page-shell h-feed">
+<section class="notes-index page-shell h-feed">
   <header class="page-header">
-    <p class="kicker">Owned publishing</p>
+    <p class="kicker">Research Notes</p>
     <h1 class="p-name">{{ .Title }}</h1>
-    {{ with .Content }}<div class="page-lede">{{ . }}</div>{{ end }}
+    {{ with .Content }}<div class="notes-index__intro">{{ . }}</div>{{ end }}
   </header>
-  <div class="listing-grid">
-    {{ range .Pages.ByDate.Reverse }}
-    <article class="h-entry">
-      <time class="dt-published overline" datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date.Format "January 2, 2006" }}</time>
-      <h2 class="p-name"><a class="u-url" href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
-      {{ with .Params.summary }}<p class="p-summary">{{ . }}</p>{{ end }}
-      <a class="lnk" href="{{ .RelPermalink }}">Read note <span class="arw" aria-hidden="true">↗</span></a>
-      <span class="p-author h-card visually-hidden"><a class="p-name u-url" href="{{ "/" | absURL }}">{{ $p.profile.name }}</a></span>
-    </article>
+
+  {{ $pages := .RegularPages.ByDate.Reverse }}
+  {{ $featured := where $pages "Params.featured" true }}
+  {{ if gt (len $featured) 0 }}
+  <section class="notes-index__section" aria-labelledby="featured-notes-title">
+    <div class="notes-index__section-head">
+      <h2 id="featured-notes-title">Featured</h2>
+      <p>Selected notes that best connect methods, concepts, evidence, and public research outputs.</p>
+    </div>
+    <div class="notes-index__list">
+      {{ range $featured }}{{ partial "notes/card.html" . }}{{ end }}
+    </div>
+  </section>
+  {{ end }}
+
+  {{ $groups := slice
+    (dict "type" "method" "title" "Methods" "description" "Measurement, analysis, reproducibility, workflow, and experimental reasoning.")
+    (dict "type" "concept" "title" "Concepts" "description" "Scientific concepts interpreted through a materials and measurement perspective.")
+    (dict "type" "reflection" "title" "Reflections" "description" "Evidence-grounded methodological or intellectual reflections on research practice.")
+  }}
+  {{ range $group := $groups }}
+    {{ $items := where $pages "Params.note_type" $group.type }}
+    {{ if gt (len $items) 0 }}
+    <section class="notes-index__section" aria-labelledby="notes-{{ $group.type }}-title">
+      <div class="notes-index__section-head">
+        <h2 id="notes-{{ $group.type }}-title">{{ $group.title }}</h2>
+        <p>{{ $group.description }}</p>
+      </div>
+      <div class="notes-index__list">
+        {{ range $items }}{{ partial "notes/card.html" . }}{{ end }}
+      </div>
+    </section>
     {{ end }}
-  </div>
+  {{ end }}
+
+  {{ if eq (len $pages) 0 }}
+  <p class="notes-index__empty">Research Notes are being prepared through the private review and publication workflow. Public notes will appear here only after scientific, governance, accessibility, and web-quality checks are complete.</p>
+  {{ end }}
 </section>
 {{ end }}
