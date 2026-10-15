@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1400" height="500" viewBox="0 0 1400 500" role="img" aria-labelledby="title desc">
 <title id="title">Peel-trace interpretation workflow</title>
-<desc id="desc">A conceptual workflow moving from a raw force displacement trace through quality control and window selection, to force and stability descriptors, replicate-level summaries, and interpretation with limitations.</desc>
+<desc id="desc">A conceptual workflow moving from a raw force displacement trace through quality control and window selection, to force and trace-behavior descriptors, replicate-level summaries, and interpretation with limitations.</desc>
 <rect width="1400" height="500" fill="white"/>
 <text x="700" y="48" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="700">From trace to interpretable summary</text>
 <text x="700" y="80" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18">Original workflow schematic — no experimental data shown</text>
@@ -28,7 +28,7 @@
   <text x="760" y="262" text-anchor="middle" font-size="16">initiation / restart</text>
   <text x="910" y="205" text-anchor="middle" font-size="17" font-weight="700">Trace behavior</text>
   <text x="910" y="235" text-anchor="middle" font-size="16">stability / variation</text>
-  <text x="910" y="262" text-anchor="middle" font-size="16">oscillation / stick-slip</text>
+  <text x="910" y="262" text-anchor="middle" font-size="16">force oscillation</text>
 
   <line x1="985" y1="220" x2="1065" y2="220" stroke="#222" stroke-width="2"/>
   <polygon points="1065,220 1051,211 1051,229" fill="#222"/>
