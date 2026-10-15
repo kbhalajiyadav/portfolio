@@ -24,7 +24,7 @@ Please assess the staged note against the already-public paper, source-data reco
 The current staged draft intentionally contains no experimental figure asset. Before live publication, add one evidence figure using one of these paths:
 
 1. Preferred: plot representative E6000 and Fabri-Fuse T-peel traces from the public source-data archive at DOI `10.5281/zenodo.20278428` after the corresponding source files/sheets are mapped unambiguously.
-2. Fallback: adapt or reuse the published representative trace panel, Figure 1A, under the article's CC BY 4.0 license with clear attribution.
+2. Fallback: adapt or reuse the published representative trace panel, Figure 2A, under the article's CC BY 4.0 license with clear attribution.
 
 Do not substitute another schematic for the real evidence.
 

@@ -123,9 +123,9 @@ Preferred figure:
 - representative E6000 and Fabri-Fuse T-peel traces plotted from the public source-data archive after unambiguous source mapping.
 
 Fallback:
-- adapt/reuse the published representative trace panel, **Figure 1A**, with CC BY 4.0 attribution.
+- adapt/reuse the published representative trace panel, **Figure 2A**, with CC BY 4.0 attribution.
 
-The published paper's Figure 1A, not Figure 2A, contains the representative force-displacement curves. Figure 2 contains PSI, SSA, and initiation-force repeatability summaries.
+The final published article's Figure 2A contains the representative force-displacement curves. Figure 1 is the nominal peel-arm axial-stress comparison. Earlier manuscript drafts used different figure numbering, so the publication version controls.
 
 No experimental figure is currently committed with the note. Adding one reopens rights/provenance/accessibility review before live release.
 
