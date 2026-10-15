@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+<title id="title">Illustrative peel traces with similar central force level but different stability</title>
+<desc id="desc">Two qualitative force versus displacement traces. The left trace remains relatively stable around a central force level. The right trace has a similar central force level but large oscillations. The schematic is explicitly labeled as illustrative and not experimental data.</desc>
+<rect width="1200" height="620" fill="white"/>
+<text x="600" y="48" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="700">A single force level can hide different trace behavior</text>
+<text x="600" y="82" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18">Illustrative schematic — not experimental data</text>
+<g transform="translate(90,135)">
+  <text x="225" y="0" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700">Relatively stable trace</text>
+  <line x1="0" y1="360" x2="450" y2="360" stroke="#222" stroke-width="2"/>
+  <line x1="0" y1="40" x2="0" y2="360" stroke="#222" stroke-width="2"/>
+  <line x1="0" y1="200" x2="450" y2="200" stroke="#777" stroke-width="2" stroke-dasharray="9 8"/>
+  <text x="445" y="190" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="15">similar central force level</text>
+  <polyline fill="none" stroke="#222" stroke-width="4" points="0,325 25,285 50,250 75,225 100,210 125,205 150,198 175,207 200,195 225,203 250,197 275,206 300,196 325,202 350,198 375,204 400,197 425,202 450,200"/>
+  <text x="225" y="405" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="17">Displacement</text>
+  <text x="-48" y="205" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="17" transform="rotate(-90 -48 205)">Force</text>
+  <text x="225" y="455" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="16">Low oscillation • visually consistent window</text>
+</g>
+<g transform="translate(660,135)">
+  <text x="225" y="0" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700">Oscillatory / unstable trace</text>
+  <line x1="0" y1="360" x2="450" y2="360" stroke="#222" stroke-width="2"/>
+  <line x1="0" y1="40" x2="0" y2="360" stroke="#222" stroke-width="2"/>
+  <line x1="0" y1="200" x2="450" y2="200" stroke="#777" stroke-width="2" stroke-dasharray="9 8"/>
+  <text x="445" y="190" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="15">similar central force level</text>
+  <polyline fill="none" stroke="#222" stroke-width="4" points="0,325 25,280 50,235 75,165 100,245 125,145 150,255 175,135 200,250 225,150 250,260 275,140 300,245 325,155 350,255 375,145 400,250 425,160 450,235"/>
+  <text x="225" y="405" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="17">Displacement</text>
+  <text x="-48" y="205" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="17" transform="rotate(-90 -48 205)">Force</text>
+  <text x="225" y="455" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="16">Large oscillation • same scalar can conceal dynamics</text>
+</g>
+</svg>
