@@ -1,77 +1,59 @@
 # Research Notes tooling and integration decision record
 
-This document records the tooling architecture for the Research Notes system. The objective is not to maximize the number of tools. It is to give each tool one clear responsibility, keep the public site coherent with `bhalaji.com`, and avoid introducing a second publishing stack when an existing component already solves the problem.
+This document records the tooling architecture for the Research Notes system. The objective is not to maximize the number of tools. Each tool must have one clear responsibility, preserve the private/public boundary, and reduce more maintenance than it adds.
 
-## 1. Decision summary
+## 1. Final architecture
 
-Use a deliberately hybrid stack:
+Use a deliberately hybrid but minimal stack:
 
-1. **Obsidian** — private note capture, literature notes, concept development, and graph-based research thinking.
-2. **Quartz 5, local only** — optional private preview/navigation layer for backlinks, graph exploration, search, transclusions, and digital-garden behavior.
-3. **Quarto, optional per-note compiler** — pilot for notes that genuinely need scholarly mechanics such as citations, bibliographies, numbered figures/tables/equations, cross-references, or reproducible Python/R/Jupyter output.
-4. **Hugo** — remain the only production website renderer and owner of navigation, typography, metadata, structured data, accessibility, page layout, and the public `bhalaji.com` visual system.
+1. **Obsidian** — private capture, literature notes, concept development, and research thinking.
+2. **Quartz 5, local only** — optional private graph/search/backlink/transclusion layer.
+3. **Native Hugo Markdown** — default canonical source for ordinary Research Notes.
+4. **Hugo** — sole production renderer and owner of navigation, typography, metadata, structured data, accessibility, page layout, and the public `bhalaji.com` visual system.
 5. **GitHub** — public-source version control, CI, review, deployment evidence, and post-clearance publication history only.
-6. **Zotero + Better BibTeX (local toolchain, optional but recommended)** — canonical personal reference management and deterministic BibTeX/BibLaTeX export for public-note citations.
+6. **Zotero + Better BibTeX** — optional local reference-management path for curated public bibliographies; the master library remains private.
+7. **Quarto** — optional, feature-triggered compiler only when a note genuinely needs capabilities that native Hugo Markdown does not provide efficiently.
 
 Do **not** replace Hugo with Quartz, Quarto, MyST/Jupyter Book, Astro/Starlight, Material for MkDocs, Docusaurus, or Obsidian Publish unless a future requirement cannot be met cleanly within the current architecture.
 
-## 2. Tool responsibility boundaries
+## 2. Private research layer
 
 ### Obsidian
 
 Best role: private research engine.
 
-Use for:
+Use for embryo ideas, literature notes, private reflections, source annotations, research questions, candidate outlines, and conceptual relationships.
 
-- embryo ideas and fragments;
-- literature notes;
-- backlinks and conceptual relationships;
-- private reflections;
-- candidate outlines;
-- source annotations;
-- research questions and future-note seeds.
-
-Privacy is determined by the storage/data-classification decision, not by Obsidian itself. If remote sync is used, the service must be permitted for the data class involved. Obsidian Sync supports end-to-end encryption, but institutional/storage rules still control whether a particular research dataset or confidential material may be stored there.
+Privacy is determined by the storage/data-classification decision, not by Obsidian itself. Remote sync is used only when the service is permitted for the data class involved.
 
 Official reference: <https://obsidian.md/help/sync/security>
 
 ### Quartz 5
 
-Best role: private digital-garden preview.
+Best role: private/local knowledge-navigation layer.
 
-Strengths:
+Useful capabilities include backlinks, graph navigation, local search, transclusions, configurable filters, and static local preview.
 
-- native Obsidian-style Markdown workflow;
-- backlinks and graph navigation;
-- local search;
-- transclusions;
-- configurable filters and plugins;
-- static output.
-
-Limit: filtering a draft from generated output does **not** make its source private. Quartz is not the confidentiality boundary.
+Filtering a draft from generated Quartz output does **not** make the source private. Quartz is therefore not the confidentiality boundary and is not part of the canonical public deployment.
 
 Official references:
 
 - <https://quartz.jzhao.xyz/>
 - <https://quartz.jzhao.xyz/advanced/making-plugins>
 
-Decision: keep Quartz local/private and decoupled from the production deployment.
+## 3. Default Research Note authoring
 
-### Quarto
+**Default canonical source: native Hugo Markdown.**
 
-Best role: optional scientific-authoring/compiler layer.
+This keeps one directly reviewable, directly publishable source and avoids generated-source drift.
 
-Quarto is unusually compatible with the existing architecture because it has a first-class `hugo-md` output format. In this mode Quarto can execute code and generate Markdown while Hugo remains responsible for theming, navigation, page layout, and final HTML.
+The Note 001 private comparison confirmed that for a prose-led note with a modest bibliography and a small number of figures, Quarto would add `.qmd` source, bibliography/compiler management, and generated Markdown without removing enough authoring work to justify the extra transformation layer.
 
-Useful capabilities:
+The detailed decision is recorded in `docs/research-note-authoring-decision.md`; issue #79 is closed as completed.
 
-- Pandoc/citeproc citations and bibliographies;
-- CSL citation styles;
-- numbered figures, tables, equations, sections, theorems, and proofs;
-- cross-references;
-- executable Python/R/Jupyter content;
-- reproducible plot generation;
-- Hugo Markdown output.
+## 4. Quarto — conditional, not standard infrastructure
+
+Quarto remains useful because it supports Pandoc/citeproc citations, CSL styles, numbered figures/tables/equations, cross-references, executable Python/R/Jupyter content, reproducible plot generation, and `hugo-md` output.
 
 Official references:
 
@@ -79,200 +61,147 @@ Official references:
 - <https://quarto.org/docs/authoring/footnotes-and-citations>
 - <https://quarto.org/docs/authoring/cross-references>
 
-Decision: **pilot, do not make mandatory yet**. A normal prose Research Note should remain plain Hugo Markdown. Adopt Quarto only when it removes real manual scientific-authoring work.
+Re-evaluate Quarto only when a future note genuinely needs one or more of:
 
-A Quarto pilot must satisfy all of the following before becoming part of CI:
+- executable Python/R/Jupyter output;
+- dense numbered cross-references across figures, tables, or equations;
+- equation-heavy technical authoring;
+- citation-heavy synthesis where BibTeX/CSL materially reduces maintenance risk;
+- multi-format scientific output from one canonical source.
 
-- no change to the public visual identity;
-- generated Markdown is deterministic enough for review;
-- source `.qmd`, notebooks, code, and data remain outside public Git until repository-safe;
-- raw HTML requirements do not weaken the site's security or integrity controls;
-- generated assets pass the same disclosure and provenance checks as hand-authored assets;
-- build time and dependency burden remain proportionate.
+A future Quarto pilot must still preserve Hugo as the final renderer, produce deterministic/reviewable Markdown, keep private `.qmd`/notebooks/data outside public Git until repository-safe, and pass the same disclosure/provenance/accessibility controls as hand-authored assets.
 
-### MyST / Jupyter Book 2
+Quarto is **not** added to portfolio CI for Note 001.
 
-MyST is a strong scientific-document system with citations, equations, cross-references, figures, directives, executable content, and publication-quality output. Jupyter Book 2 is now a distribution of the MyST Document Engine.
+## 5. Reference management
 
-Official references:
+Recommended optional path:
 
-- <https://mystmd.org/guide/quickstart-myst-markdown>
-- <https://mystmd.org/guide/citations>
-- <https://jupyterbook.org/stable>
-
-Decision: **watchlist, not current integration**. MyST/Jupyter Book becomes attractive if the project later needs a multi-chapter computational book, course, extended methods manual, or notebook-heavy research monograph. For individual portfolio notes, adding MyST alongside Hugo and Quartz would currently duplicate more infrastructure than it removes.
-
-### Astro Starlight
-
-Starlight provides accessible documentation defaults, search, SEO, Markdown/MDX, frontmatter validation, and a plugin ecosystem.
-
-Official reference: <https://starlight.astro.build/>
-
-Decision: no migration. It would be a strong choice for a new documentation product, but `bhalaji.com` already has a mature Hugo design system and validation stack. Migrating would create large regression and maintenance cost without solving a unique Research Notes requirement.
-
-### Material for MkDocs
-
-Material for MkDocs provides excellent built-in search, tags, blogging, media optimization, privacy/offline capabilities, and documentation navigation.
-
-Official references:
-
-- <https://squidfunk.github.io/mkdocs-material/plugins/>
-- <https://squidfunk.github.io/mkdocs-material/plugins/search/>
-
-Decision: no migration. It is optimized for documentation and knowledge bases; reproducing the current portfolio identity and evidence architecture would cost more than the gains.
-
-### Docusaurus
-
-Docusaurus is strong for large versioned technical-documentation products.
-
-Official reference: <https://docusaurus.io/docs/versioning>
-
-Decision: no migration. Its own documentation cautions that versioning increases contributor/build complexity and should be used only when the use case warrants it. Research Notes need corrections and status history, not multiple complete documentation versions.
-
-### Obsidian Publish
-
-Obsidian Publish can provide public or password-protected sites and integrates tightly with Obsidian.
-
-Official references:
-
-- <https://obsidian.md/help/publish/security>
-- <https://obsidian.md/help/teams/publish>
-
-Decision: not part of the canonical publishing path. It would duplicate Hugo hosting and branding, while site-password protection is site-wide rather than individual-note access control. A private authoring vault should remain private rather than rely on an unlisted or password-protected publishing surface unless institutional storage/hosting review explicitly allows it.
-
-## 3. Reference-management architecture
-
-### Zotero + Better BibTeX
-
-Recommended local reference-management path:
-
-`Zotero collection -> Better BibTeX deterministic citekeys -> curated public-note bibliography -> Quarto/Hugo rendering`
-
-Better BibTeX provides stable/configurable citation keys and automatic exports suitable for text-based/version-controlled authoring.
-
-Official references:
-
-- <https://retorque.re/zotero-better-bibtex/citing/>
-- <https://retorque.re/zotero-better-bibtex/exporting/auto/>
+`private Zotero collection -> Better BibTeX deterministic citekeys/export -> curated public bibliography -> Hugo or Quarto when justified`
 
 Rules:
 
 - keep the master Zotero library private;
-- export only a curated collection containing public sources used by Research Notes;
-- do not export private notes, attachments, annotations, unpublished manuscripts, or restricted metadata into this public repository;
-- citation existence is not enough: source status/retraction/correction review remains required before publication.
+- export only public bibliographic metadata used by the note;
+- do not export private notes, annotations, attachments, unpublished manuscripts, or restricted metadata;
+- citation existence is not enough: claim-to-source fit and source-status review remain mandatory.
 
-## 4. Citation verification support
+Official Better BibTeX references:
 
-The publication process should combine different tools rather than ask one system to prove everything:
+- <https://retorque.re/zotero-better-bibtex/citing/>
+- <https://retorque.re/zotero-better-bibtex/exporting/auto/>
 
-- **Crossref/Crossmark** — public metadata and update/correction/retraction signals where available;
-- **Consensus** — optional literature discovery/triangulation; eligible because it has a genuine free tier, with academic-email discounts available for optional paid tiers;
-- **Scholar Sidekick / other installed reference-audit tools** — use only where their current free/eligible access is available and useful;
-- manual inspection of the actual paper/source — final authority for the claim being made.
+## 6. Citation verification support
 
-Do not make **Scite** a default dependency: its current ChatGPT/MCP access requires a paid plan or trial, so it does not satisfy the project's free-by-default requirement. Likewise, do not make paid-only SEO/research services a required part of the workflow.
+Use layered verification rather than relying on one tool:
 
-No plugin, AI tool, or citation graph substitutes for reading the underlying source relevant to the claim.
+- Crossref/Crossmark where available for metadata/update signals;
+- Consensus free tier for optional literature discovery/triangulation;
+- installed citation-audit tools when their current access is free/eligible and useful;
+- direct inspection of the underlying paper/source for the claim being made.
 
-## 5. Discoverability support
+No plugin, AI system, or citation graph substitutes for reading the relevant source.
 
-Primary measurement plane:
+Do not make Scite or paid-only research/SEO products default dependencies unless a future verified academic/student entitlement makes them genuinely no-cost and they solve a measured gap.
 
-- Google Search Console for indexing, queries, impressions, and clicks;
+## 7. Discoverability support
+
+Use the existing first-party/free measurement plane first:
+
+- Google Search Console;
 - Bing Webmaster Tools / IndexNow where already integrated;
-- existing site analytics/privacy controls where appropriate;
-- repository-native audits and search-performance evidence before considering any paid SEO platform.
+- repository-native integrity and performance audits;
+- existing privacy-compatible analytics where appropriate.
 
-Paid-only SEO suites are **not** part of the default stack. They may be reconsidered only if a verified student/academic entitlement makes them effectively free and they solve a measured gap that Search Console/Bing/repository analytics cannot address.
+SEO tooling may identify discoverability gaps only after a topic has passed governance, evidence, and strategic-fit gates. It must never determine scientific claims or force content production.
 
-Do not let SEO tools determine scientific claims or publication topics. They can identify discoverability gaps only after a topic has already passed governance/evidence/strategic-fit gates.
-
-## 6. GitHub operational support
+## 8. GitHub operational support
 
 Keep:
 
-- Dependabot for GitHub Actions and npm dependency updates;
+- Dependabot for GitHub Actions/npm updates;
 - GitHub Dependency Graph;
 - pinned action SHAs;
-- official GitHub dependency review on pull requests;
+- official dependency review on pull requests;
 - local pre-commit/pre-push disclosure checks;
 - Research Notes governance CI;
+- Research Notes presentation CI with synthetic fixtures;
 - full Hugo/accessibility/performance CI;
 - monthly integrity checks.
 
-Administrative additions:
+Administrative control still required in repository settings:
 
-- main-branch ruleset requiring `governance`, `build`, and `dependency-review` status checks;
-- expected source app set to GitHub Actions where possible;
-- no bypass except deliberate emergency/admin use.
+- require `build` from GitHub Actions;
+- require `governance` from GitHub Actions;
+- require `dependency-review` from GitHub Actions;
+- use GitHub Actions as expected source where available;
+- avoid broad bypasses.
 
-Dependency Graph is enabled and the pinned official dependency-review action has passed successfully on PR #77. Issue #78 now tracks only the remaining ruleset configuration.
+Issue #78 tracks that remaining ruleset configuration.
 
-GitHub references:
+## 9. Alternatives reviewed
 
-- <https://docs.github.com/en/pull-requests/how-tos/review-pull-requests/reviewing-dependency-changes-in-a-pull-request>
-- <https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/available-rules-for-rulesets>
+### MyST / Jupyter Book 2
 
-## 7. Cost/access adoption rule
+Watchlist only. Reconsider for a future multi-chapter computational book, course, extended methods manual, or notebook-heavy research monograph.
+
+### Astro/Starlight, Material for MkDocs, Docusaurus
+
+No migration. They are strong documentation frameworks but would duplicate or replace mature Hugo infrastructure without solving a unique Research Notes requirement.
+
+### Obsidian Publish
+
+Not part of the canonical path. It would duplicate Hugo hosting/branding and does not replace institutionally appropriate private storage.
+
+## 10. Cost/access rule
 
 Required infrastructure must be one of:
 
 1. free/open-source;
-2. already included in an existing approved service/account; or
+2. already included in an approved existing service/account; or
 3. available at no cost through a verified student/academic entitlement.
 
-Optional integrations must have a genuine useful free tier or a verifiable student/academic route before they are recommended as part of this project.
-
-A trial alone does **not** qualify as free access for long-term architecture.
+A trial alone does not qualify as free access for long-term architecture.
 
 If a tool changes its pricing/access model, re-evaluate it before relying on it.
 
-## 8. Tool-adoption test
+## 11. Tool-adoption test
 
 A new tool is adopted only if it passes all six tests:
 
 1. **Unique value** — solves a requirement not already handled adequately.
-2. **Boundary safety** — does not blur private/public or evidence/disclosure boundaries.
-3. **Interoperability** — plain files and durable formats remain available; avoid proprietary lock-in for the canonical record.
+2. **Boundary safety** — preserves research-disclosure and private/public boundaries.
+3. **Interoperability** — canonical content remains in durable/open formats.
 4. **Maintenance ratio** — recurring value exceeds dependency/configuration burden.
 5. **Exit path** — content remains usable if the tool disappears.
-6. **Cost/access** — satisfies the free/open-source/existing-entitlement/student-access rule above.
+6. **Cost/access** — meets the free/open-source/existing-entitlement/student-access rule.
 
-This prevents the system from becoming a collection of overlapping plugins or subscriptions.
+## 12. Current recommendation
 
-## 9. Current recommendation
-
-Adopt now:
+Adopt/retain now:
 
 - Hugo production;
+- native Hugo Markdown as default Research Note source;
 - Obsidian private authoring;
-- local-only Quartz preview;
-- Zotero + Better BibTeX for curated citation export;
-- existing governance/build CI;
+- local-only Quartz preview/navigation;
+- Zotero + Better BibTeX when bibliography management warrants it;
 - GitHub Dependency Graph + dependency review;
 - local disclosure hooks;
-- explicit GitHub ruleset required checks (manual repository-admin action).
+- governance, presentation, build, accessibility, and performance CI.
 
-Pilot next:
+Feature-triggered only:
 
-- Quarto `hugo-md` for one private/local methods-note prototype.
-
-Free/eligible optional research support:
-
-- Consensus free tier for literature discovery/triangulation;
-- installed reference-audit tools only when their current access is free/eligible and they materially improve verification.
+- Quarto for computation/cross-reference/equation/multi-format-heavy notes.
 
 Watchlist:
 
-- MyST/Jupyter Book 2 for future multi-page computational narratives.
+- MyST/Jupyter Book 2 for future larger computational narratives.
 
 Do not add now:
 
-- Scite as a required/default integration;
-- paid-only SEO suites;
-- second public site generator;
+- a second public site generator;
 - public Quartz deployment;
 - Obsidian Publish as canonical site;
 - automatic bidirectional vault/public-repository synchronization;
-- generic prose/SEO plugins that duplicate existing governance checks without clear signal.
+- paid-only SEO/research tooling as required infrastructure;
+- generic prose/SEO plugins that duplicate existing checks without clear signal.
