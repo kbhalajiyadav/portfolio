@@ -1,16 +1,39 @@
 # Research Note 001 — public-source boundary and review record
 
-Working title: **What a Peel Trace Tells You That a Single Force Value Cannot**
+Current title: **What a Peel Trace Can Tell You Beyond a Single Force Value**
 
-This document records the evidence boundary and pre-staging review for Research Note 001. The note itself remains private/local. Only already-public material may support it, and the embargoed M.S. thesis manuscript is not treated as a technical source.
+This document records the evidence boundary, adversarial review, and public-source staging status for Research Note 001. The staged note uses only already-public material; the embargoed M.S. thesis manuscript is not a technical source.
 
 ## Current decision
 
-The reviewed private candidate has passed the claim-level scientific review and disclosure/source-status review with targeted edits.
+The candidate has passed claim-level scientific review, source-status review, disclosure/IP review, adversarial red-team review, editorial-value review, rights/asset review, and explicit author approval for public-source staging.
 
-**Repository-boundary status:** eligible for public-source staging as `draft: true` if the author chooses.
+**Repository-boundary status:** staged in public Git as `draft: true`.
 
-This is not publication approval. The author release decision remains separate and pending.
+This is **not** website-publication approval. The live author release decision remains pending, and independent human scientific review is required before `draft: false`.
+
+Current governance state:
+
+- `repository_safe: true`
+- `repository_staging_decision: approved`
+- `editorial_value_review: complete`
+- `external_scientific_review_required: true`
+- `external_scientific_review_status: pending`
+- `source_status_review: complete`
+- `author_release_decision: pending`
+- `draft: true`
+
+A substantive scientific edit reopens the relevant review.
+
+## Why the note exists
+
+The peer-reviewed paper reports the textile adhesive comparison and defines the study-specific metrics; the public software documents the extraction workflow. The Research Note does not claim a new metric, dataset, or experimental result.
+
+Its distinct reader value is interpretive: it makes the reasoning chain explicit—
+
+`trace -> QC / analysis window -> descriptor -> replicate summary -> decision`
+
+—and identifies where information can be lost or overinterpreted at each reduction step. This is intended as a companion to the paper and software rather than a duplicate or substitute.
 
 ## Approved public sources
 
@@ -18,7 +41,7 @@ This is not publication approval. The author release decision remains separate a
 
 Kantepalle, B. Y.; Epitawala Arachchige, U.; Joung, D.; Tang, C. **Multi-Criteria Selection of Adhesives for Wearable Textiles.** *Polymers* 2026, 18(12), 1504. DOI: `10.3390/polym18121504`.
 
-Use for claims specific to the published textile study, including its T-peel framework, crack-initiation force, peel stability index, stick–slip amplitude, deformation tolerance, inter-sample repeatability, funding, authorship, and published conclusions.
+Use for claims specific to the published textile study, including its T-peel framework, operational crack-initiation-force descriptor, peel stability index, stick–slip amplitude terminology, deformation tolerance, inter-sample repeatability, funding, authorship, and published conclusions.
 
 ### Public research software
 
@@ -31,73 +54,67 @@ Use for claims specific to the published textile study, including its T-peel fra
 
 Use for public workflow behavior, initiation/restart terminology, QC-first interpretation, protocol-defined force/stability descriptors, analysis windows, diagnostics, validation, provenance, and reproducibility controls.
 
-The public GitHub release `v1.4.0-rc15` remains available and is explicitly identified as the manuscript-baseline release candidate.
+The public GitHub release `v1.4.0-rc15` remains available and is explicitly identified as a manuscript-baseline release candidate.
 
 ### Public source-data record
 
-The peer-reviewed article states that its original T-peel source data are archived at Zenodo DOI `10.5281/zenodo.20278428`.
+The peer-reviewed article states that the original T-peel source data are archived at Zenodo DOI `10.5281/zenodo.20278428`.
 
-Note 001 does not currently rely on unpublished data analysis or on new calculations from this archive.
+Note 001 does not perform new calculations from this dataset and does not introduce unpublished data analysis.
 
 ### Public thesis repository record
 
 VCU Scholars Compass: <https://scholarscompass.vcu.edu/etd/8456/>
 
-The public record may be used only for bibliographic relationship and public repository metadata. The embargoed thesis manuscript is not used as a technical source for Note 001.
-
-The reviewed candidate therefore removes the thesis record from the formal reference list and keeps it only as related public work.
+The record is related public work only. The embargoed thesis manuscript is not used as a technical source and is not included in the note's formal reference list.
 
 ## General peel-mechanics sources
 
-The note uses four primary papers only for limited general-mechanics boundaries:
+The note uses a deliberately small set of primary sources for general mechanics boundaries:
 
-- Kendall, K. **Thin-film peeling—the elastic term.** *Journal of Physics D: Applied Physics* 1975, 8, 1449–1452. DOI: `10.1088/0022-3727/8/13/005` — elastic deformation/geometry contribution to peel force.
-- Villey, R. et al. **Rate-dependent elastic hysteresis during the peeling of pressure sensitive adhesives.** *Soft Matter* 2015, 11, 3480–3491. DOI: `10.1039/C5SM00260E` — rate, large-deformation rheology, and dissipation in PSA peeling.
-- Perrin, H. et al. **Peeling an elastic film from a soft viscoelastic adhesive: experiments and scaling laws.** *Soft Matter* 2019, 15, 770–778. DOI: `10.1039/C8SM01946K` — coupling among peel force, velocity, geometry, and viscoelastic dissipation in a soft adhesive system.
-- Dalbe, M.-J. et al. **Inertial and stick-slip regimes of unstable adhesive tape peeling.** *Soft Matter* 2016, 12, 4537–4548. DOI: `10.1039/C6SM00119J` — stick–slip/inertial peeling as a physical instability rather than generic measurement noise.
+- Kendall, K. **Thin-film peeling—the elastic term.** *Journal of Physics D: Applied Physics* 1975, 8, 1449–1452. DOI `10.1088/0022-3727/8/13/005` — geometry/elastic-deformation contribution to peel force.
+- Villey, R. et al. **Rate-dependent elastic hysteresis during the peeling of pressure sensitive adhesives.** *Soft Matter* 2015, 11, 3480–3491. DOI `10.1039/C5SM00260E` — rate/rheology/dissipation sensitivity in pressure-sensitive adhesive peeling.
+- Perrin, H. et al. **Peeling an elastic film from a soft viscoelastic adhesive: experiments and scaling laws.** *Soft Matter* 2019, 15, 770–778. DOI `10.1039/C8SM01946K` — coupling among peel force, velocity, geometry, and viscoelastic dissipation in a soft adhesive system.
+- Dalbe, M.-J. et al. **Inertial and stick-slip regimes of unstable adhesive tape peeling.** *Soft Matter* 2016, 12, 4537–4548. DOI `10.1039/C6SM00119J` — stick–slip/inertial peeling as a physical instability in the studied tape system.
+- Andrews, E. H.; Khan, T. A.; Majid, H. A. **Adhesion to skin: Part 1 Peel tests with hard and soft machines.** *Journal of Materials Science* 1985, 20, 3621–3630. DOI `10.1007/BF01113769` — counter-evidence showing that machine compliance can materially alter observed peel behavior and suppress force oscillations.
 
-The note must not imply that pressure-sensitive tape, polymer-gel, and textile-interface systems are mechanically identical.
+These references do not establish that pressure-sensitive tape, polymer-gel, skin-adhesive, and textile-interface systems are mechanically identical. They support only the bounded claims stated above.
 
 ## Source-status review
 
-On October 14, 2026, the four general-mechanics papers and the 2026 *Polymers* article were independently checked for DOI/title agreement and retraction/expression-of-concern signals. All five matched their identifiers and none was flagged as retracted.
+On October 14, 2026, the peer-reviewed sources used in the note were checked for identifier/title agreement and retraction/expression-of-concern signals. The cited records matched their identifiers and none was flagged as retracted. The software release was independently checked against its public GitHub release record.
 
-The specific software release used by the note was also checked against the public GitHub release record.
+The Andrews citation was specifically re-verified after a discovery result initially used an abbreviated title; the DOI resolves to the full article title above and no retraction, correction, or expression-of-concern notice was found.
 
-The reviewed private candidate therefore uses:
+## Claim-level and adversarial review outcome
 
-- `source_status_review: complete`
-- `repository_safe: true`
-- `author_release_decision: pending`
-- `draft: true`
+The review produced the following material changes:
 
-These values apply to the reviewed candidate only. A later substantive edit reopens the relevant review.
-
-## Claim-level review outcome
-
-The scientific review passed with several tightening edits:
-
-1. The peer-reviewed article's **crack-initiation force** is now distinguished from the public software's broader **initiation/restart** descriptor.
-2. A broad statement that automation improves reproducibility was replaced with the narrower claim that a scripted workflow can standardize extraction and preserve analysis provenance.
-3. The note now states that the force–displacement trace **and its QC context** are the evidence from which scalar descriptors are derived.
-4. The practical reading sequence is explicitly labeled an author methodological recommendation rather than a universal standard.
-5. The thesis repository record is no longer a formal technical citation.
-6. The external mechanics papers remain limited to the specific general claims listed above.
+1. The title was changed from the categorical **“What a Peel Trace Tells You That a Single Force Value Cannot”** to **“What a Peel Trace Can Tell You Beyond a Single Force Value.”**
+2. The paper's `Fci` label is now accompanied by its operational peak-oriented definition; the note explicitly avoids treating it as a universal measurement of the physical instant of crack nucleation.
+3. The public software's initiation/restart terminology is distinguished from the paper-specific descriptor.
+4. Observed force oscillation is separated from mechanism identification. The note no longer treats an oscillatory trace by itself as proof of interfacial stick–slip.
+5. Figure 2 was revised to use the mechanism-neutral label **force oscillation** rather than `oscillation / stick-slip`.
+6. A broad automation/reproducibility statement was narrowed to standardization of extraction and preservation of provenance.
+7. The published adhesive framework is explicitly described as a proof of concept rather than a universal screening rule.
+8. Repeatability is limited to the tested replicate set and is not presented as cross-laboratory reproducibility.
+9. The practical reading sequence is identified as author methodological guidance, not an ASTM/ISO test method, validated SOP, or acceptance criterion.
+10. `status` was changed from `stable` to `evolving` for the initial note lifecycle.
+11. Co-author attribution, underlying funding, published COI status, and AI-assisted editorial/adversarial review are surfaced transparently.
+12. The note now contains an explicit **What this note adds** section to establish non-redundant reader value.
 
 ## Core claim envelope
 
-The note may explain that a force–displacement peel history can contain information beyond one scalar force summary, including:
+The note may explain that a force–displacement peel history can preserve information beyond a single scalar force summary, including:
 
-- crack-initiation behavior in the published textile framework;
-- initiation/restart behavior in the public software workflow;
+- protocol-defined peak-oriented initiation behavior;
 - continuing force level;
-- oscillation/stick–slip;
-- stability;
+- force oscillation and trace stability;
 - drift and analysis-window quality;
 - displacement/break behavior; and
-- repeatability across specimens.
+- repeatability across the tested replicate set.
 
-The note must preserve the public software's interpretation boundary: these are **protocol-defined descriptors of the measured peel response**, not universal intrinsic adhesive material constants.
+The note must preserve the public software's interpretation boundary: its outputs are **protocol-defined descriptors of the measured peel response**, not universal intrinsic adhesive material constants or stand-alone mechanism identifiers.
 
 ## Explicit exclusions
 
@@ -105,7 +122,7 @@ Do not introduce into Note 001:
 
 - embargoed thesis-manuscript text or thesis-only technical detail;
 - ongoing Ph.D. data, results, figures, methods, or conclusions that are not already public;
-- lab-internal discussion or internal documents;
+- lab-internal discussion or documents;
 - unpublished collaborator material;
 - sponsor-confidential information;
 - private reviewer/editorial correspondence;
@@ -114,27 +131,17 @@ Do not introduce into Note 001:
 
 ## Figures and rights
 
-The private candidate uses two original explanatory SVG schematics:
+The staged page bundle contains two original explanatory SVG schematics:
 
-1. stable versus oscillatory illustrative peel traces, explicitly labeled **illustrative; not experimental data**;
-2. raw trace → QC/window → descriptors → replicate summary → interpretation/limitations.
+1. stable versus oscillatory illustrative traces, explicitly labelled **illustrative; not experimental data**;
+2. `raw trace -> QC/window -> protocol-defined descriptors -> replicate summary -> interpretation/limitations`.
 
-Both were created specifically for the note, include accessible SVG metadata, and contain no experimental data. No journal figure is reproduced.
+Both contain accessible SVG `<title>`/`<desc>` metadata, no experimental data, no external asset loads, no scripts or event handlers, and no reproduced journal figure.
 
-## Provenance and disclosure
+## Remaining publication gate
 
-The public note should make clear that it discusses work the author co-authored and software the author co-developed. The underlying study's funding and conflict-of-interest statements remain those of the peer-reviewed paper.
+The next required substantive review is **independent human scientific review**. Because Note 001 interprets a co-authored study and method terminology, an appropriate co-author/PI or another knowledgeable researcher should check that the explanation fairly represents the public work without relying on unpublished context.
 
-AI/external-tool assistance is not an evidentiary source. The candidate contains only already-public research information, and all scientific claims are tied to the underlying public sources.
-
-## Authoring decision
-
-The private Note 001 comparison concluded that native Hugo Markdown is the appropriate default for this note. Quarto remains optional and feature-triggered for future notes that genuinely need executable computation, dense numbered cross-references, equation-heavy authoring, citation-heavy synthesis, or multi-format scientific output.
-
-The durable decision is recorded in `docs/research-note-authoring-decision.md`; issue #79 is closed as completed.
-
-## Remaining gate before public-source staging
-
-Only the author's intentional staging decision remains. If staged, Note 001 should enter the public repository as `draft: true` with the reviewed governance fields and should then pass the ordinary governance, presentation, dependency-review, full-build, accessibility, responsive, and Lighthouse checks before publication is considered.
+The staged source must remain `draft: true` until that review is complete, any resulting substantive edits are re-audited, all website/accessibility/performance checks pass, and the author separately sets `author_release_decision: approved`.
 
 No automatic promotion is permitted.
