@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   {{ partial "seo_head.html" . }}
+  {{ if and .IsPage (eq .Section "notes") }}{{ partial "notes/schema.html" . }}{{ end }}
   <script data-consent-bootstrap>
     (() => {
       const root = document.documentElement;
@@ -19,7 +20,12 @@
   {{ $refinements := resources.FromString "css/refinements.css" (readFile "static/css/refinements.css") }}
   {{ $about := resources.FromString "css/about.css" (readFile "static/css/about.css") }}
   {{ $polish := resources.FromString "css/final-polish.css" (readFile "static/css/final-polish.css") }}
-  {{ $styles := (slice $core $refinements $about $polish) | resources.Concat "css/site.css" | minify | fingerprint "sha384" }}
+  {{ $styleParts := slice $core $refinements $about $polish }}
+  {{ if eq .Section "notes" }}
+    {{ $notes := resources.FromString "css/notes.css" (readFile "static/css/notes.css") }}
+    {{ $styleParts = $styleParts | append $notes }}
+  {{ end }}
+  {{ $styles := $styleParts | resources.Concat "css/site.css" | minify | fingerprint "sha384" }}
   <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}" crossorigin="anonymous">
 </head>
 <body class="page-{{ .Kind }} section-{{ .Section }}">
