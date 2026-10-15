@@ -29,6 +29,13 @@
     {{ partial "notes/status_notice.html" . }}
 
     {{ if ne $status "withdrawn" }}
+    {{ with .Params.in_brief }}
+    <aside class="note-in-brief" aria-labelledby="note-in-brief-title">
+      <span class="note-in-brief__label" id="note-in-brief-title">In brief</span>
+      <div>{{ . | markdownify }}</div>
+    </aside>
+    {{ end }}
+
     <div class="note-reading-grid{{ if .Params.toc }} has-toc{{ end }}">
       {{ if .Params.toc }}
       <aside class="note-toc" aria-label="On this page">
