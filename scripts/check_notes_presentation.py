@@ -43,8 +43,10 @@ def main() -> int:
         "Presentation Fixture: Corrected Concept",
         "Presentation Fixture: Retired Reflection",
         "Presentation Fixture: Withdrawn Concept",
+        "This note has been withdrawn and should not be relied upon.",
     ):
         require(index, needle, "notes index", errors)
+    forbid(index, "Synthetic withdrawn note used only to validate tombstone rendering.", "notes index", errors)
 
     method = read_page(root, "notes/presentation-method/index.html", errors)
     for needle in (
@@ -85,17 +87,23 @@ def main() -> int:
         "Withdrawn — do not rely on this note.",
         "This synthetic note must not be relied upon",
         "See current material",
+        "This Research Note has been withdrawn and should not be relied upon.",
+        '"creativeWorkStatus":"withdrawn"',
     ):
         require(withdrawn, needle, "withdrawn fixture", errors)
-    forbid(withdrawn, "WITHDRAWN_FIXTURE_BODY_SHOULD_NOT_APPEAR", "withdrawn fixture", errors)
-    forbid(withdrawn, 'class="article-content', "withdrawn fixture", errors)
+    for needle in (
+        "WITHDRAWN_FIXTURE_BODY_SHOULD_NOT_APPEAR",
+        'class="article-content',
+        "Synthetic withdrawn note used only to validate tombstone rendering.",
+    ):
+        forbid(withdrawn, needle, "withdrawn fixture", errors)
 
     if errors:
         for error in errors:
             print(f"ERROR: {error}", file=sys.stderr)
         return 1
 
-    print("Research Notes presentation fixtures passed: index, metadata, Open Graph, schema, TOC, correction, retirement, and withdrawal states verified.")
+    print("Research Notes presentation fixtures passed: index, metadata, Open Graph, schema, TOC, correction, retirement, withdrawal, and tombstone leakage controls verified.")
     return 0
 
 
