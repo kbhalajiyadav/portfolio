@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+import re
 import sys
 
 
@@ -61,8 +62,22 @@ def main() -> int:
         'property="og:type" content="article"',
         '/social/research.png',
         'name=robots content="noindex,follow"',
+        '/css/site-notes.min.',
     ):
         require(method, needle, "method fixture", errors)
+
+    css_match = re.search(r'href=([^ >]*?/css/site-notes\.min\.[^ >]+?\.css)', method)
+    if not css_match:
+        errors.append("method fixture: could not resolve the Notes-specific stylesheet")
+    else:
+        css_name = css_match.group(1).split("/css/", 1)[-1]
+        css_path = root / "css" / css_name
+        if not css_path.exists():
+            errors.append(f"method fixture: missing Notes stylesheet asset {css_name!r}")
+        else:
+            css = css_path.read_text(encoding="utf-8")
+            for needle in (".note-status-banner", ".note-reading-grid", ".notes-index__section"):
+                require(css, needle, "Notes stylesheet", errors)
 
     corrected = read_page(root, "notes/presentation-corrected/index.html", errors)
     for needle in (
@@ -103,7 +118,7 @@ def main() -> int:
             print(f"ERROR: {error}", file=sys.stderr)
         return 1
 
-    print("Research Notes presentation fixtures passed: index, metadata, Open Graph, schema, TOC, correction, retirement, withdrawal, and tombstone leakage controls verified.")
+    print("Research Notes presentation fixtures passed: dedicated stylesheet, index, metadata, Open Graph, schema, TOC, correction, retirement, withdrawal, and tombstone leakage controls verified.")
     return 0
 
 
