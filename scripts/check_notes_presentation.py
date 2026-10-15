@@ -52,7 +52,7 @@ def main() -> int:
         "Method",
         "Evolving note.",
         "On this page",
-        "Synthetic fixture content",
+        "synthetic fixture content",
         '"@type":"Article"',
         '"@type":"BreadcrumbList"',
         "article:published_time",
