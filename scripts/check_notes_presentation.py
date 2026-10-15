@@ -134,7 +134,7 @@ def main() -> int:
     for needle in (
         "Corrected.",
         "A synthetic factual statement was corrected for presentation testing.",
-        "Reviewed October 14, 2026",
+        "Updated October 14, 2026",
         "Revision history",
         "Corrected a synthetic statement and recorded the change in the public revision history.",
         "This body exists only to test the corrected state",
