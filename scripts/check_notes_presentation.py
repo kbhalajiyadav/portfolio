@@ -40,7 +40,7 @@ def main() -> int:
         "Methods",
         "Concepts",
         "Reflections",
-        "What a Peel Trace Can Tell You Beyond a Single Force Value",
+        "The Strongest Adhesive Was Not the Right One",
         "Presentation Fixture: Method",
         "Presentation Fixture: Corrected Concept",
         "Presentation Fixture: Retired Reflection",
@@ -52,20 +52,22 @@ def main() -> int:
 
     staged = read_page(root, "notes/peel-trace-beyond-single-force/index.html", errors)
     for needle in (
-        "What a Peel Trace Can Tell You Beyond a Single Force Value",
+        "The Strongest Adhesive Was Not the Right One",
         "Research Note",
-        "Method",
+        "Reflection",
         "Evolving",
         "In brief",
-        "What this note adds",
-        "trace → QC and analysis window → descriptor → replicate summary → decision",
-        "Peak-oriented initiation descriptor",
-        "oscillation in a force trace alone does not prove a particular interfacial mechanism",
-        "This staging draft still requires independent human scientific review before live publication",
-        "Illustrative schematic; not experimental data.",
-        "Original workflow schematic; no experimental data shown.",
+        "The force ranking looked convincing",
+        "The trace changed the question",
+        "Checking the decision in the device",
+        "Making the analysis visible",
+        "What I carried forward",
+        "Limits",
+        "34.95",
+        "27.98",
+        "make the judgment inspectable",
         "Funding, interests, and acknowledgements",
-        "AI-assisted tools supported editorial and adversarial review",
+        "AI tools supported editing and adversarial review.",
         '"@type":"Article"',
         '"@type":"BreadcrumbList"',
         'property="og:type" content="article"',
@@ -74,24 +76,14 @@ def main() -> int:
     ):
         require(staged, needle, "staged Note 001", errors)
     for needle in (
+        "What a Peel Trace Can Tell You Beyond a Single Force Value",
+        "[CONFIRM",
+        "Illustrative schematic; not experimental data.",
+        "Original workflow schematic; no experimental data shown.",
         "This Research Note has been withdrawn and should not be relied upon.",
         "WITHDRAWN_FIXTURE_BODY_SHOULD_NOT_APPEAR",
     ):
         forbid(staged, needle, "staged Note 001", errors)
-
-    for asset in (
-        "notes/peel-trace-beyond-single-force/figures/figure-1-illustrative-traces.svg",
-        "notes/peel-trace-beyond-single-force/figures/figure-2-trace-to-interpretation.svg",
-    ):
-        asset_path = root / asset
-        if not asset_path.exists():
-            errors.append(f"staged Note 001: missing rendered figure asset {asset!r}")
-            continue
-        svg = asset_path.read_text(encoding="utf-8")
-        require(svg, "<title", asset, errors)
-        require(svg, "<desc", asset, errors)
-        for unsafe in ("<script", "javascript:", "<foreignObject", " onload=", " onclick="):
-            forbid(svg, unsafe, asset, errors)
 
     method = read_page(root, "notes/presentation-method/index.html", errors)
     for needle in (
@@ -177,7 +169,7 @@ def main() -> int:
         return 1
 
     print(
-        "Research Notes presentation passed: staged Note 001 plus synthetic fixtures verified for dedicated styling, index, metadata, Open Graph, schema, TOC, In brief, transparency, figure assets, correction, retirement, withdrawal, and tombstone leakage controls."
+        "Research Notes presentation passed: staged Note 001 plus synthetic fixtures verified for dedicated styling, index, metadata, Open Graph, schema, TOC, In brief, transparency, correction, retirement, withdrawal, and tombstone leakage controls."
     )
     return 0
 

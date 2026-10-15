@@ -1,66 +1,59 @@
-# Research Note 001 — pre-staging red-team record
+# Research Note 001 — adversarial review record
 
-This record documents the adversarial review performed **before** the author release decision. The Research Note itself and its figures remain private/local and have not been committed to public Git.
+This is the durable summary of the adversarial review history for **The Strongest Adhesive Was Not the Right One**.
 
-## Verdict
+The note has since been staged in public Git as `draft: true`. It is not live on `bhalaji.com`.
 
-**Pass after targeted red-team edits.**
+## What the red team changed
 
-The reviewed candidate remains technically eligible for public-source staging as `draft: true`, but the author release decision is still `pending`. No automatic promotion is permitted.
+The earlier method-style draft accumulated correct cautions but became less useful. The subsequent reflection rewrite keeps the important scientific boundaries while restoring the published evidence and author perspective.
 
-## Material findings
+The current draft preserves these red-team outcomes:
 
-1. **Categorical title risk.** The working title was stronger than the evidence required. The private candidate now uses the less categorical working title **“What a Peel Trace Can Tell You Beyond a Single Force Value.”**
-2. **Crack-initiation terminology risk.** The peer-reviewed study labels `Fci` as crack-initiation force but operationally defines it from retained high local maxima in the selected analysis window. The revised candidate states the operational definition and does not equate it with a universal physical measurement of the instant of crack nucleation.
-3. **Oscillation/mechanism risk.** Force-trace oscillation alone does not prove a specific stick–slip mechanism. The revised note distinguishes an operational trace descriptor from mechanism identification and adds counter-literature on machine-compliance dependence in peel testing.
-4. **Generalization risk.** The underlying textile comparison is now explicitly described as a proof of concept for a defined system, not a universally validated ranking framework.
-5. **Repeatability/reproducibility risk.** The revised text limits repeatability claims to the tested replicate set and rejects cross-laboratory/protocol inference.
-6. **Standards boundary.** The practical reading sequence is explicitly identified as interpretive guidance, not a replacement for an applicable test standard, validated laboratory SOP, or acceptance criterion.
-7. **Lifecycle overconfidence.** The initial note lifecycle status is changed from `stable` to `evolving` because the note is new and is partly tied to release-candidate software.
-8. **Contributor transparency.** The candidate now identifies the underlying study as co-authored work and the Research Note as B.Y.K.'s explanatory synthesis.
-9. **AI/editorial transparency.** The candidate records that AI-assisted tools supported editorial/adversarial review, were not used as scientific evidence, and do not replace author responsibility.
-10. **COI transparency.** The candidate now carries the underlying peer-reviewed study's statement that the authors declared no conflicts of interest.
-11. **Source-review traceability.** A source-status review date is recorded; substantive changes reopen the relevant review.
-12. **Figure security/accessibility.** The two original SVGs were checked for scripts, event handlers, external links and foreign objects; none were found. Both contain accessible `<title>` and `<desc>` metadata and no experimental data.
+1. **No mechanism overclaim.** SSA is a protocol-defined trace descriptor. Force oscillation alone is not treated as proof of a specific interfacial stick-slip mechanism.
+2. **No causal leap.** The lower SSA observed for Fabri-Fuse and its higher device-level strain-to-electrical-failure are presented as associated results in this system, not evidence that one caused the other.
+3. **No universal ranking claim.** The adhesive result is bounded to the published textile system and test protocol.
+4. **No reproducibility inflation.** The note does not call within-study repeatability cross-laboratory reproducibility.
+5. **No standard-setting language.** The reflection does not present a new ASTM/ISO method, acceptance rule, or universal threshold.
+6. **Collaborative work is credited.** The study is written as `we`; B.Y.K.'s learning and software motivation are written as `I`.
+7. **AI use is transparent.** AI tools assisted editing/adversarial review and are not used as scientific evidence.
+8. **Funding and COI are surfaced from the published article.**
+9. **No thesis-only technical material is used.**
+10. **The real evidence is preferred to a schematic.** The two illustrative SVGs are removed. A public-data trace figure remains a pre-publication requirement.
 
-## Counter-literature check
+## Counter-evidence retained
 
-A deliberate search for evidence that could undermine a simple “oscillations = interface stick–slip” interpretation identified:
+Two external papers remain only in the Limits section to support an important caution: observed peel dynamics can depend on the broader test system, including machine compliance, so trace oscillation should not be over-read as an intrinsic material property or a unique mechanism signature.
 
-- Andrews, E. H.; Khan, T. A.; Majid, H. A. **Adhesion to skin: Part 1 Peel tests with hard and soft machines.** *Journal of Materials Science* 1985, 20, 3621–3630. DOI `10.1007/BF01113769`.
+- Andrews, E. H.; Khan, T. A.; Majid, H. A. (1985). DOI `10.1007/BF01113769`.
+- Dalbe, M.-J. et al. (2016). DOI `10.1039/C6SM00119J`.
 
-The DOI/title record was independently verified and no retraction, correction, or expression-of-concern notice was found. Its machine-compliance result is used only to support the caution that measured peel dynamics can depend on the test system.
+## New reflection-specific red-team checks
 
-## Standards/metrology check
+The rewrite was checked against these failure modes:
 
-Current public standards metadata reinforces the same boundary:
+- a narrative title implying a universal adhesive ranking;
+- an invented personal origin story;
+- claiming formal precommitment before the device result;
+- using a thesis-only device value;
+- propagating the paper's inconsistent relative-percent wording rather than reporting the two public means;
+- implying that stable peel caused better electrical performance;
+- treating the software as an attempt to automate scientific judgment away;
+- claiming that adhesive peel physics and liquid-crystal response physics are the same;
+- retaining a `Reproducibility` tag that the article itself does not justify;
+- replacing real evidence with explanatory schematics.
 
-- ASTM lists `D1876-08(2023)` for T-peel resistance of adhesives.
-- ASTM lists `D2724-19(2025)e1` for bond strength of bonded/fused/laminated apparel fabrics; the published textile study reports an adapted protocol based on ASTM D2724-19.
-- ISO lists `ISO 11339:2022` for T-peel testing of flexible-to-flexible bonded assemblies and states that the test procedure does not provide design information.
+The staged reflection avoids each of these.
 
-The Research Note therefore remains explanatory and system-specific rather than standard-setting.
+## Stop rule
 
-## Pre-mortem outcomes
+No further governance layer is needed for Note 001.
 
-The red-team explicitly tested these plausible future criticisms:
+The remaining substantive gates are concrete rather than procedural expansion:
 
-- `Fci` was presented as a fundamental crack-nucleation measurement;
-- oscillations were automatically labeled as a physical stick–slip mechanism;
-- PSI/SSA were presented as transferable material constants;
-- a proof-of-concept ranking was presented as a validated universal method;
-- an author recommendation was presented as an ASTM/ISO procedure;
-- a single-author note appeared to appropriate co-authored work;
-- AI assistance was hidden or treated as evidence;
-- later software/source changes could silently stale the note.
+- real evidence figure;
+- independent human scientific review;
+- re-audit of substantive changes;
+- final author live-release decision.
 
-The private v4 candidate has been revised against each of these failure modes.
-
-## Remaining boundary
-
-The only irreversible step remains the author's intentional release decision. Until then:
-
-- no Note 001 prose enters `content/notes/`;
-- no Note 001 figure enters public Git;
-- `author_release_decision` remains `pending`;
-- staging/publishing automation must not promote the candidate.
+The governance machinery should now serve future notes rather than keep growing around this one.

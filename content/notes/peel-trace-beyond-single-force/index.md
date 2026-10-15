@@ -1,11 +1,11 @@
 ---
-title: What a Peel Trace Can Tell You Beyond a Single Force Value
+title: The Strongest Adhesive Was Not the Right One
 date: 2026-10-14 20:52:00-04:00
-lastmod: 2026-10-14 20:52:00-04:00
+lastmod: 2026-10-15 07:41:00-04:00
 draft: true
-summary: Peel tests produce force–displacement histories before they produce a single force value. This note explains how trace shape, peak-oriented initiation descriptors, oscillation/stability, analysis-window quality, and replicate repeatability can complement conventional peel-strength reporting—and why the interpretation remains protocol-dependent.
-in_brief: A peel trace can preserve information that a single average or peak force does not represent, including force fluctuations, analysis-window quality, and repeatability-related descriptors. In a published soft-textile proof of concept and its public analysis workflow, these features complemented conventional peel-strength reporting. They must be interpreted within the test system, geometry, protocol, and analysis settings and should not be treated as intrinsic adhesive constants or mechanism identifiers.
-note_type: method
+summary: A peel-force ranking picked the strongest adhesive. The full force trace and a stretch test on printed silver traces pointed to a different choice. This note is about what that changed in how I measure materials.
+in_brief: In a published study of four adhesives on stretchable knit fabric, E6000 had the highest peel force but large force swings during peeling. Fabri-Fuse peeled more steadily, and silver traces printed on it maintained electrical function to 34.95% strain, compared with 27.98% on E6000. The lesson was not to swap one favorite metric for another. It was to ask what a single number leaves out before trusting it.
+note_type: reflection
 status: evolving
 featured: true
 toc: true
@@ -13,15 +13,15 @@ social_card: research
 tags:
 - Adhesion
 - Peel testing
-- Soft materials
-- Reproducibility
+- Wearable textiles
+- Measurement
 image: ''
 image_alt: ''
 revision_note: ''
 status_reason: ''
 replacement_url: ''
 funding_statement: The underlying published study was funded in part by the U.S. Army Combat Capabilities Development Command Soldier Center (W911QY2220002) and the Virginia Commonwealth University College of Engineering.
-acknowledgements: The underlying study was co-authored by Bhalaji Yadav Kantepalle, Udena Epitawala Arachchige, Daeha Joung, and Christina Tang. This Research Note is an explanatory synthesis by Bhalaji Yadav Kantepalle. AI-assisted tools supported editorial and adversarial review; they were not treated as scientific sources.
+acknowledgements: The study behind this note was co-authored by Bhalaji Yadav Kantepalle, Udena Epitawala Arachchige, Daeha Joung, and Christina Tang. The published article also acknowledges Samrawit Tesfai for technical assistance. This note is my own reflection. AI tools supported editing and adversarial review. They were not used as scientific sources.
 governance:
   repository_safe: true
   repository_staging_decision: approved
@@ -31,7 +31,7 @@ governance:
   contains_confidential_or_sponsor_material: false
   potentially_patent_sensitive: false
   ip_clearance: not_applicable
-  venue_policy_review: not_applicable
+  venue_policy_review: cleared
   embargo_status: none
   regulated_research_material: false
   ethics_review: not_applicable
@@ -49,14 +49,12 @@ governance:
   coi_statement: The underlying peer-reviewed study states that the authors declared no conflicts of interest.
   copyright_review: complete
   source_status_review: complete
-  source_status_reviewed_on: 2026-10-14
+  source_status_reviewed_on: 2026-10-15
   author_release_decision: pending
 sources:
 - https://doi.org/10.3390/polym18121504
+- https://doi.org/10.5281/zenodo.20278428
 - https://doi.org/10.5281/zenodo.20301242
-- https://doi.org/10.1088/0022-3727/8/13/005
-- https://doi.org/10.1039/C5SM00260E
-- https://doi.org/10.1039/C8SM01946K
 - https://doi.org/10.1039/C6SM00119J
 - https://doi.org/10.1007/BF01113769
 related_publications:
@@ -67,109 +65,54 @@ related_software:
 related_projects: []
 related_notes: []
 ---
-## What this note adds
+## The force ranking looked convincing
 
-The peer-reviewed paper reports the textile adhesive comparison and defines the study-specific metrics; the public software documents the extraction workflow. This note does **not** claim a new metric, dataset, or experimental result.
+During my M.S. research, we were trying to identify an adhesive interface for a stretchable textile assembly that would also support printed silver traces during deformation. We compared four commercial adhesives with T-peel tests.
 
-Its purpose is interpretive: to make the reasoning chain explicit—
+Early qualitative observations made the strongest bond seem like the obvious choice. The formal force ranking agreed. E6000 produced the highest peel force, 1.82 ± 0.27 N/mm. Ranked by peel force alone, the decision looked easy.
 
-**trace → QC and analysis window → descriptor → replicate summary → decision**
+But the force-displacement curves did not look alike.
 
-—and to show where information can be lost or overinterpreted at each reduction step. That makes the note a companion to the paper and software rather than a substitute for either.
+## The trace changed the question
 
-## The measurement is a trace before it is a scalar
+A peel test records force as the bond opens. The scalar summaries come later, when the trace is reduced to one or more metrics.
 
-A peel experiment records force while displacement progresses. Reducing that record to a single average, maximum, or width-normalized force can be useful, but the reduction necessarily discards information about *how* the force evolved.
+E6000 showed large force oscillations while Fabri-Fuse and JB Weld showed visibly steadier curves. In the published analysis, stick-slip amplitude (SSA) described the difference between the mean retained peaks and valleys within the selected 25 mm analysis window. E6000 had an SSA of 4.05 ± 0.83 N. Fabri-Fuse had an SSA of 0.69 ± 0.29 N.
 
-That matters because peel force is not determined by interface chemistry alone. Even in classical elastic peeling, geometry and elastic deformation contribute to the energy balance ([Kendall, 1975](https://doi.org/10.1088/0022-3727/8/13/005)). In soft or pressure-sensitive adhesive systems, rate-dependent viscoelastic dissipation and large deformation can materially affect the measured response ([Villey et al., 2015](https://doi.org/10.1039/C5SM00260E); [Perrin et al., 2019](https://doi.org/10.1039/C8SM01946K)). Unstable peeling can also generate stick–slip or inertial oscillations rather than a smooth force history ([Dalbe et al., 2016](https://doi.org/10.1039/C6SM00119J)).
+That difference changed what I thought the screening question should be. It was no longer only, "Which adhesive gives the largest force?" It became, "Which candidate gives a strong enough, steady enough, and sufficiently deformation-tolerant interface for this application?" On that broader screen, Fabri-Fuse was selected. It also had the lowest reported variation in initiation force across specimens, a high Peel Stability Index, and high displacement at break.
 
-{{< figure src="figures/figure-1-illustrative-traces.svg" alt="Two qualitative force-displacement traces at similar central force level. The left is relatively stable and the right has large oscillations. No experimental data are shown." caption="**Illustrative schematic; not experimental data.** A single force summary can be similar even when the force histories differ substantially." >}}
+## Checking the decision in the device
 
-The purpose is conceptual: inspect the trace before deciding which scalar descriptors are mechanically meaningful.
+A new selection logic needed a downstream test that could contradict it. We printed conductive silver traces directly on fabric and on E6000 and Fabri-Fuse layers, then stretched the assemblies while monitoring electrical conduction.
 
-## What information can disappear in one force value?
+E6000 was included because it was the peel-force winner. The device comparison asked whether the broader selection held up in the application. If E6000 had performed better, the interpretation would have needed to narrow.
 
-### Peak-oriented initiation descriptor—and restart terminology in the public workflow
+Fabri-Fuse maintained electrical function over a larger strain range before failure, reaching 34.95 ± 2.43% strain compared with 27.98 ± 1.47% for E6000.
 
-The published textile study labels \(F_{ci}\) as crack-initiation force and defines it operationally as the mean of the retained five highest local maxima within the selected analysis window, reported separately from the continuing peel-force descriptor ([Kantepalle et al., 2026](https://doi.org/10.3390/polym18121504)). Because this is a protocol-defined peak-oriented quantity, it should not be read as a universal measurement of the instant a crack first nucleates.
+The study did not establish why the device outcomes differed. It showed that the force-based winner was not the best performer in the downstream test.
 
-The public software uses initiation/restart-force terminology for its defined workflows ([Kantepalle & Tang, 2026](https://doi.org/10.5281/zenodo.20301242)). These labels are method-specific and should not be assumed to be mechanically equivalent across different peel tests.
+## Making the analysis visible
 
-### Stability and oscillation
+Once I treated the trace as evidence rather than a route to one number, the analysis became part of the experiment. Which region of the curve was analyzed, which peaks and valleys were retained, and whether those choices made sense on the original trace could all affect the resulting descriptors.
 
-Two traces can occupy a similar force range while showing very different fluctuation patterns. Stick–slip is a well-established peeling instability in many adhesive systems, but oscillation in a force trace alone does not prove a particular interfacial mechanism. Peel dynamics can depend on rate, geometry, peeled-arm mechanics, and machine compliance; changing machine stiffness has been shown to change observed peel behavior and suppress force oscillations in some systems ([Dalbe et al., 2016](https://doi.org/10.1039/C6SM00119J); [Andrews et al., 1985](https://doi.org/10.1007/BF01113769)).
+That is why I turned the analysis into a versioned [software workflow](/project/peel-trace-evaluation/) with QC plots, diagnostics, and provenance records. The goal was not to automate judgment away. It was to make the judgment inspectable.
 
-In our published textile study, trace-shape and stability criteria—including the peel stability index and the operationally named stick–slip amplitude—helped distinguish candidate adhesives beyond conventional peel-strength ranking ([Kantepalle et al., 2026](https://doi.org/10.3390/polym18121504)). In this note, those quantities are treated as trace descriptors unless a physical mechanism has been established independently. They are useful only when the selected trace region and extrema are physically interpretable.
+## What I carried forward
 
-### Drift and analysis-window quality
+The materials I work on now are different. I study how thermal, flow, and deformation histories organize liquid-crystalline and soft-material structure, and how optical measurements track the response. The physics is different, but I carried the same measurement habit forward.
 
-A numerical summary is only as defensible as the portion of the trace being summarized. The public software therefore couples metric extraction to a protocol-defined analysis window, diagnostics, and visual QC rather than treating every recorded point as equally suitable for averaging ([Kantepalle & Tang, 2026](https://doi.org/10.5281/zenodo.20301242)).
+A peak force can hide how a peel response evolves. A single color value, or a color judged by eye, can hide how an optical response changes with temperature, deformation, and processing history. In both cases, the first number available is not always the number that answers the question.
 
-A drifting region, an initiation transient, an end-of-test drop, or a region with insufficient valid extrema can each change what a scalar summary means. This is an analysis-quality problem before it is a ranking problem.
+The lesson was not to replace peel strength with a new favorite metric. It was to stop letting the easiest metric define the question.
 
-### Replicate repeatability
+## Limits
 
-A high value observed once is different from a response that is consistently reproduced across nominally similar specimens. The published framework therefore considered inter-sample repeatability alongside trace-level descriptors ([Kantepalle et al., 2026](https://doi.org/10.3390/polym18121504)).
-
-Repeatability does not prove general reproducibility across laboratories or protocols. It addresses a narrower question: whether the result is consistent across the tested replicate set under the stated conditions. The published adhesive comparison was a proof of concept with the replicate counts reported in the paper, not a universal validation study.
-
-## Why QC belongs next to the metric
-
-The public software exports QC plots so that the selected window, retained extrema, and diagnostic flags can be compared with the original force–displacement trace before interpretation ([Kantepalle & Tang, 2026](https://doi.org/10.5281/zenodo.20301242)).
-
-A scripted workflow can standardize how descriptors are extracted and can preserve analysis provenance. It cannot make every automatically extracted number mechanically meaningful.
-
-{{< figure src="figures/figure-2-trace-to-interpretation.svg" alt="Conceptual workflow from a raw force-displacement trace through quality control and analysis-window selection, force and stability descriptors, replicate summaries, and interpretation within geometry and limitations. No experimental data are shown." caption="**Original workflow schematic; no experimental data shown.** From raw trace through QC and protocol-defined descriptors to replicate-level interpretation." >}}
-
-The force–displacement trace and its QC context are the evidence from which the scalar descriptors are derived; those descriptors should be interpreted within the relevant geometry, protocol, and limitations.
-
-## The descriptors are conditional, not universal constants
-
-The measured peel response can combine interface separation with deformation and dissipation elsewhere in the system. Classical and modern peel literature both make clear that geometry, deformation, rate, and viscoelastic behavior can affect the measured force or apparent adherence ([Kendall, 1975](https://doi.org/10.1088/0022-3727/8/13/005); [Villey et al., 2015](https://doi.org/10.1039/C5SM00260E); [Perrin et al., 2019](https://doi.org/10.1039/C8SM01946K)).
-
-Accordingly, the public software explicitly describes its outputs as protocol-defined descriptors under a specified specimen geometry, test protocol, and analysis profile ([Kantepalle & Tang, 2026](https://doi.org/10.5281/zenodo.20301242)).
-
-The published textile study used these descriptors in a proof-of-concept multi-criteria framework for a defined fabric–adhesive–fabric system. Its conclusion was not that one new metric universally replaces peel strength. Rather, trace shape, stability, deformation tolerance, and repeatability provided additional information that changed the practical selection compared with ranking by the highest peel strength alone ([Kantepalle et al., 2026](https://doi.org/10.3390/polym18121504)).
-
-## A practical reading order
-
-This is interpretive guidance layered on a defined peel test, not a replacement for an applicable test standard, validated laboratory SOP, or method-specific acceptance criterion.
-
-For this class of peel measurement, a defensible sequence is:
-
-1. inspect the complete force–displacement trace;
-2. verify units, specimen geometry, and test conditions;
-3. identify a mechanically interpretable analysis region;
-4. report conventional force-level descriptors;
-5. add initiation, stability, or oscillation descriptors only when their extraction is valid;
-6. inspect QC plots and diagnostic flags;
-7. examine repeatability across specimens;
-8. interpret every metric within the stated geometry, protocol, and analysis settings.
-
-This ordering keeps the trace as evidence and treats scalar metrics as summaries of that evidence—not substitutes for checking whether the underlying measurement is credible.
-
-## Evidence and interpretation boundary
-
-Claims specific to the textile study come from the peer-reviewed article. Statements about extraction, QC, diagnostics, provenance, and the initiation/restart workflow come from the public software release. The external peel-mechanics papers are used only to establish general boundaries around geometry, deformation, viscoelastic dissipation, rate dependence, and unstable stick–slip behavior.
-
-The practical reading order is an author methodological recommendation synthesized from those public sources; it is not presented as a universal test standard.
-
-## Limitations
-
-This staging draft still requires independent human scientific review before live publication because it interprets collaborative published work and method terminology.
-
-This note explains the interpretation logic of an already-public peel-trace framework and places it within general peel mechanics. It does not establish that the same metrics, thresholds, analysis windows, mechanism labels, or profiles are appropriate for every adhesive, substrate, geometry, instrument, or standard. It also does not turn the underlying proof-of-concept comparison into a validated universal screening rule.
-
-The two figures are original explanatory schematics and contain no experimental data. Applying the same descriptors to another system requires method-specific validation and the relevant literature or test standard.
-
-The VCU thesis repository record is related public work, but the embargoed manuscript is not used as a technical source for this note.
+These results come from one stretch-knit fabric system, four adhesives, one peel rate, and three replicate specimens per adhesive in the reported peel comparison. Peel force, force oscillation, and device performance depend on the system and protocol, so the reported descriptors are not intrinsic material constants. Test-system dynamics can also affect observed peel oscillations ([Andrews et al., 1985](https://doi.org/10.1007/BF01113769) and [Dalbe et al., 2016](https://doi.org/10.1039/C6SM00119J)). The association between lower SSA and higher strain-to-electrical-failure in this study does not establish that one caused the other. The full methods and statistics are in the [paper](/publication/adhesives-wearable/).
 
 ## References
 
-1. Kantepalle, B. Y., Epitawala Arachchige, U., Joung, D., & Tang, C. (2026). *Multi-Criteria Selection of Adhesives for Wearable Textiles*. Polymers, 18(12), 1504. <https://doi.org/10.3390/polym18121504>
-2. Kantepalle, B. Y., & Tang, C. (2026). *Peel Trace Evaluation for Soft Substrates* (v1.4.0-rc15). Zenodo. <https://doi.org/10.5281/zenodo.20301242>
-3. Kendall, K. (1975). Thin-film peeling—the elastic term. *Journal of Physics D: Applied Physics, 8*(13), 1449–1452. <https://doi.org/10.1088/0022-3727/8/13/005>
-4. Villey, R., et al. (2015). Rate-dependent elastic hysteresis during the peeling of pressure sensitive adhesives. *Soft Matter, 11*(17), 3480–3491. <https://doi.org/10.1039/C5SM00260E>
-5. Perrin, H., et al. (2019). Peeling an elastic film from a soft viscoelastic adhesive: experiments and scaling laws. *Soft Matter, 15*(4), 770–778. <https://doi.org/10.1039/C8SM01946K>
-6. Dalbe, M.-J., et al. (2016). Inertial and stick-slip regimes of unstable adhesive tape peeling. *Soft Matter, 12*(20), 4537–4548. <https://doi.org/10.1039/C6SM00119J>
-7. Andrews, E. H., Khan, T. A., & Majid, H. A. (1985). Adhesion to skin: Part 1 Peel tests with hard and soft machines. *Journal of Materials Science, 20*, 3621–3630. <https://doi.org/10.1007/BF01113769>
+1. Kantepalle, B. Y., Epitawala Arachchige, U., Joung, D., & Tang, C. (2026). Multi-Criteria Selection of Adhesives for Wearable Textiles. *Polymers, 18*(12), 1504. <https://doi.org/10.3390/polym18121504>
+2. *Source data for Multi-Criteria Selection of Adhesives for Wearable Textiles*. (2026). Zenodo. <https://doi.org/10.5281/zenodo.20278428>
+3. Kantepalle, B. Y., & Tang, C. (2026). *Peel Trace Evaluation for Soft Substrates* (v1.4.0-rc15). Zenodo. <https://doi.org/10.5281/zenodo.20301242>
+4. Andrews, E. H., Khan, T. A., & Majid, H. A. (1985). Adhesion to skin: Part 1 Peel tests with hard and soft machines. *Journal of Materials Science, 20*, 3621-3630. <https://doi.org/10.1007/BF01113769>
+5. Dalbe, M.-J., et al. (2016). Inertial and stick-slip regimes of unstable adhesive tape peeling. *Soft Matter, 12*(20), 4537-4548. <https://doi.org/10.1039/C6SM00119J>
