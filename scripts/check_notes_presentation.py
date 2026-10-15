@@ -56,6 +56,9 @@ def main() -> int:
         '"@type":"Article"',
         '"@type":"BreadcrumbList"',
         "article:published_time",
+        'property="og:type" content="article"',
+        '/social/research.png',
+        'name=robots content="noindex,follow"',
     ):
         require(method, needle, "method fixture", errors)
 
@@ -92,7 +95,7 @@ def main() -> int:
             print(f"ERROR: {error}", file=sys.stderr)
         return 1
 
-    print("Research Notes presentation fixtures passed: index, metadata, schema, TOC, correction, retirement, and withdrawal states verified.")
+    print("Research Notes presentation fixtures passed: index, metadata, Open Graph, schema, TOC, correction, retirement, and withdrawal states verified.")
     return 0
 
 
