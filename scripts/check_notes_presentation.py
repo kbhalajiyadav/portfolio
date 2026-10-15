@@ -54,8 +54,11 @@ def main() -> int:
         "Research Note",
         "Method",
         "Evolving note.",
+        "In brief",
+        "This synthetic summary validates the dedicated",
         "On this page",
-        "synthetic fixture content",
+        "Funding, interests, and acknowledgements",
+        "Synthetic fixture; no funding applies.",
         '"@type":"Article"',
         '"@type":"BreadcrumbList"',
         "article:published_time",
@@ -76,7 +79,15 @@ def main() -> int:
             errors.append(f"method fixture: missing Notes stylesheet asset {css_name!r}")
         else:
             css = css_path.read_text(encoding="utf-8")
-            for needle in (".note-status-banner", ".note-reading-grid", ".notes-index__section"):
+            for needle in (
+                ".note-status-banner",
+                ".note-reading-grid",
+                ".notes-index__section",
+                ".note-in-brief",
+                ".quarto-figure",
+                ".note-revisions",
+                ".note-transparency",
+            ):
                 require(css, needle, "Notes stylesheet", errors)
 
     corrected = read_page(root, "notes/presentation-corrected/index.html", errors)
@@ -84,6 +95,8 @@ def main() -> int:
         "Corrected.",
         "A synthetic factual statement was corrected for presentation testing.",
         "Reviewed October 14, 2026",
+        "Revision history",
+        "Corrected a synthetic statement and recorded the change in the public revision history.",
         "This body exists only to test the corrected state",
     ):
         require(corrected, needle, "corrected fixture", errors)
@@ -110,6 +123,7 @@ def main() -> int:
         "WITHDRAWN_FIXTURE_BODY_SHOULD_NOT_APPEAR",
         'class="article-content',
         "Synthetic withdrawn note used only to validate tombstone rendering.",
+        "note-in-brief",
     ):
         forbid(withdrawn, needle, "withdrawn fixture", errors)
 
@@ -118,7 +132,9 @@ def main() -> int:
             print(f"ERROR: {error}", file=sys.stderr)
         return 1
 
-    print("Research Notes presentation fixtures passed: dedicated stylesheet, index, metadata, Open Graph, schema, TOC, correction, retirement, withdrawal, and tombstone leakage controls verified.")
+    print(
+        "Research Notes presentation fixtures passed: dedicated stylesheet, index, metadata, Open Graph, schema, TOC, In brief, transparency, revision history, correction, retirement, withdrawal, and tombstone leakage controls verified."
+    )
     return 0
 
 
