@@ -12,7 +12,11 @@
       <p class="note-kicker"><span>Research Note</span><span class="note-kicker__sep" aria-hidden="true">·</span><span>{{ index $typeLabels $noteType | default (title $noteType) }}</span></p>
       <h1 class="p-name">{{ .Title }}</h1>
       <a class="u-url visually-hidden" href="{{ .Permalink }}">Permalink</a>
+      {{ if eq $status "withdrawn" }}
+      <p class="note-lede p-summary">This Research Note has been withdrawn and should not be relied upon.</p>
+      {{ else }}
       {{ with .Params.summary }}<p class="note-lede p-summary">{{ . | markdownify }}</p>{{ end }}
+      {{ end }}
       <div class="note-meta" aria-label="Article metadata">
         <span class="note-meta__author">{{ $p.profile.name }}</span>
         <span class="note-meta__item"><time class="dt-published" datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">Published {{ .Date.Format "January 2, 2006" }}</time></span>
