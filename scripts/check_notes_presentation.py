@@ -56,6 +56,8 @@ def main() -> int:
         "Research Note",
         "Reflection",
         "Evolving",
+        "Drafted October 14, 2026",
+        "Updated October 15, 2026",
         "In brief",
         "The force ranking looked convincing",
         "The trace changed the question",
@@ -77,6 +79,8 @@ def main() -> int:
         require(staged, needle, "staged Note 001", errors)
     for needle in (
         "What a Peel Trace Can Tell You Beyond a Single Force Value",
+        "Published October 14, 2026",
+        "Reviewed October 15, 2026",
         "[CONFIRM",
         "Illustrative schematic; not experimental data.",
         "Original workflow schematic; no experimental data shown.",
