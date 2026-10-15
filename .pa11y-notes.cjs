@@ -17,6 +17,7 @@ module.exports = {
   concurrency: 2,
   urls: [
     'http://127.0.0.1:4174/notes/',
+    'http://127.0.0.1:4174/notes/peel-trace-beyond-single-force/',
     'http://127.0.0.1:4174/notes/presentation-method/',
     'http://127.0.0.1:4174/notes/presentation-corrected/',
     'http://127.0.0.1:4174/notes/presentation-retired/',
