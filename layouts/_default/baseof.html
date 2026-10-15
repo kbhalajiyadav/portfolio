@@ -21,11 +21,13 @@
   {{ $about := resources.FromString "css/about.css" (readFile "static/css/about.css") }}
   {{ $polish := resources.FromString "css/final-polish.css" (readFile "static/css/final-polish.css") }}
   {{ $styleParts := slice $core $refinements $about $polish }}
+  {{ $styleTarget := "css/site.css" }}
   {{ if eq .Section "notes" }}
     {{ $notes := resources.FromString "css/notes.css" (readFile "static/css/notes.css") }}
     {{ $styleParts = $styleParts | append $notes }}
+    {{ $styleTarget = "css/site-notes.css" }}
   {{ end }}
-  {{ $styles := $styleParts | resources.Concat "css/site.css" | minify | fingerprint "sha384" }}
+  {{ $styles := $styleParts | resources.Concat $styleTarget | minify | fingerprint "sha384" }}
   <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}" crossorigin="anonymous">
 </head>
 <body class="page-{{ .Kind }} section-{{ .Section }}">
