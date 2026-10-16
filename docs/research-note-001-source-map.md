@@ -21,7 +21,7 @@ Current governance state:
 - `author_release_decision: pending`
 - `draft: true`
 
-No new governance gates are being added for this note. The remaining substantive work is the real evidence figure, independent human scientific review, any resulting re-audit, and the author's separate live-release decision.
+No new governance gates are being added for this note. The remaining substantive work is independent human scientific review, any resulting re-audit, and the author's separate live-release decision.
 
 ## Why the note exists
 
@@ -45,9 +45,9 @@ The article is published open access under CC BY 4.0.
 
 Zenodo DOI `10.5281/zenodo.20278428`.
 
-The published article identifies this archive as the source-data record for the study and states that it includes the manuscript master data workbook and supporting documentation for the fabric-fabric T-peel force-displacement source data.
+The published article identifies this archive as the source-data record for the study and states that it includes the manuscript master data workbook and supporting documentation for the fabric-fabric T-peel force-displacement source data. The Zenodo record is licensed under CC BY 4.0.
 
-Use for the planned real trace figure only after the representative E6000 and Fabri-Fuse source records are mapped unambiguously.
+The archive remains available for an independent future replot if the representative E6000 and Fabri-Fuse source records are mapped unambiguously. Note 001 does not depend on such a replot because the final published evidence panel is now used directly and transparently.
 
 ### Public research software
 
@@ -115,19 +115,22 @@ AI tools assisted editing and adversarial review of the Research Note. They are 
 
 ## Figure and rights status
 
-The two earlier schematic SVGs have been removed because the reflection's central argument should be demonstrated with real evidence.
+The two earlier schematic SVGs were removed because the reflection's central argument should be demonstrated with real evidence.
 
-Current state: **real-data Figure 1 pending**.
+Current state: **Figure 1 added using the published representative trace panel.**
 
-Preferred figure:
-- representative E6000 and Fabri-Fuse T-peel traces plotted from the public source-data archive after unambiguous source mapping.
+Figure 1:
 
-Fallback:
-- adapt/reuse the published representative trace panel, **Figure 2A**, with CC BY 4.0 attribution.
+- source: Kantepalle et al. (2026), final published Figure 2A;
+- article DOI: `10.3390/polym18121504`;
+- reuse basis: article CC BY 4.0;
+- modification: cropped to the Figure 2A panel only; plotted data and labels were not altered;
+- purpose: show the published representative force-displacement traces discussed in the reflection;
+- accessibility: alt text identifies the four adhesive conditions and describes the visibly higher, more oscillatory E6000 trace relative to the steadier Fabri-Fuse and JB Weld traces.
+
+The public source-data archive at DOI `10.5281/zenodo.20278428` remains the preferred source for a future independent replot if the representative source records are mapped unambiguously. That replot is not required for Note 001 now that the published evidence panel is used transparently under CC BY 4.0.
 
 The final published article's Figure 2A contains the representative force-displacement curves. Figure 1 is the nominal peel-arm axial-stress comparison. Earlier manuscript drafts used different figure numbering, so the publication version controls.
-
-No experimental figure is currently committed with the note. Adding one reopens rights/provenance/accessibility review before live release.
 
 ## Explicit exclusions
 
@@ -147,10 +150,9 @@ Do not introduce:
 
 Before `draft: false`:
 
-1. add and review the real evidence figure;
-2. complete independent human scientific review;
-3. re-audit any substantive reviewer edits;
-4. pass ordinary governance, presentation, accessibility, build, and performance checks;
-5. obtain a separate `author_release_decision: approved`.
+1. complete independent human scientific review;
+2. re-audit any substantive reviewer edits;
+3. pass ordinary governance, presentation, accessibility, build, and performance checks;
+4. obtain a separate `author_release_decision: approved`.
 
 No automatic promotion is permitted.
