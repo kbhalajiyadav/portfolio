@@ -19,7 +19,7 @@ The current draft preserves these red-team outcomes:
 7. **AI use is transparent.** AI tools assisted editing/adversarial review and are not used as scientific evidence.
 8. **Funding and COI are surfaced from the published article.**
 9. **No thesis-only technical material is used.**
-10. **The real evidence is preferred to a schematic.** The two illustrative SVGs are removed. A public-data trace figure remains a pre-publication requirement.
+10. **The real evidence is preferred to a schematic.** The two illustrative SVGs were removed, and Figure 1 now uses the published representative trace panel with CC BY 4.0 attribution.
 
 ## Counter-evidence retained
 
@@ -51,9 +51,8 @@ No further governance layer is needed for Note 001.
 
 The remaining substantive gates are concrete rather than procedural expansion:
 
-- real evidence figure;
 - independent human scientific review;
-- re-audit of substantive changes;
+- re-audit of any substantive reviewer changes;
 - final author live-release decision.
 
 The governance machinery should now serve future notes rather than keep growing around this one.
