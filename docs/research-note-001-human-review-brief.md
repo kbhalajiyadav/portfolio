@@ -17,18 +17,19 @@ Please assess the staged note against the already-public paper, source-data reco
 7. Are the study-specific descriptors and conclusions bounded sufficiently without burying the reflection in caveats?
 8. Are co-author credit, funding, acknowledgements, and conflict-of-interest statements represented fairly?
 9. Does the note add useful author perspective beyond the paper and software documentation?
-10. When the real-data Figure 1 is added, does it faithfully represent the public source data and match the prose without selective or misleading presentation?
+10. Does Figure 1 faithfully represent the published Figure 2A evidence and match the prose without selective or misleading presentation?
 
-## Figure gate
+## Figure included for review
 
-The current staged draft intentionally contains no experimental figure asset. Before live publication, add one evidence figure using one of these paths:
+Figure 1 now uses the published representative trace panel, Figure 2A, cropped to that panel and reused under the article's CC BY 4.0 license with attribution.
 
-1. Preferred: plot representative E6000 and Fabri-Fuse T-peel traces from the public source-data archive at DOI `10.5281/zenodo.20278428` after the corresponding source files/sheets are mapped unambiguously.
-2. Fallback: adapt or reuse the published representative trace panel, Figure 2A, under the article's CC BY 4.0 license with clear attribution.
+Please check that:
 
-Do not substitute another schematic for the real evidence.
+- the crop does not remove context needed to interpret the trace comparison;
+- the alt text and caption are accurate;
+- the figure supports the prose without implying causality or a unique stick-slip mechanism.
 
-Adding the final figure reopens the figure provenance, accessibility, and rights check.
+The public source-data archive at DOI `10.5281/zenodo.20278428` remains available for a future independent replot if the representative source records are mapped unambiguously. Such a replot is not required for this note because the published evidence panel is now used directly and transparently.
 
 ## Privacy/confidentiality rule
 
@@ -38,7 +39,7 @@ If private context materially changes the review, discuss it through an appropri
 
 ## Completion record
 
-After review and the final evidence figure are complete:
+After review is complete:
 
 - set `external_scientific_review_status: complete`;
 - keep `author_release_decision: pending` until the separate live-publication decision;
