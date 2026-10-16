@@ -57,7 +57,7 @@ def main() -> int:
         "Reflection",
         "Evolving",
         "Drafted October 14, 2026",
-        "Updated October 15, 2026",
+        "Updated October 16, 2026",
         "In brief",
         "The force ranking looked convincing",
         "The trace changed the question",
@@ -68,6 +68,9 @@ def main() -> int:
         "34.95",
         "27.98",
         "make the judgment inspectable",
+        "figure-1-representative-t-peel-traces.png",
+        "Representative T-peel force-displacement traces",
+        "CC BY 4.0",
         "Funding, interests, and acknowledgements",
         "AI tools supported editing and adversarial review.",
         '"@type":"Article"',
@@ -173,7 +176,7 @@ def main() -> int:
         return 1
 
     print(
-        "Research Notes presentation passed: staged Note 001 plus synthetic fixtures verified for dedicated styling, index, metadata, Open Graph, schema, TOC, In brief, transparency, correction, retirement, withdrawal, and tombstone leakage controls."
+        "Research Notes presentation passed: staged Note 001 plus synthetic fixtures verified for dedicated styling, index, metadata, Open Graph, schema, TOC, In brief, transparency, evidence figure, correction, retirement, withdrawal, and tombstone leakage controls."
     )
     return 0
 
