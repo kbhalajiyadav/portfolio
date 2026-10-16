@@ -1,7 +1,7 @@
 ---
 title: The Strongest Adhesive Was Not the Right One
 date: 2026-10-14 20:52:00-04:00
-lastmod: 2026-10-15 07:41:00-04:00
+lastmod: 2026-10-16 06:28:00-04:00
 draft: true
 summary: A peel-force ranking picked the strongest adhesive. The full force trace and a stretch test on printed silver traces pointed to a different choice. This note is about what that changed in how I measure materials.
 in_brief: In a published study of four adhesives on stretchable knit fabric, E6000 had the highest peel force but large force swings during peeling. Fabri-Fuse peeled more steadily, and silver traces printed on it maintained electrical function to 34.95% strain, compared with 27.98% on E6000. The lesson was not to swap one favorite metric for another. It was to ask what a single number leaves out before trusting it.
@@ -78,6 +78,10 @@ But the force-displacement curves did not look alike.
 A peel test records force as the bond opens. The scalar summaries come later, when the trace is reduced to one or more metrics.
 
 E6000 showed large force oscillations while Fabri-Fuse and JB Weld showed visibly steadier curves. In the published analysis, stick-slip amplitude (SSA) described the difference between the mean retained peaks and valleys within the selected 25 mm analysis window. E6000 had an SSA of 4.05 ± 0.83 N. Fabri-Fuse had an SSA of 0.69 ± 0.29 N.
+
+![Representative T-peel force-displacement traces for E6000, Fabri-Fuse, JB Weld, and Guo Elephant 407. E6000 reaches the highest force and shows larger oscillations, while Fabri-Fuse and JB Weld remain lower and steadier.](figure-1-representative-t-peel-traces.png)
+
+*Figure 1. Representative T-peel force-displacement traces from Kantepalle et al. (2026), cropped to the Figure 2A panel from the published article. No plotted data or labels were altered. Reused under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). [Source article](https://doi.org/10.3390/polym18121504).*
 
 That difference changed what I thought the screening question should be. It was no longer only, "Which adhesive gives the largest force?" It became, "Which candidate gives a strong enough, steady enough, and sufficiently deformation-tolerant interface for this application?" On that broader screen, Fabri-Fuse was selected. It also had the lowest reported variation in initiation force across specimens, a high Peel Stability Index, and high displacement at break.
 
