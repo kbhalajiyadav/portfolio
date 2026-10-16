@@ -1,9 +1,9 @@
 ---
 title: The Strongest Adhesive Was Not the Right One
 date: 2026-10-14 20:52:00-04:00
-lastmod: 2026-10-16 06:28:00-04:00
+lastmod: 2026-10-16 06:40:00-04:00
 draft: true
-summary: A peel-force ranking picked the strongest adhesive. The full force trace and a stretch test on printed silver traces pointed to a different choice. This note is about what that changed in how I measure materials.
+summary: A peel-force ranking made E6000 the force winner. The full force trace and a stretch test on printed silver traces pointed to a different choice for this wearable-textile system. This note is about what that changed in how I measure materials.
 in_brief: In a published study of four adhesives on stretchable knit fabric, E6000 had the highest peel force but large force swings during peeling. Fabri-Fuse peeled more steadily, and silver traces printed on it maintained electrical function to 34.95% strain, compared with 27.98% on E6000. The lesson was not to swap one favorite metric for another. It was to ask what a single number leaves out before trusting it.
 note_type: reflection
 status: evolving
@@ -49,7 +49,7 @@ governance:
   coi_statement: The underlying peer-reviewed study states that the authors declared no conflicts of interest.
   copyright_review: complete
   source_status_review: complete
-  source_status_reviewed_on: 2026-10-15
+  source_status_reviewed_on: 2026-10-16
   author_release_decision: pending
 sources:
 - https://doi.org/10.3390/polym18121504
@@ -69,7 +69,7 @@ related_notes: []
 
 During my M.S. research, we were trying to identify an adhesive interface for a stretchable textile assembly that would also support printed silver traces during deformation. We compared four commercial adhesives with T-peel tests.
 
-Early qualitative observations made the strongest bond seem like the obvious choice. The formal force ranking agreed. E6000 produced the highest peel force, 1.82 ± 0.27 N/mm. Ranked by peel force alone, the decision looked easy.
+The formal force ranking made E6000 look like the obvious choice. It produced the highest peel force, 1.82 ± 0.27 N/mm. Ranked by peel force alone, the decision looked easy.
 
 But the force-displacement curves did not look alike.
 
