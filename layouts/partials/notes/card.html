@@ -1,0 +1,21 @@
+{{ $typeLabels := dict "method" "Method" "concept" "Concept" "reflection" "Reflection" }}
+{{ $statusLabels := dict "stable" "Stable" "evolving" "Evolving" "corrected" "Corrected" "retired" "Retired" "withdrawn" "Withdrawn" }}
+{{ $type := .Params.note_type | default "concept" }}
+{{ $status := .Params.status | default "evolving" }}
+<article class="note-index-item h-entry note-index-item--{{ $status }}">
+  <div class="note-index-item__meta">
+    <span class="note-type-label">{{ index $typeLabels $type | default (title $type) }}</span>
+    <span class="note-status-chip note-status-chip--{{ $status }}">{{ index $statusLabels $status | default (title $status) }}</span>
+  </div>
+  <h3 class="p-name"><a class="u-url" href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+  {{ if eq $status "withdrawn" }}
+    <p class="p-summary">This note has been withdrawn and should not be relied upon. Open the status page for the current notice.</p>
+  {{ else }}
+    {{ with .Params.summary }}<p class="p-summary">{{ . }}</p>{{ end }}
+  {{ end }}
+  <div class="note-index-item__footer">
+    <time class="dt-published" datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+    <span aria-hidden="true">·</span>
+    <span>{{ .ReadingTime }} min read</span>
+  </div>
+</article>

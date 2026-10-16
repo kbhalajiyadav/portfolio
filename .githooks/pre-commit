@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# The portfolio repository is public. Block unsafe Research Note metadata before
+# a local commit can become part of public Git history.
+python3 scripts/check_notes_governance.py

@@ -1,0 +1,24 @@
+{{ $status := .Params.status | default "evolving" }}
+{{ if eq $status "evolving" }}
+<aside class="note-status-banner note-status-banner--evolving" aria-label="Note status">
+  <strong>Evolving note.</strong>
+  <span>This page documents the current public understanding and may be revised as evidence or methods develop.</span>
+</aside>
+{{ else if eq $status "corrected" }}
+<aside class="note-status-banner note-status-banner--corrected" aria-label="Correction notice">
+  <strong>Corrected.</strong>
+  <span>{{ .Params.revision_note | markdownify }}</span>
+</aside>
+{{ else if eq $status "retired" }}
+<aside class="note-status-banner note-status-banner--retired" aria-label="Retirement notice">
+  <strong>Retired.</strong>
+  <span>{{ .Params.status_reason | markdownify }}</span>
+  {{ with .Params.replacement_url }}<a class="lnk" href="{{ . }}">Current replacement <span class="arw" aria-hidden="true">→</span></a>{{ end }}
+</aside>
+{{ else if eq $status "withdrawn" }}
+<aside class="note-status-banner note-status-banner--withdrawn" aria-label="Withdrawal notice">
+  <strong>Withdrawn — do not rely on this note.</strong>
+  <span>{{ .Params.status_reason | markdownify }}</span>
+  {{ with .Params.replacement_url }}<a class="lnk" href="{{ . }}">See current material <span class="arw" aria-hidden="true">→</span></a>{{ end }}
+</aside>
+{{ end }}

@@ -1,0 +1,36 @@
+{{ $groups := slice
+  (dict "key" "related_publications" "label" "Publications")
+  (dict "key" "related_software" "label" "Software")
+  (dict "key" "related_projects" "label" "Research")
+  (dict "key" "related_notes" "label" "Related notes")
+}}
+{{ $hasAny := false }}
+{{ range $group := $groups }}
+  {{ $items := index $.Params $group.key | default (slice) }}
+  {{ if gt (len $items) 0 }}{{ $hasAny = true }}{{ end }}
+{{ end }}
+{{ if $hasAny }}
+<section class="note-related" aria-labelledby="related-work-title">
+  <p class="overline">Evidence network</p>
+  <h2 id="related-work-title">Related public work</h2>
+  <div class="note-related__groups">
+    {{ range $group := $groups }}
+      {{ $items := index $.Params $group.key | default (slice) }}
+      {{ if gt (len $items) 0 }}
+      <div class="note-related__group">
+        <h3>{{ $group.label }}</h3>
+        <ul>
+          {{ range $path := $items }}
+            {{ with site.GetPage $path }}
+            <li><a href="{{ .RelPermalink }}">{{ .Title }}</a>{{ with .Params.summary }}<span>{{ . }}</span>{{ end }}</li>
+            {{ else }}
+              {{ if not $.Draft }}{{ errorf "Research Note %q references missing related page %q" $.File.Path $path }}{{ end }}
+            {{ end }}
+          {{ end }}
+        </ul>
+      </div>
+      {{ end }}
+    {{ end }}
+  </div>
+</section>
+{{ end }}

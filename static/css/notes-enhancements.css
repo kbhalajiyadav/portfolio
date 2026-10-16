@@ -1,0 +1,52 @@
+/* Research Notes editorial primitives layered on the existing portfolio visual system. */
+.note-in-brief,.article-content .callout-note,.article-content .callout-tip{max-width:var(--note-measure);margin:1.8rem 0 2.2rem;padding:1.15rem 1.25rem;border:1px solid var(--line);border-left:3px solid var(--teal);background:var(--surface-soft)}
+.note-in-brief> :first-child,.article-content .callout-note> :first-child,.article-content .callout-tip> :first-child{margin-top:0}
+.note-in-brief> :last-child,.article-content .callout-note> :last-child,.article-content .callout-tip> :last-child{margin-bottom:0}
+.note-in-brief__label,.article-content .callout-title{display:block;margin-bottom:.45rem;color:var(--teal);font-family:var(--sans);font-size:.72rem;font-weight:750;letter-spacing:.1em;text-transform:uppercase}
+
+/* Quarto/Pandoc output should inherit the portfolio, not its own theme. */
+.article-content .quarto-figure{margin:2.4rem 0}
+.article-content .quarto-figure>figure,.article-content .quarto-figure figure{margin:0}
+.article-content .quarto-figure-center>figure{text-align:left}
+.article-content .quarto-figure figcaption,.article-content .figure-caption{max-width:76ch;margin-top:.65rem;color:var(--ink-soft);font-family:var(--sans);font-size:.78rem;line-height:1.55;text-align:left}
+.article-content .quarto-figure img,.article-content .quarto-figure svg{display:block;max-width:100%;height:auto;border:1px solid var(--line);background:var(--surface)}
+.article-content .figure-number{font-weight:700;color:var(--ink)}
+.article-content .footnotes{margin-top:2.7rem;padding-top:1.5rem;border-top:1px solid var(--line);font-size:.88rem}
+.article-content .footnotes ol{padding-left:1.25rem}
+.article-content .footnotes p{font-size:.9rem;line-height:1.58}
+.article-content .math.display,.article-content mjx-container[display="true"]{max-width:100%;overflow-x:auto;overflow-y:hidden;padding:.3rem 0}
+.article-content .sourceCode{max-width:100%}
+.article-content .cell-output-display{max-width:100%;overflow-x:auto}
+
+/* A restrained wide-figure escape hatch; normal prose measure remains unchanged. */
+.article-content .figure-wide,.article-content .quarto-figure.figure-wide{width:min(100vw - 3rem,980px);max-width:none}
+.note-reading-grid.has-toc .article-content .figure-wide{width:min(calc(100vw - 320px),980px)}
+
+.note-revisions{max-width:var(--note-wide);margin-top:3rem;padding-top:2rem;border-top:1px solid var(--line)}
+.note-revisions h2{margin:.45rem 0 1rem;font-size:clamp(1.35rem,2vw,1.8rem)}
+.note-revisions ol{margin:0;padding:0;list-style:none;border-top:1px solid var(--line)}
+.note-revisions li{display:grid;grid-template-columns:9.5rem minmax(0,1fr);gap:1rem 1.5rem;padding:.85rem 0;border-bottom:1px solid var(--line)}
+.note-revisions time{color:var(--rust);font-family:var(--sans);font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.note-revisions p{margin:0;color:var(--ink-soft);font-size:.9rem;line-height:1.55}
+
+.note-transparency{max-width:var(--note-wide);margin-top:3rem;padding:1.25rem 0 0;border-top:1px solid var(--line)}
+.note-transparency h2{margin:.45rem 0 1rem;font-size:clamp(1.35rem,2vw,1.8rem)}
+.note-transparency p{max-width:72ch;color:var(--ink-soft);font-size:.92rem;line-height:1.6}
+
+/* Status pages stay useful but visually restrained. */
+.note-page--corrected .note-header{border-bottom-color:color-mix(in srgb,var(--cyan) 35%,var(--line))}
+.note-page--retired .note-header{opacity:.9}
+
+@media(max-width:980px){
+  .note-reading-grid.has-toc .article-content .figure-wide{width:100%}
+}
+@media(max-width:680px){
+  .note-in-brief,.article-content .callout-note,.article-content .callout-tip{padding:1rem}
+  .article-content .figure-wide,.article-content .quarto-figure.figure-wide{width:100%}
+  .note-revisions li{grid-template-columns:1fr;gap:.25rem}
+}
+@media print{
+  .note-in-brief,.article-content .callout-note,.article-content .callout-tip{box-shadow:none;background:transparent}
+  .note-revisions,.note-transparency{max-width:none}
+  .article-content .figure-wide,.article-content .quarto-figure.figure-wide{width:auto;max-width:100%}
+}
