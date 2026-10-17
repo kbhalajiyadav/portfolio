@@ -202,7 +202,7 @@ def render_engagement(data: dict) -> str:
             rf"\smallentry{{{esc(item['role'])}}}{{{esc(item['period'])}}}"
             rf"{{{esc(item['organization'])}}}"
         )
-    return section("Teaching, Review, and Applied Innovation", engagement)
+    return section("Teaching, Service, Review, and Applied Innovation", engagement)
 
 
 def render_industry(data: dict, compact: bool = False) -> str:
