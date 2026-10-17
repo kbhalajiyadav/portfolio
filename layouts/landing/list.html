@@ -115,6 +115,7 @@
     <div><h3 class="subhead">Service and review</h3>{{ range first $serviceLimit $visibleService }}<article class="compact-record"><span>{{ .date }}</span><h4>{{ .role }}</h4><p>{{ .organization }}</p><small>{{ .detail }}</small></article>{{ end }}</div>
     <div><h3 class="subhead">Applied innovation</h3>{{ range first $innovationLimit $visibleInnovation }}<article class="compact-record"><span>{{ .date }}</span><h4>{{ .role }}</h4><p>{{ .organization }}</p><small>{{ .detail }}</small>{{ with .links }}<div class="actions">{{ range . }}<a class="lnk" href="{{ .href }}" target="_blank" rel="noopener">{{ .label }} <span class="arw" aria-hidden="true">↗</span></a>{{ end }}</div>{{ end }}</article>{{ end }}</div>
   </div>
+  <div class="actions"><a class="lnk" href="{{ "/engagement/" | relURL }}">View full professional engagement <span class="arw" aria-hidden="true">→</span></a></div>
 </section>
 
 <section class="contact-section" id="contact">
