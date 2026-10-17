@@ -88,6 +88,7 @@ for required in (
     'range $p.applied_innovation',
     'Browse all research outputs',
     'Intellectual property record',
+    'View full professional engagement',
 ):
     if required not in landing_text:
         errors.append(f'layouts/landing/list.html: missing homepage invariant {required!r}')
@@ -116,7 +117,7 @@ build_cv_text = (ROOT / 'scripts/build_cv.py').read_text(encoding='utf-8')
 for required in (
     'Aug 2026–Present',
     'Graduate Researcher, Quantitative Metrology',
-    'Teaching, Review, and Applied Innovation',
+    'Teaching, Service, Review, and Applied Innovation',
     'Presentation of Research--Foundational',
     'https://www.credly.com/badges/a2c228cc-13df-4153-b22b-741275119646',
     'https://www.credly.com/badges/e6785521-d537-4ea8-983f-3e1b123f01c7/public_url',
