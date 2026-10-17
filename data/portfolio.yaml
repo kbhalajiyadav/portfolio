@@ -17,7 +17,7 @@ profile:
   cv: uploads/cv.pdf
   resume: uploads/resume.pdf
   last_updated: October 2026
-  last_updated_iso: '2026-10-13'
+  last_updated_iso: '2026-10-17'
 research:
 - number: '01'
   title: Measure response
@@ -124,6 +124,10 @@ presentations:
   event: VCU Engineering Graduate Research & Postdoc Showcase
   authors: B. Y. Kantepalle, H. Stwodah, D. Joung, and C. Tang
 service:
+- date: Oct 14, 2026
+  role: Panelist · Engineering Career Preparation
+  organization: National Society of Black Engineers (NSBE) · Florida Atlantic University
+  detail: Shared experience and practical guidance on internships and research opportunities, technical preparation, professional confidence, leadership, and career development.
 - date: Mar 29, 2026
   role: Judge · Student Poster Session
   organization: AIChE Atlantic Regional Conference · VCU
