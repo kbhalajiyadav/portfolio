@@ -17,7 +17,8 @@
         {{ if .Params.doi }}<a class="lnk" href="{{ printf "https://doi.org/%s" .Params.doi }}" target="_blank" rel="noopener">Article <span class="arw" aria-hidden="true">↗</span></a>{{ end }}
         {{ if .Params.url_pdf }}<a class="lnk" href="{{ .Params.url_pdf }}" target="_blank" rel="noopener">Article PDF <span class="arw" aria-hidden="true">↗</span></a>{{ end }}
         {{ if .Params.url_code }}<a class="lnk" href="{{ .Params.url_code }}" target="_blank" rel="noopener">Source code <span class="arw" aria-hidden="true">↗</span></a>{{ end }}
-        {{ if .Params.url_dataset }}<a class="lnk" href="{{ .Params.url_dataset }}" target="_blank" rel="noopener">Software release <span class="arw" aria-hidden="true">↗</span></a>{{ end }}
+        {{ if .Params.url_software }}<a class="lnk" href="{{ .Params.url_software }}" target="_blank" rel="noopener">Software release <span class="arw" aria-hidden="true">↗</span></a>{{ end }}
+        {{ if .Params.url_dataset }}<a class="lnk" href="{{ .Params.url_dataset }}" target="_blank" rel="noopener">Experimental dataset <span class="arw" aria-hidden="true">↗</span></a>{{ end }}
         {{ if .Params.url_source }}<a class="lnk" href="{{ .Params.url_source }}" target="_blank" rel="noopener">{{ if $isThesis }}Thesis record{{ else }}Publisher record{{ end }} <span class="arw" aria-hidden="true">↗</span></a>{{ end }}
       </div>
     </header>
