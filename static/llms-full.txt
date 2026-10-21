@@ -47,7 +47,7 @@ Public industry references:
 2. I. Caloian, J. Trapp, B. Y. Kantepalle, P. Latimer, T. J. Lawton, and C. Tang, “Mechanical Properties of Dual-Layer Electrospun Fiber Mats,” Polymers 17(13), 1777 (2025). DOI: https://doi.org/10.3390/polym17131777
 
 ## Thesis
-M.S. thesis: “Multi-Criteria Selection of Adhesives for Wearable Textiles,” Virginia Commonwealth University, defended July 1, 2026. Repository record: https://scholarscompass.vcu.edu/etd/8456/ . The complete manuscript is under embargo until July 20, 2031.
+M.S. thesis: “Multi-Criteria Selection of Adhesives for Wearable Textiles,” Virginia Commonwealth University, defended July 1, 2026. Repository record: https://scholarscompass.vcu.edu/etd/8456/ . Institutional DOI: https://doi.org/10.25772/f6wc-rh09 . The complete manuscript is under embargo until July 20, 2031.
 
 ## Research software
 Peel Trace Evaluation for Soft Substrates, version v1.4.0-rc15, by Bhalaji Yadav Kantepalle and Christina Tang. Source: https://github.com/VCU-Soft-Functional-Materials-Lab/Peel-Trace-Evaluation-for-Soft-Substrates . Version DOI: https://doi.org/10.5281/zenodo.20301242 . All versions: https://doi.org/10.5281/zenodo.20278327 . License: Apache-2.0.
