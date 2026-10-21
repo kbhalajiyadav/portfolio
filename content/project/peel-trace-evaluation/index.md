@@ -33,6 +33,12 @@ sample-level summaries.
 - [Manuscript-baseline release, v1.4.0-rc15](https://doi.org/10.5281/zenodo.20301242)
 - [All archived versions](https://doi.org/10.5281/zenodo.20278327)
 
+## Related research outputs
+
+- [Peer-reviewed article: Multi-Criteria Selection of Adhesives for Wearable Textiles](https://doi.org/10.3390/polym18121504)
+- [VCU M.S. thesis: Multi-Criteria Selection of Adhesives for Wearable Textiles](https://doi.org/10.25772/f6wc-rh09) (public repository record; full manuscript under embargo until July 20, 2031)
+- [Experimental source dataset](https://doi.org/10.5281/zenodo.20278428) (archived separately from the software release)
+
 ## Recommended citation
 
 Kantepalle, B. Y.; Tang, C. *Peel Trace Evaluation for Soft Substrates*,
