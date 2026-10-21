@@ -61,7 +61,8 @@ featured: true
 
 url_pdf: ''
 url_code: 'https://github.com/VCU-Soft-Functional-Materials-Lab/Peel-Trace-Evaluation-for-Soft-Substrates'
-url_dataset: 'https://doi.org/10.5281/zenodo.20301242'
+url_dataset: 'https://doi.org/10.5281/zenodo.20278428'
+url_software: 'https://doi.org/10.5281/zenodo.20301242'
 url_poster: ''
 url_project: ''
 url_slides: ''
