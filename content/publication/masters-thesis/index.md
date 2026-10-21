@@ -42,6 +42,7 @@ projects: []
 - **Institution:** Virginia Commonwealth University
 - **Defense:** July 1, 2026
 - **Repository submission:** July 21, 2026
+- **Institutional DOI:** [10.25772/f6wc-rh09](https://doi.org/10.25772/f6wc-rh09)
 - **Manuscript availability:** Embargoed until July 20, 2031
 
 ## Advisor and committee
