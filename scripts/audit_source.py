@@ -257,6 +257,23 @@ for token in ('role="status"', 'aria-live="polite"', 'data-copy-status', 'data-c
     if token not in publication_template:
         errors.append(f'layouts/publication/single.html: copy-feedback accessibility marker missing {token!r}')
 
+# Preserve the independent dataset and versioned software archive links in the article record.
+article_metadata = texts[ROOT / 'content/publication/adhesives-wearable/index.md']
+for field in (
+    "url_dataset: 'https://doi.org/10.5281/zenodo.20278428'",
+    "url_software: 'https://doi.org/10.5281/zenodo.20301242'",
+):
+    if field not in article_metadata:
+        errors.append(f'content/publication/adhesives-wearable/index.md: missing research-output link {field!r}')
+for token in (
+    'if .Params.url_dataset',
+    'Experimental dataset <span',
+    'if .Params.url_software',
+    'Software release <span',
+):
+    if token not in publication_template:
+        errors.append(f'layouts/publication/single.html: dataset/software link label missing {token!r}')
+
 workflow_text = (ROOT / '.github/workflows/hugo.yaml').read_text(encoding='utf-8')
 if 'node --check assets/js/site.js' not in workflow_text:
     errors.append('.github/workflows/hugo.yaml: JavaScript syntax check must target the bundled asset')
