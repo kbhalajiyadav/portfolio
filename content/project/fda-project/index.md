@@ -11,7 +11,7 @@ weight: 3
 
 ## Professional context
 
-As a **Technical Project Manager** at **Kreative Organics**, I worked directly with
+As a **Technical Project Manager** at **Kreative Organics Pvt. Ltd.**, I worked directly with
 the CEO and cross-functional quality, technical, and external teams on SAP Business One
 computerized-system requalification and configuration in pharmaceutical-intermediate manufacturing.
 
