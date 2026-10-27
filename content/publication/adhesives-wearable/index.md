@@ -100,3 +100,13 @@ figures:
     license: CC BY 4.0
     license_url: https://creativecommons.org/licenses/by/4.0/
 ---
+
+## Reading the results
+
+Figure 2A shows why a high peel force alone was not sufficient for adhesive selection: the E6000 trace also exhibited pronounced oscillations. Figure 4 compares stability, repeatability, deformation tolerance, and apparent fracture energy to inform a **use-specific** decision, rather than a universal ranking of adhesive performance.
+
+## Printed-conductor evaluation and collaboration
+
+Figure 5 extends that comparison to printed conductive traces on fabric. In the reported benchtop tests, the Fabri-Fuse condition reached **34.95 ± 2.43% strain to electrical failure** (three specimens per condition); this does not establish clinical or long-term wearable-device performance.
+
+The conductive-trace work was part of a collaboration involving Christina Tang's VCU Soft Functional Materials Lab and the [Joung Research Group](https://sites.google.com/view/joungresearchgroup/team), including coauthors Udena Epitawala Arachchige and Daeha Joung. The [published article](https://doi.org/10.3390/polym18121504) credits all four authors and should be consulted for the formal contribution statement; no exclusive authorship of Figure 5 is implied.

@@ -1,7 +1,7 @@
 {{/* Research figure. .figure is sourced from publication front matter; .featured opts into a concise homepage caption. The image loads when scrolled near so it never competes with first paint. */}}
 {{ $f := .figure }}
 <figure class="research-figure{{ if .featured }} research-figure--featured{{ end }}">
-  <a class="research-figure__media" href="{{ $f.src | relURL }}" target="_blank" rel="noopener"><img class="js-deferred-figure" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 {{ $f.width }} {{ $f.height }}'/%3E" data-src="{{ $f.src | relURL }}" alt="{{ $f.alt }}" width="{{ $f.width }}" height="{{ $f.height }}" decoding="async"><noscript><img src="{{ $f.src | relURL }}" alt="{{ $f.alt }}" width="{{ $f.width }}" height="{{ $f.height }}" loading="lazy" decoding="async"></noscript></a>
+  <a class="research-figure__media" href="{{ $f.src | relURL }}" target="_blank" rel="noopener"><img class="js-deferred-figure" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 {{ $f.width }} {{ $f.height }}'/%3E" data-src="{{ $f.src | relURL }}" alt="{{ $f.alt }}" width="{{ $f.width }}" height="{{ $f.height }}" decoding="async"><noscript><img src="{{ $f.src | relURL }}" alt="{{ $f.alt }}" width="{{ $f.width }}" height="{{ $f.height }}" loading="lazy" decoding="async"></noscript><span class="research-figure__open">View full-resolution figure <span aria-hidden="true">↗</span></span></a>
   <figcaption>
     <span class="research-figure__evidence">{{ $f.evidence }}</span>
     <p>{{ if and .featured $f.homepage_caption }}{{ $f.homepage_caption }}{{ else }}{{ $f.caption }}{{ end }}</p>
