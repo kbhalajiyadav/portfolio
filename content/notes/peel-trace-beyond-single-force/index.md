@@ -50,7 +50,7 @@ governance:
   copyright_review: complete
   source_status_review: complete
   source_status_reviewed_on: 2026-10-16
-  author_release_decision: pending
+  author_release_decision: approved
 sources:
 - https://doi.org/10.3390/polym18121504
 - https://doi.org/10.5281/zenodo.20278428
