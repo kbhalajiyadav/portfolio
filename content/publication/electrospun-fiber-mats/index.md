@@ -91,7 +91,7 @@ slides: ''
 
 My contributions to this coauthored study include the mechanical analysis and visualization presented in **Figures 4 and 5 and Table 1**, alongside formal analysis and validation. These results document how sequentially electrospun TPU–nylon layers compared with the single-polymer mats and manually layered controls.
 
-The selected results are [Figure 5 — Young’s modulus comparison](https://www.mdpi.com/2073-4360/17/13/1777/pdf#page=9) and [Figure 4 — representative engineering stress–strain curves](https://www.mdpi.com/2073-4360/17/13/1777/pdf#page=8). Their source-resolution images are being prepared for direct display here.
+The selected results are [Figure 5 — Young’s modulus comparison](https://www.mdpi.com/2073-4360/17/13/1777/pdf#page=9) and [Figure 4 — representative engineering stress–strain curves](https://www.mdpi.com/2073-4360/17/13/1777/pdf#page=8). The published figures provide the complete plotted data and experimental context.
 
 ### Table 1 — Mechanical properties
 
