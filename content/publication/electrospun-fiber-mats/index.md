@@ -87,10 +87,10 @@ projects: ''
 slides: ''
 figures:
   - src: media/research/polymers-2025-fig1-sem.png
-    width: 1200
-    height: 400
+    width: 557
+    height: 152
     evidence: Published figure · co-authored
-    alt: Scanning electron micrographs of a single electrospun TPU layer, a single electrospun nylon layer, and a layered TPU-nylon structure, each with a 100 micrometer scale bar.
+    alt: Scanning electron micrographs of a single electrospun TPU layer, a single electrospun nylon layer, and a layered TPU-nylon structure, each with a 100 micrometer scale bar (A to C).
     caption: Fiber morphology of single-layer TPU, single-layer nylon, and the layered TPU-nylon mat. Scale bars are 100 µm.
     credit: Figure 1 from Caloian, Trapp, Kantepalle, Latimer, Lawton, and Tang, Polymers 2025, 17, 1777. © 2025 the authors. No data or labels changed.
     license: CC BY 4.0

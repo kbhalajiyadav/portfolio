@@ -81,19 +81,19 @@ figures:
     license: CC BY 4.0
     license_url: https://creativecommons.org/licenses/by/4.0/
   - src: media/research/polymers-2026-fig4-radar.png
-    width: 1200
-    height: 1000
+    width: 563
+    height: 434
     evidence: Published figure
-    alt: Radar plot comparing four adhesives on fracture energy, displacement at break, peel stability, stick-slip suppression, and initiation repeatability, with larger values better on each axis.
-    caption: Multi-criteria comparison of the adhesives. The plot supports material selection for this application and is not an intrinsic ranking of the adhesives.
+    alt: Radar plot comparing E6000, JB Weld, and Fabri-Fuse on deformation tolerance, peel stability index, stick-slip suppression, initiation-force repeatability, and apparent fracture energy. E6000 leads on fracture energy, JB Weld on stability, and Fabri-Fuse is strong across most axes.
+    caption: Multi-criteria comparison of three adhesives. The plot supports material selection for this application and is not an intrinsic ranking of the adhesives.
     credit: Figure 4 from Kantepalle, Epitawala Arachchige, Joung, and Tang, Polymers 2026, 18, 1504. © 2026 the authors. No data or labels changed.
     license: CC BY 4.0
     license_url: https://creativecommons.org/licenses/by/4.0/
   - src: media/research/polymers-2026-fig5-conductive-traces.png
-    width: 1200
-    height: 800
+    width: 568
+    height: 199
     evidence: Published figure
-    alt: Printed conductive silver trace on fabric before and after stretching, a magnified view of the failed conductor, and a bar chart of strain to electrical failure for no adhesive, E6000, and Fabri-Fuse.
+    alt: Photographs of a printed conductive trace on fabric before loading, after failure, and a magnified failure region, beside a bar chart of strain to electrical failure. Fabri-Fuse is highest, E6000 is in between, and no adhesive is lowest.
     caption: Downstream check in a printed conductive trace. Strain to electrical failure was compared on bare fabric, E6000, and Fabri-Fuse (n = 3).
     credit: Figure 5 from Kantepalle, Epitawala Arachchige, Joung, and Tang, Polymers 2026, 18, 1504. © 2026 the authors. No data or labels changed.
     license: CC BY 4.0

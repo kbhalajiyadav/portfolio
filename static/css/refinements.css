@@ -190,7 +190,7 @@ html[data-analytics-consent="unknown"] .privacy-banner+main .page-shell{padding-
 .research-figure{margin:0}
 .research-package>.research-figure{grid-column:1/-1;display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(1.5rem,3vw,2.5rem);align-items:start;padding:clamp(1.5rem,3vw,2.5rem) clamp(2rem,4vw,3.4rem);border-top:1px solid var(--line)}
 .research-figure__media{display:block;width:fit-content;max-width:100%;border:1px solid var(--line);background:#fff}
-.research-figure__media img{display:block;max-width:100%;height:auto}
+.research-figure__media img{display:block;max-width:100%;height:auto;margin:0;border:0;box-shadow:none}
 .research-figure figcaption{margin-top:0}
 .research-figure__evidence{color:var(--teal);font-family:var(--sans);font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
 .research-figure figcaption p{margin-top:.45rem;color:var(--ink);font-size:.98rem}
