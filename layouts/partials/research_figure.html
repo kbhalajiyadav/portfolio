@@ -1,11 +1,11 @@
-{{/* Reusable research figure. Context: dict "figure" (src, width, height, evidence, alt, caption, credit, license, license_url) plus optional "source", "data", "code" links. */}}
+{{/* Research figure. .figure is sourced from publication front matter; .featured opts into a concise homepage caption. */}}
 {{ $f := .figure }}
-<figure class="research-figure">
-  <a class="research-figure__media" href="{{ $f.src | relURL }}" target="_blank" rel="noopener"><img src="{{ $f.src | relURL }}" alt="{{ $f.alt }}" width="{{ $f.width }}" height="{{ $f.height }}" loading="lazy" decoding="async"></a>
+<figure class="research-figure{{ if .featured }} research-figure--featured{{ end }}">
+  <a class="research-figure__media" href="{{ $f.src | relURL }}" target="_blank" rel="noopener" aria-label="Open published figure at available image resolution (new tab)"><img src="{{ $f.src | relURL }}" alt="{{ $f.alt }}" width="{{ $f.width }}" height="{{ $f.height }}" loading="lazy" decoding="async"></a>
   <figcaption>
     <span class="research-figure__evidence">{{ $f.evidence }}</span>
-    <p>{{ $f.caption }}</p>
+    <p>{{ if and .featured $f.homepage_caption }}{{ $f.homepage_caption }}{{ else }}{{ $f.caption }}{{ end }}</p>
     <small>{{ $f.credit }} Reused under <a href="{{ $f.license_url }}" target="_blank" rel="noopener license">{{ $f.license }}</a>.</small>
-    {{ if or .source .data .code }}<div class="actions">{{ with .source }}<a class="lnk" href="{{ . }}" target="_blank" rel="noopener">Article <span class="arw" aria-hidden="true">↗</span></a>{{ end }}{{ with .data }}<a class="lnk" href="{{ . }}" target="_blank" rel="noopener">Dataset <span class="arw" aria-hidden="true">↗</span></a>{{ end }}{{ with .code }}<a class="lnk" href="{{ . }}" target="_blank" rel="noopener">Source code <span class="arw" aria-hidden="true">↗</span></a>{{ end }}</div>{{ end }}
+    {{ if or .source .data .code }}<div class="actions">{{ with .source }}<a class="lnk" href="{{ . }}" target="_blank" rel="noopener">Published article <span class="arw" aria-hidden="true">↗</span></a>{{ end }}{{ with .data }}<a class="lnk" href="{{ . }}" target="_blank" rel="noopener">Dataset <span class="arw" aria-hidden="true">↗</span></a>{{ end }}{{ with .code }}<a class="lnk" href="{{ . }}" target="_blank" rel="noopener">Source code <span class="arw" aria-hidden="true">↗</span></a>{{ end }}</div>{{ end }}
   </figcaption>
 </figure>
