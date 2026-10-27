@@ -27,6 +27,8 @@ sample-level summaries.
 - sample-level and group-level outputs; and
 - versioned, citable analysis records.
 
+{{< method-schematic id="peel-trace-schematic" title="Peel Trace Evaluation workflow" steps="Reference~validation|Force-displacement~data|Column and~profile mapping|Steady-peel~window|Peel-trace~descriptors|QC plots~and records" caption="The notebook blocks user-data analysis until the bundled Scotch Tape reference check passes, then extracts protocol-defined descriptors with provenance records." >}}
+
 ## Resources
 
 - [Source repository](https://github.com/VCU-Soft-Functional-Materials-Lab/Peel-Trace-Evaluation-for-Soft-Substrates)

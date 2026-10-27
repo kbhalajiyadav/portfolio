@@ -36,6 +36,8 @@ The workflow uses Python and OpenCV to:
 The method treats image acquisition, deformation tracking, and color analysis
 as one measurement sequence rather than as separate visual observations.
 
+{{< method-schematic id="optical-metrology-schematic" title="Optical metrology measurement sequence" steps="Synchronized~imaging|Deformation~tracking|Region~selection|CIE L*a*b*~conversion|Strain and color~comparison" caption="The workflow treats imaging, deformation tracking, and color analysis as one measurement sequence." >}}
+
 ## Presentations and outputs
 
 The work was presented in 2026 as **“Quantifying Mechanochromic Response in

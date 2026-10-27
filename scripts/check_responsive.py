@@ -36,6 +36,7 @@ PAGES = [
     ("engagement/", "engagement"),
     ("contact/", "contact"),
     ("publication/adhesives-wearable/", "publication"),
+    ("publication/electrospun-fiber-mats/", "publication-fiber-mats"),
     ("project/peel-trace-evaluation/", "project"),
 ]
 EVIDENCE_PAGES = {"home", "about", "research", "outputs", "experience", "engagement", "contact"}

@@ -1,0 +1,11 @@
+{{/* Research figure. .figure is sourced from publication front matter; .featured opts into a concise homepage caption. The image loads when scrolled near so it never competes with first paint. */}}
+{{ $f := .figure }}
+<figure class="research-figure{{ if .featured }} research-figure--featured{{ end }}">
+  <a class="research-figure__media" href="{{ $f.src | relURL }}" target="_blank" rel="noopener"><img class="js-deferred-figure" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 {{ $f.width }} {{ $f.height }}'/%3E" data-src="{{ $f.src | relURL }}" alt="{{ $f.alt }}" width="{{ $f.width }}" height="{{ $f.height }}" decoding="async"><noscript><img src="{{ $f.src | relURL }}" alt="{{ $f.alt }}" width="{{ $f.width }}" height="{{ $f.height }}" loading="lazy" decoding="async"></noscript></a>
+  <figcaption>
+    <span class="research-figure__evidence">{{ $f.evidence }}</span>
+    <p>{{ if and .featured $f.homepage_caption }}{{ $f.homepage_caption }}{{ else }}{{ $f.caption }}{{ end }}</p>
+    <small>{{ $f.credit }} Reused under <a href="{{ $f.license_url }}" target="_blank" rel="noopener license">{{ $f.license }}</a>.</small>
+    {{ if or .source .data .code }}<div class="actions">{{ with .source }}<a class="lnk" href="{{ . }}" target="_blank" rel="noopener">Published article <span class="arw" aria-hidden="true">↗</span></a>{{ end }}{{ with .data }}<a class="lnk" href="{{ . }}" target="_blank" rel="noopener">Dataset <span class="arw" aria-hidden="true">↗</span></a>{{ end }}{{ with .code }}<a class="lnk" href="{{ . }}" target="_blank" rel="noopener">Source code <span class="arw" aria-hidden="true">↗</span></a>{{ end }}</div>{{ end }}
+  </figcaption>
+</figure>

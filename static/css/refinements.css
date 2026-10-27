@@ -185,3 +185,41 @@ html[data-analytics-consent="unknown"] .privacy-banner+main .page-shell{padding-
 @media(prefers-reduced-motion:reduce){
   ::view-transition-old(root),::view-transition-new(root),::view-transition-old(site-header),::view-transition-new(site-header){animation:none!important}
 }
+
+/* Research figure: published or schematic evidence with its credit beside it. */
+.research-figure{margin:0}
+.package-lead>.research-figure--featured{margin-top:1.6rem;padding-top:1.35rem;border-top:1px solid var(--line)}
+.package-lead>.research-figure--featured .research-figure__media{margin-bottom:1rem}
+.package-lead>.research-figure--featured .research-figure__media img{width:auto;max-width:100%;height:auto}
+.package-lead>.research-figure--featured figcaption p{line-height:1.55}
+.package-lead>.research-figure--featured .actions{display:flex;flex-wrap:wrap;gap:.7rem 1rem}
+.research-figure__media{display:block;width:fit-content;max-width:100%;border:1px solid var(--line);background:#fff}
+.research-figure__media img{display:block;max-width:100%;height:auto;margin:0;border:0;box-shadow:none}
+.research-figure figcaption{margin-top:0}
+.research-figure__evidence{color:var(--teal);font-family:var(--sans);font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.research-figure figcaption p{margin-top:.45rem;color:var(--ink);font-size:1rem}
+.research-figure figcaption small{display:block;margin-top:.55rem;color:var(--ink-soft);font-size:.8rem;line-height:1.5}
+.research-figure figcaption .actions{margin-top:.8rem}
+@media(max-width:680px){.package-lead>.research-figure--featured{margin-top:1.3rem;padding-top:1.2rem}}
+
+/* Method schematic: explanatory step sequence for project pages, in the research-signature style. */
+.method-schematic{margin:1.75rem 0 2rem;padding:1.2rem 0 1rem;border-block:1px solid var(--line)}
+.method-schematic__desktop svg{display:block;width:100%;height:auto}
+.method-schematic__rail{fill:none;stroke:var(--line-strong);stroke-width:1.5}
+.method-schematic__arrowhead{fill:var(--teal)}
+.method-schematic__node{fill:var(--surface);stroke:var(--teal);stroke-width:1.6}
+.method-schematic__stage text{fill:var(--ink);font-family:var(--sans);font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.method-schematic__stage .method-schematic__number{fill:var(--rust);font-family:var(--mono);font-size:12px;font-weight:400;letter-spacing:0}
+.method-schematic__mobile{display:none;margin:0;padding:0;list-style:none;border-top:1px solid var(--line)}
+.method-schematic__mobile li{display:grid;grid-template-columns:3rem minmax(0,1fr);align-items:center;gap:1rem;padding:.75rem 0;border-bottom:1px solid var(--line)}
+.method-schematic__mobile span{color:var(--rust);font-family:var(--mono);font-size:.72rem}
+.method-schematic__mobile strong{font-family:var(--sans);font-size:.88rem;letter-spacing:.04em;text-transform:uppercase}
+.method-schematic figcaption{margin-top:.85rem;color:var(--ink-soft);font-size:.92rem;line-height:1.55}
+.method-schematic__note{font-family:var(--sans);font-size:.76rem;letter-spacing:.02em}
+@media(max-width:820px){.method-schematic__desktop{display:none}.method-schematic__mobile{display:grid}}
+
+/* Figures on detail pages. */
+.figure-block{margin-top:2.5rem}
+.figure-block .research-figure+.research-figure{margin-top:2.25rem;padding-top:2rem;border-top:1px solid var(--line)}
+.figure-block .research-figure figcaption{margin-top:.9rem}
+:root:not([data-js]) .js-deferred-figure{display:none}

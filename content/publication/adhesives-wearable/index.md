@@ -70,4 +70,33 @@ url_source: ''
 url_video: ''
 
 projects: []
+figures:
+  - src: media/research/polymers-2026-fig2a-peel-traces.png
+    width: 2520
+    height: 1504
+    evidence: Published figure
+    alt: Representative T-peel force-displacement traces for four adhesives. E6000 reaches the highest force but oscillates strongly, while Fabri-Fuse and JB Weld peel at lower, steadier force.
+    caption: Representative T-peel traces. The adhesive with the highest peak force also showed the largest oscillation during peeling.
+    homepage_caption: In these T-peel tests, the highest-force adhesive was not the most stable. Peel-trace shape and repeatability informed the selection of Fabri-Fuse for conductive-textile evaluation.
+    credit: Figure 2A from Kantepalle, Epitawala Arachchige, Joung, and Tang, Polymers 2026, 18, 1504. © 2026 the authors. Cropped to panel A at original pixel resolution; plotted data and labels unchanged.
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+  - src: media/research/polymers-2026-fig4-radar.png
+    width: 3221
+    height: 2433
+    evidence: Published figure
+    alt: Radar plot comparing three adhesives by displacement to break, peel-trace stability, stick-slip oscillation, initiation-force repeatability, and apparent fracture energy. It visualizes criteria for selection, not an intrinsic property ranking.
+    caption: Multi-criteria comparison of three adhesives. The plot supports material selection for this application and is not an intrinsic ranking of the adhesives.
+    credit: Figure 4 from Kantepalle, Epitawala Arachchige, Joung, and Tang, Polymers 2026, 18, 1504. © 2026 the authors. Original source figure losslessly re-encoded without resizing; plotted data and labels unchanged.
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+  - src: media/research/polymers-2026-fig5-conductive-traces.png
+    width: 4984
+    height: 1654
+    evidence: Published figure
+    alt: Photographs of a printed conductive trace on fabric before loading, after failure, and a magnified failure region, beside a bar chart of strain to electrical failure. Fabri-Fuse is highest, E6000 is in between, and no adhesive is lowest.
+    caption: Downstream check in a printed conductive trace. Strain to electrical failure was compared on bare fabric, E6000, and Fabri-Fuse (n = 3).
+    credit: Figure 5 from Kantepalle, Epitawala Arachchige, Joung, and Tang, Polymers 2026, 18, 1504. © 2026 the authors. Original source figure losslessly re-encoded without resizing; plotted data and labels unchanged.
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
 ---

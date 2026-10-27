@@ -85,4 +85,42 @@ projects: ''
 #   E.g. `slides: "example"` references `content/slides/example/index.md`.
 #   Otherwise, set `slides: ""`.
 slides: ''
+figures:
+  - src: media/research/polymers-2025-fig5-youngs-modulus.png
+    width: 1265
+    height: 987
+    evidence: Published figure · co-authored mechanical analysis
+    alt: Box-and-whisker comparison of Young's modulus for TPU, nylon, sequentially electrospun TPU–nylon layers, and manually layered TPU–nylon mats. Nylon has the highest modulus; both layered groups lie between nylon and TPU.
+    caption: Figure 5. Young's modulus distributions for single-polymer and TPU–nylon layered electrospun fiber mats, including sequential and manually assembled layers.
+    credit: Figure 5 from Caloian, Trapp, Kantepalle, Latimer, Lawton, and Tang, Polymers 2025, 17, 1777. © 2025 the authors. Extracted from the published article PDF at its native embedded resolution and losslessly encoded as PNG; no changes to plotted data, axes, or labels.
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+  - src: media/research/polymers-2025-fig4-stress-strain.png
+    width: 1195
+    height: 802
+    evidence: Published figure · co-authored mechanical analysis
+    alt: Representative stress–strain curves comparing electrospun nylon, TPU, sequentially layered TPU–nylon, and manually layered TPU–nylon mats. TPU traces extend much farther on the horizontal strain axis; the nylon and layered traces rise steeply.
+    caption: Figure 4. Representative engineering stress–strain responses of TPU, nylon, sequentially electrospun TPU–nylon layers, and manually layered structures.
+    credit: Figure 4 from Caloian, Trapp, Kantepalle, Latimer, Lawton, and Tang, Polymers 2025, 17, 1777. © 2025 the authors. Extracted from the published article PDF at its native embedded resolution and losslessly encoded as PNG; no changes to plotted data, axes, or labels.
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
 ---
+
+## Mechanical analysis and visualization
+
+My contributions to this coauthored study include the mechanical analysis and visualization presented in **Figures 4 and 5 and Table 1**, alongside formal analysis and validation. These results document how sequentially electrospun TPU–nylon layers compared with the single-polymer mats and manually layered controls.
+
+The figures above show the Young’s modulus comparison (Figure 5) and representative engineering stress–strain curves (Figure 4). Table 1 below preserves the published numerical comparison, while the [original article](https://doi.org/10.3390/polym17131777) provides the complete methods and interpretation.
+
+### Table 1 — Mechanical properties
+
+| Sample | Young’s modulus (MPa) | Ultimate strength (MPa) | Elongation at break (%) |
+| :--- | ---: | ---: | ---: |
+| TPU (single layer) | 1.2 ± 0.2 | Not determined | >310 |
+| Nylon (single layer) | 202.6 ± 95.3 | 16 ± 10 | 24 ± 7 |
+| TPU–nylon (manually layered) | 90.4 ± 31.2 | 8 ± 4 | 27 ± 6 |
+| TPU–nylon (sequential electrospinning) | 73.1 ± 12.5 | 6 ± 1 | 30 ± 21 |
+
+*Published Table 1; TPU: n = 4; all other samples: n = 10. Data are reproduced without numerical changes. The published table uses “Nyon” for nylon; this apparent typographical error is corrected above.*
+
+*Source: Caloian, I.; Trapp, J.; Kantepalle, B.Y.; Latimer, P.; Lawton, T.J.; Tang, C. [Mechanical Properties of Dual-Layer Electrospun Fiber Mats](https://doi.org/10.3390/polym17131777). Polymers 2025, 17, 1777. © 2025 the authors; reproduced from Table 1 under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), with row labels shortened and the typographical correction disclosed.*
