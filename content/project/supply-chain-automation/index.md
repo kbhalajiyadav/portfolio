@@ -12,7 +12,7 @@ weight: 4
 ## Professional context
 
 During a **Technical Project Management internship with Deep Thought Edu Tech Ventures**,
-working at **Kreative Organics**, I focused on chemical trade-data, normalization, automation,
+working at **Kreative Organics Pvt. Ltd.**, I focused on chemical trade-data, normalization, automation,
 and decision-support workflows used by technical and business teams.
 
 ## Selected contributions

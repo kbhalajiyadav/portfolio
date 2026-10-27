@@ -160,6 +160,20 @@ LAYOUT_EXPRESSION = r"""
       visibleFullSizeLink: Boolean(open && open.textContent.includes('View full-resolution figure')),
     };
   });
+  const seriesPairs = [...document.querySelectorAll('.series-grid')]
+    .filter((grid) => grid.querySelectorAll(':scope > .series').length === 2)
+    .map((grid) => {
+      const cards = [...grid.querySelectorAll(':scope > .series')];
+      return {
+        columnCount: getComputedStyle(grid).gridTemplateColumns.split(' ').filter(Boolean).length,
+        cardTopDifference: Math.abs(cards[0].getBoundingClientRect().top - cards[1].getBoundingClientRect().top)
+      };
+    });
+  const contactHeader = document.querySelector('.contact-page .page-header');
+  const contactHeading = document.querySelector('.contact-section--page h2');
+  const contactIntroGap = contactHeader && contactHeading
+    ? contactHeading.getBoundingClientRect().top - contactHeader.getBoundingClientRect().bottom
+    : null;
   const schematic = document.querySelector('.method-schematic');
   const schematicBorders = schematic
     ? [getComputedStyle(schematic).borderTopWidth, getComputedStyle(schematic).borderBottomWidth]
@@ -177,6 +191,8 @@ LAYOUT_EXPRESSION = r"""
     navDisplay: nav ? getComputedStyle(nav).display : null,
     tocOpen: toc ? toc.open : null,
     researchFigures,
+    seriesPairs,
+    contactIntroGap,
     schematicBorders,
     h1Count: document.querySelectorAll('h1').length,
     mainCount: document.querySelectorAll('main').length
@@ -288,6 +304,18 @@ def main() -> int:
                             record_errors.append(f"expected one h1, found {layout['h1Count']}")
                         if layout["mainCount"] != 1:
                             record_errors.append(f"expected one main, found {layout['mainCount']}")
+                        if page_name in {"home", "engagement"}:
+                            expected_columns = 2 if width >= 981 else 1
+                            for pair in layout["seriesPairs"]:
+                                if pair["columnCount"] != expected_columns:
+                                    record_errors.append(f"two presentation groups should use {expected_columns} column(s), not {pair['columnCount']}")
+                                if width >= 981 and pair["cardTopDifference"] > 2:
+                                    record_errors.append("paired presentation groups do not share a desktop row")
+                        if page_name == "contact":
+                            contact_gap = layout["contactIntroGap"]
+                            if contact_gap is None or not 16 <= contact_gap <= 90:
+                                record_errors.append(f"contact introduction gap is inconsistent: {contact_gap}")
+
                         if page_name in {"home", "publication", "publication-fiber-mats"} and not layout["researchFigures"]:
                             record_errors.append("expected source-attributed research figures")
                         for index, figure in enumerate(layout["researchFigures"]):
