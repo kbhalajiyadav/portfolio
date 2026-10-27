@@ -77,6 +77,7 @@ figures:
     evidence: Published figure
     alt: Representative T-peel force-displacement traces for four adhesives. E6000 reaches the highest force but oscillates strongly, while Fabri-Fuse and JB Weld peel at lower, steadier force.
     caption: Representative T-peel traces. The adhesive with the highest peak force also showed the largest oscillation during peeling.
+    homepage_caption: In these T-peel tests, the highest-force adhesive was not the most stable. Peel-trace shape and repeatability informed the selection of Fabri-Fuse for conductive-textile evaluation.
     credit: Figure 2A from Kantepalle, Epitawala Arachchige, Joung, and Tang, Polymers 2026, 18, 1504. © 2026 the authors. Cropped to panel A and resized for web; plotted data unchanged.
     license: CC BY 4.0
     license_url: https://creativecommons.org/licenses/by/4.0/
