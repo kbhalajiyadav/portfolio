@@ -70,4 +70,32 @@ url_source: ''
 url_video: ''
 
 projects: []
+figures:
+  - src: media/research/polymers-2026-fig2a-peel-traces.png
+    width: 350
+    height: 203
+    evidence: Published figure
+    alt: Representative T-peel force-displacement traces for four adhesives. E6000 reaches the highest force but oscillates strongly, while Fabri-Fuse and JB Weld peel at lower, steadier force.
+    caption: Representative T-peel traces. The adhesive with the highest peak force also showed the largest oscillation during peeling.
+    credit: Figure 2A from Kantepalle, Epitawala Arachchige, Joung, and Tang, Polymers 2026, 18, 1504. © 2026 the authors. Cropped to panel A. No data or labels changed.
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+  - src: media/research/polymers-2026-fig4-radar.png
+    width: 1200
+    height: 1000
+    evidence: Published figure
+    alt: Radar plot comparing four adhesives on fracture energy, displacement at break, peel stability, stick-slip suppression, and initiation repeatability, with larger values better on each axis.
+    caption: Multi-criteria comparison of the adhesives. The plot supports material selection for this application and is not an intrinsic ranking of the adhesives.
+    credit: Figure 4 from Kantepalle, Epitawala Arachchige, Joung, and Tang, Polymers 2026, 18, 1504. © 2026 the authors. No data or labels changed.
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+  - src: media/research/polymers-2026-fig5-conductive-traces.png
+    width: 1200
+    height: 800
+    evidence: Published figure
+    alt: Printed conductive silver trace on fabric before and after stretching, a magnified view of the failed conductor, and a bar chart of strain to electrical failure for no adhesive, E6000, and Fabri-Fuse.
+    caption: Downstream check in a printed conductive trace. Strain to electrical failure was compared on bare fabric, E6000, and Fabri-Fuse (n = 3).
+    credit: Figure 5 from Kantepalle, Epitawala Arachchige, Joung, and Tang, Polymers 2026, 18, 1504. © 2026 the authors. No data or labels changed.
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
 ---
