@@ -143,6 +143,27 @@ LAYOUT_EXPRESSION = r"""
   const menu = document.querySelector('.menu-button');
   const nav = document.querySelector('#site-nav');
   const toc = document.querySelector('.toc-disclosure[data-responsive-toc]');
+  const researchFigures = [...document.querySelectorAll('.research-figure')].map((figure) => {
+    const media = figure.querySelector('.research-figure__media');
+    const open = figure.querySelector('.research-figure__open');
+    const mediaStyle = media ? getComputedStyle(media) : null;
+    const openStyle = open ? getComputedStyle(open) : null;
+    return {
+      mediaBorders: mediaStyle
+        ? [mediaStyle.borderTopWidth, mediaStyle.borderRightWidth, mediaStyle.borderBottomWidth, mediaStyle.borderLeftWidth]
+        : null,
+      separatorWidth: getComputedStyle(figure).borderTopWidth,
+      openBorders: openStyle
+        ? [openStyle.borderTopWidth, openStyle.borderRightWidth, openStyle.borderBottomWidth, openStyle.borderLeftWidth]
+        : null,
+      openBackground: openStyle ? openStyle.backgroundColor : null,
+      visibleFullSizeLink: Boolean(open && open.textContent.includes('View full-resolution figure')),
+    };
+  });
+  const schematic = document.querySelector('.method-schematic');
+  const schematicBorders = schematic
+    ? [getComputedStyle(schematic).borderTopWidth, getComputedStyle(schematic).borderBottomWidth]
+    : null;
   return {
     url: location.href,
     viewportWidth: width,
@@ -155,6 +176,8 @@ LAYOUT_EXPRESSION = r"""
     menuDisplay: menu ? getComputedStyle(menu).display : null,
     navDisplay: nav ? getComputedStyle(nav).display : null,
     tocOpen: toc ? toc.open : null,
+    researchFigures,
+    schematicBorders,
     h1Count: document.querySelectorAll('h1').length,
     mainCount: document.querySelectorAll('main').length
   };
@@ -265,6 +288,21 @@ def main() -> int:
                             record_errors.append(f"expected one h1, found {layout['h1Count']}")
                         if layout["mainCount"] != 1:
                             record_errors.append(f"expected one main, found {layout['mainCount']}")
+                        if page_name in {"home", "publication", "publication-fiber-mats"} and not layout["researchFigures"]:
+                            record_errors.append("expected source-attributed research figures")
+                        for index, figure in enumerate(layout["researchFigures"]):
+                            if figure["mediaBorders"] is None or any(v != "0px" for v in figure["mediaBorders"]):
+                                record_errors.append(f"research figure {index + 1} has a card-style image border")
+                            if figure["separatorWidth"] != "0px":
+                                record_errors.append(f"research figure {index + 1} has a decorative separator rule")
+                            if figure["openBorders"] is None or any(v != "0px" for v in figure["openBorders"]):
+                                record_errors.append(f"research figure {index + 1} has a boxed full-size link")
+                            if figure["openBackground"] not in {"rgba(0, 0, 0, 0)", "transparent"}:
+                                record_errors.append(f"research figure {index + 1} has a shaded full-size link")
+                            if not figure["visibleFullSizeLink"]:
+                                record_errors.append(f"research figure {index + 1} lacks a visible full-size link")
+                        if layout["schematicBorders"] is not None and any(v != "0px" for v in layout["schematicBorders"]):
+                            record_errors.append("explanatory method schematic has decorative outer borders")
                         if page_name == "home" and width >= 981:
                             if layout["footerItemCount"] < 2:
                                 record_errors.append("desktop footer navigation items are missing")
