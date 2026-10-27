@@ -7,6 +7,7 @@
   <script data-consent-bootstrap>
     (() => {
       const root = document.documentElement;
+      root.dataset.js = 'on';
       try {
         const choice = window.localStorage.getItem('bhalaji.analyticsConsent.v1');
         root.dataset.analyticsConsent = choice === 'granted' || choice === 'denied' ? choice : 'unknown';

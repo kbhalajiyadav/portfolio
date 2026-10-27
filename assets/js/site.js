@@ -267,4 +267,22 @@
       });
     });
   }
+  // Research figures load when scrolled near so they never compete with first paint.
+  const deferred = document.querySelectorAll('img.js-deferred-figure[data-src]');
+  const reveal = (image) => {
+    image.src = image.dataset.src;
+    image.removeAttribute('data-src');
+  };
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        observer.unobserve(entry.target);
+        reveal(entry.target);
+      });
+    }, { rootMargin: '400px 0px' });
+    deferred.forEach((image) => observer.observe(image));
+  } else {
+    deferred.forEach(reveal);
+  }
 })();

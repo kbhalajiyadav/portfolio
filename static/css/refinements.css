@@ -222,3 +222,4 @@ html[data-analytics-consent="unknown"] .privacy-banner+main .page-shell{padding-
 .figure-block{margin-top:2.5rem}
 .figure-block .research-figure+.research-figure{margin-top:2.25rem;padding-top:2rem;border-top:1px solid var(--line)}
 .figure-block .research-figure figcaption{margin-top:.9rem}
+:root:not([data-js]) .js-deferred-figure{display:none}
