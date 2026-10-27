@@ -1,7 +1,7 @@
 {{/* Research figure. .figure is sourced from publication front matter; .featured opts into a concise homepage caption. */}}
 {{ $f := .figure }}
 <figure class="research-figure{{ if .featured }} research-figure--featured{{ end }}">
-  <a class="research-figure__media" href="{{ $f.src | relURL }}" target="_blank" rel="noopener" aria-label="Open published figure at available image resolution (new tab)"><img src="{{ $f.src | relURL }}" alt="{{ $f.alt }}" width="{{ $f.width }}" height="{{ $f.height }}" loading="lazy" decoding="async"></a>
+  <a class="research-figure__media" href="{{ $f.src | relURL }}" target="_blank" rel="noopener"><img src="{{ $f.src | relURL }}" alt="{{ $f.alt }}" width="{{ $f.width }}" height="{{ $f.height }}" loading="lazy" decoding="async"></a>
   <figcaption>
     <span class="research-figure__evidence">{{ $f.evidence }}</span>
     <p>{{ if and .featured $f.homepage_caption }}{{ $f.homepage_caption }}{{ else }}{{ $f.caption }}{{ end }}</p>
