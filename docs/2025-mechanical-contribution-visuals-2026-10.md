@@ -1,6 +1,6 @@
 # Correction: 2025 paper visuals should reflect contributed mechanical results
 
-**Decision:** 2026-10-27. PR #85 stays a draft until the two source-resolution mechanical figures are added and verified.
+**Decision:** 2026-10-27. The two source-resolution mechanical figures have been uploaded, checked by Git blob identity against the prepared source assets, and integrated into the publication page. Final CI and deployment validation must still be completed.
 
 The 2025 paper's Figure 1 is a useful overview of fiber morphology, but it was initially featured because SEM makes a recognizable scientific thumbnail—not because it best represented the portfolio owner's work. The owner identified **Figures 4 and 5 and Table 1** as their direct areas of contribution. The publication's author-contributions section independently lists B.Y.K. in formal analysis, validation, visualization, and methodology, while not assigning exclusive authorship of individual figures.
 
@@ -11,7 +11,7 @@ The 2025 paper's Figure 1 is a useful overview of fiber morphology, but it was i
 3. **Table 1, mechanical-property summary:** accessible semantic HTML table, not an image. Preserve Young's modulus, ultimate strength, elongation at break, sample sizes, and the paper's stated limitations.
 4. **Figure 1 SEM:** background characterization, not the portfolio's lead illustration. The figure was removed from the portfolio article's featured figures pending the mechanical replacements. The existing file under static is intentionally left untouched during staging; decide on its removal when the new images land.
 
-The public article page already contains a faithful Table 1 transcription with a CC BY 4.0 license credit and direct PDF links to Figures 5 and 4. Once the two PNGs have been uploaded to the PR branch, replace these external-only figure links with the reusable figure component and retire the unneeded SEM asset, leaving any meaningful context as text.
+The public article page now displays Figure 5 followed by Figure 4, with DOI and CC BY 4.0 credit beside each figure, and a faithful accessible Table 1 transcription. Figure 1's superseded SEM binary has been deleted from the PR branch; its scientific context remains in the published paper.
 
 ## Source files prepared from uploaded paper
 
@@ -30,10 +30,9 @@ Caloian, I.; Trapp, J.; Kantepalle, B.Y.; Latimer, P.; Lawton, T.J.; Tang, C. *M
 
 The public webpage should reflect **the user's contribution to a coauthored paper**; it should not imply exclusive ownership of the complete paper or the underlying experiments.
 
-## Release gate
+## Release verification
 
-- Upload just the two new PNGs into `feature/homepage-evidence-figure` at the paths above, preserving the filenames, not directly to `main`.
-- Verify Git bytes, image dimensions, alt descriptions, source credits, responsive figure legibility, and scientific context.
-- Add both to the 2025 publication front matter in Figure 5 then Figure 4 order, with CC BY 4.0 attribution and exact transformation notes. Do not link Figure 1 ahead of them.
-- Re-run GitHub build, figure-integrity checks, site content audits, accessibility, responsive/WCAG, and Lighthouse mobile/desktop.
-- Keep PR #85 as a **draft** and do not deploy until completed.
+- **Complete:** both mechanical PNGs are committed at the intended paths in `feature/homepage-evidence-figure`. The exact Git blobs match the source-export ZIP: Figure 5 `4c01605035f678f73c89c2e22096c3fff3727d6d`, Figure 4 `e2cc2601bdffcb5c0b690ea7fe7cd36c858c210c`.
+- **Complete:** publication front matter references Figure 5 then Figure 4, with exact dimensions and CC BY 4.0 transformation notes.
+- **Complete:** Figure 1 is no longer featured, and its unused binary has been deleted from `static/media/research/` on the PR branch.
+- **Next release gate:** confirm fresh Hugo, figure-integrity, source/link, accessibility, responsive/WCAG and mobile/desktop Lighthouse results on the final PR head; review the merge and resulting live deployment before claiming public availability.
