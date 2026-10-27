@@ -30,7 +30,7 @@
           {{ with .Params.abstract }}<section class="abstract-block"><h2>Abstract</h2><p>{{ . }}</p></section>{{ end }}
         {{ end }}
         {{ $figures := .Params.figures }}
-        {{ with $figures }}<section class="figure-block" id="figures"><h2>Figures</h2>{{ range . }}{{ if not (fileExists (printf "static/%s" .src)) }}{{ errorf "Missing publication research figure: %s" .src }}{{ end }}{{ partial "research_figure.html" (dict "figure" . "source" (printf "https://doi.org/%s" $.Params.doi) "data" $.Params.url_dataset "code" $.Params.url_code) }}{{ end }}</section>{{ end }}
+        {{ with $figures }}<section class="figure-block" id="figures"><h2>Figures</h2>{{ range . }}{{ if not (fileExists (printf "static/%s" .src)) }}{{ errorf "Missing publication research figure: %s" .src }}{{ end }}{{ partial "research_figure.html" (dict "figure" . "source" (printf "https://doi.org/%s" $.Params.doi)) }}{{ end }}</section>{{ end }}
         {{ .Content }}
       </div>
       <aside class="citation-column">
