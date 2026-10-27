@@ -184,9 +184,19 @@ jobs:
 
       - name: Lighthouse audits for mobile and desktop
         run: |
-          LHCI_FORM_FACTOR=mobile npx lhci autorun --config=.lighthouserc.cjs
+          # Failing assertions are echoed as one annotation so they are readable from the checks API.
+          audit() {
+            LHCI_FORM_FACTOR="$1" npx lhci autorun --config=.lighthouserc.cjs 2>&1 | tee "artifacts/lighthouse-$1.log"
+            local status=${PIPESTATUS[0]}
+            if [[ $status -ne 0 ]]; then
+              summary=$(grep -E 'result\(s\) for|✘|expected:|found:|all values:|Error' "artifacts/lighthouse-$1.log" | head -60 | sed 's/^ *//' | sed ':a;N;$!ba;s/\n/%0A/g')
+              echo "::error title=Lighthouse $1 assertions::${summary}"
+            fi
+            return $status
+          }
+          audit mobile
           rm -rf .lighthouseci
-          LHCI_FORM_FACTOR=desktop npx lhci autorun --config=.lighthouserc.cjs
+          audit desktop
 
       - name: Report generated-site inventory
         if: always()
