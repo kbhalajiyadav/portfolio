@@ -64,8 +64,8 @@ publications:
   # Rendered only once the image exists under static/. Set width and height to the exported file.
   figure:
     src: media/research/polymers-2026-fig2a-peel-traces.png
-    width: 1200
-    height: 744
+    width: 327
+    height: 192
     evidence: Published figure
     alt: Representative T-peel force-displacement traces for four adhesives. E6000 reaches the highest force but oscillates strongly, while Fabri-Fuse and JB Weld peel at lower, steadier force.
     caption: The strongest bond was not the steadiest. Peel traces showed oscillation that a single peak-force number hides, which changed the adhesive chosen for printed conductive traces.
