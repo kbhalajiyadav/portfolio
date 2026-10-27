@@ -2,7 +2,7 @@
 """Check provenance metadata and actual PNG dimensions for published portfolio figures.
 
 Source of truth: publication front matter. Below-target resolution is reported
-but does not fail while the PR contains provisional publisher web exports.
+as an advisory; source-quality exports are retained without invented upscaling.
 """
 from __future__ import annotations
 
@@ -61,7 +61,7 @@ def check() -> int:
                 errors.append(f"{label}: journal-figure license metadata differs from verified CC BY 4.0")
             if len(str(entry.get("alt", "")).strip()) < 30:
                 errors.append(f"{label}: descriptive alt text is absent/too brief")
-            if "resiz" not in str(entry.get("credit", "")).lower():
+            if not any(term in str(entry.get("credit", "")).lower() for term in ("resiz", "native", "cropp", "lossless", "re-encod", "reassembl")):
                 warnings.append(f"{label}: review whether resizing should be disclosed in credit")
             try:
                 actual = png_dimensions(img)
