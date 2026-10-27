@@ -85,14 +85,23 @@ projects: ''
 #   E.g. `slides: "example"` references `content/slides/example/index.md`.
 #   Otherwise, set `slides: ""`.
 slides: ''
-figures:
-  - src: media/research/polymers-2025-fig1-sem.png
-    width: 2152
-    height: 508
-    evidence: Published figure · co-authored
-    alt: Scanning electron micrographs of a single electrospun TPU layer, a single electrospun nylon layer, and a layered TPU-nylon structure, each with a 100 micrometer scale bar (A to C).
-    caption: Fiber morphology of single-layer TPU, single-layer nylon, and the layered TPU-nylon mat. Scale bars are 100 µm.
-    credit: Figure 1 from Caloian, Trapp, Kantepalle, Latimer, Lawton, and Tang, Polymers 2025, 17, 1777. © 2025 the authors. Extracted from the published PDF and reassembled at native image resolution; all three 100 µm scale bars retained.
-    license: CC BY 4.0
-    license_url: https://creativecommons.org/licenses/by/4.0/
 ---
+
+## Mechanical analysis and visualization
+
+My contributions to this coauthored study include the mechanical analysis and visualization presented in **Figures 4 and 5 and Table 1**, alongside formal analysis and validation. These results document how sequentially electrospun TPU–nylon layers compared with the single-polymer mats and manually layered controls.
+
+The selected results are [Figure 5 — Young’s modulus comparison](https://www.mdpi.com/2073-4360/17/13/1777/pdf#page=9) and [Figure 4 — representative engineering stress–strain curves](https://www.mdpi.com/2073-4360/17/13/1777/pdf#page=8). Their source-resolution images are being prepared for direct display here.
+
+### Table 1 — Mechanical properties
+
+| Sample | Young’s modulus (MPa) | Ultimate strength (MPa) | Elongation at break (%) |
+| :--- | ---: | ---: | ---: |
+| TPU (single layer) | 1.2 ± 0.2 | Not determined | >310 |
+| Nylon (single layer) | 202.6 ± 95.3 | 16 ± 10 | 24 ± 7 |
+| TPU–nylon (manually layered) | 90.4 ± 31.2 | 8 ± 4 | 27 ± 6 |
+| TPU–nylon (sequential electrospinning) | 73.1 ± 12.5 | 6 ± 1 | 30 ± 21 |
+
+*Published Table 1; TPU: n = 4; all other samples: n = 10. Data are reproduced without numerical changes. The published table uses “Nyon” for nylon; this apparent typographical error is corrected above.*
+
+*Source: Caloian, I.; Trapp, J.; Kantepalle, B.Y.; Latimer, P.; Lawton, T.J.; Tang, C. [Mechanical Properties of Dual-Layer Electrospun Fiber Mats](https://doi.org/10.3390/polym17131777). Polymers 2025, 17, 1777. © 2025 the authors; reproduced from Table 1 under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), with row labels shortened and the typographical correction disclosed.*
