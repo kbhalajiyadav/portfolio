@@ -61,18 +61,6 @@ publications:
   doi: https://doi.org/10.3390/polym18121504
   code: https://github.com/VCU-Soft-Functional-Materials-Lab/Peel-Trace-Evaluation-for-Soft-Substrates
   detail: publication/adhesives-wearable/
-  # Research figure is required at build time. Update dimensions only when a genuine higher-resolution export replaces it.
-  figure:
-    src: media/research/polymers-2026-fig2a-peel-traces.png
-    width: 350
-    height: 203
-    evidence: Published figure
-    alt: Representative T-peel force-displacement traces for four adhesives. E6000 reaches the highest force but oscillates strongly, while Fabri-Fuse and JB Weld peel at lower, steadier force.
-    caption: The highest-peel-force adhesive was not the most stable in this test. Trace oscillation and repeatability helped inform the selection of Fabri-Fuse for conductive-textile evaluation.
-    credit: Figure 2A from Kantepalle, Epitawala Arachchige, Joung, and Tang, Polymers 2026, 18, 1504. © 2026 the authors. Cropped to panel A and resized for web; plotted data unchanged.
-    license: CC BY 4.0
-    license_url: https://creativecommons.org/licenses/by/4.0/
-    data: https://doi.org/10.5281/zenodo.20278428
 - year: '2025'
   type: Journal article · Co-author
   title: Mechanical Properties of Dual-Layer Electrospun Fiber Mats
