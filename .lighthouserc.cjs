@@ -10,6 +10,7 @@ module.exports = {
         'http://127.0.0.1:4173/outputs/',
         'http://127.0.0.1:4173/research/',
         'http://127.0.0.1:4173/publication/adhesives-wearable/',
+        'http://127.0.0.1:4173/publication/electrospun-fiber-mats/',
         'http://127.0.0.1:4173/project/quantitative-thermal-imaging/'
       ],
       settings: {
