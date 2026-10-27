@@ -25,6 +25,7 @@ module.exports = {
     'http://127.0.0.1:4173/contact/',
     'http://127.0.0.1:4173/publication/',
     'http://127.0.0.1:4173/publication/adhesives-wearable/',
+    'http://127.0.0.1:4173/publication/electrospun-fiber-mats/',
     'http://127.0.0.1:4173/publication/masters-thesis/',
     'http://127.0.0.1:4173/project/',
     'http://127.0.0.1:4173/project/peel-trace-evaluation/',
