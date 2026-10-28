@@ -49,6 +49,23 @@
 <title>{{ $pageTitle }}</title>
 <meta name="description" content="{{ $description }}">
 <meta name="author" content="{{ $p.profile.name }}">
+{{/* Highwire bibliographic metadata on canonical scholarly records only.
+     Do not invent a PDF for an embargoed work or mislabel article IDs as page numbers. */}}
+{{ if and .IsPage (eq .Section "publication") }}
+  <meta name="citation_title" content="{{ .Title }}">
+  {{ range .Params.authors }}<meta name="citation_author" content="{{ . }}">{{ end }}
+  {{ if .Params.scholar_dissertation_institution }}
+    <meta name="citation_publication_date" content="{{ .Date.Format "2006" }}">
+  {{ else }}
+    <meta name="citation_publication_date" content="{{ .Date.Format "2006/01/02" }}">
+  {{ end }}
+  {{ with .Params.scholar_journal }}<meta name="citation_journal_title" content="{{ . }}">{{ end }}
+  {{ with .Params.scholar_volume }}<meta name="citation_volume" content="{{ . }}">{{ end }}
+  {{ with .Params.scholar_issue }}<meta name="citation_issue" content="{{ . }}">{{ end }}
+  {{ with .Params.scholar_dissertation_institution }}<meta name="citation_dissertation_institution" content="{{ . }}">{{ end }}
+  {{ with .Params.doi }}<meta name="citation_doi" content="{{ . }}">{{ end }}
+  {{ with .Params.scholar_doi }}<meta name="citation_doi" content="{{ . }}">{{ end }}
+{{ end }}
 <meta name="copyright" content="© 2026{{ if gt now.Year 2026 }}–{{ now.Year }}{{ end }} {{ $p.profile.name }}. All rights reserved.">
 <meta name="application-name" content="{{ $p.profile.short_name }}">
 <meta name="apple-mobile-web-app-title" content="{{ $p.profile.short_name }}">
