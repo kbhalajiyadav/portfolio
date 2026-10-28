@@ -56,6 +56,7 @@ SELECTORS = [
     ".compact-record",
     ".secondary-output",
     ".research-package",
+    ".package-artifacts",
     ".package-artifacts article",
     ".output-row",
     ".timeline-item",
@@ -73,6 +74,8 @@ SELECTORS = [
 ]
 
 EDITORIAL_SLACK_LIMITS = {
+    ".package-artifacts": 24.0,
+    ".research-package": 48.0,
     ".trajectory-grid article": 56.0,
     ".series summary": 56.0,
     ".education-panel": 72.0,
