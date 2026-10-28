@@ -265,6 +265,14 @@ for field in (
 ):
     if field not in article_metadata:
         errors.append(f'content/publication/adhesives-wearable/index.md: missing research-output link {field!r}')
+# Cite both collaborating laboratories using their verified institutional links.
+for label, url in (
+    ("Christina Tang's VCU Soft Functional Materials Lab", 'https://vcusoftmaterialslab.weebly.com/'),
+    ('Joung Research Group', 'https://sites.google.com/view/joungresearchgroup/team'),
+):
+    if f'[{label}]({url})' not in article_metadata:
+        errors.append(f'content/publication/adhesives-wearable/index.md: missing verified laboratory link {label!r}')
+
 for token in (
     'if .Params.url_dataset',
     'Experimental dataset <span',
