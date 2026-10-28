@@ -88,6 +88,19 @@ def main() -> int:
             if declaration and ("fr" in declaration.group(1) or "repeat(" in declaration.group(1)):
                 errors.append(f"{name} CSS reintroduces fixed/fractional related-output grid rows")
 
+    # Research figures remain borderless and carry visible, readable provenance.
+    for selector, declaration in (
+        (".research-figure__media", "border:0"),
+        (".research-figure__open", "border:0"),
+        (".research-figure figcaption small", "display:block"),
+        (".research-figure figcaption small", "max-width:70ch"),
+        (".package-lead>.research-figure--featured", "margin-top:1.6rem"),
+    ):
+        if not rule_has(REF, selector, declaration):
+            errors.append(f"research figure presentation invariant missing {selector} {declaration}")
+    if re.search(r"\.research-figure\{margin:0\}\s*\.package-lead>\.research-figure--featured\s*\{", REF):
+        errors.append("featured figure spacing must not be re-overridden after its canonical layout rule")
+
     # Content-flow guardrails: real copy controls height; fixed text slots are forbidden.
     if not rule_has(REF, ".pillar", "min-height:0"):
         errors.append("research-program cards must remain intrinsically height-safe")

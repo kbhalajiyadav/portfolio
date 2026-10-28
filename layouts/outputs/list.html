@@ -43,11 +43,12 @@
       <article class="output-row" data-output-type="thesis" data-output-date="2026-07-21">
         <div class="output-row__meta"><time datetime="2026-07-21">Jul 2026</time><span>M.S. thesis</span></div>
         <div class="output-row__content">
-          <h2><a href="{{ $thesisPage.RelPermalink }}">{{ $thesisPage.Title }}</a></h2>
+          <h2><a href="{{ $thesisPage.RelPermalink }}" aria-label="{{ $thesisPage.Title }} (M.S. thesis)">{{ $thesisPage.Title }}</a></h2>
           <p class="output-row__byline">Virginia Commonwealth University · defended July 1, 2026 · degree completed August 2026</p>
           <p class="output-row__summary">{{ $thesisPage.Params.summary }}</p>
           <div class="actions">
             <a class="lnk" href="{{ $thesisPage.RelPermalink }}">Thesis record <span class="arw" aria-hidden="true">→</span></a>
+            <a class="lnk" href="{{ $primaryPage.RelPermalink }}">Related journal article <span class="arw" aria-hidden="true">→</span></a>
             {{ with $thesisPage.Params.url_source }}<a class="lnk" href="{{ . }}" target="_blank" rel="noopener">VCU repository <span class="arw" aria-hidden="true">↗</span></a>{{ end }}
           </div>
         </div>
@@ -56,11 +57,12 @@
       <article class="output-row" data-output-type="publication" data-output-date="2026-06-16">
         <div class="output-row__meta"><time datetime="2026-06-16">Jun 2026</time><span>Peer-reviewed article</span></div>
         <div class="output-row__content">
-          <h2><a href="{{ $primaryPage.RelPermalink }}">{{ $primary.title }}</a></h2>
+          <h2><a href="{{ $primaryPage.RelPermalink }}" aria-label="{{ $primary.title }} (peer-reviewed journal article)">{{ $primary.title }}</a></h2>
           <p class="output-row__byline">{{ $primary.authors }} · {{ $primary.venue }}</p>
           <p class="output-row__summary">{{ $primaryPage.Params.summary }}</p>
           <div class="actions">
             <a class="lnk" href="{{ $primaryPage.RelPermalink }}">Article record <span class="arw" aria-hidden="true">→</span></a>
+            <a class="lnk" href="{{ $thesisPage.RelPermalink }}">Related M.S. thesis <span class="arw" aria-hidden="true">→</span></a>
             <a class="lnk" href="{{ $primary.doi }}" target="_blank" rel="noopener">DOI <span class="arw" aria-hidden="true">↗</span></a>
           </div>
         </div>
