@@ -16,6 +16,9 @@ publication_types: ["2"]
 
 publication: "*Polymers*, 18(12), 1504"
 publication_short: "*Polymers* 18(12)"
+scholar_journal: "Polymers"
+scholar_volume: "18"
+scholar_issue: "12"
 
 abstract: >-
   Peeling behavior of soft materials is important in a wide range of
