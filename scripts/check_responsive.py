@@ -403,12 +403,12 @@ def main() -> int:
                                     record_errors.append(
                                         f"related-output grid reserves {output['unusedGridHeight']:.1f}px below its actual content"
                                     )
-                                if not 8 <= output["contentToPatentGap"] <= 96:
+                                if not 24 <= output["contentToPatentGap"] <= 72:
                                     record_errors.append(
                                         f"unexpected blank gap between thesis/software content and patent record: "
                                         f"{output['contentToPatentGap']}px"
                                     )
-                                if not 8 <= output["gridToPatentGap"] <= 96:
+                                if not 24 <= output["gridToPatentGap"] <= 72:
                                     record_errors.append(
                                         f"grid-to-patent section spacing is outside editorial rhythm: "
                                         f"{output['gridToPatentGap']}px"
