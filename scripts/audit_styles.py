@@ -76,6 +76,18 @@ def main() -> int:
         if compact(rule) not in ref_compact:
             errors.append(f"interactive/accessibility invariant missing {rule!r}")
 
+    # Homepage research outputs: a two-column pair must not inherit the old
+    # 1fr/1fr two-row sidebar, which silently allocates an empty grid track.
+    if not rule_has(SITE, ".package-artifacts", "grid-template-rows:auto"):
+        errors.append("base related-output grid must not reserve two equal-height rows")
+    if not rule_has(REF, ".package-artifacts", "grid-template-rows:auto"):
+        errors.append("editorial related-output grid must explicitly declare intrinsic rows")
+    for css, name in ((SITE, "base"), (REF, "refinement"), (ABOUT, "about"), (POLISH, "polish")):
+        for match in re.finditer(r"\\.package-artifacts\\s*\\{([^}]+)\\}", css):
+            declaration = re.search(r"grid-template-rows\\s*:\\s*([^;}]+)", match.group(1))
+            if declaration and ("fr" in declaration.group(1) or "repeat(" in declaration.group(1)):
+                errors.append(f"{name} CSS reintroduces fixed/fractional related-output grid rows")
+
     # Content-flow guardrails: real copy controls height; fixed text slots are forbidden.
     if not rule_has(REF, ".pillar", "min-height:0"):
         errors.append("research-program cards must remain intrinsically height-safe")
