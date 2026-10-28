@@ -88,7 +88,8 @@ figures:
     caption: Figure 4. Representative engineering stress–strain responses of TPU, nylon, sequentially electrospun TPU–nylon layers, and manually layered structures.
     credit: Figure 4 from Caloian, Trapp, Kantepalle, Latimer, Lawton, and Tang, Polymers 2025, 17, 1777. © 2025 the authors. Extracted from the published article PDF at its native embedded resolution and losslessly encoded as PNG; no changes to plotted data, axes, or labels.
     license: CC BY 4.0
-    license_url: https://creativecommons.org/licenses/by/4.0/  - src: media/research/polymers-2025-fig5-youngs-modulus.png
+    license_url: https://creativecommons.org/licenses/by/4.0/
+  - src: media/research/polymers-2025-fig5-youngs-modulus.png
     width: 1265
     height: 987
     evidence: Published figure · co-authored mechanical analysis
