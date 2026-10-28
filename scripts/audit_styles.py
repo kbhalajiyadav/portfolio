@@ -83,8 +83,8 @@ def main() -> int:
     if not rule_has(REF, ".package-artifacts", "grid-template-rows:auto"):
         errors.append("editorial related-output grid must explicitly declare intrinsic rows")
     for css, name in ((SITE, "base"), (REF, "refinement"), (ABOUT, "about"), (POLISH, "polish")):
-        for match in re.finditer(r"\\.package-artifacts\\s*\\{([^}]+)\\}", css):
-            declaration = re.search(r"grid-template-rows\\s*:\\s*([^;}]+)", match.group(1))
+        for match in re.finditer(r"\.package-artifacts\s*\{([^}]+)\}", css):
+            declaration = re.search(r"grid-template-rows\s*:\s*([^;}]+)", match.group(1))
             if declaration and ("fr" in declaration.group(1) or "repeat(" in declaration.group(1)):
                 errors.append(f"{name} CSS reintroduces fixed/fractional related-output grid rows")
 
