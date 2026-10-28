@@ -98,6 +98,18 @@ def main() -> int:
     if "Questions worth combining methods around" in trajectory:
         errors.append("doctoral collaboration block must not restore process-oriented collaboration wording")
 
+    # Progressive disclosure must retain underlying doctoral and engagement records.
+    home = (LAYOUTS / "landing/list.html").read_text(encoding="utf-8")
+    for html, label in ((trajectory, "doctoral"), (home, "engagement")):
+        if 'class="home-disclosure ' not in html or '<summary>Explore ' not in html:
+            errors.append(f"homepage {label} disclosure must retain native details/summary markup")
+        if 'class="home-disclosure__body"' not in html:
+            errors.append(f"homepage {label} disclosure must retain its evidence body")
+    if not all(marker in trajectory for marker in ('class="trajectory-grid"', 'class="questions__grid"', 'Open research questions')):
+        errors.append("homepage doctoral disclosure must preserve applications, automation, and questions")
+    if not all(marker in home for marker in ('class="series-grid"', 'class="engagement-grid"', 'View full professional engagement')):
+        errors.append("homepage engagement disclosure must preserve records and the full-engagement link")
+
     footer = (LAYOUTS / "partials/site_footer.html").read_text(encoding="utf-8")
     if "https://infosec.exchange/@bhalaji" in footer:
         errors.append("shared footer must not expose Mastodon after verification is established")

@@ -119,11 +119,16 @@
   <div class="series-grid">
     {{ range first $presentationLimit $visibleSeries }}<details class="series" id="{{ .id }}"><summary><span><strong>{{ .title }}</strong><small>{{ .summary }}</small></span><i aria-hidden="true">+</i></summary><ul>{{ range .records }}<li>{{ . }}</li>{{ end }}</ul></details>{{ end }}
   </div>
+  <details class="home-disclosure home-disclosure--engagement">
+    <summary>Explore teaching, service, and applied innovation</summary>
+    <div class="home-disclosure__body">
   <div class="engagement-grid">
     <div><h3 class="subhead">Teaching and research guidance</h3>{{ range first $teachingLimit $visibleTeaching }}<article class="compact-record"><span>{{ .date }} · {{ .type }}</span><h4>{{ .title }}</h4><p>{{ .detail }}</p></article>{{ end }}</div>
     <div><h3 class="subhead">Service and review</h3>{{ range first $serviceLimit $visibleService }}<article class="compact-record"><span>{{ .date }}</span><h4>{{ .role }}</h4><p>{{ .organization }}</p><small>{{ .detail }}</small></article>{{ end }}</div>
     <div><h3 class="subhead">Applied innovation</h3>{{ range first $innovationLimit $visibleInnovation }}<article class="compact-record"><span>{{ .date }}</span><h4>{{ .role }}</h4><p>{{ .organization }}</p><small>{{ .detail }}</small>{{ with .links }}<div class="actions">{{ range . }}<a class="lnk" href="{{ .href }}" target="_blank" rel="noopener">{{ .label }} <span class="arw" aria-hidden="true">↗</span></a>{{ end }}</div>{{ end }}</article>{{ end }}</div>
   </div>
+    </div>
+  </details>
   <div class="actions"><a class="lnk" href="{{ "/engagement/" | relURL }}">View full professional engagement <span class="arw" aria-hidden="true">→</span></a></div>
 </section>
 

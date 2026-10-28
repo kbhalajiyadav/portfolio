@@ -65,6 +65,20 @@
 .questions__grid article:last-child{border-right:0}
 .questions__grid strong{display:block;margin-bottom:.55rem;font-family:var(--sans);font-size:.9rem;line-height:1.35}
 .questions__grid p{margin:0;color:var(--ink-soft);font-size:.98rem;line-height:1.55}
+
+/* Secondary homepage evidence uses accessible, JavaScript-independent disclosure.
+   Primary research, figures, citations, and navigation remain visible. */
+.home-disclosure{margin:1.35rem 0 0;border-block:1px solid var(--line-strong);background:transparent}
+.home-disclosure>summary{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:48px;padding:1rem 0;color:var(--teal);font-family:var(--sans);font-size:.94rem;font-weight:650;line-height:1.45;cursor:pointer;list-style:none}
+.home-disclosure>summary::-webkit-details-marker{display:none}
+.home-disclosure>summary::after{content:"+";flex:0 0 auto;color:var(--teal);font-size:1.3rem;font-weight:400;line-height:1}
+.home-disclosure[open]>summary::after{content:"−"}
+.home-disclosure>summary:hover{color:var(--cyan)}
+.home-disclosure>summary:focus-visible{outline:2px solid var(--teal);outline-offset:4px}
+.home-disclosure__body{padding:1.5rem 0 2rem}
+.research-extension__details .trajectory-grid{border-top:0;padding-top:0}
+.research-extension__details .questions{margin-top:2.25rem;padding-top:1.5rem}
+.home-disclosure--engagement{margin-top:1.65rem}
 .outputs-page .page-header{max-width:760px}
 .output-filter{display:flex;align-items:flex-end;flex-wrap:wrap;gap:.25rem 1.2rem;margin:0 0 1.35rem;border-bottom:1px solid var(--line);font-family:var(--sans)}
 .output-filter button{appearance:none;min-width:24px;min-height:40px;margin:0;padding:.58rem 0 .68rem;border:0;border-bottom:2px solid transparent;background:transparent;color:var(--ink-soft);font-family:var(--sans);font-size:.86rem;font-weight:650;cursor:pointer}
@@ -183,9 +197,8 @@ html[data-analytics-consent="unknown"] .privacy-banner+main .page-shell{padding-
   .privacy-banner{align-items:stretch;flex-direction:column;gap:.55rem;width:calc(100% - 2rem);padding:.78rem .9rem}
   .privacy-banner__copy strong{margin-bottom:.1rem}
   .privacy-banner__copy p{font-size:.79rem;line-height:1.42}
-  .privacy-banner__actions{gap:.5rem}
+  .privacy-banner__actions{gap:.5rem;width:100%}
   html[data-analytics-consent="unknown"] .privacy-banner+main .page-shell{padding-top:2.5rem}
-  .privacy-banner__actions{width:100%}
   .privacy-banner__actions .button{flex:1;white-space:normal}
 }
 @media(prefers-reduced-motion:reduce){
