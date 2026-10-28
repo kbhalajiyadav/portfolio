@@ -205,6 +205,9 @@ def main() -> int:
                   const copy=document.querySelector('.hero__copy');
                   const visual=document.querySelector('.hero__visual');
                   const note=document.querySelector('.identity-note');
+                  const doctoralDetails=document.querySelector('.research-extension__details');
+                  const doctoralInitiallyClosed=doctoralDetails?.open===false;
+                  if (doctoralDetails) doctoralDetails.open=true;
                   const appHeading=document.querySelector('.trajectory-grid .application-card h3');
                   const appBody=document.querySelector('.trajectory-grid .application-card h3 + p');
                   const desktopSig=document.querySelector('.research-signature__desktop');
@@ -217,6 +220,7 @@ def main() -> int:
                     columns:hero?getComputedStyle(hero).gridTemplateColumns:null,
                     visualAfterCopy:!!(copyRect&&visualRect&&visualRect.top>=copyRect.bottom+12),
                     identityPosition:note?getComputedStyle(note).position:null,
+                    doctoralInitiallyClosed,
                     headingBodyGap:Math.round((pRect?.top||0)-(hRect?.bottom||0)),
                     desktopSignatureDisplay:desktopSig?getComputedStyle(desktopSig).display:null,
                     mobileSignatureDisplay:mobileSig?getComputedStyle(mobileSig).display:null
@@ -227,6 +231,8 @@ def main() -> int:
                     errors.append("820px hero has not transitioned to an intentional stacked composition")
                 if tablet.get("identityPosition") != "static":
                     errors.append(f"820px hero identity note should be static, got {tablet.get('identityPosition')}")
+                if not tablet.get("doctoralInitiallyClosed"):
+                    errors.append("doctoral applications must remain collapsed until explicitly expanded")
                 if tablet.get("headingBodyGap", 0) < 7:
                     errors.append(f"doctoral application heading/body rhythm is too tight: {tablet.get('headingBodyGap')}px")
                 if tablet.get("desktopSignatureDisplay") != "none" or tablet.get("mobileSignatureDisplay") == "none":
