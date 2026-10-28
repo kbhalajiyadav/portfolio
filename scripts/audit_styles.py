@@ -178,20 +178,24 @@ def main() -> int:
     ):
         if compact(rule) not in polish_compact:
             errors.append(f"final governed visual invariant missing {rule!r}")
-    tablet_match = re.search(r"@media\(max-width:820px\)\s*\{(.*)\}\s*@media\(prefers-reduced-motion", POLISH, re.DOTALL)
-    if not tablet_match:
-        errors.append("missing governed tablet composition block")
+    # Compact hero rules belong to the 980px breakpoint; repeating them at
+    # 820px makes later responsive revisions unnecessarily fragile.
+    compact_match = re.search(r"@media\(max-width:980px\)\s*\{(.*?)\}\s*@media\(max-width:820px", POLISH, re.DOTALL)
+    if not compact_match:
+        errors.append("missing governed compact hero composition block")
     else:
-        tablet = tablet_match.group(1)
+        compact_hero = compact_match.group(1)
         for selector, declaration in (
             (".hero", "grid-template-columns:1fr"),
             (".hero__copy", "width:100%"),
             (".hero h1", "max-width:100%"),
             (".identity-note", "position:static"),
-            (".research-signature__desktop", "display:none"),
         ):
-            if not rule_has(tablet, selector, declaration):
-                errors.append(f"tablet governance invariant missing {selector} {declaration}")
+            if not rule_has(compact_hero, selector, declaration):
+                errors.append(f"compact hero invariant missing {selector} {declaration}")
+    tablet_match = re.search(r"@media\(max-width:820px\)\s*\{(.*?)\}\s*@media\(prefers-reduced-motion", POLISH, re.DOTALL)
+    if not tablet_match or not rule_has(tablet_match.group(1), ".research-signature__desktop", "display:none"):
+        errors.append("820px scientific schematic must switch to its mobile treatment")
 
     motif = re.search(r"--motif-opacity:([0-9.]+)", REF)
     if not motif:
