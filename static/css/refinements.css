@@ -76,6 +76,7 @@
 .home-disclosure>summary:hover{color:var(--cyan)}
 .home-disclosure>summary:focus-visible{outline:2px solid var(--teal);outline-offset:4px}
 .home-disclosure__body{padding:1.5rem 0 2rem}
+.home-disclosure:not([open])>.home-disclosure__body{display:none}
 .research-extension__details .trajectory-grid{border-top:0;padding-top:0}
 .research-extension__details .questions{margin-top:2.25rem;padding-top:1.5rem}
 .home-disclosure--engagement{margin-top:1.65rem}

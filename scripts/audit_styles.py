@@ -107,6 +107,7 @@ def main() -> int:
         (".home-disclosure>summary", "min-height:48px"),
         (".home-disclosure>summary", "list-style:none"),
         (".home-disclosure>summary:focus-visible", "outline:2px solid var(--teal)"),
+        (".home-disclosure:not([open])>.home-disclosure__body", "display:none"),
         (".research-extension__details .trajectory-grid", "border-top:0"),
     ):
         if not rule_has(REF, selector, declaration):
