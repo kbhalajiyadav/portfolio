@@ -220,7 +220,7 @@ def main() -> int:
         if compact(rule) not in ref_compact:
             errors.append(f"system invariant missing {rule!r}")
     for rule in (
-        ".research-package{display:block;border:0;border-top:1px solid var(--line-strong);",
+        ".research-package{display:block;border:0;background:transparent;",
         ".secondary-output{border:0;border-top:1px solid var(--line);background:transparent;",
         ".hero+.privacy-banner{margin-top:0;",
     ):
