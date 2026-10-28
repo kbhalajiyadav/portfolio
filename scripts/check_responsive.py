@@ -175,14 +175,30 @@ LAYOUT_EXPRESSION = r"""
     ? contactHeading.getBoundingClientRect().top - contactHeader.getBoundingClientRect().bottom
     : null;
   const outputPackage = document.querySelector('.research-package');
+  const outputFigure = outputPackage?.querySelector('.research-figure--featured');
+  const outputMedia = outputFigure?.querySelector('.research-figure__media');
+  const outputCaption = outputFigure?.querySelector('figcaption');
   const outputRecords = [...document.querySelectorAll('.package-artifacts > article')];
-  const outputLayout = outputPackage && outputRecords.length === 2
-    ? {
-        outerBorder: getComputedStyle(outputPackage).borderTopWidth,
-        recordDisplay: getComputedStyle(outputRecords[0].parentElement).display,
-        recordGap: Math.round(outputRecords[1].getBoundingClientRect().top - outputRecords[0].getBoundingClientRect().bottom),
-        recordHeights: outputRecords.map((record) => Math.round(record.getBoundingClientRect().height))
-      }
+  const outputLayout = outputPackage && outputFigure && outputMedia && outputCaption && outputRecords.length === 2
+    ? (() => {
+        const figureMedia = outputMedia.getBoundingClientRect();
+        const figureCaption = outputCaption.getBoundingClientRect();
+        const first = outputRecords[0].getBoundingClientRect();
+        const second = outputRecords[1].getBoundingClientRect();
+        return {
+          outerBorder: getComputedStyle(outputPackage).borderTopWidth,
+          packageDisplay: getComputedStyle(outputPackage).display,
+          figureDisplay: getComputedStyle(outputFigure).display,
+          figureColumns: getComputedStyle(outputFigure).gridTemplateColumns.split(/\s+/).filter(Boolean).length,
+          figureRowOffset: Math.abs(figureMedia.top - figureCaption.top),
+          figureWidths: [figureMedia.width, figureCaption.width],
+          recordDisplay: getComputedStyle(outputRecords[0].parentElement).display,
+          recordColumns: getComputedStyle(outputRecords[0].parentElement).gridTemplateColumns.split(/\s+/).filter(Boolean).length,
+          recordTopOffset: Math.abs(first.top - second.top),
+          recordVerticalGap: Math.round(second.top - first.bottom),
+          recordHeights: [first.height, second.height]
+        };
+      })()
     : null;
   const schematic = document.querySelector('.method-schematic');
   const schematicBorders = schematic
@@ -325,16 +341,30 @@ def main() -> int:
                         if page_name == "home":
                             output = layout["outputLayout"]
                             if output is None:
-                                record_errors.append("featured research outputs are missing paired supporting records")
+                                record_errors.append("featured research package is missing its attributed figure or related records")
                             else:
-                                if output["outerBorder"] != "0px":
-                                    record_errors.append("featured output retains an unnecessary enclosing panel border")
-                                if output["recordDisplay"] != "flex":
-                                    record_errors.append("research supporting records are no longer content-sized")
-                                if not 12 <= output["recordGap"] <= 56:
-                                    record_errors.append(f"supporting thesis/software records have unnatural vertical separation: {output['recordGap']}px")
-                                if width >= 1181 and max(output["recordHeights"]) > 310:
-                                    record_errors.append(f"supporting research output is stretched into an empty panel: {output['recordHeights']}")
+                                if output["outerBorder"] != "0px" or output["packageDisplay"] != "block":
+                                    record_errors.append("featured research should be an unboxed full-width editorial feature")
+                                if output["figureDisplay"] != "grid":
+                                    record_errors.append("featured figure and interpretation lost their grid layout")
+                                expected_figure_columns = 2 if width > 820 else 1
+                                if output["figureColumns"] != expected_figure_columns:
+                                    record_errors.append(f"feature should use {expected_figure_columns} plot/caption column(s), not {output['figureColumns']}")
+                                if expected_figure_columns == 2 and output["figureRowOffset"] > 2:
+                                    record_errors.append("plot and interpretation are not aligned in the same row")
+                                if min(output["figureWidths"]) < 160:
+                                    record_errors.append(f"featured plot/caption column is too narrow: {output['figureWidths']}")
+                                if output["recordDisplay"] != "grid":
+                                    record_errors.append("thesis and software should share a related-outputs grid")
+                                expected_record_columns = 1 if width <= 680 else 2
+                                if output["recordColumns"] != expected_record_columns:
+                                    record_errors.append(f"related outputs should use {expected_record_columns} column(s), not {output['recordColumns']}")
+                                if expected_record_columns == 2 and output["recordTopOffset"] > 2:
+                                    record_errors.append("thesis and software entries are not aligned on the same row")
+                                if expected_record_columns == 1 and not 12 <= output["recordVerticalGap"] <= 70:
+                                    record_errors.append(f"stacked related outputs have an unnatural gap: {output['recordVerticalGap']}px")
+                                if max(output["recordHeights"]) > 340:
+                                    record_errors.append(f"related output is stretched into an oversized card: {output['recordHeights']}")
                         if page_name == "contact":
                             contact_gap = layout["contactIntroGap"]
                             if contact_gap is None or not 16 <= contact_gap <= 90:
