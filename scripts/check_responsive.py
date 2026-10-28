@@ -174,6 +174,16 @@ LAYOUT_EXPRESSION = r"""
   const contactIntroGap = contactHeader && contactHeading
     ? contactHeading.getBoundingClientRect().top - contactHeader.getBoundingClientRect().bottom
     : null;
+  const outputPackage = document.querySelector('.research-package');
+  const outputRecords = [...document.querySelectorAll('.package-artifacts > article')];
+  const outputLayout = outputPackage && outputRecords.length === 2
+    ? {
+        outerBorder: getComputedStyle(outputPackage).borderTopWidth,
+        recordDisplay: getComputedStyle(outputRecords[0].parentElement).display,
+        recordGap: Math.round(outputRecords[1].getBoundingClientRect().top - outputRecords[0].getBoundingClientRect().bottom),
+        recordHeights: outputRecords.map((record) => Math.round(record.getBoundingClientRect().height))
+      }
+    : null;
   const schematic = document.querySelector('.method-schematic');
   const schematicBorders = schematic
     ? [getComputedStyle(schematic).borderTopWidth, getComputedStyle(schematic).borderBottomWidth]
@@ -193,6 +203,7 @@ LAYOUT_EXPRESSION = r"""
     researchFigures,
     seriesPairs,
     contactIntroGap,
+    outputLayout,
     schematicBorders,
     h1Count: document.querySelectorAll('h1').length,
     mainCount: document.querySelectorAll('main').length
@@ -311,6 +322,19 @@ def main() -> int:
                                     record_errors.append(f"two presentation groups should use {expected_columns} column(s), not {pair['columnCount']}")
                                 if width >= 981 and pair["cardTopDifference"] > 2:
                                     record_errors.append("paired presentation groups do not share a desktop row")
+                        if page_name == "home":
+                            output = layout["outputLayout"]
+                            if output is None:
+                                record_errors.append("featured research outputs are missing paired supporting records")
+                            else:
+                                if output["outerBorder"] != "0px":
+                                    record_errors.append("featured output retains an unnecessary enclosing panel border")
+                                if output["recordDisplay"] != "flex":
+                                    record_errors.append("research supporting records are no longer content-sized")
+                                if not 12 <= output["recordGap"] <= 56:
+                                    record_errors.append(f"supporting thesis/software records have unnatural vertical separation: {output['recordGap']}px")
+                                if width >= 1181 and max(output["recordHeights"]) > 310:
+                                    record_errors.append(f"supporting research output is stretched into an empty panel: {output['recordHeights']}")
                         if page_name == "contact":
                             contact_gap = layout["contactIntroGap"]
                             if contact_gap is None or not 16 <= contact_gap <= 90:
