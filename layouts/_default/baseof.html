@@ -26,7 +26,7 @@
 <body class="page-{{ .Kind }} section-{{ .Section }}">
   <a class="skip-link" href="#main-content">Skip to content</a>
   {{ partial "site_header.html" . }}
-  {{ partial "privacy_controls.html" . }}
+  {{ if not .IsHome }}{{ partial "privacy_controls.html" . }}{{ end }}
   <main id="main-content">{{ block "main" . }}{{ end }}</main>
   {{ partial "site_footer.html" . }}
   {{ $siteRuntime := resources.Get "js/site.js" }}
