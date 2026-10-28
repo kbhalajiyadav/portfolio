@@ -75,7 +75,7 @@
       {{ with $article.Params.figures }}
         {{ $f := index . 0 }}
         {{ if not (fileExists (printf "static/%s" $f.src)) }}{{ errorf "Missing homepage research figure: %s" $f.src }}{{ end }}
-        {{ partial "research_figure.html" (dict "figure" $f "featured" true "source" $primary.doi "data" $article.Params.url_dataset "code" $primary.code) }}
+        {{ partial "research_figure.html" (dict "figure" $f "featured" true "data" $article.Params.url_dataset "code" $primary.code) }}
       {{ else }}{{ errorf "Primary publication has no research figures: %s" $primary.detail }}{{ end }}
     </div>
     <div class="package-artifacts">

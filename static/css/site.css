@@ -109,7 +109,7 @@ main{overflow:clip}
 .package-lead{padding:clamp(2rem,4vw,3.4rem);border-right:1px solid var(--line)}
 .package-lead h3{margin-top:.75rem;font-size:clamp(1.55rem,2.5vw,2.25rem)}
 .package-lead>p{color:var(--ink-soft)}.venue{font-style:italic;color:var(--ink-soft)}
-.package-artifacts{display:grid;grid-template-rows:1fr 1fr}
+.package-artifacts{display:grid;grid-template-rows:auto}
 .package-artifacts article{padding:2rem;border-bottom:1px solid var(--line)}.package-artifacts article:last-child{border-bottom:0}.package-artifacts span{color:var(--rust);font-family:var(--sans);font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase}.package-artifacts h4{margin-top:.55rem;font-size:1.18rem}.package-artifacts p{margin-top:.65rem;color:var(--ink-soft);font-size:.94rem}
 .secondary-output{display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:end;margin-top:1rem;padding:2rem;border:1px solid var(--line);background:var(--surface-soft)}
 .secondary-output h3{margin:.55rem 0 .7rem;font-size:1.35rem}.secondary-output p{margin:.2rem 0;color:var(--ink-soft);font-size:.92rem}

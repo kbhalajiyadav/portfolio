@@ -178,13 +178,26 @@ LAYOUT_EXPRESSION = r"""
   const outputFigure = outputPackage?.querySelector('.research-figure--featured');
   const outputMedia = outputFigure?.querySelector('.research-figure__media');
   const outputCaption = outputFigure?.querySelector('figcaption');
+  const outputGrid = outputPackage?.querySelector('.package-artifacts');
+  const journalLink = outputPackage?.querySelector('.package-lead > .actions a[target="_blank"]');
+  const captionLinkLabels = outputCaption
+    ? [...outputCaption.querySelectorAll('.actions a')].map(link => link.textContent.trim())
+    : [];
+  const patentRecord = document.querySelector('#outputs > .secondary-output');
+  const browseOutputs = document.querySelector('#outputs > .actions');
   const outputRecords = [...document.querySelectorAll('.package-artifacts > article')];
-  const outputLayout = outputPackage && outputFigure && outputMedia && outputCaption && outputRecords.length === 2
+  const outputLayout = outputPackage && outputFigure && outputMedia && outputCaption
+    && outputGrid && patentRecord && browseOutputs && outputRecords.length === 2
     ? (() => {
         const figureMedia = outputMedia.getBoundingClientRect();
         const figureCaption = outputCaption.getBoundingClientRect();
+        const figureBox = outputFigure.getBoundingClientRect();
+        const gridBox = outputGrid.getBoundingClientRect();
+        const patentBox = patentRecord.getBoundingClientRect();
+        const browseBox = browseOutputs.getBoundingClientRect();
         const first = outputRecords[0].getBoundingClientRect();
         const second = outputRecords[1].getBoundingClientRect();
+        const contentBottom = Math.max(first.bottom, second.bottom);
         return {
           outerBorder: getComputedStyle(outputPackage).borderTopWidth,
           packageDisplay: getComputedStyle(outputPackage).display,
@@ -192,11 +205,23 @@ LAYOUT_EXPRESSION = r"""
           figureColumns: getComputedStyle(outputFigure).gridTemplateColumns.split(/\s+/).filter(Boolean).length,
           figureRowOffset: Math.abs(figureMedia.top - figureCaption.top),
           figureWidths: [figureMedia.width, figureCaption.width],
-          recordDisplay: getComputedStyle(outputRecords[0].parentElement).display,
-          recordColumns: getComputedStyle(outputRecords[0].parentElement).gridTemplateColumns.split(/\s+/).filter(Boolean).length,
+          recordDisplay: getComputedStyle(outputGrid).display,
+          recordColumns: getComputedStyle(outputGrid).gridTemplateColumns.split(/\s+/).filter(Boolean).length,
+          recordRows: getComputedStyle(outputGrid).gridTemplateRows.split(/\s+/).filter(Boolean).length,
           recordTopOffset: Math.abs(first.top - second.top),
           recordVerticalGap: Math.round(second.top - first.bottom),
-          recordHeights: [first.height, second.height]
+          recordHeights: [first.height, second.height],
+          unusedGridHeight: Math.max(0, gridBox.bottom - contentBottom),
+          contentToPatentGap: Math.round(patentBox.top - contentBottom),
+          gridToPatentGap: Math.round(patentBox.top - gridBox.bottom),
+          figureToRecordsGap: Math.round(gridBox.top - figureBox.bottom),
+          patentToBrowseGap: Math.round(browseBox.top - patentBox.bottom),
+          journalArticleLinks: journalLink
+            ? [...outputPackage.querySelectorAll('a[href]')].filter(link => link.href === journalLink.href).length
+            : 0,
+          captionDatasetLink: captionLinkLabels.some(label => label.includes('Dataset')),
+          captionCodeLink: captionLinkLabels.some(label => label.includes('Source code')),
+          captionLicenseLink: Boolean(outputCaption.querySelector('a[rel~="license"]'))
         };
       })()
     : null;
@@ -365,6 +390,48 @@ def main() -> int:
                                     record_errors.append(f"stacked related outputs have an unnatural gap: {output['recordVerticalGap']}px")
                                 if max(output["recordHeights"]) > 340:
                                     record_errors.append(f"related output is stretched into an oversized card: {output['recordHeights']}")
+                                # A two-column grid with two records must not retain a second
+                                # empty row. Previous checks saw aligned cards but missed >200px
+                                # of blank grid track between the software and patent entries.
+                                expected_record_rows = 2 if width <= 680 else 1
+                                if output["recordRows"] != expected_record_rows:
+                                    record_errors.append(
+                                        f"related-output grid has {output['recordRows']} row(s); expected {expected_record_rows} "
+                                        "(unused tracks create unexplained whitespace)"
+                                    )
+                                if output["unusedGridHeight"] > 24:
+                                    record_errors.append(
+                                        f"related-output grid reserves {output['unusedGridHeight']:.1f}px below its actual content"
+                                    )
+                                if not 24 <= output["contentToPatentGap"] <= 72:
+                                    record_errors.append(
+                                        f"unexpected blank gap between thesis/software content and patent record: "
+                                        f"{output['contentToPatentGap']}px"
+                                    )
+                                if not 24 <= output["gridToPatentGap"] <= 72:
+                                    record_errors.append(
+                                        f"grid-to-patent section spacing is outside editorial rhythm: "
+                                        f"{output['gridToPatentGap']}px"
+                                    )
+                                if not 20 <= output["figureToRecordsGap"] <= 150:
+                                    record_errors.append(
+                                        f"figure-to-related-outputs gap is inconsistent: "
+                                        f"{output['figureToRecordsGap']}px"
+                                    )
+                                if not 8 <= output["patentToBrowseGap"] <= 96:
+                                    record_errors.append(
+                                        f"patent-to-output-index link gap is inconsistent: "
+                                        f"{output['patentToBrowseGap']}px"
+                                    )
+                                if output["journalArticleLinks"] != 1:
+                                    record_errors.append(
+                                        f"featured publication must have one journal DOI action, not "
+                                        f"{output['journalArticleLinks']} duplicates"
+                                    )
+                                if not (output["captionDatasetLink"] and output["captionCodeLink"] and output["captionLicenseLink"]):
+                                    record_errors.append(
+                                        "featured figure must retain dataset, source code, and license links"
+                                    )
                         if page_name == "contact":
                             contact_gap = layout["contactIntroGap"]
                             if contact_gap is None or not 16 <= contact_gap <= 90:
