@@ -282,6 +282,29 @@ for token in (
     if token not in publication_template:
         errors.append(f'layouts/publication/single.html: dataset/software link label missing {token!r}')
 
+# Editorial QA: verify contributor attribution, destination consistency, and figure order.
+if re.search(r'\[Joung Research Group\]\([^)]+\)[^\n]*\bDaeha Joung\b', article_metadata):
+    errors.append('conductive-trace collaboration must not redundantly repeat a group namesake already in the author byline')
+if 'Figure 5 is presented as a collaborative result' not in article_metadata:
+    errors.append('conductive-trace description must retain collaborative, nonexclusive authorship wording')
+
+lab_affiliation = texts[ROOT / 'data/current_affiliation.yaml']
+if 'lab_url: https://vcusoftmaterialslab.weebly.com/' not in lab_affiliation:
+    errors.append('About research-group link must resolve to the official lab homepage, not an outdated people roster')
+
+for publication_file in (ROOT / 'content/publication').glob('*/index.md'):
+    source = texts[publication_file]
+    figure_section = re.search(r'(?ms)^figures:\s*\n(.*?)(?=^---\s*$)', source)
+    if figure_section:
+        figure_numbers = [int(n) for n in re.findall(r'(?m)^\s+- src:\s+\S*fig(\d+)', figure_section.group(1))]
+        if len(figure_numbers) >= 2 and figure_numbers != sorted(figure_numbers):
+            errors.append(f'{publication_file.relative_to(ROOT)}: published figures must appear in numerical order: {figure_numbers}')
+
+for markdown_file, source in texts.items():
+    if markdown_file.is_relative_to(ROOT / 'content') and markdown_file.suffix == '.md':
+        if re.search(r'\]\([^)]+\)[ \t]+[,.;:]', source):
+            errors.append(f'{markdown_file.relative_to(ROOT)}: extra space between inline Markdown link and punctuation')
+
 workflow_text = (ROOT / '.github/workflows/hugo.yaml').read_text(encoding='utf-8')
 if 'node --check assets/js/site.js' not in workflow_text:
     errors.append('.github/workflows/hugo.yaml: JavaScript syntax check must target the bundled asset')
