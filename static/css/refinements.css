@@ -207,11 +207,13 @@ html[data-analytics-consent="unknown"] .privacy-banner+main .page-shell{padding-
   grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);
   gap:clamp(1.75rem,4vw,3.75rem);
   align-items:start;
-  margin-top:clamp(1.7rem,3vw,2.5rem);
+  margin-top:1.6rem;
+  padding-top:0;
+  border-top:0;
 }
-.package-lead>.research-figure--featured .research-figure__media{width:100%}
+.package-lead>.research-figure--featured .research-figure__media{width:100%;margin-bottom:1rem}
 .package-lead>.research-figure--featured .research-figure__media img{
-  width:100%;
+  width:auto;
   max-width:100%;
   height:auto;
 }
@@ -223,7 +225,7 @@ html[data-analytics-consent="unknown"] .privacy-banner+main .page-shell{padding-
 .package-lead>.research-figure--featured figcaption p{
   margin-top:.7rem;
   font-size:1.04rem;
-  line-height:1.6;
+  line-height:1.55;
 }
 .package-artifacts{
   display:grid;
@@ -261,10 +263,6 @@ html[data-analytics-consent="unknown"] .privacy-banner+main .page-shell{padding-
 
 /* Research figure: published or schematic evidence with its credit beside it. */
 .research-figure{margin:0}
-.package-lead>.research-figure--featured{margin-top:1.6rem;padding-top:0;border-top:0}
-.package-lead>.research-figure--featured .research-figure__media{margin-bottom:1rem}
-.package-lead>.research-figure--featured .research-figure__media img{width:auto;max-width:100%;height:auto}
-.package-lead>.research-figure--featured figcaption p{line-height:1.55}
 .package-lead>.research-figure--featured .actions{display:flex;flex-wrap:wrap;gap:.7rem 1rem}
 .research-figure__media{display:block;width:fit-content;max-width:100%;border:0;background:transparent;text-decoration:none}
 .research-figure__media img{display:block;max-width:100%;height:auto;margin:0;border:0;box-shadow:none}
@@ -273,10 +271,10 @@ html[data-analytics-consent="unknown"] .privacy-banner+main .page-shell{padding-
 .research-figure__media:focus-visible{outline:2px solid var(--teal);outline-offset:4px}
 .research-figure figcaption{margin-top:0}
 .research-figure__evidence{color:var(--teal);font-family:var(--sans);font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
-.research-figure figcaption p{margin-top:.45rem;color:var(--ink);font-size:1rem}
-.research-figure figcaption small{display:block;margin-top:.55rem;color:var(--ink-soft);font-size:.8rem;line-height:1.5}
+.research-figure figcaption p{margin-top:.45rem;color:var(--ink);font-size:1rem;text-wrap:pretty}
+.research-figure figcaption small{display:block;max-width:70ch;margin-top:.55rem;color:var(--ink-soft);font-size:.8rem;line-height:1.5;overflow-wrap:break-word}
 .research-figure figcaption .actions{margin-top:.8rem}
-@media(max-width:680px){.package-lead>.research-figure--featured{margin-top:1.3rem;padding-top:0}}
+@media(max-width:680px){.package-lead>.research-figure--featured{margin-top:1.3rem}}
 
 /* Method schematic: explanatory step sequence for project pages, in the research-signature style. */
 .method-schematic{margin:1.75rem 0 2rem;padding:0;border:0}
