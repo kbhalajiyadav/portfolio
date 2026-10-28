@@ -179,6 +179,10 @@ LAYOUT_EXPRESSION = r"""
   const outputMedia = outputFigure?.querySelector('.research-figure__media');
   const outputCaption = outputFigure?.querySelector('figcaption');
   const outputGrid = outputPackage?.querySelector('.package-artifacts');
+  const journalLink = outputPackage?.querySelector('.package-lead > .actions a[target="_blank"]');
+  const captionLinkLabels = outputCaption
+    ? [...outputCaption.querySelectorAll('.actions a')].map(link => link.textContent.trim())
+    : [];
   const patentRecord = document.querySelector('#outputs > .secondary-output');
   const browseOutputs = document.querySelector('#outputs > .actions');
   const outputRecords = [...document.querySelectorAll('.package-artifacts > article')];
@@ -211,7 +215,13 @@ LAYOUT_EXPRESSION = r"""
           contentToPatentGap: Math.round(patentBox.top - contentBottom),
           gridToPatentGap: Math.round(patentBox.top - gridBox.bottom),
           figureToRecordsGap: Math.round(gridBox.top - figureBox.bottom),
-          patentToBrowseGap: Math.round(browseBox.top - patentBox.bottom)
+          patentToBrowseGap: Math.round(browseBox.top - patentBox.bottom),
+          journalArticleLinks: journalLink
+            ? [...outputPackage.querySelectorAll('a[href]')].filter(link => link.href === journalLink.href).length
+            : 0,
+          captionDatasetLink: captionLinkLabels.some(label => label.includes('Dataset')),
+          captionCodeLink: captionLinkLabels.some(label => label.includes('Source code')),
+          captionLicenseLink: Boolean(outputCaption.querySelector('a[rel~="license"]'))
         };
       })()
     : null;
@@ -412,6 +422,15 @@ def main() -> int:
                                     record_errors.append(
                                         f"patent-to-output-index link gap is inconsistent: "
                                         f"{output['patentToBrowseGap']}px"
+                                    )
+                                if output["journalArticleLinks"] != 1:
+                                    record_errors.append(
+                                        f"featured publication must have one journal DOI action, not "
+                                        f"{output['journalArticleLinks']} duplicates"
+                                    )
+                                if not (output["captionDatasetLink"] and output["captionCodeLink"] and output["captionLicenseLink"]):
+                                    record_errors.append(
+                                        "featured figure must retain dataset, source code, and license links"
                                     )
                         if page_name == "contact":
                             contact_gap = layout["contactIntroGap"]
