@@ -101,6 +101,27 @@ def main() -> int:
     if re.search(r"\.research-figure\{margin:0\}\s*\.package-lead>\.research-figure--featured\s*\{", REF):
         errors.append("featured figure spacing must not be re-overridden after its canonical layout rule")
 
+    # Native homepage disclosures must stay legible, keyboard-focusable, and unboxed.
+    for selector, declaration in (
+        (".home-disclosure", "border-block:1px solid var(--line-strong)"),
+        (".home-disclosure>summary", "min-height:48px"),
+        (".home-disclosure>summary", "list-style:none"),
+        (".home-disclosure>summary:focus-visible", "outline:2px solid var(--teal)"),
+        (".home-disclosure:not([open])>.home-disclosure__body", "display:none"),
+        (".research-extension__details .trajectory-grid", "border-top:0"),
+    ):
+        if not rule_has(REF, selector, declaration):
+            errors.append(f"missing disclosure visual invariant {selector}: {declaration}")
+    mobile_privacy = re.search(r"@media\(max-width:680px\)\s*\{(.*?)\}\s*@media\(prefers-reduced-motion", REF, re.DOTALL)
+    if not mobile_privacy or mobile_privacy.group(1).count(".privacy-banner__actions{") != 1:
+        errors.append("mobile privacy action styling must have only one declaration block")
+    compact_schematic = re.search(r"@media\(max-width:820px\)\s*\{(.*?)\}\s*@media\(prefers-reduced-motion", POLISH, re.DOTALL)
+    if not compact_schematic or any(
+        f".{selector}{{" in compact_schematic.group(1)
+        for selector in ("hero", "hero__copy", "hero__visual", "identity-note")
+    ):
+        errors.append("820px schematic CSS must not repeat the 980px compact hero")
+
     # Content-flow guardrails: real copy controls height; fixed text slots are forbidden.
     if not rule_has(REF, ".pillar", "min-height:0"):
         errors.append("research-program cards must remain intrinsically height-safe")
@@ -158,20 +179,24 @@ def main() -> int:
     ):
         if compact(rule) not in polish_compact:
             errors.append(f"final governed visual invariant missing {rule!r}")
-    tablet_match = re.search(r"@media\(max-width:820px\)\s*\{(.*)\}\s*@media\(prefers-reduced-motion", POLISH, re.DOTALL)
-    if not tablet_match:
-        errors.append("missing governed tablet composition block")
+    # Compact hero rules belong to the 980px breakpoint; repeating them at
+    # 820px makes later responsive revisions unnecessarily fragile.
+    compact_match = re.search(r"@media\(max-width:980px\)\s*\{(.*?)\}\s*@media\(max-width:820px", POLISH, re.DOTALL)
+    if not compact_match:
+        errors.append("missing governed compact hero composition block")
     else:
-        tablet = tablet_match.group(1)
+        compact_hero = compact_match.group(1)
         for selector, declaration in (
             (".hero", "grid-template-columns:1fr"),
             (".hero__copy", "width:100%"),
             (".hero h1", "max-width:100%"),
             (".identity-note", "position:static"),
-            (".research-signature__desktop", "display:none"),
         ):
-            if not rule_has(tablet, selector, declaration):
-                errors.append(f"tablet governance invariant missing {selector} {declaration}")
+            if not rule_has(compact_hero, selector, declaration):
+                errors.append(f"compact hero invariant missing {selector} {declaration}")
+    tablet_match = re.search(r"@media\(max-width:820px\)\s*\{(.*?)\}\s*@media\(prefers-reduced-motion", POLISH, re.DOTALL)
+    if not tablet_match or not rule_has(tablet_match.group(1), ".research-signature__desktop", "display:none"):
+        errors.append("820px scientific schematic must switch to its mobile treatment")
 
     motif = re.search(r"--motif-opacity:([0-9.]+)", REF)
     if not motif:

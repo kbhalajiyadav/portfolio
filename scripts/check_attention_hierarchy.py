@@ -111,6 +111,12 @@ PAGE_METRICS = r"""
     researchPackageCount:selectedOutputs ? selectedOutputs.querySelectorAll('.research-package').length : 0,
     secondaryOutputCount:selectedOutputs ? selectedOutputs.querySelectorAll('.secondary-output').length : 0,
     selectedOutputsText:selectedOutputs ? (selectedOutputs.textContent || '').replace(/\s+/g,' ').trim() : '',
+    disclosures:[...document.querySelectorAll('main details.home-disclosure')].map(item=>({
+      open:item.open,
+      summaryHeight:item.querySelector(':scope > summary')?.getBoundingClientRect().height || 0,
+      evidenceCount:item.querySelectorAll('.trajectory-grid article, .questions article, .compact-record').length,
+      bodyVisible:!!item.querySelector('.home-disclosure__body')?.getClientRects().length,
+    })),
   };
 })()
 """
@@ -328,6 +334,28 @@ def main() -> int:
                         errors.append(f"{prefix}: citable-software proof count must remain 1")
                     if metrics.get("researchPackageCount") != 1 or metrics.get("secondaryOutputCount") != 1:
                         errors.append(f"{prefix}: homepage outputs must stay curated to one flagship research group plus one IP record")
+                    disclosures = metrics.get("disclosures", [])
+                    if len(disclosures) != 2:
+                        errors.append(f"{prefix}: two accessible secondary evidence disclosures required, got {len(disclosures)}")
+                    for index, disclosure in enumerate(disclosures, start=1):
+                        if disclosure["open"] or disclosure["bodyVisible"]:
+                            errors.append(f"{prefix}: secondary evidence {index} must be closed by default")
+                        if disclosure["summaryHeight"] < 44:
+                            errors.append(f"{prefix}: secondary evidence {index} has a small or missing summary")
+                        if disclosure["evidenceCount"] < (5 if index == 1 else 4):
+                            errors.append(f"{prefix}: secondary evidence {index} was deleted rather than disclosed")
+                    expanded = cdp.evaluate("""(() => {
+                      const items = [...document.querySelectorAll('main details.home-disclosure')];
+                      items.forEach(item => item.open = true);
+                      return {
+                        visible:items.length === 2 && items.every(item => !!item.querySelector('.home-disclosure__body')?.getClientRects().length),
+                        overflow:document.documentElement.scrollWidth > innerWidth + 2,
+                        researchCount:items[0]?.querySelectorAll('.trajectory-grid article, .questions article').length || 0,
+                        engagementCount:items[1]?.querySelectorAll('.compact-record').length || 0,
+                      };
+                    })()""")
+                    if not expanded["visible"] or expanded["overflow"] or expanded["researchCount"] < 5 or expanded["engagementCount"] < 4:
+                        errors.append(f"{prefix}: expanded secondary evidence must remain fully readable: {expanded}")
                     if "Mechanical Properties of Dual-Layer Electrospun Fiber Mats" in metrics.get("selectedOutputsText", ""):
                         errors.append(f"{prefix}: complete coauthor publication record belongs on Outputs, not homepage selected evidence")
             finally:
