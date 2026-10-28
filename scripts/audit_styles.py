@@ -219,6 +219,15 @@ def main() -> int:
     ):
         if compact(rule) not in ref_compact:
             errors.append(f"system invariant missing {rule!r}")
+    for rule in (
+        ".research-package{display:block;border:0;background:transparent;",
+        ".secondary-output{border:0;border-top:1px solid var(--line);background:transparent;",
+        ".hero+.privacy-banner{margin-top:0;",
+    ):
+        if compact(rule) not in ref_compact:
+            errors.append(f"research hierarchy or below-introduction privacy styling missing {rule}")
+    if ".privacy-banner+main .hero" in REF:
+        errors.append("privacy notice must not displace the homepage hero")
     if ".privacy-banner{position:fixed" in ref_compact:
         errors.append("privacy controls must remain in document flow")
     if "text-align:justify" in all_compact:

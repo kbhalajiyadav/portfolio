@@ -133,7 +133,13 @@ def validate(record: dict, page_name: str, page_level: str) -> list[str]:
         errors.append(f"privacy notice must remain in document flow; position={record.get('bannerPosition')!r}")
     if header and banner["top"] < header["bottom"] - 2:
         errors.append("privacy notice overlaps the site header")
-    if main and banner["bottom"] > main["top"] + 2:
+    if page_level == "home":
+        hero = record.get("hero")
+        if not hero or banner["top"] < hero["bottom"] - 2:
+            errors.append("homepage privacy choices must follow the research introduction")
+        if main and banner["top"] < main["top"] - 2:
+            errors.append("homepage privacy choices must remain inside main document flow")
+    elif main and banner["bottom"] > main["top"] + 2:
         errors.append(
             f"privacy notice overlaps main content: banner bottom={banner['bottom']:.1f}, main top={main['top']:.1f}"
         )

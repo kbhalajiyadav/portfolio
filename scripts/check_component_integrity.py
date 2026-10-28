@@ -30,6 +30,7 @@ PAGES = [
     ("/", "home"),
     ("/about/", "about"),
     ("/research/", "research"),
+    ("/research-statement/", "research-statement"),
     ("/outputs/", "outputs"),
     ("/experience/", "experience"),
     ("/engagement/", "engagement"),

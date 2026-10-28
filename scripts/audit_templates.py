@@ -51,6 +51,41 @@ def main() -> int:
     if '"https://infosec.exchange/@bhalaji"' not in seo_head:
         errors.append("Person structured data must retain Mastodon in sameAs")
 
+    # Scholarly metadata must be scoped to the three canonical output records.
+    landing = (LAYOUTS / "landing/list.html").read_text(encoding="utf-8")
+    if '{{ if not .IsHome }}{{ partial "privacy_controls.html" . }}{{ end }}' not in base:
+        errors.append("homepage privacy notice must no longer precede the introduction")
+    if not (landing.find('class="hero"') < landing.find('partial "privacy_controls.html"') < landing.find('partial "home_proof.html"')):
+        errors.append("homepage consent choices must follow the introduction before research evidence")
+
+    statement_path = ROOT / "content/research-statement/index.md"
+    research_page = (ROOT / "content/research/index.md").read_text(encoding="utf-8")
+    if not statement_path.exists():
+        errors.append("standalone research statement missing")
+    else:
+        statement = statement_path.read_text(encoding="utf-8")
+        for heading in ("## Research motivation", "## Foundation in experimental measurement", "## Doctoral research direction", "## Questions and boundaries"):
+            if heading not in statement:
+                errors.append(f"research statement missing grounded section {heading}")
+    if "(/research-statement/)" not in research_page:
+        errors.append("Research page must link to its research statement")
+
+    scholar_records = {
+        "adhesives-wearable": ('scholar_journal: "Polymers"', 'scholar_volume: "18"', 'scholar_issue: "12"'),
+        "electrospun-fiber-mats": ("scholar_journal: 'Polymers'", "scholar_volume: '17'", "scholar_issue: '13'"),
+        "masters-thesis": ('scholar_dissertation_institution: "Virginia Commonwealth University"', 'scholar_doi: "10.25772/f6wc-rh09"'),
+    }
+    for slug, markers in scholar_records.items():
+        record = (ROOT / "content/publication" / slug / "index.md").read_text(encoding="utf-8")
+        for marker in markers:
+            if marker not in record:
+                errors.append(f"authoritative Scholar metadata missing in {slug}: {marker}")
+    for meta in ("citation_title", "citation_author", "citation_publication_date", "citation_journal_title", "citation_volume", "citation_issue", "citation_dissertation_institution", "citation_doi"):
+        if f'name="{meta}"' not in seo_head:
+            errors.append(f"publication head missing Scholar citation tag {meta}")
+    if 'name="citation_pdf_url"' in seo_head:
+        errors.append("do not advertise an unverified publication PDF as a hosted full-text asset")
+
     header = (LAYOUTS / "partials/site_header.html").read_text(encoding="utf-8")
     for marker in ('class="brand__monogram"', 'viewBox="0 0 40 40"', 'fill="currentColor"'):
         if marker not in header:

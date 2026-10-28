@@ -15,6 +15,8 @@ tags:
 url: /research/
 ---
 
+For a focused account of my research background, doctoral questions, and experimental approach, see the [research statement](/research-statement/).
+
 ## Research focus
 
 My research asks two linked questions: what changes inside a responsive

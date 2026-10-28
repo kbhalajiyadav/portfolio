@@ -7,6 +7,8 @@ weight: 2
 publication_types: ["7"]
 publication: "M.S. thesis, Virginia Commonwealth University"
 publication_short: "VCU M.S. thesis"
+scholar_dissertation_institution: "Virginia Commonwealth University"
+scholar_doi: "10.25772/f6wc-rh09"
 summary: "A stability-informed, multi-criteria T-peel framework for evaluating adhesive and layered interfaces on soft, stretchable textile substrates."
 abstract: >-
   This thesis develops a stability-informed, multi-criteria T-peel framework
