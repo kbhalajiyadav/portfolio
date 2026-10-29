@@ -4,7 +4,7 @@ kicker: "Research direction"
 summary: "A research statement connecting earlier work in soft-material measurement to current doctoral questions about processing and responsive structure."
 description: "Research statement on stimulus histories, structure, rheology, neutron scattering, and quantitative optical and mechanical measurement."
 date: "2026-10-28T00:00:00Z"
-lastmod: "2026-10-28T00:00:00Z"
+lastmod: "2026-10-29T00:00:00Z"
 toc: false
 url: /research-statement/
 ---

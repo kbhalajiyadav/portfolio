@@ -28,9 +28,9 @@
 .about-method-grid article{min-width:0;padding:0;border:0;background:transparent}
 .about-method-grid h3{margin:0 0 .7rem}
 .about-method-grid p{margin:0;color:var(--ink-soft);font-size:.92rem;line-height:1.62}
-.about-path{position:relative;border-block:1px solid var(--line)}
+.about-path{position:relative;border:0}
 .about-path::before{content:"";position:absolute;top:0;bottom:0;left:165px;width:1px;background:var(--line-strong)}
-.about-path article{position:relative;display:grid;grid-template-columns:135px 30px minmax(0,1fr);gap:0;padding:1.8rem 0;border-bottom:1px solid var(--line)}
+.about-path article{position:relative;display:grid;grid-template-columns:135px 30px minmax(0,1fr);gap:0;padding:1.8rem 0;border:0}
 .about-path article:last-child{border-bottom:0}
 .about-path__period{padding-top:.16rem;color:var(--rust);font-family:var(--sans);font-size:.74rem;font-weight:700}
 .about-path__marker{position:relative;z-index:1;justify-self:center;width:9px;height:9px;margin-top:.35rem;border:2px solid var(--paper);border-radius:50%;background:var(--teal);box-shadow:0 0 0 1px var(--teal)}

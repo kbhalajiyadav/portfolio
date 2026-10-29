@@ -362,10 +362,32 @@ def main() -> int:
         if (root / obsolete).exists():
             errors.append(f"obsolete generated asset remains: {obsolete}")
 
+
+    # Record exactly which built pages participated in the full metadata,
+    # link, asset, and internal-anchor smoke audit.
+    inventory = []
+    for html, parser in sorted(pages.items()):
+        inventory.append({
+            "page": html.relative_to(root).as_posix(),
+            "title": parser.title,
+            "canonical": parser.canonical,
+            "links": len(parser.links),
+            "images": len(parser.images),
+            "h1_count": parser.h1_count,
+            "main_count": parser.main_count,
+        })
+    report = root.parent / "artifacts" / "site-page-inventory.json"
+    report.parent.mkdir(parents=True, exist_ok=True)
+    report.write_text(json.dumps({
+        "total_html_pages": len(inventory),
+        "audited_pages": inventory,
+        "failures": errors,
+    }, indent=2) + "\n", encoding="utf-8")
+
     if errors:
         print("\n".join(f"ERROR: {error}" for error in errors), file=sys.stderr)
         return 1
-    print(f"Generated-site audit passed: {len(pages)} HTML pages.")
+    print(f"Generated-site audit passed: {len(pages)} HTML pages; coverage inventory: {report}.")
     return 0
 
 

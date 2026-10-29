@@ -3,7 +3,7 @@ title: "Research Program"
 kicker: "Research overview"
 summary: "How processing histories organize soft functional materials, and how to measure the resulting response reliably."
 date: "2026-07-28T00:00:00Z"
-lastmod: "2026-10-13T00:00:00Z"
+lastmod: "2026-10-29T00:00:00Z"
 toc: true
 tags:
   - Stimuli-Responsive Materials
