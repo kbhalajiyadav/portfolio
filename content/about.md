@@ -16,7 +16,7 @@ bio:
 research_identity:
   title: Research question
   text: >-
-    What changes inside a responsive material during processing, and which measurements can track that change reliably? I approach that question from three directions: response measurement, structure under stimuli, and comparison across experiments and processing conditions.
+    How do thermal and mechanical processing histories organize material structure, and which reproducible measurements can distinguish the resulting responses? I approach that question from three directions: response measurement, structure under stimuli, and comparison across experiments and processing conditions.
 professional_path:
   - period: 2018–2022
     title: Chemical-engineering foundation
