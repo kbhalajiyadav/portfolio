@@ -266,7 +266,7 @@ LAYOUT_EXPRESSION = r"""
     aboutMethodBorders,
     aboutIntroPairs:[...document.querySelectorAll('.about-section__intro')]
       .map(section => {
-        const title = section.querySelector('.about-section__title h2')?.getBoundingClientRect();
+        const title = section.querySelector('.about-section__intro > h2')?.getBoundingClientRect();
         const prose = section.querySelector('.about-section__summary p')?.getBoundingClientRect();
         return title && prose ? {
           id:section.closest('[id]')?.id || 'unnamed',
@@ -468,7 +468,7 @@ def main() -> int:
                                 record_errors.append(f"About editorial headings/introductions are missing: {pairs}")
                             for pair in pairs:
                                 if width >= 981:
-                                    if pair["columnCount"] != 2 or abs(pair["proseTop"] - pair["titleTop"]) > 12:
+                                    if pair["columnCount"] != 2 or abs(pair["proseTop"] - pair["titleTop"]) > 4:
                                         record_errors.append(
                                             f"About/{pair['id']} summary does not align with the heading: {pair}"
                                         )
