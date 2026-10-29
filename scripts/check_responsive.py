@@ -19,6 +19,7 @@ import websocket
 
 VIEWPORTS = [
     (390, 844, "390-mobile"),
+    (414, 896, "414-iphone-viewport"),
     (680, 900, "680-small"),
     (768, 900, "768-tablet"),
     (980, 900, "980-laptop-boundary"),
