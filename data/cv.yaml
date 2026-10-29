@@ -62,6 +62,7 @@ publications:
   of Dual-Layer Electrospun Fiber Mats. Polymers 2025, 17, 1777. https://doi.org/10.3390/polym17131777
 intellectual_property:
 - title: Quantitative Thermal Imaging
+  details_url: https://bhalaji.com/project/quantitative-thermal-imaging/
   status: Patent pending
   year: '2026'
   inventors: Bhalaji Yadav Kantepalle and Christina Tang
@@ -70,6 +71,7 @@ intellectual_property:
   description: Provisional patent application filed.
 research_software:
 - title: Peel Trace Evaluation for Soft Substrates
+  details_url: https://bhalaji.com/project/peel-trace-evaluation/
   authors: Bhalaji Yadav Kantepalle and Christina Tang
   version: v1.4.0-rc15
   repository: https://github.com/VCU-Soft-Functional-Materials-Lab/Peel-Trace-Evaluation-for-Soft-Substrates

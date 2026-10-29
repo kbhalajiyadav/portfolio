@@ -138,11 +138,15 @@ def main() -> int:
     signature = read("layouts/partials/research_signature.html")
     for marker in (
         "Stimulus to translation research framework",
-        "Schematic; no quantitative data are implied.",
+        "research-signature-caption",
         "research-signature__mobile",
     ):
         if marker not in signature:
             errors.append(f"research signature is missing integrity/accessibility marker {marker!r}")
+    method = read("layouts/shortcodes/method-schematic.html")
+    for name, source in (("research signature", signature), ("method schematic", method)):
+        if "Schematic; no quantitative data are implied." in source:
+            errors.append(f"{name} exposes an internal publishing disclaimer")
 
     seo = read("layouts/partials/seo_head.html")
     for marker in (

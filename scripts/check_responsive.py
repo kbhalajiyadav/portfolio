@@ -297,11 +297,19 @@ LAYOUT_EXPRESSION = r"""
       const mobile = diagram.querySelector('.research-signature__mobile, .method-schematic__mobile');
       const shown = desktop && getComputedStyle(desktop).display !== 'none' ? desktop : mobile;
       const labels = [...(shown?.querySelectorAll('li strong') || [])];
+      const visibleRows = [...(shown?.querySelectorAll('li') || [])];
+      const hasHorizontalRule = element => {
+        if (!element) return false;
+        const style = getComputedStyle(element);
+        return parseFloat(style.borderTopWidth) > 0 || parseFloat(style.borderBottomWidth) > 0;
+      };
       return {
         count:labels.length,
         minFontSize:labels.length ? Math.min(...labels.map(el => parseFloat(getComputedStyle(el).fontSize))) : 0,
         overflowing:labels.some(el => el.getBoundingClientRect().right > width + 1),
-        mobileDisplayed:!!mobile && getComputedStyle(mobile).display !== 'none'
+        mobileDisplayed:!!mobile && getComputedStyle(mobile).display !== 'none',
+        hasExtraRules:[diagram, shown, ...visibleRows].some(hasHorizontalRule),
+        internalDisclaimer:diagram.textContent.includes('Schematic; no quantitative data are implied.')
       };
     })(),
     h1Count: document.querySelectorAll('h1').length,
@@ -549,6 +557,8 @@ def main() -> int:
                                 record_errors.append(f"scientific workflow labels must remain readable at {width}px: {diagram}")
                             if diagram and diagram["mobileDisplayed"] != (width <= 820):
                                 record_errors.append(f"scientific workflow must reflow at 820px: {diagram}")
+                            if diagram and (diagram["hasExtraRules"] or diagram["internalDisclaimer"]):
+                                record_errors.append(f"scientific workflow has redundant rules or internal caption: {diagram}")
                         if page_name == "home" and width >= 981:
                             if layout["footerItemCount"] < 2:
                                 record_errors.append("desktop footer navigation items are missing")

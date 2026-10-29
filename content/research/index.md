@@ -25,9 +25,6 @@ those measurements trustworthy. The work connects five stages:
 
 {{< research-signature >}}
 
-Temperature, deformation, and flow alter structure; optical and mechanical
-measurements reveal the consequences.
-
 ## Measure response
 
 Current work develops mechanics-consistent measurements for soft, stretchable,

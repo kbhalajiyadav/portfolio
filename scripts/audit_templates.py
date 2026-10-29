@@ -162,6 +162,16 @@ def main() -> int:
         errors.append("scientific diagrams must use accessible intrinsic-size text, not scaled SVG labels")
     if '<svg' in research_short or '<svg' in methods_short:
         errors.append("workflow diagrams must not shrink text inside SVG viewBox coordinates")
+    if "Schematic; no quantitative data are implied." in research_short or "Schematic; no quantitative data are implied." in methods_short:
+        errors.append("visitor-facing captions must not expose internal schematic disclaimers")
+    for target in (
+        'https://bhalaji.com/project/quantitative-thermal-imaging/',
+        'https://bhalaji.com/project/peel-trace-evaluation/',
+    ):
+        if target not in cv_data:
+            errors.append(f"CV/resume project-title destination missing: {target}")
+    if 'title = href(item["details_url"], item["title"]) if item.get("details_url") else esc(item["title"])' not in cv_builder:
+        errors.append("CV and resume project titles must link to their established evidence pages")
     if not all(marker in trajectory for marker in ('Controlled histories and repeatable measurement', 'Potential application directions')):
         errors.append("doctoral research evidence must distinguish measurement methods from potential applications")
     research_page = (ROOT / "content/research/index.md").read_text(encoding="utf-8")

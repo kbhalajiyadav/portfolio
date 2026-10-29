@@ -148,8 +148,9 @@ def render_publications(data: dict, title: str = "Peer-Reviewed Publications") -
 def render_intellectual_property(data: dict) -> str:
     intellectual_property: list[str] = []
     for item in data.get("intellectual_property", []):
+        title = href(item["details_url"], item["title"]) if item.get("details_url") else esc(item["title"])
         intellectual_property.append(
-            rf"\smallentry{{{esc(item['title'])}}}"
+            rf"\smallentry{{{title}}}"
             rf"{{{esc(item['status'])} · {esc(item['year'])}}}"
             rf"{{{esc(item['inventors'])}}}"
         )
@@ -168,15 +169,19 @@ def render_intellectual_property(data: dict) -> str:
 def render_software(data: dict) -> str:
     software: list[str] = []
     for item in data["research_software"]:
+        title = href(item["details_url"], item["title"]) if item.get("details_url") else esc(item["title"])
         software.append(
-            rf"\smallentry{{{esc(item['title'])}}}{{{esc(item['version'])}}}"
+            rf"\smallentry{{{title}}}{{{esc(item['version'])}}}"
             rf"{{{esc(item['authors'])}}}"
         )
         software.append(
-            rf"{{\small {esc(item['description'])} "
+            rf"{{\small {esc(item['description'])}"
+            + r"\\ "
+            + r"\mbox{"
             + href(item["repository"], "Repository")
             + r" \contactsep "
             + href(item["archive"], "Archived release")
+            + "}"
             + "}"
         )
     return section("Research Software", software)
