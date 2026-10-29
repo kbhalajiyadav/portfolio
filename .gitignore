@@ -20,6 +20,12 @@ hugo.linux
 /static/uploads/cv.pdf
 /static/uploads/resume.pdf
 
+# Local-only research incubation. These names are convenience barriers only;
+# the preferred private vault lives outside this public repository entirely.
+/.research-incubator/
+/embryo/
+/private-research/
+
 # IDE
 .vscode/
 .idea/

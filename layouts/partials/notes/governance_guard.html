@@ -1,0 +1,77 @@
+{{ if not .Draft }}
+  {{ $g := .Params.governance }}
+  {{ if not $g }}{{ errorf "Research Note %q cannot publish without governance front matter" .File.Path }}{{ end }}
+
+  {{ $noteType := .Params.note_type | default "" }}
+  {{ if not (in (slice "method" "concept" "reflection") $noteType) }}{{ errorf "Research Note %q has invalid note_type %q" .File.Path $noteType }}{{ end }}
+  {{ $status := .Params.status | default "" }}
+  {{ if not (in (slice "stable" "evolving" "corrected" "retired" "withdrawn") $status) }}{{ errorf "Research Note %q has invalid status %q" .File.Path $status }}{{ end }}
+
+  {{ if eq $status "corrected" }}
+    {{ if not (.Params.revision_note | default "") }}{{ errorf "Corrected Research Note %q requires revision_note" .File.Path }}{{ end }}
+  {{ end }}
+  {{ if in (slice "retired" "withdrawn") $status }}
+    {{ if not (.Params.status_reason | default "") }}{{ errorf "%s Research Note %q requires status_reason" (title $status) .File.Path }}{{ end }}
+  {{ end }}
+
+  {{ if ne (index $g "repository_safe") true }}{{ errorf "Research Note %q requires repository_safe=true" .File.Path }}{{ end }}
+  {{ if ne (index $g "repository_staging_decision" | default "") "approved" }}{{ errorf "Research Note %q requires repository_staging_decision=approved" .File.Path }}{{ end }}
+
+  {{ $basis := index $g "disclosure_basis" | default "" }}
+  {{ if not (in (slice "public_literature" "published_own_work" "authorized_public_disclosure") $basis) }}{{ errorf "Research Note %q has unresolved disclosure_basis" .File.Path }}{{ end }}
+
+  {{ range $field := slice "contains_unpublished_research" "contains_unpublished_collaborator_material" "contains_confidential_or_sponsor_material" }}
+    {{ if ne (index $g $field) false }}{{ errorf "Research Note %q cannot publish unless governance.%s is explicitly false" $.File.Path $field }}{{ end }}
+  {{ end }}
+
+  {{ $patentSensitive := index $g "potentially_patent_sensitive" }}
+  {{ $ipClearance := index $g "ip_clearance" | default "" }}
+  {{ if eq $patentSensitive true }}
+    {{ if ne $ipClearance "cleared" }}{{ errorf "Research Note %q is patent-sensitive and requires ip_clearance=cleared" .File.Path }}{{ end }}
+  {{ else if eq $patentSensitive false }}
+    {{ if ne $ipClearance "not_applicable" }}{{ errorf "Research Note %q is not patent-sensitive and requires ip_clearance=not_applicable" .File.Path }}{{ end }}
+  {{ else }}
+    {{ errorf "Research Note %q requires an explicit potentially_patent_sensitive boolean" .File.Path }}
+  {{ end }}
+
+  {{ if not (in (slice "not_applicable" "cleared") (index $g "venue_policy_review" | default "")) }}{{ errorf "Research Note %q has unresolved venue_policy_review" .File.Path }}{{ end }}
+  {{ if ne (index $g "embargo_status" | default "") "none" }}{{ errorf "Research Note %q cannot publish under an active or unresolved embargo" .File.Path }}{{ end }}
+
+  {{ $regulated := index $g "regulated_research_material" }}
+  {{ $ethicsReview := index $g "ethics_review" | default "" }}
+  {{ if eq $regulated true }}
+    {{ if ne $ethicsReview "cleared" }}{{ errorf "Research Note %q contains regulated-research material and requires ethics_review=cleared" .File.Path }}{{ end }}
+  {{ else if eq $regulated false }}
+    {{ if ne $ethicsReview "not_applicable" }}{{ errorf "Research Note %q is non-regulated and requires ethics_review=not_applicable" .File.Path }}{{ end }}
+  {{ else }}
+    {{ errorf "Research Note %q requires an explicit regulated_research_material boolean" .File.Path }}
+  {{ end }}
+
+  {{ range $field := slice "export_control_review" "dual_use_review" }}
+    {{ if not (in (slice "not_applicable" "cleared") (index $g $field | default "")) }}{{ errorf "Research Note %q has unresolved governance.%s" $.File.Path $field }}{{ end }}
+  {{ end }}
+
+  {{ range $field := slice "ownership_review" "contributor_review" "editorial_value_review" "funding_review" "privacy_review" "external_tool_review" "copyright_review" }}
+    {{ if ne (index $g $field | default "") "complete" }}{{ errorf "Research Note %q requires governance.%s=complete" $.File.Path $field }}{{ end }}
+  {{ end }}
+
+  {{ $externalScienceRequired := index $g "external_scientific_review_required" }}
+  {{ $externalScienceStatus := index $g "external_scientific_review_status" | default "" }}
+  {{ if eq $externalScienceRequired true }}
+    {{ if ne $externalScienceStatus "complete" }}{{ errorf "Research Note %q requires completed independent human scientific review before publication" .File.Path }}{{ end }}
+  {{ else if eq $externalScienceRequired false }}
+    {{ if ne $externalScienceStatus "not_required" }}{{ errorf "Research Note %q with external review not required must use external_scientific_review_status=not_required" .File.Path }}{{ end }}
+  {{ else }}
+    {{ errorf "Research Note %q requires an explicit external_scientific_review_required boolean" .File.Path }}
+  {{ end }}
+
+  {{ $coi := index $g "coi_status" | default "" }}
+  {{ if not (in (slice "none_declared" "disclosed" "managed") $coi) }}{{ errorf "Research Note %q has unresolved coi_status" .File.Path }}{{ end }}
+  {{ if and (in (slice "disclosed" "managed") $coi) (not (index $g "coi_statement" | default "")) }}{{ errorf "Research Note %q requires coi_statement for disclosed or managed COI" .File.Path }}{{ end }}
+
+  {{ if ne (index $g "source_status_review" | default "") "complete" }}{{ errorf "Research Note %q requires source_status_review=complete" .File.Path }}{{ end }}
+  {{ if ne (index $g "author_release_decision" | default "") "approved" }}{{ errorf "Research Note %q requires author_release_decision=approved" .File.Path }}{{ end }}
+
+  {{ $sources := .Params.sources | default (slice) }}
+  {{ if lt (len $sources) 1 }}{{ errorf "Research Note %q requires at least one verified source" .File.Path }}{{ end }}
+{{ end }}

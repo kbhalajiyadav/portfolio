@@ -1,0 +1,142 @@
+name: Research Notes presentation
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "archetypes/notes.md"
+      - "content/notes/**"
+      - "layouts/_default/baseof.html"
+      - "layouts/notes/**"
+      - "layouts/partials/notes/**"
+      - "layouts/partials/seo_head.html"
+      - "static/css/notes*.css"
+      - ".pa11y-notes.cjs"
+      - "scripts/check_notes_presentation.py"
+      - "testdata/research-notes/**"
+      - ".github/workflows/research-notes-presentation.yaml"
+  push:
+    branches: [main]
+    paths:
+      - "archetypes/notes.md"
+      - "content/notes/**"
+      - "layouts/_default/baseof.html"
+      - "layouts/notes/**"
+      - "layouts/partials/notes/**"
+      - "layouts/partials/seo_head.html"
+      - "static/css/notes*.css"
+      - ".pa11y-notes.cjs"
+      - "scripts/check_notes_presentation.py"
+      - "testdata/research-notes/**"
+      - ".github/workflows/research-notes-presentation.yaml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  notes-presentation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      HUGO_VERSION: 0.124.1
+      PUPPETEER_SKIP_DOWNLOAD: "true"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Install verified Hugo CLI
+        run: |
+          package="hugo_${HUGO_VERSION}_linux-amd64.deb"
+          release="https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}"
+          curl --fail --location --retry 3 --output "${RUNNER_TEMP}/${package}" "${release}/${package}"
+          curl --fail --location --retry 3 --output "${RUNNER_TEMP}/checksums.txt" "${release}/hugo_${HUGO_VERSION}_checksums.txt"
+          (cd "${RUNNER_TEMP}" && grep " ${package}$" checksums.txt | sha256sum --check --strict)
+          sudo dpkg -i "${RUNNER_TEMP}/${package}"
+          hugo version
+
+      - name: Set up Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 24
+
+      - name: Install exact accessibility-tool versions
+        run: npm install --ignore-scripts --no-audit --no-fund
+
+      - name: Render non-publishing Research Notes fixtures and staged drafts
+        run: |
+          mkdir -p content/notes artifacts/notes-presentation
+          cp testdata/research-notes/*.md content/notes/
+          hugo --gc --buildDrafts --minify --printPathWarnings \
+            --baseURL "http://127.0.0.1:4174/" \
+            --destination artifacts/notes-presentation
+          python3 scripts/check_notes_presentation.py artifacts/notes-presentation
+
+      - name: Start private rendered-fixture server
+        run: |
+          python3 -u -m http.server 4174 --bind 127.0.0.1 --directory artifacts/notes-presentation > artifacts/notes-server.log 2>&1 &
+          for attempt in {1..20}; do
+            curl --silent --fail http://127.0.0.1:4174/notes/ >/dev/null && exit 0
+            sleep 1
+          done
+          cat artifacts/notes-server.log
+          exit 1
+
+      - name: Resolve Chrome executable
+        run: |
+          chrome="$(command -v google-chrome || command -v chromium || command -v chromium-browser)"
+          test -n "$chrome"
+          echo "CHROME_PATH=$chrome" >> "$GITHUB_ENV"
+
+      - name: Accessibility audit at desktop, mobile, and WCAG reflow widths
+        run: |
+          set -o pipefail
+          PA11Y_WIDTH=1440 PA11Y_HEIGHT=1000 npx pa11y-ci --config .pa11y-notes.cjs --json | tee artifacts/notes-pa11y-desktop.json
+          PA11Y_WIDTH=390 PA11Y_HEIGHT=844 npx pa11y-ci --config .pa11y-notes.cjs --json | tee artifacts/notes-pa11y-mobile.json
+          PA11Y_WIDTH=320 PA11Y_HEIGHT=800 npx pa11y-ci --config .pa11y-notes.cjs --json | tee artifacts/notes-pa11y-reflow-320.json
+
+      - name: Capture private layout evidence
+        run: |
+          mkdir -p artifacts/notes-screenshots
+          "$CHROME_PATH" --headless=new --no-sandbox --disable-dev-shm-usage --hide-scrollbars \
+            --window-size=1440,1000 --screenshot=artifacts/notes-screenshots/index-desktop.png \
+            http://127.0.0.1:4174/notes/
+          "$CHROME_PATH" --headless=new --no-sandbox --disable-dev-shm-usage --hide-scrollbars \
+            --window-size=1440,1000 --screenshot=artifacts/notes-screenshots/note-001-desktop.png \
+            http://127.0.0.1:4174/notes/peel-trace-beyond-single-force/
+          "$CHROME_PATH" --headless=new --no-sandbox --disable-dev-shm-usage --hide-scrollbars \
+            --window-size=390,844 --screenshot=artifacts/notes-screenshots/note-001-mobile.png \
+            http://127.0.0.1:4174/notes/peel-trace-beyond-single-force/
+          "$CHROME_PATH" --headless=new --no-sandbox --disable-dev-shm-usage --hide-scrollbars \
+            --window-size=1440,1000 --screenshot=artifacts/notes-screenshots/method-desktop.png \
+            http://127.0.0.1:4174/notes/presentation-method/
+          "$CHROME_PATH" --headless=new --no-sandbox --disable-dev-shm-usage --hide-scrollbars \
+            --window-size=390,844 --screenshot=artifacts/notes-screenshots/method-mobile.png \
+            http://127.0.0.1:4174/notes/presentation-method/
+          "$CHROME_PATH" --headless=new --no-sandbox --disable-dev-shm-usage --hide-scrollbars \
+            --window-size=1440,1000 --screenshot=artifacts/notes-screenshots/withdrawn-desktop.png \
+            http://127.0.0.1:4174/notes/presentation-withdrawn/
+          test -s artifacts/notes-screenshots/index-desktop.png
+          test -s artifacts/notes-screenshots/note-001-desktop.png
+          test -s artifacts/notes-screenshots/note-001-mobile.png
+          test -s artifacts/notes-screenshots/method-desktop.png
+          test -s artifacts/notes-screenshots/method-mobile.png
+          test -s artifacts/notes-screenshots/withdrawn-desktop.png
+
+      - name: Upload presentation evidence
+        if: github.event_name == 'pull_request' && success()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: research-notes-presentation-${{ github.run_attempt }}
+          path: |
+            artifacts/notes-presentation/
+            artifacts/notes-pa11y-*.json
+            artifacts/notes-screenshots/
+          if-no-files-found: error
+          retention-days: 14

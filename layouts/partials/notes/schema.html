@@ -1,0 +1,49 @@
+{{ $p := site.Data.portfolio }}
+{{ $personID := printf "%s#person" ("/" | absURL) }}
+{{ $websiteID := printf "%s#website" ("/" | absURL) }}
+{{ $articleID := printf "%s#article" .Permalink }}
+{{ $status := .Params.status | default "evolving" }}
+{{ $description := .Params.summary | default .Description | default .Summary | markdownify | plainify }}
+{{ if eq $status "withdrawn" }}{{ $description = "This Research Note has been withdrawn and should not be relied upon." }}{{ end }}
+{{ $article := dict
+  "@context" "https://schema.org"
+  "@type" "Article"
+  "@id" $articleID
+  "headline" .Title
+  "name" .Title
+  "url" .Permalink
+  "mainEntityOfPage" .Permalink
+  "description" $description
+  "datePublished" (.Date.Format "2006-01-02")
+  "dateModified" (.Lastmod.Format "2006-01-02")
+  "author" (dict "@id" $personID)
+  "publisher" (dict "@id" $personID)
+  "isPartOf" (dict "@id" $websiteID)
+  "creativeWorkStatus" $status
+  "articleSection" "Research Notes"
+  "inLanguage" (site.Language.Lang | default "en")
+  "isAccessibleForFree" true
+}}
+{{ if ne $status "withdrawn" }}
+  {{ with .Params.tags }}{{ $article = merge $article (dict "keywords" .) }}{{ end }}
+  {{ with .Params.image }}{{ $article = merge $article (dict "image" (. | absURL)) }}{{ end }}
+  {{ $citationRefs := slice }}
+  {{ range $path := (.Params.related_publications | default (slice)) }}
+    {{ with site.GetPage $path }}{{ $citationRefs = $citationRefs | append (dict "@id" .Permalink) }}{{ end }}
+  {{ end }}
+  {{ range $path := (.Params.related_software | default (slice)) }}
+    {{ with site.GetPage $path }}{{ $citationRefs = $citationRefs | append (dict "@id" .Permalink) }}{{ end }}
+  {{ end }}
+  {{ if gt (len $citationRefs) 0 }}{{ $article = merge $article (dict "citation" $citationRefs) }}{{ end }}
+{{ end }}
+<script type="application/ld+json">{{ $article | jsonify | safeJS }}</script>
+{{ $crumbs := slice
+  (dict "@type" "ListItem" "position" 1 "name" "Home" "item" ("/" | absURL))
+  (dict "@type" "ListItem" "position" 2 "name" "Research Notes" "item" ("/notes/" | absURL))
+  (dict "@type" "ListItem" "position" 3 "name" .Title "item" .Permalink)
+}}
+<script type="application/ld+json">{{ dict "@context" "https://schema.org" "@type" "BreadcrumbList" "itemListElement" $crumbs | jsonify | safeJS }}</script>
+<meta property="article:published_time" content="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+<meta property="article:modified_time" content="{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}">
+<meta property="article:section" content="Research Notes">
+{{ if ne $status "withdrawn" }}{{ range .Params.tags }}<meta property="article:tag" content="{{ . }}">{{ end }}{{ end }}

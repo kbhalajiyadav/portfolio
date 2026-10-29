@@ -1,0 +1,16 @@
+{{ with .Params.revisions }}
+  {{ if gt (len .) 0 }}
+  <section class="note-revisions" aria-labelledby="note-revisions-title">
+    <p class="overline">Version record</p>
+    <h2 id="note-revisions-title">Revision history</h2>
+    <ol>
+      {{ range . }}
+      <li>
+        <time datetime="{{ .date }}">{{ time.Format "January 2, 2006" .date }}</time>
+        <p>{{ .summary | markdownify }}</p>
+      </li>
+      {{ end }}
+    </ol>
+  </section>
+  {{ end }}
+{{ end }}

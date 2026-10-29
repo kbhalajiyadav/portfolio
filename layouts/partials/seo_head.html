@@ -2,13 +2,15 @@
 {{ $p := site.Data.portfolio }}
 {{ $isHome := .IsHome }}
 {{ $isAbout := eq .RelPermalink "/about/" }}
+{{ $isNoteArticle := and .IsPage (eq .Section "notes") }}
 {{ $siteName := printf "%s · Research Portfolio" $p.profile.name }}
 {{ $pageTitle := cond $isHome $siteName (printf "%s · %s" .Title $p.profile.short_name) }}
 {{ $description := $p.profile.summary }}
 {{ with .Params.summary }}{{ $description = . | markdownify | plainify }}{{ end }}
 {{ with .Description }}{{ $description = . | markdownify | plainify }}{{ end }}
+{{ if and $isNoteArticle (eq (.Params.status | default "") "withdrawn") }}{{ $description = "This Research Note has been withdrawn and should not be relied upon." }}{{ end }}
 {{ $canonical := .Permalink }}
-{{ $ogType := cond $isAbout "profile" (cond (eq .Section "publication") "article" "website") }}
+{{ $ogType := cond $isAbout "profile" (cond (or (eq .Section "publication") $isNoteArticle) "article" "website") }}
 {{ $aboutURL := "/about/" | absURL }}
 {{ $socialCard := "portfolio" }}
 {{ if eq .RelPermalink "/research/" }}
@@ -21,6 +23,8 @@
   {{ $socialCard = "engagement" }}
 {{ else if eq .Section "publication" }}
   {{ $socialCard = "outputs" }}
+{{ else if eq .Section "notes" }}
+  {{ $socialCard = "research" }}
 {{ else if eq .Section "project" }}
   {{ $tags := .Params.tags | default (slice) }}
   {{ if eq .RelPermalink "/project/quantitative-thermal-imaging/" }}
@@ -71,7 +75,7 @@
 <meta name="apple-mobile-web-app-title" content="{{ $p.profile.short_name }}">
 <meta name="theme-color" content="#f7f5f0">
 {{ $is404 := or (eq .RelPermalink "/404.html") (eq .Title "404 Page not found") }}
-{{ if $is404 }}
+{{ if or $is404 .Draft }}
 <meta name="robots" content="noindex,follow">
 {{ else }}
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">

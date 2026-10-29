@@ -1,0 +1,40 @@
+name: Research Notes governance
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  schedule:
+    - cron: "41 9 1 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: research-notes-governance-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  governance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout public repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Install exact validation dependency
+        run: python3 -m pip install --disable-pip-version-check PyYAML==6.0.3
+
+      - name: Compile governance checker
+        run: python3 -m py_compile scripts/check_notes_governance.py
+
+      - name: Enforce public-repository and publication boundaries
+        run: python3 scripts/check_notes_governance.py
