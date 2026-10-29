@@ -119,6 +119,15 @@ def main() -> int:
         if not rule_has(REF, selector, declaration):
             errors.append(f"research disclosure composition invariant missing: {selector}: {declaration}")
 
+    for selector, declaration, source in (
+        (".research-signature__flow", "grid-template-columns:repeat(3,minmax(0,1fr))", POLISH),
+        (".research-signature__flow strong", "font-size:.95rem", POLISH),
+        (".method-schematic__steps", "grid-template-columns:repeat(3,minmax(0,1fr))", REF),
+        (".method-schematic__steps strong", "font-size:.95rem", REF),
+    ):
+        if not rule_has(source, selector, declaration):
+            errors.append(f"research/process labels must retain intrinsic readable text: {selector} {declaration}")
+
     # Native homepage disclosures must stay legible, keyboard-focusable, and unboxed.
     for selector, declaration in (
         (".home-disclosure", "border-top:1px solid var(--line-strong)"),
