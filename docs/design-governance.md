@@ -111,7 +111,9 @@ Rules:
 - Equal-height cards are used only when content and comparison benefit from equal height.
 - Intrinsic-height editorial structures are preferred for education, timelines, records, and asymmetric content.
 - Large unused white zones require a content or hierarchy reason; they are not a substitute for spacing.
-- In expanded research disclosures, present questions before methods and application hypotheses. A collapsed disclosure should not leave an oversized empty band; preserve its keyboard-focus indicator while removing purely decorative boxing.
+- Homepage doctoral research questions must be visible without interaction. The disclosure is reserved for supplementary measurement and potential application descriptions; preserve the accessible summary focus ring and compact closed spacing.
+- Explanatory research/process schematics must use intrinsic text sizes rather than scaling text inside a fixed-width SVG; preserve numbered order, captions, and mobile reflow without adding cards or separators.
+- A research statement should be reachable from the homepage doctoral section, the About research-identity section, and the academic CV, without creating additional primary hero actions.
 - Release verification must check the canonical homepage and Research/Research Statement for revision-specific scientific wording in addition to the exact commit marker; the page reader's indexed cache is not an authoritative deployment test.
 - Measure actual gaps between homepage section children and the trailing-content-to-boundary gap; use broad spacing limits, not screenshot-exact coordinates. Existing navigation-continuity checks own persistent header geometry, action density, and output-filter stability (do not duplicate them).
 - Repeated cards, borders, shadows, or callouts should be removed when they do not add semantic structure.

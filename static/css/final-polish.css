@@ -31,13 +31,10 @@ a:hover .content-link__arrow--internal,a:focus-visible .content-link__arrow--int
 
 .research-signature{margin:2rem 0 2.5rem;padding:1.35rem 0 1.15rem;border-block:1px solid var(--line)}
 .research-signature__desktop{width:100%}
-.research-signature__desktop svg{display:block;width:100%;height:auto;color:var(--ink)}
-.research-signature__rail{fill:none;stroke:var(--line-strong);stroke-width:1.5}
-.research-signature__arrowhead{fill:var(--teal)}
-.research-signature__node{fill:var(--surface);stroke:var(--teal);stroke-width:1.6}
-.research-signature__motif{fill:none;stroke:var(--teal);stroke-width:1.45;stroke-linecap:round;stroke-linejoin:round}
-.research-signature__motif--quiet{opacity:.55}
-.research-signature__stage text{fill:var(--ink);font-family:var(--sans);font-size:14px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.research-signature__flow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5rem 1.6rem;list-style:none;margin:0;padding:0}
+.research-signature__flow li{display:grid;grid-template-columns:2.25rem minmax(0,1fr);gap:.75rem;align-items:center;min-width:0}
+.research-signature__index{display:grid;place-items:center;width:2.25rem;height:2.25rem;border:1px solid var(--teal);border-radius:50%;color:var(--rust);font-family:var(--mono);font-size:.85rem}
+.research-signature__flow strong{color:var(--ink);font-family:var(--sans);font-size:.95rem;line-height:1.45;font-weight:650}
 .research-signature figcaption{max-width:74ch;margin:.9rem 0 0;color:var(--ink-soft);font-size:.95rem;line-height:1.55}
 .research-signature__note{font-family:var(--sans);font-size:.76rem;letter-spacing:.02em}
 .research-signature__mobile{display:none}
@@ -61,8 +58,8 @@ a:hover .content-link__arrow--internal,a:focus-visible .content-link__arrow--int
   .research-signature__desktop{display:none}
   .research-signature__mobile{display:grid;grid-template-columns:1fr;gap:0;margin:0;padding:0;list-style:none;border-top:1px solid var(--line)}
   .research-signature__mobile li{display:grid;grid-template-columns:3rem minmax(0,1fr);align-items:center;gap:1rem;padding:.8rem 0;border-bottom:1px solid var(--line)}
-  .research-signature__mobile span{color:var(--rust);font-family:var(--mono);font-size:.72rem}
-  .research-signature__mobile strong{font-family:var(--sans);font-size:.9rem;letter-spacing:.04em;text-transform:uppercase}
+  .research-signature__mobile span{color:var(--rust);font-family:var(--mono);font-size:.82rem}
+  .research-signature__mobile strong{font-family:var(--sans);font-size:.95rem;line-height:1.4}
 }
 
 @media(prefers-reduced-motion:reduce){

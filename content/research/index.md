@@ -115,4 +115,4 @@ University intellectual-property status.
 
 - **Processing history and molecular order:** How do heating, cooling, and shear alter cholesteric orientation, structural transitions, and recovery? When does helical order persist, reorient, or unwind?
 - **Structure and trustworthy measurement:** Which combinations of rheology, scattering, and optical measurements can distinguish structural changes from hysteresis, experimental drift, and competing interpretations?
-- **From measured response to function:** What calibration, stability, and repeatability are needed before optical or mechanical responses can support sensing and materials applications?
+- **Calibrating response across thermal cycles:** How consistently can temperature-dependent optical responses be calibrated over repeated heating and cooling cycles, and what limits their use as quantitative thermal indicators?

@@ -141,9 +141,27 @@ def main() -> int:
         if 'class="home-disclosure__body"' not in html:
             errors.append(f"homepage {label} disclosure must retain its evidence body")
     if not all(marker in trajectory for marker in ('class="trajectory-grid"', 'class="questions__grid"', 'Open research questions')):
-        errors.append("homepage doctoral disclosure must preserve applications, automation, and questions")
-    if trajectory.find('class="questions"') < 0 or trajectory.find('class="trajectory-grid"') < 0 or trajectory.find('class="questions"') > trajectory.find('class="trajectory-grid"'):
-        errors.append("doctoral disclosure must lead with research questions, then methods and applications")
+        errors.append("homepage doctoral section must preserve visible questions and disclosed supporting evidence")
+    questions_pos = trajectory.find('<section class="questions"')
+    details_pos = trajectory.find('<details class="home-disclosure')
+    methods_pos = trajectory.find('class="trajectory-grid"')
+    if min(questions_pos, details_pos, methods_pos) < 0 or not (questions_pos < details_pos < methods_pos):
+        errors.append("doctoral questions must be visible before the closed methods/applications disclosure")
+    if not all(link in trajectory for link in ('href="{{ "/research-statement/" | relURL }}"', 'Explore measurement methods and application directions')):
+        errors.append("doctoral section must link to research statement while the disclosure labels only supplementary material")
+    about_template = (LAYOUTS / "about/single.html").read_text(encoding="utf-8")
+    if 'href="{{ "/research-statement/" | relURL }}"' not in about_template:
+        errors.append("About must link to the research statement")
+    cv_builder = (ROOT / "scripts/build_cv.py").read_text(encoding="utf-8")
+    cv_data = (ROOT / "data/cv.yaml").read_text(encoding="utf-8")
+    if 'href(p["research_statement"], "Research statement (online)")' not in cv_builder or 'research_statement: https://bhalaji.com/research-statement/' not in cv_data:
+        errors.append("academic CV must link to the research statement from canonical data")
+    research_short = (LAYOUTS / "partials/research_signature.html").read_text(encoding="utf-8")
+    methods_short = (LAYOUTS / "shortcodes/method-schematic.html").read_text(encoding="utf-8")
+    if '<ol class="research-signature__flow"' not in research_short or '<ol class="method-schematic__steps"' not in methods_short:
+        errors.append("scientific diagrams must use accessible intrinsic-size text, not scaled SVG labels")
+    if '<svg' in research_short or '<svg' in methods_short:
+        errors.append("workflow diagrams must not shrink text inside SVG viewBox coordinates")
     if not all(marker in trajectory for marker in ('Controlled histories and repeatable measurement', 'Potential application directions')):
         errors.append("doctoral research evidence must distinguish measurement methods from potential applications")
     research_page = (ROOT / "content/research/index.md").read_text(encoding="utf-8")
