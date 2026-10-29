@@ -236,7 +236,10 @@ def render_skills(data: dict) -> str:
 def render_cv(data: dict) -> str:
     p = data["profile"]
     output = [
-        section("Research Profile", [rf"\color{{Ink}} {esc(p['summary'])}\color{{black}}"]),
+        section("Research Profile", [
+            rf"\color{{Ink}} {esc(p['summary'])}\color{{black}}",
+            r"{\small " + href(p["research_statement"], "Research statement (online)") + "}",
+        ]),
         render_education(data),
         render_research_experience(data),
         render_publications(data),
