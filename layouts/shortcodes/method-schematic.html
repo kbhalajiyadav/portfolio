@@ -12,5 +12,5 @@
   <ol class="method-schematic__mobile" aria-label="{{ .Get "title" }}">
     {{ range $i, $step := $steps }}<li><span>{{ printf "%02d" (add $i 1) }}</span><strong>{{ replace $step "~" " " }}</strong></li>{{ end }}
   </ol>
-  <figcaption id="{{ $id }}-caption">{{ .Get "caption" }} <span class="method-schematic__note">Schematic; no quantitative data are implied.</span></figcaption>
+  <figcaption id="{{ $id }}-caption">{{ .Get "caption" }}</figcaption>
 </figure>
