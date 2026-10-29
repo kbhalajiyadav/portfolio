@@ -112,6 +112,19 @@ PAGE_METRICS = r"""
     secondaryOutputCount:selectedOutputs ? selectedOutputs.querySelectorAll('.secondary-output').length : 0,
     selectedOutputsText:selectedOutputs ? (selectedOutputs.textContent || '').replace(/\s+/g,' ').trim() : '',
     selectedOutputsHeadingLines:lineCount(selectedOutputs?.querySelector('.section-head h2')),
+    sectionHeadingPairs:[...document.querySelectorAll('main .section-head')]
+      .filter(head => head.querySelector(':scope > h2') && head.querySelector(':scope > p:not(.kicker)'))
+      .map(head => {
+        const h2 = head.querySelector(':scope > h2').getBoundingClientRect();
+        const intro = head.querySelector(':scope > p:not(.kicker)').getBoundingClientRect();
+        const kicker = head.querySelector(':scope > .kicker')?.getBoundingClientRect();
+        return {
+          section:head.closest('[id]')?.id || 'unnamed',
+          headingTop:h2.top,headingBottom:h2.bottom,introTop:intro.top,
+          kickerBottom:kicker?.bottom ?? null,
+          columns:getComputedStyle(head).gridTemplateColumns.split(/\\s+/).filter(Boolean).length,
+        };
+      }),
     disclosures:[...document.querySelectorAll('main details.home-disclosure')].map(item=>({
       open:item.open,
       summaryHeight:item.querySelector(':scope > summary')?.getBoundingClientRect().height || 0,
@@ -333,6 +346,26 @@ def main() -> int:
                         errors.append(f"{prefix}: patent-pending proof count must remain 1")
                     if values.get("Citable software release") != "1":
                         errors.append(f"{prefix}: citable-software proof count must remain 1")
+                    # The introductory paragraph must align with the heading, not
+                    # float between the kicker and title (the original visual bug).
+                    heading_pairs = metrics.get("sectionHeadingPairs", [])
+                    if len(heading_pairs) < 4:
+                        errors.append(f"{prefix}: missing editorial heading/intro pairs: {heading_pairs}")
+                    for pair in heading_pairs:
+                        offset = pair["introTop"] - pair["headingTop"]
+                        if width >= 981:
+                            if pair["columns"] != 2 or abs(offset) > 4:
+                                errors.append(
+                                    f"{prefix}/{pair['section']}: right intro does not align to the heading "
+                                    f"(offset={offset:.1f}px, columns={pair['columns']})"
+                                )
+                            if pair["kickerBottom"] is not None and pair["introTop"] < pair["kickerBottom"] + 4:
+                                errors.append(f"{prefix}/{pair['section']}: introduction intrudes into kicker row")
+                        elif not 0 <= pair["introTop"] - pair["headingBottom"] <= 48:
+                            errors.append(
+                                f"{prefix}/{pair['section']}: stacked introduction has an unstable vertical gap "
+                                f"({pair['introTop'] - pair['headingBottom']:.1f}px)"
+                            )
                     title_lines = metrics.get("selectedOutputsHeadingLines")
                     if not title_lines or title_lines > 3:
                         errors.append(f"{prefix}: selected outputs headline is overly tall ({title_lines} lines)")
