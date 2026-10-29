@@ -258,17 +258,18 @@ collaboration_questions:
   text: How consistently can temperature-dependent optical responses be calibrated over repeated heating
     and cooling cycles, and what limits their use as quantitative thermal indicators?
 narrative:
-  problem_title: From stimulus to structure to measurement.
-  problem: Responsive materials can change color, stiffness, or organization. The harder question is whether
-    that change can still be interpreted after reshaping, scaling, or moving between processing conditions.
+  problem_title: How processing shapes structure and function.
+  problem: Heating, cooling, and flow can reorganize materials. The challenge is to connect a defined
+    processing history to internal structure and measurable response, then test whether those
+    relationships remain reliable across conditions.
   chain:
   - Stimulus
   - Structure
   - Response
   - Measurement
   - Translation
-  chain_note: Temperature, deformation, and flow alter structure; measurements connect those changes to
-    optical and mechanical behavior and to the conditions that produced them.
+  chain_note: Processing history can change internal order and material properties. Measurements test
+    how structure relates to optical, mechanical, or other functional responses and whether the result repeats.
 applications:
 - Characterization of responsive materials under controlled thermal and flow histories
 - Rheology-informed evaluation of extrudable functional inks and printed soft composites as adjacent research questions

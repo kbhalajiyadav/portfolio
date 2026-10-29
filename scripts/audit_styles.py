@@ -213,6 +213,15 @@ def main() -> int:
         errors.append("timeline sentence links must not show directional arrows")
     if not rule_has(POLISH, ".research-signature", "margin:.85rem 0 1.6rem"):
         errors.append("research schematic lost its compact explanatory spacing")
+    if not rule_has(POLISH, ".article-content p .content-link__arrow,.article-content li .content-link__arrow", "display:none"):
+        errors.append("scholarly inline links should not inject directional arrows into sentences")
+    for selector, declaration in (
+        ("#research>.section-head", "margin-bottom:.7rem"),
+        ("#research>.section-head>p:not(.kicker)", "margin-bottom:0"),
+        ("#research>.research-signature", "margin-top:0"),
+    ):
+        if not rule_has(POLISH, selector, declaration):
+            errors.append(f"homepage research schematic must not inherit excess intro gap: {selector} {declaration}")
     # The mobile hero needs an explicit composition; inherited desktop widths caused the 390px collapse.
     mobile_match = re.search(r"@media\(max-width:680px\)\s*\{(.*)\}\s*@media\(prefers-reduced-motion", REF, re.DOTALL)
     if not mobile_match:

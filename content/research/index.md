@@ -67,7 +67,7 @@ methods** can be useful across process-sensitive materials without assuming a
 shared molecular mechanism. Published work on [printed liquid-crystal
 elastomers](https://doi.org/10.1073/pnas.2414960122),
 [smectic 3D-printing inks](https://doi.org/10.1038/s41467-026-75368-z),
-and [rheology–printability relationships in direct ink writing](https://www.sciencedirect.com/science/article/pii/S0079642523001202)
+and [rheology–printability relationships in direct ink writing](https://doi.org/10.1016/j.pmatsci.2023.101188)
 illustrates adjacent problems in how flow history affects alignment, print
 fidelity, and final response.
 
