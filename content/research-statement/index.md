@@ -21,16 +21,46 @@ In the coauthored [dual-layer electrospun-fiber study](/publication/electrospun-
 
 ## Doctoral research direction
 
-My doctoral research direction extends those measurement principles to stimuli-responsive and liquid-crystalline soft materials through three linked questions.
+My doctoral research direction extends these measurement principles to soft
+functional materials. Small-molecule cholesteric mixtures serve as a
+**model system** for asking how processing can change internal order and
+observable behavior, without treating a model-system result as automatically
+transferable to a manufactured device. Three linked questions guide the work.
 
-**How does processing history affect structure?** Controlled temperature, flow, and deformation histories create defined conditions for comparing material states. Rheology can quantify the mechanical response; neutron scattering may supply complementary structural evidence where the relevant length scales and sample contrast make it an appropriate method.
+**How does processing history affect structure?** Heating, cooling, and
+shear can change cholesteric textures and rheological response. A mechanistic
+question is whether shear reorients an existing helical arrangement, changes
+local order, or unwinds the helix. Controlled histories define comparable
+states, while scattering may provide structural evidence where contrast and
+instrument geometry permit.
 
-**How can structure be connected to an observable response?** Optical metrology and mechanical measurements offer complementary views of material behavior. I aim to compare responses acquired under defined stimulus histories, testing which interpretations are supported by the combination of measurements rather than assigning unique structural meaning to color or force alone.
+**Which measurements distinguish competing interpretations?** Optical
+metrology, rheology, and scattering probe different aspects and length scales
+of material behavior. I aim to compare their responses under defined
+histories, testing which interpretations the combined evidence can support
+without assigning unique structural meaning to color, texture, or force alone.
 
-**What makes those comparisons reproducible?** Documented analysis windows, synchronized acquisition, repeated stimulus cycles, and versioned software help distinguish material-dependent variation from differences introduced by instruments and processing conditions. Automation is useful when it improves that consistency rather than merely increasing throughput.
+**What makes the result reproducible and useful?** Documented temperature
+ramps, shear conditions, calibration, repeated cycles, synchronized acquisition,
+and versioned software help distinguish material dependence from hysteresis
+or measurement drift. Automation is valuable when it improves the
+interpretability of those comparisons, not merely their throughput.
 
 ## Questions and boundaries
 
-The methods above describe a research direction, not a claim that every proposed experiment or scattering measurement has been completed. Questions of interest include how thermal and flow histories organize soft-matter structure, where scattering and rheology yield independent or complementary information, and whether passive optical responses can be calibrated for constrained, non-clinical visual-indication applications.
+The methods above describe a research direction, not a claim that every
+proposed experiment or scattering measurement has been completed. The
+longer-term aim is to carry mechanistic insights and validated measurement
+methods into responsive materials, passive indicators, and wearable interfaces,
+with application-specific testing before any performance claim.
 
-My approach prioritizes controlled comparisons, transparent analysis, and collaboration where distinct measurements answer a common scientific question. The broader [Research Program](/research/) connects these priorities to the publicly documented papers, software, and technical projects.
+Computational infrared thermography is a **separate exploratory measurement
+direction**, not a demonstrated extension of the cholesteric system. In
+particular, physiological or metabolic inference from thermal images would
+need suitable independent reference measurements and validation; it is not
+presented as a current diagnostic capability.
+
+My approach prioritizes controlled comparisons, transparent analysis, and
+collaboration where distinct methods answer a shared question. The broader
+[Research Program](/research/) connects these priorities to documented
+papers, software, and technical projects.
