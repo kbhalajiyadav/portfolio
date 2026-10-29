@@ -113,6 +113,11 @@ def main() -> int:
         errors.append("homepage research problem must introduce processing-dependent variation")
     if "model system" not in norm(doctoral.get("title")).casefold():
         errors.append("doctoral heading must frame liquid crystals as one model, not the entire research identity")
+    if "–" in doctoral.get("title", "") or "structure–response" in norm(doctoral.get("title")):
+        errors.append("doctoral homepage heading must remain clear to non-specialists, without compact technical notation")
+    home_applications = portfolio.get("applications", [])
+    if any(term in " ".join(home_applications).casefold() for term in ("3d-print", "printing ink", "functional ink", "extrudable")):
+        errors.append("homepage applications must not imply unpublished 3D-printing or functional-ink contributions; keep adjacent literature on the Research page")
 
     for field in ("role", "program", "institution"):
         if not norm(profile.get(field)):
