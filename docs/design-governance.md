@@ -154,6 +154,8 @@ The site should use the smallest set of component patterns that accurately fit t
 
 - Research programs may use the numbered three-part system.
 - Education and chronology use editorial/timeline structures.
+- About professional milestones should balance narrative weight across four periods. Use direct article, thesis, and software links for the M.S. interval, with advisor attribution; mentor names alone should not dominate the trajectory. Keep each milestone understandable without opening other pages.
+- In the About timeline, the vertical track and dots already express sequence. Avoid redundant row rules and surrounding horizontal framing. Institutional repository links must land on the specific thesis record, not a generic VCU page.
 - Presentation series use expandable records.
 - Detail pages use article/case-study layouts.
 - Do not introduce a new card style when an existing semantic pattern fits.
