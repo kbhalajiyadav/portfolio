@@ -265,6 +265,23 @@ LAYOUT_EXPRESSION = r"""
     contactIntroGap,
     outputLayout,
     aboutMethodBorders,
+    aboutTimeline:(() => {
+      const timeline = document.querySelector('.about-path');
+      if (!timeline) return null;
+      const milestones = [...timeline.querySelectorAll(':scope > article')];
+      const css = getComputedStyle(timeline);
+      return {
+        count:milestones.length,
+        outerRules:[css.borderTopWidth, css.borderBottomWidth].map(parseFloat),
+        rowRules:milestones.map(item => {
+          const computed = getComputedStyle(item);
+          return [computed.borderTopWidth, computed.borderBottomWidth].map(parseFloat);
+        }),
+        lengths:milestones.map(item => item.querySelector('.about-path__content')?.textContent.trim().split(/\s+/).length || 0),
+        milestoneLinks:milestones.map(item => [...item.querySelectorAll('a[href]')].map(link => link.getAttribute('href'))),
+        periods:milestones.map(item => item.querySelector('.about-path__period')?.textContent.trim() || ''),
+      };
+    })(),
     editorialPairs:[...document.querySelectorAll('main .section-head')]
       .filter(section => section.querySelector(':scope > h2') && section.querySelector(':scope > p:not(.kicker)'))
       .map(section => {
@@ -510,6 +527,24 @@ def main() -> int:
                                 elif pair["columns"] != 1 or not 0 <= pair["proseTop"] - pair["titleBottom"] <= 48:
                                     record_errors.append(f"{pair['id']}: stacked heading/intro spacing is unstable: {pair}")
                         if page_name == "about":
+                            timeline = layout.get("aboutTimeline")
+                            if not timeline or timeline["count"] != 4:
+                                record_errors.append(f"About chronology must have four dated entries: {timeline}")
+                            elif timeline["periods"] != ["2018–2022", "2022–2024", "2024–2026", "2026–present"]:
+                                record_errors.append(f"About chronology order differs from canonical source: {timeline['periods']}")
+                            if timeline:
+                                if any(value > 0 for value in timeline["outerRules"] + [
+                                    edge for row in timeline["rowRules"] for edge in row
+                                ]):
+                                    record_errors.append(f"About chronology has redundant horizontal row separators: {timeline}")
+                                link_set = set(timeline["milestoneLinks"][2]) if len(timeline["milestoneLinks"]) >= 3 else set()
+                                required = {
+                                    "/publication/adhesives-wearable/",
+                                    "/publication/masters-thesis/",
+                                    "/project/peel-trace-evaluation/",
+                                }
+                                if not required.issubset(link_set):
+                                    record_errors.append(f"About M.S. milestone lacks evidence links: {sorted(required - link_set)}")
                             pairs = layout.get("aboutIntroPairs", [])
                             if len(pairs) < 5:
                                 record_errors.append(f"About editorial headings/introductions are missing: {pairs}")
