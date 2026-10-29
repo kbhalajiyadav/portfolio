@@ -102,7 +102,8 @@ Rules:
 
 - Related heading/body pairs must have visible breathing room; headings should not visually collide with body text.
 - In two-column editorial section headers, the right-hand introduction aligns with the top of the left-hand heading, not with the eyebrow/kicker above it. At compact widths it follows the heading in normal reading order. Check computed bounding boxes in browser audits rather than relying on heading line counts or visual estimates.
-- Apply the same alignment check to About's nested title/summary headers. Intentional exceptions, such as side-by-side research-question labels, should be evaluated by their own semantics rather than normalized blindly.
+- Give the kicker-to-heading gap a consistent compact rhythm across desktop and mobile; do not let later non-media styles override mobile spacing.
+- Apply the same alignment check to About's title/summary headers, using shared grid rows rather than an arbitrary top padding. Intentional exceptions, such as side-by-side research-question labels, should be evaluated by their own semantics rather than normalized blindly.
 - Section spacing should communicate hierarchy: page shell -> section -> subsection -> heading/body -> record.
 - Equal-height cards are used only when content and comparison benefit from equal height.
 - Intrinsic-height editorial structures are preferred for education, timelines, records, and asymmetric content.
