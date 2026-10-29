@@ -104,6 +104,28 @@ GEOMETRY_EXPRESSION = r"""
     }),
     articleHeadingMargins: articleHeadings.map((element) => number(getComputedStyle(element).marginTop)),
     articleFlowRhythm: [...document.querySelectorAll('.article-content')].flatMap(inspectFlow),
+    homepageSectionRhythm: sections.map(section => {
+      const style = getComputedStyle(section);
+      const visibleChildren = [...section.children].filter(child => {
+        const appearance = getComputedStyle(child);
+        const box = child.getBoundingClientRect();
+        return appearance.display !== 'none' && box.height > 0;
+      });
+      const sectionBox = section.getBoundingClientRect();
+      const lastChildBottom = visibleChildren.length
+        ? Math.max(...visibleChildren.map(child => child.getBoundingClientRect().bottom))
+        : null;
+      return {
+        id: section.id || 'unnamed',
+        flow: inspectFlow(section),
+        bottomPadding: number(style.paddingBottom),
+        trailingGap: lastChildBottom === null ? null : sectionBox.bottom - lastChildBottom,
+        bottomBorder: number(style.borderBottomWidth),
+        topBorder: number(style.borderTopWidth),
+        top: sectionBox.top,
+        bottom: sectionBox.bottom
+      };
+    }),
     abstractSurface: abstractStyle ? {
       backgroundColor: abstractStyle.backgroundColor,
       boxShadow: abstractStyle.boxShadow,
@@ -155,6 +177,36 @@ def validate(record: dict, page_name: str, page_level: str) -> list[str]:
         for index, padding in enumerate(record.get("sectionPadding", []), start=1):
             if not between(padding["top"], 64, 112) or not between(padding["bottom"], 64, 112):
                 errors.append(f"homepage section {index} spacing is inconsistent: {padding}")
+        # Check actual content geometry rather than freezing every margin
+        # to one screenshot or applying the same rules to unrelated cards.
+        rhythm = record.get("homepageSectionRhythm", [])
+        if len(rhythm) < 4:
+            errors.append("homepage section-rhythm anchors are missing")
+        for section in rhythm:
+            tail = section.get("trailingGap")
+            bottom_padding = section.get("bottomPadding", 0)
+            if tail is None or tail < bottom_padding - 8 or tail > bottom_padding + 32:
+                errors.append(
+                    f"{section['id']}: excess blank space after last section element: "
+                    f"trailing={tail}, padding={bottom_padding:.1f}px"
+                )
+            for pair in section.get("flow", []):
+                if pair["gap"] > 192:
+                    errors.append(
+                        f"{section['id']}: unexplained internal whitespace: "
+                        f"{pair['from']} -> {pair['to']} = {pair['gap']:.1f}px"
+                    )
+                if pair["stackedRules"]:
+                    errors.append(
+                        f"{section['id']}: adjacent content has stacked dividers: "
+                        f"{pair['from']} -> {pair['to']}"
+                    )
+        for before, after in zip(rhythm, rhythm[1:]):
+            # The content flow may contain intentional non-section material.
+            # Two touching full-width rules, however, should never substitute
+            # for a meaningful semantic boundary.
+            if before["bottomBorder"] > 0 and after["topBorder"] > 0 and abs(after["top"] - before["bottom"]) <= 20:
+                errors.append(f"stacked section boundaries: {before['id']} -> {after['id']}")
     else:
         shell = record.get("shell")
         back = record.get("backLink")
