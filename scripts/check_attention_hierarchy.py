@@ -131,6 +131,13 @@ PAGE_METRICS = r"""
       evidenceCount:item.querySelectorAll('.trajectory-grid article, .questions article, .compact-record').length,
       bodyVisible:!!item.querySelector('.home-disclosure__body')?.getClientRects().length,
     })),
+    researchDisclosureGap:(() => {
+      const section = document.querySelector('#research');
+      const details = section?.querySelector('.research-extension__details');
+      return section && details
+        ? section.getBoundingClientRect().bottom - details.getBoundingClientRect().bottom
+        : null;
+    })(),
   };
 })()
 """
@@ -376,6 +383,11 @@ def main() -> int:
                         errors.append(f"{prefix}: selected outputs headline is overly tall ({title_lines} lines)")
                     if metrics.get("researchPackageCount") != 1 or metrics.get("secondaryOutputCount") != 1:
                         errors.append(f"{prefix}: homepage outputs must stay curated to one flagship research group plus one IP record")
+                    # Collapsed details should not reserve an unexplained blank band
+                    # before the section boundary; the sitewide minimum remains 64px.
+                    trailing = metrics.get("researchDisclosureGap")
+                    if trailing is None or not 62 <= trailing <= 90:
+                        errors.append(f"{prefix}: closed doctoral disclosure leaves excessive bottom whitespace: {trailing}")
                     disclosures = metrics.get("disclosures", [])
                     if len(disclosures) != 2:
                         errors.append(f"{prefix}: two accessible secondary evidence disclosures required, got {len(disclosures)}")
@@ -409,10 +421,30 @@ def main() -> int:
                         overflow:document.documentElement.scrollWidth > innerWidth + 2,
                         researchCount:items[0]?.querySelectorAll('.trajectory-grid article, .questions article').length || 0,
                         engagementCount:items[1]?.querySelectorAll('.compact-record').length || 0,
+                        editorialFlow:(() => {
+                          const questions = research?.querySelector('.questions');
+                          const methods = research?.querySelector('.trajectory-grid');
+                          const kicker = research?.querySelector('.questions__head .kicker');
+                          const title = research?.querySelector('.questions__head h3');
+                          const questionGrid = research?.querySelector('.questions__grid');
+                          return questions && methods && kicker && title && questionGrid ? {
+                            questionsBeforeMethods:questions.compareDocumentPosition(methods) & Node.DOCUMENT_POSITION_FOLLOWING ? true : false,
+                            headingGap:title.getBoundingClientRect().top - kicker.getBoundingClientRect().bottom,
+                            questionToMethodGap:methods.getBoundingClientRect().top - questionGrid.getBoundingClientRect().bottom,
+                            columns:getComputedStyle(questionGrid).gridTemplateColumns.split(/\s+/).filter(Boolean).length,
+                          } : null;
+                        })(),
                       };
                     })()""")
                     if not expanded["visible"] or expanded["overflow"] or expanded["researchCount"] < 5 or expanded["engagementCount"] < 4:
                         errors.append(f"{prefix}: expanded secondary evidence must remain fully readable: {expanded}")
+                    flow = expanded.get("editorialFlow")
+                    if not flow or not flow["questionsBeforeMethods"] or not 4 <= flow["headingGap"] <= 24:
+                        errors.append(f"{prefix}: question heading is not aligned as one editorial unit: {flow}")
+                    if flow and not 20 <= flow["questionToMethodGap"] <= 64:
+                        errors.append(f"{prefix}: research questions/methods separation is inconsistent: {flow}")
+                    if flow and flow["columns"] != (1 if width <= 820 else 3):
+                        errors.append(f"{prefix}: open questions need readable responsive columns: {flow}")
                     rules = expanded.get("rules", {})
                     disclosure_rules = rules.get("disclosure")
                     if not disclosure_rules or not (0 < disclosure_rules[0] <= 2) or sum(disclosure_rules[1:]) > 0:

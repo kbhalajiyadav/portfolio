@@ -1,7 +1,7 @@
 ---
 title: "Research Program"
 kicker: "Research overview"
-summary: "How processing changes responsive soft and liquid-crystalline materials—and how to measure those changes."
+summary: "How processing histories organize soft functional materials, and how to measure the resulting response reliably."
 date: "2026-07-28T00:00:00Z"
 lastmod: "2026-10-13T00:00:00Z"
 toc: true
@@ -19,9 +19,9 @@ For a focused account of my research background, doctoral questions, and experim
 
 ## Research focus
 
-My research asks two linked questions: what changes inside a responsive
-material during processing, and which measurements can track that change
-reliably? The work moves through five stages:
+My research asks how thermal and mechanical histories organize soft functional
+materials, which structural changes explain their responses, and what makes
+those measurements trustworthy. The work connects five stages:
 
 {{< research-signature >}}
 
@@ -46,30 +46,49 @@ Related work:
 
 ## Resolve structure under stimuli
 
-The doctoral direction examines how thermal, flow, and deformation histories
-organize liquid-crystalline and soft-material structure. Rheology defines the
-mechanical history; neutron scattering is used when its length scale and
-contrast can answer a specific structural question. Optical measurements then
-connect structural change to observable behavior.
+Small-molecule cholesteric mixtures provide a **model system** for investigating
+how cooling and shear reorganize liquid-crystalline order. They show optical
+textures under controlled processing without introducing polymer-chain
+dynamics, while leaving important structural mechanisms open to investigation.
+
+One question is whether a change in optical texture under shear reflects
+reorientation of helical structure, changes in local orientation, or unwinding.
+Optics alone need not distinguish those possibilities. Rheology records the
+mechanical response; appropriately selected scattering measurements can
+provide complementary structural information when their length scale,
+contrast, and geometry support the comparison. These are research hypotheses,
+not claims that the competing mechanisms have been resolved.
+
+The broader goal is to develop transferable methods for connecting processing
+history, structure, and response across other responsive soft materials.
 
 ## Translate reproducibly
 
-Results can be compared across experiments only when stimulus cycles,
-acquisition timing, analysis rules, and software versions are documented. The
-[peel-trace analysis software](/project/peel-trace-evaluation/) is one example.
+Reproducible measurements must distinguish changes in material state from
+heating/cooling hysteresis, recovery effects, environmental conditions, and
+instrument drift. Documenting thermal and shear protocols, acquisition timing,
+calibration, and analysis versions is therefore as important as increasing
+experimental throughput.
 
-For repeated or long-duration experiments, automation can standardize sample
-placement, stimulus timing, and synchronized data capture. Robotic handling can
-extend the same approach to feedback-controlled sequences.
+The [peel-trace analysis software](/project/peel-trace-evaluation/) is an
+existing example of versioned measurement analysis. Synchronized thermal,
+optical, mechanical, and structural workflows are a **prospective direction**;
+they are not presented here as a completed automation platform.
 
 ## Application directions
 
-Potential applications include:
+Potential translation paths include:
 
-- passive visual temperature mapping and wearable indicators;
-- non-contact optical monitoring and condition indication;
-- visual inspection and safety cues where powered instrumentation is impractical; and
-- adaptive or decorative surfaces whose response can be quantified and reproduced.
+- calibrated characterization of thermochromic and responsive materials;
+- passive thermal indication and wearable interfaces requiring their own performance validation; and
+- **exploratory computational thermography**, using infrared-image analysis
+  independently of liquid-crystal-based indicators.
+
+Infrared thermography and thermochromic color sensing use different physical
+measurement principles. Estimating physiological quantities such as body-fat
+percentage or metabolic rate from skin-temperature imagery would require
+independent reference data and rigorous validation; these are **not** current
+capabilities or diagnostic claims.
 
 A Spring 2026 applied-innovation prototype explored this translation through a
 battery-free thermochromic foot-care sock concept for personalized heat-pattern
@@ -94,6 +113,6 @@ University intellectual-property status.
 
 ## Open research questions
 
-- How do thermal and flow histories organize liquid-crystal structure across relevant time and length scales?
-- How can neutron scattering, rheology, optical metrology, and mechanics reveal structure–processing–property relationships?
-- How can passive thermochromic and soft-material systems be translated into reliable temperature-mapping, wearable, and sensing applications?
+- **Processing history and molecular order:** How do heating, cooling, and shear alter cholesteric orientation, structural transitions, and recovery? When does helical order persist, reorient, or unwind?
+- **Structure and trustworthy measurement:** Which combinations of rheology, scattering, and optical measurements can distinguish structural changes from hysteresis, experimental drift, and competing interpretations?
+- **From measured response to function:** What calibration, stability, and repeatability are needed before optical or mechanical responses can support sensing and materials applications?

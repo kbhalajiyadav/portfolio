@@ -81,6 +81,9 @@ Rules:
 - Use method-level terms on program pages (`computer vision`) and implementation-specific tools (`OpenCV`) where technical detail is appropriate.
 - Avoid governance, audit, release, benchmark, package, or staging language in visitor-facing prose unless the subject itself requires it.
 - Homepage copy argues the research identity; destination pages carry the fuller evidence.
+- Describe small-molecule cholesteric liquid crystals as a model system for testing processing–structure–response questions; do not imply the model alone establishes device performance or a resolved structural mechanism.
+- Distinguish infrared thermography from thermochromic sensing. Physiological body-fat, metabolic-rate, or diagnostic predictions are not established capabilities without independent reference validation.
+- Clearly differentiate published work, existing software, unpublished preliminary observations, proposed methods, prototypes, and possible commercial applications. Avoid unsupported numerical savings or health claims.
 - Repetition across Home, About, Research, Outputs, Experience, and Engagement should be intentional and role-specific.
 
 ## 6. Counts, dates, and derived claims
@@ -108,6 +111,7 @@ Rules:
 - Equal-height cards are used only when content and comparison benefit from equal height.
 - Intrinsic-height editorial structures are preferred for education, timelines, records, and asymmetric content.
 - Large unused white zones require a content or hierarchy reason; they are not a substitute for spacing.
+- In expanded research disclosures, present questions before methods and application hypotheses. A collapsed disclosure should not leave an oversized empty band; preserve its keyboard-focus indicator while removing purely decorative boxing.
 - Repeated cards, borders, shadows, or callouts should be removed when they do not add semantic structure.
 
 ## 8. Responsive composition

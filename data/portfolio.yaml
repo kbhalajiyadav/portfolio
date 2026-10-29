@@ -248,15 +248,15 @@ teaching:
   detail: Supported students in laboratory safety, literature review, experimental planning, and the preparation
     of scientific figures.
 collaboration_questions:
-- title: Structure under processing
-  text: How do thermal and flow histories organize liquid-crystal structure across relevant time and length
-    scales?
-- title: Structure to measurable response
-  text: How can neutron scattering, rheology, optical metrology, and mechanics reveal structure–processing–property
-    relationships?
-- title: Materials to applications
-  text: How can passive thermochromic and soft-material systems be translated into reliable temperature-mapping,
-    wearable, and sensing applications?
+- title: Processing history and molecular order
+  text: How do heating, cooling, and shear alter cholesteric orientation, structural transitions, and recovery?
+    When does helical order persist, reorient, or unwind?
+- title: Structure and trustworthy measurement
+  text: Which combinations of rheology, scattering, and optical measurements can distinguish structural
+    changes from hysteresis, experimental drift, and competing interpretations?
+- title: From measured response to function
+  text: What calibration, stability, and repeatability are needed before optical or mechanical responses
+    can support sensing and materials applications?
 narrative:
   problem_title: From stimulus to structure to measurement.
   problem: Responsive materials can change color, stiffness, or organization. The harder question is whether
@@ -270,17 +270,19 @@ narrative:
   chain_note: Temperature, deformation, and flow alter structure; measurements connect those changes to
     optical and mechanical behavior and to the conditions that produced them.
 applications:
-- Passive visual temperature mapping and wearable indicators
-- Non-contact optical monitoring and condition indication
-- Visual inspection and safety cues where powered instrumentation is impractical
-- Adaptive or decorative surfaces whose response can be quantified and reproduced
+- Characterization of thermochromic and other responsive materials under controlled thermal histories
+- Passive thermal indicators and wearable interfaces, subject to device-specific validation
+- Exploratory infrared-thermography analysis software, separate from material-based color sensing
 doctoral:
   title: My doctoral work asks how processing history organizes liquid-crystal structure.
-  text: I use rheology, structure-sensitive characterization, and quantitative optical and mechanical
-    measurements to connect thermal and flow histories to material behavior, with an emphasis on methods
-    that can be compared across experiments and scales.
-  robotics: Automation can standardize sample placement, stimulus timing, and synchronized data capture for
-    repeated or long-duration experiments, improving consistency across stimulus cycles.
+  text: Small-molecule cholesteric mixtures provide a model system for investigating how temperature
+    and flow shape molecular order and measurable response. I bring together rheology, structure-sensitive
+    characterization, and quantitative optical methods; the broader aim is reproducible measurement
+    across responsive soft materials.
+  robotics: Controlled heating, cooling, and shear histories can help distinguish reversible response
+    from hysteresis, structural recovery, and measurement drift. I am interested in synchronizing
+    experimental conditions with optical, mechanical, and structural measurements to test repeatability
+    across stimulus cycles.
 presentation_series:
 - id: adhesion-soft-wearable-interfaces
   title: Adhesive selection and soft wearable interfaces

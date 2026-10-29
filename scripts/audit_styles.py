@@ -108,6 +108,17 @@ def main() -> int:
     if re.search(r"\.research-figure\{margin:0\}\s*\.package-lead>\.research-figure--featured\s*\{", REF):
         errors.append("featured figure spacing must not be re-overridden after its canonical layout rule")
 
+    # Research disclosure stays editorial and compact, rather than reserving a
+    # large decorative blank area when collapsed.
+    for selector, declaration in (
+        ("#research.section", "padding-bottom:4rem"),
+        (".research-extension__details>.home-disclosure__body", "padding:1.1rem 0 .5rem"),
+        (".questions__head", "display:block"),
+        (".trajectory-grid", "grid-template-columns:repeat(2,minmax(0,1fr))"),
+    ):
+        if not rule_has(REF, selector, declaration):
+            errors.append(f"research disclosure composition invariant missing: {selector}: {declaration}")
+
     # Native homepage disclosures must stay legible, keyboard-focusable, and unboxed.
     for selector, declaration in (
         (".home-disclosure", "border-top:1px solid var(--line-strong)"),

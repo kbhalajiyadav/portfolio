@@ -142,6 +142,18 @@ def main() -> int:
             errors.append(f"homepage {label} disclosure must retain its evidence body")
     if not all(marker in trajectory for marker in ('class="trajectory-grid"', 'class="questions__grid"', 'Open research questions')):
         errors.append("homepage doctoral disclosure must preserve applications, automation, and questions")
+    if trajectory.find('class="questions"') < 0 or trajectory.find('class="trajectory-grid"') < 0 or trajectory.find('class="questions"') > trajectory.find('class="trajectory-grid"'):
+        errors.append("doctoral disclosure must lead with research questions, then methods and applications")
+    if not all(marker in trajectory for marker in ('Controlled histories and repeatable measurement', 'Potential application directions')):
+        errors.append("doctoral research evidence must distinguish measurement methods from potential applications")
+    research_page = (ROOT / "content/research/index.md").read_text(encoding="utf-8")
+    research_statement = (ROOT / "content/research-statement/index.md").read_text(encoding="utf-8")
+    if "model system" not in research_page or "model system" not in research_statement:
+        errors.append("research content must explain the cholesteric model-system role")
+    if "infrared thermography" not in research_page.lower() or "computational infrared thermography" not in research_statement.lower():
+        errors.append("research content must distinguish exploratory infrared software from thermochromic sensing")
+    if "not" not in research_page.split("Estimating physiological quantities", 1)[-1].split("\n\n", 1)[0]:
+        errors.append("research content must not present physiological inference as a validated result")
     # Homepage selected-outputs heading must introduce the featured study without
     # becoming a four-line inventory of every possible output type.
     if "<h2>Published research and tools.</h2>" not in home:
