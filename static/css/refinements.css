@@ -21,7 +21,7 @@
 .identity-note{right:-.85rem}
 .section{padding-block:var(--refined-section-space)}
 .section[id],.contact-section[id]{scroll-margin-top:calc(var(--header-h) + 38px)}
-.section-head{gap:1.6rem 4.5rem;margin-bottom:2.6rem}
+.section-head{gap:1rem 4.5rem;margin-bottom:2.6rem}
 .section-head h2{max-width:19ch}
 .pillars{align-items:stretch}
 .pillar{min-height:0;padding:1.85rem}
@@ -153,6 +153,9 @@ html[data-analytics-consent="unknown"] .privacy-banner+main .page-shell{padding-
   .engagement-grid>div:first-child{grid-column:1/-1}
 }
 @media(max-width:980px){
+  /* Stack section headers with a compact label, heading and introduction rhythm. */
+  .section-head{grid-template-columns:1fr;gap:.65rem}
+
   .identity-note{right:0}
   .site-nav .nav-about{margin:0 0 .35rem;padding:.75rem 0 1rem;border-right:0;border-bottom:1px solid var(--line)}
   .site-nav .nav-about:hover::after,.site-nav .nav-about:focus-visible::after,.site-nav .nav-about.is-current-page::after{right:0}

@@ -264,6 +264,29 @@ LAYOUT_EXPRESSION = r"""
     contactIntroGap,
     outputLayout,
     aboutMethodBorders,
+    editorialPairs:[...document.querySelectorAll('main .section-head')]
+      .filter(section => section.querySelector(':scope > h2') && section.querySelector(':scope > p:not(.kicker)'))
+      .map(section => {
+        const title = section.querySelector(':scope > h2').getBoundingClientRect();
+        const prose = section.querySelector(':scope > p:not(.kicker)').getBoundingClientRect();
+        const label = section.querySelector(':scope > .kicker')?.getBoundingClientRect();
+        return {
+          id:section.closest('[id]')?.id || 'unnamed',
+          titleTop:title.top,titleBottom:title.bottom,proseTop:prose.top,
+          labelBottom:label?.bottom ?? null,
+          columns:getComputedStyle(section).gridTemplateColumns.split(/\s+/).filter(Boolean).length
+        };
+      }),
+    aboutIntroPairs:[...document.querySelectorAll('.about-section__intro')]
+      .map(section => {
+        const title = section.querySelector('.about-section__intro > h2')?.getBoundingClientRect();
+        const prose = section.querySelector('.about-section__summary p')?.getBoundingClientRect();
+        return title && prose ? {
+          id:section.closest('[id]')?.id || 'unnamed',
+          titleTop:title.top,titleBottom:title.bottom,proseTop:prose.top,
+          columnCount:getComputedStyle(section).gridTemplateColumns.split(/\s+/).filter(Boolean).length
+        } : null;
+      }).filter(Boolean),
     outputFilterRules,
     schematicBorders,
     h1Count: document.querySelectorAll('h1').length,
@@ -452,7 +475,29 @@ def main() -> int:
                                     record_errors.append(
                                         "featured figure must retain dataset, source code, and license links"
                                     )
+                        if page_name in {"home", "experience", "engagement"}:
+                            pairs = layout.get("editorialPairs", [])
+                            minimum = 4 if page_name == "home" else 1
+                            if len(pairs) < minimum:
+                                record_errors.append(f"missing shared heading/intro pairs: {pairs}")
+                            for pair in pairs:
+                                if width >= 981:
+                                    if pair["columns"] != 2 or abs(pair["proseTop"] - pair["titleTop"]) > 4:
+                                        record_errors.append(f"{pair['id']}: introduction/title desktop misalignment: {pair}")
+                                elif pair["columns"] != 1 or not 0 <= pair["proseTop"] - pair["titleBottom"] <= 48:
+                                    record_errors.append(f"{pair['id']}: stacked heading/intro spacing is unstable: {pair}")
                         if page_name == "about":
+                            pairs = layout.get("aboutIntroPairs", [])
+                            if len(pairs) < 5:
+                                record_errors.append(f"About editorial headings/introductions are missing: {pairs}")
+                            for pair in pairs:
+                                if width >= 981:
+                                    if pair["columnCount"] != 2 or abs(pair["proseTop"] - pair["titleTop"]) > 4:
+                                        record_errors.append(
+                                            f"About/{pair['id']} summary does not align with the heading: {pair}"
+                                        )
+                                elif pair["columnCount"] != 1 or not 0 <= pair["proseTop"] - pair["titleBottom"] <= 56:
+                                    record_errors.append(f"About/{pair['id']} stacked heading/summary gap is unstable: {pair}")
                             methods = layout.get("aboutMethodBorders")
                             if not methods or len(methods.get("cards", [])) != 3:
                                 record_errors.append("About method columns are missing")
