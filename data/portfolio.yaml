@@ -254,9 +254,9 @@ collaboration_questions:
 - title: Structure and trustworthy measurement
   text: Which combinations of rheology, scattering, and optical measurements can distinguish structural
     changes from hysteresis, experimental drift, and competing interpretations?
-- title: From measured response to function
-  text: What calibration, stability, and repeatability are needed before optical or mechanical responses
-    can support sensing and materials applications?
+- title: Calibrating response across thermal cycles
+  text: How consistently can temperature-dependent optical responses be calibrated over repeated heating
+    and cooling cycles, and what limits their use as quantitative thermal indicators?
 narrative:
   problem_title: From stimulus to structure to measurement.
   problem: Responsive materials can change color, stiffness, or organization. The harder question is whether
