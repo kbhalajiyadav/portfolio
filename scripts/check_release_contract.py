@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Exercise the exact homepage release contract against a local Hugo build."""
+"""Exercise the deployed text and homepage stylesheet contract against a local Hugo build."""
 from __future__ import annotations
 
 import argparse
@@ -15,8 +15,25 @@ def main() -> int:
     parser.add_argument("site", type=Path)
     args = parser.parse_args()
     site = args.site.resolve()
-    body = normalize_optional_attribute_quotes((site / "index.html").read_text(encoding="utf-8"))
-    errors = [f"generated homepage missing {needle!r}" for needle in EXPECTED_TEXT[""] if needle not in body]
+    # Apply the same textual release contract to every generated page that the
+    # deployed-site smoke test will inspect. Catch stale assertions before deploy.
+    errors: list[str] = []
+    body = ""
+    for route, needles in EXPECTED_TEXT.items():
+        path = site / route / "index.html" if not route or route.endswith("/") else site / route
+        if not path.is_file():
+            errors.append(f"generated release path missing: {route or '/'}")
+            continue
+        page_text = path.read_text(encoding="utf-8")
+        if path.suffix == ".html":
+            page_text = normalize_optional_attribute_quotes(page_text)
+        if not route:
+            body = page_text
+        errors.extend(
+            f"generated {route or 'homepage'} missing {needle!r}"
+            for needle in needles
+            if needle not in page_text
+        )
     for obsolete in ("From stimulus to structure to measurement.", "Schematic; no quantitative data are implied."):
         if obsolete in body:
             errors.append(f"generated homepage still contains stale text {obsolete!r}")
@@ -34,7 +51,7 @@ def main() -> int:
         for error in errors:
             print(f"ERROR: {error}")
         return 1
-    print("Generated homepage revision and deployed-stylesheet contract passed.")
+    print("Generated site release text and deployed-stylesheet contract passed.")
     return 0
 
 
