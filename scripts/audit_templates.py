@@ -152,6 +152,8 @@ def main() -> int:
     about_template = (LAYOUTS / "about/single.html").read_text(encoding="utf-8")
     if 'href="{{ "/research-statement/" | relURL }}"' not in about_template:
         errors.append("About must link to the research statement")
+    if '{{ .text | markdownify }}' not in about_template:
+        errors.append("About chronology must render canonical research evidence links as hyperlinks")
     cv_builder = (ROOT / "scripts/build_cv.py").read_text(encoding="utf-8")
     cv_data = (ROOT / "data/cv.yaml").read_text(encoding="utf-8")
     if 'href(p["research_statement"], "Research statement (online)")' not in cv_builder or 'research_statement: https://bhalaji.com/research-statement/' not in cv_data:
