@@ -52,6 +52,11 @@ a:hover .content-link__arrow--internal,a:focus-visible .content-link__arrow--int
   :root{--shell:clamp(1280px,88vw,1520px)}
   .hero__visual{width:min(100%,410px)}
 }
+/* Give the display headline enough room on widescreens, without widening prose or portrait. */
+@media(min-width:1680px){
+  .hero__copy{max-width:940px}
+  .hero h1{max-width:100%;text-wrap:balance}
+}
 
 @media(max-width:980px){
   .hero{grid-template-columns:1fr;gap:2.5rem;padding-block:3rem 3.75rem}

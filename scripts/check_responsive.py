@@ -25,6 +25,7 @@ VIEWPORTS = [
     (980, 900, "980-laptop-boundary"),
     (1180, 900, "1180-desktop-boundary"),
     (1440, 1000, "1440-desktop"),
+    (1725, 1000, "1725-wide-hero"),
     (1920, 1080, "1920-wide"),
     (720, 500, "200-percent-zoom-equivalent"),
 ]
@@ -281,7 +282,17 @@ LAYOUT_EXPRESSION = r"""
       const title = document.querySelector('.hero h1');
       if (!title) return null;
       const style = getComputedStyle(title);
-      return {fontSize:parseFloat(style.fontSize),lineHeight:parseFloat(style.lineHeight),letterSpacing:parseFloat(style.letterSpacing)};
+      const rect=title.getBoundingClientRect();
+      const copy=title.closest('.hero__copy');
+      return {
+        fontSize:parseFloat(style.fontSize),
+        lineHeight:parseFloat(style.lineHeight),
+        letterSpacing:parseFloat(style.letterSpacing),
+        renderedLines:rect.height/parseFloat(style.lineHeight),
+        titleWidth:rect.width,
+        copyWidth:copy?.getBoundingClientRect().width ?? null,
+        measuredLedeWidth:document.querySelector('.hero .lede')?.getBoundingClientRect().width ?? null
+      };
     })(),
     homeResearchDiagramGap:(() => {
       const section = document.querySelector('#research');
@@ -622,6 +633,12 @@ def main() -> int:
                                 record_errors.append(f"homepage research introduction and numbered workflow are separated by excessive blank space: {gap}")
                         if page_name == "research" and layout.get("scholarlyInlineArrows"):
                             record_errors.append("scholarly prose has redundant directional arrows after inline links")
+                        if page_name == "home" and width >= 1680:
+                            heading = layout.get("heroTypography")
+                            if not heading or not 1.8 <= heading["renderedLines"] <= 2.2 or heading["copyWidth"] < 880:
+                                record_errors.append(f"wide desktop hero must have a readable two-line headline without a cramped text column: {heading}")
+                            elif heading["measuredLedeWidth"] is not None and heading["measuredLedeWidth"] > 680:
+                                record_errors.append(f"wide desktop hero paragraph is too long to read comfortably: {heading}")
                         if page_name == "home" and width <= 680:
                             heading = layout.get("heroTypography")
                             if not heading or not 1.08 <= heading["lineHeight"] / heading["fontSize"] <= 1.28 or heading["letterSpacing"] < -0.023 * heading["fontSize"]:
