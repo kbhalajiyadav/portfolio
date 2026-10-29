@@ -62,17 +62,14 @@ The question here is not whether shear can change texture, but which
 structural processes explain the measured optical and rheological responses
 for a specified mixture and processing history.
 
-The broader goal is to test which **measurement and analysis methods** can transfer
-to other responsive materials and process-sensitive formulations. Functional
-printing inks, extrusion-processed soft composites, and liquid-crystal
-elastomers pose adjacent processing–structure–response questions; they do not
-necessarily share the cholesteric model system's molecular mechanism.
-
-Published examples of [flow-programmed alignment in printed liquid-crystal
-elastomers](https://doi.org/10.1073/pnas.2414960122) and
-[temperature- and shear-controlled smectic ink printing](https://doi.org/10.1038/s41467-026-75368-z)
-illustrate that connection. They are studies by other groups, not findings
-from my cholesteric experiments.
+The broader goal is to identify which **controlled protocols and measurement
+methods** can be useful across process-sensitive materials without assuming a
+shared molecular mechanism. Published work on [printed liquid-crystal
+elastomers](https://doi.org/10.1073/pnas.2414960122),
+[smectic 3D-printing inks](https://doi.org/10.1038/s41467-026-75368-z),
+and [rheology–printability relationships in direct ink writing](https://www.sciencedirect.com/science/article/pii/S0079642523001202)
+illustrates adjacent problems in how flow history affects alignment, print
+fidelity, and final response.
 
 ## Translate reproducibly
 
@@ -91,25 +88,18 @@ they are not presented here as a completed automation platform.
 
 Potential translation paths include:
 
-- process-history-aware characterization of responsive formulations;
-- rheology-guided evaluation of printable functional inks and soft composites,
-  requiring system-specific measurements; and
-- repeatable calibration of passive thermal indicators and wearable interfaces
-  before any application-level performance claim.
+- rheological characterization of functional inks and extrusion-based 3D
+  printing, with deposition and shape retention assessed for each formulation;
+- process–microstructure–property studies in printed coatings and electronics,
+  including film formation and electrical performance where relevant; and
+- calibration and repeatability of passive thermal indicators and wearable
+  interfaces, with application-specific validation before performance claims.
 
-Separately, **exploratory computational thermography** applies infrared-image
-analysis independently of liquid-crystal-based color indicators.
-
-Infrared thermography and thermochromic color sensing use different physical
-measurement principles. Estimating physiological quantities such as body-fat
-percentage or metabolic rate from skin-temperature imagery would require
-independent reference data and rigorous validation; these are **not** current
-capabilities or diagnostic claims.
-
-A Spring 2026 applied-innovation prototype explored this translation through a
-battery-free thermochromic foot-care sock concept for personalized heat-pattern
-monitoring in people with diabetes. It was demonstrated as a prototype rather
-than evaluated as a clinical device; see the [applied-innovation record](/engagement/#engagement-contributions-heading).
+**Separate exploratory direction:** computational infrared thermography uses
+different sensing physics from thermochromic indicators. No physiological
+inference or diagnostic capability is claimed. The
+[2026 thermochromic foot-care prototype](/engagement/#engagement-contributions-heading)
+was a demonstration concept, not a clinically evaluated device.
 
 ## Connected research outputs
 
