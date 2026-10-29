@@ -32,7 +32,10 @@ shear can change cholesteric textures and rheological response. A mechanistic
 question is whether shear reorients an existing helical arrangement, changes
 local order, or unwinds the helix. Controlled histories define comparable
 states, while scattering may provide structural evidence where contrast and
-instrument geometry permit.
+instrument geometry permit. Shear-driven cholesteric texture changes were
+[observed decades ago](https://doi.org/10.1103/PhysRevLett.27.790);
+the present question is how to distinguish competing structural explanations
+under defined histories, rather than claim the texture change is new.
 
 **Which measurements distinguish competing interpretations?** Optical
 metrology, rheology, and scattering probe different aspects and length scales
