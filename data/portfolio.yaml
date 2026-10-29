@@ -4,9 +4,9 @@ profile:
   role: Ph.D. student
   program: Integrative Life Sciences
   institution: Virginia Commonwealth University
-  eyebrow: Stimuli-responsive materials · Measurement under processing
-  headline: How processing history shapes material response.
-  summary: I study how heating, cooling, and shear influence liquid-crystalline and other soft materials. I use rheology, quantitative imaging, and mechanics to test how changes in structure relate to optical and mechanical response.
+  eyebrow: Soft matter · Rheology · Quantitative imaging
+  headline: Making material response measurable and interpretable.
+  summary: I investigate how heating, cooling, and flow affect liquid-crystalline and other soft materials, using rheology, quantitative imaging, and mechanics to examine relationships among processing history, structure, and response.
   status: Ph.D. student · Integrative Life Sciences · Virginia Commonwealth University
   location: Richmond, Virginia
   email: contact@bhalaji.com
@@ -258,10 +258,10 @@ collaboration_questions:
   text: How consistently can temperature-dependent optical responses be calibrated over repeated heating
     and cooling cycles, and what limits their use as quantitative thermal indicators?
 narrative:
-  problem_title: How processing shapes structure and function.
-  problem: Heating, cooling, and flow can reorganize materials. The challenge is to connect a defined
-    processing history to internal structure and measurable response, then test whether those
-    relationships remain reliable across conditions.
+  problem_title: Why the same material can behave differently after processing.
+  problem: A material's response can depend on what happened before it was measured. The challenge
+    is to distinguish structural change from measurement effects and repeat the result under
+    defined conditions.
   chain:
   - Stimulus
   - Structure
@@ -275,7 +275,7 @@ applications:
 - Rheology-informed evaluation of extrudable functional inks and printed soft composites as adjacent research questions
 - Calibration and repeatability testing for passive thermal indicators and soft wearable interfaces
 doctoral:
-  title: My doctoral work asks how processing history organizes liquid-crystal structure.
+  title: Liquid crystals as a model system for processing–structure–response.
   text: Small-molecule cholesteric mixtures provide a model system for investigating how temperature
     and flow shape molecular order and measurable response. Rheology, structure-sensitive characterization,
     and optical metrology provide complementary tests. The longer-term goal is to determine which
