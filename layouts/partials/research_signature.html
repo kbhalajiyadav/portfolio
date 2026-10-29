@@ -10,5 +10,5 @@
   <ol class="research-signature__mobile" aria-label="Research translation chain">
     {{ range $index, $step := $p.narrative.chain }}<li><span>{{ printf "%02d" (add $index 1) }}</span><strong>{{ $step }}</strong></li>{{ end }}
   </ol>
-  <figcaption id="research-signature-caption">{{ $p.narrative.chain_note }} <span class="research-signature__note">Schematic; no quantitative data are implied.</span></figcaption>
+  <figcaption id="research-signature-caption">{{ $p.narrative.chain_note }}</figcaption>
 </figure>
