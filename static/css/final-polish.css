@@ -18,11 +18,12 @@
 .publication-layout .abstract-block h2{margin-top:0}
 .publication-layout .abstract-block>p:last-child{margin-bottom:0}
 
-/* Content links use one directional language: internal →, external/new-tab ↗. */
+/* Preserve direction cues on standalone navigation; hide them in scholarly prose where punctuation and link underlining already convey the action. */
 .content-link__arrow,.about-external-cue,.about-profile-links__arrow{display:inline-block;margin-left:.14em;font-family:var(--sans);font-size:.8em;line-height:1;transition:transform .16s ease}
 a:hover .content-link__arrow--external,a:focus-visible .content-link__arrow--external,a:hover .about-external-cue,a:focus-visible .about-external-cue,a:hover .about-profile-links__arrow,a:focus-visible .about-profile-links__arrow{transform:translate(1.5px,-1.5px)}
 a:hover .content-link__arrow--internal,a:focus-visible .content-link__arrow--internal{transform:translateX(1.5px)}
 .about-profile-links strong .about-profile-links__arrow{margin-top:0;color:var(--teal);font-size:.8em;line-height:1}
+.article-content p .content-link__arrow,.article-content li .content-link__arrow{display:none}
 
 /* Keep two-column profile-card rules balanced when the card count is odd. */
 .about-profile-links a:nth-last-child(-n+2){border-bottom:1px solid var(--line)}
@@ -53,6 +54,10 @@ a:hover .content-link__arrow--internal,a:focus-visible .content-link__arrow--int
 }
 
 @media(max-width:820px){
+  /* Homepage schematic follows its introductory paragraph directly; the older generic section-head margin created a false blank panel. */
+  #research>.section-head{margin-bottom:.7rem}
+  #research>.section-head>p:not(.kicker){margin-bottom:0}
+  #research>.research-signature{margin-top:0}
   /* The 980px rules already govern the compact hero; only the schematic changes here. */
   .research-signature__desktop{display:none}
   .research-signature__mobile{display:grid;grid-template-columns:1fr;gap:.2rem;margin:0;padding:0;list-style:none;border:0}
