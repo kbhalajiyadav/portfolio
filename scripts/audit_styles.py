@@ -76,6 +76,11 @@ def main() -> int:
         if compact(rule) not in ref_compact:
             errors.append(f"interactive/accessibility invariant missing {rule!r}")
 
+    if not rule_has(REF, ".series-grid:has(> .series:nth-child(2):last-child):not(:has(> .series[open]))", "align-items:stretch"):
+        errors.append("two closed desktop disclosures must share a bottom edge")
+    if not rule_has(REF, ".series-grid:has(> .series:nth-child(2):last-child):not(:has(> .series[open]))>.series>summary", "height:100%"):
+        errors.append("closed desktop disclosure summaries must fill equal-height cards")
+
     # Editorial titles and introductions share the same grid row on desktop.
     # The previous row-spanning introduction sat above its corresponding heading.
     if not rule_has(SITE, ".section-head>p:not(.kicker)", "grid-row:2"):
@@ -120,13 +125,25 @@ def main() -> int:
             errors.append(f"research disclosure composition invariant missing: {selector}: {declaration}")
 
     for selector, declaration, source in (
-        (".research-signature__flow", "grid-template-columns:repeat(3,minmax(0,1fr))", POLISH),
+        (".research-signature__flow", "grid-template-columns:repeat(5,minmax(0,1fr))", POLISH),
         (".research-signature__flow strong", "font-size:.95rem", POLISH),
         (".method-schematic__steps", "grid-template-columns:repeat(3,minmax(0,1fr))", REF),
         (".method-schematic__steps strong", "font-size:.95rem", REF),
     ):
         if not rule_has(source, selector, declaration):
             errors.append(f"research/process labels must retain intrinsic readable text: {selector} {declaration}")
+
+    # Intermediate screen width needs a centered short second row.
+    intermediate_flow = re.search(r"@media\(min-width:821px\) and \(max-width:1180px\)\s*\{(.*?)\}\s*/\*", POLISH, re.DOTALL)
+    if not intermediate_flow or any(
+        not rule_has(intermediate_flow.group(1), selector, declaration)
+        for selector, declaration in (
+            (".research-signature__flow", "grid-template-columns:repeat(6,minmax(0,1fr))"),
+            (".research-signature__flow li:nth-child(4)", "grid-column:2 / span 2"),
+            (".research-signature__flow li:nth-child(5)", "grid-column:4 / span 2"),
+        )
+    ):
+        errors.append("intermediate desktop workflow should center its 3+2 layout")
 
     # A numbered scientific workflow needs no surrounding or per-row rules.
     for selector, declaration, css in (
