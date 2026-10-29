@@ -179,6 +179,7 @@ LAYOUT_EXPRESSION = r"""
   const contactIntroGap = contactHeader && contactHeading
     ? contactHeading.getBoundingClientRect().top - contactHeader.getBoundingClientRect().bottom
     : null;
+  const homepageShell = document.querySelector('.hero')?.getBoundingClientRect().width ?? null;
   const outputPackage = document.querySelector('.research-package');
   const outputFigure = outputPackage?.querySelector('.research-figure--featured');
   const outputMedia = outputFigure?.querySelector('.research-figure__media');
@@ -210,6 +211,9 @@ LAYOUT_EXPRESSION = r"""
           figureColumns: getComputedStyle(outputFigure).gridTemplateColumns.split(/\s+/).filter(Boolean).length,
           figureRowOffset: Math.abs(figureMedia.top - figureCaption.top),
           figureWidths: [figureMedia.width, figureCaption.width],
+          figureRelativePosition: figureMedia.left - figureCaption.right,
+          fullSizeInCaption: Boolean(outputCaption.querySelector('.research-figure__open[href]')),
+          fullSizeUnderMedia: Boolean(outputMedia.querySelector('.research-figure__open')),
           recordDisplay: getComputedStyle(outputGrid).display,
           recordColumns: getComputedStyle(outputGrid).gridTemplateColumns.split(/\s+/).filter(Boolean).length,
           recordRows: getComputedStyle(outputGrid).gridTemplateRows.split(/\s+/).filter(Boolean).length,
@@ -267,6 +271,7 @@ LAYOUT_EXPRESSION = r"""
     seriesPairs,
     contactIntroGap,
     outputLayout,
+    homepageShell,
     aboutMethodBorders,
     headerSurface:(() => {
       const header = document.querySelector('.site-head');
@@ -504,6 +509,9 @@ def main() -> int:
                                         f"two collapsed presentation cards have uneven bottom edges ({pair['cardHeightDifference']:.1f}px)"
                                     )
                         if page_name == "home":
+                            shell = layout.get("homepageShell")
+                            if width >= 1900 and (shell is None or not 1450 <= shell <= 1580):
+                                record_errors.append(f"large-monitor content shell must be wide but editorially bounded: {shell}")
                             workflow = layout.get("diagramReadability")
                             if not workflow or not workflow.get("isResearchSignature") or len(workflow.get("stageGeometry", [])) != 5:
                                 record_errors.append("homepage 5-stage processing workflow is missing")
@@ -532,6 +540,10 @@ def main() -> int:
                                     record_errors.append(f"feature should use {expected_figure_columns} plot/caption column(s), not {output['figureColumns']}")
                                 if expected_figure_columns == 2 and output["figureRowOffset"] > 2:
                                     record_errors.append("plot and interpretation are not aligned in the same row")
+                                if width > 820 and output["figureRelativePosition"] < 0:
+                                    record_errors.append("desktop featured plot must appear right of the research interpretation")
+                                if not output["fullSizeInCaption"] or output["fullSizeUnderMedia"]:
+                                    record_errors.append("featured full-size action must be grouped with figure attribution and data/code links")
                                 if min(output["figureWidths"]) < 160:
                                     record_errors.append(f"featured plot/caption column is too narrow: {output['figureWidths']}")
                                 if output["recordDisplay"] != "grid":
