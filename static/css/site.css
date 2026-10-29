@@ -89,7 +89,7 @@ main{overflow:clip}
 .metrics strong{font-size:1.6rem;font-weight:650;color:var(--teal)}.metrics span{color:var(--ink-soft);font-size:.78rem;line-height:1.3}
 .section{padding-block:clamp(5rem,9vw,8rem);border-bottom:1px solid var(--line)}
 .section-head{display:grid;grid-template-columns:minmax(250px,.8fr) minmax(0,1.2fr);gap:2rem 5rem;align-items:start;margin-bottom:3rem}
-.section-head .kicker{grid-column:1}.section-head h2{grid-column:1;max-width:15ch}.section-head>p:not(.kicker){grid-column:2;grid-row:2;margin-top:0;color:var(--ink-soft);font-size:1.08rem}
+.section-head .kicker{grid-column:1;margin:0}.section-head h2{grid-column:1;max-width:15ch}.section-head>p:not(.kicker){grid-column:2;grid-row:2;margin-top:0;color:var(--ink-soft);font-size:1.08rem}
 .split-head{grid-template-columns:1.15fr .85fr}.split-head>div h2{max-width:16ch;margin-top:.55rem}.split-head .metadata-line{grid-column:2;grid-row:1;margin-top:1.8rem;font-family:var(--sans);font-size:.81rem}
 .research-chain{display:grid;grid-template-columns:repeat(5,1fr);margin:0;padding:0;border-block:1px solid var(--line);list-style:none}
 .research-chain li{position:relative;padding:1.2rem 1rem;border-right:1px solid var(--line);font-family:var(--sans);font-size:.88rem;font-weight:650}
