@@ -540,7 +540,7 @@ def main() -> int:
                                 link_set = set(timeline["milestoneLinks"][2]) if len(timeline["milestoneLinks"]) >= 3 else set()
                                 required = {
                                     "/publication/adhesives-wearable/",
-                                    "/publication/masters-thesis/",
+                                    "https://scholarscompass.vcu.edu/etd/8456/",
                                     "/project/peel-trace-evaluation/",
                                 }
                                 if not required.issubset(link_set):
