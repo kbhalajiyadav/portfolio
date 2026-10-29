@@ -169,7 +169,9 @@ LAYOUT_EXPRESSION = r"""
       const cards = [...grid.querySelectorAll(':scope > .series')];
       return {
         columnCount: getComputedStyle(grid).gridTemplateColumns.split(' ').filter(Boolean).length,
-        cardTopDifference: Math.abs(cards[0].getBoundingClientRect().top - cards[1].getBoundingClientRect().top)
+        cardTopDifference: Math.abs(cards[0].getBoundingClientRect().top - cards[1].getBoundingClientRect().top),
+        bothClosed: cards.every(card => !card.open),
+        cardHeightDifference: Math.abs(cards[0].getBoundingClientRect().height - cards[1].getBoundingClientRect().height)
       };
     });
   const contactHeader = document.querySelector('.contact-page .page-header');
@@ -368,6 +370,11 @@ LAYOUT_EXPRESSION = r"""
       };
       return {
         count:labels.length,
+        isResearchSignature:diagram.classList.contains('research-signature'),
+        stageGeometry:visibleRows.map(item => {
+          const r = item.getBoundingClientRect();
+          return {top:r.top,left:r.left,right:r.right,width:r.width};
+        }),
         minFontSize:labels.length ? Math.min(...labels.map(el => parseFloat(getComputedStyle(el).fontSize))) : 0,
         overflowing:labels.some(el => el.getBoundingClientRect().right > width + 1),
         mobileDisplayed:!!mobile && getComputedStyle(mobile).display !== 'none',
@@ -492,7 +499,26 @@ def main() -> int:
                                     record_errors.append(f"two presentation groups should use {expected_columns} column(s), not {pair['columnCount']}")
                                 if width >= 981 and pair["cardTopDifference"] > 2:
                                     record_errors.append("paired presentation groups do not share a desktop row")
+                                if width >= 981 and pair["bothClosed"] and pair["cardHeightDifference"] > 2:
+                                    record_errors.append(
+                                        f"two collapsed presentation cards have uneven bottom edges ({pair['cardHeightDifference']:.1f}px)"
+                                    )
                         if page_name == "home":
+                            workflow = layout.get("diagramReadability")
+                            if not workflow or not workflow.get("isResearchSignature") or len(workflow.get("stageGeometry", [])) != 5:
+                                record_errors.append("homepage 5-stage processing workflow is missing")
+                            elif width > 820:
+                                steps = workflow["stageGeometry"]
+                                if width >= 1181:
+                                    if max(step["top"] for step in steps) - min(step["top"] for step in steps) > 2:
+                                        record_errors.append("wide desktop five-stage sequence must read as one row")
+                                    if any(steps[i]["left"] >= steps[i+1]["left"] for i in range(4)):
+                                        record_errors.append("wide desktop stage order must read left-to-right")
+                                else:
+                                    if max(step["top"] for step in steps[:3]) - min(step["top"] for step in steps[:3]) > 2 or abs(steps[3]["top"] - steps[4]["top"]) > 2:
+                                        record_errors.append("intermediate desktop 5-stage sequence must use three plus two rows")
+                                    if not (steps[3]["left"] > steps[0]["left"] and steps[4]["right"] < steps[2]["right"]):
+                                        record_errors.append("intermediate desktop short row must be visually centered")
                             output = layout["outputLayout"]
                             if output is None:
                                 record_errors.append("featured research package is missing its attributed figure or related records")
