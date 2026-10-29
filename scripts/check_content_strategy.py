@@ -221,12 +221,13 @@ def main() -> int:
     for required in (
         "Christina Tang",
         "/publication/adhesives-wearable/",
-        "/publication/masters-thesis/",
         "/project/peel-trace-evaluation/",
     ):
         if required not in ms:
             errors.append(f"About M.S. milestone lacks context/evidence: {required}")
     institutional_url = str(affiliation.get("institutional_record_url", ""))
+    if f"[M.S. thesis]({institutional_url})" not in ms:
+        errors.append("About M.S. thesis must link directly to the canonical VCU repository record")
     if not institutional_url.startswith("https://scholarscompass.vcu.edu/etd/"):
         errors.append("VCU Scholars Compass must link to the thesis record, not a generic university page")
     if "VCU Scholars Compass" != affiliation.get("institutional_record_label"):
