@@ -14,6 +14,9 @@ from urllib.request import Request, urlopen
 EXPECTED_TEXT = {
     "": [
         "Research program",
+        "How processing shapes structure and function.",
+        "Heating, cooling, and flow can reorganize materials.",
+        "Processing history can change internal order and material properties.",
         "Ph.D. student",
         "Browse all research outputs",
         "Processing history and molecular order",
@@ -239,6 +242,36 @@ def validate_runtime(base: str, nonce: str) -> list[str]:
     return errors
 
 
+def validate_homepage_styles(base: str, body: str, nonce: str) -> list[str]:
+    """Verify the stylesheet actually served with the homepage contains the mobile-gap fix."""
+    errors: list[str] = []
+    stylesheet_links = []
+    for tag in re.findall(r"<link\\b[^>]*>", body, flags=re.IGNORECASE):
+        if "stylesheet" not in (extract_attribute(tag, "rel") or "").split():
+            continue
+        href = extract_attribute(tag, "href")
+        if href:
+            stylesheet_links.append(urljoin(base, href))
+    if len(stylesheet_links) != 1:
+        return [f"homepage must reference one versioned stylesheet, found {len(stylesheet_links)}"]
+    url = stylesheet_links[0]
+    try:
+        status, _content_type, raw = fetch(url, nonce)
+        if status != 200:
+            return [f"homepage stylesheet {url} returned HTTP {status}"]
+        css = raw.decode("utf-8", errors="replace")
+        required = (
+            (r"#research\\s*>\\s*\\.section-head\\s*\\{[^}]*margin-bottom\\s*:\\s*(?:0?\\.7)rem", "compact homepage research heading gap"),
+            (r"#research\\s*>\\s*\\.research-signature\\s*\\{[^}]*margin-top\\s*:\\s*0(?:[;}])", "zero schematic top gap"),
+        )
+        for pattern, label in required:
+            if not re.search(pattern, css):
+                errors.append(f"homepage stylesheet {url} is missing {label}")
+    except (URLError, HTTPError, TimeoutError, OSError) as exc:
+        errors.append(f"homepage stylesheet {url}: {exc}")
+    return errors
+
+
 def validate_release(base: str, nonce: str) -> list[str]:
     errors: list[str] = []
 
@@ -252,6 +285,11 @@ def validate_release(base: str, nonce: str) -> list[str]:
             for needle in needles:
                 if needle not in body:
                     errors.append(f"{url}: missing release marker {needle!r}")
+            if not path:
+                for obsolete in ("From stimulus to structure to measurement.", "Schematic; no quantitative data are implied."):
+                    if obsolete in body:
+                        errors.append(f"{url}: stale homepage copy remains visible: {obsolete!r}")
+                errors.extend(validate_homepage_styles(base, body, nonce))
         except (URLError, HTTPError, TimeoutError, OSError) as exc:
             errors.append(f"{url}: {exc}")
 
