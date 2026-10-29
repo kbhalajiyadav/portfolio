@@ -64,7 +64,7 @@
         <article>
           <span class="about-path__period">{{ .period }}</span>
           <span class="about-path__marker" aria-hidden="true"></span>
-          <div class="about-path__content"><h3>{{ .title }}</h3>{{ .text | markdownify }}</div>
+          <div class="about-path__content"><h3>{{ .title }}</h3><p>{{ .text | markdownify }}</p></div>
         </article>
         {{ end }}
       </div>

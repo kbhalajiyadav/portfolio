@@ -206,6 +206,13 @@ def main() -> int:
     if not rule_has(ABOUT, ".about-profile-links", "border-block:1px solid var(--line)"):
         errors.append("About profile links must use the editorial ruled-list treatment")
 
+    # Screenshot-derived regression guards: no translucent header or cramped in-sentence links.
+    if not rule_has(SITE, ".site-head", "background:var(--paper)"):
+        errors.append("sticky navigation must have a fully opaque background")
+    if not rule_has(ABOUT, ".about-path__content .content-link__arrow", "display:none"):
+        errors.append("timeline sentence links must not show directional arrows")
+    if not rule_has(POLISH, ".research-signature", "margin:.85rem 0 1.6rem"):
+        errors.append("research schematic lost its compact explanatory spacing")
     # The mobile hero needs an explicit composition; inherited desktop widths caused the 390px collapse.
     mobile_match = re.search(r"@media\(max-width:680px\)\s*\{(.*)\}\s*@media\(prefers-reduced-motion", REF, re.DOTALL)
     if not mobile_match:
@@ -218,6 +225,8 @@ def main() -> int:
             (".hero .eyebrow", "max-width:none"),
             (".hero h1", "max-width:100%"),
             (".hero h1", "text-wrap:balance"),
+            (".hero h1", "line-height:1.12"),
+            (".hero h1", "letter-spacing:-.012em"),
         ):
             if not rule_has(mobile, selector, declaration):
                 errors.append(f"mobile hero invariant missing {selector} {declaration}")

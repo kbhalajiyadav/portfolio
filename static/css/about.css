@@ -35,8 +35,9 @@
 .about-path__period{padding-top:.16rem;color:var(--rust);font-family:var(--sans);font-size:.74rem;font-weight:700}
 .about-path__marker{position:relative;z-index:1;justify-self:center;width:9px;height:9px;margin-top:.35rem;border:2px solid var(--paper);border-radius:50%;background:var(--teal);box-shadow:0 0 0 1px var(--teal)}
 .about-path__content{padding-left:1.25rem}
-.about-path h3{font-size:1.2rem}
-.about-path p{max-width:70ch;margin:.6rem 0 0;color:var(--ink-soft);line-height:1.65}
+.about-path h3{font-size:1.2rem;line-height:1.25;letter-spacing:-.012em}
+.about-path p{max-width:70ch;margin:.75rem 0 0;color:var(--ink-soft);line-height:1.68}
+.about-path__content .content-link__arrow{display:none}
 .about-profile-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-block:1px solid var(--line);background:transparent}
 .about-profile-links a{display:flex;flex-direction:column;min-height:0;padding:1.15rem 1.5rem 1.15rem 0;border-bottom:1px solid var(--line);color:var(--ink);font-family:var(--sans);text-decoration:none;transition:color .16s ease}
 .about-profile-links a:nth-child(even){padding-right:0;padding-left:1.5rem;border-left:1px solid var(--line)}

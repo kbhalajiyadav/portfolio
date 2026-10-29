@@ -56,8 +56,23 @@ provide complementary structural information when their length scale,
 contrast, and geometry support the comparison. These are research hypotheses,
 not claims that the competing mechanisms have been resolved.
 
-The broader goal is to develop transferable methods for connecting processing
-history, structure, and response across other responsive soft materials.
+Shear-induced optical-texture changes in cholesteric mixtures were already
+[documented in 1971](https://doi.org/10.1103/PhysRevLett.27.790).
+The question here is not whether shear can change texture, but which
+structural processes explain the measured optical and rheological responses
+for a specified mixture and processing history.
+
+The broader goal is to test which **measurement and analysis methods** can transfer
+to other responsive materials and process-sensitive formulations. Functional
+printing inks, extrusion-processed soft composites, and liquid-crystal
+elastomers pose adjacent processing–structure–response questions; they do not
+necessarily share the cholesteric model system's molecular mechanism.
+
+Published examples of [flow-programmed alignment in printed liquid-crystal
+elastomers](https://doi.org/10.1073/pnas.2414960122) and
+[temperature- and shear-controlled smectic ink printing](https://doi.org/10.1038/s41467-026-75368-z)
+illustrate that connection. They are studies by other groups, not findings
+from my cholesteric experiments.
 
 ## Translate reproducibly
 
@@ -76,10 +91,14 @@ they are not presented here as a completed automation platform.
 
 Potential translation paths include:
 
-- calibrated characterization of thermochromic and responsive materials;
-- passive thermal indication and wearable interfaces requiring their own performance validation; and
-- **exploratory computational thermography**, using infrared-image analysis
-  independently of liquid-crystal-based indicators.
+- process-history-aware characterization of responsive formulations;
+- rheology-guided evaluation of printable functional inks and soft composites,
+  requiring system-specific measurements; and
+- repeatable calibration of passive thermal indicators and wearable interfaces
+  before any application-level performance claim.
+
+Separately, **exploratory computational thermography** applies infrared-image
+analysis independently of liquid-crystal-based color indicators.
 
 Infrared thermography and thermochromic color sensing use different physical
 measurement principles. Estimating physiological quantities such as body-fat
