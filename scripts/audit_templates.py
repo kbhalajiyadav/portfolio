@@ -142,6 +142,13 @@ def main() -> int:
             errors.append(f"homepage {label} disclosure must retain its evidence body")
     if not all(marker in trajectory for marker in ('class="trajectory-grid"', 'class="questions__grid"', 'Open research questions')):
         errors.append("homepage doctoral disclosure must preserve applications, automation, and questions")
+    # Homepage selected-outputs heading must introduce the featured study without
+    # becoming a four-line inventory of every possible output type.
+    if "<h2>Published research and tools.</h2>" not in home:
+        errors.append("homepage selected-outputs heading must remain concise")
+    if "The first-author article, associated thesis, and citable software document the same study." not in home:
+        errors.append("homepage selected-outputs introduction must explain the related work")
+
     if not all(marker in home for marker in ('class="series-grid"', 'class="engagement-grid"', 'View full professional engagement')):
         errors.append("homepage engagement disclosure must preserve records and the full-engagement link")
 

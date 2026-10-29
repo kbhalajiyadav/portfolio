@@ -103,12 +103,17 @@ def main() -> int:
 
     # Native homepage disclosures must stay legible, keyboard-focusable, and unboxed.
     for selector, declaration in (
-        (".home-disclosure", "border-block:1px solid var(--line-strong)"),
+        (".home-disclosure", "border-top:1px solid var(--line-strong)"),
+        (".home-disclosure", "border:0"),
         (".home-disclosure>summary", "min-height:48px"),
         (".home-disclosure>summary", "list-style:none"),
         (".home-disclosure>summary:focus-visible", "outline:2px solid var(--teal)"),
         (".home-disclosure:not([open])>.home-disclosure__body", "display:none"),
-        (".research-extension__details .trajectory-grid", "border-top:0"),
+        (".trajectory-grid", "border:0"),
+        (".trajectory-grid .robotics-card", "border:0!important"),
+        (".research-extension .questions", "border:0"),
+        (".questions__grid", "border:0"),
+        (".questions__grid article", "border:0"),
     ):
         if not rule_has(REF, selector, declaration):
             errors.append(f"missing disclosure visual invariant {selector}: {declaration}")
@@ -140,15 +145,26 @@ def main() -> int:
         errors.append("education panel must remain intrinsic")
     if not rule_has(REF, ".trajectory-grid", "align-items:start"):
         errors.append("doctoral application/automation columns must remain intrinsic")
-    if not rule_has(REF, ".trajectory-grid", "border-block:1px solid var(--line)"):
-        errors.append("doctoral direction must retain the editorial ruled-band treatment")
+    # Application, automation, and the question cards are editorial content, not table cells.
+    # Keep the single disclosure affordance, not competing interior separators.
+    if not rule_has(REF, ".questions__grid", "gap:clamp(1.5rem,3vw,3rem)"):
+        errors.append("research questions need space between columns instead of grid borders")
+    if "border-block:1px solid var(--line-strong)" in REF.split(".home-disclosure{", 1)[-1].split("}", 1)[0]:
+        errors.append("expanded research disclosure must not regain a second bottom rule")
     if re.search(r"\.(?:education-panel|trajectory-grid)(?:\s+article)?\s*\{[^}]*\b(?:height|min-height):\s*[0-9.]+(?:em|rem|px)", REF):
         errors.append("education/doctoral editorial content must not use fixed heights")
 
     if ".about-program-grid" in ABOUT:
         errors.append("About must not duplicate the homepage research-program card grid")
-    if not rule_has(ABOUT, ".about-method-grid", "border-block:1px solid var(--line)"):
-        errors.append("About methods must use the lighter editorial-band treatment")
+    for selector, declaration in (
+        (".about-method-grid", "border:0"),
+        (".about-method-grid", "gap:clamp(1.75rem,3.5vw,3.5rem)"),
+        (".about-method-grid article", "border:0"),
+    ):
+        if not rule_has(ABOUT, selector, declaration):
+            errors.append(f"About methods should form separated editorial columns, not a framed table: {selector} {declaration}")
+    if not rule_has(REF, ".output-list", "border-top:0"):
+        errors.append("Outputs filter/list junction must not have two parallel rules")
     if not rule_has(ABOUT, ".about-profile-links", "border-block:1px solid var(--line)"):
         errors.append("About profile links must use the editorial ruled-list treatment")
 

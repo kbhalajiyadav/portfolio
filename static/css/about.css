@@ -23,10 +23,8 @@
 .about-biography .about-section__intro,.about-identity .about-section__intro{margin-bottom:0}
 .about-prose{display:grid;gap:1.15rem}
 .about-prose p{font-size:1.08rem;line-height:1.72}
-.about-method-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-block:1px solid var(--line);background:transparent}
-.about-method-grid article{min-width:0;padding:1.45rem 1.5rem;border-right:1px solid var(--line);background:transparent}
-.about-method-grid article:first-child{padding-left:0}
-.about-method-grid article:last-child{padding-right:0;border-right:0}
+.about-method-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(1.75rem,3.5vw,3.5rem);border:0;background:transparent}
+.about-method-grid article{min-width:0;padding:0;border:0;background:transparent}
 .about-method-grid h3{margin:0 0 .7rem}
 .about-method-grid p{margin:0;color:var(--ink-soft);font-size:.92rem;line-height:1.62}
 .about-path{position:relative;border-block:1px solid var(--line)}
@@ -73,9 +71,7 @@
   .about-fact-strip div:nth-child(2){border-right:0}
   .about-fact-strip div:nth-child(n+3){border-bottom:0}
   .about-fact-strip div:nth-child(3){padding-left:0}
-  .about-method-grid{grid-template-columns:1fr 1fr}
-  .about-method-grid article:nth-child(2){padding-right:0;border-right:0}
-  .about-method-grid article:last-child{grid-column:1/-1;padding-left:0;border-top:1px solid var(--line);border-right:0}
+  .about-method-grid{grid-template-columns:1fr;gap:1.65rem}
 }
 @media(max-width:680px){
   .about-hero{gap:2.5rem;padding-bottom:3rem}
@@ -84,9 +80,7 @@
   .about-fact-strip div,.about-fact-strip div:first-child,.about-fact-strip div:nth-child(3),.about-fact-strip div:last-child{padding:1rem 0;border-right:0;border-bottom:1px solid var(--line)}
   .about-fact-strip div:last-child{border-bottom:0}
   .about-section{padding-block:4rem}
-  .about-method-grid,.about-profile-links{grid-template-columns:1fr}
-  .about-method-grid article,.about-method-grid article:nth-child(2),.about-method-grid article:last-child{grid-column:auto;padding:1.25rem 0;border-right:0;border-top:0;border-bottom:1px solid var(--line)}
-  .about-method-grid article:last-child{border-bottom:0}
+  .about-profile-links{grid-template-columns:1fr}
   .about-path::before{left:5px}
   .about-path article{grid-template-columns:18px minmax(0,1fr);padding:1.45rem 0}
   .about-path__period{grid-column:2;padding:0 0 .35rem .8rem}

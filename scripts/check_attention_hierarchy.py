@@ -111,6 +111,7 @@ PAGE_METRICS = r"""
     researchPackageCount:selectedOutputs ? selectedOutputs.querySelectorAll('.research-package').length : 0,
     secondaryOutputCount:selectedOutputs ? selectedOutputs.querySelectorAll('.secondary-output').length : 0,
     selectedOutputsText:selectedOutputs ? (selectedOutputs.textContent || '').replace(/\s+/g,' ').trim() : '',
+    selectedOutputsHeadingLines:lineCount(selectedOutputs?.querySelector('.section-head h2')),
     disclosures:[...document.querySelectorAll('main details.home-disclosure')].map(item=>({
       open:item.open,
       summaryHeight:item.querySelector(':scope > summary')?.getBoundingClientRect().height || 0,
@@ -332,6 +333,9 @@ def main() -> int:
                         errors.append(f"{prefix}: patent-pending proof count must remain 1")
                     if values.get("Citable software release") != "1":
                         errors.append(f"{prefix}: citable-software proof count must remain 1")
+                    title_lines = metrics.get("selectedOutputsHeadingLines")
+                    if not title_lines or title_lines > 3:
+                        errors.append(f"{prefix}: selected outputs headline is overly tall ({title_lines} lines)")
                     if metrics.get("researchPackageCount") != 1 or metrics.get("secondaryOutputCount") != 1:
                         errors.append(f"{prefix}: homepage outputs must stay curated to one flagship research group plus one IP record")
                     disclosures = metrics.get("disclosures", [])
@@ -347,7 +351,22 @@ def main() -> int:
                     expanded = cdp.evaluate("""(() => {
                       const items = [...document.querySelectorAll('main details.home-disclosure')];
                       items.forEach(item => item.open = true);
+                      const edges = element => {
+                        if (!element) return null;
+                        const style = getComputedStyle(element);
+                        return ['borderTopWidth','borderRightWidth','borderBottomWidth','borderLeftWidth']
+                          .map(key => parseFloat(style[key]) || 0);
+                      };
+                      const research = items[0];
                       return {
+                        rules: {
+                          disclosure:edges(research),
+                          applications:edges(research?.querySelector('.trajectory-grid')),
+                          automation:edges(research?.querySelector('.robotics-card')),
+                          questions:edges(research?.querySelector('.questions')),
+                          questionGrid:edges(research?.querySelector('.questions__grid')),
+                          questionCards:[...(research?.querySelectorAll('.questions__grid article') || [])].map(edges),
+                        },
                         visible:items.length === 2 && items.every(item => !!item.querySelector('.home-disclosure__body')?.getClientRects().length),
                         overflow:document.documentElement.scrollWidth > innerWidth + 2,
                         researchCount:items[0]?.querySelectorAll('.trajectory-grid article, .questions article').length || 0,
@@ -356,6 +375,17 @@ def main() -> int:
                     })()""")
                     if not expanded["visible"] or expanded["overflow"] or expanded["researchCount"] < 5 or expanded["engagementCount"] < 4:
                         errors.append(f"{prefix}: expanded secondary evidence must remain fully readable: {expanded}")
+                    rules = expanded.get("rules", {})
+                    disclosure_rules = rules.get("disclosure")
+                    if not disclosure_rules or not (0 < disclosure_rules[0] <= 2) or sum(disclosure_rules[1:]) > 0:
+                        errors.append(f"{prefix}: research disclosure requires one top separator only: {disclosure_rules}")
+                    for name in ("applications", "automation", "questions", "questionGrid"):
+                        values = rules.get(name)
+                        if values is None or any(value > 0 for value in values):
+                            errors.append(f"{prefix}: unnecessary inner divider on {name}: {values}")
+                    question_cards = rules.get("questionCards", [])
+                    if len(question_cards) != 3 or any(any(edge > 0 for edge in card) for card in question_cards):
+                        errors.append(f"{prefix}: research question cards should not have boxed or table-cell borders: {question_cards}")
                     if "Mechanical Properties of Dual-Layer Electrospun Fiber Mats" in metrics.get("selectedOutputsText", ""):
                         errors.append(f"{prefix}: complete coauthor publication record belongs on Outputs, not homepage selected evidence")
             finally:
