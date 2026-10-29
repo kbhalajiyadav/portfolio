@@ -56,6 +56,12 @@ provide complementary structural information when their length scale,
 contrast, and geometry support the comparison. These are research hypotheses,
 not claims that the competing mechanisms have been resolved.
 
+Shear-induced optical-texture changes in cholesteric mixtures were already
+[documented in 1971](https://doi.org/10.1103/PhysRevLett.27.790).
+The question here is not whether shear can change texture, but which
+structural processes explain the measured optical and rheological responses
+for a specified mixture and processing history.
+
 The broader goal is to test which **measurement and analysis methods** can transfer
 to other responsive materials and process-sensitive formulations. Functional
 printing inks, extrusion-processed soft composites, and liquid-crystal
