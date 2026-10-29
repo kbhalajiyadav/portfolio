@@ -156,6 +156,8 @@ def main() -> int:
             errors.append(f"featured research figure lost its cohesive desktop layout: {selector} {declaration}")
     if "--shell:clamp(1280px,88vw,1520px)" not in POLISH:
         errors.append("wide-screen shell must expand moderately without unrestricted full-bleed text")
+    if "@media(min-width:1680px)" not in POLISH or not rule_has(POLISH, ".hero__copy", "max-width:940px") or not rule_has(POLISH, ".hero h1", "max-width:100%;text-wrap:balance"):
+        errors.append("large-monitor hero needs a separate wide headline measure without expanding the reading paragraph")
 
     # A numbered scientific workflow needs no surrounding or per-row rules.
     for selector, declaration, css in (
