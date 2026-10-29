@@ -175,7 +175,8 @@ def render_software(data: dict) -> str:
             rf"{{{esc(item['authors'])}}}"
         )
         software.append(
-            rf"{{\small {esc(item['description'])} "
+            rf"{{\small {esc(item['description'])}"
+            + r"\\ "
             + r"\mbox{"
             + href(item["repository"], "Repository")
             + r" \contactsep "
