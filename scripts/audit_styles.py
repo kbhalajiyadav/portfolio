@@ -302,6 +302,14 @@ def main() -> int:
         errors.append("privacy notice must not displace the homepage hero")
     if ".privacy-banner{position:fixed" in ref_compact:
         errors.append("privacy controls must remain in document flow")
+    for selector, declaration in (
+        (".privacy-banner", "background:transparent"),
+        (".privacy-banner", "box-shadow:none"),
+        (".privacy-banner", "border-block:1px solid var(--line)"),
+        (".privacy-banner__actions .button", "min-height:44px"),
+    ):
+        if not rule_has(REF, selector, declaration):
+            errors.append(f"compact, accessible in-flow analytics strip required: {selector} {declaration}")
     if "text-align:justify" in all_compact:
         errors.append("body copy must not use full justification")
 
