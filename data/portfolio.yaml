@@ -270,15 +270,15 @@ narrative:
   chain_note: Temperature, deformation, and flow alter structure; measurements connect those changes to
     optical and mechanical behavior and to the conditions that produced them.
 applications:
-- Characterization of thermochromic and other responsive materials under controlled thermal histories
-- Passive thermal indicators and wearable interfaces, subject to device-specific validation
-- Exploratory infrared-thermography analysis software, separate from material-based color sensing
+- Characterization of responsive materials under controlled thermal and flow histories
+- Rheology-informed evaluation of extrudable functional inks and printed soft composites as adjacent research questions
+- Calibration and repeatability testing for passive thermal indicators and soft wearable interfaces
 doctoral:
   title: My doctoral work asks how processing history organizes liquid-crystal structure.
   text: Small-molecule cholesteric mixtures provide a model system for investigating how temperature
-    and flow shape molecular order and measurable response. I bring together rheology, structure-sensitive
-    characterization, and quantitative optical methods; the broader aim is reproducible measurement
-    across responsive soft materials.
+    and flow shape molecular order and measurable response. Rheology, structure-sensitive characterization,
+    and optical metrology provide complementary tests. The longer-term goal is to determine which
+    measurement methods transfer to other responsive materials and process-sensitive formulations.
   robotics: Controlled heating, cooling, and shear histories can help distinguish reversible response
     from hysteresis, structural recovery, and measurement drift. I am interested in synchronizing
     experimental conditions with optical, mechanical, and structural measurements to test repeatability
