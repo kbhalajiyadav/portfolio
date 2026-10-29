@@ -271,7 +271,7 @@ LAYOUT_EXPRESSION = r"""
         return title && prose ? {
           id:section.closest('[id]')?.id || 'unnamed',
           titleTop:title.top,titleBottom:title.bottom,proseTop:prose.top,
-          columnCount:getComputedStyle(section).gridTemplateColumns.split(/\\s+/).filter(Boolean).length
+          columnCount:getComputedStyle(section).gridTemplateColumns.split(/\s+/).filter(Boolean).length
         } : null;
       }).filter(Boolean),
     outputFilterRules,
