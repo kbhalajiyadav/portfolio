@@ -51,24 +51,23 @@
 .related-package .actions{margin-top:.75rem}
 .research-extension{margin-top:clamp(5rem,8vw,7rem);padding-top:clamp(3.5rem,5.5vw,5rem);border-top:1px solid var(--line)}
 .research-extension .section-head{margin-bottom:2.25rem}
-.trajectory-grid{position:relative;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(240px,.65fr);gap:clamp(2.5rem,5vw,5rem);align-items:start;padding-block:1.6rem;border-block:1px solid var(--line)}
+.trajectory-grid{position:relative;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(240px,.65fr);gap:clamp(2.5rem,5vw,5rem);align-items:start;padding:0;border:0}
 .trajectory-grid article{min-width:0;padding:0;border:0;background:transparent}
 .trajectory-grid .application-card ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.4rem 1.4rem;margin:1.2rem 0 0;padding-left:1.15rem}
 .trajectory-grid .application-card li{margin:0}
-.trajectory-grid .robotics-card{padding-left:clamp(1.5rem,3vw,2.5rem);border:0!important;border-left:2px solid var(--teal)!important}
-.research-extension .questions{display:block;margin-top:clamp(3.75rem,6vw,5rem);padding-top:clamp(2.5rem,4vw,3.5rem);border:0;border-top:1px solid var(--line);background:transparent}
+.trajectory-grid .robotics-card{padding:0;border:0!important}
+.research-extension .questions{display:block;margin-top:clamp(2.5rem,4vw,3.5rem);padding:0;border:0;background:transparent}
 .questions__head{display:grid;grid-template-columns:minmax(180px,.55fr) minmax(0,1.45fr);gap:1rem 3rem;align-items:start;margin-bottom:1.45rem}
 .questions__head .kicker{margin:0}
 .questions__head h3{max-width:34ch;font-size:clamp(1.25rem,2vw,1.7rem);text-wrap:balance}
-.questions__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-block:1px solid var(--line);background:transparent}
-.questions__grid article{min-width:0;padding:1.45rem 1.6rem;border-right:1px solid var(--line);background:transparent}
-.questions__grid article:last-child{border-right:0}
+.questions__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(1.5rem,3vw,3rem);border:0;background:transparent}
+.questions__grid article{min-width:0;padding:0;border:0;background:transparent}
 .questions__grid strong{display:block;margin-bottom:.55rem;font-family:var(--sans);font-size:.9rem;line-height:1.35}
 .questions__grid p{margin:0;color:var(--ink-soft);font-size:.98rem;line-height:1.55}
 
 /* Secondary homepage evidence uses accessible, JavaScript-independent disclosure.
    Primary research, figures, citations, and navigation remain visible. */
-.home-disclosure{margin:1.35rem 0 0;border-block:1px solid var(--line-strong);background:transparent}
+.home-disclosure{margin:1.35rem 0 0;border:0;border-top:1px solid var(--line-strong);background:transparent}
 .home-disclosure>summary{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:48px;padding:1rem 0;color:var(--teal);font-family:var(--sans);font-size:.94rem;font-weight:650;line-height:1.45;cursor:pointer;list-style:none}
 .home-disclosure>summary::-webkit-details-marker{display:none}
 .home-disclosure>summary::after{content:"+";flex:0 0 auto;color:var(--teal);font-size:1.3rem;font-weight:400;line-height:1}
@@ -77,8 +76,6 @@
 .home-disclosure>summary:focus-visible{outline:2px solid var(--teal);outline-offset:4px}
 .home-disclosure__body{padding:1.5rem 0 2rem}
 .home-disclosure:not([open])>.home-disclosure__body{display:none}
-.research-extension__details .trajectory-grid{border-top:0;padding-top:0}
-.research-extension__details .questions{margin-top:2.25rem;padding-top:1.5rem}
 .home-disclosure--engagement{margin-top:1.65rem}
 .outputs-page .page-header{max-width:760px}
 .output-filter{display:flex;align-items:flex-end;flex-wrap:wrap;gap:.25rem 1.2rem;margin:0 0 1.35rem;border-bottom:1px solid var(--line);font-family:var(--sans)}
@@ -161,15 +158,12 @@ html[data-analytics-consent="unknown"] .privacy-banner+main .page-shell{padding-
   .site-nav .nav-about:hover::after,.site-nav .nav-about:focus-visible::after,.site-nav .nav-about.is-current-page::after{right:0}
   .site-footer nav{justify-content:flex-start}
   .trajectory-grid{grid-template-columns:1fr;gap:1.75rem}
-  .trajectory-grid .robotics-card{padding:1.6rem 0 0;border-left:0!important;border-top:2px solid var(--teal)!important}
   .education-panel{margin-top:.5rem}
   .output-row{grid-template-columns:7.75rem minmax(0,1fr);gap:1.25rem}
 }
 @media(max-width:820px){
   .questions__head{grid-template-columns:1fr;gap:.45rem}
   .questions__grid{grid-template-columns:1fr}
-  .questions__grid article{border-right:0;border-bottom:1px solid var(--line)}
-  .questions__grid article:last-child{border-bottom:0}
 }
 @media(max-width:680px){
   .hero{display:grid;grid-template-columns:1fr;gap:2.5rem;padding-block:2.75rem 3.5rem}
@@ -183,7 +177,6 @@ html[data-analytics-consent="unknown"] .privacy-banner+main .page-shell{padding-
   .identity-note{position:static;width:100%;min-width:0;margin-top:.9rem;box-shadow:none;border-left-width:2px}
   .related-package{padding:1.2rem}
   .research-extension{margin-top:4.25rem;padding-top:3.25rem}
-  .trajectory-grid{padding-block:1.4rem}
   .trajectory-grid .application-card ul{grid-template-columns:1fr;gap:.35rem}
   .output-filter{align-items:stretch;gap:0 .85rem}
   .output-filter button{min-height:44px}
