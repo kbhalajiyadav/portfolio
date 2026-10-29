@@ -76,6 +76,13 @@ def main() -> int:
         if compact(rule) not in ref_compact:
             errors.append(f"interactive/accessibility invariant missing {rule!r}")
 
+    # Editorial titles and introductions share the same grid row on desktop.
+    # The previous row-spanning introduction sat above its corresponding heading.
+    if not rule_has(SITE, ".section-head>p:not(.kicker)", "grid-row:2"):
+        errors.append("desktop section intro must occupy the heading row, not span the kicker")
+    if not rule_has(SITE, ".section-head>p:not(.kicker)", "margin-top:0"):
+        errors.append("desktop section intro must not have a compensating top offset")
+
     # Homepage research outputs: a two-column pair must not inherit the old
     # 1fr/1fr two-row sidebar, which silently allocates an empty grid track.
     if not rule_has(SITE, ".package-artifacts", "grid-template-rows:auto"):
