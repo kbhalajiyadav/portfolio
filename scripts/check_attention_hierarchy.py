@@ -122,7 +122,7 @@ PAGE_METRICS = r"""
           section:head.closest('[id]')?.id || 'unnamed',
           headingTop:h2.top,headingBottom:h2.bottom,introTop:intro.top,
           kickerBottom:kicker?.bottom ?? null,
-          columns:getComputedStyle(head).gridTemplateColumns.split(/\\s+/).filter(Boolean).length,
+          columns:getComputedStyle(head).gridTemplateColumns.split(/\s+/).filter(Boolean).length,
         };
       }),
     disclosures:[...document.querySelectorAll('main details.home-disclosure')].map(item=>({
