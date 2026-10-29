@@ -1,7 +1,7 @@
 {{ $p := site.Data.portfolio }}
 <figure class="research-signature" aria-labelledby="research-signature-caption">
   <div class="research-signature__desktop">
-    <ol class="research-signature__flow" aria-label="Research framework from stimulus through translation">
+    <ol class="research-signature__flow" aria-label="Stimulus to translation research framework">
       {{ range $index, $step := $p.narrative.chain }}
       <li><span class="research-signature__index">{{ printf "%02d" (add $index 1) }}</span><strong>{{ $step }}</strong></li>
       {{ end }}
