@@ -265,6 +265,26 @@ LAYOUT_EXPRESSION = r"""
     contactIntroGap,
     outputLayout,
     aboutMethodBorders,
+    headerSurface:(() => {
+      const header = document.querySelector('.site-head');
+      return header ? getComputedStyle(header).backgroundColor : null;
+    })(),
+    heroTypography:(() => {
+      const title = document.querySelector('.hero h1');
+      if (!title) return null;
+      const style = getComputedStyle(title);
+      return {fontSize:parseFloat(style.fontSize),lineHeight:parseFloat(style.lineHeight),letterSpacing:parseFloat(style.letterSpacing)};
+    })(),
+    researchDiagramGap:(() => {
+      const figure = document.querySelector('.research-signature');
+      const before = figure?.previousElementSibling;
+      const mobile = figure?.querySelector('.research-signature__mobile');
+      const desktop = figure?.querySelector('.research-signature__desktop');
+      const active = mobile && getComputedStyle(mobile).display !== 'none' ? mobile : desktop;
+      const first = active?.querySelector('li');
+      if (!figure || !before || !first) return null;
+      return {previousTag:before.tagName,gap:first.getBoundingClientRect().top - before.getBoundingClientRect().bottom};
+    })(),
     aboutTimeline:(() => {
       const timeline = document.querySelector('.about-path');
       if (!timeline) return null;
@@ -279,6 +299,18 @@ LAYOUT_EXPRESSION = r"""
         }),
         lengths:milestones.map(item => item.querySelector('.about-path__content')?.textContent.trim().split(/\s+/).length || 0),
         milestoneLinks:milestones.map(item => [...item.querySelectorAll('a[href]')].map(link => link.getAttribute('href'))),
+        headingGaps:milestones.map(item => {
+          const title = item.querySelector('.about-path__content h3');
+          const body = item.querySelector('.about-path__content p');
+          return title && body ? body.getBoundingClientRect().top - title.getBoundingClientRect().bottom : null;
+        }),
+        headingLeading:milestones.map(item => {
+          const title = item.querySelector('.about-path__content h3');
+          if (!title) return 0;
+          const style = getComputedStyle(title);
+          return parseFloat(style.lineHeight) / parseFloat(style.fontSize);
+        }),
+        visibleInlineArrows:[...timeline.querySelectorAll('.about-path__content .content-link__arrow')].filter(item => getComputedStyle(item).display !== 'none').length,
         periods:milestones.map(item => item.querySelector('.about-path__period')?.textContent.trim() || ''),
       };
     })(),
@@ -526,6 +558,20 @@ def main() -> int:
                                         record_errors.append(f"{pair['id']}: introduction/title desktop misalignment: {pair}")
                                 elif pair["columns"] != 1 or not 0 <= pair["proseTop"] - pair["titleBottom"] <= 48:
                                     record_errors.append(f"{pair['id']}: stacked heading/intro spacing is unstable: {pair}")
+                        if page_name in {"home", "about", "research"}:
+                            header_surface = layout.get("headerSurface")
+                            if not header_surface or header_surface in {"transparent", "rgba(0, 0, 0, 0)"} or (
+                                header_surface.startswith("rgba(") and float(header_surface.rstrip(")").split(",")[-1]) < 1
+                            ):
+                                record_errors.append(f"sticky header must be opaque to prevent text ghosting: {header_surface}")
+                        if page_name == "home" and width <= 680:
+                            heading = layout.get("heroTypography")
+                            if not heading or not 1.08 <= heading["lineHeight"] / heading["fontSize"] <= 1.28 or heading["letterSpacing"] < -0.023 * heading["fontSize"]:
+                                record_errors.append(f"mobile hero title needs readable leading and uncramped tracking: {heading}")
+                        if page_name == "research" and width <= 820:
+                            diagram_gap = layout.get("researchDiagramGap")
+                            if not diagram_gap or diagram_gap["previousTag"] != "P" or not 8 <= diagram_gap["gap"] <= 75:
+                                record_errors.append(f"research explanation and first diagram stage are visually disconnected: {diagram_gap}")
                         if page_name == "about":
                             timeline = layout.get("aboutTimeline")
                             if not timeline or timeline["count"] != 4:
@@ -545,6 +591,10 @@ def main() -> int:
                                 }
                                 if not required.issubset(link_set):
                                     record_errors.append(f"About M.S. milestone lacks evidence links: {sorted(required - link_set)}")
+                                if timeline["visibleInlineArrows"]:
+                                    record_errors.append("About chronology has directional arrows inside sentences")
+                                if any(gap is None or not 8 <= gap <= 30 for gap in timeline["headingGaps"]) or min(timeline["headingLeading"]) < 1.19:
+                                    record_errors.append(f"About chronology headings and paragraphs are crowded: {timeline['headingGaps']}")
                             pairs = layout.get("aboutIntroPairs", [])
                             if len(pairs) < 5:
                                 record_errors.append(f"About editorial headings/introductions are missing: {pairs}")
