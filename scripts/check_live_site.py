@@ -17,7 +17,7 @@ EXPECTED_TEXT = {
         "Making material response measurable and interpretable.",
         "Soft matter",
         "Why the same material can behave differently after processing.",
-        "Liquid crystals as a model system for processing",
+        "Liquid crystals as a model system for how processing shapes structure.",
         "Processing history can change internal order and material properties.",
         "Ph.D. student",
         "Browse all research outputs",
