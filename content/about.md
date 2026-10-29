@@ -12,7 +12,7 @@ bio:
   - >-
     My work sits at the intersection of soft-matter science, measurement development, and reproducible experimentation. A chemical-engineering and regulated-manufacturing background now informs doctoral research on stimuli-responsive soft and liquid-crystalline materials at Virginia Commonwealth University.
   - >-
-    I combine rheology, neutron scattering, quantitative imaging, and mechanics to test how processing histories reorganize material structure and how those changes appear in optical and mechanical response. I focus on methods that remain interpretable across experiments, scales, and processing conditions.
+    I use rheology, quantitative imaging, and mechanics to investigate how processing histories affect material structure and response. Where suitable, structure-sensitive scattering can help distinguish interpretations that optical or mechanical signals alone cannot resolve. I focus on methods that remain interpretable across experiments and processing conditions.
 research_identity:
   title: Research question
   text: >-
