@@ -40,11 +40,13 @@ of material behavior. I aim to compare their responses under defined
 histories, testing which interpretations the combined evidence can support
 without assigning unique structural meaning to color, texture, or force alone.
 
-**What makes the result reproducible and useful?** Documented temperature
-ramps, shear conditions, calibration, repeated cycles, synchronized acquisition,
-and versioned software help distinguish material dependence from hysteresis
-or measurement drift. Automation is valuable when it improves the
-interpretability of those comparisons, not merely their throughput.
+**How can temperature-dependent response be calibrated repeatably?**
+Repeated heating and cooling can expose hysteresis, recovery effects, or
+changes in an optical response. Calibration, controlled temperature ramps,
+and comparison with reference measurements are needed to test whether an
+observable response remains quantitatively useful. Automation may improve
+repeatability when it preserves stimulus and measurement histories rather
+than merely increasing throughput.
 
 ## Questions and boundaries
 
