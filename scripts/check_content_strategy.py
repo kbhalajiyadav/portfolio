@@ -105,7 +105,7 @@ def main() -> int:
         errors.append("homepage identity must contain a field, direct research claim, and methods subline")
     if "processing history" in norm(profile.get("headline")).casefold():
         errors.append("homepage headline must not duplicate the doctoral processing-history explanation")
-    if "liquid-crystalline" not in norm(profile.get("summary")).casefold():
+    if "liquid crystalline" not in norm(profile.get("summary")):
         errors.append("homepage description must identify the current material class")
     narrative = portfolio.get("narrative", {})
     doctoral = portfolio.get("doctoral", {})
