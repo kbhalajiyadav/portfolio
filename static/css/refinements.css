@@ -179,7 +179,7 @@ html[data-analytics-consent="unknown"] .privacy-banner+main .page-shell{padding-
   .hero{display:grid;grid-template-columns:1fr;gap:2.5rem;padding-block:2.75rem 3.5rem}
   .hero__copy{width:100%;max-width:none}
   .hero .eyebrow{max-width:none;margin-bottom:1rem;font-size:.72rem;line-height:1.5;letter-spacing:.1em;text-wrap:balance}
-  .hero h1{max-width:100%;font-size:clamp(2.35rem,10.8vw,2.9rem);line-height:1;text-wrap:balance}
+  .hero h1{max-width:100%;font-size:clamp(2.25rem,10vw,2.7rem);line-height:1.12;letter-spacing:-.012em;text-wrap:balance}
   .hero .lede{margin-top:1.25rem;font-size:1.04rem;line-height:1.58}
   .hero .actions{margin-top:1.3rem}
   .hero .status-line{margin-top:1.3rem;line-height:1.45}
