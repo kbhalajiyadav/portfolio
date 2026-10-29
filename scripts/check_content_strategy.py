@@ -206,6 +206,32 @@ def main() -> int:
     if "newest first" not in outputs_body.casefold():
         errors.append("Outputs page must explain reverse-chronological ordering")
 
+    # Timeline milestones should be balanced and link to published evidence,
+    # not overwhelm subsequent research entries with a single long career paragraph.
+    path = about.get("professional_path", [])
+    expected_periods = ["2018–2022", "2022–2024", "2024–2026", "2026–present"]
+    if [str(item.get("period", "")) for item in path] != expected_periods:
+        errors.append("About timeline must retain four chronological education, industry and research milestones")
+    timeline_lengths = [len(words(item.get("text", ""))) for item in path]
+    if any(length < 20 or length > 100 for length in timeline_lengths):
+        errors.append(f"About timeline descriptions are too sparse or too dense: {timeline_lengths}")
+    if timeline_lengths and min(timeline_lengths) > 0 and max(timeline_lengths) / min(timeline_lengths) > 3:
+        errors.append(f"About timeline entries are disproportionately long: {timeline_lengths}")
+    ms = next((item.get("text", "") for item in path if item.get("period") == "2024–2026"), "")
+    for required in (
+        "Christina Tang",
+        "/publication/adhesives-wearable/",
+        "/publication/masters-thesis/",
+        "/project/peel-trace-evaluation/",
+    ):
+        if required not in ms:
+            errors.append(f"About M.S. milestone lacks context/evidence: {required}")
+    institutional_url = str(affiliation.get("institutional_record_url", ""))
+    if not institutional_url.startswith("https://scholarscompass.vcu.edu/etd/"):
+        errors.append("VCU Scholars Compass must link to the thesis record, not a generic university page")
+    if "VCU Scholars Compass" != affiliation.get("institutional_record_label"):
+        errors.append("Institutional thesis repository must be identified accurately as VCU Scholars Compass")
+
     ip = (cv.get("intellectual_property") or [{}])[0]
     ms_items = [item for item in about.get("professional_path", []) if str(item.get("period", "")).strip() == "2024–2026"]
     if len(ms_items) != 1:
