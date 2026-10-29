@@ -272,10 +272,10 @@ narrative:
     how structure relates to optical, mechanical, or other functional responses and whether the result repeats.
 applications:
 - Characterization of responsive materials under controlled thermal and flow histories
-- Rheology-informed evaluation of extrudable functional inks and printed soft composites as adjacent research questions
+- Comparing structure and measured response across other process-sensitive soft materials, with material-specific validation
 - Calibration and repeatability testing for passive thermal indicators and soft wearable interfaces
 doctoral:
-  title: Liquid crystals as a model system for processing–structure–response.
+  title: Liquid crystals as a model system for how processing shapes structure.
   text: Small-molecule cholesteric mixtures provide a model system for investigating how temperature
     and flow shape molecular order and measurable response. Rheology, structure-sensitive characterization,
     and optical metrology provide complementary tests. The longer-term goal is to determine which
