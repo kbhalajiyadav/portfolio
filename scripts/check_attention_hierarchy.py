@@ -353,6 +353,11 @@ def main() -> int:
                         errors.append(f"{prefix}: missing editorial heading/intro pairs: {heading_pairs}")
                     for pair in heading_pairs:
                         offset = pair["introTop"] - pair["headingTop"]
+                        label_gap = pair["headingTop"] - pair["kickerBottom"] if pair["kickerBottom"] is not None else None
+                        if label_gap is not None and not 6 <= label_gap <= 30:
+                            errors.append(
+                                f"{prefix}/{pair['section']}: kicker/title spacing is inconsistent ({label_gap:.1f}px)"
+                            )
                         if width >= 981:
                             if pair["columns"] != 2 or abs(offset) > 4:
                                 errors.append(
