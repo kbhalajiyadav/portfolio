@@ -1,17 +1,35 @@
 {{ $p := site.Data.portfolio }}
 <div class="trajectory research-extension" id="trajectory" aria-labelledby="doctoral-direction-title">
-  <div class="section-head research-extension__head"><p class="kicker">Doctoral research direction</p><h2 id="doctoral-direction-title">{{ $p.doctoral.title }}</h2><p>{{ $p.doctoral.text }}</p></div>
-  <details class="home-disclosure research-extension__details">
-    <summary>Explore applications, automation, and open research questions</summary>
-    <div class="home-disclosure__body">
-  <div class="trajectory-grid">
-    <article class="application-card"><h3>Application directions</h3><p>Measurement and processing directions where reliable optical or mechanical response could support practical sensing and material evaluation.</p><ul>{{ range $p.applications }}<li>{{ . }}</li>{{ end }}</ul></article>
-    <article class="robotics-card"><h3>Automation for repeatability</h3><p>{{ $p.doctoral.robotics }}</p></article>
+  <div class="section-head research-extension__head">
+    <p class="kicker">Doctoral research direction</p>
+    <h2 id="doctoral-direction-title">{{ $p.doctoral.title }}</h2>
+    <p>{{ $p.doctoral.text }}</p>
   </div>
-  <section class="questions" aria-labelledby="collaboration-questions-title">
-    <div class="questions__head"><p class="kicker">Collaboration</p><h3 id="collaboration-questions-title">Open research questions</h3></div>
-    <div class="questions__grid">{{ range $p.collaboration_questions }}<article><strong>{{ .title }}</strong><p>{{ .text }}</p></article>{{ end }}</div>
-  </section>
+  <details class="home-disclosure research-extension__details">
+    <summary>Explore research questions, measurement methods, and applications</summary>
+    <div class="home-disclosure__body">
+      <section class="questions" aria-labelledby="collaboration-questions-title">
+        <div class="questions__head">
+          <p class="kicker">Research and collaboration</p>
+          <h3 id="collaboration-questions-title">Open research questions</h3>
+        </div>
+        <div class="questions__grid">
+          {{ range $p.collaboration_questions }}
+          <article><strong>{{ .title }}</strong><p>{{ .text }}</p></article>
+          {{ end }}
+        </div>
+      </section>
+      <div class="trajectory-grid">
+        <article class="robotics-card">
+          <h3>Controlled histories and repeatable measurement</h3>
+          <p>{{ $p.doctoral.robotics }}</p>
+        </article>
+        <article class="application-card">
+          <h3>Potential application directions</h3>
+          <p>The model-system approach informs material and measurement questions; these are opportunities for investigation, not validated products.</p>
+          <ul>{{ range $p.applications }}<li>{{ . }}</li>{{ end }}</ul>
+        </article>
+      </div>
     </div>
   </details>
 </div>
