@@ -51,10 +51,12 @@ than merely increasing throughput.
 ## Questions and boundaries
 
 The methods above describe a research direction, not a claim that every
-proposed experiment or scattering measurement has been completed. The
-longer-term aim is to carry mechanistic insights and validated measurement
-methods into responsive materials, passive indicators, and wearable interfaces,
-with application-specific testing before any performance claim.
+proposed experiment or scattering measurement has been completed. The longer-term aim is to test which controlled protocols, calibration strategies,
+and analysis methods remain useful in other responsive materials and
+process-sensitive formulations, including printable functional inks and
+extrusion-processed soft composites. The methods may transfer even when the
+molecular mechanisms do not. Passive indicators and wearable interfaces are
+possible applications that require their own performance validation.
 
 Computational infrared thermography is a **separate exploratory measurement
 direction**, not a demonstrated extension of the cholesteric system. In
