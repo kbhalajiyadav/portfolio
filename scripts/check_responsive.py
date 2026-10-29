@@ -39,6 +39,7 @@ PAGES = [
     ("publication/adhesives-wearable/", "publication"),
     ("publication/electrospun-fiber-mats/", "publication-fiber-mats"),
     ("project/peel-trace-evaluation/", "project"),
+    ("project/optical-metrology/", "optical-metrology"),
 ]
 EVIDENCE_PAGES = {"home", "about", "research", "outputs", "experience", "engagement", "contact"}
 EVIDENCE_VIEWPORTS = {"390-mobile", "1440-desktop"}
@@ -289,6 +290,20 @@ LAYOUT_EXPRESSION = r"""
       }).filter(Boolean),
     outputFilterRules,
     schematicBorders,
+    diagramReadability:(() => {
+      const diagram = document.querySelector('.research-signature, .method-schematic');
+      if (!diagram) return null;
+      const desktop = diagram.querySelector('.research-signature__desktop, .method-schematic__desktop');
+      const mobile = diagram.querySelector('.research-signature__mobile, .method-schematic__mobile');
+      const shown = desktop && getComputedStyle(desktop).display !== 'none' ? desktop : mobile;
+      const labels = [...(shown?.querySelectorAll('li strong') || [])];
+      return {
+        count:labels.length,
+        minFontSize:labels.length ? Math.min(...labels.map(el => parseFloat(getComputedStyle(el).fontSize))) : 0,
+        overflowing:labels.some(el => el.getBoundingClientRect().right > width + 1),
+        mobileDisplayed:!!mobile && getComputedStyle(mobile).display !== 'none'
+      };
+    })(),
     h1Count: document.querySelectorAll('h1').length,
     mainCount: document.querySelectorAll('main').length
   };
@@ -527,6 +542,13 @@ def main() -> int:
                                 record_errors.append(f"research figure {index + 1} lacks a visible full-size link")
                         if layout["schematicBorders"] is not None and any(v != "0px" for v in layout["schematicBorders"]):
                             record_errors.append("explanatory method schematic has decorative outer borders")
+                        if page_name in {"research", "project", "optical-metrology"}:
+                            diagram = layout.get("diagramReadability")
+                            expected_steps = 5 if page_name != "project" else 6
+                            if not diagram or diagram["count"] != expected_steps or diagram["minFontSize"] < 14 or diagram["overflowing"]:
+                                record_errors.append(f"scientific workflow labels must remain readable at {width}px: {diagram}")
+                            if diagram and diagram["mobileDisplayed"] != (width <= 820):
+                                record_errors.append(f"scientific workflow must reflow at 820px: {diagram}")
                         if page_name == "home" and width >= 981:
                             if layout["footerItemCount"] < 2:
                                 record_errors.append("desktop footer navigation items are missing")
