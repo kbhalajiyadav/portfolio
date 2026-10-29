@@ -117,7 +117,8 @@ Rules:
 - The academic CV and compact resume may hyperlink established project titles to canonical portfolio pages without adding repeated “Read more” lines. Keep titles meaningful in print, retain publisher DOIs and research software archives, and avoid linking speculative or restricted data.
 - A research statement should be reachable from the homepage doctoral section, the About research-identity section, and the academic CV, without creating additional primary hero actions.
 - Release verification must check the canonical homepage and Research/Research Statement for revision-specific scientific wording in addition to the exact commit marker; the page reader's indexed cache is not an authoritative deployment test.
-- Measure actual gaps between homepage section children and the trailing-content-to-boundary gap; use broad spacing limits, not screenshot-exact coordinates. Existing navigation-continuity checks own persistent header geometry, action density, and output-filter stability (do not duplicate them).
+- Measure actual gaps between homepage section children and the trailing-content-to-boundary gap; use broad spacing limits, not screenshot-exact coordinates. Measure the homepage Research Program paragraph-to-first-stage distance explicitly on mobile/tablet, not only the similarly named diagram on the separate Research page. The generic `.section-head` margin was responsible for a real iPhone gap regression. Existing navigation-continuity checks own persistent header geometry, action density, and output-filter stability (do not duplicate them).
+- Keep directional arrows on standalone navigation and calls to action, but not after inline hyperlinks within continuous research prose; citations and author links should read naturally with surrounding punctuation.
 - Repeated cards, borders, shadows, or callouts should be removed when they do not add semantic structure.
 
 ## 8. Responsive composition
