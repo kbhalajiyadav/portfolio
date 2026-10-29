@@ -99,6 +99,21 @@ def main() -> int:
     profile = portfolio.get("profile", {})
     cv_profile = cv.get("profile", {})
 
+    # The homepage identifies the research approach without repeating the same technical heading.
+    hero_fields = ("eyebrow", "headline", "summary")
+    if any(not norm(profile.get(field)) for field in hero_fields):
+        errors.append("homepage identity must contain a field, direct research claim, and methods subline")
+    if "processing history" in norm(profile.get("headline")).casefold():
+        errors.append("homepage headline must not duplicate the doctoral processing-history explanation")
+    if "liquid-crystalline" not in norm(profile.get("summary")).casefold():
+        errors.append("homepage description must identify the current material class")
+    narrative = portfolio.get("narrative", {})
+    doctoral = portfolio.get("doctoral", {})
+    if "same material" not in norm(narrative.get("problem_title")).casefold():
+        errors.append("homepage research problem must introduce processing-dependent variation")
+    if "model system" not in norm(doctoral.get("title")).casefold():
+        errors.append("doctoral heading must frame liquid crystals as one model, not the entire research identity")
+
     for field in ("role", "program", "institution"):
         if not norm(profile.get(field)):
             errors.append(f"portfolio.profile.{field} is required for structured current identity")
