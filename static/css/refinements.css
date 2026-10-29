@@ -115,16 +115,16 @@
 .privacy-choice-link{appearance:none;margin:0;padding:0;border:0;background:transparent;cursor:pointer}
 .site-footer nav .privacy-choice-link{color:var(--ink-soft);font-family:var(--sans);font-size:.76rem;font-weight:400;text-decoration:none}
 .site-footer nav .privacy-choice-link:hover{color:var(--cyan)}
-.privacy-banner{position:relative;z-index:90;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;width:min(calc(100% - 3rem),var(--shell));margin:1rem auto 0;padding:1.15rem 1.25rem;border:1px solid var(--line-strong);background:var(--surface);box-shadow:0 12px 36px rgba(20,24,27,.09);font-family:var(--sans);scroll-margin-top:calc(var(--header-h) + 1rem)}
+.privacy-banner{position:relative;z-index:90;display:flex;align-items:center;justify-content:space-between;gap:.75rem 1.2rem;width:min(calc(100% - 3rem),var(--shell));margin:.35rem auto 0;padding:.65rem 0;border:0;border-block:1px solid var(--line);background:transparent;box-shadow:none;font-family:var(--sans);scroll-margin-top:calc(var(--header-h) + 1rem)}
 html[data-analytics-consent="granted"] .privacy-banner,html[data-analytics-consent="denied"] .privacy-banner{display:none}
 .privacy-banner[hidden]{display:none}
 html[data-analytics-consent="unknown"] .privacy-banner+main .page-shell{padding-top:clamp(2.5rem,4vw,3.75rem)}
-.hero+.privacy-banner{margin-top:0;margin-bottom:clamp(1rem,2vw,1.5rem)}
+.hero+.privacy-banner{margin-top:0;margin-bottom:clamp(.65rem,1.5vw,1rem)}
 .privacy-banner__copy{min-width:0}
-.privacy-banner__copy strong{display:block;margin-bottom:.28rem;color:var(--ink);font-size:.86rem}
-.privacy-banner__copy p{max-width:64ch;margin:0;color:var(--ink-soft);font-size:.82rem;line-height:1.5}
-.privacy-banner__actions{display:flex;flex:0 0 auto;align-items:center;gap:.6rem}
-.privacy-banner__actions .button{min-height:40px;padding:.52rem .78rem;font-size:.78rem;cursor:pointer}
+.privacy-banner__copy strong{display:inline;margin-right:.45rem;color:var(--ink);font-size:.82rem}
+.privacy-banner__copy p{display:inline;max-width:64ch;margin:0;color:var(--ink-soft);font-size:.79rem;line-height:1.5}
+.privacy-banner__actions{display:flex;flex:0 0 auto;align-items:center;gap:.4rem}
+.privacy-banner__actions .button{min-height:44px;padding:.42rem .7rem;font-size:.77rem;cursor:pointer}
 .privacy-banner__decline{background:transparent;color:var(--teal)}
 .privacy-banner__decline:hover{border-color:var(--cyan);background:var(--surface-soft);color:var(--cyan)}
 @media(min-width:1180px){
@@ -196,9 +196,9 @@ html[data-analytics-consent="unknown"] .privacy-banner+main .page-shell{padding-
   .output-row h2{max-width:none}
   .engagement-grid{grid-template-columns:1fr;gap:2.25rem}
   .engagement-grid>div:first-child{grid-column:auto}
-  .privacy-banner{align-items:stretch;flex-direction:column;gap:.55rem;width:calc(100% - 2rem);padding:.78rem .9rem}
-  .privacy-banner__copy strong{margin-bottom:.1rem}
-  .privacy-banner__copy p{font-size:.79rem;line-height:1.42}
+  .privacy-banner{align-items:stretch;flex-direction:column;gap:.45rem;width:calc(100% - 2rem);padding:.55rem 0}
+  .privacy-banner__copy strong{display:block;margin-bottom:.1rem}
+  .privacy-banner__copy p{display:block;font-size:.78rem;line-height:1.42}
   .privacy-banner__actions{gap:.5rem;width:100%}
   html[data-analytics-consent="unknown"] .privacy-banner+main .page-shell{padding-top:2.5rem}
   .privacy-banner__actions .button{flex:1;white-space:normal}

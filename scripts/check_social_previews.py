@@ -9,7 +9,7 @@ import sys
 from urllib.parse import urlparse
 
 CARD_ALTS = {
-    "portfolio.png": "Bhalaji Kantepalle research portfolio: making responsive materials measurable under real processing conditions.",
+    "portfolio.png": "Bhalaji Kantepalle research portfolio: making material response measurable and interpretable.",
     "research.png": "Bhalaji Kantepalle research program: stimulus to structure to response to measurement to translation.",
     "outputs.png": "Bhalaji Kantepalle research outputs: publications, software, and intellectual property.",
     "experience.png": "Bhalaji Kantepalle experience and education across materials, data, and regulated systems.",

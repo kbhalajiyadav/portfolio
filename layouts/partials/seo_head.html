@@ -37,7 +37,7 @@
 {{ with .Params.social_card }}{{ $socialCard = . }}{{ end }}
 {{ $socialImage := (printf "social/%s.png" $socialCard) | absURL }}
 {{ $socialAltByCard := dict
-  "portfolio" (printf "%s research portfolio: making responsive materials measurable under real processing conditions." $p.profile.short_name)
+  "portfolio" (printf "%s research portfolio: making material response measurable and interpretable." $p.profile.short_name)
   "research" (printf "%s research program: stimulus to structure to response to measurement to translation." $p.profile.short_name)
   "outputs" (printf "%s research outputs: publications, software, and intellectual property." $p.profile.short_name)
   "experience" (printf "%s experience and education across materials, data, and regulated systems." $p.profile.short_name)

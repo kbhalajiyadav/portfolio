@@ -80,7 +80,9 @@ Rules:
 - Labels should add orientation instead of repeating the adjacent heading.
 - Use method-level terms on program pages (`computer vision`) and implementation-specific tools (`OpenCV`) where technical detail is appropriate.
 - Avoid governance, audit, release, benchmark, package, or staging language in visitor-facing prose unless the subject itself requires it.
-- Homepage copy argues the research identity; destination pages carry the fuller evidence.
+- Homepage copy argues the research identity; destination pages carry the fuller evidence. The hero kicker identifies the field/methods, the headline states the measurable research goal, and the subline names systems and methods; the Research section owns the open problem, the doctoral block owns the liquid-crystal model system, questions own unresolved hypotheses, and Outputs owns the peer-reviewed evidence.
+- The analytics consent UI belongs in a compact, nonsticky editorial strip after the hero: no shadow or floating card, clear Allow/Decline choices with 44px touch targets, and a persistent footer route to reopen consent choices. Do not weaken the opt-in Clarity behavior.
+- Retain functional inks and extrusion-printed materials only as separately labeled prospective/adjacent research questions, never as demonstrated work without a corresponding public output.
 - Describe small-molecule cholesteric liquid crystals as a model system for testing processing–structure–response questions; do not imply the model alone establishes device performance or a resolved structural mechanism.
 - Distinguish infrared thermography from thermochromic sensing. Physiological body-fat, metabolic-rate, or diagnostic predictions are not established capabilities without independent reference validation.
 - Clearly differentiate published work, existing software, unpublished preliminary observations, proposed methods, prototypes, and possible commercial applications. Avoid unsupported numerical savings or health claims.
