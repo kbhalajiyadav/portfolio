@@ -145,6 +145,18 @@ def main() -> int:
     ):
         errors.append("intermediate desktop workflow should center its 3+2 layout")
 
+    # The featured scientific figure has an integrated desktop caption and a wider visual panel.
+    for selector, declaration in (
+        (".package-lead>.research-figure--featured .research-figure__media", "grid-column:2"),
+        (".package-lead>.research-figure--featured figcaption", "grid-column:1"),
+        (".package-lead>.research-figure--featured figcaption", "border:0"),
+        (".package-lead>.research-figure--featured figcaption .research-figure__open", "margin-top:0"),
+    ):
+        if not rule_has(REF, selector, declaration):
+            errors.append(f"featured research figure lost its cohesive desktop layout: {selector} {declaration}")
+    if "--shell:clamp(1280px,88vw,1520px)" not in POLISH:
+        errors.append("wide-screen shell must expand moderately without unrestricted full-bleed text")
+
     # A numbered scientific workflow needs no surrounding or per-row rules.
     for selector, declaration, css in (
         (".research-signature", "border:0", POLISH),
