@@ -276,6 +276,19 @@ LAYOUT_EXPRESSION = r"""
       const style = getComputedStyle(title);
       return {fontSize:parseFloat(style.fontSize),lineHeight:parseFloat(style.lineHeight),letterSpacing:parseFloat(style.letterSpacing)};
     })(),
+    homeResearchDiagramGap:(() => {
+      const section = document.querySelector('#research');
+      const introduction = section?.querySelector(':scope > .section-head > p:not(.kicker)');
+      const first = section?.querySelector(':scope > .research-signature .research-signature__mobile > li:first-child');
+      if (!introduction || !first) return null;
+      return {
+        introductionBottom:introduction.getBoundingClientRect().bottom,
+        firstStageTop:first.getBoundingClientRect().top,
+        gap:first.getBoundingClientRect().top - introduction.getBoundingClientRect().bottom
+      };
+    })(),
+    scholarlyInlineArrows:[...document.querySelectorAll('.article-content p .content-link__arrow, .article-content li .content-link__arrow')]
+      .filter(el => getComputedStyle(el).display !== 'none').length,
     researchDiagramGap:(() => {
       const figure = document.querySelector('.research-signature');
       const before = figure?.previousElementSibling;
@@ -565,6 +578,12 @@ def main() -> int:
                                 header_surface.startswith("rgba(") and float(header_surface.rstrip(")").split(",")[-1]) < 1
                             ):
                                 record_errors.append(f"sticky header must be opaque to prevent text ghosting: {header_surface}")
+                        if page_name == "home" and width <= 820:
+                            gap = layout.get("homeResearchDiagramGap")
+                            if not gap or not 4 <= gap["gap"] <= 44:
+                                record_errors.append(f"homepage research introduction and numbered workflow are separated by excessive blank space: {gap}")
+                        if page_name == "research" and layout.get("scholarlyInlineArrows"):
+                            record_errors.append("scholarly prose has redundant directional arrows after inline links")
                         if page_name == "home" and width <= 680:
                             heading = layout.get("heroTypography")
                             if not heading or not 1.08 <= heading["lineHeight"] / heading["fontSize"] <= 1.28 or heading["letterSpacing"] < -0.023 * heading["fontSize"]:
