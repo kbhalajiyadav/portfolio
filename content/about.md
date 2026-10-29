@@ -28,7 +28,7 @@ professional_path:
   - period: 2024–2026
     title: M.S. research in quantitative metrology
     text: >-
-      Conducted M.S. research in the VCU Soft Functional Materials Lab with advisor Christina Tang, Ph.D., on soft-interface adhesion and quantitative optical metrology. The work produced a [first-author article](/publication/adhesives-wearable/), a [defended M.S. thesis](/publication/masters-thesis/) with an institutional repository record, [citable peel-trace software](/project/peel-trace-evaluation/), and two 2026 presentations on computer-vision metrology for textiles.
+      Conducted M.S. research in the VCU Soft Functional Materials Lab with advisor Christina Tang, Ph.D., on soft-interface adhesion and quantitative optical metrology. The work produced a [first-author article](/publication/adhesives-wearable/), a defended [M.S. thesis](https://scholarscompass.vcu.edu/etd/8456/) (VCU repository record), [citable peel-trace software](/project/peel-trace-evaluation/), and two 2026 presentations on computer-vision metrology for textiles.
   - period: 2026–present
     title: Doctoral research in structure under processing
     text: >-
