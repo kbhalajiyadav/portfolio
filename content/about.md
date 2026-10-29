@@ -31,7 +31,8 @@ professional_path:
       Conducted M.S. research in the VCU Soft Functional Materials Lab with advisor Christina Tang, Ph.D., on soft-interface adhesion and quantitative optical metrology. The work produced a [first-author article](/publication/adhesives-wearable/), a [defended M.S. thesis](/publication/masters-thesis/) with an institutional repository record, [citable peel-trace software](/project/peel-trace-evaluation/), and two 2026 presentations on computer-vision metrology for textiles.
   - period: 2026–present
     title: Doctoral research in structure under processing
-    text: Pursuing doctoral research in stimuli-responsive soft and liquid-crystalline materials, with emphasis on rheology, neutron scattering, optical metrology, repeatable stimulus histories, and structure–processing–response relationships.
+    text: >-
+      Using small-molecule cholesteric liquid-crystal mixtures as a model system to study how heating, cooling, and shear change structural order and measurable response. The research direction combines rheology and quantitative optical methods, with structure-sensitive scattering where it can distinguish competing interpretations.
 methods:
   - title: Measurement development
     text: Force–displacement analysis, deformation tracking, colorimetry, and computer vision for soft and textile-supported systems.
