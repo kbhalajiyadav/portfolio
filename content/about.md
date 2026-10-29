@@ -7,7 +7,7 @@ url: /about/
 kicker: About
 summary: Research biography and current scientific focus spanning responsive materials, quantitative metrology, and structure under processing.
 description: Research biography, scientific focus, professional path, methods, and research profiles for Bhalaji Yadav Kantepalle.
-lastmod: 2026-10-13
+lastmod: 2026-10-29
 bio:
   - >-
     My work sits at the intersection of soft-matter science, measurement development, and reproducible experimentation. A chemical-engineering and regulated-manufacturing background now informs doctoral research on stimuli-responsive soft and liquid-crystalline materials at Virginia Commonwealth University.
