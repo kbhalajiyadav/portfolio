@@ -49,7 +49,7 @@ EXPECTED_TEXT = {
         "Connected research outputs",
         "Open research questions",
         "Small-molecule cholesteric mixtures",
-        "independent reference data",
+        "application-specific validation before performance claims.",
     ],
     "research-statement/": [
         "Research Statement",
