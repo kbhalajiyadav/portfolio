@@ -146,7 +146,7 @@ def main() -> int:
     # becoming a four-line inventory of every possible output type.
     if "<h2>Published research and tools.</h2>" not in home:
         errors.append("homepage selected-outputs heading must remain concise")
-    if "The first-author article, associated thesis, and citable software form one research package." not in home:
+    if "The first-author article, associated thesis, and citable software document the same study." not in home:
         errors.append("homepage selected-outputs introduction must explain the related work")
 
     if not all(marker in home for marker in ('class="series-grid"', 'class="engagement-grid"', 'View full professional engagement')):
