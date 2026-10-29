@@ -128,6 +128,17 @@ def main() -> int:
         if not rule_has(source, selector, declaration):
             errors.append(f"research/process labels must retain intrinsic readable text: {selector} {declaration}")
 
+    # A numbered scientific workflow needs no surrounding or per-row rules.
+    for selector, declaration, css in (
+        (".research-signature", "border:0", POLISH),
+        (".research-signature__mobile", "border:0", POLISH),
+        (".research-signature__mobile li", "border:0", POLISH),
+        (".method-schematic__mobile", "border:0", REF),
+        (".method-schematic__mobile li", "border:0", REF),
+    ):
+        if not rule_has(css, selector, declaration):
+            errors.append(f"scientific process diagram has redundant framing: {selector} {declaration}")
+
     # Native homepage disclosures must stay legible, keyboard-focusable, and unboxed.
     for selector, declaration in (
         (".home-disclosure", "border-top:1px solid var(--line-strong)"),
