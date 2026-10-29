@@ -5,20 +5,22 @@
     <h2 id="doctoral-direction-title">{{ $p.doctoral.title }}</h2>
     <p>{{ $p.doctoral.text }}</p>
   </div>
+  <p class="research-extension__statement-link"><a class="lnk" href="{{ "/research-statement/" | relURL }}">Read the research statement <span class="arw" aria-hidden="true">→</span></a></p>
+  <section class="questions" aria-labelledby="collaboration-questions-title">
+    <div class="questions__head">
+      <p class="kicker">Research and collaboration</p>
+      <h3 id="collaboration-questions-title">Open research questions</h3>
+    </div>
+    <p class="questions__context">Heating, cooling, and flow can change material behavior. Interpreting that change requires knowing its history and separating material response from measurement effects.</p>
+    <div class="questions__grid">
+      {{ range $p.collaboration_questions }}
+      <article><strong>{{ .title }}</strong><p>{{ .text }}</p></article>
+      {{ end }}
+    </div>
+  </section>
   <details class="home-disclosure research-extension__details">
-    <summary>Explore research questions, measurement methods, and applications</summary>
+    <summary>Explore measurement methods and application directions</summary>
     <div class="home-disclosure__body">
-      <section class="questions" aria-labelledby="collaboration-questions-title">
-        <div class="questions__head">
-          <p class="kicker">Research and collaboration</p>
-          <h3 id="collaboration-questions-title">Open research questions</h3>
-        </div>
-        <div class="questions__grid">
-          {{ range $p.collaboration_questions }}
-          <article><strong>{{ .title }}</strong><p>{{ .text }}</p></article>
-          {{ end }}
-        </div>
-      </section>
       <div class="trajectory-grid">
         <article class="robotics-card">
           <h3>Controlled histories and repeatable measurement</h3>
