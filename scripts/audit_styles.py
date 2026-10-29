@@ -156,8 +156,15 @@ def main() -> int:
 
     if ".about-program-grid" in ABOUT:
         errors.append("About must not duplicate the homepage research-program card grid")
-    if not rule_has(ABOUT, ".about-method-grid", "border-block:1px solid var(--line)"):
-        errors.append("About methods must use the lighter editorial-band treatment")
+    for selector, declaration in (
+        (".about-method-grid", "border:0"),
+        (".about-method-grid", "gap:clamp(1.75rem,3.5vw,3.5rem)"),
+        (".about-method-grid article", "border:0"),
+    ):
+        if not rule_has(ABOUT, selector, declaration):
+            errors.append(f"About methods should form separated editorial columns, not a framed table: {selector} {declaration}")
+    if not rule_has(REF, ".output-list", "border-top:0"):
+        errors.append("Outputs filter/list junction must not have two parallel rules")
     if not rule_has(ABOUT, ".about-profile-links", "border-block:1px solid var(--line)"):
         errors.append("About profile links must use the editorial ruled-list treatment")
 
