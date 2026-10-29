@@ -301,6 +301,7 @@ html[data-analytics-consent="unknown"] .privacy-banner+main .page-shell{padding-
 /* Research figure: published or schematic evidence with its credit beside it. */
 .research-figure{margin:0}
 .package-lead>.research-figure--featured .actions{display:flex;flex-wrap:wrap;gap:.7rem 1rem}
+.package-lead>.research-figure--featured figcaption .research-figure__open{margin-top:0}
 .research-figure__media{display:block;width:fit-content;max-width:100%;border:0;background:transparent;text-decoration:none}
 .research-figure__media img{display:block;max-width:100%;height:auto;margin:0;border:0;box-shadow:none}
 .research-figure__open{display:inline-block;margin-top:.6rem;padding:0;border:0;color:var(--teal);background:transparent;font-family:var(--sans);font-size:.8rem;font-weight:600;text-align:left}
