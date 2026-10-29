@@ -150,9 +150,9 @@ def main() -> int:
     research_statement = (ROOT / "content/research-statement/index.md").read_text(encoding="utf-8")
     if "model system" not in research_page or "model system" not in research_statement:
         errors.append("research content must explain the cholesteric model-system role")
-    if "infrared thermography" not in research_page or "Computational infrared thermography" not in research_statement:
+    if "infrared thermography" not in research_page.lower() or "computational infrared thermography" not in research_statement.lower():
         errors.append("research content must distinguish exploratory infrared software from thermochromic sensing")
-    if "not" not in research_page.split("Estimating physiological quantities", 1)[-1].split("\\n\\n", 1)[0]:
+    if "not" not in research_page.split("Estimating physiological quantities", 1)[-1].split("\n\n", 1)[0]:
         errors.append("research content must not present physiological inference as a validated result")
     # Homepage selected-outputs heading must introduce the featured study without
     # becoming a four-line inventory of every possible output type.
