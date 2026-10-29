@@ -264,6 +264,16 @@ LAYOUT_EXPRESSION = r"""
     contactIntroGap,
     outputLayout,
     aboutMethodBorders,
+    aboutIntroPairs:[...document.querySelectorAll('.about-section__intro')]
+      .map(section => {
+        const title = section.querySelector('.about-section__title h2')?.getBoundingClientRect();
+        const prose = section.querySelector('.about-section__summary p')?.getBoundingClientRect();
+        return title && prose ? {
+          id:section.closest('[id]')?.id || 'unnamed',
+          titleTop:title.top,titleBottom:title.bottom,proseTop:prose.top,
+          columnCount:getComputedStyle(section).gridTemplateColumns.split(/\\s+/).filter(Boolean).length
+        } : null;
+      }).filter(Boolean),
     outputFilterRules,
     schematicBorders,
     h1Count: document.querySelectorAll('h1').length,
@@ -453,6 +463,17 @@ def main() -> int:
                                         "featured figure must retain dataset, source code, and license links"
                                     )
                         if page_name == "about":
+                            pairs = layout.get("aboutIntroPairs", [])
+                            if len(pairs) < 5:
+                                record_errors.append(f"About editorial headings/introductions are missing: {pairs}")
+                            for pair in pairs:
+                                if width >= 981:
+                                    if pair["columnCount"] != 2 or abs(pair["proseTop"] - pair["titleTop"]) > 12:
+                                        record_errors.append(
+                                            f"About/{pair['id']} summary does not align with the heading: {pair}"
+                                        )
+                                elif pair["columnCount"] != 1 or not 0 <= pair["proseTop"] - pair["titleBottom"] <= 56:
+                                    record_errors.append(f"About/{pair['id']} stacked heading/summary gap is unstable: {pair}")
                             methods = layout.get("aboutMethodBorders")
                             if not methods or len(methods.get("cards", [])) != 3:
                                 record_errors.append("About method columns are missing")
