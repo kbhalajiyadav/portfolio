@@ -246,7 +246,7 @@ def validate_homepage_styles(base: str, body: str, nonce: str) -> list[str]:
     """Verify the stylesheet actually served with the homepage contains the mobile-gap fix."""
     errors: list[str] = []
     stylesheet_links = []
-    for tag in re.findall(r"<link\\b[^>]*>", body, flags=re.IGNORECASE):
+    for tag in re.findall(r"<link\b[^>]*>", body, flags=re.IGNORECASE):
         if "stylesheet" not in (extract_attribute(tag, "rel") or "").split():
             continue
         href = extract_attribute(tag, "href")
@@ -261,8 +261,8 @@ def validate_homepage_styles(base: str, body: str, nonce: str) -> list[str]:
             return [f"homepage stylesheet {url} returned HTTP {status}"]
         css = raw.decode("utf-8", errors="replace")
         required = (
-            (r"#research\\s*>\\s*\\.section-head\\s*\\{[^}]*margin-bottom\\s*:\\s*(?:0?\\.7)rem", "compact homepage research heading gap"),
-            (r"#research\\s*>\\s*\\.research-signature\\s*\\{[^}]*margin-top\\s*:\\s*0(?:[;}])", "zero schematic top gap"),
+            (r"#research\s*>\s*\.section-head\s*\{[^}]*margin-bottom\s*:\s*(?:0?\.7)rem", "compact homepage research heading gap"),
+            (r"#research\s*>\s*\.research-signature\s*\{[^}]*margin-top\s*:\s*0(?:[;}])", "zero schematic top gap"),
         )
         for pattern, label in required:
             if not re.search(pattern, css):
