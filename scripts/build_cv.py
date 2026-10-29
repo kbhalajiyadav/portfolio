@@ -176,9 +176,11 @@ def render_software(data: dict) -> str:
         )
         software.append(
             rf"{{\small {esc(item['description'])} "
-            + r"\mbox{" + href(item["repository"], "Repository") + "}"
+            + r"\mbox{"
+            + href(item["repository"], "Repository")
             + r" \contactsep "
-            + r"\mbox{" + href(item["archive"], "Archived release") + "}"
+            + href(item["archive"], "Archived release")
+            + "}"
             + "}"
         )
     return section("Research Software", software)
