@@ -226,6 +226,23 @@ LAYOUT_EXPRESSION = r"""
         };
       })()
     : null;
+  const borderEdges = element => {
+    if (!element) return null;
+    const style = getComputedStyle(element);
+    return ['borderTopWidth','borderRightWidth','borderBottomWidth','borderLeftWidth']
+      .map(key => parseFloat(style[key]) || 0);
+  };
+  const aboutMethods = document.querySelector('.about-method-grid');
+  const aboutMethodBorders = aboutMethods ? {
+    grid: borderEdges(aboutMethods),
+    cards: [...aboutMethods.querySelectorAll(':scope > article')].map(borderEdges),
+    gap:parseFloat(getComputedStyle(aboutMethods).rowGap) || 0,
+  } : null;
+  const filter = document.querySelector('.output-filter');
+  const list = document.querySelector('.output-list');
+  const outputFilterRules = filter && list
+    ? {filterBottom:borderEdges(filter)[2], listTop:borderEdges(list)[0]}
+    : null;
   const schematic = document.querySelector('.method-schematic');
   const schematicBorders = schematic
     ? [getComputedStyle(schematic).borderTopWidth, getComputedStyle(schematic).borderBottomWidth]
@@ -246,6 +263,8 @@ LAYOUT_EXPRESSION = r"""
     seriesPairs,
     contactIntroGap,
     outputLayout,
+    aboutMethodBorders,
+    outputFilterRules,
     schematicBorders,
     h1Count: document.querySelectorAll('h1').length,
     mainCount: document.querySelectorAll('main').length
@@ -433,6 +452,16 @@ def main() -> int:
                                     record_errors.append(
                                         "featured figure must retain dataset, source code, and license links"
                                     )
+                        if page_name == "about":
+                            methods = layout.get("aboutMethodBorders")
+                            if not methods or len(methods.get("cards", [])) != 3:
+                                record_errors.append("About method columns are missing")
+                            elif any(value > 0 for edges in [methods["grid"], *methods["cards"]] for value in edges) or methods["gap"] < 20:
+                                record_errors.append(f"About methods regained table-cell borders or lost spacing: {methods}")
+                        if page_name == "outputs":
+                            junction = layout.get("outputFilterRules")
+                            if not junction or not (0 < junction["filterBottom"] <= 2) or junction["listTop"] > 0:
+                                record_errors.append(f"Outputs filter/list junction has duplicated or missing rule: {junction}")
                         if page_name == "contact":
                             contact_gap = layout["contactIntroGap"]
                             if contact_gap is None or not 16 <= contact_gap <= 90:
