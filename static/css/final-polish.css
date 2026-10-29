@@ -49,7 +49,7 @@ a:hover .content-link__arrow--internal,a:focus-visible .content-link__arrow--int
 
 /* Preserve editorial line lengths while using large desktop displays more effectively. */
 @media(min-width:1440px){
-  :root{--shell:1280px}
+  :root{--shell:clamp(1280px,88vw,1520px)}
   .hero__visual{width:min(100%,410px)}
 }
 
