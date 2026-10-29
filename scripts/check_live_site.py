@@ -16,6 +16,9 @@ EXPECTED_TEXT = {
         "Research program",
         "Ph.D. student",
         "Browse all research outputs",
+        "Processing history and molecular order",
+        "Controlled histories and repeatable measurement",
+        "Potential application directions",
         'href="/favicon.svg"',
         'href="/favicon-48.png"',
         'href="/favicon.ico"',
@@ -40,6 +43,13 @@ EXPECTED_TEXT = {
         "Translate reproducibly",
         "Connected research outputs",
         "Open research questions",
+        "Small-molecule cholesteric mixtures",
+        "independent reference data",
+    ],
+    "research-statement/": [
+        "Research Statement",
+        "Small-molecule cholesteric mixtures",
+        "Computational infrared thermography",
     ],
     "outputs/": [
         "Research Outputs",

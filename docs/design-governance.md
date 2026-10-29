@@ -112,6 +112,8 @@ Rules:
 - Intrinsic-height editorial structures are preferred for education, timelines, records, and asymmetric content.
 - Large unused white zones require a content or hierarchy reason; they are not a substitute for spacing.
 - In expanded research disclosures, present questions before methods and application hypotheses. A collapsed disclosure should not leave an oversized empty band; preserve its keyboard-focus indicator while removing purely decorative boxing.
+- Release verification must check the canonical homepage and Research/Research Statement for revision-specific scientific wording in addition to the exact commit marker; the page reader's indexed cache is not an authoritative deployment test.
+- Measure actual gaps between homepage section children and the trailing-content-to-boundary gap; use broad spacing limits, not screenshot-exact coordinates. Existing navigation-continuity checks own persistent header geometry, action density, and output-filter stability (do not duplicate them).
 - Repeated cards, borders, shadows, or callouts should be removed when they do not add semantic structure.
 
 ## 8. Responsive composition
