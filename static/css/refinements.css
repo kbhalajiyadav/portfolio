@@ -51,14 +51,16 @@
 .related-package .actions{margin-top:.75rem}
 .research-extension{margin-top:clamp(5rem,8vw,7rem);padding-top:clamp(3.5rem,5.5vw,5rem);border-top:1px solid var(--line)}
 .research-extension .section-head{margin-bottom:2.25rem}
-.trajectory-grid{position:relative;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(240px,.65fr);gap:clamp(2.5rem,5vw,5rem);align-items:start;padding:0;border:0}
+/* Research content remains intrinsic and editorial: questions first, then methods and translation. */
+#research.section{padding-bottom:4rem}
+.trajectory-grid{position:relative;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(2rem,4vw,4rem);align-items:start;margin-top:clamp(2rem,3.5vw,2.75rem);padding:0;border:0}
 .trajectory-grid article{min-width:0;padding:0;border:0;background:transparent}
-.trajectory-grid .application-card ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.4rem 1.4rem;margin:1.2rem 0 0;padding-left:1.15rem}
+.trajectory-grid .application-card ul{display:grid;grid-template-columns:minmax(0,1fr);gap:.5rem;margin:1rem 0 0;padding-left:1.15rem}
 .trajectory-grid .application-card li{margin:0}
 .trajectory-grid .robotics-card{padding:0;border:0!important}
-.research-extension .questions{display:block;margin-top:clamp(2.5rem,4vw,3.5rem);padding:0;border:0;background:transparent}
-.questions__head{display:grid;grid-template-columns:minmax(180px,.55fr) minmax(0,1.45fr);gap:1rem 3rem;align-items:start;margin-bottom:1.45rem}
-.questions__head .kicker{margin:0}
+.research-extension .questions{display:block;margin:0;padding:0;border:0;background:transparent}
+.questions__head{display:block;margin-bottom:1.45rem}
+.questions__head .kicker{margin:0 0 .5rem}
 .questions__head h3{max-width:34ch;font-size:clamp(1.25rem,2vw,1.7rem);text-wrap:balance}
 .questions__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(1.5rem,3vw,3rem);border:0;background:transparent}
 .questions__grid article{min-width:0;padding:0;border:0;background:transparent}
@@ -75,6 +77,7 @@
 .home-disclosure>summary:hover{color:var(--cyan)}
 .home-disclosure>summary:focus-visible{outline:2px solid var(--teal);outline-offset:4px}
 .home-disclosure__body{padding:1.5rem 0 2rem}
+.research-extension__details>.home-disclosure__body{padding:1.1rem 0 .5rem}
 .home-disclosure:not([open])>.home-disclosure__body{display:none}
 .home-disclosure--engagement{margin-top:1.65rem}
 .outputs-page .page-header{max-width:760px}
@@ -165,8 +168,7 @@ html[data-analytics-consent="unknown"] .privacy-banner+main .page-shell{padding-
   .output-row{grid-template-columns:7.75rem minmax(0,1fr);gap:1.25rem}
 }
 @media(max-width:820px){
-  .questions__head{grid-template-columns:1fr;gap:.45rem}
-  .questions__grid{grid-template-columns:1fr}
+  .questions__grid{grid-template-columns:1fr;gap:1.5rem}
 }
 @media(max-width:680px){
   .hero{display:grid;grid-template-columns:1fr;gap:2.5rem;padding-block:2.75rem 3.5rem}
@@ -180,7 +182,7 @@ html[data-analytics-consent="unknown"] .privacy-banner+main .page-shell{padding-
   .identity-note{position:static;width:100%;min-width:0;margin-top:.9rem;box-shadow:none;border-left-width:2px}
   .related-package{padding:1.2rem}
   .research-extension{margin-top:4.25rem;padding-top:3.25rem}
-  .trajectory-grid .application-card ul{grid-template-columns:1fr;gap:.35rem}
+  .trajectory-grid .application-card ul{gap:.45rem}
   .output-filter{align-items:stretch;gap:0 .85rem}
   .output-filter button{min-height:44px}
   .output-row{grid-template-columns:1fr;gap:.65rem;padding:1.35rem 0}
