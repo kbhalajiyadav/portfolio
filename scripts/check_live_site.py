@@ -14,8 +14,10 @@ from urllib.request import Request, urlopen
 EXPECTED_TEXT = {
     "": [
         "Research program",
-        "How processing shapes structure and function.",
-        "Heating, cooling, and flow can reorganize materials.",
+        "Making material response measurable and interpretable.",
+        "Soft matter",
+        "Why the same material can behave differently after processing.",
+        "Liquid crystals as a model system for processing",
         "Processing history can change internal order and material properties.",
         "Ph.D. student",
         "Browse all research outputs",
