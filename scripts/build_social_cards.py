@@ -15,11 +15,11 @@ CARDS = {
     "portfolio": {
         "kicker": "RESEARCH PORTFOLIO",
         "lines": (
-            "Making responsive materials",
-            "measurable under real",
-            "processing conditions.",
+            "Making material response",
+            "measurable and",
+            "interpretable.",
         ),
-        "subtitle": "Stimuli-responsive materials · measurement under processing",
+        "subtitle": "Soft matter · Rheology · Quantitative imaging",
         "motif": "trace",
         "size": 56,
     },
