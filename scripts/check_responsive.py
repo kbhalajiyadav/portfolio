@@ -669,10 +669,8 @@ def main() -> int:
                                 header_surface.startswith("rgba(") and float(header_surface.rstrip(")").split(",")[-1]) < 1
                             ):
                                 record_errors.append(f"sticky header must be opaque to prevent text ghosting: {header_surface}")
-                        if page_name == "home" and width <= 820:
-                            gap = layout.get("homeResearchDiagramGap")
-                            if not gap or not 4 <= gap["gap"] <= 44:
-                                record_errors.append(f"homepage research introduction and numbered workflow are separated by excessive blank space: {gap}")
+                        if page_name == "home" and layout.get("homeResearchDiagramGap") is not None:
+                            record_errors.append("homepage duplicates the Research page's five-stage diagram")
                         if page_name == "research" and layout.get("scholarlyInlineArrows"):
                             record_errors.append("scholarly prose has redundant directional arrows after inline links")
                         if page_name == "home" and width >= 1680:

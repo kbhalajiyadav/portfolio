@@ -108,8 +108,8 @@ def main() -> int:
         errors.append("homepage description must identify the current material class")
     narrative = portfolio.get("narrative", {})
     doctoral = portfolio.get("doctoral", {})
-    if "same material" not in norm(narrative.get("problem_title")).casefold():
-        errors.append("homepage research problem must introduce processing-dependent variation")
+    if "measuring material response" not in norm(narrative.get("problem_title")):
+        errors.append("homepage methods introduction must name the measurement approach rather than repeat the hero question")
     if "model system" not in norm(doctoral.get("title")).casefold():
         errors.append("doctoral heading must frame liquid crystals as one model, not the entire research identity")
     if "–" in doctoral.get("title", "") or "structure–response" in norm(doctoral.get("title")):
