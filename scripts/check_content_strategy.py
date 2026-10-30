@@ -313,6 +313,12 @@ def main() -> int:
     # records canonical for the detailed Experience and Outputs pages.
     if len(cv.get("research_software", [])) <= 0:
         errors.append("canonical CV has no citable research-software record")
+    # The release-specific DOI must accompany the recommended citation itself.
+    software_page = (ROOT / "content/project/peel-trace-evaluation/index.md").read_text(encoding="utf-8")
+    cited = software_page.split("## Recommended citation", 1)[-1].split("## Availability", 1)[0]
+    release_url = "https://doi.org/10.5281/zenodo.20301242"
+    if release_url not in cited:
+        errors.append("recommended Peel Trace citation lacks its version-specific DOI link")
     if "metrics" in portfolio:
         errors.append("legacy presentation metrics must not be manually duplicated in portfolio.yaml")
     if "home_proof.html" in (ROOT / "layouts" / "landing" / "list.html").read_text(encoding="utf-8"):
