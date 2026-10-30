@@ -221,3 +221,10 @@ Rules can be overridden when a specific scientific, accessibility, or communicat
 - Homepage numerical proof counters are intentionally omitted. Credibility should be established through clearly attributed publications, research software, and documented work rather than scoreboard styling.
 - The Peel Trace software page may show a real 271,863-byte bundled Scotch Tape QC reference plot from the upstream project. It is **not** data from the published textile-adhesion experiment. Keep the original pixels, attribution, local source integrity test, accessible description, and lazy loading. Avoid swapping in the 1.9 MB overview image merely to duplicate the existing six-stage schematic.
 - Manual iOS VoiceOver and Android TalkBack/device typography tests remain distinct from automated Chromium audits. Never claim these passed based solely on CI.
+
+## 11. Single-source mobile Experience, exact software citation and favicon (October 2026)
+
+- Render the homepage Experience timeline and education data **once** in source HTML. A single native `details` disclosure starts open so desktop and no-JavaScript visitors have readable content. The site runtime closes it at widths of 820px and below and keeps it open above 820px. The mobile disclosure and always-visible full-Experience link remain keyboard accessible. Never restore two breakpoint-specific content copies.
+- Treat education as part of Experience content, not a tangential complementary `aside` landmark on the homepage. Preserve the two-column visual layout on desktop.
+- The software's recommended citation must contain the exact manuscript-baseline release URL `https://doi.org/10.5281/zenodo.20301242`; retain the separate all-versions DOI in Resources.
+- Keep a committed root `static/favicon.ico` fallback generated from the same BK SVG. The icon build still regenerates deployment variants; release checks must also fetch the plain `/favicon.ico` URL, not exclusively a cache-busted query URL.
