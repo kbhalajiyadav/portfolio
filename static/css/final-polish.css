@@ -107,3 +107,13 @@ a:hover .content-link__arrow--internal,a:focus-visible .content-link__arrow--int
   .hero{padding-bottom:1.25rem}
   #research.section{padding-top:2rem}
 }
+
+/* Accepted articles are editorial entries, not decorative cards. */
+.accepted-feature{margin:0 0 clamp(2rem,4vw,3rem);padding:0 0 1.65rem;border-bottom:1px solid var(--line)}
+.accepted-feature .overline{display:block;margin:0 0 .65rem}
+.accepted-feature h3{max-width:38ch;margin:0 0 .65rem;font-size:clamp(1.4rem,2.2vw,1.9rem);line-height:1.23;text-wrap:balance}
+.accepted-feature h3 a{color:var(--ink);text-decoration-color:var(--teal);text-underline-offset:.17em;text-decoration-thickness:1px}
+.accepted-feature h3 a:hover,.accepted-feature h3 a:focus-visible{color:var(--teal)}
+.accepted-feature p:not(.overline){max-width:72ch;margin:.5rem 0;color:var(--ink-soft)}
+.accepted-feature__venue{font-family:var(--sans);font-size:.89rem}
+.accepted-feature .actions{margin-top:.9rem}

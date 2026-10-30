@@ -3,6 +3,7 @@
 {{ $cv := site.Data.cv }}
 {{ $ip := index $cv.intellectual_property 0 }}
 {{ $publicationSync := site.Data.publication_sync }}
+{{ $acceptedPage := site.GetPage "/publication/mechanochromic-textiles/" }}
 {{ $controls := site.Data.site_controls }}
 {{ $experienceLimit := $controls.homepage.limits.experience_records | default 3 }}
 {{ $experienceOutcomeLimit := $controls.homepage.limits.experience_outcomes | default 1 }}
@@ -57,9 +58,21 @@
 <section class="section" id="outputs">
   <div class="section-head">
     <p class="kicker">Selected outputs</p>
-    <h2>Published research and tools.</h2>
-    <p>The first-author article, associated thesis, and citable software document the same study. Patent-pending technology appears separately below.</p>
+    <h2>First-author research and open methods.</h2>
+    <p>A newly accepted textile mechanochromism study joins the published adhesion work, associated thesis, and citable research software.</p>
   </div>
+  {{ with $acceptedPage }}
+  <article class="accepted-feature">
+    <p class="overline">{{ if eq .Params.publication_status "accepted" }}New · Accepted for publication · October 2026{{ else }}New first-author article{{ end }}</p>
+    <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+    <p class="accepted-feature__venue">{{ .Params.publication | markdownify }}</p>
+    <p>{{ .Params.summary }}</p>
+    <div class="actions">
+      <a class="lnk" href="{{ .RelPermalink }}">About this study <span class="arw" aria-hidden="true">→</span></a>
+      {{ with .Params.doi }}<a class="lnk" href="https://doi.org/{{ . }}" target="_blank" rel="noopener">Published article <span class="arw" aria-hidden="true">↗</span></a>{{ end }}
+    </div>
+  </article>
+  {{ end }}
   {{ $primary := index $p.publications 0 }}
   <article class="research-package">
     <div class="package-lead">

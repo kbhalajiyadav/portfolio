@@ -1,17 +1,22 @@
 {{ define "main" }}
 {{ $ptype := "" }}{{ if .Params.publication_types }}{{ $ptype = (index .Params.publication_types 0) | printf "%v" }}{{ end }}
 {{ $isThesis := eq $ptype "7" }}
+{{ $isAccepted := eq .Params.publication_status "accepted" }}
 <article class="scholar-page h-entry">
   <div class="page-shell">
     <a class="back-link lnk" href="{{ "/outputs/" | relURL }}"><span aria-hidden="true">←</span> Research outputs</a>
     <header class="page-header publication-header">
-      <p class="kicker">{{ if $isThesis }}M.S. thesis{{ else }}Peer-reviewed article{{ end }}</p>
+      <p class="kicker">{{ if $isThesis }}M.S. thesis{{ else if $isAccepted }}Accepted journal manuscript{{ else }}Peer-reviewed article{{ end }}</p>
       <h1 class="p-name">{{ .Title }}</h1>
       <a class="u-url visually-hidden" href="{{ .Permalink }}">Permalink</a>
       {{ with .Params.summary }}<p class="page-lede publication-summary">{{ . | markdownify }}</p>{{ end }}
       {{ with .Params.authors }}<p class="publication-authors">{{ delimit . ", " }}</p>{{ end }}
       {{ with .Params.publication }}<p class="publication-venue">{{ . | markdownify }}</p>{{ end }}
+      {{ if $isAccepted }}
+      <div class="page-meta"><time datetime="{{ .Params.accepted_date }}">Accepted {{ time.Format "January 2, 2006" .Params.accepted_date }}</time><span>Final publication details to follow</span></div>
+      {{ else }}
       <div class="page-meta"><time class="dt-published" datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ time.Format "2006" .Date }}</time>{{ if $isThesis }}<span>VCU repository record · manuscript embargoed</span>{{ end }}</div>
+      {{ end }}
       {{ with .Params.tags }}<ul class="tag-list page-tags">{{ range . }}<li><a href="{{ (printf "/tags/%s/" (. | urlize)) | relURL }}">{{ . }}</a></li>{{ end }}</ul>{{ end }}
       <div class="actions publication-actions">
         {{ if .Params.doi }}<a class="lnk" href="{{ printf "https://doi.org/%s" .Params.doi }}" target="_blank" rel="noopener">Article <span class="arw" aria-hidden="true">↗</span></a>{{ end }}
