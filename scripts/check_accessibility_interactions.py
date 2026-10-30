@@ -32,6 +32,8 @@ TYPOGRAPHY_PAGES = [
 ]
 
 RELATED_PAGES = [
+    "publication/mechanochromic-textiles/",
+    "project/optical-metrology/",
     "publication/adhesives-wearable/",
     "publication/masters-thesis/",
     "project/peel-trace-evaluation/",
@@ -294,7 +296,7 @@ def output_filter_check(cdp: CDP) -> dict:
           const buttons = [...document.querySelectorAll('[data-output-filter]')];
           const records = [...document.querySelectorAll('[data-output-type][data-output-date]')];
           const status = document.querySelector('[data-output-filter-status]');
-          if (buttons.length !== 5 || records.length !== 5) {
+          if (buttons.length !== 5 || records.length < 5 || !buttons.some(button => button.dataset.outputFilter === 'publication')) {
             return resolve({missing:true, buttonCount:buttons.length, recordCount:records.length});
           }
           const dates = records.map((record) => record.dataset.outputDate || '');
@@ -318,6 +320,8 @@ def output_filter_check(cdp: CDP) -> dict:
                 dates,
                 chronological:JSON.stringify(dates) === JSON.stringify(sorted),
                 initialPressed,
+                expectedPublicationCount:records.filter(record => record.dataset.outputType === 'publication').length,
+                recordCount:records.length,
                 publicationState,
                 allVisibleCount:records.filter((record) => !record.hidden).length,
               });
@@ -517,11 +521,12 @@ def main() -> int:
                     if output_filter.get("initialPressed") != "all":
                         errors.append(f"research-output filter must default to All: {output_filter}")
                     publication_state = output_filter.get("publicationState", {})
-                    if publication_state.get("visibleCount") != 2 or publication_state.get("visibleTypes") != ["publication"]:
+                    if (publication_state.get("visibleCount") != output_filter.get("expectedPublicationCount")
+                            or publication_state.get("visibleTypes") != ["publication"]):
                         errors.append(f"publication filter exposed incorrect records: {publication_state}")
                     if publication_state.get("pressed") != "publication" or not publication_state.get("status"):
                         errors.append(f"publication filter lacks state/status feedback: {publication_state}")
-                    if output_filter.get("allVisibleCount") != 5:
+                    if output_filter.get("allVisibleCount") != output_filter.get("recordCount"):
                         errors.append(f"All filter did not restore every output: {output_filter}")
 
                 for path in RELATED_PAGES:

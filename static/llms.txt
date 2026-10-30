@@ -9,7 +9,8 @@
 - [Experience and education](https://bhalaji.com/experience/): Professional and research experience, education, and research training.
 - [Engagement](https://bhalaji.com/engagement/): Research presentations, teaching and research guidance, service, review, and applied innovation.
 - [Contact](https://bhalaji.com/contact/): Research collaboration, methods exchange, and research-profile links.
-- [First-author article](https://bhalaji.com/publication/adhesives-wearable/): Multi-criteria adhesive selection for wearable textiles.
+- [Accepted first-author ACS manuscript](https://bhalaji.com/publication/mechanochromic-textiles/): “Substrate Enhanced Mechanochromic Sensitivity in Stimuli Response Textiles,” accepted October 27, 2026 in ACS Applied Polymer Materials. No publication DOI or issue details confirmed yet.
+- [Published first-author article](https://bhalaji.com/publication/adhesives-wearable/): Multi-criteria adhesive selection for wearable textiles.
 - [M.S. thesis record](https://bhalaji.com/publication/masters-thesis/): Degree and repository information; full manuscript embargoed until July 20, 2031.
 - [Research software](https://bhalaji.com/project/peel-trace-evaluation/): Versioned workflow for protocol-defined peel-trace analysis.
 - [Quantitative Thermal Imaging](https://bhalaji.com/project/quantitative-thermal-imaging/): Patent-pending intellectual-property record, VCU Tech # TAN-26-099.

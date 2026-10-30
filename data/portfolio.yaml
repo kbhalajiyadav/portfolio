@@ -6,6 +6,7 @@ profile:
   institution: Virginia Commonwealth University
   eyebrow: Soft matter · Rheology · Quantitative imaging
   headline: Making material response measurable and interpretable.
+  current_focus: How do heating, cooling, and shear reorganize cholesteric liquid-crystal order?
   summary: I investigate how heating, cooling, and flow affect liquid-crystalline and other soft materials, using rheology, quantitative imaging, and mechanics to examine relationships among processing history, structure, and response.
   status: Ph.D. student · Integrative Life Sciences · Virginia Commonwealth University
   location: Richmond, Virginia
@@ -21,8 +22,7 @@ profile:
 research:
 - number: '01'
   title: Measure response
-  text: Mechanics-consistent adhesion, deformation tracking, and computer-vision metrology for soft, stretchable,
-    and textile-supported systems.
+  text: Quantify adhesion, deformation, and optical response in soft and textile-supported materials.
   tags:
   - Adhesion
   - Computer vision
@@ -32,8 +32,7 @@ research:
   motif: trace
 - number: '02'
   title: Resolve structure under stimuli
-  text: Rheology and neutron-scattering methods for determining how deformation, temperature, time, and
-    flow reorganize liquid-crystalline and soft-material structure.
+  text: Test how temperature and shear affect liquid-crystalline order using complementary measurements.
   tags:
   - Rheology
   - SANS
@@ -43,8 +42,7 @@ research:
   motif: rings
 - number: '03'
   title: Translate reproducibly
-  text: Versioned analysis, synchronized experiments, and repeatable stimulus cycles that preserve the
-    meaning of a response from bench characterization toward scalable processing.
+  text: Make results comparable through documented protocols, repeatable cycles, and versioned analysis.
   tags:
   - Open methods
   - Automation

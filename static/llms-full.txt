@@ -42,6 +42,9 @@ Public industry references:
 - DeepThought profile describing Bhalaji as a young leader at Kreative Organics: https://www.linkedin.com/posts/deepthoughtedutech_leadership-career-learning-activity-7033467848710656000-vjpq
 - Team and Data Science context at Kreative Organics: https://www.linkedin.com/posts/tarunsciensation_deepthought-dtgrowthteams-contributorrevolution-activity-7003898159890411520-Vulj
 
+## Accepted manuscript (not yet published online)
+B. Y. Kantepalle, T. Lawton, I. Caloian, A. Greenhalgh, B. Hall, A. Reyna, J. Trapp, and C. Tang, “Substrate Enhanced Mechanochromic Sensitivity in Stimuli Response Textiles,” ACS Applied Polymer Materials, accepted October 27, 2026. Canonical site record: https://bhalaji.com/publication/mechanochromic-textiles/ . The DOI, publication date, volume, and issue are not yet confirmed. For related computer-vision metrology work, see https://bhalaji.com/project/optical-metrology/ .
+
 ## Peer-reviewed publications
 1. B. Y. Kantepalle, U. Epitawala Arachchige, D. Joung, and C. Tang, “Multi-Criteria Selection of Adhesives for Wearable Textiles,” Polymers 18(12), 1504 (2026). DOI: https://doi.org/10.3390/polym18121504
 2. I. Caloian, J. Trapp, B. Y. Kantepalle, P. Latimer, T. J. Lawton, and C. Tang, “Mechanical Properties of Dual-Layer Electrospun Fiber Mats,” Polymers 17(13), 1777 (2025). DOI: https://doi.org/10.3390/polym17131777

@@ -160,6 +160,31 @@ def main() -> int:
             f"cv={sorted(cv_dois)}, portfolio={sorted(portfolio_pubs)}"
         )
 
+    # Accepted manuscripts are not yet DOI-indexed publications in the ORCID snapshot.
+    # Guard against fabricated bibliographic fields and cross-surface status drift.
+    accepted_path = ROOT / "content" / "publication" / "mechanochromic-textiles" / "index.md"
+    if not accepted_path.is_file():
+        errors.append("missing dedicated accepted-manuscript page")
+    else:
+        import yaml as _yaml
+        source = accepted_path.read_text(encoding="utf-8")
+        front = _yaml.safe_load(source.split("---", 2)[1])
+        title = norm_text(front.get("title", ""))
+        status = front.get("publication_status")
+        if status not in {"accepted", "published"}:
+            errors.append("unknown manuscript lifecycle status")
+        if status == "accepted":
+            if any(front.get(k) for k in ("doi", "scholar_volume", "scholar_issue")):
+                errors.append("accepted manuscript must not claim unpublished DOI/volume/issue")
+            if not front.get("accepted_date"):
+                errors.append("accepted manuscript missing acceptance date")
+        if status == "published" and not norm_doi(front.get("doi", "")):
+            errors.append("published manuscript must have a verified DOI")
+        if not any(title.lower() in norm_text(item).lower() for item in cv.get("publications", [])):
+            errors.append("accepted manuscript missing from canonical CV")
+        if status == "published" and norm_doi(front.get("doi", "")) not in portfolio_pubs:
+            errors.append("newly published manuscript must be added to canonical published-publications inventory")
+
     if int(orcid.get("journal_article_count", -1)) != len(orcid_pubs):
         errors.append("ORCID journal_article_count does not equal the number of synchronized journal articles")
 

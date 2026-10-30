@@ -26,6 +26,24 @@
     <a class="lnk" href="{{ "/publication/masters-thesis/" | relURL }}">M.S. thesis <span class="arw" aria-hidden="true">→</span></a>
   </div>
 </section>
+{{ else if eq $path "/publication/mechanochromic-textiles/" }}
+<section class="related-package" aria-labelledby="related-package-title">
+  <h2 id="related-package-title">Related research</h2>
+  <p>Quantitative optical measurements help interpret deformation-dependent color changes in responsive textiles.</p>
+  <div class="actions">
+    <a class="lnk" href="{{ "/project/optical-metrology/" | relURL }}">Optical metrology <span class="arw" aria-hidden="true">→</span></a>
+    <a class="lnk" href="{{ "/research/" | relURL }}">Research program <span class="arw" aria-hidden="true">→</span></a>
+  </div>
+</section>
+{{ else if eq $path "/project/optical-metrology/" }}
+<section class="related-package" aria-labelledby="related-package-title">
+  <h2 id="related-package-title">Related research</h2>
+  <p>Further research on textile substrate effects was accepted in ACS Applied Polymer Materials in October 2026.</p>
+  <div class="actions">
+    <a class="lnk" href="{{ "/publication/mechanochromic-textiles/" | relURL }}">Accepted manuscript <span class="arw" aria-hidden="true">→</span></a>
+    <a class="lnk" href="{{ "/research/" | relURL }}">Research program <span class="arw" aria-hidden="true">→</span></a>
+  </div>
+</section>
 {{ else if eq $path "/project/quantitative-thermal-imaging/" }}
 <section class="related-package" aria-labelledby="related-package-title">
   <h2 id="related-package-title">Related research</h2>

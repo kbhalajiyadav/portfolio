@@ -107,3 +107,44 @@ a:hover .content-link__arrow--internal,a:focus-visible .content-link__arrow--int
   .hero{padding-bottom:1.25rem}
   #research.section{padding-top:2rem}
 }
+
+/* Homepage: an editorial scan path without dashboard cards or excess dividers. */
+.hero__focus{max-width:67ch;margin:1rem 0 0;color:var(--ink-soft);font-size:.98rem;line-height:1.5}
+.hero__focus strong{margin-right:.45rem;color:var(--ink);font-family:var(--sans);font-size:.78rem;letter-spacing:.02em}
+.hero__focus a,.hero__cv a{color:var(--teal);text-decoration-color:color-mix(in srgb,var(--teal) 40%,transparent);text-underline-offset:.18em}
+.hero__focus a:hover,.hero__cv a:hover{color:var(--cyan)}
+.hero__cv{margin:.6rem 0 0;color:var(--ink-soft);font-family:var(--sans);font-size:.77rem}
+.hero__copy>.status-line{margin-top:1rem}
+#highlights.section{padding-block:clamp(2.25rem,4.5vw,3.75rem)}
+#highlights .section-head{margin-bottom:1.45rem}
+.highlights__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(1.1rem,2.5vw,2.5rem)}
+.highlight{min-width:0;padding:1.05rem 0 .2rem;border-top:1px solid var(--line-strong)}
+.highlight__type{min-height:2.2em;margin:0 0 .7rem;color:var(--rust);font-family:var(--sans);font-size:.72rem;font-weight:700;line-height:1.4}
+.highlight h3{margin:0;font-size:clamp(1.12rem,1.55vw,1.4rem);line-height:1.27;letter-spacing:-.01em;text-wrap:balance}
+.highlight h3 a{color:var(--ink);text-decoration-thickness:1px;text-decoration-color:color-mix(in srgb,var(--teal) 42%,transparent);text-underline-offset:.15em}
+.highlight h3 a:hover,.highlight h3 a:focus-visible{color:var(--teal)}
+.highlight>p:not(.highlight__type){margin:.65rem 0 0;color:var(--ink-soft);font-size:.91rem;line-height:1.52}
+.highlight>.lnk{margin-top:.8rem;font-size:.8rem;white-space:normal}
+.highlights__more{margin:1rem 0 0;font-size:.87rem}
+#research.section{padding-top:clamp(2.5rem,4.8vw,4rem)}
+#research>.section-head{margin-bottom:.85rem}
+#research .pillars{margin-top:1.5rem}
+#research .pillar{padding:1.3rem}
+#research .pillar .motif{width:42px;height:42px;top:1.15rem;right:1.15rem}
+#research .pillar .card-number{margin-bottom:.7rem}
+#research .pillar h3{margin-top:.65rem;max-width:20ch;font-size:1.2rem}
+#research .pillar p{margin-top:.7rem;font-size:.92rem;line-height:1.48}
+#research .pillar>.lnk{padding-top:.9rem;font-size:.81rem;white-space:normal}
+@media(max-width:980px){.highlights__grid{grid-template-columns:1fr 1fr}.highlight:last-child{grid-column:1/-1}}
+@media(max-width:680px){
+  #highlights.section{padding-block:2rem}
+  #highlights .section-head{margin-bottom:.6rem}
+  .highlights__grid{grid-template-columns:1fr;gap:.95rem}
+  .highlight:last-child{grid-column:auto}
+  .highlight{padding:.9rem 0 0}
+  .highlight__type{min-height:0;margin-bottom:.4rem}
+  .highlight>p:not(.highlight__type){margin:.45rem 0 0}
+  #research.section{padding-top:2.5rem}
+  #research>.section-head{margin-bottom:.7rem}
+  .hero__focus{font-size:.94rem}
+}

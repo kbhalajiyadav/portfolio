@@ -19,6 +19,7 @@ import websocket
 PRIMARY_DESTINATIONS = ["about/", "research/", "outputs/", "experience/", "engagement/", "contact/"]
 DETAIL_PARENTS = {
     "publication/adhesives-wearable/": "/outputs/",
+    "publication/mechanochromic-textiles/": "/outputs/",
     "publication/masters-thesis/": "/outputs/",
     "project/peel-trace-evaluation/": "/outputs/",
     "project/optical-metrology/": "/research/",

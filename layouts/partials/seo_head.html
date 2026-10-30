@@ -2,6 +2,7 @@
 {{ $p := site.Data.portfolio }}
 {{ $isHome := .IsHome }}
 {{ $isAbout := eq .RelPermalink "/about/" }}
+{{ $isAcceptedManuscript := eq .Params.publication_status "accepted" }}
 {{ $siteName := printf "%s · Research Portfolio" $p.profile.name }}
 {{ $pageTitle := cond $isHome $siteName (printf "%s · %s" .Title $p.profile.short_name) }}
 {{ $description := $p.profile.summary }}
@@ -54,10 +55,12 @@
 {{ if and .IsPage (eq .Section "publication") }}
   <meta name="citation_title" content="{{ .Title }}">
   {{ range .Params.authors }}<meta name="citation_author" content="{{ . }}">{{ end }}
-  {{ if .Params.scholar_dissertation_institution }}
-    <meta name="citation_publication_date" content="{{ .Date.Format "2006" }}">
-  {{ else }}
-    <meta name="citation_publication_date" content="{{ .Date.Format "2006/01/02" }}">
+  {{ if not $isAcceptedManuscript }}
+    {{ if .Params.scholar_dissertation_institution }}
+      <meta name="citation_publication_date" content="{{ .Date.Format "2006" }}">
+    {{ else }}
+      <meta name="citation_publication_date" content="{{ .Date.Format "2006/01/02" }}">
+    {{ end }}
   {{ end }}
   {{ with .Params.scholar_journal }}<meta name="citation_journal_title" content="{{ . }}">{{ end }}
   {{ with .Params.scholar_volume }}<meta name="citation_volume" content="{{ . }}">{{ end }}
@@ -142,7 +145,12 @@
   {{ $schemaType := cond (eq $ptype "7") "Thesis" "ScholarlyArticle" }}
   {{ $authors := slice }}
   {{ range .Params.authors }}{{ $authors = $authors | append (dict "@type" "Person" "name" (printf "%v" .)) }}{{ end }}
-  {{ $scholarly := dict "@context" "https://schema.org" "@type" $schemaType "headline" .Title "name" $page.Title "url" $page.Permalink "datePublished" (.Date.Format "2006-01-02") "author" $authors "description" (.Params.abstract | default .Params.summary) "mainEntityOfPage" .Permalink }}
+  {{ $scholarly := dict "@context" "https://schema.org" "@type" $schemaType "headline" .Title "name" $page.Title "url" $page.Permalink "author" $authors "description" (.Params.abstract | default .Params.summary) "mainEntityOfPage" .Permalink }}
+  {{ if $isAcceptedManuscript }}
+    {{ $scholarly = merge $scholarly (dict "creativeWorkStatus" "Accepted for publication") }}
+  {{ else }}
+    {{ $scholarly = merge $scholarly (dict "datePublished" (.Date.Format "2006-01-02")) }}
+  {{ end }}
   {{ $recordDOI := .Params.doi | default .Params.scholar_doi }}
   {{ with $recordDOI }}{{ $scholarly = merge $scholarly (dict "sameAs" (printf "https://doi.org/%s" .) "identifier" (dict "@type" "PropertyValue" "propertyID" "DOI" "value" .)) }}{{ end }}
 <script type="application/ld+json">{{ $scholarly | jsonify | safeJS }}</script>
