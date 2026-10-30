@@ -214,3 +214,10 @@ Before merging any change, ask:
 ## 14. Exceptions
 
 Rules can be overridden when a specific scientific, accessibility, or communication need justifies it. The exception should be documented in the relevant template/content change or pull-request rationale so future work does not accidentally normalize a one-off choice.
+
+## 10. Mobile editorial summary and software provenance (October 2026)
+
+- Homepage Experience is summarized visibly on mobile with a native, keyboard-operable disclosure for selected roles, education and training; desktop retains its full two-column chronology. Keep a direct link to the complete Experience page outside the disclosure.
+- Homepage numerical proof counters are intentionally omitted. Credibility should be established through clearly attributed publications, research software, and documented work rather than scoreboard styling.
+- The Peel Trace software page may show a real 271,863-byte bundled Scotch Tape QC reference plot from the upstream project. It is **not** data from the published textile-adhesion experiment. Keep the original pixels, attribution, local source integrity test, accessible description, and lazy loading. Avoid swapping in the 1.9 MB overview image merely to duplicate the existing six-stage schematic.
+- Manual iOS VoiceOver and Android TalkBack/device typography tests remain distinct from automated Chromium audits. Never claim these passed based solely on CI.
