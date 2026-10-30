@@ -297,19 +297,22 @@ LAYOUT_EXPRESSION = r"""
     homeExperience:(() => {
       const section=document.querySelector('#experience');
       if(!section) return null;
-      const desktop=section.querySelector('.home-experience--desktop');
-      const mobile=section.querySelector('.home-experience--mobile');
-      const disclosure=mobile?.querySelector('details.home-disclosure--experience');
+      const block=section.querySelector('.home-experience');
+      const disclosure=block?.querySelector('details[data-responsive-experience]');
       const summary=disclosure?.querySelector(':scope > summary');
-      const link=mobile?.querySelector(':scope > .actions a[href="/experience/"]');
+      const actions=block?.querySelector(':scope > .actions a[href="/experience/"]');
+      const styles=summary ? getComputedStyle(summary) : null;
       return {
-        desktopVisible:!!desktop && getComputedStyle(desktop).display !== 'none',
-        mobileVisible:!!mobile && getComputedStyle(mobile).display !== 'none',
-        summaryVisible:!!summary && summary.getBoundingClientRect().height >= 44,
-        collapsed:!!disclosure && !disclosure.open,
-        directLinkVisible:!!link && link.getClientRects().length > 0,
-        educationCount:mobile?.querySelectorAll('.education-panel article').length || 0,
-        roleCount:mobile?.querySelectorAll('.timeline-item').length || 0,
+        blockCount:section.querySelectorAll('.home-experience').length,
+        disclosureCount:section.querySelectorAll('details[data-responsive-experience]').length,
+        timelineCount:section.querySelectorAll('.timeline').length,
+        educationPanelCount:section.querySelectorAll('.education-panel').length,
+        open:!!disclosure?.open,
+        summaryVisible:!!summary && styles?.display !== 'none' && summary.getBoundingClientRect().height >= 44,
+        summaryHidden:!!summary && styles?.display === 'none',
+        directLinkVisible:!!actions && actions.getClientRects().length > 0,
+        educationCount:section.querySelectorAll('.education-panel article').length,
+        roleCount:section.querySelectorAll('.timeline-item').length,
       };
     })(),
     counterPresent:!!document.querySelector('.metrics'),
@@ -551,13 +554,16 @@ def main() -> int:
                             exp=layout.get("homeExperience")
                             if not exp:
                                 record_errors.append("home Experience responsive composition missing")
-                            elif width <= 820:
-                                if exp["desktopVisible"] or not exp["mobileVisible"] or not exp["collapsed"] or not exp["summaryVisible"] or not exp["directLinkVisible"]:
-                                    record_errors.append(f"mobile Experience must show a short accessible disclosure and direct full-page link: {exp}")
-                                if exp["educationCount"] < 2 or exp["roleCount"] < 2:
-                                    record_errors.append(f"mobile Experience lost evidence inside disclosure: {exp}")
-                            elif not exp["desktopVisible"] or exp["mobileVisible"]:
-                                record_errors.append(f"desktop Experience must preserve its visible timeline and education panels: {exp}")
+                            else:
+                                if any(exp[key] != 1 for key in ("blockCount", "disclosureCount", "timelineCount", "educationPanelCount")):
+                                    record_errors.append(f"Experience records must appear only once in HTML: {exp}")
+                                if not exp["directLinkVisible"] or exp["educationCount"] < 2 or exp["roleCount"] < 2:
+                                    record_errors.append(f"Experience evidence or always-visible full-page link missing: {exp}")
+                                if width <= 820:
+                                    if exp["open"] or not exp["summaryVisible"]:
+                                        record_errors.append(f"mobile Experience must be collapsed with accessible summary: {exp}")
+                                elif not exp["open"] or not exp["summaryHidden"]:
+                                    record_errors.append(f"desktop Experience must be expanded without redundant summary: {exp}")
                             shell = layout.get("homepageShell")
                             if width >= 1900 and (shell is None or not 1450 <= shell <= 1580):
                                 record_errors.append(f"large-monitor content shell must be wide but editorially bounded: {shell}")

@@ -1,7 +1,7 @@
 ---
 title: "Peel Trace Evaluation for Soft Substrates"
 date: "2026-06-16T00:00:00Z"
-lastmod: "2026-10-10T00:00:00Z"
+lastmod: "2026-10-30T00:00:00Z"
 status: "Open source"
 summary: "A versioned, reproducible workflow for protocol-defined analysis of force–displacement peel traces from soft and stretchable substrates."
 tags:
@@ -50,7 +50,7 @@ The software repository includes a bundled Scotch Tape reference example used fo
 ## Recommended citation
 
 Kantepalle, B. Y.; Tang, C. *Peel Trace Evaluation for Soft Substrates*,
-version 1.4.0-rc15; Zenodo, 2026.
+version 1.4.0-rc15; Zenodo, 2026. [https://doi.org/10.5281/zenodo.20301242](https://doi.org/10.5281/zenodo.20301242).
 
 ## Availability
 

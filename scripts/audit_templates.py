@@ -60,8 +60,10 @@ def main() -> int:
 
     if 'partial "home_proof.html"' in landing:
         errors.append("homepage should not contain the old numerical counter strip")
-    if not all(marker in landing for marker in ('class="home-experience--mobile"', 'home-disclosure--experience', 'partial "home_experience_body.html"')):
-        errors.append("mobile Experience must retain a short visible summary and native accessible disclosure")
+    if not all(marker in landing for marker in ('class="home-experience"', 'home-disclosure--experience', 'open data-responsive-experience', 'partial "home_experience_body.html"')):
+        errors.append("Experience must use one progressive-enhancement disclosure")
+    if landing.count('partial "home_experience_body.html"') != 1:
+        errors.append("homepage Experience chronology must not be rendered twice")
 
     statement_path = ROOT / "content/research-statement/index.md"
     research_page = (ROOT / "content/research/index.md").read_text(encoding="utf-8")

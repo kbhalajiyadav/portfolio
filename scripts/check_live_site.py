@@ -329,6 +329,20 @@ def validate_release(base: str, nonce: str) -> list[str]:
         except (URLError, HTTPError, TimeoutError, OSError) as exc:
             errors.append(f"{url}: {exc}")
 
+    # Browser requests typically use the plain URL, not our cache-busted probe.
+    # Verify the root icon both ways to catch a stale CDN 404 that a query might mask.
+    direct_icon_url = urljoin(base, "favicon.ico")
+    try:
+        with urlopen(Request(direct_icon_url, headers={"User-Agent": "Mozilla/5.0"}), timeout=25) as response:
+            if response.status != 200:
+                errors.append(f"{direct_icon_url}: direct browser request returned HTTP {response.status}")
+            else:
+                raw_icon = response.read()
+                if len(raw_icon) < 6 or struct.unpack("<HHH", raw_icon[:6])[:2] != (0, 1):
+                    errors.append(f"{direct_icon_url}: direct browser request returned invalid ICO bytes")
+    except (URLError, HTTPError, TimeoutError, OSError) as exc:
+        errors.append(f"{direct_icon_url}: direct browser request failed: {exc}")
+
     for path in ICO_PATHS:
         url = urljoin(base, path)
         try:
