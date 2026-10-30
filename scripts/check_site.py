@@ -35,6 +35,8 @@ class PageParser(HTMLParser):
         self.links: list[str] = []
         self.anchor_records: list[dict[str, str]] = []
         self.images: list[dict[str, str | None]] = []
+        self.accessible_table_regions: list[dict[str, str | None]] = []
+        self.rendered_tables = 0
         self.h1_count = 0
         self.main_count = 0
         self.skip_target = False
@@ -66,6 +68,10 @@ class PageParser(HTMLParser):
             }
         elif self._anchor_depth:
             self._anchor_depth += 1
+        if tag == "div" and "table-scroll-region" in (data.get("class") or "").split():
+            self.accessible_table_regions.append(data)
+        if tag == "table":
+            self.rendered_tables += 1
         if tag == "img" and data.get("src"):
             self.images.append({
                 "src": data.get("src"),
@@ -236,12 +242,13 @@ def main() -> int:
         pages[html.resolve()] = parser
 
         if relative == Path("publication/electrospun-fiber-mats/index.html"):
-            markup = html.read_text(encoding="utf-8", errors="replace")
-            region = re.search(
-                r'<div\b[^>]*class="table-scroll-region"[^>]*role="region"[^>]*aria-label="[^"]+"[^>]*tabindex="0"[^>]*>',
-                markup,
-            )
-            if not region or "<table" not in markup[region.end():]:
+            regions = parser.accessible_table_regions
+            if not parser.rendered_tables or not any(
+                region.get("role") == "region"
+                and region.get("tabindex") == "0"
+                and bool(region.get("aria-label"))
+                for region in regions
+            ):
                 errors.append("electrospun mechanical-properties table needs an accessible keyboard-scroll region")
         if not parser.html_lang:
             errors.append(f"{relative}: missing html lang")
