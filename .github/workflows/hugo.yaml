@@ -85,9 +85,10 @@ jobs:
           python3 scripts/check_content_strategy.py
           python3 scripts/check_design_governance.py
           python3 scripts/check_research_figures.py
+          python3 scripts/check_software_evidence.py
           python3 scripts/check_review_freshness.py
           python3 scripts/check_workflows.py
-          python3 -m py_compile scripts/build_social_cards.py scripts/check_social_previews.py scripts/check_data_consistency.py scripts/check_content_strategy.py scripts/check_design_governance.py scripts/check_research_figures.py scripts/check_software_release.py scripts/check_review_freshness.py scripts/check_layout_spacing.py scripts/check_release_marker.py scripts/check_live_site.py scripts/check_release_contract.py scripts/check_home_navigation.py scripts/check_accessibility_interactions.py scripts/check_attention_hierarchy.py scripts/check_component_integrity.py scripts/check_navigation_continuity.py scripts/check_deep_links.py
+          python3 -m py_compile scripts/build_social_cards.py scripts/check_social_previews.py scripts/check_data_consistency.py scripts/check_content_strategy.py scripts/check_design_governance.py scripts/check_research_figures.py scripts/check_software_evidence.py scripts/check_software_release.py scripts/check_review_freshness.py scripts/check_layout_spacing.py scripts/check_release_marker.py scripts/check_live_site.py scripts/check_release_contract.py scripts/check_home_navigation.py scripts/check_accessibility_interactions.py scripts/check_attention_hierarchy.py scripts/check_component_integrity.py scripts/check_navigation_continuity.py scripts/check_deep_links.py
           node --check assets/js/site.js
           node --check assets/js/evidence-target.js
 
