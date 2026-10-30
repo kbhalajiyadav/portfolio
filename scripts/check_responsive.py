@@ -416,7 +416,22 @@ LAYOUT_EXPRESSION = r"""
         isResearchSignature:diagram.classList.contains('research-signature'),
         stageGeometry:visibleRows.map(item => {
           const r = item.getBoundingClientRect();
-          return {top:r.top,left:r.left,right:r.right,width:r.width};
+          return {top:r.top,bottom:r.bottom,left:r.left,right:r.right,width:r.width};
+        }),
+        stageTextOverflow:labels.some((label,index) => {
+          const labelRect=label.getBoundingClientRect();
+          const itemRect=visibleRows[index]?.getBoundingClientRect();
+          const indexRect=visibleRows[index]?.querySelector('.research-signature__index')?.getBoundingClientRect();
+          return !itemRect || labelRect.right>itemRect.right+1 ||
+            (indexRect && labelRect.left<indexRect.right+4);
+        }),
+        stageCollisions:visibleRows.some((item,i) => {
+          const a=item.getBoundingClientRect();
+          return visibleRows.slice(i+1).some(next => {
+            const b=next.getBoundingClientRect();
+            return Math.min(a.right,b.right)>Math.max(a.left,b.left)+1 &&
+              Math.min(a.bottom,b.bottom)>Math.max(a.top,b.top)+1;
+          });
         }),
         minFontSize:labels.length ? Math.min(...labels.map(el => parseFloat(getComputedStyle(el).fontSize))) : 0,
         overflowing:labels.some(el => el.getBoundingClientRect().right > width + 1),
@@ -662,18 +677,19 @@ def main() -> int:
                             workflow = layout.get("diagramReadability")
                             if not workflow or not workflow.get("isResearchSignature") or len(workflow.get("stageGeometry", [])) != 5:
                                 record_errors.append("Research page's five-stage processing sequence is missing")
-                            elif width > 820:
-                                steps = workflow["stageGeometry"]
-                                if width >= 1181:
-                                    if max(step["top"] for step in steps) - min(step["top"] for step in steps) > 2:
-                                        record_errors.append("wide desktop five-stage sequence must read as one row")
-                                    if any(steps[i]["left"] >= steps[i+1]["left"] for i in range(4)):
-                                        record_errors.append("wide desktop stage order must read left-to-right")
-                                else:
-                                    if max(step["top"] for step in steps[:3]) - min(step["top"] for step in steps[:3]) > 2 or abs(steps[3]["top"] - steps[4]["top"]) > 2:
-                                        record_errors.append("intermediate desktop five-stage sequence must use three plus two rows")
-                                    if not (steps[3]["left"] > steps[0]["left"] and steps[4]["right"] < steps[2]["right"]):
-                                        record_errors.append("intermediate desktop short row must be visually centered")
+                            else:
+                                steps=workflow["stageGeometry"]
+                                if workflow.get("stageTextOverflow") or workflow.get("stageCollisions"):
+                                    record_errors.append(f"research stages or labels overlap within the article column: {workflow}")
+                                if any(steps[i+1]["top"] < steps[i]["top"] - 2 for i in range(4)):
+                                    record_errors.append(f"research stage reading order is not preserved: {steps}")
+                                rows={}
+                                for step in steps:
+                                    key=round(step["top"]/5)*5
+                                    rows.setdefault(key,[]).append(step)
+                                for stage_row in rows.values():
+                                    if any(stage_row[i]["left"] >= stage_row[i+1]["left"] for i in range(len(stage_row)-1)):
+                                        record_errors.append(f"research stage order must read left-to-right within each row: {steps}")
                         if page_name == "research" and layout.get("scholarlyInlineArrows"):
                             record_errors.append("scholarly prose has redundant directional arrows after inline links")
                         if page_name == "home" and width >= 1680:
