@@ -5,6 +5,7 @@ from __future__ import annotations
 from collections import Counter
 from html.parser import HTMLParser
 import json
+import re
 from pathlib import Path
 import sys
 from urllib.parse import unquote, urlparse
@@ -234,6 +235,14 @@ def main() -> int:
         relative = html.relative_to(root)
         pages[html.resolve()] = parser
 
+        if relative == Path("publication/electrospun-fiber-mats/index.html"):
+            markup = html.read_text(encoding="utf-8", errors="replace")
+            region = re.search(
+                r'<div\b[^>]*class="table-scroll-region"[^>]*role="region"[^>]*aria-label="[^"]+"[^>]*tabindex="0"[^>]*>',
+                markup,
+            )
+            if not region or "<table" not in markup[region.end():]:
+                errors.append("electrospun mechanical-properties table needs an accessible keyboard-scroll region")
         if not parser.html_lang:
             errors.append(f"{relative}: missing html lang")
         if not parser.viewport:
