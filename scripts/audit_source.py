@@ -93,6 +93,10 @@ for required in (
 ):
     if required not in landing_text:
         errors.append(f'layouts/landing/list.html: missing homepage invariant {required!r}')
+if landing_text.count('partial "home_experience_body.html"') != 1:
+    errors.append("homepage experience partial must render only once")
+if 'data-responsive-experience' not in landing_text or 'open data-responsive-experience' not in landing_text:
+    errors.append("single Experience must be expanded by default for no-JavaScript access")
 for required in ('<h3>Research training</h3>', 'range $p.professional_development', 'class="education-panel"', 'class="timeline"'):
     if required not in experience_text:
         errors.append(f'layouts/partials/home_experience_body.html: missing experience invariant {required!r}')
