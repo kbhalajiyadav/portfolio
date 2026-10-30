@@ -139,11 +139,16 @@ def main() -> int:
     for marker in (
         "Stimulus to translation research framework",
         "research-signature-caption",
-        "research-signature__mobile",
+        "research-signature__flow",
     ):
         if marker not in signature:
             errors.append(f"research signature is missing integrity/accessibility marker {marker!r}")
+    if signature.count('<ol ') != 1:
+        errors.append("research workflow must not duplicate steps for responsive rendering")
     method = read("layouts/shortcodes/method-schematic.html")
+    if method.count('<ol ') != 1:
+        errors.append("method workflow must not duplicate steps for responsive rendering")
+
     for name, source in (("research signature", signature), ("method schematic", method)):
         if "Schematic; no quantitative data are implied." in source:
             errors.append(f"{name} exposes an internal publishing disclaimer")

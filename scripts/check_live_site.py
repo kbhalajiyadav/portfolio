@@ -90,6 +90,15 @@ EXPECTED_TEXT = {
         "does not place its contents in the public domain",
         "BK monogram",
     ],
+    "project/peel-trace-evaluation/": [
+        "https://doi.org/10.5281/zenodo.20301242",
+        "Recommended citation",
+        "Example analysis output",
+    ],
+    "publication/masters-thesis/": [
+        "https://doi.org/10.25772/f6wc-rh09",
+        "Manuscript availability",
+    ],
     "project/optical-metrology/": [
         "Optical Metrology for Mechanochromic Textiles",
         "Measurement workflow",

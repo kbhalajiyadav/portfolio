@@ -31,13 +31,11 @@ a:hover .content-link__arrow--internal,a:focus-visible .content-link__arrow--int
 .about-profile-links a:nth-last-child(2):nth-child(odd){border-bottom:0}
 
 .research-signature{margin:.85rem 0 1.6rem;padding:0;border:0}
-.research-signature__desktop{width:100%}
 .research-signature__flow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:1rem 1.25rem;list-style:none;margin:0;padding:0}
 .research-signature__flow li{display:grid;grid-template-columns:2.25rem minmax(0,1fr);gap:.75rem;align-items:center;min-width:0}
 .research-signature__index{display:grid;place-items:center;width:2.25rem;height:2.25rem;border:1px solid var(--teal);border-radius:50%;color:var(--rust);font-family:var(--mono);font-size:.85rem}
 .research-signature__flow strong{color:var(--ink);font-family:var(--sans);font-size:.95rem;line-height:1.45;font-weight:650}
 .research-signature figcaption{max-width:74ch;margin:.9rem 0 0;color:var(--ink-soft);font-size:.95rem;line-height:1.55}
-.research-signature__mobile{display:none}
 
 /* In the middle widths, center the short second row; on wide desktop, show all five in order. */
 @media(min-width:821px) and (max-width:1180px){
@@ -72,11 +70,10 @@ a:hover .content-link__arrow--internal,a:focus-visible .content-link__arrow--int
   #research>.section-head>p:not(.kicker){margin-bottom:0}
   #research>.research-signature{margin-top:0}
   /* The 980px rules already govern the compact hero; only the schematic changes here. */
-  .research-signature__desktop{display:none}
-  .research-signature__mobile{display:grid;grid-template-columns:1fr;gap:.2rem;margin:0;padding:0;list-style:none;border:0}
-  .research-signature__mobile li{display:grid;grid-template-columns:3rem minmax(0,1fr);align-items:center;gap:1rem;padding:.5rem 0;border:0}
-  .research-signature__mobile span{color:var(--rust);font-family:var(--mono);font-size:.82rem}
-  .research-signature__mobile strong{font-family:var(--sans);font-size:.95rem;line-height:1.4}
+  .research-signature__flow{grid-template-columns:1fr;gap:.2rem}
+  .research-signature__flow li{grid-template-columns:3rem minmax(0,1fr);gap:1rem;padding:.5rem 0;border:0}
+  .research-signature__flow .research-signature__index{display:block;width:auto;height:auto;border:0;border-radius:0;font-size:.82rem}
+  .research-signature__flow strong{line-height:1.4}
 }
 
 @media(prefers-reduced-motion:reduce){
@@ -103,3 +100,10 @@ a:hover .content-link__arrow--internal,a:focus-visible .content-link__arrow--int
 .software-evidence{margin:1.8rem 0 2.2rem;padding:0;border:0;background:transparent}
 .software-evidence img{display:block;max-width:100%;height:auto;border:0;background:transparent}
 .software-evidence figcaption{margin:.85rem 0 0;max-width:76ch;color:var(--ink-soft);font-size:.94rem;line-height:1.55}
+
+/* Mobile hero-to-research handoff: retain separation, remove stacked excess.
+   Applies only to the introductory research section, not all section rhythm. */
+@media(max-width:680px){
+  .hero{padding-bottom:1.25rem}
+  #research.section{padding-top:2rem}
+}

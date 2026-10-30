@@ -175,7 +175,13 @@ def validate(record: dict, page_name: str, page_level: str) -> list[str]:
         if hero_padding is None or not between(hero_padding, 36, 96):
             errors.append(f"home introduction top spacing is outside the intended range: {hero_padding}")
         for index, padding in enumerate(record.get("sectionPadding", []), start=1):
-            if not between(padding["top"], 64, 112) or not between(padding["bottom"], 64, 112):
+            # Only the first homepage Research section deliberately pulls closer
+            # to the portrait on phones; retain the normal section rhythm below.
+            first_mobile_research = index == 1 and record.get("viewportWidth", 9999) <= 680
+            if first_mobile_research:
+                if not between(padding["top"], 30, 34) or not between(padding["bottom"], 64, 112):
+                    errors.append(f"mobile research handoff spacing changed: {padding}")
+            elif not between(padding["top"], 64, 112) or not between(padding["bottom"], 64, 112):
                 errors.append(f"homepage section {index} spacing is inconsistent: {padding}")
         # Check actual content geometry rather than freezing every margin
         # to one screenshot or applying the same rules to unrelated cards.

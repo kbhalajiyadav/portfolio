@@ -228,3 +228,9 @@ Rules can be overridden when a specific scientific, accessibility, or communicat
 - Treat education as part of Experience content, not a tangential complementary `aside` landmark on the homepage. Preserve the two-column visual layout on desktop.
 - The software's recommended citation must contain the exact manuscript-baseline release URL `https://doi.org/10.5281/zenodo.20301242`; retain the separate all-versions DOI in Resources.
 - Keep a committed root `static/favicon.ico` fallback generated from the same BK SVG. The icon build still regenerates deployment variants; release checks must also fetch the plain `/favicon.ico` URL, not exclusively a cache-busted query URL.
+
+## 12. Mobile hero transition and nonduplicated research sequences (October 2026)
+
+- On narrow phones, the portrait/location panel should lead naturally into the Research Program; its inter-section whitespace must remain intentional, not the sum of full desktop section padding. The mobile hero bottom padding is 1.25rem and only the first research section has 2rem top padding, preserving the normal rhythm elsewhere. The attention audit measures the resulting gap after privacy choice is dismissed.
+- The research five-stage sequence and software/process schematics are each represented by exactly one semantic ordered list in rendered HTML, with CSS rearranging that same list at <=820px. Do not restore separate desktop and mobile list copies; avoid decorative divider lines.
+- Journal citations and the thesis citation retain complete copyable source text while displaying linked canonical DOIs. The thesis institutional DOI and software version-specific Zenodo DOI must also be identified in their structured scholarly metadata. The thesis embargo notice should appear once in an appropriate availability field, not repeatedly within the research abstract and conclusion.

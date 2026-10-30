@@ -143,12 +143,13 @@
   {{ $authors := slice }}
   {{ range .Params.authors }}{{ $authors = $authors | append (dict "@type" "Person" "name" (printf "%v" .)) }}{{ end }}
   {{ $scholarly := dict "@context" "https://schema.org" "@type" $schemaType "headline" .Title "name" $page.Title "url" $page.Permalink "datePublished" (.Date.Format "2006-01-02") "author" $authors "description" (.Params.abstract | default .Params.summary) "mainEntityOfPage" .Permalink }}
-  {{ with .Params.doi }}{{ $scholarly = merge $scholarly (dict "sameAs" (printf "https://doi.org/%s" .) "identifier" (dict "@type" "PropertyValue" "propertyID" "DOI" "value" .)) }}{{ end }}
+  {{ $recordDOI := .Params.doi | default .Params.scholar_doi }}
+  {{ with $recordDOI }}{{ $scholarly = merge $scholarly (dict "sameAs" (printf "https://doi.org/%s" .) "identifier" (dict "@type" "PropertyValue" "propertyID" "DOI" "value" .)) }}{{ end }}
 <script type="application/ld+json">{{ $scholarly | jsonify | safeJS }}</script>
 {{ else if and .IsPage (eq .Section "project") }}
 {{ with .File }}
 {{ if eq .ContentBaseName "peel-trace-evaluation" }}
-<script type="application/ld+json">{{ dict "@context" "https://schema.org" "@type" "SoftwareSourceCode" "name" $page.Title "url" $page.Permalink "codeRepository" $p.software.repository "license" "https://www.apache.org/licenses/LICENSE-2.0" "version" $p.software.version "author" (slice (dict "@id" $personID) (dict "@type" "Person" "name" "Christina Tang")) "description" $page.Params.summary | jsonify | safeJS }}</script>
+<script type="application/ld+json">{{ dict "@context" "https://schema.org" "@type" "SoftwareSourceCode" "name" $page.Title "url" $page.Permalink "codeRepository" $p.software.repository "license" "https://www.apache.org/licenses/LICENSE-2.0" "version" $p.software.version "identifier" (dict "@type" "PropertyValue" "propertyID" "DOI" "value" (replace $p.software.version_doi "https://doi.org/" "")) "sameAs" $p.software.version_doi "author" (slice (dict "@id" $personID) (dict "@type" "Person" "name" "Christina Tang")) "description" $page.Params.summary | jsonify | safeJS }}</script>
 {{ end }}
 {{ end }}
 {{ end }}

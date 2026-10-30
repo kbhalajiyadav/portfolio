@@ -15,9 +15,8 @@ abstract: >-
   for evaluating adhesive and layered interfaces on soft, stretchable textile
   substrates. It combines conventional strength measures with trace stability,
   deformation tolerance, and repeatability to support more defensible
-  materials selection. The complete manuscript and detailed results remain
-  under repository embargo until July 20, 2031.
-citation: "Kantepalle, B.Y. Multi-Criteria Selection of Adhesives for Wearable Textiles. M.S. Thesis, Virginia Commonwealth University, Richmond, VA, USA, 2026."
+  materials selection.
+citation: "Kantepalle, B.Y. Multi-Criteria Selection of Adhesives for Wearable Textiles. M.S. Thesis, Virginia Commonwealth University, Richmond, VA, USA, 2026. https://doi.org/10.25772/f6wc-rh09"
 bibtex: >-
   @mastersthesis{Kantepalle2026Thesis,
     author = {Kantepalle, Bhalaji Yadav},
@@ -25,6 +24,7 @@ bibtex: >-
     school = {Virginia Commonwealth University},
     address = {Richmond, Virginia, USA},
     year = {2026},
+    doi = {10.25772/f6wc-rh09},
     url = {https://scholarscompass.vcu.edu/etd/8456/}
   }
 tags:
@@ -60,5 +60,3 @@ The thesis-associated analysis workflow is openly available as
 The manuscript-baseline release is archived as version `v1.4.0-rc15`
 ([doi:10.5281/zenodo.20301242](https://doi.org/10.5281/zenodo.20301242)).
 
-The thesis manuscript remains under embargo; the VCU repository record and
-associated research outputs provide the currently available sources.
