@@ -181,9 +181,9 @@ def main() -> int:
             errors.append(f"CV/resume project-title destination missing: {target}")
     if 'title = href(item["details_url"], item["title"]) if item.get("details_url") else esc(item["title"])' not in cv_builder:
         errors.append("CV and resume project titles must link to their established evidence pages")
+    research_page = (ROOT / "content/research/index.md").read_text(encoding="utf-8")
     if "## Application directions" not in research_page or "## Open research questions" not in research_page:
         errors.append("detailed doctoral questions and application boundaries must remain on Research")
-    research_page = (ROOT / "content/research/index.md").read_text(encoding="utf-8")
     research_statement = (ROOT / "content/research-statement/index.md").read_text(encoding="utf-8")
     if "model system" not in research_page or "model system" not in research_statement:
         errors.append("research content must explain the cholesteric model-system role")
