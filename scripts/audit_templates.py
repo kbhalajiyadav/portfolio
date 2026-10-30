@@ -206,10 +206,12 @@ def main() -> int:
         errors.append("Research applications must explicitly distinguish exploratory thermography from validated physiological inference")
     # Homepage selected-outputs heading must introduce the featured study without
     # becoming a four-line inventory of every possible output type.
-    if "<h2>Published research and tools.</h2>" not in home:
+    if "<h2>First-author research and open methods.</h2>" not in home:
         errors.append("homepage selected-outputs heading must remain concise")
-    if "The first-author article, associated thesis, and citable software document the same study." not in home:
-        errors.append("homepage selected-outputs introduction must explain the related work")
+    if "A newly accepted textile mechanochromism study joins the published adhesion work" not in home:
+        errors.append("homepage selected-outputs introduction must distinguish accepted and published work")
+    if 'class="accepted-feature"' not in home or '/publication/mechanochromic-textiles/' not in home:
+        errors.append("newly accepted first-author article must have a canonical homepage link")
 
     if not all(marker in home for marker in ('class="series-grid"', 'class="engagement-grid"', 'View full professional engagement')):
         errors.append("homepage engagement disclosure must preserve records and the full-engagement link")
