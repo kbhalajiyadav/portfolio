@@ -294,6 +294,32 @@ LAYOUT_EXPRESSION = r"""
         measuredLedeWidth:document.querySelector('.hero .lede')?.getBoundingClientRect().width ?? null
       };
     })(),
+    homeExperience:(() => {
+      const section=document.querySelector('#experience');
+      if(!section) return null;
+      const desktop=section.querySelector('.home-experience--desktop');
+      const mobile=section.querySelector('.home-experience--mobile');
+      const disclosure=mobile?.querySelector('details.home-disclosure--experience');
+      const summary=disclosure?.querySelector(':scope > summary');
+      const link=mobile?.querySelector(':scope > .actions a[href="/experience/"]');
+      return {
+        desktopVisible:!!desktop && getComputedStyle(desktop).display !== 'none',
+        mobileVisible:!!mobile && getComputedStyle(mobile).display !== 'none',
+        summaryVisible:!!summary && summary.getBoundingClientRect().height >= 44,
+        collapsed:!!disclosure && !disclosure.open,
+        directLinkVisible:!!link && link.getClientRects().length > 0,
+        educationCount:mobile?.querySelectorAll('.education-panel article').length || 0,
+        roleCount:mobile?.querySelectorAll('.timeline-item').length || 0,
+      };
+    })(),
+    counterPresent:!!document.querySelector('.metrics'),
+    softwareReference:(() => {
+      const figure=document.querySelector('.software-evidence');
+      if(!figure) return null;
+      const image=figure.querySelector('img');
+      return {hasAlt:!!image?.alt, lazy:image?.loading==='lazy', width:image?.getAttribute('width'), height:image?.getAttribute('height'),
+        citation:!!figure.querySelector('figcaption a[href*="Peel-Trace-Evaluation"]'), caption:figure.querySelector('figcaption')?.textContent||''};
+    })(),
     homeResearchDiagramGap:(() => {
       const section = document.querySelector('#research');
       const introduction = section?.querySelector(':scope > .section-head > p:not(.kicker)');
@@ -520,6 +546,18 @@ def main() -> int:
                                         f"two collapsed presentation cards have uneven bottom edges ({pair['cardHeightDifference']:.1f}px)"
                                     )
                         if page_name == "home":
+                            if layout.get("counterPresent"):
+                                record_errors.append("homepage numerical counter row should be removed")
+                            exp=layout.get("homeExperience")
+                            if not exp:
+                                record_errors.append("home Experience responsive composition missing")
+                            elif width <= 820:
+                                if exp["desktopVisible"] or not exp["mobileVisible"] or not exp["collapsed"] or not exp["summaryVisible"] or not exp["directLinkVisible"]:
+                                    record_errors.append(f"mobile Experience must show a short accessible disclosure and direct full-page link: {exp}")
+                                if exp["educationCount"] < 2 or exp["roleCount"] < 2:
+                                    record_errors.append(f"mobile Experience lost evidence inside disclosure: {exp}")
+                            elif not exp["desktopVisible"] or exp["mobileVisible"]:
+                                record_errors.append(f"desktop Experience must preserve its visible timeline and education panels: {exp}")
                             shell = layout.get("homepageShell")
                             if width >= 1900 and (shell is None or not 1450 <= shell <= 1580):
                                 record_errors.append(f"large-monitor content shell must be wide but editorially bounded: {shell}")
@@ -695,6 +733,10 @@ def main() -> int:
                             if contact_gap is None or not 16 <= contact_gap <= 90:
                                 record_errors.append(f"contact introduction gap is inconsistent: {contact_gap}")
 
+                        if page_name == "project":
+                            reference = layout.get("softwareReference")
+                            if not reference or not reference["hasAlt"] or not reference["lazy"] or not reference["citation"] or reference["width"] != "3993" or reference["height"] != "1350" or "not a result from the published wearable-textile experiment" not in reference["caption"]:
+                                record_errors.append(f"Peel Trace reference figure is absent, uncredited, unoptimized or misleading: {reference}")
                         if page_name in {"home", "publication", "publication-fiber-mats"} and not layout["researchFigures"]:
                             record_errors.append("expected source-attributed research figures")
                         for index, figure in enumerate(layout["researchFigures"]):
