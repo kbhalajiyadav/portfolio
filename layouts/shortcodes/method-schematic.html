@@ -2,15 +2,10 @@
 {{ $id := .Get "id" }}
 {{ $steps := split (.Get "steps") "|" }}
 <figure class="method-schematic" aria-labelledby="{{ $id }}-caption">
-  <div class="method-schematic__desktop">
-    <ol class="method-schematic__steps" aria-label="{{ .Get "title" }}">
-      {{ range $i, $step := $steps }}
-      <li><span class="method-schematic__number">{{ printf "%02d" (add $i 1) }}</span><strong>{{ replace $step "~" " " }}</strong></li>
-      {{ end }}
-    </ol>
-  </div>
-  <ol class="method-schematic__mobile" aria-label="{{ .Get "title" }}">
-    {{ range $i, $step := $steps }}<li><span>{{ printf "%02d" (add $i 1) }}</span><strong>{{ replace $step "~" " " }}</strong></li>{{ end }}
+  <ol class="method-schematic__steps" aria-label="{{ .Get "title" }}">
+    {{ range $i, $step := $steps }}
+    <li><span class="method-schematic__number">{{ printf "%02d" (add $i 1) }}</span><strong>{{ replace $step "~" " " }}</strong></li>
+    {{ end }}
   </ol>
   <figcaption id="{{ $id }}-caption">{{ .Get "caption" }}</figcaption>
 </figure>
