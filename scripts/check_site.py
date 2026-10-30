@@ -248,9 +248,10 @@ def main() -> int:
             errors.append(f"{relative}: canonical URL is not absolute: {parser.canonical}")
         if not parser.robots:
             errors.append(f"{relative}: missing robots directive")
-        elif relative == Path("404.html") and "noindex" not in parser.robots:
-            errors.append("404.html: must be noindex")
-        elif relative != Path("404.html") and "noindex" in parser.robots:
+        elif relative == Path("404.html") or relative.parts[0] == "tags":
+            if "noindex" not in parser.robots:
+                errors.append(f"{relative}: low-value page must be noindex")
+        elif "noindex" in parser.robots:
             errors.append(f"{relative}: unexpectedly noindex")
         if not parser.manifest_href:
             errors.append(f"{relative}: missing web manifest discovery")
