@@ -65,6 +65,15 @@ def main() -> int:
     if landing.count('partial "home_experience_body.html"') != 1:
         errors.append("homepage Experience chronology must not be rendered twice")
 
+    citation_template = (LAYOUTS / "publication/single.html").read_text(encoding="utf-8")
+    thesis_metadata = (ROOT / "content/publication/masters-thesis/index.md").read_text(encoding="utf-8")
+    if "href=\"{{ $doiURL }}\"" not in citation_template or ".Params.scholar_doi" not in citation_template:
+        errors.append("publication citations must link canonical DOIs without corrupting copyable citation text")
+    if "https://doi.org/10.25772/f6wc-rh09" not in thesis_metadata.split("citation:", 1)[-1].split("bibtex:", 1)[0]:
+        errors.append("thesis citation must include institutional DOI")
+    if '"sameAs" $p.software.version_doi' not in seo_head or '.Params.scholar_doi' not in seo_head:
+        errors.append("scholarly metadata must expose software and thesis version-specific DOIs")
+
     statement_path = ROOT / "content/research-statement/index.md"
     research_page = (ROOT / "content/research/index.md").read_text(encoding="utf-8")
     if not statement_path.exists():
@@ -169,6 +178,8 @@ def main() -> int:
     methods_short = (LAYOUTS / "shortcodes/method-schematic.html").read_text(encoding="utf-8")
     if '<ol class="research-signature__flow"' not in research_short or '<ol class="method-schematic__steps"' not in methods_short:
         errors.append("scientific diagrams must use accessible intrinsic-size text, not scaled SVG labels")
+    if any(bad in research_short + methods_short for bad in ("research-signature__mobile", "method-schematic__mobile", "method-schematic__desktop")):
+        errors.append("process diagrams must not retain redundant breakpoint-specific markup")
     if research_short.count("<ol ") != 1 or methods_short.count("<ol ") != 1:
         errors.append("responsive scientific sequences must not duplicate list content")
     if '<svg' in research_short or '<svg' in methods_short:
