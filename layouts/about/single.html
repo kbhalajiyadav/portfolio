@@ -39,24 +39,10 @@
       </div>
     </section>
 
-    <section class="about-section about-identity" id="research-identity" aria-labelledby="research-identity-heading">
-      <div class="about-section__intro">
-        <p class="kicker">{{ .Params.research_identity.title }}</p>
-        <h2 id="research-identity-heading">From material response to reproducible measurement.</h2>
-        <div class="about-section__summary">
-          <p>{{ .Params.research_identity.text }}</p>
-          <div class="about-research-links">
-            <a class="lnk" href="{{ "/research/" | relURL }}">Explore the research questions <span class="arw" aria-hidden="true">→</span></a>
-            <a class="lnk" href="{{ "/research-statement/" | relURL }}">Read the research statement <span class="arw" aria-hidden="true">→</span></a>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <section class="about-section" id="professional-path" aria-labelledby="professional-path-heading">
       <div class="about-section__intro">
         <p class="kicker">Professional path</p>
-        <h2 id="professional-path-heading">Chemical engineering, regulated practice, and research metrology.</h2>
+        <h2 id="professional-path-heading">From chemical engineering to doctoral research.</h2>
         <div class="about-section__summary"><p>Chemical-engineering training led through regulated manufacturing into quantitative soft-materials research and the current doctoral program.</p></div>
       </div>
       <div class="about-path" aria-label="Professional path in chronological order">
@@ -66,19 +52,6 @@
           <span class="about-path__marker" aria-hidden="true"></span>
           <div class="about-path__content"><h3>{{ .title }}</h3><p>{{ .text | markdownify }}</p></div>
         </article>
-        {{ end }}
-      </div>
-    </section>
-
-    <section class="about-section" id="methods" aria-labelledby="methods-capabilities">
-      <div class="about-section__intro">
-        <p class="kicker">Methods and capabilities</p>
-        <h2 id="methods-capabilities">Measurement choices are part of the scientific claim.</h2>
-        <div class="about-section__summary"><p>The work combines experimental characterization, quantitative imaging, mechanics-consistent interpretation, and versioned analysis so that results remain comparable across conditions and equipment.</p></div>
-      </div>
-      <div class="about-method-grid">
-        {{ range .Params.methods }}
-        <article><h3>{{ .title }}</h3><p>{{ .text }}</p></article>
         {{ end }}
       </div>
     </section>

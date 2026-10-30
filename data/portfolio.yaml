@@ -197,9 +197,9 @@ experience:
   detail: Worked directly with the CEO and cross-functional quality, technical, and external teams on SAP Business
     One computerized-system requalification and configuration in pharmaceutical-intermediate manufacturing.
   outcomes:
-  - Led user-requirements review, deviation and root-cause investigation, gap and impact assessment, CAPA and preventive controls, qualification-environment testing, Performance Qualification, change-control verification, and user-access and approval-workflow controls
-  - Translated procedural and cross-department workflow requirements into system-enforced validations, access restrictions, approval gates, alerts, mandatory fields, and exception controls designed to reduce recurrence and prevent uncontrolled or out-of-sequence transactions
-  - Developed and iterated module-level PQ protocols and test scripts with internal QA and external consultant review, defining test steps, expected results, and qualification evidence after configuration changes
+  - Led cross-functional requirements review, computerized-system requalification, and validation evidence.
+  - Translated process requirements into tested system controls and approval workflows.
+  - Prepared qualification protocols and traceability with quality-assurance and external teams.
   - Following reconfiguration, project records showed an approximately 99% reduction in recurring data-entry errors; planning and execution reduced the SAP requalification blackout period from five days to a few hours
   - Expanded and refined a structured project-management framework with the CEO for cross-department execution and new-product-development tracking, building on work initiated during the preceding internship
   links:
@@ -213,9 +213,9 @@ experience:
   location: Hyderabad, India
   detail: Directed chemical-data normalization and end-to-end trade-data automation for pharmaceutical market intelligence and decision support.
   outcomes:
-  - Directed a Python-based chemical-name normalization model across heterogeneous import/export records, improving data accuracy by approximately 90%
-  - Built automated trade-data and Tableau decision-support workflows integrating U.S. FDA Drug Master File information; recurring analysis time fell by about 70%
-  - Began developing a structured project-management framework in Notion for project tracking and decision support; it was later expanded and refined with the CEO during the subsequent Technical Project Manager role
+  - Developed chemical-name normalization for heterogeneous trade records.
+  - Built repeatable Python and Tableau decision-support workflows incorporating FDA Drug Master File information.
+  - Introduced project-tracking practices expanded during the subsequent project-management role.
   links:
   - label: Chemical data & digital operations
     href: project/supply-chain-automation/
@@ -224,17 +224,15 @@ experience:
 teaching:
 - date: Summer 2026
   type: Research guidance
-  title: Guidance for two Summer 2026 student projects
+  title: Guidance for two student projects
   project_count: 2
-  detail: 'Guided two Summer 2026 student research projects: one developed temperature-mapping methods
-    for stimuli-responsive liquid crystals, and one analyzed hyperspectral measurements of soil–plastic
-    mixtures to evaluate concentration-dependent plastic detection and estimate the minimum detectable
-    concentration.'
+  detail: 'Guided two student projects in temperature mapping of responsive liquid crystals and
+    hyperspectral detection of plastic concentration in soil mixtures.'
 - date: Spring 2026
   type: Technical and scientific support
-  title: Characterization, analysis, and research communication
-  detail: Provided technical support in NMR characterization and interpretation, strain-to-color quantification,
-    relationship analysis, scientific figure development, poster preparation, and grant drafting.
+  title: Research support and communication
+  detail: Supported NMR interpretation, quantitative strain–color analysis, figures, posters,
+    and grant preparation.
 - date: Nov 11–12, 2025
   type: Classroom instruction
   title: Undergraduate Material Balance
