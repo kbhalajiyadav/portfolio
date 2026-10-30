@@ -85,16 +85,20 @@ a:hover .content-link__arrow--internal,a:focus-visible .content-link__arrow--int
 }
 
 
-/* Keep the evidence-first desktop chronology; condense only the phone/tablet homepage. */
-.home-experience--mobile{display:none}
+/* One semantic Experience chronology on all screens. Without JS, the open
+   disclosure remains readable, including on phones. */
+.home-experience__summary{display:none}
+.home-disclosure--experience{margin:0;border:0}
+.home-disclosure--experience>summary{display:none}
+.home-disclosure--experience>.home-disclosure__body{padding:0}
+.home-experience>.actions{margin-top:1rem}
 @media(max-width:820px){
-  .home-experience--desktop{display:none}
-  .home-experience--mobile{display:block}
-  .home-experience__summary{max-width:62ch;margin:0;color:var(--ink-soft);line-height:1.55}
-  .home-disclosure--experience{margin-top:1.25rem}
-  .home-disclosure--experience .home-disclosure__body{padding:.65rem 0 1rem}
-  .home-experience--mobile>.actions{margin-top:1rem}
+  .home-experience__summary{display:block;max-width:62ch;margin:0;color:var(--ink-soft);line-height:1.55}
+  .home-disclosure--experience{margin-top:1.25rem;border-top:1px solid var(--line-strong)}
+  .home-disclosure--experience>summary{display:flex}
+  .home-disclosure--experience>.home-disclosure__body{padding:.65rem 0 1rem}
 }
+
 /* Authentic reference output sits in the article flow, not in a framed card. */
 .software-evidence{margin:1.8rem 0 2.2rem;padding:0;border:0;background:transparent}
 .software-evidence img{display:block;max-width:100%;height:auto;border:0;background:transparent}
