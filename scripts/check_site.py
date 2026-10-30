@@ -249,7 +249,13 @@ def main() -> int:
                 and bool(region.get("aria-label"))
                 for region in regions
             ):
-                errors.append("electrospun mechanical-properties table needs an accessible keyboard-scroll region")
+                excerpt = html.read_text(encoding="utf-8", errors="replace")
+                region_start = excerpt.find("table-scroll-region")
+                excerpt = excerpt[max(0, region_start - 180):region_start + 450] if region_start >= 0 else "no wrapper class found"
+                errors.append(
+                    "electrospun mechanical-properties table needs an accessible keyboard-scroll region "
+                    f"(rendered_tables={parser.rendered_tables}, regions={regions!r}, markup={excerpt!r})"
+                )
         if not parser.html_lang:
             errors.append(f"{relative}: missing html lang")
         if not parser.viewport:
