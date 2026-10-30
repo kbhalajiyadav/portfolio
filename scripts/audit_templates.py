@@ -55,8 +55,13 @@ def main() -> int:
     landing = (LAYOUTS / "landing/list.html").read_text(encoding="utf-8")
     if '{{ if not .IsHome }}{{ partial "privacy_controls.html" . }}{{ end }}' not in base:
         errors.append("homepage privacy notice must no longer precede the introduction")
-    if not (landing.find('class="hero"') < landing.find('partial "privacy_controls.html"') < landing.find('partial "home_proof.html"')):
-        errors.append("homepage consent choices must follow the introduction before research evidence")
+    if not (landing.find('class="hero"') < landing.find('partial "privacy_controls.html"') < landing.find('id="research"')):
+        errors.append("homepage consent choices must follow the introduction before the Research section")
+
+    if 'partial "home_proof.html"' in landing:
+        errors.append("homepage should not contain the old numerical counter strip")
+    if not all(marker in landing for marker in ('class="home-experience--mobile"', 'home-disclosure--experience', 'partial "home_experience_body.html"')):
+        errors.append("mobile Experience must retain a short visible summary and native accessible disclosure")
 
     statement_path = ROOT / "content/research-statement/index.md"
     research_page = (ROOT / "content/research/index.md").read_text(encoding="utf-8")
