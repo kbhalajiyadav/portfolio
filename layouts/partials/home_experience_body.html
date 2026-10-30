@@ -12,6 +12,6 @@
       <h3>Education</h3>
       {{ range $p.education }}{{ if ne .show false }}<article><span>{{ .period }}</span><strong>{{ .degree }}</strong><p>{{ .institution }}</p>{{ with .note }}<small>{{ . }}</small>{{ end }}</article>{{ end }}{{ end }}
       <h3>Research training</h3>
-      {{ range $p.professional_development }}{{ if ne .show false }}<article><span>{{ .period }}</span><strong>{{ .title }}</strong><p>{{ .organization }}</p><small>{{ .note }}</small></article>{{ end }}{{ end }}
+      {{ range $p.professional_development }}{{ if ne .show false }}<article class="home-training-record"><strong>{{ .title }}</strong><p>{{ .organization }} · {{ replaceRE "^.*([0-9]{4})$" "$1" .period }}</p></article>{{ end }}{{ end }}
     </div>
   </div>

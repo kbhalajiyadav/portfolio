@@ -180,7 +180,7 @@ def validate(record: dict, page_name: str, page_level: str) -> list[str]:
             if section == "highlights":
                 valid = between(padding["top"], 28, 65) and between(padding["bottom"], 28, 65)
             elif section == "research":
-                valid = between(padding["top"], 30, 72) and between(padding["bottom"], 60, 112)
+                valid = between(padding["top"], 30, 65) and between(padding["bottom"], 30, 80)
             else:
                 valid = between(padding["top"], 60, 112) and between(padding["bottom"], 60, 112)
             if not valid:

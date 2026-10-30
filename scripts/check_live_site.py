@@ -13,17 +13,17 @@ from urllib.request import Request, urlopen
 
 EXPECTED_TEXT = {
     "": [
-        "Research program",
         "Making material response measurable and interpretable.",
         "Soft matter",
         "Current question",
         "Recent research, at a glance.",
         "Substrate Enhanced Mechanochromic Sensitivity in Stimuli Response Textiles",
-        "Three approaches to measuring material response.",
+        "Current doctoral research",
+        "Liquid crystals as a model system for how processing shapes structure.",
         "What a peel trace can reveal.",
         "Comparing strength, stability, and deformation tolerance",
-        "Explore the research questions",
-        "Read the research statement",
+        "Research questions",
+        "Research statement",
         "Ph.D. student",
         "Browse all research outputs",
         'href="/favicon.svg"',

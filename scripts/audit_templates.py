@@ -201,8 +201,12 @@ def main() -> int:
         errors.append("five-stage framework should live on Research rather than repeat on Home")
     if 'class="highlights__grid"' not in home or '/publication/mechanochromic-textiles/' not in home:
         errors.append("accepted first-author work must appear in the homepage scan path")
-    if not (home.find('id="highlights"') < home.find('id="research"') < home.find('id="outputs"')):
-        errors.append("homepage must place concise output highlights before deep research content")
+    if not (home.find('id="research"') < home.find('id="highlights"') < home.find('id="outputs"')):
+        errors.append("homepage must prioritize doctoral direction before selected research outputs")
+    if 'class="pillars"' in home or '<h2>{{ $p.narrative.problem_title }}</h2>' in home:
+        errors.append("homepage must not restore generic methods cards or duplicate open questions")
+    if 'class="section doctoral-intro"' not in home or '{{ $p.doctoral.title }}' not in home or '{{ $p.doctoral.text }}' not in home:
+        errors.append("homepage doctoral section must explain the current model system and methods")
 
     if not all(marker in home for marker in ('class="series-grid"', 'class="engagement-grid"', 'View full professional engagement')):
         errors.append("homepage engagement disclosure must preserve records and the full-engagement link")
