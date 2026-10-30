@@ -52,6 +52,16 @@
     window.setTimeout(() => { button.textContent = original; }, 1200);
   });
 
+  // One source of truth for Experience: fully readable on desktop and without JS,
+  // initially collapsed on narrow screens when enhancement is available.
+  const experienceDisclosure = document.querySelector('[data-responsive-experience]');
+  if (experienceDisclosure) {
+    const mobile = window.matchMedia('(max-width: 820px)');
+    const syncExperience = () => { experienceDisclosure.open = !mobile.matches; };
+    syncExperience();
+    mobile.addEventListener('change', syncExperience);
+  }
+
   const outputFilterButtons = Array.from(document.querySelectorAll('[data-output-filter]'));
   const outputRecords = Array.from(document.querySelectorAll('[data-output-type][data-output-date]'));
   const outputFilterStatus = document.querySelector('[data-output-filter-status]');
