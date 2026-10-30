@@ -349,7 +349,7 @@ def validate_release(base: str, nonce: str) -> list[str]:
                 errors.append(f"{touch_url}: direct browser request returned HTTP {response.status}")
             else:
                 png = response.read()
-                if len(png) < 24 or png[:8] != b"\\x89PNG\\r\\n\\x1a\\n" or struct.unpack(">II", png[16:24]) != (180, 180):
+                if len(png) < 24 or png[:8] != bytes.fromhex("89504e470d0a1a0a") or struct.unpack(">II", png[16:24]) != (180, 180):
                     errors.append(f"{touch_url}: direct browser request returned an invalid 180px icon")
     except (URLError, HTTPError, TimeoutError, OSError) as exc:
         errors.append(f"{touch_url}: direct browser request failed: {exc}")
