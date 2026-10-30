@@ -169,6 +169,8 @@ def validate(record: dict, page_name: str, page_level: str) -> list[str]:
         errors.append(
             f"privacy notice is too tall for the viewport: {banner['height']:.1f}px of {record['viewportHeight']}px"
         )
+    if record["viewportWidth"] <= 390 and banner["height"] > 145:
+        errors.append(f"first-visit mobile consent notice interrupts the page with excessive height: {banner['height']:.1f}px")
 
     if page_level == "home":
         hero_padding = record.get("heroPaddingTop")

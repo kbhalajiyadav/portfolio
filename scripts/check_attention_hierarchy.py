@@ -84,7 +84,11 @@ PAGE_METRICS = r"""
     ledeFontSize:ledeStyle ? parseFloat(ledeStyle.fontSize) || 0 : 0,
     ledeLineHeight:ledeStyle ? parseFloat(ledeStyle.lineHeight) || 0 : 0,
     heroActionCount:heroActions.length,
-    currentFocusVisible:!!document.querySelector('.hero__focus a[href="/research/#open-research-questions"]'),
+    currentFocusVisible:(() => {
+      const focus=document.querySelector('.hero__focus');
+      return !!focus && focus.textContent.includes('Current question') &&
+        focus.textContent.includes('cholesteric') && !focus.querySelector('a');
+    })(),
     contactActionVisible:!!document.querySelector('.hero .actions a[href="/contact/"]'),
     cvVisible:!!document.querySelector('.hero__cv a[href*="cv.pdf"]'),
     highlightCount:document.querySelectorAll('.highlights__grid > .highlight').length,
@@ -308,7 +312,7 @@ def main() -> int:
                     if metrics.get("ledeFontSize", 0) and metrics.get("ledeLineHeight", 0) < metrics["ledeFontSize"] * 1.45:
                         errors.append(f"{prefix}: lede line height is too tight")
                     if not (metrics.get("currentFocusVisible") and metrics.get("contactActionVisible") and metrics.get("cvVisible")):
-                        errors.append(f"{prefix}: hero research focus, contact and CV pathways are incomplete")
+                        errors.append(f"{prefix}: hero research question, contact and CV pathways are incomplete")
                     if metrics.get("highlightCount") != 3:
                         errors.append(f"{prefix}: homepage must present three concise highlighted outputs")
                     if set(metrics.get("highlightDestinations") or []) != {

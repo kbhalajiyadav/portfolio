@@ -273,9 +273,8 @@ applications:
 - Calibration and repeatability testing for passive thermal indicators and soft wearable interfaces
 doctoral:
   title: Liquid crystals as a model system for how processing shapes structure.
-  text: Cholesteric mixtures provide a model system for studying molecular order and optical response
-    under controlled processing histories. Rheology and quantitative imaging provide complementary
-    measurements, while scattering can test competing structural interpretations.
+  text: Rheology and quantitative imaging provide complementary measurements, while scattering can
+    help test competing interpretations of structural change.
   robotics: Controlled heating, cooling, and shear histories can help distinguish reversible response
     from hysteresis, structural recovery, and measurement drift. I am interested in synchronizing
     experimental conditions with optical, mechanical, and structural measurements to test repeatability

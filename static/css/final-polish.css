@@ -185,3 +185,43 @@ a:hover .content-link__arrow--internal,a:focus-visible .content-link__arrow--int
   .doctoral-intro .research-home-followup{margin-top:1rem;gap:.65rem 1.2rem}
   #highlights .highlights__more{margin-top:1.4rem}
 }
+
+/* Five-stage framework: respond to the figure's true content-column width,
+   not to the outer desktop viewport. A narrow article column must never
+   squeeze the last label into the following numbered marker. */
+.research-signature{container-type:inline-size}
+.research-signature__flow{column-gap:.95rem;row-gap:1.15rem}
+.research-signature__flow li{min-width:0;column-gap:.65rem;align-items:center}
+.research-signature__flow strong{min-width:0;overflow-wrap:normal}
+.research-signature__index{flex:none;align-self:center}
+@container (max-width:960px){
+  .research-signature__flow{grid-template-columns:repeat(6,minmax(0,1fr))}
+  .research-signature__flow li{grid-column:span 2}
+  .research-signature__flow li:nth-child(4){grid-column:2 / span 2}
+  .research-signature__flow li:nth-child(5){grid-column:4 / span 2}
+}
+@container (max-width:560px){
+  .research-signature__flow{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .research-signature__flow li{grid-column:auto}
+  .research-signature__flow li:nth-child(4){grid-column:auto}
+  .research-signature__flow li:nth-child(5){grid-column:1/-1;justify-self:center}
+}
+@container (max-width:420px){
+  .research-signature__flow{grid-template-columns:1fr;row-gap:.45rem}
+  .research-signature__flow li,.research-signature__flow li:nth-child(4),.research-signature__flow li:nth-child(5){grid-column:auto;justify-self:stretch}
+}
+@media(max-width:820px){
+  /* One semantic list in a comfortably spaced vertical sequence on phones. */
+  .research-signature__flow{grid-template-columns:1fr;row-gap:.2rem}
+  .research-signature__flow li,.research-signature__flow li:nth-child(4),.research-signature__flow li:nth-child(5){grid-column:auto;justify-self:stretch}
+}
+/* The hero question is a statement; detailed links live just below it. */
+.hero__focus{max-width:64ch}
+/* Compact, opt-in, first-visit notice: no fixed overlay or reduced tap targets. */
+@media(max-width:680px){
+  .privacy-banner{gap:.38rem;padding:.45rem 0}
+  .privacy-banner__copy strong,.privacy-banner__copy p{display:inline;margin:0;font-size:.76rem;line-height:1.35}
+  .privacy-banner__copy strong{margin-right:.35rem}
+  .privacy-banner__actions{width:auto;justify-content:flex-start;gap:.5rem}
+  .privacy-banner__actions .button{flex:0 1 auto;min-width:108px;min-height:44px;padding:.4rem .6rem}
+}
