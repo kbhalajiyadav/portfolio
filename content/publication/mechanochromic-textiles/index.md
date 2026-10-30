@@ -37,7 +37,6 @@ tags:
 
 This study examines how a supporting textile substrate influences the sensitivity of color response to mechanical stimuli. It connects the textile system to the broader problem of quantifying the response of soft, stimulus-responsive materials.
 
-The manuscript was accepted for publication on October 27, 2026. The final publisher DOI and bibliographic details will be added when available.
 
 ## Related work
 

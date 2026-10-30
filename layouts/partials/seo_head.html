@@ -3,11 +3,16 @@
 {{ $isHome := .IsHome }}
 {{ $isAbout := eq .RelPermalink "/about/" }}
 {{ $isAcceptedManuscript := eq .Params.publication_status "accepted" }}
+{{ $isTagArchive := or (eq .Kind "taxonomy") (eq .Kind "term") }}
 {{ $siteName := printf "%s · Research Portfolio" $p.profile.name }}
 {{ $pageTitle := cond $isHome $siteName (printf "%s · %s" .Title $p.profile.short_name) }}
+{{ if eq .RelPermalink "/publication/masters-thesis/" }}
+  {{ $pageTitle = printf "%s (M.S. thesis) · %s" .Title $p.profile.short_name }}
+{{ end }}
 {{ $description := $p.profile.summary }}
 {{ with .Params.summary }}{{ $description = . | markdownify | plainify }}{{ end }}
 {{ with .Description }}{{ $description = . | markdownify | plainify }}{{ end }}
+{{ if $isTagArchive }}{{ $description = printf "Browse research items associated with %s in the %s portfolio." .Title $p.profile.short_name }}{{ end }}
 {{ $canonical := .Permalink }}
 {{ $ogType := cond $isAbout "profile" (cond (eq .Section "publication") "article" "website") }}
 {{ $aboutURL := "/about/" | absURL }}
@@ -74,7 +79,7 @@
 <meta name="apple-mobile-web-app-title" content="{{ $p.profile.short_name }}">
 <meta name="theme-color" content="#f7f5f0">
 {{ $is404 := or (eq .RelPermalink "/404.html") (eq .Title "404 Page not found") }}
-{{ if $is404 }}
+{{ if or $is404 $isTagArchive }}
 <meta name="robots" content="noindex,follow">
 {{ else }}
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
