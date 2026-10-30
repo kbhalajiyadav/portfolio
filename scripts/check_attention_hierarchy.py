@@ -118,6 +118,9 @@ PAGE_METRICS = r"""
     secondaryOutputCount:selectedOutputs ? selectedOutputs.querySelectorAll('.secondary-output').length : 0,
     selectedOutputsText:selectedOutputs ? (selectedOutputs.textContent || '').replace(/\s+/g,' ').trim() : '',
     selectedOutputsHeadingLines:lineCount(selectedOutputs?.querySelector('.section-head h2')),
+    caseStudyHeading:selectedOutputs?.querySelector('.package-lead h3')?.textContent?.trim() || '',
+    caseStudyFigureCount:selectedOutputs?.querySelectorAll('.package-lead > .research-figure').length || 0,
+    caseStudyLinks:[...(selectedOutputs?.querySelectorAll('.package-artifacts a[href]') || [])].map(a=>a.getAttribute('href')),
     sectionHeadingPairs:[...document.querySelectorAll('main .section-head')]
       .filter(head => head.querySelector(':scope > h2') && head.querySelector(':scope > p:not(.kicker)'))
       .map(head => {
@@ -137,28 +140,18 @@ PAGE_METRICS = r"""
       evidenceCount:item.querySelectorAll('.trajectory-grid article, .questions article, .compact-record').length,
       bodyVisible:!!item.querySelector('.home-disclosure__body')?.getClientRects().length,
     })),
-    visibleQuestions:(() => {
-      const section = document.querySelector('.research-extension .questions');
-      const title = section?.querySelector('.questions__head h3');
-      const label = section?.querySelector('.questions__head .kicker');
-      const cards = [...(section?.querySelectorAll('.questions__grid article') || [])];
-      const grid = section?.querySelector('.questions__grid');
+    researchFollowup:(() => {
+      const block=document.querySelector('.research-home-followup');
+      const pillars=document.querySelector('#research .pillars');
+      const box=block?.getBoundingClientRect();
+      const last=pillars?.getBoundingClientRect();
       return {
-        visible:!!section?.getClientRects().length,
-        count:cards.length,
-        linkedStatement:!!document.querySelector('.research-extension__statement-link a[href="/research-statement/"]'),
-        headingGap:title && label ? title.getBoundingClientRect().top - label.getBoundingClientRect().bottom : null,
-        columns:grid ? getComputedStyle(grid).gridTemplateColumns.split(/\s+/).filter(Boolean).length : 0,
-        borders:cards.map(card => ['borderTopWidth','borderRightWidth','borderBottomWidth','borderLeftWidth']
-          .map(key => parseFloat(getComputedStyle(card)[key]) || 0)),
+        exists:!!block,
+        linkDestinations:[...(block?.querySelectorAll('a[href]') || [])].map(a=>a.getAttribute('href')),
+        gap:last && box ? box.top-last.bottom : null,
+        duplicateQuestionCount:document.querySelectorAll('.research-extension .questions article').length,
+        duplicateDiagramCount:document.querySelectorAll('#research .research-signature').length,
       };
-    })(),
-    researchDisclosureGap:(() => {
-      const section = document.querySelector('#research');
-      const details = section?.querySelector('.research-extension__details');
-      return section && details
-        ? section.getBoundingClientRect().bottom - details.getBoundingClientRect().bottom
-        : null;
     })(),
   };
 })()
@@ -407,88 +400,45 @@ def main() -> int:
                         errors.append(f"{prefix}: selected outputs headline is overly tall ({title_lines} lines)")
                     if metrics.get("researchPackageCount") != 1 or metrics.get("secondaryOutputCount") != 1:
                         errors.append(f"{prefix}: homepage outputs must stay curated to one flagship research group plus one IP record")
-                    # Collapsed details should not reserve an unexplained blank band
-                    # before the section boundary; the sitewide minimum remains 64px.
-                    trailing = metrics.get("researchDisclosureGap")
-                    if trailing is None or not 62 <= trailing <= 90:
-                        errors.append(f"{prefix}: closed doctoral disclosure leaves excessive bottom whitespace: {trailing}")
-                    visible_questions = metrics.get("visibleQuestions") or {}
-                    if not visible_questions.get("visible") or visible_questions.get("count") != 3:
-                        errors.append(f"{prefix}: three doctoral research questions must be visible without opening a disclosure")
-                    if not visible_questions.get("linkedStatement"):
-                        errors.append(f"{prefix}: homepage doctoral section lacks research-statement link")
-                    if visible_questions.get("headingGap") is None or not 4 <= visible_questions["headingGap"] <= 24:
-                        errors.append(f"{prefix}: visible research question heading is not aligned: {visible_questions}")
-                    if visible_questions.get("columns") != (1 if width <= 820 else 3):
-                        errors.append(f"{prefix}: visible questions have unreadable responsive columns: {visible_questions}")
-                    if any(any(edge > 0 for edge in card) for card in visible_questions.get("borders", [])):
-                        errors.append(f"{prefix}: questions regained card borders")
+                    if metrics.get("caseStudyFigureCount") != 1 or metrics.get("caseStudyHeading") == "Multi-Criteria Selection of Adhesives for Wearable Textiles":
+                        errors.append(f"{prefix}: lower homepage section must interpret one published figure, not repeat the article listing")
+                    if not {
+                        "/publication/masters-thesis/",
+                        "/project/peel-trace-evaluation/",
+                    }.issubset(set(metrics.get("caseStudyLinks") or [])):
+                        errors.append(f"{prefix}: case study lost its thesis and methods provenance")
+                    followup = metrics.get("researchFollowup") or {}
+                    if not followup.get("exists") or set(followup.get("linkDestinations") or []) != {
+                        "/research/#open-research-questions",
+                        "/research-statement/",
+                    }:
+                        errors.append(f"{prefix}: doctoral detail must be linked instead of repeated: {followup}")
+                    gap = followup.get("gap")
+                    if gap is None or not 16 <= gap <= 100:
+                        errors.append(f"{prefix}: research links are visually disconnected from the methods overview: {gap}")
+                    if followup.get("duplicateQuestionCount") or followup.get("duplicateDiagramCount"):
+                        errors.append(f"{prefix}: duplicate detailed questions or five-stage research diagram reappeared")
                     disclosures = metrics.get("disclosures", [])
-                    if len(disclosures) != 2:
-                        errors.append(f"{prefix}: two accessible secondary evidence disclosures required, got {len(disclosures)}")
-                    for index, disclosure in enumerate(disclosures, start=1):
-                        if disclosure["open"] or disclosure["bodyVisible"]:
-                            errors.append(f"{prefix}: secondary evidence {index} must be closed by default")
-                        if disclosure["summaryHeight"] < 44:
-                            errors.append(f"{prefix}: secondary evidence {index} has a small or missing summary")
-                        if disclosure["evidenceCount"] < (2 if index == 1 else 4):
-                            errors.append(f"{prefix}: secondary evidence {index} was deleted rather than disclosed")
+                    if len(disclosures) != 1:
+                        errors.append(f"{prefix}: only the engagement evidence should remain disclosed: {disclosures}")
+                    else:
+                        disclosure = disclosures[0]
+                        if disclosure["open"] or disclosure["bodyVisible"] or disclosure["summaryHeight"] < 44 or disclosure["evidenceCount"] < 4:
+                            errors.append(f"{prefix}: engagement must remain accessible and collapsed by default: {disclosure}")
                     expanded = cdp.evaluate("""(() => {
-                      const items = [...document.querySelectorAll('main details.home-disclosure:not(.home-disclosure--experience)')];
-                      items.forEach(item => item.open = true);
-                      const edges = element => {
-                        if (!element) return null;
-                        const style = getComputedStyle(element);
-                        return ['borderTopWidth','borderRightWidth','borderBottomWidth','borderLeftWidth']
-                          .map(key => parseFloat(style[key]) || 0);
-                      };
-                      const research = items[0];
+                      const item=document.querySelector('main details.home-disclosure--engagement');
+                      if (!item) return {present:false};
+                      item.open=true;
                       return {
-                        rules: {
-                          disclosure:edges(research),
-                          applications:edges(research?.querySelector('.trajectory-grid')),
-                          automation:edges(research?.querySelector('.robotics-card')),
-                          questions:edges(document.querySelector('.research-extension .questions')),
-                          questionGrid:edges(document.querySelector('.research-extension .questions__grid')),
-                          questionCards:[...document.querySelectorAll('.research-extension .questions__grid article')].map(edges),
-                        },
-                        visible:items.length === 2 && items.every(item => !!item.querySelector('.home-disclosure__body')?.getClientRects().length),
-                        overflow:document.documentElement.scrollWidth > innerWidth + 2,
-                        researchCount:items[0]?.querySelectorAll('.trajectory-grid article').length || 0,
-                        engagementCount:items[1]?.querySelectorAll('.compact-record').length || 0,
-                        editorialFlow:(() => {
-                          const questions = document.querySelector('.research-extension .questions');
-                          const methods = research?.querySelector('.trajectory-grid');
-                          const details = research;
-                          const summary = details?.querySelector(':scope > summary');
-                          return questions && methods && details && summary ? {
-                            questionsBeforeMethods:!!(questions.compareDocumentPosition(methods) & Node.DOCUMENT_POSITION_FOLLOWING),
-                            questionToDisclosureGap:details.getBoundingClientRect().top - questions.getBoundingClientRect().bottom,
-                            summaryToMethodsGap:methods.getBoundingClientRect().top - summary.getBoundingClientRect().bottom,
-                          } : null;
-                        })(),
+                        present:true,
+                        bodyVisible:!!item.querySelector('.home-disclosure__body')?.getClientRects().length,
+                        overflow:document.documentElement.scrollWidth > innerWidth+2,
+                        records:item.querySelectorAll('.compact-record').length,
+                        summaryHeight:item.querySelector(':scope > summary')?.getBoundingClientRect().height || 0,
                       };
                     })()""")
-                    if not expanded["visible"] or expanded["overflow"] or expanded["researchCount"] < 2 or expanded["engagementCount"] < 4:
-                        errors.append(f"{prefix}: expanded secondary evidence must remain fully readable: {expanded}")
-                    flow = expanded.get("editorialFlow")
-                    if not flow or not flow["questionsBeforeMethods"]:
-                        errors.append(f"{prefix}: scientific questions must precede disclosed methods: {flow}")
-                    if flow and not 8 <= flow["questionToDisclosureGap"] <= 80:
-                        errors.append(f"{prefix}: questions/disclosure spacing is inconsistent: {flow}")
-                    if flow and not 4 <= flow["summaryToMethodsGap"] <= 64:
-                        errors.append(f"{prefix}: disclosure summary/methods spacing is inconsistent: {flow}")
-                    rules = expanded.get("rules", {})
-                    disclosure_rules = rules.get("disclosure")
-                    if not disclosure_rules or not (0 < disclosure_rules[0] <= 2) or sum(disclosure_rules[1:]) > 0:
-                        errors.append(f"{prefix}: research disclosure requires one top separator only: {disclosure_rules}")
-                    for name in ("applications", "automation", "questions", "questionGrid"):
-                        values = rules.get(name)
-                        if values is None or any(value > 0 for value in values):
-                            errors.append(f"{prefix}: unnecessary inner divider on {name}: {values}")
-                    question_cards = rules.get("questionCards", [])
-                    if len(question_cards) != 3 or any(any(edge > 0 for edge in card) for card in question_cards):
-                        errors.append(f"{prefix}: research question cards should not have boxed or table-cell borders: {question_cards}")
+                    if not expanded.get("present") or not expanded.get("bodyVisible") or expanded.get("overflow") or expanded.get("records", 0) < 4:
+                        errors.append(f"{prefix}: expanded engagement evidence must remain fully readable: {expanded}")
                     if "Mechanical Properties of Dual-Layer Electrospun Fiber Mats" in metrics.get("selectedOutputsText", ""):
                         errors.append(f"{prefix}: complete coauthor publication record belongs on Outputs, not homepage selected evidence")
             finally:

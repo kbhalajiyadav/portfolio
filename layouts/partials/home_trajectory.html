@@ -1,37 +1,7 @@
-{{ $p := site.Data.portfolio }}
-<div class="trajectory research-extension" id="trajectory" aria-labelledby="doctoral-direction-title">
-  <div class="section-head research-extension__head">
-    <p class="kicker">Doctoral research direction</p>
-    <h2 id="doctoral-direction-title">{{ $p.doctoral.title }}</h2>
-    <p>{{ $p.doctoral.text }}</p>
+<div class="research-home-followup" id="trajectory">
+  <p>Detailed experimental questions, interpretation limits, and possible applications are covered in the full research program.</p>
+  <div class="actions">
+    <a class="lnk" href="{{ "/research/#open-research-questions" | relURL }}">Explore the research questions <span class="arw" aria-hidden="true">→</span></a>
+    <a class="lnk" href="{{ "/research-statement/" | relURL }}">Read the research statement <span class="arw" aria-hidden="true">→</span></a>
   </div>
-  <p class="research-extension__statement-link"><a class="lnk" href="{{ "/research-statement/" | relURL }}">Read the research statement <span class="arw" aria-hidden="true">→</span></a></p>
-  <section class="questions" aria-labelledby="collaboration-questions-title">
-    <div class="questions__head">
-      <p class="kicker">Research and collaboration</p>
-      <h3 id="collaboration-questions-title">Open research questions</h3>
-    </div>
-    <p class="questions__context">Heating, cooling, and flow can change material behavior. Interpreting that change requires knowing its history and separating material response from measurement effects.</p>
-    <div class="questions__grid">
-      {{ range $p.collaboration_questions }}
-      <article><strong>{{ .title }}</strong><p>{{ .text }}</p></article>
-      {{ end }}
-    </div>
-  </section>
-  <details class="home-disclosure research-extension__details">
-    <summary>Explore measurement methods and application directions</summary>
-    <div class="home-disclosure__body">
-      <div class="trajectory-grid">
-        <article class="robotics-card">
-          <h3>Controlled histories and repeatable measurement</h3>
-          <p>{{ $p.doctoral.robotics }}</p>
-        </article>
-        <article class="application-card">
-          <h3>Potential application directions</h3>
-          <p>The model-system approach informs material and measurement questions; these are opportunities for investigation, not validated products.</p>
-          <ul>{{ range $p.applications }}<li>{{ . }}</li>{{ end }}</ul>
-        </article>
-      </div>
-    </div>
-  </details>
 </div>

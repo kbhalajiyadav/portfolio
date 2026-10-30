@@ -565,21 +565,8 @@ def main() -> int:
                             shell = layout.get("homepageShell")
                             if width >= 1900 and (shell is None or not 1450 <= shell <= 1580):
                                 record_errors.append(f"large-monitor content shell must be wide but editorially bounded: {shell}")
-                            workflow = layout.get("diagramReadability")
-                            if not workflow or not workflow.get("isResearchSignature") or len(workflow.get("stageGeometry", [])) != 5:
-                                record_errors.append("homepage 5-stage processing workflow is missing")
-                            elif width > 820:
-                                steps = workflow["stageGeometry"]
-                                if width >= 1181:
-                                    if max(step["top"] for step in steps) - min(step["top"] for step in steps) > 2:
-                                        record_errors.append("wide desktop five-stage sequence must read as one row")
-                                    if any(steps[i]["left"] >= steps[i+1]["left"] for i in range(4)):
-                                        record_errors.append("wide desktop stage order must read left-to-right")
-                                else:
-                                    if max(step["top"] for step in steps[:3]) - min(step["top"] for step in steps[:3]) > 2 or abs(steps[3]["top"] - steps[4]["top"]) > 2:
-                                        record_errors.append("intermediate desktop 5-stage sequence must use three plus two rows")
-                                    if not (steps[3]["left"] > steps[0]["left"] and steps[4]["right"] < steps[2]["right"]):
-                                        record_errors.append("intermediate desktop short row must be visually centered")
+                            if layout.get("diagramReadability") is not None:
+                                record_errors.append("homepage repeats the five-stage diagram already on the Research page")
                             output = layout["outputLayout"]
                             if output is None:
                                 record_errors.append("featured research package is missing its attributed figure or related records")
@@ -669,10 +656,24 @@ def main() -> int:
                                 header_surface.startswith("rgba(") and float(header_surface.rstrip(")").split(",")[-1]) < 1
                             ):
                                 record_errors.append(f"sticky header must be opaque to prevent text ghosting: {header_surface}")
-                        if page_name == "home" and width <= 820:
-                            gap = layout.get("homeResearchDiagramGap")
-                            if not gap or not 4 <= gap["gap"] <= 44:
-                                record_errors.append(f"homepage research introduction and numbered workflow are separated by excessive blank space: {gap}")
+                        if page_name == "home" and layout.get("homeResearchDiagramGap") is not None:
+                            record_errors.append("homepage duplicates the Research page's five-stage diagram")
+                        if page_name == "research":
+                            workflow = layout.get("diagramReadability")
+                            if not workflow or not workflow.get("isResearchSignature") or len(workflow.get("stageGeometry", [])) != 5:
+                                record_errors.append("Research page's five-stage processing sequence is missing")
+                            elif width > 820:
+                                steps = workflow["stageGeometry"]
+                                if width >= 1181:
+                                    if max(step["top"] for step in steps) - min(step["top"] for step in steps) > 2:
+                                        record_errors.append("wide desktop five-stage sequence must read as one row")
+                                    if any(steps[i]["left"] >= steps[i+1]["left"] for i in range(4)):
+                                        record_errors.append("wide desktop stage order must read left-to-right")
+                                else:
+                                    if max(step["top"] for step in steps[:3]) - min(step["top"] for step in steps[:3]) > 2 or abs(steps[3]["top"] - steps[4]["top"]) > 2:
+                                        record_errors.append("intermediate desktop five-stage sequence must use three plus two rows")
+                                    if not (steps[3]["left"] > steps[0]["left"] and steps[4]["right"] < steps[2]["right"]):
+                                        record_errors.append("intermediate desktop short row must be visually centered")
                         if page_name == "research" and layout.get("scholarlyInlineArrows"):
                             record_errors.append("scholarly prose has redundant directional arrows after inline links")
                         if page_name == "home" and width >= 1680:

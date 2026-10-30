@@ -36,7 +36,7 @@
   </div>
 </section>
 
-{{/* Keep the research introduction first, with opt-in analytics choices in normal flow. */}}
+{{/* The first scan path follows the introduction; consent stays unobtrusive and opt-in. */}}
 {{ partial "privacy_controls.html" . }}
 
 <section class="section highlights" id="highlights" aria-labelledby="highlights-heading">
@@ -80,7 +80,6 @@
     <h2>{{ $p.narrative.problem_title }}</h2>
     <p>{{ $p.narrative.problem }}</p>
   </div>
-  {{ partial "research_signature.html" . }}
   <div class="pillars">
     {{ range $p.research }}
     <article class="pillar pillar--{{ .motif }}">
@@ -96,16 +95,16 @@
 
 <section class="section" id="outputs">
   <div class="section-head">
-    <p class="kicker">Selected outputs</p>
-    <h2>Published adhesion work and open methods.</h2>
-    <p>The published first-author article, associated M.S. thesis, and citable software describe one study. Patent-pending imaging is documented separately below.</p>
+    <p class="kicker">Research case study</p>
+    <h2>What a peel trace can reveal.</h2>
+    <p>For wearable interfaces, a maximum peel-force value does not describe stability across a test. The published evidence below illustrates why additional trace-based criteria matter.</p>
   </div>
   {{ $primary := index $p.publications 0 }}
   <article class="research-package">
     <div class="package-lead">
-      <span class="overline">First-author research · 2026</span>
-      <h3>{{ $primary.title }}</h3>
-      <p>{{ $primary.authors }}</p><p class="venue">{{ $primary.venue }}</p>
+      <span class="overline">Published evidence · Adhesion measurement</span>
+      <h3>Comparing strength, stability, and deformation tolerance</h3>
+      <p>Adhesive selection was evaluated against several measurement criteria rather than one peak reading. The journal paper documents the analysis and its experimental scope.</p>
       <div class="actions">
         <a class="lnk" href="{{ $primary.detail | relURL }}">Article details <span class="arw" aria-hidden="true">→</span></a>
         <a class="lnk" href="{{ $primary.doi }}" target="_blank" rel="noopener">Article <span class="arw" aria-hidden="true">↗</span></a>
@@ -119,14 +118,14 @@
         {{ partial "research_figure.html" (dict "figure" $f "featured" true "data" $article.Params.url_dataset "code" $primary.code) }}
       {{ else }}{{ errorf "Primary publication has no research figures: %s" $primary.detail }}{{ end }}
     </div>
-    <div class="package-artifacts">
-      <article><span>Associated thesis</span><h4>Multi-Criteria Selection of Adhesives for Wearable Textiles</h4><p>VCU M.S. thesis · defended July 1, 2026 · degree completed August 2026</p><a class="lnk" href="{{ "/publication/masters-thesis/" | relURL }}">Thesis record <span class="arw" aria-hidden="true">→</span></a></article>
-      <article><span>Research software</span><h4>{{ $p.software.title }}</h4><p>{{ $p.software.text }}</p><div class="actions"><a class="lnk" href="{{ $p.software.detail | relURL }}">Software details <span class="arw" aria-hidden="true">→</span></a><a class="lnk" href="{{ $p.software.version_doi }}" target="_blank" rel="noopener">Software release <span class="arw" aria-hidden="true">↗</span></a></div></article>
+    <div class="package-artifacts" aria-label="Methods behind the case study">
+      <article><span>Experimental context</span><h4>Methods and thesis</h4><p>The degree record documents the study's experimental scope and thesis availability.</p><a class="lnk" href="{{ "/publication/masters-thesis/" | relURL }}">View thesis record <span class="arw" aria-hidden="true">→</span></a></article>
+      <article><span>Reproducible analysis</span><h4>Peel-trace workflow</h4><p>Versioned software provides a citable route from force–displacement measurements to trace metrics.</p><div class="actions"><a class="lnk" href="{{ $p.software.detail | relURL }}">View analysis method <span class="arw" aria-hidden="true">→</span></a><a class="lnk" href="{{ $p.software.version_doi }}" target="_blank" rel="noopener">Archived release <span class="arw" aria-hidden="true">↗</span></a></div></article>
     </div>
 
   </article>
   <article class="secondary-output">
-    <div><span class="overline">{{ $ip.status }} · {{ $ip.year }}</span><h3>{{ $ip.title }}</h3><p>{{ $ip.inventors }}</p><p class="venue">{{ $ip.organization }} · VCU Tech # {{ $ip.tech_id }}</p><p>{{ $ip.description }}</p></div>
+    <div><span class="overline">Separate work · {{ $ip.status }}</span><h3>{{ $ip.title }}</h3><p>Patent-pending quantitative imaging technology; see its dedicated record for the current scope and attribution.</p></div>
     <div class="actions"><a class="lnk" href="{{ "/project/quantitative-thermal-imaging/" | relURL }}">Intellectual property record <span class="arw" aria-hidden="true">→</span></a></div>
   </article>
   <div class="actions"><a class="lnk" href="{{ "/outputs/" | relURL }}">Browse all research outputs <span class="arw" aria-hidden="true">→</span></a></div>

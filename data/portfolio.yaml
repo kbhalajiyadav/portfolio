@@ -7,7 +7,7 @@ profile:
   eyebrow: Soft matter · Rheology · Quantitative imaging
   headline: Making material response measurable and interpretable.
   current_focus: How do heating, cooling, and shear reorganize cholesteric liquid-crystal order?
-  summary: I investigate how heating, cooling, and flow affect liquid-crystalline and other soft materials, using rheology, quantitative imaging, and mechanics to examine relationships among processing history, structure, and response.
+  summary: I use rheology, quantitative imaging, and mechanics to study liquid-crystalline and other responsive soft materials, with an emphasis on reliable measurements.
   status: Ph.D. student · Integrative Life Sciences · Virginia Commonwealth University
   location: Richmond, Virginia
   email: contact@bhalaji.com
@@ -256,10 +256,9 @@ collaboration_questions:
   text: How consistently can temperature-dependent optical responses be calibrated over repeated heating
     and cooling cycles, and what limits their use as quantitative thermal indicators?
 narrative:
-  problem_title: Why the same material can behave differently after processing.
-  problem: A material's response can depend on what happened before it was measured. The challenge
-    is to distinguish structural change from measurement effects and repeat the result under
-    defined conditions.
+  problem_title: Three approaches to measuring material response.
+  problem: Mechanical, optical, and structural methods provide different kinds of evidence. Combining
+    them helps reveal what a material does and what a measurement can establish.
   chain:
   - Stimulus
   - Structure

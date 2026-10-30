@@ -144,27 +144,14 @@ def main() -> int:
         errors.append("shared header must expose current standalone pages to assistive technology")
 
     trajectory = (LAYOUTS / "partials/home_trajectory.html").read_text(encoding="utf-8")
-    if ">Open research questions</h3>" not in trajectory:
-        errors.append("doctoral collaboration block must use the reader-facing 'Open research questions' heading")
-    if "Questions worth combining methods around" in trajectory:
-        errors.append("doctoral collaboration block must not restore process-oriented collaboration wording")
-
-    # Progressive disclosure must retain underlying doctoral and engagement records.
+    # The homepage should link to doctoral detail, not duplicate all research questions.
     home = (LAYOUTS / "landing/list.html").read_text(encoding="utf-8")
-    for html, label in ((trajectory, "doctoral"), (home, "engagement")):
-        if 'class="home-disclosure ' not in html or '<summary>Explore ' not in html:
-            errors.append(f"homepage {label} disclosure must retain native details/summary markup")
-        if 'class="home-disclosure__body"' not in html:
-            errors.append(f"homepage {label} disclosure must retain its evidence body")
-    if not all(marker in trajectory for marker in ('class="trajectory-grid"', 'class="questions__grid"', 'Open research questions')):
-        errors.append("homepage doctoral section must preserve visible questions and disclosed supporting evidence")
-    questions_pos = trajectory.find('<section class="questions"')
-    details_pos = trajectory.find('<details class="home-disclosure')
-    methods_pos = trajectory.find('class="trajectory-grid"')
-    if min(questions_pos, details_pos, methods_pos) < 0 or not (questions_pos < details_pos < methods_pos):
-        errors.append("doctoral questions must be visible before the closed methods/applications disclosure")
-    if not all(link in trajectory for link in ('href="{{ "/research-statement/" | relURL }}"', 'Explore measurement methods and application directions')):
-        errors.append("doctoral section must link to research statement while the disclosure labels only supplementary material")
+    if 'class="home-disclosure ' not in home or '<summary>Explore ' not in home or 'class="home-disclosure__body"' not in home:
+        errors.append("homepage engagement records must retain one accessible progressive disclosure")
+    if any(marker in trajectory for marker in ('class="questions__grid"', 'class="trajectory-grid"', '<details')):
+        errors.append("homepage doctoral bridge must not duplicate the Research page's questions and methods")
+    if not all(link in trajectory for link in ('href="{{ "/research-statement/" | relURL }}"', 'href="{{ "/research/#open-research-questions" | relURL }}"')):
+        errors.append("homepage must link to detailed research questions and research statement")
     about_template = (LAYOUTS / "about/single.html").read_text(encoding="utf-8")
     if 'href="{{ "/research-statement/" | relURL }}"' not in about_template:
         errors.append("About must link to the research statement")
@@ -194,9 +181,9 @@ def main() -> int:
             errors.append(f"CV/resume project-title destination missing: {target}")
     if 'title = href(item["details_url"], item["title"]) if item.get("details_url") else esc(item["title"])' not in cv_builder:
         errors.append("CV and resume project titles must link to their established evidence pages")
-    if not all(marker in trajectory for marker in ('Controlled histories and repeatable measurement', 'Potential application directions')):
-        errors.append("doctoral research evidence must distinguish measurement methods from potential applications")
     research_page = (ROOT / "content/research/index.md").read_text(encoding="utf-8")
+    if "## Application directions" not in research_page or "## Open research questions" not in research_page:
+        errors.append("detailed doctoral questions and application boundaries must remain on Research")
     research_statement = (ROOT / "content/research-statement/index.md").read_text(encoding="utf-8")
     if "model system" not in research_page or "model system" not in research_statement:
         errors.append("research content must explain the cholesteric model-system role")
@@ -206,10 +193,12 @@ def main() -> int:
         errors.append("Research applications must explicitly distinguish exploratory thermography from validated physiological inference")
     # Homepage selected-outputs heading must introduce the featured study without
     # becoming a four-line inventory of every possible output type.
-    if "<h2>Published adhesion work and open methods.</h2>" not in home:
-        errors.append("homepage detailed-evidence heading must remain concise and truthful")
-    if "The published first-author article, associated M.S. thesis, and citable software" not in home:
-        errors.append("homepage detailed-evidence introduction must explain the related work")
+    if "<h2>What a peel trace can reveal.</h2>" not in home or "research_figure.html" not in home:
+        errors.append("lower homepage section must remain a figure-led case study")
+    if "{{ $primary.title }}" in home or "<h4>{{ $p.software.title }}</h4>" in home:
+        errors.append("homepage case study must not duplicate highlight record titles")
+    if 'partial "research_signature.html"' in home:
+        errors.append("five-stage framework should live on Research rather than repeat on Home")
     if 'class="highlights__grid"' not in home or '/publication/mechanochromic-textiles/' not in home:
         errors.append("accepted first-author work must appear in the homepage scan path")
     if not (home.find('id="highlights"') < home.find('id="research"') < home.find('id="outputs"')):
