@@ -95,15 +95,13 @@
 <section class="section" id="experience">
   <div class="section-head"><p class="kicker">Experience and education</p><h2>Research rigor shaped by laboratory work and regulated manufacturing.</h2><p>Selected roles are shown here; the complete chronology, supporting case studies, education, and research training are available on the Experience page.</p></div>
   {{ $visibleExperience := slice }}{{ range $p.experience }}{{ if ne .show false }}{{ $visibleExperience = $visibleExperience | append . }}{{ end }}{{ end }}
-  <div class="home-experience--desktop">
-    {{ partial "home_experience_body.html" (dict "portfolio" $p "visibleExperience" $visibleExperience "experienceLimit" $experienceLimit "experienceOutcomeLimit" $experienceOutcomeLimit) }}
-    <div class="actions"><a class="lnk" href="{{ "/experience/" | relURL }}">View full experience and education <span class="arw" aria-hidden="true">→</span></a></div>
-  </div>
-  <div class="home-experience--mobile">
+  <div class="home-experience">
     <p class="home-experience__summary">Graduate research, teaching, chemical engineering and regulated-industry practice.</p>
-    <details class="home-disclosure home-disclosure--experience">
+    <details class="home-disclosure home-disclosure--experience" open data-responsive-experience>
       <summary>Explore selected roles, education and training</summary>
-      <div class="home-disclosure__body">{{ partial "home_experience_body.html" (dict "portfolio" $p "visibleExperience" $visibleExperience "experienceLimit" $experienceLimit "experienceOutcomeLimit" $experienceOutcomeLimit) }}</div>
+      <div class="home-disclosure__body">
+        {{ partial "home_experience_body.html" (dict "portfolio" $p "visibleExperience" $visibleExperience "experienceLimit" $experienceLimit "experienceOutcomeLimit" $experienceOutcomeLimit) }}
+      </div>
     </details>
     <div class="actions"><a class="lnk" href="{{ "/experience/" | relURL }}">View full experience and education <span class="arw" aria-hidden="true">→</span></a></div>
   </div>
