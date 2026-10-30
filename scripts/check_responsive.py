@@ -753,7 +753,7 @@ def main() -> int:
 
                         if page_name == "project":
                             reference = layout.get("softwareReference")
-                            if not reference or not reference["hasAlt"] or not reference["lazy"] or not reference["citation"] or reference["width"] != "3993" or reference["height"] != "1350" or "not a result from the published wearable-textile experiment" not in reference["caption"]:
+                            if not reference or not reference["hasAlt"] or not reference["lazy"] or not reference["citation"] or reference["width"] != "3993" or reference["height"] != "1350" or "not experimental data from the wearable-textile adhesion article" not in reference["caption"]:
                                 record_errors.append(f"Peel Trace reference figure is absent, uncredited, unoptimized or misleading: {reference}")
                         if page_name in {"home", "publication", "publication-fiber-mats"} and not layout["researchFigures"]:
                             record_errors.append("expected source-attributed research figures")
