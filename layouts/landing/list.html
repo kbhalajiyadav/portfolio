@@ -39,6 +39,15 @@
 {{/* The first scan path follows the introduction; consent stays unobtrusive and opt-in. */}}
 {{ partial "privacy_controls.html" . }}
 
+<section class="section doctoral-intro" id="research" aria-labelledby="doctoral-intro-heading">
+  <div class="section-head">
+    <p class="kicker">Current doctoral research</p>
+    <h2 id="doctoral-intro-heading">{{ $p.doctoral.title }}</h2>
+    <p>{{ $p.doctoral.text }}</p>
+  </div>
+  {{ partial "home_trajectory.html" . }}
+</section>
+
 <section class="section highlights" id="highlights" aria-labelledby="highlights-heading">
   <div class="section-head">
     <p class="kicker">Selected work</p>
@@ -72,25 +81,6 @@
     {{ end }}
   </div>
   <p class="highlights__more"><a class="lnk" href="{{ "/outputs/" | relURL }}">See all research outputs <span class="arw" aria-hidden="true">→</span></a></p>
-</section>
-
-<section class="section" id="research">
-  <div class="section-head">
-    <p class="kicker">Research program</p>
-    <h2>{{ $p.narrative.problem_title }}</h2>
-    <p>{{ $p.narrative.problem }}</p>
-  </div>
-  <div class="pillars">
-    {{ range $p.research }}
-    <article class="pillar pillar--{{ .motif }}">
-      <div class="motif" aria-hidden="true"><i></i><i></i><i></i></div>
-      <span class="card-number">{{ .number }}</span>
-      <h3>{{ .title }}</h3><p>{{ .text }}</p>
-      <a class="lnk" href="{{ .href | relURL }}">{{ .link_label }} <span class="arw" aria-hidden="true">→</span></a>
-    </article>
-    {{ end }}
-  </div>
-  {{ partial "home_trajectory.html" . }}
 </section>
 
 <section class="section" id="outputs">

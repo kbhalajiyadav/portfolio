@@ -59,27 +59,6 @@ PAGE_METRICS = r"""
   const secondary = document.querySelector('.hero .actions .lnk');
   const primaryStyle = primary ? getComputedStyle(primary) : null;
   const secondaryStyle = secondary ? getComputedStyle(secondary) : null;
-  const pillars = [...document.querySelectorAll('.pillar')].map((item) => {
-    const box = item.getBoundingClientRect();
-    const title = item.querySelector('h3')?.getBoundingClientRect();
-    const body = item.querySelector(':scope > p')?.getBoundingClientRect();
-    const link = item.querySelector(':scope > .lnk')?.getBoundingClientRect();
-    const motif = item.querySelector('.motif');
-    return {
-      top:box.top,
-      bottom:box.bottom,
-      height:box.height,
-      titleTop:title?.top ?? null,
-      titleBottom:title?.bottom ?? null,
-      bodyTop:body?.top ?? null,
-      bodyBottom:body?.bottom ?? null,
-      linkTop:link?.top ?? null,
-      linkBottom:link?.bottom ?? null,
-      titleBodyGap:title && body ? body.top - title.bottom : null,
-      bodyLinkGap:body && link ? link.top - body.bottom : null,
-      motifOpacity:motif ? parseFloat(getComputedStyle(motif).opacity) : null,
-    };
-  });
   const selectedOutputs = document.querySelector('#outputs');
   return {
     viewport:{width:innerWidth,height:innerHeight},
@@ -93,10 +72,10 @@ PAGE_METRICS = r"""
     primaryAction:rect('.hero .button--primary'),
     portrait:rect('.hero__visual'),
     identity:rect('.identity-note'),
-    portraitToHighlightsGap:(() => {
+    portraitToDoctoralGap:(() => {
       const identity=document.querySelector('.identity-note');
-      const highlights=document.querySelector('#highlights .section-head .kicker');
-      return identity && highlights ? highlights.getBoundingClientRect().top - identity.getBoundingClientRect().bottom : null;
+      const doctoral=document.querySelector('#research .section-head .kicker');
+      return identity && doctoral ? doctoral.getBoundingClientRect().top - identity.getBoundingClientRect().bottom : null;
     })(),
     status:rect('.status-line'),
     eyebrowLines:lineCount(eyebrow),
@@ -113,7 +92,13 @@ PAGE_METRICS = r"""
     primaryBackground:primaryStyle ? primaryStyle.backgroundColor : '',
     secondaryBackground:secondaryStyle ? secondaryStyle.backgroundColor : '',
     counterVisible:!!document.querySelector(".metrics"),
-    pillars,
+    doctoralHeading:document.querySelector('#research .section-head h2')?.textContent?.trim() || '',
+    genericPillars:document.querySelectorAll('#research .pillar').length,
+    selectedWorkGap:(() => {
+      const cards=document.querySelector('.highlights__grid');
+      const link=document.querySelector('.highlights__more');
+      return cards && link ? link.getBoundingClientRect().top - cards.getBoundingClientRect().bottom : null;
+    })(),
     researchPackageCount:selectedOutputs ? selectedOutputs.querySelectorAll('.research-package').length : 0,
     secondaryOutputCount:selectedOutputs ? selectedOutputs.querySelectorAll('.secondary-output').length : 0,
     selectedOutputsText:selectedOutputs ? (selectedOutputs.textContent || '').replace(/\s+/g,' ').trim() : '',
@@ -142,9 +127,9 @@ PAGE_METRICS = r"""
     })),
     researchFollowup:(() => {
       const block=document.querySelector('.research-home-followup');
-      const pillars=document.querySelector('#research .pillars');
+      const intro=document.querySelector('#research .section-head');
       const box=block?.getBoundingClientRect();
-      const last=pillars?.getBoundingClientRect();
+      const last=intro?.getBoundingClientRect();
       return {
         exists:!!block,
         linkDestinations:[...(block?.querySelectorAll('a[href]') || [])].map(a=>a.getAttribute('href')),
@@ -292,9 +277,9 @@ def main() -> int:
                             errors.append(f"{prefix}: headline block does not use the available mobile measure")
                         if copy and portrait and portrait["top"] < copy["bottom"] + 20:
                             errors.append(f"{prefix}: portrait is pulled into the hero copy")
-                        gap = metrics.get("portraitToHighlightsGap")
+                        gap = metrics.get("portraitToDoctoralGap")
                         if gap is None or not 34 <= gap <= 100:
-                            errors.append(f"{prefix}: mobile portrait-to-highlights transition has unstable blank space ({gap}px)")
+                            errors.append(f"{prefix}: mobile portrait-to-doctoral transition has unstable blank space ({gap}px)")
 
                     else:
                         line_limit = 5 if width <= 1100 else 4
@@ -339,34 +324,13 @@ def main() -> int:
                     if not transparent(metrics.get("secondaryBackground", "")):
                         errors.append(f"{prefix}: secondary CV action is competing with the primary action")
 
-                    pillars = metrics.get("pillars", [])
-                    if len(pillars) != 3:
-                        errors.append(f"{prefix}: expected exactly three research-program cards, found {len(pillars)}")
-                    else:
-                        for index, card in enumerate(pillars, start=1):
-                            gap = card.get("titleBodyGap")
-                            if gap is None or gap < 8 or gap > 42:
-                                errors.append(f"{prefix}: research card {index} title/body gap is unstable ({gap})")
-                            link_gap = card.get("bodyLinkGap")
-                            if link_gap is None or link_gap < 14 or link_gap > 88:
-                                errors.append(f"{prefix}: research card {index} body/action gap is excessive ({link_gap})")
-                        for row_index, row in enumerate(visual_rows(pillars), start=1):
-                            if len(row) < 2:
-                                continue
-                            top_spread = spread([item.get("top") for item in row])
-                            title_spread = spread([item.get("titleTop") for item in row])
-                            link_spread = spread([item.get("linkBottom") for item in row])
-                            if top_spread is None or top_spread > 3:
-                                errors.append(f"{prefix}: research-card row {row_index} tops lost alignment ({top_spread})")
-                            if title_spread is None or title_spread > 3:
-                                errors.append(f"{prefix}: research-card row {row_index} title tops lost alignment ({title_spread})")
-                            if not mobile and (link_spread is None or link_spread > 3):
-                                errors.append(f"{prefix}: research-card row {row_index} actions lost baseline alignment ({link_spread})")
-                        opacities = [item.get("motifOpacity") for item in pillars if item.get("motifOpacity") is not None]
-                        if len(opacities) != 3:
-                            errors.append(f"{prefix}: research motifs missing opacity metrics")
-                        elif max(opacities) > 0.5 or (spread(opacities) or 0) > 0.02:
-                            errors.append(f"{prefix}: research motifs are visually unbalanced: {opacities}")
+                    if metrics.get("genericPillars") != 0:
+                        errors.append(f"{prefix}: homepage must not display repeated generic research method cards")
+                    if "Liquid crystals as a model system" not in metrics.get("doctoralHeading", ""):
+                        errors.append(f"{prefix}: specific doctoral research heading is missing")
+                    work_gap=metrics.get("selectedWorkGap")
+                    if work_gap is None or not 20 <= work_gap <= 42:
+                        errors.append(f"{prefix}: all-outputs link should be clearly separated from the selected-work cards ({work_gap})")
 
                     if metrics.get("counterVisible"):
                         errors.append(f"{prefix}: marketing-style proof counter row has returned")
