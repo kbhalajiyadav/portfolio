@@ -169,6 +169,8 @@ def main() -> int:
     methods_short = (LAYOUTS / "shortcodes/method-schematic.html").read_text(encoding="utf-8")
     if '<ol class="research-signature__flow"' not in research_short or '<ol class="method-schematic__steps"' not in methods_short:
         errors.append("scientific diagrams must use accessible intrinsic-size text, not scaled SVG labels")
+    if research_short.count("<ol ") != 1 or methods_short.count("<ol ") != 1:
+        errors.append("responsive scientific sequences must not duplicate list content")
     if '<svg' in research_short or '<svg' in methods_short:
         errors.append("workflow diagrams must not shrink text inside SVG viewBox coordinates")
     if "Schematic; no quantitative data are implied." in research_short or "Schematic; no quantitative data are implied." in methods_short:
