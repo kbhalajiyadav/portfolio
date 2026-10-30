@@ -39,7 +39,7 @@ EXPECTED_TEXT = {
     "about/": [
         "About Bhalaji Yadav Kantepalle",
         "Research built around measurable response",
-        "Chemical engineering, regulated practice, and research metrology",
+        "From chemical engineering to doctoral research",
         "VCU Soft Functional Materials Lab",
         "Christina Tang, Ph.D.",
         "Research profiles and institutional links",
