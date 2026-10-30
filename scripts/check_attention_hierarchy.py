@@ -93,10 +93,10 @@ PAGE_METRICS = r"""
     primaryAction:rect('.hero .button--primary'),
     portrait:rect('.hero__visual'),
     identity:rect('.identity-note'),
-    portraitToResearchGap:(() => {
+    portraitToHighlightsGap:(() => {
       const identity=document.querySelector('.identity-note');
-      const research=document.querySelector('#highlights .section-head .kicker');
-      return identity && research ? research.getBoundingClientRect().top - identity.getBoundingClientRect().bottom : null;
+      const highlights=document.querySelector('#highlights .section-head .kicker');
+      return identity && highlights ? highlights.getBoundingClientRect().top - identity.getBoundingClientRect().bottom : null;
     })(),
     status:rect('.status-line'),
     eyebrowLines:lineCount(eyebrow),
@@ -299,7 +299,7 @@ def main() -> int:
                             errors.append(f"{prefix}: headline block does not use the available mobile measure")
                         if copy and portrait and portrait["top"] < copy["bottom"] + 20:
                             errors.append(f"{prefix}: portrait is pulled into the hero copy")
-                        gap = metrics.get("portraitToResearchGap")
+                        gap = metrics.get("portraitToHighlightsGap")
                         if gap is None or not 34 <= gap <= 100:
                             errors.append(f"{prefix}: mobile portrait-to-highlights transition has unstable blank space ({gap}px)")
 

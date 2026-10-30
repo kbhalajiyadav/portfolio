@@ -32,6 +32,8 @@ TYPOGRAPHY_PAGES = [
 ]
 
 RELATED_PAGES = [
+    "publication/mechanochromic-textiles/",
+    "project/optical-metrology/",
     "publication/adhesives-wearable/",
     "publication/masters-thesis/",
     "project/peel-trace-evaluation/",

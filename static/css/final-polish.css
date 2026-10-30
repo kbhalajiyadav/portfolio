@@ -145,5 +145,6 @@ a:hover .content-link__arrow--internal,a:focus-visible .content-link__arrow--int
   .highlight__type{min-height:0;margin-bottom:.4rem}
   .highlight>p:not(.highlight__type){margin:.45rem 0 0}
   #research.section{padding-top:2.5rem}
+  #research>.section-head{margin-bottom:.7rem}
   .hero__focus{font-size:.94rem}
 }
