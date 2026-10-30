@@ -81,17 +81,21 @@ if not (ROOT / 'data/current_affiliation.yaml').exists():
     errors.append('data/current_affiliation.yaml: canonical current lab/advisor context must remain present')
 
 landing_text = texts[ROOT / 'layouts/landing/list.html']
+experience_text = (ROOT / 'layouts/partials/home_experience_body.html').read_text(encoding='utf-8')
 for required in (
-    '<h3>Research training</h3>',
     '<h3 class="subhead">Applied innovation</h3>',
-    'range $p.professional_development',
     'range $p.applied_innovation',
     'Browse all research outputs',
     'Intellectual property record',
     'View full professional engagement',
+    'home-disclosure--experience',
+    'home_experience_body.html',
 ):
     if required not in landing_text:
         errors.append(f'layouts/landing/list.html: missing homepage invariant {required!r}')
+for required in ('<h3>Research training</h3>', 'range $p.professional_development', 'class="education-panel"', 'class="timeline"'):
+    if required not in experience_text:
+        errors.append(f'layouts/partials/home_experience_body.html: missing experience invariant {required!r}')
 
 for page_path, layout_path in (
     ('content/outputs/_index.md', 'layouts/outputs/list.html'),
