@@ -730,8 +730,8 @@ def main() -> int:
                                 if any(gap is None or not 8 <= gap <= 30 for gap in timeline["headingGaps"]) or min(timeline["headingLeading"]) < 1.19:
                                     record_errors.append(f"About chronology headings and paragraphs are crowded: {timeline['headingGaps']}")
                             pairs = layout.get("aboutIntroPairs", [])
-                            if len(pairs) < 5:
-                                record_errors.append(f"About editorial headings/introductions are missing: {pairs}")
+                            if len(pairs) < 3:
+                                record_errors.append(f"About biography/path/records editorial headings are missing: {pairs}")
                             for pair in pairs:
                                 if width >= 981:
                                     if pair["columnCount"] != 2 or abs(pair["proseTop"] - pair["titleTop"]) > 4:
@@ -740,11 +740,8 @@ def main() -> int:
                                         )
                                 elif pair["columnCount"] != 1 or not 0 <= pair["proseTop"] - pair["titleBottom"] <= 56:
                                     record_errors.append(f"About/{pair['id']} stacked heading/summary gap is unstable: {pair}")
-                            methods = layout.get("aboutMethodBorders")
-                            if not methods or len(methods.get("cards", [])) != 3:
-                                record_errors.append("About method columns are missing")
-                            elif any(value > 0 for edges in [methods["grid"], *methods["cards"]] for value in edges) or methods["gap"] < 20:
-                                record_errors.append(f"About methods regained table-cell borders or lost spacing: {methods}")
+                            if layout.get("aboutMethodBorders"):
+                                record_errors.append("About repeats the full methods grid already on the Research page")
                         if page_name == "outputs":
                             junction = layout.get("outputFilterRules")
                             if not junction or not (0 < junction["filterBottom"] <= 2) or junction["listTop"] > 0:
@@ -756,7 +753,7 @@ def main() -> int:
 
                         if page_name == "project":
                             reference = layout.get("softwareReference")
-                            if not reference or not reference["hasAlt"] or not reference["lazy"] or not reference["citation"] or reference["width"] != "3993" or reference["height"] != "1350" or "not a result from the published wearable-textile experiment" not in reference["caption"]:
+                            if not reference or not reference["hasAlt"] or not reference["lazy"] or not reference["citation"] or reference["width"] != "3993" or reference["height"] != "1350" or "not experimental data from the wearable-textile adhesion article" not in reference["caption"]:
                                 record_errors.append(f"Peel Trace reference figure is absent, uncredited, unoptimized or misleading: {reference}")
                         if page_name in {"home", "publication", "publication-fiber-mats"} and not layout["researchFigures"]:
                             record_errors.append("expected source-attributed research figures")

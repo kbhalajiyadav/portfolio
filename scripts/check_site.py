@@ -5,6 +5,7 @@ from __future__ import annotations
 from collections import Counter
 from html.parser import HTMLParser
 import json
+import re
 from pathlib import Path
 import sys
 from urllib.parse import unquote, urlparse
@@ -34,6 +35,8 @@ class PageParser(HTMLParser):
         self.links: list[str] = []
         self.anchor_records: list[dict[str, str]] = []
         self.images: list[dict[str, str | None]] = []
+        self.accessible_table_regions: list[dict[str, str | None]] = []
+        self.rendered_tables = 0
         self.h1_count = 0
         self.main_count = 0
         self.skip_target = False
@@ -65,6 +68,10 @@ class PageParser(HTMLParser):
             }
         elif self._anchor_depth:
             self._anchor_depth += 1
+        if tag == "div" and "table-scroll-region" in (data.get("class") or "").split():
+            self.accessible_table_regions.append(data)
+        if tag == "table":
+            self.rendered_tables += 1
         if tag == "img" and data.get("src"):
             self.images.append({
                 "src": data.get("src"),
@@ -234,6 +241,21 @@ def main() -> int:
         relative = html.relative_to(root)
         pages[html.resolve()] = parser
 
+        if relative == Path("publication/electrospun-fiber-mats/index.html"):
+            regions = parser.accessible_table_regions
+            if not parser.rendered_tables or not any(
+                region.get("role") == "region"
+                and region.get("tabindex") == "0"
+                and bool(region.get("aria-label"))
+                for region in regions
+            ):
+                excerpt = html.read_text(encoding="utf-8", errors="replace")
+                region_start = excerpt.find("table-scroll-region")
+                excerpt = excerpt[max(0, region_start - 180):region_start + 450] if region_start >= 0 else "no wrapper class found"
+                errors.append(
+                    "electrospun mechanical-properties table needs an accessible keyboard-scroll region "
+                    f"(rendered_tables={parser.rendered_tables}, regions={regions!r}, markup={excerpt!r})"
+                )
         if not parser.html_lang:
             errors.append(f"{relative}: missing html lang")
         if not parser.viewport:
@@ -248,9 +270,10 @@ def main() -> int:
             errors.append(f"{relative}: canonical URL is not absolute: {parser.canonical}")
         if not parser.robots:
             errors.append(f"{relative}: missing robots directive")
-        elif relative == Path("404.html") and "noindex" not in parser.robots:
-            errors.append("404.html: must be noindex")
-        elif relative != Path("404.html") and "noindex" in parser.robots:
+        elif relative == Path("404.html") or relative.parts[0] == "tags":
+            if "noindex" not in parser.robots:
+                errors.append(f"{relative}: low-value page must be noindex")
+        elif "noindex" in parser.robots:
             errors.append(f"{relative}: unexpectedly noindex")
         if not parser.manifest_href:
             errors.append(f"{relative}: missing web manifest discovery")

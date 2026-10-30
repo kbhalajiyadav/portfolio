@@ -112,12 +112,15 @@ The figures above show representative engineering stress–strain curves (Figure
 
 ### Table 1 — Mechanical properties
 
+{{< accessible-table label="Mechanical properties of electrospun TPU and nylon fiber mats; scroll horizontally for all columns" >}}
+
 | Sample | Young’s modulus (MPa) | Ultimate strength (MPa) | Elongation at break (%) |
 | :--- | ---: | ---: | ---: |
 | TPU (single layer) | 1.2 ± 0.2 | Not determined | >310 |
 | Nylon (single layer) | 202.6 ± 95.3 | 16 ± 10 | 24 ± 7 |
 | TPU–nylon (manually layered) | 90.4 ± 31.2 | 8 ± 4 | 27 ± 6 |
 | TPU–nylon (sequential electrospinning) | 73.1 ± 12.5 | 6 ± 1 | 30 ± 21 |
+{{< /accessible-table >}}
 
 *Published Table 1; TPU: n = 4; all other samples: n = 10. Data are reproduced without numerical changes. The published table uses “Nyon” for nylon; this apparent typographical error is corrected above.*
 

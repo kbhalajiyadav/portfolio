@@ -106,7 +106,7 @@ figures:
 
 ## Reading the results
 
-Figure 2A shows why a high peel force alone was not sufficient for adhesive selection: the E6000 trace also exhibited pronounced oscillations. Figure 4 compares stability, repeatability, deformation tolerance, and apparent fracture energy to inform a **use-specific** decision, rather than a universal ranking of adhesive performance.
+Read together, the traces and multi-criteria comparison support a **use-specific adhesive selection**, not a universal performance ranking. Stability, repeatability, and deformation tolerance inform the decision alongside peel strength.
 
 ## Printed-conductor evaluation and collaboration
 

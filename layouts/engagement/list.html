@@ -17,7 +17,7 @@
   </section>
 
   <section class="engagement-section" aria-labelledby="engagement-contributions-heading">
-    <div class="section-head"><p class="kicker">Contribution</p><h2 id="engagement-contributions-heading">Teaching, service, review, and applied innovation</h2></div>
+    <div class="section-head"><p class="kicker">Contribution</p><h2 id="engagement-contributions-heading">Teaching, service &amp; innovation</h2></div>
     <div class="engagement-grid">
       <div><h3 class="subhead">Teaching and research guidance</h3>{{ range $p.teaching }}{{ if ne .show false }}<article class="compact-record"><span>{{ .date }} · {{ .type }}</span><h4>{{ .title }}</h4><p>{{ .detail }}</p></article>{{ end }}{{ end }}</div>
       <div><h3 class="subhead">Service and review</h3>{{ range $p.service }}{{ if ne .show false }}<article class="compact-record"><span>{{ .date }}</span><h4>{{ .role }}</h4><p>{{ .organization }}</p><small>{{ .detail }}</small></article>{{ end }}{{ end }}</div>

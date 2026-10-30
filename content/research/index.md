@@ -21,26 +21,21 @@ For a focused account of my research background, doctoral questions, and experim
 
 My research asks how thermal and mechanical histories organize soft functional
 materials, which structural changes explain their responses, and what makes
-those measurements trustworthy. The work connects five stages:
+those measurements trustworthy. The framework connects five stages:
 
 {{< research-signature >}}
 
 ## Measure response
 
-Current work develops mechanics-consistent measurements for soft, stretchable,
-and textile-supported systems. The methods combine force–displacement analysis,
-deformation tracking, optical colorimetry, and computer vision instead of
-relying on a single maximum-force value or a visual assessment of color change.
+Earlier work developed mechanics-consistent measurements for soft, stretchable,
+and textile-supported systems, combining force–displacement analysis,
+deformation tracking, optical colorimetry, and computer vision. These methods
+go beyond a single maximum-force reading or a visual assessment of color change.
 
-Related work:
-
-- a [first-author article on multi-criteria adhesive selection](/publication/adhesives-wearable/) for wearable textiles;
-- the [associated M.S. thesis](/publication/masters-thesis/);
-- [versioned research software](/project/peel-trace-evaluation/) for protocol-defined peel-trace analysis;
-- a [first-author manuscript accepted in *ACS Applied Polymer Materials*](/publication/mechanochromic-textiles/) on substrate-enhanced mechanochromic sensitivity in responsive textiles (accepted October 27, 2026; publication details pending);
-- an [optical-metrology project](/project/optical-metrology/) documenting computer-vision measurement of mechanochromic textiles;
-- the [patent-pending Quantitative Thermal Imaging technology](/project/quantitative-thermal-imaging/) (VCU Tech # TAN-26-099); and
-- presentation records for [adhesion and soft wearable interfaces](/engagement/#adhesion-soft-wearable-interfaces) and [computer-vision metrology](/engagement/#computer-vision-mechanochromic-textiles).
+Examples include the [optical-metrology project](/project/optical-metrology/) and
+[accepted research on textile mechanochromism](/publication/mechanochromic-textiles/).
+The published adhesion article, associated thesis, and software are grouped under
+[Connected research outputs](#connected-research-outputs).
 
 ## Resolve structure under stimuli
 
@@ -104,7 +99,7 @@ was a demonstration concept, not a clinically evaluated device.
 
 ## Connected research outputs
 
-Two first-author research directions are represented here: the [accepted ACS manuscript on mechanochromic textile sensitivity](/publication/mechanochromic-textiles/) and the separately published adhesion study. The adhesion study connects three complementary outputs:
+Two first-author research directions are represented here: the [accepted ACS manuscript on mechanochromic textile sensitivity](/publication/mechanochromic-textiles/) and the separately published adhesion study. Related 2026 presentations are documented under [adhesion and soft wearable interfaces](/engagement/#adhesion-soft-wearable-interfaces) and [computer-vision metrology](/engagement/#computer-vision-mechanochromic-textiles). The adhesion study connects three complementary outputs:
 
 1. [Peer-reviewed article](/publication/adhesives-wearable/)
 2. [M.S. thesis](/publication/masters-thesis/)
@@ -116,7 +111,7 @@ of the analysis workflow.
 
 The separate [Quantitative Thermal Imaging page](/project/quantitative-thermal-imaging/)
 summarizes the patent-pending technology and its current Virginia Commonwealth
-University intellectual-property status.
+University intellectual-property status (VCU Tech # TAN-26-099).
 
 ## Open research questions
 

@@ -39,7 +39,7 @@ EXPECTED_TEXT = {
     "about/": [
         "About Bhalaji Yadav Kantepalle",
         "Research built around measurable response",
-        "Chemical engineering, regulated practice, and research metrology",
+        "From chemical engineering to doctoral research",
         "VCU Soft Functional Materials Lab",
         "Christina Tang, Ph.D.",
         "Research profiles and institutional links",
@@ -77,7 +77,7 @@ EXPECTED_TEXT = {
         "Service and review",
     ],
     "contact/": [
-        "Research collaboration and methods exchange",
+        "Collaboration and methods exchange",
         "contact@bhalaji.com",
         "VCU Soft Functional Materials Lab",
     ],
@@ -342,6 +342,18 @@ def validate_release(base: str, nonce: str) -> list[str]:
 
     # Browser requests typically use the plain URL, not our cache-busted probe.
     # Verify the root icon both ways to catch a stale CDN 404 that a query might mask.
+    touch_url = urljoin(base, "apple-touch-icon.png")
+    try:
+        with urlopen(Request(touch_url, headers={"User-Agent": "Mozilla/5.0"}), timeout=25) as response:
+            if response.status != 200:
+                errors.append(f"{touch_url}: direct browser request returned HTTP {response.status}")
+            else:
+                png = response.read()
+                if len(png) < 24 or png[:8] != bytes.fromhex("89504e470d0a1a0a") or struct.unpack(">II", png[16:24]) != (180, 180):
+                    errors.append(f"{touch_url}: direct browser request returned an invalid 180px icon")
+    except (URLError, HTTPError, TimeoutError, OSError) as exc:
+        errors.append(f"{touch_url}: direct browser request failed: {exc}")
+
     direct_icon_url = urljoin(base, "favicon.ico")
     try:
         with urlopen(Request(direct_icon_url, headers={"User-Agent": "Mozilla/5.0"}), timeout=25) as response:

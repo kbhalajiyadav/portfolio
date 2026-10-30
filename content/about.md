@@ -5,14 +5,14 @@ type: about
 layout: single
 url: /about/
 kicker: About
-summary: Research biography and current scientific focus spanning responsive materials, quantitative metrology, and structure under processing.
-description: Research biography, scientific focus, professional path, methods, and research profiles for Bhalaji Yadav Kantepalle.
+summary: A career path from chemical engineering and regulated manufacturing to doctoral research in soft matter.
+description: Professional biography, educational path, research background, and scholarly profiles of Bhalaji Yadav Kantepalle.
 lastmod: 2026-10-29
 bio:
   - >-
-    My work sits at the intersection of soft-matter science, measurement development, and reproducible experimentation. A chemical-engineering and regulated-manufacturing background now informs doctoral research on stimuli-responsive soft and liquid-crystalline materials at Virginia Commonwealth University.
+    I studied chemical engineering at Amrita Vishwa Vidyapeetham before working in regulated manufacturing and technical project management. That experience shaped my approach to documenting processes, qualifying changes, and evaluating evidence.
   - >-
-    I use rheology, quantitative imaging, and mechanics to investigate how processing histories affect material structure and response. Where suitable, structure-sensitive scattering can help distinguish interpretations that optical or mechanical signals alone cannot resolve. I focus on methods that remain interpretable across experiments and processing conditions.
+    I later completed an M.S. in Chemical and Life Science Engineering at Virginia Commonwealth University, where I studied soft-interface adhesion and optical metrology. I now pursue a Ph.D. in Integrative Life Sciences, using responsive materials to investigate structure and measurement under controlled conditions.
 research_identity:
   title: Research question
   text: >-
@@ -24,15 +24,15 @@ professional_path:
   - period: 2022–2024
     title: Regulated manufacturing and technical project work
     text: >-
-      Joined Kreative Organics Pvt. Ltd. through a technical project management internship with Deep Thought Edu Tech Ventures, then became Technical Project Manager. Work ranged from chemical-data normalization and automated decision support to SAP Business One requalification, validation evidence, and regulated process improvement. Early-career mentors [Ravi Seelamsetty](https://in.linkedin.com/in/raviseelamsetty) and [Tarun Ayitam](https://in.linkedin.com/in/tarunsciensation) helped shape that transition.
+      Began with a technical project management internship through Deep Thought Edu Tech Ventures at Kreative Organics Pvt. Ltd., then became Technical Project Manager. The roles involved chemical-data automation, SAP Business One requalification, validation documentation, and regulated process improvement.
   - period: 2024–2026
     title: M.S. research in quantitative metrology
     text: >-
-      Conducted M.S. research in the VCU Soft Functional Materials Lab with advisor Christina Tang, Ph.D., on soft-interface adhesion and quantitative optical metrology. The work produced a [first-author adhesion article](/publication/adhesives-wearable/), a defended [M.S. thesis](https://scholarscompass.vcu.edu/etd/8456/) (VCU repository record), [citable peel-trace software](/project/peel-trace-evaluation/), and computer-vision metrology presented in 2026. A separate [first-author paper on mechanochromic textile sensitivity](/publication/mechanochromic-textiles/) was accepted by *ACS Applied Polymer Materials* in October 2026.
+      Studied soft-interface adhesion and quantitative optical metrology in Christina Tang's VCU Soft Functional Materials Lab. Outputs include a [first-author adhesion paper](/publication/adhesives-wearable/), [M.S. thesis](https://scholarscompass.vcu.edu/etd/8456/), [research software](/project/peel-trace-evaluation/), and a separate [accepted ACS manuscript](/publication/mechanochromic-textiles/).
   - period: 2026–present
     title: Doctoral research in structure under processing
     text: >-
-      Using small-molecule cholesteric liquid-crystal mixtures as a model system to study how heating, cooling, and shear change structural order and measurable response. The research direction combines rheology and quantitative optical methods, with structure-sensitive scattering where it can distinguish competing interpretations.
+      Pursuing doctoral research on the structure and response of liquid-crystalline soft materials under controlled thermal and mechanical processing. [Research program](/research/) and [research statement](/research-statement/) provide the scientific questions and methods.
 methods:
   - title: Measurement development
     text: Force–displacement analysis, deformation tracking, colorimetry, and computer vision for soft and textile-supported systems.

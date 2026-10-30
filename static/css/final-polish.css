@@ -160,7 +160,7 @@ a:hover .content-link__arrow--internal,a:focus-visible .content-link__arrow--int
 
 /* Current doctoral direction precedes evidence without repeating the methods grid. */
 @media(min-width:981px){
-  .hero{align-items:end;padding-block:clamp(2.25rem,3.4vw,3rem) clamp(1.25rem,2.2vw,2rem)}
+  .hero{align-items:center;padding-block:clamp(2.25rem,3.4vw,3rem) clamp(1.25rem,2.2vw,2rem)}
 }
 #research.doctoral-intro{padding-block:clamp(2rem,3vw,2.65rem) clamp(2.25rem,3.5vw,3rem);border-bottom:0}
 .doctoral-intro>.section-head{margin-bottom:0}
@@ -224,4 +224,12 @@ a:hover .content-link__arrow--internal,a:focus-visible .content-link__arrow--int
   .privacy-banner__copy strong{margin-right:.35rem}
   .privacy-banner__actions{width:auto;justify-content:flex-start;gap:.5rem}
   .privacy-banner__actions .button{flex:0 1 auto;min-width:108px;min-height:44px;padding:.4rem .6rem}
+}
+
+/* Scrollable scientific data remains keyboard reachable at phone widths. */
+.table-scroll-region{max-width:100%;overflow-x:auto;overscroll-behavior-inline:contain;scrollbar-width:auto;margin:1.2rem 0 1.4rem}
+.table-scroll-region:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
+.table-scroll-region table{min-width:600px;margin:0}
+@media(max-width:680px){
+  .article-content .lnk,.article-content a:not(.research-figure__media):not(.research-figure__open){min-height:24px}
 }

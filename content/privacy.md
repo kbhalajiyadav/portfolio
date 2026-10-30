@@ -1,11 +1,11 @@
 ---
 title: "Privacy and analytics notice"
 date: 2026-07-30
-lastmod: 2026-07-30
+lastmod: 2026-10-30
 summary: "How this portfolio handles technical data, Microsoft Clarity analytics, consent choices, and privacy inquiries."
 ---
 
-Effective and last reviewed: July 30, 2026.
+Effective July 30, 2026. Last reviewed October 30, 2026.
 
 ## Scope
 
@@ -47,7 +47,7 @@ Microsoft publishes additional details about
 [Clarity data collection](https://learn.microsoft.com/en-us/clarity/setup-and-installation/clarity-data),
 [Clarity cookies](https://learn.microsoft.com/en-us/clarity/setup-and-installation/clarity-cookies),
 and [data retention](https://learn.microsoft.com/en-us/clarity/setup-and-installation/data-retention).
-At the date of this notice, Microsoft states that ordinary playback data is
+As of this review, Microsoft states that ordinary playback data is
 retained for 30 days and click, heatmap, or labeled-session data may be retained
 for up to 9 months.
 

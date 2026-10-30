@@ -99,6 +99,10 @@ def main() -> int:
     for meta in ("citation_title", "citation_author", "citation_publication_date", "citation_journal_title", "citation_volume", "citation_issue", "citation_dissertation_institution", "citation_doi"):
         if f'name="{meta}"' not in seo_head:
             errors.append(f"publication head missing Scholar citation tag {meta}")
+    if 'eq .Kind "taxonomy"' not in seo_head or 'eq .Kind "term"' not in seo_head or '$isTagArchive' not in seo_head:
+        errors.append("thin tag archives must be noindex while retaining their browse links")
+    if '"/publication/masters-thesis/"' not in seo_head or '(M.S. thesis)' not in seo_head:
+        errors.append("thesis browser title must distinguish the degree record from the article")
     if 'name="citation_pdf_url"' in seo_head:
         errors.append("do not advertise an unverified publication PDF as a hosted full-text asset")
 
@@ -221,8 +225,8 @@ def main() -> int:
             errors.append(f"About template lost structural marker {marker!r}")
     if 'about-portrait__caption' in about_layout:
         errors.append("About portrait must not repeat name, role, and location already present in the page hierarchy")
-    if 'about-program-grid' in about_layout:
-        errors.append("About must not duplicate the homepage research-program card grid")
+    if 'about-program-grid' in about_layout or 'class="about-method-grid"' in about_layout or 'id="research-identity"' in about_layout:
+        errors.append("About should focus on biography/path and link out to detailed research methods")
     about_content = (ROOT / "content/about.md").read_text(encoding="utf-8")
     if "bio:\n  - >-" not in about_content:
         errors.append("content/about.md: biography entries must remain explicit YAML block scalars")
