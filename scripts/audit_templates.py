@@ -206,12 +206,14 @@ def main() -> int:
         errors.append("Research applications must explicitly distinguish exploratory thermography from validated physiological inference")
     # Homepage selected-outputs heading must introduce the featured study without
     # becoming a four-line inventory of every possible output type.
-    if "<h2>First-author research and open methods.</h2>" not in home:
-        errors.append("homepage selected-outputs heading must remain concise")
-    if "A newly accepted textile mechanochromism study joins the published adhesion work" not in home:
-        errors.append("homepage selected-outputs introduction must distinguish accepted and published work")
-    if 'class="accepted-feature"' not in home or '/publication/mechanochromic-textiles/' not in home:
-        errors.append("newly accepted first-author article must have a canonical homepage link")
+    if "<h2>Published adhesion work and open methods.</h2>" not in home:
+        errors.append("homepage detailed-evidence heading must remain concise and truthful")
+    if "The published first-author article, associated M.S. thesis, and citable software" not in home:
+        errors.append("homepage detailed-evidence introduction must explain the related work")
+    if 'class="highlights__grid"' not in home or '/publication/mechanochromic-textiles/' not in home:
+        errors.append("accepted first-author work must appear in the homepage scan path")
+    if not (home.find('id="highlights"') < home.find('id="research"') < home.find('id="outputs"')):
+        errors.append("homepage must place concise output highlights before deep research content")
 
     if not all(marker in home for marker in ('class="series-grid"', 'class="engagement-grid"', 'View full professional engagement')):
         errors.append("homepage engagement disclosure must preserve records and the full-engagement link")

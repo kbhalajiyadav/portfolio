@@ -37,7 +37,8 @@ Related work:
 - a [first-author article on multi-criteria adhesive selection](/publication/adhesives-wearable/) for wearable textiles;
 - the [associated M.S. thesis](/publication/masters-thesis/);
 - [versioned research software](/project/peel-trace-evaluation/) for protocol-defined peel-trace analysis;
-- an [optical-metrology project](/project/optical-metrology/) for computer-vision measurement of mechanochromic textiles;
+- a [first-author manuscript accepted in *ACS Applied Polymer Materials*](/publication/mechanochromic-textiles/) on substrate-enhanced mechanochromic sensitivity in responsive textiles (accepted October 27, 2026; publication details pending);
+- an [optical-metrology project](/project/optical-metrology/) documenting computer-vision measurement of mechanochromic textiles;
 - the [patent-pending Quantitative Thermal Imaging technology](/project/quantitative-thermal-imaging/) (VCU Tech # TAN-26-099); and
 - presentation records for [adhesion and soft wearable interfaces](/engagement/#adhesion-soft-wearable-interfaces) and [computer-vision metrology](/engagement/#computer-vision-mechanochromic-textiles).
 
@@ -103,7 +104,7 @@ was a demonstration concept, not a clinically evaluated device.
 
 ## Connected research outputs
 
-The first-author adhesion work connects three complementary outputs:
+Two first-author research directions are represented here: the [accepted ACS manuscript on mechanochromic textile sensitivity](/publication/mechanochromic-textiles/) and the separately published adhesion study. The adhesion study connects three complementary outputs:
 
 1. [Peer-reviewed article](/publication/adhesives-wearable/)
 2. [M.S. thesis](/publication/masters-thesis/)

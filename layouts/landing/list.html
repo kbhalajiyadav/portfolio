@@ -4,6 +4,8 @@
 {{ $ip := index $cv.intellectual_property 0 }}
 {{ $publicationSync := site.Data.publication_sync }}
 {{ $acceptedPage := site.GetPage "/publication/mechanochromic-textiles/" }}
+{{ $primaryPage := site.GetPage "/publication/adhesives-wearable/" }}
+{{ $softwarePage := site.GetPage "/project/peel-trace-evaluation/" }}
 {{ $controls := site.Data.site_controls }}
 {{ $experienceLimit := $controls.homepage.limits.experience_records | default 3 }}
 {{ $experienceOutcomeLimit := $controls.homepage.limits.experience_outcomes | default 1 }}
@@ -20,10 +22,12 @@
     <p class="eyebrow">{{ $p.profile.eyebrow }}</p>
     <h1>{{ $p.profile.headline }}</h1>
     <p class="lede">{{ $p.profile.summary }}</p>
+    <p class="hero__focus"><strong>Current question</strong> {{ $p.profile.current_focus }} <a href="{{ "/research/#open-research-questions" | relURL }}">Research questions <span aria-hidden="true">→</span></a></p>
     <div class="actions">
       <a class="button button--primary" href="{{ "/research/" | relURL }}">Explore the research</a>
-      <a class="lnk" href="{{ $cvHref }}" target="_blank" rel="noopener">Open the CV <span class="arw" aria-hidden="true">↗</span></a>
+      <a class="lnk" href="{{ "/contact/" | relURL }}">Get in touch <span class="arw" aria-hidden="true">→</span></a>
     </div>
+    <p class="hero__cv">Academic record: <a href="{{ $cvHref }}" target="_blank" rel="noopener">Open the CV <span aria-hidden="true">↗</span></a></p>
     <p class="status-line"><span aria-hidden="true"></span>{{ $p.profile.status }}</p>
   </div>
   <div class="hero__visual">
@@ -34,6 +38,41 @@
 
 {{/* Keep the research introduction first, with opt-in analytics choices in normal flow. */}}
 {{ partial "privacy_controls.html" . }}
+
+<section class="section highlights" id="highlights" aria-labelledby="highlights-heading">
+  <div class="section-head">
+    <p class="kicker">Selected work</p>
+    <h2 id="highlights-heading">Recent research, at a glance.</h2>
+    <p>Two first-author studies at different publication stages, alongside openly released research software.</p>
+  </div>
+  <div class="highlights__grid">
+    {{ with $acceptedPage }}
+    <article class="highlight">
+      <p class="highlight__type">Accepted · ACS Applied Polymer Materials · 2026</p>
+      <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+      <p>{{ .Params.summary }}</p>
+      <a class="lnk" href="{{ .RelPermalink }}">Accepted manuscript record <span class="arw" aria-hidden="true">→</span></a>
+    </article>
+    {{ end }}
+    {{ with $primaryPage }}
+    <article class="highlight">
+      <p class="highlight__type">Published · Polymers · 2026</p>
+      <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+      <p>{{ .Params.summary }}</p>
+      <a class="lnk" href="{{ .RelPermalink }}">Published paper and figures <span class="arw" aria-hidden="true">→</span></a>
+    </article>
+    {{ end }}
+    {{ with $softwarePage }}
+    <article class="highlight">
+      <p class="highlight__type">Citable research software · Zenodo</p>
+      <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+      <p>{{ .Params.summary }}</p>
+      <a class="lnk" href="{{ .RelPermalink }}">Software and release DOI <span class="arw" aria-hidden="true">→</span></a>
+    </article>
+    {{ end }}
+  </div>
+  <p class="highlights__more"><a class="lnk" href="{{ "/outputs/" | relURL }}">See all research outputs <span class="arw" aria-hidden="true">→</span></a></p>
+</section>
 
 <section class="section" id="research">
   <div class="section-head">
@@ -58,21 +97,9 @@
 <section class="section" id="outputs">
   <div class="section-head">
     <p class="kicker">Selected outputs</p>
-    <h2>First-author research and open methods.</h2>
-    <p>A newly accepted textile mechanochromism study joins the published adhesion work, associated thesis, and citable research software.</p>
+    <h2>Published adhesion work and open methods.</h2>
+    <p>The published first-author article, associated M.S. thesis, and citable software describe one study. Patent-pending imaging is documented separately below.</p>
   </div>
-  {{ with $acceptedPage }}
-  <article class="accepted-feature">
-    <p class="overline">{{ if eq .Params.publication_status "accepted" }}New · Accepted for publication · October 2026{{ else }}New first-author article{{ end }}</p>
-    <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
-    <p class="accepted-feature__venue">{{ .Params.publication | markdownify }}</p>
-    <p>{{ .Params.summary }}</p>
-    <div class="actions">
-      <a class="lnk" href="{{ .RelPermalink }}">About this study <span class="arw" aria-hidden="true">→</span></a>
-      {{ with .Params.doi }}<a class="lnk" href="https://doi.org/{{ . }}" target="_blank" rel="noopener">Published article <span class="arw" aria-hidden="true">↗</span></a>{{ end }}
-    </div>
-  </article>
-  {{ end }}
   {{ $primary := index $p.publications 0 }}
   <article class="research-package">
     <div class="package-lead">

@@ -45,8 +45,12 @@ Smart Textiles: A Computer Vision Approach”** at the VCU Engineering Graduate
 Research and Postdoc Showcase and the 29th VCU Graduate Student Research
 Symposium.
 
+Related first-author research on the influence of textile substrates on
+mechanochromic sensitivity was [accepted for publication in *ACS Applied Polymer Materials*](/publication/mechanochromic-textiles/) on October 27, 2026.
+
 - [Research overview](/research/#measure-response)
 - [Presentation record](/engagement/)
+- [Accepted journal manuscript](/publication/mechanochromic-textiles/)
 
-These presentations are the current outputs for this project; no peer-reviewed
-article or released dataset is associated with it at present.
+The presentations document the optical-metrology workflow described here.
+No public dataset or standalone code release is linked to this project.

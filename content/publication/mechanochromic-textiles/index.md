@@ -37,4 +37,8 @@ tags:
 
 This study examines how a supporting textile substrate influences the sensitivity of color response to mechanical stimuli. It connects the textile system to the broader problem of quantifying the response of soft, stimulus-responsive materials.
 
-The manuscript has been accepted for publication. A publisher link and final citation will be provided when the article appears online.
+The manuscript was accepted for publication on October 27, 2026. The final publisher DOI and bibliographic details will be added when available.
+
+## Related work
+
+The [optical metrology project](/project/optical-metrology/) describes related computer-vision approaches to quantifying deformation and color response in textiles, including 2026 research presentations. The [research program](/research/#measure-response) places these measurements alongside mechanics-based soft-material characterization. This manuscript is distinct from the [published adhesive-selection study](/publication/adhesives-wearable/), which addresses peel response and stability.

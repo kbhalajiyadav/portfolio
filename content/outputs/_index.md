@@ -5,7 +5,7 @@ description: "Research outputs by Bhalaji Yadav Kantepalle, including publicatio
 type: outputs
 layout: list
 url: /outputs/
-lastmod: 2026-10-10
+lastmod: 2026-10-30
 ---
 
 Newest first. Filters narrow the list by output type without changing the underlying chronology.

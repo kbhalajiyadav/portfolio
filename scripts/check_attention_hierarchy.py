@@ -95,7 +95,7 @@ PAGE_METRICS = r"""
     identity:rect('.identity-note'),
     portraitToResearchGap:(() => {
       const identity=document.querySelector('.identity-note');
-      const research=document.querySelector('#research .section-head .kicker');
+      const research=document.querySelector('#highlights .section-head .kicker');
       return identity && research ? research.getBoundingClientRect().top - identity.getBoundingClientRect().bottom : null;
     })(),
     status:rect('.status-line'),
@@ -105,6 +105,11 @@ PAGE_METRICS = r"""
     ledeFontSize:ledeStyle ? parseFloat(ledeStyle.fontSize) || 0 : 0,
     ledeLineHeight:ledeStyle ? parseFloat(ledeStyle.lineHeight) || 0 : 0,
     heroActionCount:heroActions.length,
+    currentFocusVisible:!!document.querySelector('.hero__focus a[href="/research/#open-research-questions"]'),
+    contactActionVisible:!!document.querySelector('.hero .actions a[href="/contact/"]'),
+    cvVisible:!!document.querySelector('.hero__cv a[href*="cv.pdf"]'),
+    highlightCount:document.querySelectorAll('.highlights__grid > .highlight').length,
+    highlightDestinations:[...document.querySelectorAll('.highlights__grid .highlight h3 a')].map(a=>a.getAttribute('href')),
     primaryBackground:primaryStyle ? primaryStyle.backgroundColor : '',
     secondaryBackground:secondaryStyle ? secondaryStyle.backgroundColor : '',
     counterVisible:!!document.querySelector(".metrics"),
@@ -296,7 +301,7 @@ def main() -> int:
                             errors.append(f"{prefix}: portrait is pulled into the hero copy")
                         gap = metrics.get("portraitToResearchGap")
                         if gap is None or not 34 <= gap <= 100:
-                            errors.append(f"{prefix}: mobile portrait-to-research transition has unstable blank space ({gap}px)")
+                            errors.append(f"{prefix}: mobile portrait-to-highlights transition has unstable blank space ({gap}px)")
 
                     else:
                         line_limit = 5 if width <= 1100 else 4
@@ -324,6 +329,16 @@ def main() -> int:
                         errors.append(f"{prefix}: lede size outside readable range: {metrics.get('ledeFontSize')}px")
                     if metrics.get("ledeFontSize", 0) and metrics.get("ledeLineHeight", 0) < metrics["ledeFontSize"] * 1.45:
                         errors.append(f"{prefix}: lede line height is too tight")
+                    if not (metrics.get("currentFocusVisible") and metrics.get("contactActionVisible") and metrics.get("cvVisible")):
+                        errors.append(f"{prefix}: hero research focus, contact and CV pathways are incomplete")
+                    if metrics.get("highlightCount") != 3:
+                        errors.append(f"{prefix}: homepage must present three concise highlighted outputs")
+                    if set(metrics.get("highlightDestinations") or []) != {
+                        "/publication/mechanochromic-textiles/",
+                        "/publication/adhesives-wearable/",
+                        "/project/peel-trace-evaluation/",
+                    }:
+                        errors.append(f"{prefix}: highlighted outputs must resolve to three distinct canonical records")
                     if metrics.get("heroActionCount") != 2:
                         errors.append(f"{prefix}: hero must expose exactly one primary and one secondary action")
                     if transparent(metrics.get("primaryBackground", "")):
