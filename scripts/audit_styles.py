@@ -162,13 +162,20 @@ def main() -> int:
     # A numbered scientific workflow needs no surrounding or per-row rules.
     for selector, declaration, css in (
         (".research-signature", "border:0", POLISH),
-        (".research-signature__mobile", "border:0", POLISH),
-        (".research-signature__mobile li", "border:0", POLISH),
-        (".method-schematic__mobile", "border:0", REF),
-        (".method-schematic__mobile li", "border:0", REF),
+        (".research-signature__flow li", "border:0", POLISH),
+        (".research-signature__flow .research-signature__index", "border:0", POLISH),
+        (".method-schematic__steps li", "border:0", REF),
+        (".method-schematic__steps .method-schematic__number", "border:0", REF),
     ):
         if not rule_has(css, selector, declaration):
             errors.append(f"scientific process diagram has redundant framing: {selector} {declaration}")
+
+    for selector, declaration in (
+        (".hero", "padding-bottom:1.25rem"),
+        ("#research.section", "padding-top:2rem"),
+    ):
+        if not rule_has(POLISH, selector, declaration):
+            errors.append(f"mobile homepage handoff spacing changed: {selector} {declaration}")
 
     # Native homepage disclosures must stay legible, keyboard-focusable, and unboxed.
     for selector, declaration in (
@@ -277,8 +284,7 @@ def main() -> int:
         ".series[id]{scroll-margin-top:calc(var(--header-h) + 38px)}",
         ".series:target{border-left:2px solid var(--teal);",
         "@media(max-width:820px)",
-        ".research-signature__desktop",
-        ".research-signature__mobile",
+        ".research-signature__flow",
     ):
         if compact(rule) not in polish_compact:
             errors.append(f"final governed visual invariant missing {rule!r}")
