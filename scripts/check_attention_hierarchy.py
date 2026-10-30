@@ -93,6 +93,11 @@ PAGE_METRICS = r"""
     primaryAction:rect('.hero .button--primary'),
     portrait:rect('.hero__visual'),
     identity:rect('.identity-note'),
+    portraitToResearchGap:(() => {
+      const identity=document.querySelector('.identity-note');
+      const research=document.querySelector('#research .section-head .kicker');
+      return identity && research ? research.getBoundingClientRect().top - identity.getBoundingClientRect().bottom : null;
+    })(),
     status:rect('.status-line'),
     eyebrowLines:lineCount(eyebrow),
     headlineLines:lineCount(headline),
@@ -289,6 +294,10 @@ def main() -> int:
                             errors.append(f"{prefix}: headline block does not use the available mobile measure")
                         if copy and portrait and portrait["top"] < copy["bottom"] + 20:
                             errors.append(f"{prefix}: portrait is pulled into the hero copy")
+                        gap = metrics.get("portraitToResearchGap")
+                        if gap is None or not 34 <= gap <= 100:
+                            errors.append(f"{prefix}: mobile portrait-to-research transition has unstable blank space ({gap}px)")
+
                     else:
                         line_limit = 5 if width <= 1100 else 4
                         if not metrics.get("headlineLines") or metrics["headlineLines"] > line_limit:
