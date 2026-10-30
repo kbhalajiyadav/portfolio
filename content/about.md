@@ -28,7 +28,7 @@ professional_path:
   - period: 2024–2026
     title: M.S. research in quantitative metrology
     text: >-
-      Studied soft-interface adhesion and quantitative optical metrology in Christina Tang's VCU Soft Functional Materials Lab. Outputs include a [first-author adhesion paper](/publication/adhesives-wearable/), [M.S. thesis](/publication/masters-thesis/), [research software](/project/peel-trace-evaluation/), and a separate [accepted ACS manuscript](/publication/mechanochromic-textiles/).
+      Studied soft-interface adhesion and quantitative optical metrology in Christina Tang's VCU Soft Functional Materials Lab. Outputs include a [first-author adhesion paper](/publication/adhesives-wearable/), [M.S. thesis](https://scholarscompass.vcu.edu/etd/8456/), [research software](/project/peel-trace-evaluation/), and a separate [accepted ACS manuscript](/publication/mechanochromic-textiles/).
   - period: 2026–present
     title: Doctoral research in structure under processing
     text: >-
