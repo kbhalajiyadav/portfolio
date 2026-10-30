@@ -210,8 +210,7 @@ def main() -> int:
                   if (doctoralDetails) doctoralDetails.open=true;
                   const appHeading=document.querySelector('.trajectory-grid .application-card h3');
                   const appBody=document.querySelector('.trajectory-grid .application-card h3 + p');
-                  const desktopSig=document.querySelector('.research-signature__desktop');
-                  const mobileSig=document.querySelector('.research-signature__mobile');
+                  const singleSig=document.querySelector('.research-signature__flow');
                   const copyRect=copy?.getBoundingClientRect();
                   const visualRect=visual?.getBoundingClientRect();
                   const hRect=appHeading?.getBoundingClientRect();
@@ -222,8 +221,8 @@ def main() -> int:
                     identityPosition:note?getComputedStyle(note).position:null,
                     doctoralInitiallyClosed,
                     headingBodyGap:Math.round((pRect?.top||0)-(hRect?.bottom||0)),
-                    desktopSignatureDisplay:desktopSig?getComputedStyle(desktopSig).display:null,
-                    mobileSignatureDisplay:mobileSig?getComputedStyle(mobileSig).display:null
+                    signatureCount:document.querySelectorAll('.research-signature ol').length,
+                    signatureColumns:singleSig?getComputedStyle(singleSig).gridTemplateColumns.trim().split(/\s+/).filter(Boolean).length:0
                   };
                 })()""")
                 observations.append({"path": "", "kind": "tablet-820", **tablet})
@@ -235,8 +234,8 @@ def main() -> int:
                     errors.append("doctoral applications must remain collapsed until explicitly expanded")
                 if tablet.get("headingBodyGap", 0) < 7:
                     errors.append(f"doctoral application heading/body rhythm is too tight: {tablet.get('headingBodyGap')}px")
-                if tablet.get("desktopSignatureDisplay") != "none" or tablet.get("mobileSignatureDisplay") == "none":
-                    errors.append("820px research signature did not switch to the legible mobile/tablet representation")
+                if tablet.get("signatureCount") != 1 or tablet.get("signatureColumns") != 1:
+                    errors.append("820px research signature must use one accessible single-column ordered list")
             finally:
                 cdp.close()
         finally:
