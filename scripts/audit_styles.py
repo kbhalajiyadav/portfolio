@@ -304,7 +304,7 @@ def main() -> int:
             if not rule_has(compact_hero, selector, declaration):
                 errors.append(f"compact hero invariant missing {selector} {declaration}")
     tablet_match = re.search(r"@media\(max-width:820px\)\s*\{(.*?)\}\s*@media\(prefers-reduced-motion", POLISH, re.DOTALL)
-    if not tablet_match or not rule_has(tablet_match.group(1), ".research-signature__desktop", "display:none"):
+    if not tablet_match or not rule_has(tablet_match.group(1), ".research-signature__flow", "grid-template-columns:1fr"):
         errors.append("820px scientific schematic must switch to its mobile treatment")
 
     motif = re.search(r"--motif-opacity:([0-9.]+)", REF)
