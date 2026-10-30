@@ -29,6 +29,12 @@ sample-level summaries.
 
 {{< method-schematic id="peel-trace-schematic" title="Peel Trace Evaluation workflow" steps="Reference~validation|Force-displacement~data|Column and~profile mapping|Steady-peel~window|Peel-trace~descriptors|QC plots~and records" caption="The notebook blocks user-data analysis until the bundled Scotch Tape reference check passes, then extracts protocol-defined descriptors with provenance records." >}}
 
+## Example analysis output
+
+The software repository includes a bundled Scotch Tape reference example used for quality control. This is an authentic plot from that example, **not experimental data from the wearable-textile adhesion article**.
+
+{{< source-figure src="/media/research/peel-trace-reference-qc.png" width="3993" height="1350" alt="Reference peel-trace quality-control plot produced by the Peel Trace Evaluation workflow from its bundled Scotch Tape example." caption="Reference quality-control plot from the bundled Scotch Tape example. It illustrates the software's diagnostic output, not a result from the published wearable-textile experiment." source="https://github.com/VCU-Soft-Functional-Materials-Lab/Peel-Trace-Evaluation-for-Soft-Substrates/blob/main/docs/example_outputs/scotch_tape_qc_trace.png" >}}
+
 ## Resources
 
 - [Source repository](https://github.com/VCU-Soft-Functional-Materials-Lab/Peel-Trace-Evaluation-for-Soft-Substrates)
