@@ -59,10 +59,6 @@ PAGE_METRICS = r"""
   const secondary = document.querySelector('.hero .actions .lnk');
   const primaryStyle = primary ? getComputedStyle(primary) : null;
   const secondaryStyle = secondary ? getComputedStyle(secondary) : null;
-  const proof = [...document.querySelectorAll('.metrics > div')].map((item) => ({
-    value:(item.querySelector('strong')?.textContent || '').trim(),
-    label:(item.querySelector('span')?.textContent || '').trim(),
-  }));
   const pillars = [...document.querySelectorAll('.pillar')].map((item) => {
     const box = item.getBoundingClientRect();
     const title = item.querySelector('h3')?.getBoundingClientRect();
@@ -106,7 +102,7 @@ PAGE_METRICS = r"""
     heroActionCount:heroActions.length,
     primaryBackground:primaryStyle ? primaryStyle.backgroundColor : '',
     secondaryBackground:secondaryStyle ? secondaryStyle.backgroundColor : '',
-    proof,
+    counterVisible:!!document.querySelector(".metrics"),
     pillars,
     researchPackageCount:selectedOutputs ? selectedOutputs.querySelectorAll('.research-package').length : 0,
     secondaryOutputCount:selectedOutputs ? selectedOutputs.querySelectorAll('.secondary-output').length : 0,
@@ -125,7 +121,7 @@ PAGE_METRICS = r"""
           columns:getComputedStyle(head).gridTemplateColumns.split(/\s+/).filter(Boolean).length,
         };
       }),
-    disclosures:[...document.querySelectorAll('main details.home-disclosure')].map(item=>({
+    disclosures:[...document.querySelectorAll('main details.home-disclosure:not(.home-disclosure--experience)')].map(item=>({
       open:item.open,
       summaryHeight:item.querySelector(':scope > summary')?.getBoundingClientRect().height || 0,
       evidenceCount:item.querySelectorAll('.trajectory-grid article, .questions article, .compact-record').length,
@@ -355,20 +351,8 @@ def main() -> int:
                         elif max(opacities) > 0.5 or (spread(opacities) or 0) > 0.02:
                             errors.append(f"{prefix}: research motifs are visually unbalanced: {opacities}")
 
-                    expected_labels = [
-                        "Peer-reviewed articles",
-                        "Patent-pending technology",
-                        "Citable software release",
-                        "Student projects guided",
-                    ]
-                    labels = [item["label"] for item in metrics.get("proof", [])]
-                    if labels != expected_labels:
-                        errors.append(f"{prefix}: proof strip labels drifted: {labels}")
-                    values = {item["label"]: item["value"] for item in metrics.get("proof", [])}
-                    if values.get("Patent-pending technology") != "1":
-                        errors.append(f"{prefix}: patent-pending proof count must remain 1")
-                    if values.get("Citable software release") != "1":
-                        errors.append(f"{prefix}: citable-software proof count must remain 1")
+                    if metrics.get("counterVisible"):
+                        errors.append(f"{prefix}: marketing-style proof counter row has returned")
                     # The introductory paragraph must align with the heading, not
                     # float between the kicker and title (the original visual bug).
                     heading_pairs = metrics.get("sectionHeadingPairs", [])
@@ -426,7 +410,7 @@ def main() -> int:
                         if disclosure["evidenceCount"] < (2 if index == 1 else 4):
                             errors.append(f"{prefix}: secondary evidence {index} was deleted rather than disclosed")
                     expanded = cdp.evaluate("""(() => {
-                      const items = [...document.querySelectorAll('main details.home-disclosure')];
+                      const items = [...document.querySelectorAll('main details.home-disclosure:not(.home-disclosure--experience)')];
                       items.forEach(item => item.open = true);
                       const edges = element => {
                         if (!element) return null;

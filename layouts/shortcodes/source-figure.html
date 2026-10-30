@@ -1,0 +1,8 @@
+{{- $src := .Get "src" -}}
+{{- $alt := .Get "alt" -}}
+{{- $caption := .Get "caption" -}}
+{{- $source := .Get "source" -}}
+<figure class="software-evidence">
+  <img src="{{ $src | relURL }}" width="{{ .Get "width" }}" height="{{ .Get "height" }}" alt="{{ $alt }}" loading="lazy" decoding="async">
+  <figcaption>{{ $caption }} Source: <a href="{{ $source }}" target="_blank" rel="noopener noreferrer">VCU Soft Functional Materials Lab, Peel Trace Evaluation repository</a>. Image reproduced unchanged from the public reference example.</figcaption>
+</figure>

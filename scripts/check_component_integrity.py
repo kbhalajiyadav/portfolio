@@ -48,7 +48,6 @@ PAGES = [
 ]
 
 SELECTORS = [
-    ".metrics div",
     ".pillar",
     ".questions article",
     ".trajectory-grid article",

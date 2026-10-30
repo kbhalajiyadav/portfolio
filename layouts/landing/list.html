@@ -34,8 +34,6 @@
 {{/* Keep the research introduction first, with opt-in analytics choices in normal flow. */}}
 {{ partial "privacy_controls.html" . }}
 
-{{ partial "home_proof.html" . }}
-
 <section class="section" id="research">
   <div class="section-head">
     <p class="kicker">Research program</p>
@@ -97,19 +95,17 @@
 <section class="section" id="experience">
   <div class="section-head"><p class="kicker">Experience and education</p><h2>Research rigor shaped by laboratory work and regulated manufacturing.</h2><p>Selected roles are shown here; the complete chronology, supporting case studies, education, and research training are available on the Experience page.</p></div>
   {{ $visibleExperience := slice }}{{ range $p.experience }}{{ if ne .show false }}{{ $visibleExperience = $visibleExperience | append . }}{{ end }}{{ end }}
-  <div class="two-col">
-    <div class="timeline">
-      {{ range first $experienceLimit $visibleExperience }}
-      <article class="timeline-item"><span>{{ .period }}</span><h3>{{ .role }}</h3><p class="org">{{ .organization }}{{ with .location }} · {{ . }}{{ end }}</p><p>{{ .detail }}</p>{{ with .outcomes }}<ul>{{ range first $experienceOutcomeLimit . }}<li>{{ . }}</li>{{ end }}</ul>{{ end }}</article>
-      {{ end }}
-      <div class="actions"><a class="lnk" href="{{ "/experience/" | relURL }}">View full experience and education <span class="arw" aria-hidden="true">→</span></a></div>
-    </div>
-    <aside class="education-panel">
-      <h3>Education</h3>
-      {{ range $p.education }}{{ if ne .show false }}<article><span>{{ .period }}</span><strong>{{ .degree }}</strong><p>{{ .institution }}</p>{{ with .note }}<small>{{ . }}</small>{{ end }}</article>{{ end }}{{ end }}
-      <h3>Research training</h3>
-      {{ range $p.professional_development }}{{ if ne .show false }}<article><span>{{ .period }}</span><strong>{{ .title }}</strong><p>{{ .organization }}</p><small>{{ .note }}</small></article>{{ end }}{{ end }}
-    </aside>
+  <div class="home-experience--desktop">
+    {{ partial "home_experience_body.html" (dict "portfolio" $p "visibleExperience" $visibleExperience "experienceLimit" $experienceLimit "experienceOutcomeLimit" $experienceOutcomeLimit) }}
+    <div class="actions"><a class="lnk" href="{{ "/experience/" | relURL }}">View full experience and education <span class="arw" aria-hidden="true">→</span></a></div>
+  </div>
+  <div class="home-experience--mobile">
+    <p class="home-experience__summary">Graduate research, teaching, chemical engineering and regulated-industry practice.</p>
+    <details class="home-disclosure home-disclosure--experience">
+      <summary>Explore selected roles, education and training</summary>
+      <div class="home-disclosure__body">{{ partial "home_experience_body.html" (dict "portfolio" $p "visibleExperience" $visibleExperience "experienceLimit" $experienceLimit "experienceOutcomeLimit" $experienceOutcomeLimit) }}</div>
+    </details>
+    <div class="actions"><a class="lnk" href="{{ "/experience/" | relURL }}">View full experience and education <span class="arw" aria-hidden="true">→</span></a></div>
   </div>
 </section>
 

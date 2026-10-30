@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Protect complementary content roles, public tone, synchronized facts, and derived proof metrics."""
+"""Protect complementary content roles, public tone, synchronized facts, and canonical research records."""
 from __future__ import annotations
 
 from difflib import SequenceMatcher
@@ -90,7 +90,6 @@ def main() -> int:
     research, research_body = parse_markdown(ROOT / "content" / "research" / "index.md")
     outputs, outputs_body = parse_markdown(ROOT / "content" / "outputs" / "_index.md")
     ip_page, ip_body = parse_markdown(ROOT / "content" / "project" / "quantitative-thermal-imaging" / "index.md")
-    home_proof = (ROOT / "layouts" / "partials" / "home_proof.html").read_text(encoding="utf-8")
     about_template = (ROOT / "layouts" / "about" / "single.html").read_text(encoding="utf-8")
     llms = (ROOT / "static" / "llms.txt").read_text(encoding="utf-8")
     llms_full = (ROOT / "static" / "llms-full.txt").read_text(encoding="utf-8")
@@ -310,18 +309,15 @@ def main() -> int:
         if url not in llms_full:
             errors.append(f"llms-full.txt is missing canonical primary destination: {url}")
 
-    guided_count = sum(int(item.get("project_count", 0) or 0) for item in portfolio.get("teaching", []))
-    if guided_count <= 0:
-        errors.append("student-project proof metric must derive from structured teaching.project_count values")
+    # The homepage no longer uses scoreboard-style counts. Keep the original
+    # records canonical for the detailed Experience and Outputs pages.
     if len(cv.get("research_software", [])) <= 0:
-        errors.append("citable-software proof metric has no canonical CV software record")
+        errors.append("canonical CV has no citable research-software record")
     if "metrics" in portfolio:
         errors.append("legacy presentation metrics must not be manually duplicated in portfolio.yaml")
-    for required in ("len $cv.research_software", ".project_count", "len $cv.intellectual_property"):
-        if required not in home_proof:
-            errors.append(f"home proof strip must derive metric using {required!r}")
-    if re.search(r"<strong>\s*1\s*</strong>\s*<span>Citable software release", home_proof):
-        errors.append("software proof count is hard-coded in presentation markup")
+    if "home_proof.html" in (ROOT / "layouts" / "landing" / "list.html").read_text(encoding="utf-8"):
+        errors.append("homepage counter row must not return")
+
 
     if errors:
         print("\n".join(f"ERROR: {error}" for error in errors), file=sys.stderr)
@@ -329,7 +325,7 @@ def main() -> int:
 
     print(
         "Content strategy guardrail passed: complementary page roles, restrained public tone, "
-        f"structured identity/affiliation, correctly separated chronology, synchronized public context, and derived proof metrics ({guided_count} guided projects)."
+        "structured identity/affiliation, correctly separated chronology, and synchronized public evidence."
     )
     return 0
 
