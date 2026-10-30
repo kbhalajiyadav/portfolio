@@ -326,7 +326,7 @@ LAYOUT_EXPRESSION = r"""
     homeResearchDiagramGap:(() => {
       const section = document.querySelector('#research');
       const introduction = section?.querySelector(':scope > .section-head > p:not(.kicker)');
-      const first = section?.querySelector(':scope > .research-signature .research-signature__mobile > li:first-child');
+      const first = section?.querySelector(':scope > .research-signature .research-signature__flow > li:first-child');
       if (!introduction || !first) return null;
       return {
         introductionBottom:introduction.getBoundingClientRect().bottom,
@@ -403,11 +403,10 @@ LAYOUT_EXPRESSION = r"""
     diagramReadability:(() => {
       const diagram = document.querySelector('.research-signature, .method-schematic');
       if (!diagram) return null;
-      const desktop = diagram.querySelector('.research-signature__desktop, .method-schematic__desktop');
-      const mobile = diagram.querySelector('.research-signature__mobile, .method-schematic__mobile');
-      const shown = desktop && getComputedStyle(desktop).display !== 'none' ? desktop : mobile;
+      const shown = diagram.querySelector('ol');
       const labels = [...(shown?.querySelectorAll('li strong') || [])];
       const visibleRows = [...(shown?.querySelectorAll('li') || [])];
+      const responsiveColumns = shown ? getComputedStyle(shown).gridTemplateColumns.trim().split(/\s+/).filter(Boolean).length : 0;
       const hasHorizontalRule = element => {
         if (!element) return false;
         const style = getComputedStyle(element);
@@ -415,6 +414,7 @@ LAYOUT_EXPRESSION = r"""
       };
       return {
         count:labels.length,
+        listCount:diagram.querySelectorAll('ol').length,
         isResearchSignature:diagram.classList.contains('research-signature'),
         stageGeometry:visibleRows.map(item => {
           const r = item.getBoundingClientRect();
@@ -422,7 +422,7 @@ LAYOUT_EXPRESSION = r"""
         }),
         minFontSize:labels.length ? Math.min(...labels.map(el => parseFloat(getComputedStyle(el).fontSize))) : 0,
         overflowing:labels.some(el => el.getBoundingClientRect().right > width + 1),
-        mobileDisplayed:!!mobile && getComputedStyle(mobile).display !== 'none',
+        mobileDisplayed:responsiveColumns === 1,
         hasExtraRules:[diagram, shown, ...visibleRows].some(hasHorizontalRule),
         internalDisclaimer:diagram.textContent.includes('Schematic; no quantitative data are implied.')
       };
@@ -761,7 +761,7 @@ def main() -> int:
                         if page_name in {"research", "project", "optical-metrology"}:
                             diagram = layout.get("diagramReadability")
                             expected_steps = 5 if page_name != "project" else 6
-                            if not diagram or diagram["count"] != expected_steps or diagram["minFontSize"] < 14 or diagram["overflowing"]:
+                            if not diagram or diagram["listCount"] != 1 or diagram["count"] != expected_steps or diagram["minFontSize"] < 14 or diagram["overflowing"]:
                                 record_errors.append(f"scientific workflow labels must remain readable at {width}px: {diagram}")
                             if diagram and diagram["mobileDisplayed"] != (width <= 820):
                                 record_errors.append(f"scientific workflow must reflow at 820px: {diagram}")
