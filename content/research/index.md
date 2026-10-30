@@ -111,7 +111,7 @@ of the analysis workflow.
 
 The separate [Quantitative Thermal Imaging page](/project/quantitative-thermal-imaging/)
 summarizes the patent-pending technology and its current Virginia Commonwealth
-University intellectual-property status.
+University intellectual-property status (VCU Tech # TAN-26-099).
 
 ## Open research questions
 
