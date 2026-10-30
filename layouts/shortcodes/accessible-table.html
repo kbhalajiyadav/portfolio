@@ -1,4 +1,4 @@
 {{- $label := .Get "label" | default "Data table; scroll horizontally to view additional columns" -}}
 <div class="table-scroll-region" role="region" aria-label="{{ $label }}" tabindex="0">
-{{ .Inner }}
+{{ .Inner | markdownify }}
 </div>
