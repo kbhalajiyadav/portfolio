@@ -99,7 +99,7 @@ was a demonstration concept, not a clinically evaluated device.
 
 ## Connected research outputs
 
-Two first-author research directions are represented here: the [accepted ACS manuscript on mechanochromic textile sensitivity](/publication/mechanochromic-textiles/) and the separately published adhesion study. The adhesion study connects three complementary outputs:
+Two first-author research directions are represented here: the [accepted ACS manuscript on mechanochromic textile sensitivity](/publication/mechanochromic-textiles/) and the separately published adhesion study. Related 2026 presentations are documented under [adhesion and soft wearable interfaces](/engagement/#adhesion-soft-wearable-interfaces) and [computer-vision metrology](/engagement/#computer-vision-mechanochromic-textiles). The adhesion study connects three complementary outputs:
 
 1. [Peer-reviewed article](/publication/adhesives-wearable/)
 2. [M.S. thesis](/publication/masters-thesis/)
