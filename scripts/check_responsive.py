@@ -339,10 +339,8 @@ LAYOUT_EXPRESSION = r"""
     researchDiagramGap:(() => {
       const figure = document.querySelector('.research-signature');
       const before = figure?.previousElementSibling;
-      const mobile = figure?.querySelector('.research-signature__mobile');
-      const desktop = figure?.querySelector('.research-signature__desktop');
-      const active = mobile && getComputedStyle(mobile).display !== 'none' ? mobile : desktop;
-      const first = active?.querySelector('li');
+      const stages = figure?.querySelector('.research-signature__flow');
+      const first = stages?.querySelector('li');
       if (!figure || !before || !first) return null;
       return {previousTag:before.tagName,gap:first.getBoundingClientRect().top - before.getBoundingClientRect().bottom};
     })(),
