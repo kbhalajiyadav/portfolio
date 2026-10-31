@@ -15,12 +15,11 @@ tags:
 url: /research/
 ---
 
-This page provides an overview of the research program, its supporting work, and open questions. For the fuller scientific narrative and experimental direction, see the [research statement](/research-statement/).
+This program connects earlier measurement research with doctoral questions about responsive structure. The [research statement](/research-statement/) develops the scientific rationale and proposed experiments.
 
 ## Research focus
 
-The research program examines how thermal and mechanical histories affect soft
-materials, from a defined stimulus through reproducible measurement and translation:
+Five stages organize the research:
 
 {{< research-signature >}}
 
