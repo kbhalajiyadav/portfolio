@@ -3,7 +3,7 @@ title: "Research Program"
 kicker: "Research overview"
 summary: "How processing histories organize soft functional materials, and how to measure the resulting response reliably."
 date: "2026-07-28T00:00:00Z"
-lastmod: "2026-10-29T00:00:00Z"
+lastmod: "2026-10-30T00:00:00Z"
 toc: true
 tags:
   - Stimuli-Responsive Materials
@@ -15,13 +15,12 @@ tags:
 url: /research/
 ---
 
-For a focused account of my research background, doctoral questions, and experimental approach, see the [research statement](/research-statement/).
+This page provides an overview of the research program, its supporting work, and open questions. For the fuller scientific narrative and experimental direction, see the [research statement](/research-statement/).
 
 ## Research focus
 
-My research asks how thermal and mechanical histories organize soft functional
-materials, which structural changes explain their responses, and what makes
-those measurements trustworthy. The framework connects five stages:
+The research program examines how thermal and mechanical histories affect soft
+materials, from a defined stimulus through reproducible measurement and translation:
 
 {{< research-signature >}}
 

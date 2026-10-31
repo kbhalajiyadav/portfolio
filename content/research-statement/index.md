@@ -4,14 +4,18 @@ kicker: "Research direction"
 summary: "A research statement connecting earlier work in soft-material measurement to current doctoral questions about processing and responsive structure."
 description: "Research statement on stimulus histories, structure, rheology, neutron scattering, and quantitative optical and mechanical measurement."
 date: "2026-10-28T00:00:00Z"
-lastmod: "2026-10-29T00:00:00Z"
+lastmod: "2026-10-30T00:00:00Z"
 toc: false
 url: /research-statement/
 ---
 
+The [Research Program](/research/) provides a navigable overview of current questions and evidence. This statement develops the scientific background, earlier work, and proposed experimental direction.
+
 ## Research motivation
 
-My research asks how thermal, mechanical, and flow histories change the structure of soft and stimuli-responsive materials, and how those changes can be measured reproducibly. A response is scientifically informative only when it can be connected to a defined stimulus, an appropriate structural or mechanical measurement, and analysis that can be repeated. I aim to understand structure–processing–response relationships without treating any one optical or mechanical signal as a complete description of material performance.
+My research asks how thermal, mechanical, and flow histories change the structure of soft and stimuli-responsive materials, and how those changes can be measured reproducibly.
+
+A response is scientifically informative only when it can be connected to a defined stimulus, an appropriate structural or mechanical measurement, and repeatable analysis. I aim to understand structure–processing–response relationships without treating any one optical or mechanical signal as a complete description of material performance.
 
 ## Foundation in experimental measurement
 
@@ -68,6 +72,4 @@ need suitable independent reference measurements and validation; it is not
 presented as a current diagnostic capability.
 
 My approach prioritizes controlled comparisons, transparent analysis, and
-collaboration where distinct methods answer a shared question. The broader
-[Research Program](/research/) connects these priorities to documented
-papers, software, and technical projects.
+collaboration where distinct methods answer a shared question.
