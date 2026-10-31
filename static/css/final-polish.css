@@ -162,6 +162,10 @@ a:hover .content-link__arrow--internal,a:focus-visible .content-link__arrow--int
 @media(min-width:981px){
   .hero{align-items:center;padding-block:clamp(2.25rem,3.4vw,3rem) clamp(1.25rem,2.2vw,2rem)}
 }
+/* Slight portrait lift where the desktop copy is taller than the image; wider layouts are already top-balanced. */
+@media(min-width:981px) and (max-width:1679px){
+  .hero__visual{transform:translateY(-16px)}
+}
 #research.doctoral-intro{padding-block:clamp(2rem,3vw,2.65rem) clamp(2.25rem,3.5vw,3rem);border-bottom:0}
 .doctoral-intro>.section-head{margin-bottom:0}
 .doctoral-intro .section-head h2{max-width:29ch;font-size:clamp(1.8rem,2.6vw,2.6rem);line-height:1.2;text-wrap:balance}
