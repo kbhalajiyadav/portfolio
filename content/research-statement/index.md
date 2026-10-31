@@ -72,6 +72,4 @@ need suitable independent reference measurements and validation; it is not
 presented as a current diagnostic capability.
 
 My approach prioritizes controlled comparisons, transparent analysis, and
-collaboration where distinct methods answer a shared question. The broader
-[Research Program](/research/) connects these priorities to documented
-papers, software, and technical projects.
+collaboration where distinct methods answer a shared question.
