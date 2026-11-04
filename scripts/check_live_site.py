@@ -17,7 +17,7 @@ EXPECTED_TEXT = {
         "Soft matter",
         "Current question",
         "Recent research, at a glance.",
-        "Substrate Enhanced Mechanochromic Sensitivity in Stimuli Response Textiles",
+        "Substrate-Enhanced Mechanochromic Sensitivity in Stimuli Response Textiles",
         "Current doctoral research",
         "Liquid crystals as a model system for how processing shapes structure.",
         "What a peel trace can reveal.",
