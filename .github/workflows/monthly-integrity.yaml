@@ -68,6 +68,19 @@ jobs:
       - name: Check research software release drift
         run: python3 scripts/check_software_release.py
 
+      # The monthly audit checks the current public release. CV PDFs are built by
+      # the deployment/CV workflows, not committed to the source repository.
+      - name: Retrieve published CV and resume for link integrity
+        run: |
+          mkdir -p static/uploads
+          for name in cv resume; do
+            curl --fail --location --retry 3 --retry-delay 2 --silent --show-error \
+              --output "static/uploads/${name}.pdf" \
+              "https://bhalaji.com/uploads/${name}.pdf"
+            test -s "static/uploads/${name}.pdf"
+            head -c 5 "static/uploads/${name}.pdf" | grep -q '^%PDF-'
+          done
+
       - name: Build and check links
         env:
           HUGO_ENVIRONMENT: production
