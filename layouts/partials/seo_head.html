@@ -61,7 +61,7 @@
   <meta name="citation_title" content="{{ .Title }}">
   {{ range .Params.authors }}<meta name="citation_author" content="{{ . }}">{{ end }}
   {{ if not $isAcceptedManuscript }}
-    {{ if .Params.scholar_dissertation_institution }}
+    {{ if or .Params.scholar_dissertation_institution (and (eq .Params.publication_status "published") (not .Params.online_publication_date)) }}
       <meta name="citation_publication_date" content="{{ .Date.Format "2006" }}">
     {{ else }}
       <meta name="citation_publication_date" content="{{ .Date.Format "2006/01/02" }}">
@@ -153,9 +153,12 @@
   {{ $scholarly := dict "@context" "https://schema.org" "@type" $schemaType "headline" .Title "name" $page.Title "url" $page.Permalink "author" $authors "description" (.Params.abstract | default .Params.summary) "mainEntityOfPage" .Permalink }}
   {{ if $isAcceptedManuscript }}
     {{ $scholarly = merge $scholarly (dict "creativeWorkStatus" "Accepted for publication") }}
+  {{ else if and (eq .Params.publication_status "published") (not .Params.online_publication_date) }}
+    {{ $scholarly = merge $scholarly (dict "datePublished" (.Date.Format "2006")) }}
   {{ else }}
     {{ $scholarly = merge $scholarly (dict "datePublished" (.Date.Format "2006-01-02")) }}
   {{ end }}
+  {{ with .Params.license_url }}{{ $scholarly = merge $scholarly (dict "license" . "isAccessibleForFree" true) }}{{ end }}
   {{ $recordDOI := .Params.doi | default .Params.scholar_doi }}
   {{ with $recordDOI }}{{ $scholarly = merge $scholarly (dict "sameAs" (printf "https://doi.org/%s" .) "identifier" (dict "@type" "PropertyValue" "propertyID" "DOI" "value" .)) }}{{ end }}
 <script type="application/ld+json">{{ $scholarly | jsonify | safeJS }}</script>
