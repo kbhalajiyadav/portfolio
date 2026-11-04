@@ -140,16 +140,28 @@ def main() -> int:
         for item in orcid.get("works", [])
         if item.get("type") == "journal-article"
     }
-    if portfolio_pubs != orcid_pubs:
-        missing = sorted(set(portfolio_pubs) - set(orcid_pubs))
-        extra = sorted(set(orcid_pubs) - set(portfolio_pubs))
-        mismatched = sorted(
-            doi for doi in set(portfolio_pubs) & set(orcid_pubs)
-            if portfolio_pubs[doi].casefold() != orcid_pubs[doi].casefold()
-        )
+    # A publisher-issued DOI may precede the next public ORCID import.
+    # This is a narrow, source-backed exception; never synthesize an ORCID work.
+    acs_doi = "10.1021/acsapm.6c03153"
+    acs_page = ROOT / "content" / "publication" / "mechanochromic-textiles" / "index.md"
+    acs_record = yaml.safe_load(acs_page.read_text(encoding="utf-8").split("---", 2)[1]) if acs_page.is_file() else {}
+    confirmed_acs_publication = (
+        acs_record.get("publication_status") == "published"
+        and norm_doi(acs_record.get("doi", "")) == acs_doi
+        and portfolio_pubs.get(acs_doi) == norm_text(acs_record.get("title", ""))
+    )
+    missing = set(portfolio_pubs) - set(orcid_pubs)
+    if confirmed_acs_publication:
+        missing.discard(acs_doi)
+    extra = set(orcid_pubs) - set(portfolio_pubs)
+    mismatched = sorted(
+        doi for doi in set(portfolio_pubs) & set(orcid_pubs)
+        if portfolio_pubs[doi].casefold() != orcid_pubs[doi].casefold()
+    )
+    if missing or extra or mismatched:
         errors.append(
             "publication drift versus ORCID snapshot: "
-            f"missing_from_orcid={missing}, extra_in_orcid={extra}, title_mismatch={mismatched}"
+            f"missing_from_orcid={sorted(missing)}, extra_in_orcid={sorted(extra)}, title_mismatch={mismatched}"
         )
 
     cv_dois = {norm_doi(item) for item in cv.get("publications", [])}
@@ -160,11 +172,11 @@ def main() -> int:
             f"cv={sorted(cv_dois)}, portfolio={sorted(portfolio_pubs)}"
         )
 
-    # Accepted manuscripts are not yet DOI-indexed publications in the ORCID snapshot.
     # Guard against fabricated bibliographic fields and cross-surface status drift.
+    # The public ORCID snapshot can lag the publisher-issued DOI.
     accepted_path = ROOT / "content" / "publication" / "mechanochromic-textiles" / "index.md"
     if not accepted_path.is_file():
-        errors.append("missing dedicated accepted-manuscript page")
+        errors.append("missing dedicated ACS publication page")
     else:
         import yaml as _yaml
         source = accepted_path.read_text(encoding="utf-8")
@@ -181,7 +193,7 @@ def main() -> int:
         if status == "published" and not norm_doi(front.get("doi", "")):
             errors.append("published manuscript must have a verified DOI")
         if not any(title.lower() in norm_text(item).lower() for item in cv.get("publications", [])):
-            errors.append("accepted manuscript missing from canonical CV")
+            errors.append("ACS publication missing from canonical CV")
         if status == "published" and norm_doi(front.get("doi", "")) not in portfolio_pubs:
             errors.append("newly published manuscript must be added to canonical published-publications inventory")
 
