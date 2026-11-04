@@ -282,10 +282,12 @@ def main() -> int:
         if value and str(value) not in llms_full:
             errors.append(f"llms-full.txt is missing synchronized {label}: {value!r}")
 
-    if "https://bhalaji.com/publication/mechanochromic-textiles/" not in llms_full or "accepted October 27, 2026" not in llms_full:
-        errors.append("full public research context must distinguish the accepted ACS manuscript from published work")
-    if "https://bhalaji.com/publication/mechanochromic-textiles/" not in llms:
-        errors.append("short public research context must link the accepted ACS manuscript")
+    acs_doi = "https://doi.org/10.1021/acsapm.6c03153"
+    acs_record = "https://bhalaji.com/publication/mechanochromic-textiles/"
+    if any(value not in llms_full for value in (acs_record, acs_doi, "CC BY 4.0", "Accepted October 27, 2026")):
+        errors.append("full public research context must distinguish DOI-backed ACS publication, license and confirmed acceptance date")
+    if acs_record not in llms or acs_doi not in llms:
+        errors.append("short public research context must link the published ACS article and DOI")
 
     for publication in portfolio.get("publications", []):
         doi = str(publication.get("doi", ""))
