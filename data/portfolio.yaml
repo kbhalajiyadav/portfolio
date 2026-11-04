@@ -17,8 +17,8 @@ profile:
   scholar: https://scholar.google.com/citations?hl=en&user=DrfbtX4AAAAJ
   cv: uploads/cv.pdf
   resume: uploads/resume.pdf
-  last_updated: October 2026
-  last_updated_iso: '2026-10-17'
+  last_updated: November 2026
+  last_updated_iso: '2026-11-04'
 research:
 - number: '01'
   title: Measure response
@@ -59,6 +59,13 @@ publications:
   doi: https://doi.org/10.3390/polym18121504
   code: https://github.com/VCU-Soft-Functional-Materials-Lab/Peel-Trace-Evaluation-for-Soft-Substrates
   detail: publication/adhesives-wearable/
+- year: '2026'
+  type: Journal article · First author
+  title: Substrate-Enhanced Mechanochromic Sensitivity in Stimuli Response Textiles
+  authors: B. Y. Kantepalle, T. J. Lawton, I. Caloian, A. Greenhalgh, B. Hall, A. Reyna, J. Trapp, and C. Tang
+  venue: ACS Applied Polymer Materials · online article (2026)
+  doi: https://doi.org/10.1021/acsapm.6c03153
+  detail: publication/mechanochromic-textiles/
 - year: '2025'
   type: Journal article · Co-author
   title: Mechanical Properties of Dual-Layer Electrospun Fiber Mats

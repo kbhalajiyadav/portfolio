@@ -14,6 +14,8 @@
       {{ with .Params.publication }}<p class="publication-venue">{{ . | markdownify }}</p>{{ end }}
       {{ if $isAccepted }}
       <div class="page-meta"><time datetime="{{ .Params.accepted_date }}">Accepted {{ time.Format "January 2, 2006" .Params.accepted_date }}</time><span>Final publication details to follow</span></div>
+      {{ else if and (eq .Params.publication_status "published") (not .Params.online_publication_date) }}
+      <div class="page-meta"><span>Published online · {{ .Date.Format "2006" }}</span></div>
       {{ else }}
       <div class="page-meta"><time class="dt-published" datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ time.Format "2006" .Date }}</time>{{ if $isThesis }}<span>VCU repository record · manuscript embargoed</span>{{ end }}</div>
       {{ end }}
@@ -26,6 +28,7 @@
         {{ if .Params.url_dataset }}<a class="lnk" href="{{ .Params.url_dataset }}" target="_blank" rel="noopener">Experimental dataset <span class="arw" aria-hidden="true">↗</span></a>{{ end }}
         {{ if .Params.url_source }}<a class="lnk" href="{{ .Params.url_source }}" target="_blank" rel="noopener">{{ if $isThesis }}Thesis record{{ else }}Publisher record{{ end }} <span class="arw" aria-hidden="true">↗</span></a>{{ end }}
       </div>
+      {{ with .Params.license_url }}<p class="fine-print">Open access · <a href="{{ . }}" target="_blank" rel="license noopener">CC BY 4.0</a>. Credit the authors and source when reusing covered material; identify modifications. Third-party rights, where indicated, are separate.</p>{{ end }}
     </header>
     <div class="article-layout publication-layout">
       <div class="article-content e-content">

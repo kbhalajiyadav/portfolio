@@ -9,7 +9,7 @@
 {{ $secondaryPage := site.GetPage "/publication/electrospun-fiber-mats/" }}
 {{ $acceptedPage := site.GetPage "/publication/mechanochromic-textiles/" }}
 {{ $primary := index $p.publications 0 }}
-{{ $secondary := index $p.publications 1 }}
+{{ $secondary := index $p.publications 2 }}
 <article class="list-page outputs-page">
   <div class="page-shell">
     <header class="page-header">
@@ -30,7 +30,7 @@
     <div class="output-list" data-output-list aria-label="Research outputs, newest first">
       {{ with $acceptedPage }}
       <article class="output-row" data-output-type="publication" data-output-date="{{ .Params.accepted_date }}">
-        <div class="output-row__meta"><time datetime="{{ .Params.accepted_date }}">{{ if eq .Params.publication_status "accepted" }}Oct 2026{{ else }}{{ .Date.Format "Jan 2006" }}{{ end }}</time><span>{{ if eq .Params.publication_status "accepted" }}Accepted journal manuscript{{ else }}Peer-reviewed article{{ end }}</span></div>
+        <div class="output-row__meta"><time datetime="{{ if eq .Params.publication_status "accepted" }}{{ .Params.accepted_date }}{{ else }}{{ .Date.Format "2006" }}{{ end }}">{{ if eq .Params.publication_status "accepted" }}Oct 2026{{ else }}{{ .Date.Format "2006" }}{{ end }}</time><span>{{ if eq .Params.publication_status "accepted" }}Accepted journal manuscript{{ else }}Peer-reviewed article{{ end }}</span></div>
         <div class="output-row__content">
           <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
           <p class="output-row__byline">{{ delimit .Params.authors ", " }} · {{ .Params.publication | markdownify }}</p>

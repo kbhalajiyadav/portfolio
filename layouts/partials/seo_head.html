@@ -61,7 +61,7 @@
   <meta name="citation_title" content="{{ .Title }}">
   {{ range .Params.authors }}<meta name="citation_author" content="{{ . }}">{{ end }}
   {{ if not $isAcceptedManuscript }}
-    {{ if .Params.scholar_dissertation_institution }}
+    {{ if or .Params.scholar_dissertation_institution (and (eq .Params.publication_status "published") (not .Params.online_publication_date)) }}
       <meta name="citation_publication_date" content="{{ .Date.Format "2006" }}">
     {{ else }}
       <meta name="citation_publication_date" content="{{ .Date.Format "2006/01/02" }}">
@@ -74,7 +74,12 @@
   {{ with .Params.doi }}<meta name="citation_doi" content="{{ . }}">{{ end }}
   {{ with .Params.scholar_doi }}<meta name="citation_doi" content="{{ . }}">{{ end }}
 {{ end }}
-<meta name="copyright" content="© 2026{{ if gt now.Year 2026 }}–{{ now.Year }}{{ end }} {{ $p.profile.name }}. All rights reserved.">
+{{ if .Params.license_url }}
+  <meta name="copyright" content="© The article authors. {{ .Params.license }}.">
+  <link rel="license" href="{{ .Params.license_url }}">
+{{ else }}
+  <meta name="copyright" content="© 2026{{ if gt now.Year 2026 }}–{{ now.Year }}{{ end }} {{ $p.profile.name }}. All rights reserved.">
+{{ end }}
 <meta name="application-name" content="{{ $p.profile.short_name }}">
 <meta name="apple-mobile-web-app-title" content="{{ $p.profile.short_name }}">
 <meta name="theme-color" content="#f7f5f0">
@@ -153,9 +158,12 @@
   {{ $scholarly := dict "@context" "https://schema.org" "@type" $schemaType "headline" .Title "name" $page.Title "url" $page.Permalink "author" $authors "description" (.Params.abstract | default .Params.summary) "mainEntityOfPage" .Permalink }}
   {{ if $isAcceptedManuscript }}
     {{ $scholarly = merge $scholarly (dict "creativeWorkStatus" "Accepted for publication") }}
+  {{ else if and (eq .Params.publication_status "published") (not .Params.online_publication_date) }}
+    {{ $scholarly = merge $scholarly (dict "datePublished" (.Date.Format "2006")) }}
   {{ else }}
     {{ $scholarly = merge $scholarly (dict "datePublished" (.Date.Format "2006-01-02")) }}
   {{ end }}
+  {{ with .Params.license_url }}{{ $scholarly = merge $scholarly (dict "license" . "isAccessibleForFree" true) }}{{ end }}
   {{ $recordDOI := .Params.doi | default .Params.scholar_doi }}
   {{ with $recordDOI }}{{ $scholarly = merge $scholarly (dict "sameAs" (printf "https://doi.org/%s" .) "identifier" (dict "@type" "PropertyValue" "propertyID" "DOI" "value" .)) }}{{ end }}
 <script type="application/ld+json">{{ $scholarly | jsonify | safeJS }}</script>
