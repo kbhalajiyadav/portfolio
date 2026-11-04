@@ -31,7 +31,7 @@ deformation tracking, optical colorimetry, and computer vision. These methods
 go beyond a single maximum-force reading or a visual assessment of color change.
 
 Examples include the [optical-metrology project](/project/optical-metrology/) and
-[accepted research on textile mechanochromism](/publication/mechanochromic-textiles/).
+[published research on textile mechanochromism](/publication/mechanochromic-textiles/).
 The published adhesion article, associated thesis, and software are grouped under
 [Connected research outputs](#connected-research-outputs).
 
@@ -97,7 +97,7 @@ was a demonstration concept, not a clinically evaluated device.
 
 ## Connected research outputs
 
-Two first-author research directions are represented here: the [accepted ACS manuscript on mechanochromic textile sensitivity](/publication/mechanochromic-textiles/) and the separately published adhesion study. Related 2026 presentations are documented under [adhesion and soft wearable interfaces](/engagement/#adhesion-soft-wearable-interfaces) and [computer-vision metrology](/engagement/#computer-vision-mechanochromic-textiles). The adhesion study connects three complementary outputs:
+Two first-author journal articles are represented here: the [ACS study of mechanochromic textile sensitivity](/publication/mechanochromic-textiles/) and the [adhesive-selection study](/publication/adhesives-wearable/). Related 2026 presentations are documented under [adhesion and soft wearable interfaces](/engagement/#adhesion-soft-wearable-interfaces) and [computer-vision metrology](/engagement/#computer-vision-mechanochromic-textiles). The adhesion study connects three complementary outputs:
 
 1. [Peer-reviewed article](/publication/adhesives-wearable/)
 2. [M.S. thesis](/publication/masters-thesis/)
