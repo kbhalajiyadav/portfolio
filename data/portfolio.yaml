@@ -59,13 +59,6 @@ publications:
   doi: https://doi.org/10.3390/polym18121504
   code: https://github.com/VCU-Soft-Functional-Materials-Lab/Peel-Trace-Evaluation-for-Soft-Substrates
   detail: publication/adhesives-wearable/
-- year: '2025'
-  type: Journal article · Co-author
-  title: Mechanical Properties of Dual-Layer Electrospun Fiber Mats
-  authors: I. Caloian, J. Trapp, B. Y. Kantepalle, P. Latimer, T. J. Lawton, and C. Tang
-  venue: Polymers 17(13), 1777
-  doi: https://doi.org/10.3390/polym17131777
-  detail: publication/electrospun-fiber-mats/
 - year: '2026'
   type: Journal article · First author
   title: Substrate-Enhanced Mechanochromic Sensitivity in Stimuli Response Textiles
@@ -73,6 +66,13 @@ publications:
   venue: ACS Applied Polymer Materials · online article (2026)
   doi: https://doi.org/10.1021/acsapm.6c03153
   detail: publication/mechanochromic-textiles/
+- year: '2025'
+  type: Journal article · Co-author
+  title: Mechanical Properties of Dual-Layer Electrospun Fiber Mats
+  authors: I. Caloian, J. Trapp, B. Y. Kantepalle, P. Latimer, T. J. Lawton, and C. Tang
+  venue: Polymers 17(13), 1777
+  doi: https://doi.org/10.3390/polym17131777
+  detail: publication/electrospun-fiber-mats/
 software:
   title: Peel Trace Evaluation for Soft Substrates
   version: v1.4.0-rc15
