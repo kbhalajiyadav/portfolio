@@ -1,7 +1,7 @@
 ---
 title: "Copyright and trademark notice"
 date: 2026-07-30
-lastmod: 2026-07-30
+lastmod: 2026-11-04
 summary: "Terms governing reuse of this portfolio, its source repository, and the BK visual identity."
 ---
 
@@ -19,7 +19,6 @@ authorship, affiliation, sponsorship, endorsement, or a common source.
 
 Making this repository publicly viewable on GitHub does not place its contents in the public domain
 or grant an open-source license. A file that carries a separate license remains
-governed by that license. Third-party material remains subject to the rights of
-its respective owner.
+governed by that license. For example, the [ACS article on mechanochromic textiles](/publication/mechanochromic-textiles/) is published under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); reuse of covered article figures or text requires attribution to its authors, a source and license link, and disclosure of modifications. That license does not apply to the rest of this website. Third-party material remains subject to the rights of its respective owner.
 
 Permission requests may be sent to [contact@bhalaji.com](mailto:contact@bhalaji.com).
