@@ -74,7 +74,12 @@
   {{ with .Params.doi }}<meta name="citation_doi" content="{{ . }}">{{ end }}
   {{ with .Params.scholar_doi }}<meta name="citation_doi" content="{{ . }}">{{ end }}
 {{ end }}
-<meta name="copyright" content="© 2026{{ if gt now.Year 2026 }}–{{ now.Year }}{{ end }} {{ $p.profile.name }}. All rights reserved.">
+{{ if .Params.license_url }}
+  <meta name="copyright" content="© The article authors. {{ .Params.license }}.">
+  <link rel="license" href="{{ .Params.license_url }}">
+{{ else }}
+  <meta name="copyright" content="© 2026{{ if gt now.Year 2026 }}–{{ now.Year }}{{ end }} {{ $p.profile.name }}. All rights reserved.">
+{{ end }}
 <meta name="application-name" content="{{ $p.profile.short_name }}">
 <meta name="apple-mobile-web-app-title" content="{{ $p.profile.short_name }}">
 <meta name="theme-color" content="#f7f5f0">
