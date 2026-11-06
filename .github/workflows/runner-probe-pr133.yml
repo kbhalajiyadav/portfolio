@@ -1,0 +1,16 @@
+name: Temporary GitHub runner diagnostic (PR 133)
+on:
+  push:
+    branches:
+      - content/acs-figure-context-status-20261105
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  runner:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Verify runner starts
+        run: echo "GitHub-hosted runner is executing"
