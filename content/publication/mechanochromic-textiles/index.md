@@ -67,11 +67,15 @@ not be attributed solely to deformation of the liquid-crystal helix.
 - **Visible response:** For the blue-coated fabric at 15% strain, the camera-based maximum color difference was ΔE = 17.9 ± 3.7 (n = 3). Changes remained within visible shades of blue; a red-shifted spectral peak did not mean that the fabric appeared red.
 - **Durability boundary:** After five home-laundering cycles, coating mass loss was 0.6 wt%. The measured color response at 10% strain decreased by 46%, so the result is a proof of concept rather than a demonstration of unrestricted wash durability.
 
-The paper's **Figures 4 and 5** compare visible appearance during stretching,
-while **Table 1** summarizes differences in spectral sensitivity between
-free-standing films and fabric-supported coatings. See the
-[open-access article](https://doi.org/10.1021/acsapm.6c03153)
-for the original figures, methods, and full results.
+## Published figure guide
+
+The original figures distinguish the optical mechanisms and the visible response:
+
+- **Figure 2 — spectral response:** Reflectance spectra and peak-wavelength changes under strain for blue, green, and red liquid-crystal coatings on black fabric. A spectral peak shift is not necessarily a corresponding change in the color perceived by an observer.
+- **Figure 4 — film versus fabric:** Photographic comparison of a free-standing blue liquid-crystal–polymer film and blue-coated fabric during stretching, holding, and release. These are qualitative appearance sequences, not a quantitative strain–color calibration.
+- **Figure 5 — camera-based color measurements:** Photographs alongside time-resolved strain, ΔE, brightness (ΔL), and chroma changes. At 15% strain, the maximum measured ΔE was 17.9 ± 3.7 (n = 3).
+
+**Table 1** reports spectral sensitivity for free-standing films and fabric-supported coatings. Some uncertainty entries in the supplied publisher PDF appear incomplete, so numerical uncertainty values are not independently reconstructed on this page. Consult the [open-access publisher article](https://doi.org/10.1021/acsapm.6c03153) for Figures 2, 4, 5, the source table, methods, and full context.
 
 ## Related work
 
