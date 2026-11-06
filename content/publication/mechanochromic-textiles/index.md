@@ -11,7 +11,7 @@ authors:
   - Christina Tang
 date: "2026-10-27T00:00:00Z"
 accepted_date: "2026-10-27"
-lastmod: "2026-11-04T00:00:00Z"
+lastmod: "2026-11-05T00:00:00Z"
 publication_status: published
 publication_types: ["2"]
 publication: "*ACS Applied Polymer Materials* · 2026 · online article"
@@ -44,7 +44,25 @@ url_pdf: ""
 url_code: ""
 url_dataset: ""
 url_source: ""
-figures: []
+figures:
+  - src: media/research/acsapm-2026-figure-2-original.png
+    width: 1921
+    height: 2154
+    evidence: Published figure · visible-reflectance spectroscopy
+    alt: Six-panel scientific figure comparing blue, green, and red liquid-crystal coatings on black fabric. Left panels plot reflected peak wavelength and applied strain versus time; right panels compare initial and final reflectance spectra.
+    caption: "Figure 2. Spectral response of liquid-crystal coatings on black fabric. Paired strain traces and reflectance spectra distinguish optical peak shifts from changes in measured reflectance."
+    credit: "Figure 2 from Kantepalle et al., ACS Applied Polymer Materials (2026), DOI 10.1021/acsapm.6c03153. © 2026 the authors. Extracted at native embedded resolution from the publisher PDF; plotted data, labels, and colors unchanged."
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+  - src: media/research/acsapm-2026-figure-5-original.png
+    width: 1305
+    height: 1805
+    evidence: Published figure · smartphone color measurement
+    alt: Eight-panel figure of blue liquid-crystal-coated fabric at 5 and 15 percent strain. Photographs show initial, stretched, held, and released states; adjacent plots track strain, color difference delta E, lightness change, and chroma change versus time.
+    caption: "Figure 5. Camera-based color response at 5% and 15% strain. Photographs and time-resolved ΔE, ΔL, and chroma show how visible changes differ between the two strain levels."
+    credit: "Figure 5 from Kantepalle et al., ACS Applied Polymer Materials (2026), DOI 10.1021/acsapm.6c03153. © 2026 the authors. Extracted at native embedded resolution from the publisher PDF; photographic panels, plotted data, labels, and colors unchanged."
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
 featured: true
 tags:
   - Mechanochromism
@@ -67,11 +85,12 @@ not be attributed solely to deformation of the liquid-crystal helix.
 - **Visible response:** For the blue-coated fabric at 15% strain, the camera-based maximum color difference was ΔE = 17.9 ± 3.7 (n = 3). Changes remained within visible shades of blue; a red-shifted spectral peak did not mean that the fabric appeared red.
 - **Durability boundary:** After five home-laundering cycles, coating mass loss was 0.6 wt%. The measured color response at 10% strain decreased by 46%, so the result is a proof of concept rather than a demonstration of unrestricted wash durability.
 
-The paper's **Figures 4 and 5** compare visible appearance during stretching,
-while **Table 1** summarizes differences in spectral sensitivity between
-free-standing films and fabric-supported coatings. See the
-[open-access article](https://doi.org/10.1021/acsapm.6c03153)
-for the original figures, methods, and full results.
+The figures above distinguish spectral peak response (**Figure 2**) from
+camera-measured visible color changes (**Figure 5**). The
+[open-access article](https://doi.org/10.1021/acsapm.6c03153) also contains
+**Figure 4**, comparing the appearance of free-standing film and coated fabric,
+and **Table 1**, reporting spectral sensitivities. Consult the publisher
+version for the full methods and numerical results.
 
 ## Related work
 
