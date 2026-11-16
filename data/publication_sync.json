@@ -2,8 +2,16 @@
   "orcid": "0000-0003-0551-6172",
   "profile_url": "https://orcid.org/0000-0003-0551-6172",
   "source": "ORCID Anonymous API v3.0",
-  "journal_article_count": 2,
+  "journal_article_count": 3,
   "works": [
+    {
+      "title": "Substrate-Enhanced\nMechanochromic Sensitivity in Stimuli\nResponse Textiles",
+      "type": "journal-article",
+      "year": "2026",
+      "journal": "ACS Applied Polymer Materials",
+      "doi": "10.1021/acsapm.6c03153",
+      "url": "https://doi.org/10.1021/acsapm.6c03153"
+    },
     {
       "title": "Multi-Criteria Selection of Adhesives for Wearable Textiles",
       "type": "journal-article",
@@ -21,5 +29,5 @@
       "url": "https://doi.org/10.3390/polym17131777"
     }
   ],
-  "metadata_changed_at": "2026-07-27T23:16:27Z"
+  "metadata_changed_at": "2026-11-16T18:29:14Z"
 }
