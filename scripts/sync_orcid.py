@@ -39,6 +39,11 @@ def normalize_doi(value: str | None) -> str | None:
     return doi or None
 
 
+def normalize_publication_text(value: Any) -> str:
+    """Collapse ORCID title/journal line breaks and spacing for display."""
+    return " ".join(str(value or "").split())
+
+
 def fetch_works(orcid: str) -> dict[str, Any]:
     url = f"https://pub.orcid.org/v3.0/{orcid}/works"
     request = urllib.request.Request(
@@ -81,23 +86,23 @@ def transform(record: dict[str, Any], orcid: str) -> list[dict[str, str]]:
         if summary.get("type") not in PAPER_TYPES:
             continue
 
-        title = nested_value(summary, "title", "title", "value")
+        title = normalize_publication_text(nested_value(summary, "title", "title", "value"))
         if not title:
             continue
 
         doi = extract_doi(group)
         year = nested_value(summary, "publication-date", "year", "value")
-        journal = nested_value(summary, "journal-title", "value")
+        journal = normalize_publication_text(nested_value(summary, "journal-title", "value"))
         source_url = nested_value(summary, "url", "value")
 
         item: dict[str, str] = {
-            "title": str(title).strip(),
+            "title": title,
             "type": str(summary.get("type")),
         }
         if year:
             item["year"] = str(year)
         if journal:
-            item["journal"] = str(journal).strip()
+            item["journal"] = journal
         if doi:
             item["doi"] = doi
             item["url"] = f"https://doi.org/{doi}"
