@@ -135,6 +135,14 @@ def main() -> int:
         errors.append("portfolio publication missing DOI")
         portfolio_pubs.pop("", None)
 
+    # ORCID records sometimes contain publisher-inserted line breaks. Keep the
+    # serialized snapshot canonical so titles stay readable across templates.
+    for work in orcid.get("works", []):
+        for field in ("title", "journal"):
+            value = work.get(field, "")
+            if value and str(value) != norm_text(value):
+                errors.append(f"ORCID {field} contains noncanonical whitespace: {value!r}")
+
     orcid_pubs = {
         norm_doi(item.get("doi", "")): norm_text(item.get("title", ""))
         for item in orcid.get("works", [])
