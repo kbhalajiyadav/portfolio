@@ -138,12 +138,13 @@ def render_research_experience(data: dict, compact: bool = False) -> str:
 
 
 def render_publications(data: dict, title: str = "Peer-Reviewed Publications") -> str:
-    # LaTeX treats plain-text DOI URLs as unbreakable words. Render the DOI as
-    # a genuine hyperlink with xurl's additional safe break opportunities.
+    # Show the DOI as short, legible clickable text rather than wrapping a
+    # full https:// URL across arbitrary line boundaries.
     def formatted_citation(value: str) -> str:
         chunks = re.split(r"(https://doi\.org/[^\s]+)", value)
         return "".join(
-            rf"\url{{{chunk}}}" if chunk.startswith("https://doi.org/") else esc(chunk)
+            href(chunk, "DOI: " + chunk.removeprefix("https://doi.org/"))
+            if chunk.startswith("https://doi.org/") else esc(chunk)
             for chunk in chunks
         )
 
@@ -252,7 +253,7 @@ def render_cv(data: dict) -> str:
     p = data["profile"]
     output = [
         section("Research Profile", [
-            rf"\color{{Ink}} {esc(p['summary'])}\color{{black}}",
+            rf"\color{{Ink}} {esc(p['summary'])}\color{{black}}\space",
             r"{\small " + href(p["research_statement"], "Research statement (online)") + "}",
         ]),
         render_education(data),
