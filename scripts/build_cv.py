@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import os
+import re
 from pathlib import Path
 import shutil
 import subprocess
@@ -137,9 +138,18 @@ def render_research_experience(data: dict, compact: bool = False) -> str:
 
 
 def render_publications(data: dict, title: str = "Peer-Reviewed Publications") -> str:
+    # LaTeX treats plain-text DOI URLs as unbreakable words. Render the DOI as
+    # a genuine hyperlink with xurl's additional safe break opportunities.
+    def formatted_citation(value: str) -> str:
+        chunks = re.split(r"(https://doi\.org/[^\s]+)", value)
+        return "".join(
+            rf"\url{{{chunk}}}" if chunk.startswith("https://doi.org/") else esc(chunk)
+            for chunk in chunks
+        )
+
     pubs = [
         "\\begin{enumerate}\n"
-        + "\n".join(rf"  \item {esc(item)}" for item in data["publications"])
+        + "\n".join(rf"  \item {formatted_citation(item)}" for item in data["publications"])
         + "\n\\end{enumerate}"
     ]
     return section(title, pubs)
