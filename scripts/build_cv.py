@@ -143,7 +143,7 @@ def render_publications(data: dict, title: str = "Peer-Reviewed Publications") -
     def formatted_citation(value: str) -> str:
         chunks = re.split(r"(https://doi\.org/[^\s]+)", value)
         return "".join(
-            href(chunk, "DOI: " + chunk.removeprefix("https://doi.org/"))
+            rf"\mbox{{{href(chunk, 'DOI: ' + chunk.removeprefix('https://doi.org/'))}}}"
             if chunk.startswith("https://doi.org/") else esc(chunk)
             for chunk in chunks
         )
@@ -253,7 +253,7 @@ def render_cv(data: dict) -> str:
     p = data["profile"]
     output = [
         section("Research Profile", [
-            rf"\color{{Ink}} {esc(p['summary'])}\color{{black}}\space",
+            rf"\color{{Ink}} {esc(p['summary'])}\color{{black}}\par",
             r"{\small " + href(p["research_statement"], "Research statement (online)") + "}",
         ]),
         render_education(data),
