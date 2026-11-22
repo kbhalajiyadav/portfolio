@@ -45,7 +45,7 @@ research_experience:
   location: Richmond, Virginia
   advisor: Christina Tang, Ph.D.
   bullets:
-  - Developed mechanics-consistent adhesion and fracture-characterization methods for soft, stretchable,
+  - Developed mechanics-consistent methods for adhesion and fracture characterization of soft, stretchable,
     and textile-supported interfaces.
   - Engineered reproducible Python and OpenCV workflows that synchronized force-displacement data, deformation
     tracking, and optical colorimetry.
