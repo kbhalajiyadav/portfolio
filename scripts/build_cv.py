@@ -148,8 +148,10 @@ def render_publications(data: dict, title: str = "Peer-Reviewed Publications") -
             for chunk in chunks
         )
 
+    # Allow DOI links to move to the next line without widening justified
+    # spaces or protruding beyond the intended printable area.
     pubs = [
-        "\\begin{enumerate}\n"
+        "\\begin{enumerate}\\raggedright\n"
         + "\n".join(rf"  \item {formatted_citation(item)}" for item in data["publications"])
         + "\n\\end{enumerate}"
     ]
@@ -310,6 +312,19 @@ def compile_pdf(tex_path: Path, pdf_path: Path) -> None:
         cwd=ROOT,
         env=env,
     )
+    # A successful XeLaTeX exit code does not mean the content fits the page.
+    # Make overfull text/vertical boxes a release-blocking error for both PDFs.
+    log_text = tex_path.with_suffix(".log").read_text(encoding="utf-8", errors="replace")
+    overfull = [
+        line.strip()
+        for line in log_text.splitlines()
+        if line.startswith("Overfull \\hbox") or line.startswith("Overfull \\vbox")
+    ]
+    if overfull:
+        raise RuntimeError(
+            f"PDF margin/layout overflow in {tex_path.name}: " + "; ".join(overfull)
+        )
+
     built_pdf = tex_path.with_suffix(".pdf")
     pdf_path.parent.mkdir(parents=True, exist_ok=True)
     shutil.copy2(built_pdf, pdf_path)
